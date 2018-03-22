@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15214794321220" configfile="/sispca2/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="72" y="113" id="pf15216364293070" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf152163761550018 pf152165824671221" path="/public/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="private/administrativo/usuario/alterasenha.xhtml" x="338" y="178" id="pf152163761550020" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf152163761550018" path="/private/administrativo/usuario/alterasenha.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="private/index.xhtml" x="432" y="324" id="pf152165824671323" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf152165824671221" path="/private/index.xhtml"/>
+  <links id="pf152163761550018" target="pf152163761550020" source="pf15216364293070" outcome="alterarsenha" fromaction="#{loginMBean.login}"/>
+  <links id="pf152165824671221" target="pf152165824671323" source="pf15216364293070" outcome="home" fromaction="#{loginMBean.login}"/>
+</pageflow:Pageflow>

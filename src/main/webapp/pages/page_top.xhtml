@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<body class="cl-default fixed">
+	<!-- start:navbar top -->
+	<header class="header"> 
+	<nav class="navbar navbar-static-top" role="navigation"> <!-- Sidebar toggle button-->
+	<a href="#" class="navbar-btn sidebar-toggle" data-target="#atas" data-toggle="offcanvas" role="button"> 
+		<span class="sr-only">Toggle navigation</span> 
+		<span class="icon-bar"></span> 
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</a>
+	<div class="prog-title">
+		<img src="#{facesContext.externalContext.request.contextPath}/images/logo_gov_ma.png" style="float: left; width:40px; height: 50px;"></img>
+		<span class="fa pull-left"></span>&nbsp;&nbsp;SISPCA - Sistema Informatizado de Planejamento, Coordena&ccedil;&atilde;o e Avalia&ccedil;&atilde;o
+	</div>
+	<div class="collapse navbar-collapse" id="atas">
+		<div class="navbar-right">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><strong><h:outputLabel
+								value="#{userMBean.usuario.email}" /></strong> <p:graphicImage
+							id="imgUsuario" value="#{userMBean.fotoPerfil}"
+							cache="disable" styleClass="img-rounded img-responsive img-user" />
+				</a>
+					<ul class="dropdown-menu dropdown-login">
+						<li>
+							<div class="navbar-login">
+								<div class="row">
+									<div class="col-lg-3">
+										<p class="text-center">
+											<p:graphicImage id="imgUsuario2"
+												value="#{userMBean.fotoPerfil}" cache="disable"
+												styleClass="img-rounded img-responsive img-user" />
+										</p>
+									</div>
+									<div class="col-lg-9">
+										<p class="text-left">
+											<strong><h:outputLabel
+													value="#{userMBean.usuario.name}" /></strong>
+										</p>
+										<p class="text-left small">
+											<h:outputLabel value="#{userMBean.usuario.email}" />
+										</p>
+										<div class="row">
+											<div class="col-md-6">
+												<small><a
+													href="#{facesContext.externalContext.request.contextPath}/views/private/administrativo/usuario/meusdados.jsf">Alterar
+														dados</a></small>
+											</div>
+											<div class="col-md-6">
+												<small><a href="#">Configurações</a></small>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<div class="navbar-login navbar-login-session">
+								<h:form>
+									<h:commandButton
+										styleClass="btn btn-danger btn-square btn-block" value="Sair"
+										action="#{userMBean.logout()}" />
+								</h:form>
+							</div>
+						</li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+	</nav> </header>
+	<!-- end:navbar top -->
+</body>
+
+</html>

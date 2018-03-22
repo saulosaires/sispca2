@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>SISPCA</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="Sistema de Tecnologia Integrada" />
+	<meta name="author" content="SEATI" /> 
+	<link rel="shortcut icon" 			   href="#{facesContext.externalContext.request.contextPath}/images/logo_gov_ma.png" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/estilo.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/bootstrap-reset.css" />
+	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/css/rate.min.css" />
+
+	<script>
+	if( typeof Primefaces != "undefined"){
+	    PrimeFaces.locales['pt'] = {  
+	            closeText: 'Fechar',  
+	            prevText: 'Anterior',  
+	            nextText: 'Próximo',  
+	            currentText: 'Começo',  
+	            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+	            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+	            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+	            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+	            dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+	            weekHeader: 'Semana',  
+	            firstDay: 1,  
+	            isRTL: false,  
+	            showMonthAfterYear: false,  
+	            yearSuffix: '',  
+	            timeOnlyTitle: 'Só Horas',  
+	            timeText: 'Tempo',  
+	            hourText: 'Hora',  
+	            minuteText: 'Minuto',  
+	            secondText: 'Segundo',  
+	            currentText: 'Data Atual',  
+	            ampm: false,  
+	            month: 'Mês',  
+	            week: 'Semana',  
+	            day: 'Dia',  
+	            allDayText : 'Todo Dia'  
+	        };
+	}
+	</script>
+	<style type="text/css">
+		.rate-circle-value{
+			font-size: 22px !important;
+		}
+	</style>
+</h:head>
+
+<body>
+	<f:view contentType="text/html; charset=UTF-8">
+		<ui:include src="/pages/page_top.xhtml" />
+		<!-- start:wrapper body -->
+		<div class="wrapper row-offcanvas row-offcanvas-left">
+			<ui:include src="/pages/page_left.xhtml" />
+			<!-- start:right sidebar -->
+			<div class="right-side">
+				<div class="content">
+					<!-- start:breadcrumb -->
+					<ol class="breadcrumb">
+						<li><c:choose>
+								<c:when
+									test="${fn:contains( view.viewId , 'public') or fn:contains( view.viewId , 'index') or fn:contains( view.viewId , 'alterasenha') or fn:contains( view.viewId , 'meusdados') or fn:contains( view.viewId , 'erro')}">
+									<a
+										href="#{facesContext.externalContext.request.contextPath}/views/private/index.jsf"><i
+										class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${not empty usuarioMBean}">
+											<a
+												href="#{facesContext.externalContext.request.contextPath}/views/private/index.jsf"><i
+												class="fa fa-home"></i>&nbsp;&nbsp;Home</a> > 
+										#{usuarioMBean.moduloAtual} ><a style="font-weight: bold;"
+												href="#{facesContext.externalContext.request.contextPath}/views/private/${fn:toLowerCase(usuarioMBean.moduloAtual)}/${fn:toLowerCase(usuarioMBean.nameControllerAtual)}/list.jsf">&nbsp;&nbsp;#{usuarioMBean.controllerAtual}</a> > #{usuarioMBean.actionAtual}
+										</c:when>
+										<c:otherwise>
+											<a
+												href="#{facesContext.externalContext.request.contextPath}/views/public/index.jsf"><i
+												class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose></li>
+					</ol>
+					<!-- Conteúdo do site principal aqui -->
+					<div class="row conteudo">
+<!--  						<img id="ajaxloader" src="#{facesContext.externalContext.request.contextPath}/images/ajax-loader.gif" style="display:none;width:40px; height: 50px;"></img>  -->
+						<ui:insert name="conteudo" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</f:view>
+	
+	<ui:include src="/pages/ajax_loader.xhtml" />
+
+	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+
+	<script src="#{facesContext.externalContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/arjuna.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/bootstrap-modal.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/mascara.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/bootstrap-carousel.js"></script>
+	<!--  <script src="#{facesContext.externalContext.request.contextPath}/js/maiuscula.js"></script> -->
+	<script src="#{facesContext.externalContext.request.contextPath}/js/jquery-migrate-1.0.0.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/wizard.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/jquery.rate.min.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/js/general.js"></script>
+	
+	<script>
+		jsf.ajax.addOnEvent(function(data) {
+	        var ajaxstatus = data.status; // Can be "begin", "complete" and "success"
+	        var ajaxloader = document.getElementById("ajaxloader");
+	
+	        switch (ajaxstatus) {
+	            case "begin": // This is called right before ajax request is been sent.
+	            	//ajaxloader.style.display = 'block';
+	            	//carregando();
+	                break;
+	
+	            case "complete": // This is called right after ajax response is received.
+	            	//ajaxloader.style.display = 'none';
+	            	completo();
+	                break;
+	
+	            case "success": // This is called when ajax response is successfully processed.
+	                // NOOP.
+	                break;
+	        }     
+    	}); 
+	</script>
+	<script type="text/javascript">
+				function desenhaCirculo(data) {
+					var status = data.status; // Can be "begin", "complete" or "success".
+					var source = data.source; // The parent HTML DOM element.					    
+					switch (status) {
+					case "begin": // Before the ajax request is sent.
+						break;
+					case "complete": // After the ajax response is arrived.
+
+					case "success": // After update of HTML DOM based on ajax response.
+						// ...
+						$('.demo').rateCircle();
+						$('.rate-circle-value').each(
+								function() {
+									$(this).html(
+											parseFloat($(this).html()).toFixed(
+													2));
+								})
+						break;
+					}
+				}
+				$(function() {
+
+					$('.demo').rateCircle();
+					$('.rate-circle-value').each(function() {
+						$(this).html(parseFloat($(this).html()).toFixed(2));
+					})
+
+				});
+
+				function showModal() {
+					$('#myModal').modal({
+						backdrop : 'static',
+						keyboard : true
+					});
+					$('#myModal').modal('show');
+				}
+
+				function closeModal() {
+					$('#myModal').modal('hide');
+				};
+	</script>
+</body>
+</html>

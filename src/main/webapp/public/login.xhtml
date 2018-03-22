@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>SISPCA</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="Sistema de Tecnologia Integrada" />
+	<meta name="author" content="SEATI" />
+	<link rel="shortcut icon" href="images/logo_gov_ma.png" />
+	
+	<link href="#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.request.contextPath}/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+
+<body class="login-body">
+
+	<div class="container login-panel">
+		<div class="row">
+			<h:form>
+				<div class="col-md-12">
+					<div class="form-signin">
+					
+						<h2 class="form-signin-heading">Acesso ao sistema</h2>
+						<div class="login-wrap">
+							<div class="user-login-info">
+								<p:messages closable="true" />
+
+
+								<h:outputText value="Login:  " styleClass="labelOutText" />
+								<h:inputText value="#{loginMBean.login}" styleClass="form-control labelInputText up" 
+								             required="true" requiredMessage="Login é obrigatório" converter="toUpperCaseConverter">
+								
+								<f:ajax event="blur" render="@this" />
+								
+								</h:inputText>         
+
+								<h:outputText value="Senha:  " styleClass="labelOutText" />
+								<h:inputSecret value="#{loginMBean.password}"
+									styleClass="form-control labelInputText" required="true"
+									requiredMessage="Senha  é obrigatório" />
+
+							</div>
+							<span class="pull-left"> <a data-toggle="modal"
+								href="#myModal"> Esqueceu a senha?</a>
+							</span>
+							
+							<h:commandButton  action="#{loginMBean.login()}" class="btn btn-lg btn-login btn-block" value="Login" />
+						</div>
+					</div>
+				</div>
+			</h:form>
+			<h:form>
+				<!-- start:modal -->
+				<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+					tabindex="-1" id="myModal" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Esqueceu a senha?</h4>
+							</div>
+							<div class="modal-body">
+								<p>Entre com o seu email para receber sua senha de acesso</p>
+
+								<h:inputText value="#{loginMBean.emailUsuario}"
+									styleClass="form-control placeholder-no-fix"  />
+
+							</div>
+							<div class="modal-footer">
+								<button data-dismiss="modal" class="btn btn-default"
+									type="button">Cancelar</button>
+								<h:commandButton
+									action="#{loginMBean.solicitaRecuperacaoSenha()}"
+									class="btn btn-success" value="Enviar" />
+							</div>
+						</div>
+					</div>
+				</div>
+ 
+			</h:form>
+			<!-- end:modal -->
+
+
+
+		</div>
+		<div class="row copyright">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<img src="#{facesContext.externalContext.request.contextPath}/images/logo-governo-2015.fw.png" class="img-responsive" />
+
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<img src="#{facesContext.externalContext.request.contextPath}/images/logo_seati_pb.fw.png" class="img-responsive" />
+			</div>
+		</div>
+
+	</div>
+
+	<script src="#{facesContext.externalContext.request.contextPath}/js/jquery.min.js"></script>
+	<!-- start:bootstrap -->
+	<script src="#{facesContext.externalContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<!-- start:arjuna.js -->
+	<script src="#{facesContext.externalContext.request.contextPath}/js/arjuna.js"></script>
+ 
+</body>
+</html>

@@ -1,0 +1,74 @@
+.titScreen{
+	margin-top: 0%; 
+	margin-left: 3%; 
+	margin-bottom: 3%;
+	color: #333;
+	font-weight: normal;
+}
+
+.spaceContainerForm{
+	margin: 2%;
+	width: 100%;
+	padding-right: 2%;
+}
+
+.labelOutText{
+	font-weight: bolder;
+	font-size: 12px;	
+}
+
+.labelInputText{
+	font-size: 12px;
+}
+
+.spaceBtnAcao{
+	margin-top: 2%;
+}
+
+.outBusc{
+	font-weight: bolder;
+	font-size: 14px;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+.tableDados{
+	margin-left: 4%; 
+	margin-right: 4%;
+}
+
+.outTextTable{
+	font-size: 13px;	
+}
+
+.linhaTransversal{
+	size="3"; 
+	margin-right: 2%;
+}
+
+.spaceParamBusca{
+	margin: 0 auto;
+	width: 40%;
+}
+
+.btnAction{
+	font-weight: bolder !important;
+	font-size: 15px !important;
+}
+
+.espacoDireita{
+	margin-right: 7px;
+}
+
+.panel-overflow-auto {
+	height: 600px;
+	overflow: auto;
+}
+
+#atas > div > ul > li > a > strong > label {
+	color: #ffffff !important;
+}
+
+.cl-default .navbar .nav .open > a {
+	background: #1abc9c !important;
+}

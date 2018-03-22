@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<!-- start:left sidebar -->
+	<div class="left-side sidebar-offcanvas"
+		style="background-color: #2C3E50; width: 15% !important">
+		<div class="sidebar">
+			<!-- sidebar menu: : style can be found in sidebar.less -->
+
+			<ul class="sidebar-menu" style="color: white;">
+				<li class="active"><a
+					href="#{facesContext.externalContext.request.contextPath}/views/private/index.jsf">
+						<i class="fa fa-dashboard"></i> <span>Plano PluriAnual</span>
+				</a></li>
+
+				<f:view>
+					<c:forEach var="modulo"
+						items="${usuarioMBean.estruturaPermissao.moduloPermissao}">
+
+						<c:if test="${modulo.key != 'Lista Relatorios'}">
+							<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
+									<span>#{modulo.value.moduloLabel}</span><i class="fa fa-angle-left pull-right"></i>
+							</a>
+								<ul class="treeview-menu">
+									<c:forEach var="controller"
+										items="${modulo.value.controllerPermissao}">
+										<li><a
+											href="#{facesContext.externalContext.request.contextPath}/views/private/${fn:toLowerCase(modulo.key)}/${fn:toLowerCase(controller.key)}/list.jsf"><i
+												class="fa fa-circle-o"></i>
+												#{controller.value.controllerLabel}</a></li>
+									</c:forEach>
+								</ul></li>
+						</c:if>
+					</c:forEach>
+				</f:view>
+			</ul>
+		</div>
+	</div>
+	<!-- end:left sidebar -->
+</body>
+</html>
