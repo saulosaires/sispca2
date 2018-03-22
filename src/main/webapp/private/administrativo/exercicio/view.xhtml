@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">		
+		<f:metadata>
+    		<f:viewParam name="exercicioId" value="#{exercicioViewMBean.exercicioId}"/>
+    		<f:viewAction action="#{exercicioViewMBean.init}" />
+		</f:metadata>
+		
+			<h:form acceptcharset="UTF-8" prependId="false">
+				<div class="container-fluid row-fluid">
+					<div class="span12">
+						<p:messages closable="true"/>
+					</div>
+					<legend class="outBusc">VISUALIZAÇÃO</legend>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-2">
+								<h:outputText value="PPA:  " styleClass="labelOutText"/>
+								<h:outputText value="#{exercicioViewMBean.exercicio.ppa.descricao}" styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">	
+							<div class="col-lg-1">
+								<h:outputText value="ANO:  " styleClass="labelOutText"/>
+								<h:outputText value="#{exercicioViewMBean.exercicio.ano}" styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-5">
+								<h:outputText value="PERÍODO DE VIGÊNCIA: " styleClass="labelOutText"/>
+								<h:outputText value="#{exercicioViewMBean.dataInicio}" styleClass="labelInputText">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
+								<h:outputText value="  a  " styleClass="labelInputText" rendered="#{exercicioViewMBean.dataInicio!=null and exercicioViewMBean.dataFim!=null}"/>
+								
+								<h:outputText value="#{exercicioViewMBean.dataFim}" pattern="dd/MM/yyyy" styleClass="labelInputText">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
+							</div>
+						</div>
+						
+						<center>
+						<div class="row" style="margin-top: 4%; width: 80%;">	
+							<table id="tableCalend" class="table table-bordered">	
+								<thead>
+									<tr>
+										<th colspan="3"><center><h3><b>CALENDÁRIO</b></h3></center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<center><h:outputText value="ACTION - CONTROLLER" styleClass="labelOutText"/></center>
+										</td>
+										<td>
+											<center><h:outputText value="DATA INÍCIO x DATA FIM" styleClass="labelOutText"/></center>
+										</td>								
+									</tr>					
+									<c:forEach var="action" items="${exercicioViewMBean.listAction}">
+										<tr>
+											<td>
+												<h:outputText value="#{fn:toUpperCase(action.controller.name)} - #{fn:toUpperCase(action.name)}" styleClass="labelInputText"/>
+											</td>
+											<td>
+												<center>
+												<h:panelGroup id="panelCalendars">											
+													<c:forEach var="datas" items="${exercicioViewMBean.mapActionCalendario.get(action)}" varStatus="step">
+														<h:outputText value="#{datas.dataInicio}" styleClass="labelInputText">
+															<f:convertDateTime pattern="dd/MM/yyyy"/>															
+														</h:outputText>
+														<h:outputText value="  a  " styleClass="labelInputText" rendered="#{datas.dataInicio!=null and datas.dataFim!=null}"/>
+														<h:outputText value="#{datas.dataFim}" pattern="dd/MM/yyyy" styleClass="labelInputText">
+															<f:convertDateTime pattern="dd/MM/yyyy"/>															
+														</h:outputText>
+														<br/><br/>
+													</c:forEach>	
+												</h:panelGroup>
+												</center>
+											</td>										
+										</tr>							
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						</center>						
+						
+						<div class="spaceBtnAcao">						
+							<h:commandButton styleClass="btnAction btn btn-primary"
+								style="margin-left: 0px" value="Voltar"
+								action="exercicioList" immediate="true" />							
+						</div>										
+					</div>
+				</div>	
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

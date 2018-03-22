@@ -27,4 +27,26 @@
 </navigation-rule> 
 
 
+
+<navigation-rule> 
+   <from-view-id>/private/administrativo/exercicio/list.xhtml</from-view-id> 
+   
+   <navigation-case> 
+      <from-outcome>exercicioView</from-outcome> 
+      <to-view-id>/private/administrativo/exercicio/view.xhtml</to-view-id> 
+   </navigation-case> 
+</navigation-rule> 
+
+
+
+<navigation-rule> 
+   <from-view-id>/private/administrativo/exercicio/view.xhtml</from-view-id> 
+   
+   <navigation-case> 
+      <from-outcome>exercicioList</from-outcome> 
+      <to-view-id>/private/administrativo/exercicio/list.xhtml</to-view-id> 
+   </navigation-case> 
+</navigation-rule> 
+
+
 </faces-config>

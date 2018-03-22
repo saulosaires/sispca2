@@ -23,23 +23,25 @@
 				</a></li>
 
 				<f:view>
-					<c:forEach var="modulo"
-						items="${usuarioMBean.estruturaPermissao.moduloPermissao}">
+					<c:forEach var="modulo" items="${menuMBean.menu}">
 
-						<c:if test="${modulo.key != 'Lista Relatorios'}">
-							<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
-									<span>#{modulo.value.moduloLabel}</span><i class="fa fa-angle-left pull-right"></i>
-							</a>
-								<ul class="treeview-menu">
-									<c:forEach var="controller"
-										items="${modulo.value.controllerPermissao}">
-										<li><a
-											href="#{facesContext.externalContext.request.contextPath}/views/private/${fn:toLowerCase(modulo.key)}/${fn:toLowerCase(controller.key)}/list.jsf"><i
-												class="fa fa-circle-o"></i>
-												#{controller.value.controllerLabel}</a></li>
-									</c:forEach>
-								</ul></li>
-						</c:if>
+							<li class="treeview">
+								<a href="#"> 
+								 	    <i class="fa fa-edit"></i>
+										<span>#{modulo.label}</span>
+										<i class="fa fa-angle-left pull-right"></i>
+								 </a>
+									<ul class="treeview-menu">
+										<c:forEach var="controller" items="${modulo.subMenu}">
+											<li>
+											<a href="#{facesContext.externalContext.request.contextPath}${fn:toLowerCase(controller.link)}">
+											<i class="fa fa-circle-o"></i>
+													#{controller.label}</a>
+											</li>
+										</c:forEach>
+									</ul>
+							  </li>
+						 
 					</c:forEach>
 				</f:view>
 			</ul>
