@@ -14,6 +14,11 @@ import javax.persistence.Table;
 @Table(name="unidade_federativa", schema="comum")
 public class UnidadeFederativa implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4784007885251028034L;
+
 	@Id
 	@SequenceGenerator(name = "seq_unidade_federativa_id", sequenceName = "comum.seq_unidade_federativa_id")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_unidade_federativa_id")
@@ -27,7 +32,9 @@ public class UnidadeFederativa implements Serializable{
 	
 	private String sigla;
 
-	public UnidadeFederativa(){ }
+	public UnidadeFederativa(){ 
+		//Empty constructor
+	}
 	
 	public Integer getId() {
 		return id;

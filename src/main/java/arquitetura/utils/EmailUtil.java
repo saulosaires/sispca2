@@ -14,19 +14,22 @@ public class EmailUtil {
 	/** O email utilizado como remetente da mensagem. */
 	private static final String EMAIL_REMETENTE = "naoresponda@seati.ma.gov.br";
 	/** A senha utilizada para autenticação com o servidor de email. */
-	private static final String EMAIL_SENHA = "n@0r3sp0nd@"; //"naoresponda";
+	private static final String EMAIL_SENHA = "n@0r3sp0nd@"; 
 	/** O host utilizado para autenticação do email. */
 	private static final String EMAIL_HOST = "correio.ma.gov.br";
 	/** A porta SSL-SMTP utilizada para autenticação do remetente. */
 	private static final int EMAIL_SSL_SMTP_PORT = 587;
 	
 	
+	private  EmailUtil() {
+		 throw new IllegalStateException("Utility class");
+	}
 	
-	public static HtmlEmail conectaEmail() throws EmailException {
+	public static HtmlEmail conectaEmail() {
 
 		HtmlEmail email = new HtmlEmail();
 		email.setHostName(EMAIL_HOST);
-		//email.setSslSmtpPort(EMAIL_SSL_SMTP_PORT);
+ 
 		email.setSmtpPort(EMAIL_SSL_SMTP_PORT);
 		email.setSSLCheckServerIdentity(true);
 		email.setStartTLSEnabled(true);
@@ -39,9 +42,7 @@ public class EmailUtil {
 	
 	public static boolean enviaEmail(String assunto, String mensagem, List<String> destinatarios, List<EmailAttachment> anexos) throws EmailException {
 
-		HtmlEmail email = new HtmlEmail();
-
-		email = conectaEmail();
+		HtmlEmail email = conectaEmail();
 		
 		try {
 			email.setFrom(EMAIL_REMETENTE);
@@ -62,8 +63,8 @@ public class EmailUtil {
 			email.send();
 			return true;
 		} catch (EmailException e) {
-			System.err.print(String.format("Falha ao tentar enviar um email! (assunto: \"%s\")\n", assunto));
-			e.printStackTrace();
+			SispcaLogger.logError(e.getMessage()); 
+			 
 		}
 		
 		return false;

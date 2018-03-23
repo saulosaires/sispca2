@@ -18,7 +18,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "orgao", schema = "comum")
-public class Orgao extends Model implements Serializable, Auditable, Comparable<Orgao>, Cloneable {
+public class Orgao extends Model implements Serializable, Auditable, Comparable<Orgao> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,13 +32,13 @@ public class Orgao extends Model implements Serializable, Auditable, Comparable<
 	private Boolean ativo;
 
 	@NotNull(message = "Código: campo é obrigatório")
-	private String codigo;
+	private String codigo="";
 
 	@NotNull(message = "Descrição: campo é obrigatório")
-	private String descricao;
+	private String descricao="";
 
 	@NotNull(message = "Sigla: campo é obrigatório")
-	private String sigla;
+	private String sigla="";
 
 	@OneToMany(mappedBy = "orgao", fetch = FetchType.LAZY)
 	private List<UnidadeOrcamentaria> unidadesOrcamentarias;
@@ -56,14 +56,6 @@ public class Orgao extends Model implements Serializable, Auditable, Comparable<
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	public String getCodigo() {
@@ -109,7 +101,7 @@ public class Orgao extends Model implements Serializable, Auditable, Comparable<
 
 	@Override
 	public String getLogDetail() {
-		// TODO Auto-generated method stub
+	
 		StringBuilder sb = new StringBuilder();
 		sb.append(" Orgao Id : ")
 				.append(id)
@@ -127,13 +119,6 @@ public class Orgao extends Model implements Serializable, Auditable, Comparable<
 	public int compareTo(Orgao orgao) {
 		return this.sigla.compareTo(orgao.sigla);
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Orgao){
-			return ((Orgao)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

@@ -109,13 +109,6 @@ public class ActionCalendario extends Model implements Serializable, Auditable{
 
 		return sb.toString();
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof ActionCalendario){
-			return ((ActionCalendario)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 }

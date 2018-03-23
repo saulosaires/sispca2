@@ -6,18 +6,26 @@ import java.security.NoSuchAlgorithmException;
 
 public class Cryptography {
 	
+	private  Cryptography() {
+		 throw new IllegalStateException("Utility class");
+	}
+	
 	//Função para criar hash da senha informada  
     public static String md5(String senha){  
         String sen = "";  
         MessageDigest md = null;  
         try {  
-            md = MessageDigest.getInstance("MD5");  
+            md = MessageDigest.getInstance("MD5"); 
+            
+            BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));  
+            sen = hash.toString(16);              
+            return sen; 
+            
         } catch (NoSuchAlgorithmException e) {  
-            e.printStackTrace();  
+          SispcaLogger.logError(e.getMessage());
         }  
-        BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));  
-        sen = hash.toString(16);              
-        return sen;  
+        
+        return "";
     }
 
 }

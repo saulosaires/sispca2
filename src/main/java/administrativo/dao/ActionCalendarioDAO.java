@@ -6,9 +6,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
-
 import administrativo.model.Action;
 import administrativo.model.ActionCalendario;
 import administrativo.model.Calendario;
@@ -25,7 +22,7 @@ public class ActionCalendarioDAO  extends AbstractDAO< ActionCalendario >  {
 	
 	public List<ActionCalendario> buscaActionsComCalendario(Calendario calendario, Action action){
 		 
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ActionCalendario> query = cb.createQuery(ActionCalendario.class);
 		Root<ActionCalendario> m = query.from(ActionCalendario.class);
 		query.select(m);
@@ -35,7 +32,7 @@ public class ActionCalendarioDAO  extends AbstractDAO< ActionCalendario >  {
 				     cb.equal(m.get("action"), action.getId())
 				    );
   
-		return getEntityManager().createQuery(query).getResultList();
+		return entityManager.createQuery(query).getResultList();
  
 		
 	}

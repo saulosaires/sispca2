@@ -11,6 +11,10 @@ import administrativo.model.Ppa;
 
 public class ExercicioController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8543732848604788698L;
 	@Inject ExercicioDAO exercicioDAO;
 	
 	public List<Exercicio> buscaExercicioPorPpaAno(Ppa buscaPpa, Integer ano){

@@ -34,6 +34,7 @@ public class TipoPrograma extends Model implements Serializable {
 	private List<Programa> programas;
 
 	public TipoPrograma() {
+		//empty constructor
 	}
 
 	public Integer getId() {
@@ -68,13 +69,6 @@ public class TipoPrograma extends Model implements Serializable {
 	public void setCodigo(char codigo) {
 		this.codigo = codigo;
 	}
-
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoPrograma){
-			return ((TipoPrograma)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

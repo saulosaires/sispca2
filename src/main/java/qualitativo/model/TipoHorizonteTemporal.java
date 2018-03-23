@@ -36,7 +36,9 @@ public class TipoHorizonteTemporal extends Model implements Serializable {
 	@OneToMany(mappedBy="tipoHorizonteTemporal")
 	private List<Programa> programas;
 
-	public TipoHorizonteTemporal() {}	
+	public TipoHorizonteTemporal() {
+		//empty constructor
+	}	
 
 	public Long getId() {
 		return id;
@@ -98,13 +100,6 @@ public class TipoHorizonteTemporal extends Model implements Serializable {
 
 		return programa;
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoHorizonteTemporal){
-			return ((TipoHorizonteTemporal)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

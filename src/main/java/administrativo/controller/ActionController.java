@@ -2,17 +2,18 @@ package administrativo.controller;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import javax.inject.Inject;
 
 import administrativo.dao.ActionDAO;
-import administrativo.dao.CalendarioDAO;
 import administrativo.model.Action;
-import administrativo.model.Calendario;
 
 public class ActionController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7419949642524803649L;
 	@Inject ActionDAO actionDAO;
  
  

@@ -35,6 +35,7 @@ public class UnidadeGestora extends Model implements Serializable, Auditable {
 	private UnidadeOrcamentaria unidadeOrcamentaria;
 
 	public UnidadeGestora() {
+		//empty constructor
 	}	
 
 	public Long getId() {
@@ -89,13 +90,6 @@ public class UnidadeGestora extends Model implements Serializable, Auditable {
 			.append(" Unidade Gestora Data da Operação: "+new Date(System.currentTimeMillis()));
 		return sb.toString();
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof UnidadeGestora){
-			return ((UnidadeGestora)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

@@ -61,6 +61,7 @@ public class Controller extends Model implements Serializable, Auditable {
 		super();
 		this.name = name;
 		this.label = label;
+		modulo = new Modulo();
 	}
 
 	@Override
@@ -105,13 +106,6 @@ public class Controller extends Model implements Serializable, Auditable {
 		return sb.toString();
 
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Controller){
-			return ((Controller)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

@@ -80,15 +80,6 @@ public class Subfuncao extends Model implements Serializable {
 	public void setFuncao(Funcao funcao) {
 		this.funcao = funcao;
 	}
-
-	 
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Subfuncao){
-			return ((Subfuncao)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

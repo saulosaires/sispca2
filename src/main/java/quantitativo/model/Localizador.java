@@ -49,6 +49,7 @@ public class Localizador extends Model implements Serializable {
 	private Regiao regiao;
 
 	public Localizador() {
+		// empty
 	}
 
 	public Integer getIdLocalizador() {

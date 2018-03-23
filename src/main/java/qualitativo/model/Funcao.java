@@ -38,7 +38,9 @@ public class Funcao extends Model implements Serializable {
 	@OneToMany(mappedBy="funcao")
 	private List<Subfuncao> subfuncaos;
 
-	public Funcao() {}	
+	public Funcao() {
+		//empty constructor
+	}	
 
 	public Long getId() {
 		return id;
@@ -108,13 +110,6 @@ public class Funcao extends Model implements Serializable {
 
 		return subfuncao;
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Funcao){
-			return ((Funcao)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

@@ -6,14 +6,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 
 public abstract class AbstractDAO< T extends Serializable > {
 	 
 	   private Class< T > clazz;
 	 
 	  
-	   static EntityManager entityManager;
+	   public static final EntityManager entityManager;
 	   
 	   static {
 		   entityManager=Persistence.createEntityManagerFactory("sispca2").createEntityManager();
@@ -26,7 +25,8 @@ public abstract class AbstractDAO< T extends Serializable > {
 	   public T findOne( long id ){
 	      return entityManager.find( clazz, id );
 	   }
-	   public List< T > findAll(){
+	  @SuppressWarnings("unchecked")
+	  public List< T > findAll(){
 	      return entityManager.createQuery( "from " + clazz.getName() ).getResultList();
 	   }
 	 
@@ -44,8 +44,11 @@ public abstract class AbstractDAO< T extends Serializable > {
 		       t.commit();
 		       return entity;
 		   }catch (Exception e) {
-	    	    t.rollback();
-	    	    throw new RuntimeException(e.getMessage());
+			   
+			   if(t!=null)
+	    	      t.rollback();
+			   
+	    	     throw new RuntimeException(e.getMessage());
 	    	}
 		 
 	   }
@@ -58,14 +61,7 @@ public abstract class AbstractDAO< T extends Serializable > {
 	      delete( entity );
 	   }
 
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
-	   
+ 
 	   
 	   
 	   

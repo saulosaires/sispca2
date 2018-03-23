@@ -55,6 +55,7 @@ public class UnidadeOrcamentaria extends Model implements Serializable, Auditabl
 	private List<Acao> acaos;
 
 	public UnidadeOrcamentaria() {
+		//empty constructor
 	}
 	
 
@@ -133,12 +134,6 @@ public class UnidadeOrcamentaria extends Model implements Serializable, Auditabl
 		return sb.toString();	
 	}
 
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof UnidadeOrcamentaria){
-			return ((UnidadeOrcamentaria)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 	
 }

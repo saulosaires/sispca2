@@ -10,30 +10,35 @@ import java.util.Locale;
 
 public class FormatoUtils {
 	
-	private static Locale sm_currentLocale = new Locale("pt", "BR");
+	private  FormatoUtils() {
+		 throw new IllegalStateException("Utility class");
+	}
+	
+	
+	private static Locale currentLocale = new Locale("pt", "BR");
 
 	public static String formataData(Date data) {
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", sm_currentLocale);
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", currentLocale);
 		return format.format(data);
 	}
 
 	public static String formataValorMonetario(BigDecimal value) {
-		return NumberFormat.getCurrencyInstance(sm_currentLocale).format(value);
+		return NumberFormat.getCurrencyInstance(currentLocale).format(value);
 	}
 
 	public static String formataQuantidade(BigInteger value) {
-		return NumberFormat.getNumberInstance(sm_currentLocale).format(value);
+		return NumberFormat.getNumberInstance(currentLocale).format(value);
 	}
 
 	public static String formataPorcentagem(BigDecimal value) {
-		NumberFormat f = NumberFormat.getPercentInstance( sm_currentLocale );
+		NumberFormat f = NumberFormat.getPercentInstance( currentLocale );
 		f.setMinimumFractionDigits(2);
 		f.setMaximumFractionDigits(2);
 		return f.format(value);
 	}
 	
 	public static String formataValorDecimal( BigDecimal value ) {
-		NumberFormat f = NumberFormat.getInstance(sm_currentLocale);
+		NumberFormat f = NumberFormat.getInstance(currentLocale);
 		f.setMinimumFractionDigits(2);
 		f.setMaximumFractionDigits(2);
 		f.setGroupingUsed(true);

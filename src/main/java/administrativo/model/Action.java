@@ -129,19 +129,7 @@ public class Action extends Model implements Serializable, Auditable {
 		this.controller = controller;
 	}
 
-	
-	
-	// public Set<Profile> getProfiles() {
-	// return profiles;
-	// }
-	//
-	// public void setProfiles(Set<Profile> profiles) {
-	// this.profiles = profiles;
-	// }
-
-	
-	
-	
+ 
 
 	@Override
 	public String getLogDetail() {
@@ -166,14 +154,6 @@ public class Action extends Model implements Serializable, Auditable {
 	}
  
 
-//	public List<Calendario> getCalendarios() {
-//		return calendarios;
-//	}
-//
-//	public void setCalendarios(List<Calendario> calendarios) {
-//		this.calendarios = calendarios;
-//	}
-
 	public Boolean getPossuiCalendario() {
 		return possuiCalendario;
 	}
@@ -182,13 +162,7 @@ public class Action extends Model implements Serializable, Auditable {
 		this.possuiCalendario = possuiCalendario;
 	}	
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Action){
-			return ((Action)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 	@Override
 	public String toString() {

@@ -26,13 +26,18 @@ import administrativo.model.Exercicio;
 @ViewScoped
 public class ExercicioViewMBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8609848522488523128L;
 	private PpaController ppaController;
 	private ExercicioController exercicioController;
 	private CalendarioController calendarioController;
 	private ActionCalendarioController actionCalendarioController;
 	private ActionController actionController;
 	
-	private Date dataInicio,dataFim;
+	private Date dataInicio;
+	private Date dataFim;
 	private List<Action> listAction;
 	private Map<Action, List<ActionCalendario>> mapActionCalendario;
 	
@@ -71,7 +76,7 @@ public class ExercicioViewMBean implements Serializable{
 			dataInicio = calendario.getDataInicio();
 			dataFim = calendario.getDataFim();	
 			
-			mapActionCalendario= new HashMap<Action, List<ActionCalendario>>();
+			mapActionCalendario= new HashMap<>();
 			for (Action ac : listAction) {
 				mapActionCalendario.put(ac,actionCalendarioController.buscaActionsComCalendario(calendario, ac));
 			}

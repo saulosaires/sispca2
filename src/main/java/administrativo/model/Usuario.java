@@ -22,11 +22,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
-import arquitetura.utils.Cryptography;
 import arquitetura.utils.FormatoUtils;
 import qualitativo.model.UnidadeOrcamentaria;
  
@@ -36,10 +34,6 @@ import qualitativo.model.UnidadeOrcamentaria;
 @Table(name = "usuario", schema = "controle_acesso")
 public class Usuario  extends Model implements Serializable, Auditable {
 	private static final long serialVersionUID = 1L;
-
-	public Usuario(Long id){
-		this.id=id;
-	}
  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +73,7 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_unidade_orcamentaria")
-	private UnidadeOrcamentaria unidadeOrcamentaria;
+	private UnidadeOrcamentaria unidadeOrcamentaria = new UnidadeOrcamentaria();
 
  
 	@Column(name="cpf",length=11,nullable=false)
@@ -116,6 +110,10 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	public Usuario() {
 	}
 
+	public Usuario(Long id){
+		this.id=id;
+	}
+	
 	public Usuario(String name, String email, Boolean primeiroAcesso,
 			Date lastLogin, String password, List<Perfil> perfis) {
 		super();
@@ -294,15 +292,7 @@ public class Usuario  extends Model implements Serializable, Auditable {
 
 		return sb.toString();
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Usuario){
-			return ((Usuario)object).getId() == this.id;
-		}
-		return false;
-	}
-
+ 
  
 	
 }

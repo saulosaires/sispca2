@@ -2,6 +2,8 @@ package administrativo.model;
 
  
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +23,12 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "permissao", schema = "controle_acesso")
-public class Permissao {
+public class Permissao implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5433001663834493143L;
 
 	/* Chave primária */
 	@Id

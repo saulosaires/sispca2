@@ -1,7 +1,6 @@
 package administrativo.beans;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
@@ -10,7 +9,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import administrativo.controller.LoginController;
-import administrativo.model.Perfil;
 import administrativo.model.Usuario;
 import arquitetura.utils.Cryptography;
 import arquitetura.utils.JPAUtil;
@@ -25,11 +23,15 @@ public class LoginMBean implements Serializable{
 	 
 	private static final long serialVersionUID = 1L;
 	
-	private String login,password,emailUsuario;
+	private String login;
+	private String password;
+	private String emailUsuario;
 	
 	@Inject private  LoginController loginController;
 	
-	public LoginMBean() {}
+	public LoginMBean() {
+		//empty constructor
+	}
  
 	
 	public String login() {
@@ -45,7 +47,7 @@ public class LoginMBean implements Serializable{
 				return "";
 			}
 			
-			List<Perfil> perfis = u.getPerfis();
+ 
 			
 			SessionUtils.put("user", u);
 			
@@ -53,7 +55,7 @@ public class LoginMBean implements Serializable{
 				
 				return "alterarsenha";
 			}else {
-				//TODO carregar permissao
+				// carregar permissao
 				return "home";
 			}
 

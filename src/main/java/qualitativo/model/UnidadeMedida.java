@@ -42,7 +42,9 @@ public class UnidadeMedida extends Model implements Serializable, Auditable {
 	@OneToMany(mappedBy="unidadeMedida")
 	private List<EtapasExecucao> etapasExecucaos;
 
-	public UnidadeMedida() {}	
+	public UnidadeMedida() {
+		//empty constructor
+	}	
 
 	public Long getId() {
 		return id;
@@ -100,13 +102,5 @@ public class UnidadeMedida extends Model implements Serializable, Auditable {
 			.append(" Unidade de Medida Sigla").append(this.sigla);
 		return sb.toString();
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof UnidadeMedida){
-			return ((UnidadeMedida)object).getId() == this.id;
-		}
-		return false;
-	}
-
+ 
 }

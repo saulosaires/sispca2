@@ -34,8 +34,7 @@ public class Exercicio extends Model implements Serializable, Auditable {
 	private Integer ano;
 	
 	private Boolean vigente;	
-
-	public Exercicio() {}
+ 
 
 	public Long getId() {
 		return id;
@@ -82,12 +81,6 @@ public class Exercicio extends Model implements Serializable, Auditable {
 		return sb.toString();
 	}	
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Exercicio){
-			return ((Exercicio)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

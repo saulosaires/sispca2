@@ -75,7 +75,10 @@ public class EtapasExecucao extends Model implements Serializable, Auditable {
 	@JoinColumn(name="id_unidade_medida")
 	private UnidadeMedida unidadeMedida;
 
-	public EtapasExecucao() {}
+	public EtapasExecucao() {
+		// empty constructor for this class
+		
+	}
 
 	
 
@@ -197,12 +200,6 @@ public class EtapasExecucao extends Model implements Serializable, Auditable {
 		return sb.toString();
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof EtapasExecucao){
-			return ((EtapasExecucao)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

@@ -31,6 +31,7 @@ public class MacroObjetivo implements Serializable {
 	private Programa programa;
 
 	public MacroObjetivo() {
+		//empty constructor
 	}
 
 	public Integer getId() {
@@ -65,12 +66,6 @@ public class MacroObjetivo implements Serializable {
 		this.programa = programa;
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof MacroObjetivo){
-			return ((MacroObjetivo)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 }

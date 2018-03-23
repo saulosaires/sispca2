@@ -29,7 +29,9 @@ public class TipoFormaImplementacao extends Model implements Serializable {
 	@OneToMany(mappedBy="tipoFormaImplementacao")
 	private List<Acao> acaos;
 
-	public TipoFormaImplementacao() {}	
+	public TipoFormaImplementacao() {
+		//empty constructor
+	}	
 
 	public Long getId() {
 		return id;
@@ -67,12 +69,6 @@ public class TipoFormaImplementacao extends Model implements Serializable {
 		return acao;
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoFormaImplementacao){
-			return ((TipoFormaImplementacao)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

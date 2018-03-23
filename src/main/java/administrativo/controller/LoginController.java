@@ -1,7 +1,6 @@
 package administrativo.controller;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class LoginController implements Serializable {
 	UsuarioDAO usuarioDao;
 
 	public LoginController() {
-
+			// empty
 	}
 
 	public Usuario loginByUserNameAndPassword(String username, String password) {
@@ -117,13 +116,12 @@ public class LoginController implements Serializable {
 			
 			String mensagem = builder.toString(); 
 			
-			List<String> destinatarios = new ArrayList<String>();
+			List<String> destinatarios = new ArrayList<>();
 			
 			destinatarios.add(usuario.getEmail());
-	    	
-			boolean emailSent = EmailUtil.enviaEmail(assunto, mensagem, destinatarios, null);
+	
 			
-			return emailSent;
+			return EmailUtil.enviaEmail(assunto, mensagem, destinatarios, null);
 		
     	}catch(Exception e) {
 			SispcaLogger.logError(e.getMessage());

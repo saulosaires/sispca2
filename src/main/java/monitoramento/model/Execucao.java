@@ -58,7 +58,9 @@ public class Execucao extends Model implements Serializable, Auditable {
 	private Exercicio exercicio;
 
 
-	public Execucao() {}
+	public Execucao() {
+		//empty constructor
+	}
 
 	public Long getId() {
 		return id;

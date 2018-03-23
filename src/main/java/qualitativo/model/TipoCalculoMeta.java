@@ -31,7 +31,9 @@ public class TipoCalculoMeta implements Serializable {
 	@OneToMany(mappedBy="tipoCalculoMeta")
 	private List<EtapasExecucao> etapasExecucaos;
 
-	public TipoCalculoMeta() {}	
+	public TipoCalculoMeta() {
+		//empty constructor
+	}	
 
 	public Long getId() {
 		return id;
@@ -64,13 +66,4 @@ public class TipoCalculoMeta implements Serializable {
 	public void setEtapasExecucaos(List<EtapasExecucao> etapasExecucaos) {
 		this.etapasExecucaos = etapasExecucaos;
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoCalculoMeta){
-			return ((TipoCalculoMeta)object).getId() == this.id;
-		}
-		return false;
-	}
-
 }

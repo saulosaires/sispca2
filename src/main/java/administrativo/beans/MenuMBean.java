@@ -24,6 +24,11 @@ public class MenuMBean implements Serializable{
 //	"Gráficos"
 //	"Metas"
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6457168508738709185L;
+
 	private Menu menuAdministrativo;
 	
 	private  List<Menu> menu;

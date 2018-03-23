@@ -17,9 +17,14 @@ import arquitetura.utils.SispcaLogger;
 @SessionScoped
 public class UserMBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7880830417324625776L;
+
 	private Usuario usuario;
 	
-	private StreamedContent fotoPerfil;
+	transient StreamedContent fotoPerfil;
 	
 	public UserMBean() {
 		usuario = (Usuario) SessionUtils.get("user");

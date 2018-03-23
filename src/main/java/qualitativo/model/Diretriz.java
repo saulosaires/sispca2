@@ -37,6 +37,7 @@ public class Diretriz implements Serializable {
 	private boolean ativo;
 	
 	public Diretriz() {
+		//empty constructor
 	}
 
 	public Integer getId() {
@@ -71,12 +72,6 @@ public class Diretriz implements Serializable {
 		this.ativo = ativo;
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Diretriz){
-			return ((Diretriz)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 	
 }

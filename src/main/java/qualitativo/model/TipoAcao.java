@@ -30,6 +30,7 @@ public class TipoAcao extends Model implements Serializable {
 	private List<Acao> acaos;
 
 	public TipoAcao() {
+		//empty constructor
 	}
 
 	public Long getId() {
@@ -55,13 +56,5 @@ public class TipoAcao extends Model implements Serializable {
 	public void setAcaos(List<Acao> acaos) {
 		this.acaos = acaos;
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoAcao){
-			return ((TipoAcao)object).getId() == this.id;
-		}
-		return false;
-	}
-
+ 
 }

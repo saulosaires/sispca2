@@ -2,6 +2,7 @@ package administrativo.model;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,8 +21,6 @@ import javax.validation.constraints.Size;
 import administrativo.enums.NivelAcesso;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
-
-import javax.persistence.JoinColumn;
  
  
 @Entity
@@ -107,12 +104,6 @@ public class Perfil extends Model implements Serializable, Auditable {
 		this.nivelAcesso = nivelAcesso;
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Perfil){
-			return ((Perfil)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 	
 }

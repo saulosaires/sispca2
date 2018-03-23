@@ -48,7 +48,9 @@ public class FisicoFinanceiro extends Model implements Serializable, Auditable {
 	@JoinColumn(name="id_regiao_municipio")
 	private RegiaoMunicipio regiaoMunicipio;
 	
-	public FisicoFinanceiro() { }
+	public FisicoFinanceiro() { 
+		//empty constructor
+	}
 
 	public Long getId() {
 		return this.id;
@@ -62,8 +64,8 @@ public class FisicoFinanceiro extends Model implements Serializable, Auditable {
 		return this.ano;
 	}
 
-	public void setAno(Integer Ano) {
-		this.ano = Ano;
+	public void setAno(Integer ano) {
+		this.ano = ano;
 	}	
 
 	public double getQuantidade() {

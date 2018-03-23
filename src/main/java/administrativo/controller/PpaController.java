@@ -10,6 +10,10 @@ import administrativo.model.Ppa;
 
 public class PpaController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1370755486293182418L;
 	@Inject PpaDAO ppaDAO;
 	
 	public List<Ppa> findAll() {

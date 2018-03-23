@@ -152,7 +152,9 @@ public class Acao extends Model implements Serializable, Auditable {
 	
 	private String observacao;
 
-	public Acao() { }	
+	public Acao() {
+		//empty
+	}	
 
 	public Long getId() {
 		return id;
@@ -486,12 +488,6 @@ public class Acao extends Model implements Serializable, Auditable {
 		
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Acao){
-			return ((Acao)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

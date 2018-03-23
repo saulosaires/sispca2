@@ -21,6 +21,10 @@ import arquitetura.utils.SispcaLogger;
 public class ExercicioListMBean implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9140878250857643893L;
 	private String mensagem;
 	private Ppa buscaPpa;
 	private Integer ano;
@@ -30,16 +34,16 @@ public class ExercicioListMBean implements Serializable{
 	
 	private Exercicio exercicioSelecionado;
 	
-	private PpaController ppaController;
+ 
 	private ExercicioController exercicioController;
 	
 	 @Inject
 	public ExercicioListMBean( PpaController ppaController,ExercicioController exercicioController){
 		
-		 this.ppaController=ppaController;
+		 
 		 this.exercicioController=exercicioController;
 		 
-		this.listPpa = (List<Ppa>) this.ppaController.findAll();
+		this.listPpa = ppaController.findAll();
 		
 	}
 

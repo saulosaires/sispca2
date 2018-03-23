@@ -26,7 +26,9 @@ public class TipoOrcamento extends Model implements Serializable {
 	@OneToMany(mappedBy="tipoOrcamento")
 	private List<Acao> acaos;
 
-	public TipoOrcamento() {}	
+	public TipoOrcamento() {
+		//empty constructor
+	}	
 
 	public Long getId() {
 		return id;
@@ -51,13 +53,6 @@ public class TipoOrcamento extends Model implements Serializable {
 	public void setAcaos(List<Acao> acaos) {
 		this.acaos = acaos;
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoOrcamento){
-			return ((TipoOrcamento)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 
 }

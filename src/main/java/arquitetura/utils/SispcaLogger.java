@@ -4,7 +4,11 @@ import org.jboss.logging.Logger;
 
 public class SispcaLogger {
 
-	private final static Logger logger = Logger.getLogger(SispcaLogger.class.getName());
+	private SispcaLogger() {
+		 throw new IllegalStateException("Utility class");
+	}
+	
+	private static final  Logger logger = Logger.getLogger(SispcaLogger.class.getName());
 	
 	
 	public static void logError(String msg) {

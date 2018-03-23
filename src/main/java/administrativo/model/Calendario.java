@@ -45,14 +45,9 @@ public class Calendario extends Model implements Serializable, Auditable {
 	
 	@OneToMany(mappedBy = "calendario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval=true)
 	private List<ActionCalendario> listActionCalendario;
-	/*
-	 * Eventos que estão vinculados a este Calendario 
-	 */
-//	@ManyToMany(targetEntity = Action.class, cascade = { CascadeType.ALL })
-//	@JoinTable(name = "action_calendario", schema = "planejamento", joinColumns = @JoinColumn(name = "id_calendario"), inverseJoinColumns = @JoinColumn(name = "id_action"))
-//	private List<Action> actions;
-	
+ 
 	public Calendario() {
+		// empty constructor
 	}
 	
 	public Long getId() {
@@ -87,16 +82,7 @@ public class Calendario extends Model implements Serializable, Auditable {
 	public void setExercicio(Exercicio exercicio) {
 		this.exercicio = exercicio;
 	}
-
-//	public List<Action> getActions() {
-//		return actions;
-//	}
-//
-//	public void setActions(List<Action> actions) {
-//		this.actions = actions;
-//	}
-
-
+ 
 	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
@@ -109,12 +95,6 @@ public class Calendario extends Model implements Serializable, Auditable {
 		return sb.toString();
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Calendario){
-			return ((Calendario)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 }

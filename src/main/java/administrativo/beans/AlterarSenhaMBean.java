@@ -18,17 +18,21 @@ import arquitetura.utils.SispcaLogger;
 @ViewScoped
 public class AlterarSenhaMBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2110396895947469990L;
 	private Usuario usuario;
-	private String password,newPassword,confirmPassword;
-	
+	private String password;
+	private String newPassword;
+	private String confirmPassword;
 	@Inject private  LoginController loginController;
 	
 	
 	public AlterarSenhaMBean() {
 		
 		usuario = (Usuario) SessionUtils.get("user");
-		newPassword="";
-		confirmPassword="";
+ 
 	}
 
 
