@@ -7,6 +7,11 @@ import javax.faces.context.FacesContext;
 
 public class Messages {
 
+	private Messages() {
+	    throw new IllegalStateException("Utility class");
+	  }
+
+	
 	public static void addMessageWarn(String message){
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, message, null)); 
 	}

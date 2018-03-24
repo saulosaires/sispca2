@@ -18,7 +18,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "orgao", schema = "comum")
-public class Orgao extends Model implements Serializable, Auditable, Comparable<Orgao> {
+public class Orgao extends Model implements Serializable, Auditable  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -116,9 +116,9 @@ public class Orgao extends Model implements Serializable, Auditable, Comparable<
 		return sb.toString();
 	}
 
-	public int compareTo(Orgao orgao) {
-		return this.sigla.compareTo(orgao.sigla);
-	}
+	 
+
  
+	 
 
 }

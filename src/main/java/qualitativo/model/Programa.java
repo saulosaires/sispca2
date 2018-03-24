@@ -71,9 +71,7 @@ public class Programa extends Model implements Serializable, Auditable {
 
 	@Column(name="tipo_politica")
 	private String tipoPolitica;
-
-	@Column(name="tipo_programa")
-	private String tipoPrograma_;
+ 
 
 	@Column(name="valor_anual")
 	private BigDecimal valorAnual;
@@ -104,7 +102,9 @@ public class Programa extends Model implements Serializable, Auditable {
 	@NotNull(message="Tipo de Programa: campo é obrigatório")
 	private TipoPrograma tipoPrograma;
 
-	public Programa() { }	
+	public Programa() { 
+		//EMPTY CONSTRUCTOR
+	}	
 
 	public Long getId() {
 		return id;
@@ -253,15 +253,7 @@ public class Programa extends Model implements Serializable, Auditable {
 		this.diretrizs = diretrizs;
 	}
 
-	/*
-	public List<Indicador> getIndicadores() {
-		return this.indicadores;
-	}
-
-	public void setIndicadores(List<Indicador> indicadores) {
-		this.indicadores = indicadores;
-	}
-	*/
+ 
 
 	public List<MacroObjetivo> getMacroObjetivos() {
 		return this.macroObjetivos;
@@ -278,14 +270,6 @@ public class Programa extends Model implements Serializable, Auditable {
 	public void setTipoHorizonteTemporal(TipoHorizonteTemporal tipoHorizonteTemporal) {
 		this.tipoHorizonteTemporal = tipoHorizonteTemporal;
 	}	
-
-	public String getTipoPrograma_() {
-		return tipoPrograma_;
-	}
-
-	public void setTipoPrograma_(String tipoPrograma_) {
-		this.tipoPrograma_ = tipoPrograma_;
-	}
 
 	public TipoPrograma getTipoPrograma() {
 		return tipoPrograma;
@@ -327,12 +311,6 @@ public class Programa extends Model implements Serializable, Auditable {
 		return sb.toString();		
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Programa){
-			return ((Programa)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 }

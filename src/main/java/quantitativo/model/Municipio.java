@@ -35,7 +35,7 @@ public class Municipio implements Serializable{
 	
 	private String descricao;
 	
-	public Municipio() { }
+	 
 
 	public Integer getId() {
 		return id;

@@ -9,8 +9,7 @@ public class Model {
 	@Column(name = "ativo")
 	private Boolean ativo = true;
 
-	public Model() {
-	}
+ 
 
 	public Boolean getAtivo() {
 		return ativo;

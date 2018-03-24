@@ -7,13 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -42,12 +43,16 @@ public class Perfil extends Model implements Serializable, Auditable {
 	/*
 	 * Permissões vinculadas a este perfil
 	 */
-	@OneToMany(mappedBy = "perfil", fetch = FetchType.LAZY)
+	@ManyToMany
+	  @JoinTable(
+	      name="perfil_permissao",
+	      joinColumns=@JoinColumn(name="id_perfil", referencedColumnName="id_perfil"),
+	      inverseJoinColumns=@JoinColumn(name="id_permissao", referencedColumnName="id_permissao"))
 	private List<Permissao> permissoes;
 
  
 	@Enumerated(EnumType.STRING)
-	@Column(name = "nivel_acesso", columnDefinition="controle_acesso.nivel_acesso")
+	@Column(name = "nivel_acesso")
 	private NivelAcesso nivelAcesso;
  
 	

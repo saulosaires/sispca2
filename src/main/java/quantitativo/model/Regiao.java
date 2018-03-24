@@ -33,8 +33,7 @@ public class Regiao extends Model implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_tipo_regiao")
 	private TipoRegiao tipoRegiao;
-
-	public Regiao() {}	
+ 
 
 	public Long getId() {
 		return id;

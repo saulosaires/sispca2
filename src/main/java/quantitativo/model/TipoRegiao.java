@@ -36,7 +36,7 @@ public class TipoRegiao extends Model implements Serializable{
 	private List<Regiao> listRegiao;
 
 	public TipoRegiao() {
-		
+		//Empty constructor
 	}
 	
 	public Long getId() {

@@ -74,7 +74,9 @@ public class RegiaoMunicipio extends Model implements Serializable{
 	
 	private transient boolean comitado;
 	
-	public RegiaoMunicipio() {}
+	public RegiaoMunicipio() {
+		//EMPTY CONSTRUCTOR
+	}
 
 	public Long getId() {
 		return id;

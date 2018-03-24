@@ -9,11 +9,6 @@ import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 
  
-/**
- * Módulo ao qual o Controller pertence
- * 
- * @author Saul Raposo
- */
 @Entity
 @Table(name = "modulo", schema = "controle_acesso")
 public class Modulo extends Model implements Serializable, Auditable {
@@ -21,9 +16,7 @@ public class Modulo extends Model implements Serializable, Auditable {
 
 	/* Chave primária */
 	@Id
-//	@SequenceGenerator(name = "modulo_id_seq", sequenceName = "controle_acesso.modulo_id_seq")
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "modulo_id_seq")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+ 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_modulo")
 	private Long id;
 
@@ -99,12 +92,6 @@ public class Modulo extends Model implements Serializable, Auditable {
 		return sb.toString();
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Modulo){
-			return ((Modulo)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 }

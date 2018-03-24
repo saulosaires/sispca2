@@ -46,10 +46,7 @@ public class ActionCalendario extends Model implements Serializable, Auditable{
 	@Column(name="data_inicio")
 	private Date dataInicio;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinColumn(name="id_action")
-	private Action action;
-	
+		
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_calendario")
 	private Calendario calendario;
@@ -80,13 +77,7 @@ public class ActionCalendario extends Model implements Serializable, Auditable{
 		this.dataInicio = dataInicio;
 	}
 
-	public Action getAction() {
-		return action;
-	}
 
-	public void setAction(Action action) {
-		this.action = action;
-	}
 
 	public Calendario getCalendario() {
 		return calendario;
@@ -103,7 +94,7 @@ public class ActionCalendario extends Model implements Serializable, Auditable{
 		sb.append(" ActionCalendario Id: ").append(id);
 		sb.append(" ActionCalendario Data Inicio: ").append(FormatoUtils.formataData(dataInicio));
 		sb.append(" ActionCalendario Data Fim: ").append(FormatoUtils.formataData(dataFim));
-		sb.append(" ActionCalendario Action: ").append(action.getId());
+
 		sb.append(" ActionCalendario Calendario: ").append(calendario.getId());
 		sb.append(" ActionCalendario Ativo: ").append(getAtivo());
 

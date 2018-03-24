@@ -56,6 +56,7 @@ public class Ppa extends Model implements Serializable {
 	private Integer periodicidadeRevisao;
 
 	public Ppa() {
+		//EMPTY CONSTRUCTOR
 	}
 
 	public Integer getId() {
@@ -115,12 +116,6 @@ public class Ppa extends Model implements Serializable {
 		this.periodicidadeRevisao = periodicidadeRevisao;
 	}
 	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Ppa){
-			return ((Ppa)object).getId() == this.id;
-		}
-		return false;
-	}
+	 
 
 }

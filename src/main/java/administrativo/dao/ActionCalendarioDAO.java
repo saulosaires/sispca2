@@ -6,7 +6,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import administrativo.model.Action;
 import administrativo.model.ActionCalendario;
 import administrativo.model.Calendario;
 import arquitetura.dao.AbstractDAO;
@@ -20,7 +19,7 @@ public class ActionCalendarioDAO  extends AbstractDAO< ActionCalendario >  {
 	}
 
 	
-	public List<ActionCalendario> buscaActionsComCalendario(Calendario calendario, Action action){
+	public List<ActionCalendario> buscaActionsComCalendario(Calendario calendario){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ActionCalendario> query = cb.createQuery(ActionCalendario.class);
@@ -28,8 +27,7 @@ public class ActionCalendarioDAO  extends AbstractDAO< ActionCalendario >  {
 		query.select(m);
 	 
 		query.where(
-				     cb.equal(m.get("calendario"), calendario.getId()),
-				     cb.equal(m.get("action"), action.getId())
+				     cb.equal(m.get("calendario"), calendario.getId())
 				    );
   
 		return entityManager.createQuery(query).getResultList();

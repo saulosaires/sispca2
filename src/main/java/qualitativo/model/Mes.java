@@ -28,6 +28,7 @@ public class Mes  extends Model implements Serializable {
  
 
 	public Mes() {
+		//Empty Constructor
 	}	
 
 	public Long getId() {
@@ -53,13 +54,6 @@ public class Mes  extends Model implements Serializable {
 	public void setNumeroMes(Integer numeroMes) {
 		this.numeroMes = numeroMes;
 	}
- 
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof Mes){
-			return ((Mes)object).getId() == this.id;
-		}
-		return false;
-	}
+  
 
 }

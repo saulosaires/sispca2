@@ -2,9 +2,9 @@ package administrativo.enums;
 
 public enum NivelAcesso {
 	
-	p("Pleno"),
-	g("Gestor"),
-	a("Administrador");
+	P("Pleno"),
+	G("Gestor"),
+	A("Administrador");
 
 	private String label;
 

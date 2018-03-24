@@ -57,13 +57,7 @@ public class PlanoInterno extends Model implements Serializable, Auditable {
 		this.id = id;
 	}
 	
-	public Boolean getAtivo() {
-		return this.ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}	
+	 
 
 	public String getCod() {
 		return cod;
@@ -113,13 +107,5 @@ public class PlanoInterno extends Model implements Serializable, Auditable {
 
 		return sb.toString();		
 	}
-	
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof PlanoInterno){
-			return ((PlanoInterno)object).getId() == this.id;
-		}
-		return false;
-	}
-	
+ 
 }

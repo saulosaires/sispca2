@@ -8,6 +8,11 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
 
+	private SessionUtils() {
+	    throw new IllegalStateException("Utility class");
+	}
+
+	
 	public static void invalidate() {
 		
 		FacesContext fc = FacesContext.getCurrentInstance();

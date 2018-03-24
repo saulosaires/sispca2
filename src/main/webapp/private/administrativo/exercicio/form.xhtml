@@ -109,12 +109,12 @@
 											</td>
 											<td>
 												<center>
-													<h:commandButton image="/images/icon_plus.png" style="width:30px; height: 30px;"
+													<h:commandButton image="#{facesContext.externalContext.request.contextPath}/resources/images/icon_plus.png" style="width:30px; height: 30px;"
 														action="#{exercicioMBean.adicionaDataPorAction(action)}" 
 														title="Adicionar Data" immediate="true">
 													</h:commandButton>
 													
-													<h:commandButton image="/images/icon_minus.png" style="width:30px; height: 30px;"
+													<h:commandButton image="#{facesContext.externalContext.request.contextPath}/resources/images/icon_minus.png" style="width:30px; height: 30px;"
 														title="Deletar Última Data para esta Ação" immediate="true"
 														action="#{exercicioMBean.deletaDataPorAction(action)}"
 														rendered="#{exercicioMBean.haIntervalosMaioresQueUm(action)}">

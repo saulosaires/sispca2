@@ -39,7 +39,9 @@ public class Subfuncao extends Model implements Serializable {
 	@JoinColumn(name="id_funcao")
 	private Funcao funcao;
 
-	public Subfuncao() {}
+	public Subfuncao() {
+		//Empty constructor
+	}
 
 	public Long getId() {
 		return id;

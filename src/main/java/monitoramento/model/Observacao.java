@@ -74,13 +74,7 @@ public class Observacao extends Model implements Serializable, Auditable {
 		this.execucaos = execucaos;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
+ 
 
 	@Override
 	public String getLogDetail() {
