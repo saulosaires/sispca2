@@ -7,42 +7,36 @@ import arquitetura.model.Model;
 
 import java.util.List;
 
-
 /**
  * The persistent class for the subfuncao database table.
  * 
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name="subfuncao", schema="planejamento")
+@Table(name = "subfuncao", schema = "planejamento")
 public class Subfuncao extends Model implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_subfuncao")
+	@Column(name = "id_subfuncao")
 	private Long id;
 
-	@Column(name="codigo")
+	@Column(name = "codigo")
 	private String codigo;
 
-	@Column(name="descricao")
+	@Column(name = "descricao")
 	private String descricao;
-	 
 
-	//bi-directional many-to-one association to Acao
-	@OneToMany(mappedBy="subfuncao")
+	// bi-directional many-to-one association to Acao
+	@OneToMany(mappedBy = "subfuncao")
 	private List<Acao> acaos;
 
-	//bi-directional many-to-one association to Funcao
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_funcao")
+	// bi-directional many-to-one association to Funcao
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_funcao")
 	private Funcao funcao;
-
-	public Subfuncao() {
-		//Empty constructor
-	}
-
+ 
 	public Long getId() {
 		return id;
 	}
@@ -82,6 +76,5 @@ public class Subfuncao extends Model implements Serializable {
 	public void setFuncao(Funcao funcao) {
 		this.funcao = funcao;
 	}
- 
 
 }
