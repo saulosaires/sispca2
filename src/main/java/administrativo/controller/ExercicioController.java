@@ -23,9 +23,9 @@ public class ExercicioController implements Serializable{
 		
 	}
 	
-	public Integer retornaQuantidadeVigente(){
+	public Integer quantidadeVigente(){
 	
-		return exercicioDAO.retornaQuantidadeVigente();
+		return exercicioDAO.quantidadeVigente();
 		
 	}
 	
@@ -38,10 +38,17 @@ public class ExercicioController implements Serializable{
 		
 	}
 	
-	public Exercicio findById(Long exercicioId) {
+	public Exercicio findOne(Long exercicioId) {
 		
 		return exercicioDAO.findOne(exercicioId);
 		
 	}
+	
+	public Exercicio update(Exercicio exercicio) {
+		
+		return exercicioDAO.update(exercicio);
+		
+	}
+	
 	
 }

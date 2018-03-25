@@ -25,11 +25,12 @@ public class LoginController implements Serializable {
 	 */
 	private static final long serialVersionUID = -5934068244899456741L;
 
-	@Inject
-	UsuarioDAO usuarioDao;
 
-	public LoginController() {
-			// empty
+	private UsuarioDAO usuarioDao;
+
+	@Inject
+	public LoginController(UsuarioDAO usuarioDao) {
+		this.usuarioDao=usuarioDao;
 	}
 
 	public Usuario loginByUserNameAndPassword(String username, String password) {

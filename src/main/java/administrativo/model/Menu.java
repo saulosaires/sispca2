@@ -1,14 +1,40 @@
 package administrativo.model;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class Menu {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import arquitetura.model.Model;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "menu", schema = "controle_acesso")
+public class Menu extends Model implements Serializable{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 	
+	@Column(name="name",length=80,nullable=false)
 	private String label;
+	
+	@Column(name="name",length=150,nullable=false)
 	private String link;
 	
-	private List<Menu> subMenu;
+ 
+	@ManyToOne
+	@JoinColumn(name = "id_menu_pai",nullable=false)
+	private Menu pai;
 	
 	public Menu() {
 	
@@ -20,11 +46,11 @@ public class Menu {
 		this.link = link;
 	}
 	
-	public Menu(String label, String link, List<Menu> subMenu) {
+	public Menu(String label, String link, Menu pai) {
 		super();
 		this.label = label;
 		this.link = link;
-		this.subMenu=subMenu;
+		this.pai=pai;
 	}
 
 
@@ -45,14 +71,15 @@ public class Menu {
 		this.link = link;
 	}
 
-	public List<Menu> getSubMenu() {
-		return subMenu;
+	public Menu getPai() {
+		return pai;
 	}
 
-	public void setSubMenu(List<Menu> subMenu) {
-		this.subMenu = subMenu;
+	public void setPai(Menu pai) {
+		this.pai = pai;
 	}
-	
+
+	 
 	
 	
 }

@@ -37,9 +37,9 @@ public class MenuMBean implements Serializable{
 		
 		menu = new ArrayList<>(10);
 		
-		menuAdministrativo = new Menu("Administrativo", "",new ArrayList<>());
+		menuAdministrativo = new Menu("Administrativo", "");
 		
-		menuAdministrativo.getSubMenu().add(new Menu("Exercicio", "/private/administrativo/exercicio/list.xhtml"));
+		//menuAdministrativo.getSubMenu().add(new Menu("Exercicio", "/private/administrativo/exercicio/list.xhtml"));
 		
 		
 		

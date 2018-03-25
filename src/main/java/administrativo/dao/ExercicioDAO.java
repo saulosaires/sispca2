@@ -45,7 +45,7 @@ public class ExercicioDAO extends AbstractDAO< Exercicio >  {
 	}
 
  
-	public Integer retornaQuantidadeVigente(){
+	public Integer quantidadeVigente(){
  		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Exercicio> query = cb.createQuery(Exercicio.class);

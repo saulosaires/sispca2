@@ -7,9 +7,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public abstract class AbstractDAO< T extends Serializable > {
+public abstract class AbstractDAO< T extends Serializable >  implements Serializable{
 	 
-	   private Class< T > clazz;
+	   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	private Class< T > clazz;
 	 
 	  
 	   public static final EntityManager entityManager;

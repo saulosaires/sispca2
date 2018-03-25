@@ -7,10 +7,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import administrativo.controller.ExercicioController;
-import administrativo.controller.PpaController;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
+import administrativo.service.ExercicioService;
+import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
@@ -35,15 +35,13 @@ public class ExercicioListMBean implements Serializable{
 	private Exercicio exercicioSelecionado;
 	
  
-	private ExercicioController exercicioController;
+	private ExercicioService exercicioService;
 	
 	 @Inject
-	public ExercicioListMBean( PpaController ppaController,ExercicioController exercicioController){
-		
+	public ExercicioListMBean( PpaService ppaService,ExercicioService exercicioService){
 		 
-		 this.exercicioController=exercicioController;
-		 
-		this.listPpa = ppaController.findAll();
+		 this.exercicioService=exercicioService;
+		 this.listPpa = ppaService.findAll();
 		
 	}
 
@@ -56,7 +54,7 @@ public class ExercicioListMBean implements Serializable{
 			
 			PrimeFacesUtils.execute("PF('dlgMensag').show()");
 			 
-	  	}else 	if (exercicioController.retornaQuantidadeVigente()>0){
+	  	}else 	if (exercicioService.quantidadeVigente()>0){
 	  		Messages.addMessageWarn("Já existe pelo menos um exercício vigente, fazer esta operação constituirá em um erro!");
 	  	}else {
 	  		this.mensagem = "Deseja tornar o exercício do ppa "+exercicio.getPpa().getDescricao()+" do ano "+exercicio.getAno()+" com vigência?";
@@ -68,14 +66,14 @@ public class ExercicioListMBean implements Serializable{
 	 
 	public void buscaExercicioPorPpaAno() {
 		
-		listExercicio= exercicioController.buscaExercicioPorPpaAno(buscaPpa, ano);
+		listExercicio= exercicioService.buscaExercicioPorPpaAno(buscaPpa, ano);
 		
 	}
 	
 	public String atualizaVigencia() {
 		
 		try {
-			exercicioController.trocarVigencia(exercicioSelecionado);
+			exercicioService.trocarVigencia(exercicioSelecionado);
 		
 			Messages.addMessageInfo("Processo de atualização de vigência realizado com sucesso!");
 		}catch(Exception e) {

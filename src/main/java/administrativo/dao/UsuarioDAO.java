@@ -1,5 +1,6 @@
 package administrativo.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +12,10 @@ import administrativo.model.Usuario;
 import arquitetura.dao.AbstractDAO;
  
 
-public class UsuarioDAO extends AbstractDAO< Usuario >  {
+public class UsuarioDAO extends AbstractDAO< Usuario >{
 
-	
+ 
+
 	public UsuarioDAO() {
 		setClazz(Usuario.class );
 	 

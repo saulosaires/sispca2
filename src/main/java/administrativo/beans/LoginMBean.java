@@ -1,16 +1,14 @@
 package administrativo.beans;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
-import administrativo.controller.LoginController;
 import administrativo.model.Usuario;
-import arquitetura.utils.Cryptography;
+import administrativo.service.LoginService;
 import arquitetura.utils.JPAUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -27,28 +25,20 @@ public class LoginMBean implements Serializable{
 	private String password;
 	private String emailUsuario;
 	
-	@Inject private  LoginController loginController;
+	@Inject private  LoginService loginService;
 	
-	public LoginMBean() {
-		//empty constructor
-	}
- 
-	
+ 	
 	public String login() {
 		
 		try {
-				
-			String senhaMD5= Cryptography.md5(password);
-			
-			Usuario u= loginController.loginByUserNameAndPassword(login,senhaMD5);
+ 			
+			Usuario u= loginService.loginByUserNameAndPassword(login,password);
 			
 			if(!JPAUtil.validId(u.getId())) {
 				Messages.addMessageError("Login ou senha Inválidos");
 				return "";
 			}
-			
  
-			
 			SessionUtils.put("user", u);
 			
 			if(u.getPrimeiroAcesso()) {
@@ -77,14 +67,6 @@ public class LoginMBean implements Serializable{
 				return "";
 			}
 			
-			
-			Optional<Usuario> u = loginController.buscarUsuarioByEmail(emailUsuario);
-			
-			if(!u.isPresent()) {
-				Messages.addMessageError("Email não encontrado");
-				return "";
-			}
-	 
 			HttpServletRequest request = SessionUtils.getRequest();
 			
 			String scheme    = request.getScheme();
@@ -92,10 +74,15 @@ public class LoginMBean implements Serializable{
 			int port         = request.getServerPort();
 			String path      = request.getContextPath();
 			
-			loginController.recuperarSenha(u.get(),scheme,serveName,port,path);
-			
-			Messages.addMessageInfo("Acesse o link enviado para seu email para instruções de recuperação de senha");
-			
+			boolean sent = loginService.solicitaRecuperacaoSenha(emailUsuario, scheme, serveName, port, path);
+ 
+			if(sent) {
+				Messages.addMessageError("Email não encontrado");
+				return "";
+			}else {
+				Messages.addMessageInfo("Acesse o link enviado para seu email para instruções de recuperação de senha");
+			}
+	 			
 			return "";
 				
 		}catch(Exception e) {
