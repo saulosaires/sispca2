@@ -14,10 +14,8 @@
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
 			<f:metadata>
-				<f:event type="preRenderView"
-					listener="#{usuarioMBean.checkPermissionInView(exercicioMBean.controllerName, 'insert')}" />
-				<f:event type="preRenderView"
-					listener="#{exercicioMBean.checkExercicioAtivo()}"/>		
+    			<f:viewParam name="exercicioId" value="#{exercicioFormMBean.exercicioId}"/>
+    			<f:viewAction action="#{exercicioFormMBean.init}" />
 			</f:metadata>
 			<h:form>				
 				<div class="container-fluid row-fluid">
@@ -31,8 +29,7 @@
 						<div class="row">
 							<div class="col-lg-2">
 								<h:outputText value="PPA:  " styleClass="labelOutText"/>
-								<h:selectOneMenu id="selectPpa" value="#{exercicioMBean.entity.ppa}" styleClass="form-control input-sm"
-									converter="simpleConverter">
+								<h:selectOneMenu id="selectPpa" value="#{exercicioFormMBean.exercicio.ppa}" styleClass="form-control input-sm" >
 									<f:selectItem itemLabel="--SELECIONE--"/>
 									<f:selectItems var="ppa" value="#{exercicioMBean.listPpa}"
 										itemLabel="#{fn:toUpperCase(ppa.descricao)}" itemValue="#{ppa}"/>
@@ -42,16 +39,16 @@
 						<div class="row" style="margin-top: 1%">	
 							<div class="col-lg-1">
 								<h:outputText value="ANO:  " styleClass="labelOutText"/>
-								<h:inputText id="inputAno" value="#{exercicioMBean.entity.ano}" styleClass="form-control input-sm"/>
+								<h:inputText id="inputAno" value="#{exercicioFormMBean.exercicio.ano}" styleClass="form-control input-sm"/>
 							</div>
 						</div>
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-8">
 								<h:outputText value="PERÍODO DE VIGÊNCIA: " styleClass="labelOutText"/>
-								<p:calendar id="calendarDataInicio" value="#{exercicioMBean.dataInicio}" pattern="dd/MM/yyyy" styleClass="input-sm"
+								<p:calendar id="calendarDataInicio" value="#{exercicioFormMBean.dataInicio}" pattern="dd/MM/yyyy" styleClass="input-sm"
 									locale="pt"/>
 								<h:outputText value="a"/>
-								<p:calendar id="calendarDataFim" value="#{exercicioMBean.dataFim}" pattern="dd/MM/yyyy" styleClass="input-sm"
+								<p:calendar id="calendarDataFim" value="#{exercicioFormMBean.dataFim}" pattern="dd/MM/yyyy" styleClass="input-sm"
 									locale="pt"/>
 							</div>
 						</div>
@@ -79,65 +76,21 @@
 											<center><h:outputText value="ADICIONAR/DELETAR DATA" styleClass="labelOutText"/></center>
 										</td>
 									</tr>					
-									<c:forEach var="action" items="${exercicioMBean.listAction}">
-										<tr>
-											<td>
-												<b><h:outputText value="#{fn:toUpperCase(action.controller.modulo.nome)}  " styleClass="labelInputText"/></b>
-												<h:outputText value="(#{fn:toUpperCase(action.controller.label)} - #{fn:toUpperCase(action.label)})" styleClass="labelInputText"/>
-											</td>
-											<td>
-												<h:panelGroup id="panelCalendars">											
-													<c:forEach var="datas" items="${exercicioMBean.mapActionCalendario.get(action)}" varStatus="step">
-														<p:calendar value="#{datas.dataInicio}" pattern="dd/MM/yyyy" styleClass="input-sm" locale="pt">
-														 	<p:ajax event="dateSelect" process="@this"/>
-														 </p:calendar>	
-														a
-														<p:calendar value="#{datas.dataFim}" pattern="dd/MM/yyyy" styleClass="input-sm" locale="pt">
-															<p:ajax event="dateSelect" process="@this"/>
-														</p:calendar>
-														<br/><br/>
-													</c:forEach>	
-												</h:panelGroup>
-											</td>
-											<td>
-												<h:selectOneRadio value="#{exercicioMBean.operacaoData}" layout="pageDirection">
-													<f:selectItem itemLabel="Repetir para todo Mês" itemValue="1"/>
-													<f:selectItem itemLabel="Repetir a cada 02 Meses" itemValue="2"/>
-													<f:ajax execute="@this selectPpa inputAno calendarDataInicio calendarDataFim" event="change" render="@form"
-														listener="#{exercicioMBean.repeteDataMeses(action)}"/>
-												</h:selectOneRadio>
-											</td>
-											<td>
-												<center>
-													<h:commandButton image="#{facesContext.externalContext.request.contextPath}/resources/images/icon_plus.png" style="width:30px; height: 30px;"
-														action="#{exercicioMBean.adicionaDataPorAction(action)}" 
-														title="Adicionar Data" immediate="true">
-													</h:commandButton>
-													
-													<h:commandButton image="#{facesContext.externalContext.request.contextPath}/resources/images/icon_minus.png" style="width:30px; height: 30px;"
-														title="Deletar Última Data para esta Ação" immediate="true"
-														action="#{exercicioMBean.deletaDataPorAction(action)}"
-														rendered="#{exercicioMBean.haIntervalosMaioresQueUm(action)}">
-													</h:commandButton>		
-												</center>	
-											</td>
-										</tr>							
-									</c:forEach>
+ 
 								</tbody>
 							</table>
 						</div>
 						</center>
 						
 						<div class="spaceBtnAcao">							
-							<h:commandButton value="Inserir" action="#{exercicioMBean.mostraDados()}"
-								styleClass="btnAction btn btn-primary" rendered="#{exercicioMBean.operation  eq 'Inserir'}"/>					
+							<h:commandButton value="Inserir" action="exercicioList"
+								styleClass="btnAction btn btn-primary" rendered="true"/>					
 							&nbsp;	
 							<h:commandButton value="Editar" action="#{exercicioMBean.mostraDados()}"
-								styleClass="btnAction btn btn-primary" rendered="#{exercicioMBean.operation  eq 'Editar'}"/>							
+								styleClass="btnAction btn btn-primary" rendered="false"/>							
 							&nbsp;	
 							<h:commandButton styleClass="btnAction btn btn-primary"
-								style="margin-left: 0px" value="Cancela"
-								action="#{exercicioMBean.cancelaOperacao}" immediate="true" />							
+								style="margin-left: 0px" value="Cancela" action="exercicioList" immediate="true" />							
 						</div>										
 					</div>
 				</div>			

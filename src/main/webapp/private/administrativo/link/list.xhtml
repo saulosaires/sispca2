@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">	
+			<h:form>
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<p:messages autoUpdate="true" showDetail="true" closable="true"/>
+					</div>
+					<div class="row-fluid">
+						<ui:include src="/template/tutorial_form.xhtml" />
+					</div>
+					<div class="row-fluid">						
+						<div class="span12">
+							<fieldset>
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="TÍTULO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="inputBuscaDescricao" value="#{linkListMBean.titulo}" styleClass="form-control input-sm up" /> 	 											
+										</div>
+									</div>
+									
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="URL: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="inputBuscaUrl" value="#{linkListMBean.url}" styleClass="form-control input-sm up" />									
+										</div>
+									</div>						
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
+											<f:ajax
+												execute="@this inputBuscaDescricao inputBuscaUrl"
+												event="click" listener="#{linkListMBean.queryLinkByDescricaoAndURL}"
+												render="tableLinks" />
+										</h:commandButton>
+										&nbsp;
+										<h:commandButton value="Adicionar" styleClass="btnAction btn btn-primary" action="listInsert" />
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<legend class="outBusc">RESULTADOS</legend>
+				</div>				
+				<center>
+					<p:dataTable id="tableLinks" value="#{linkListMBean.listLinks}" var="link" paginator="true"
+						rows="10" emptyMessage="Não há links a serem mostradas" styleClass="tableDados">
+						<p:column headerText="TIPO DE LINK" styleClass="outTextTable" style="width: 30%;">
+							<h:outputText value="#{fn:toUpperCase(link.tipoLink.descricao)}" />
+						</p:column>
+						<p:column headerText="TÍTULO" styleClass="outTextTable" style="width: 30%;">
+							<h:outputText value="#{fn:toUpperCase(link.titulo)}" />
+						</p:column>
+						<p:column headerText="URL" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(link.url)}" />
+						</p:column>
+												
+						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable"
+							footerText="Quantidade Total: #{linkListMBean.listLinks.size()}">
+							<center>
+								<p:button title="Editar"  outcome="linkEdit" icon="ui-icon-pencil">
+								 	  <f:param name="linkId" value="#{link.id}" /> 
+								</p:button>
+								
+								<p:commandButton title="Deletar" action="#{linkListMBean.delete(link)}" icon="ui-icon-trash">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
+								</p:commandButton>
+							</center>
+						</p:column>						
+					</p:dataTable>
+				</center>	
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        			<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        			<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    			</p:confirmDialog>	
+    		</h:form>
+		</ui:define>
+	</ui:composition>	
+</body>
+</html>

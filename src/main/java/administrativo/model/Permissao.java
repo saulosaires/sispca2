@@ -37,7 +37,7 @@ public class Permissao implements Serializable{
 	private List<Perfil> perfil;
 	
 	 
-	@Column(name="action",length=100,nullable=false)
+	@Column(name="action",length=100)//TODO CHANGE TO NOT NULL
 	private String action;
  
 

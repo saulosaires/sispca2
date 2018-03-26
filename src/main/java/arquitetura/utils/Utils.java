@@ -14,4 +14,15 @@ public class Utils {
 		return new Random().nextInt();
 	}
 	
+	public static boolean emptyParam(String param) {
+		
+		return (param==null || "".equals(param));
+	}
+	
+	public static boolean invalidId(Long id) {
+		
+		return (id==null ||  id<0);
+	}
+	
+	
 }

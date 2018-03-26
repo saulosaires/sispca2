@@ -94,18 +94,18 @@
 						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable">
 							<center>
 								<p:button   title="Visualizar"  outcome="exercicioView" icon="ui-icon-search">
-									 <f:param name="exercicioId" value="#{exerc.id}" />
-									 
+									 <f:param name="exercicioId" value="#{exerc.id}" /> 
 								</p:button  >
 								
-								<p:commandButton title="Editar"      action="exercicioEdit" icon="ui-icon-pencil" />
-								<p:commandButton title="Tornar sem vigência"
-									actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" icon="ui-icon-circle-minus"
-									rendered="#{exerc.vigente}" update="@form" process="@this"/>	
+								<p:button title="Editar"      outcome="exercicioEdit" icon="ui-icon-pencil" >
+								 	 <f:param name="exercicioId" value="#{exerc.id}" /> 
+								</p:button  >
+								
+								<p:commandButton title="Tornar sem vigência" actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" 
+								                 icon="ui-icon-circle-minus" rendered="#{exerc.vigente}" update="@form" process="@this"/>	
 														
-								<p:commandButton title="Tornar Vigente"
-									actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" icon="ui-icon-circle-plus" process="@this"
-									rendered="#{!exerc.vigente}" update="@form"/>								
+								<p:commandButton title="Tornar Vigente" actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" 
+								                 icon="ui-icon-circle-plus" process="@this" rendered="#{!exerc.vigente}" update="@form"/>								
 							</center>
 						</p:column>
 					</p:dataTable>

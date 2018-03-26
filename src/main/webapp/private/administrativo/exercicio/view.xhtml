@@ -69,30 +69,10 @@
 										<td>
 											<center><h:outputText value="DATA INÍCIO x DATA FIM" styleClass="labelOutText"/></center>
 										</td>								
-									</tr>					
-									<c:forEach var="action" items="${exercicioViewMBean.listAction}">
-										<tr>
-											<td>
-												<h:outputText value="#{fn:toUpperCase(action.controller.name)} - #{fn:toUpperCase(action.name)}" styleClass="labelInputText"/>
-											</td>
-											<td>
-												<center>
-												<h:panelGroup id="panelCalendars">											
-													<c:forEach var="datas" items="${exercicioViewMBean.mapActionCalendario.get(action)}" varStatus="step">
-														<h:outputText value="#{datas.dataInicio}" styleClass="labelInputText">
-															<f:convertDateTime pattern="dd/MM/yyyy"/>															
-														</h:outputText>
-														<h:outputText value="  a  " styleClass="labelInputText" rendered="#{datas.dataInicio!=null and datas.dataFim!=null}"/>
-														<h:outputText value="#{datas.dataFim}" pattern="dd/MM/yyyy" styleClass="labelInputText">
-															<f:convertDateTime pattern="dd/MM/yyyy"/>															
-														</h:outputText>
-														<br/><br/>
-													</c:forEach>	
-												</h:panelGroup>
-												</center>
-											</td>										
-										</tr>							
-									</c:forEach>
+									</tr>	
+													
+ 
+									
 								</tbody>
 							</table>
 						</div>

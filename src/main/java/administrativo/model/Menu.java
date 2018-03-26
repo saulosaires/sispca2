@@ -1,6 +1,7 @@
 package administrativo.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,16 +26,20 @@ public class Menu extends Model implements Serializable{
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name="name",length=80,nullable=false)
+	@Column(name="label",length=80,nullable=false)
 	private String label;
 	
-	@Column(name="name",length=150,nullable=false)
+	@Column(name="link",length=150,nullable=false)
 	private String link;
-	
+
+	@Column(name="name",length=150,nullable=false)
+	private String name;
  
 	@ManyToOne
-	@JoinColumn(name = "id_menu_pai",nullable=false)
+	@JoinColumn(name = "id_menu_pai",nullable=true)
 	private Menu pai;
+	
+	private transient List<Menu> subMenu; 
 	
 	public Menu() {
 	
@@ -77,6 +82,30 @@ public class Menu extends Model implements Serializable{
 
 	public void setPai(Menu pai) {
 		this.pai = pai;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Menu> getSubMenu() {
+		return subMenu;
+	}
+
+	public void setSubMenu(List<Menu> subMenu) {
+		this.subMenu = subMenu;
 	}
 
 	 

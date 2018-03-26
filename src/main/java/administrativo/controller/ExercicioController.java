@@ -15,7 +15,12 @@ public class ExercicioController implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8543732848604788698L;
-	@Inject ExercicioDAO exercicioDAO;
+	private ExercicioDAO exercicioDAO;
+	
+	@Inject 
+	public ExercicioController(ExercicioDAO exercicioDAO){
+		this.exercicioDAO=exercicioDAO;
+	}
 	
 	public List<Exercicio> buscaExercicioPorPpaAno(Ppa buscaPpa, Integer ano){
 		

@@ -1,0 +1,66 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+   <persistence-unit name="sispca2" transaction-type="RESOURCE_LOCAL">
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:/PostgresDS</jta-data-source>
+<!--       <mapping-file>ormap.xml</mapping-file> -->
+   
+      <class>arquitetura.model.Model</class>
+    
+      <class>administrativo.model.Calendario</class>
+      <class>administrativo.model.ActionCalendario</class>
+      <class>administrativo.model.Exercicio</class>
+      <class>administrativo.model.Perfil</class>
+      <class>administrativo.model.Permissao</class>
+      <class>administrativo.model.Ppa</class>
+      <class>administrativo.model.Usuario</class>
+   	  <class>administrativo.model.Menu</class>
+   	  <class>administrativo.model.Link</class>
+   	  <class>administrativo.model.TipoLink</class>
+      
+      <class>monitoramento.model.Execucao</class>
+      <class>monitoramento.model.Observacao</class>
+      
+      <class>qualitativo.model.Acao</class>
+      <class>qualitativo.model.Diretriz</class>
+      <class>qualitativo.model.EtapasExecucao</class>
+      <class>qualitativo.model.Funcao</class>
+      <class>qualitativo.model.MacroObjetivo</class>
+      <class>qualitativo.model.Mes</class>
+      <class>qualitativo.model.Orgao</class>
+      <class>qualitativo.model.PlanoInterno</class>
+      <class>qualitativo.model.Programa</class>
+      <class>qualitativo.model.Subfuncao</class>
+      <class>qualitativo.model.TipoAcao</class>
+      <class>qualitativo.model.TipoCalculoMeta</class>
+      <class>qualitativo.model.TipoFormaImplementacao</class>
+      <class>qualitativo.model.TipoHorizonteTemporal</class>
+      <class>qualitativo.model.TipoOrcamento</class>
+      <class>qualitativo.model.TipoPrograma</class>
+      <class>qualitativo.model.UnidadeGestora</class>
+      <class>qualitativo.model.UnidadeMedida</class>
+      <class>qualitativo.model.UnidadeOrcamentaria</class>
+             
+      <class>quantitativo.model.FisicoFinanceiro</class>
+      <class>quantitativo.model.FisicoFinanceiroMensal</class>
+      <class>quantitativo.model.Localizador</class>
+      <class>quantitativo.model.Municipio</class>
+      <class>quantitativo.model.Regiao</class>
+      <class>quantitativo.model.RegiaoMunicipio</class>
+      <class>quantitativo.model.TipoRegiao</class>
+      <class>quantitativo.model.UnidadeFederativa</class>
+      
+      
+      <properties>
+ 
+ 		 <property  name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
+		 <property name="hibernate.show_sql" value="true"/>
+		 <property name="hibernate.format_sql" value="true"/>
+		
+		 <property name="hibernate.hbm2ddl.auto" value="update"/>
+		
+      </properties>
+   </persistence-unit>
+</persistence>

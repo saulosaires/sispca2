@@ -1,52 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
 
-<navigation-rule>
-   <from-view-id>*</from-view-id>
-   <navigation-case>
-	<from-outcome>home</from-outcome>
-	<to-view-id>/private/index.xhtml</to-view-id>
-   </navigation-case>
-</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/private/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>exercicioList</from-outcome>
+			<to-view-id>/private/administrativo/exercicio/list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>linksArquivosList</from-outcome>
+			<to-view-id>/private/administrativo/link/list.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>linksArquivosList</from-outcome>
+			<to-view-id>/private/administrativo/link/form.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/public/login.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-action>#{loginMBean.login}</from-action>
+			<from-outcome>alterarsenha</from-outcome>
+			<to-view-id>/private/administrativo/usuario/alterasenha.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
 
 
-<navigation-rule> 
-   <from-view-id>/public/login.xhtml</from-view-id> 
-   
-   <navigation-case> 
-      <from-action>#{loginMBean.login}</from-action> 
-      <from-outcome>alterarsenha</from-outcome> 
-      <to-view-id>/private/administrativo/usuario/alterasenha.xhtml</to-view-id> 
-   </navigation-case> 
-  
+	<navigation-rule>
+		<from-view-id>/private/administrativo/link/list.xhtml</from-view-id>
 
-</navigation-rule> 
+		<navigation-case>
+			<from-outcome>linkEdit</from-outcome>
+			<to-view-id>/private/administrativo/link/form.xhtml</to-view-id>
+		</navigation-case>
 
+	</navigation-rule>
 
+	<navigation-rule>
+		<from-view-id>/private/administrativo/exercicio/list.xhtml</from-view-id>
 
-<navigation-rule> 
-   <from-view-id>/private/administrativo/exercicio/list.xhtml</from-view-id> 
-   
-   <navigation-case> 
-      <from-outcome>exercicioView</from-outcome> 
-      <to-view-id>/private/administrativo/exercicio/view.xhtml</to-view-id> 
-   </navigation-case> 
-</navigation-rule> 
+		<navigation-case>
+			<from-outcome>exercicioView</from-outcome>
+			<to-view-id>/private/administrativo/exercicio/view.xhtml</to-view-id>
+		</navigation-case>
 
+		<navigation-case>
+			<from-outcome>exercicioEdit</from-outcome>
+			<to-view-id>/private/administrativo/exercicio/form.xhtml</to-view-id>
+		</navigation-case>
 
-
-<navigation-rule> 
-   <from-view-id>/private/administrativo/exercicio/view.xhtml</from-view-id> 
-   
-   <navigation-case> 
-      <from-outcome>exercicioList</from-outcome> 
-      <to-view-id>/private/administrativo/exercicio/list.xhtml</to-view-id> 
-   </navigation-case> 
-</navigation-rule> 
-
-
+	</navigation-rule>
+ 
 </faces-config>

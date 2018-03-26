@@ -32,12 +32,15 @@
 										<i class="fa fa-angle-left pull-right"></i>
 								 </a>
 									<ul class="treeview-menu">
-										<c:forEach var="controller" items="${modulo.subMenu}">
+										<c:forEach var="submenu" items="${modulo.subMenu}">
 											<li>
-											<a href="#{facesContext.externalContext.request.contextPath}${fn:toLowerCase(controller.link)}">
-											<i class="fa fa-circle-o"></i>
-													#{controller.label}</a>
-											</li>
+											 
+											<h:link  outcome="#{submenu.link}">
+												<i class="fa fa-circle-o" />
+												#{submenu.label}
+												</h:link>
+												 
+										   </li>
 										</c:forEach>
 									</ul>
 							  </li>

@@ -13,9 +13,9 @@
 	<meta name="author" content="SEATI" />
 	<link rel="shortcut icon" href="images/logo_gov_ma.png" />
 	
-	<link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
 
 </h:head>
 
@@ -50,6 +50,7 @@
 							<span class="pull-left"> <a data-toggle="modal"
 								href="#myModal"> Esqueceu a senha?</a>
 							</span>
+							
 							
 							<h:commandButton  action="#{loginMBean.login()}" class="btn btn-lg btn-login btn-block" value="Login" />
 						</div>
@@ -103,11 +104,11 @@
 
 	</div>
 
-	<script src="resources/js/jquery.min.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/jquery.min.js"></script>
 	<!-- start:bootstrap -->
-	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<!-- start:arjuna.js -->
-	<script src="resources/js/arjuna.js"></script>
+	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/arjuna.js"></script>
  
 </body>
 </html>
