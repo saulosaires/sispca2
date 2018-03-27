@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.PpaController;
 import administrativo.model.Ppa;
+import arquitetura.utils.Utils;
 
 public class PpaService implements Serializable {
 
@@ -26,4 +27,22 @@ public class PpaService implements Serializable {
 		return ppaController.findAll();
 	}
 
+	
+	public List<Ppa> queryPpa(String sigla, String descricao, Integer anoInicio, Integer anoFim){
+		
+		
+		if (Utils.emptyParam(sigla) && Utils.emptyParam(descricao) && Utils.invalidYear(anoInicio) && Utils.invalidYear(anoFim)) {
+			return ppaController.findAll();
+		} else {
+			return ppaController.queryPpa(sigla, descricao, anoInicio, anoFim);
+		}
+		
+	}
+
+	public void delete(Ppa ppa) {
+
+		ppaController.delete(ppa);
+		
+	}
+	
 }

@@ -20,10 +20,7 @@ import java.util.List;
 public class Ppa extends Model implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/* Chave primária */
 	@Id
-//	@SequenceGenerator(name = "ppa_id_ppa_seq", sequenceName = "planejamento.ppa_id_ppa_seq")
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ppa_id_ppa_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ppa")
 	private Integer id;
@@ -37,12 +34,12 @@ public class Ppa extends Model implements Serializable {
 
 	@NotNull(message = "Descrição: campo é obrigatório")
 	@Size(min = 1, max = 30)
-	@Column
+	@Column(name = "descricao")
 	private String descricao;
 
 	@NotNull
 	@Size(min = 1, max = 15)
-	@Column(unique = true)
+	@Column(unique = true,name="sigla")
 	private String sigla;
 
 	// "Ppa" tem muitos "Exercicio"
@@ -54,10 +51,7 @@ public class Ppa extends Model implements Serializable {
 
 	@Column(name = "periodicidade_revisao")
 	private Integer periodicidadeRevisao;
-
-	public Ppa() {
-		//EMPTY CONSTRUCTOR
-	}
+ 
 
 	public Integer getId() {
 		return this.id;

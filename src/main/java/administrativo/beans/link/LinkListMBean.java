@@ -9,6 +9,8 @@ import javax.inject.Named;
 
 import administrativo.model.Link;
 import administrativo.service.LinkService;
+import arquitetura.utils.Messages;
+import arquitetura.utils.SispcaLogger;
 
 @Named
 @ViewScoped
@@ -19,6 +21,10 @@ public class LinkListMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
 
+	public static final String FAIL_DELETE_LINK_MSG    = "Falha inesperada ao tentar Deletar Link";
+	public static final String SUCCESS_DELETE_LINK_MSG   = "Link deletado com Sucesso";
+
+	
 	private String titulo;
 	private String url;
 	private List<Link> listLinks;
@@ -36,8 +42,27 @@ public class LinkListMBean implements Serializable {
 		listLinks = linkService.queryLinkByDescricaoAndURL(titulo, url);
 		
 	}
+ 
+	public String deletar(Link link) {
+		
+		
+		try {
+  
+			linkService.delete(link);
 
-	public void delete(Link link) {
+			Messages.addMessageInfo(SUCCESS_DELETE_LINK_MSG);
+			
+		} catch (Exception e) {
+			SispcaLogger.logError(e.getLocalizedMessage());
+
+			Messages.addMessageError(FAIL_DELETE_LINK_MSG);
+			
+			 
+		}
+
+		queryLinkByDescricaoAndURL();
+		
+		return "";
 		
 	}
 	

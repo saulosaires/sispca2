@@ -9,22 +9,27 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import administrativo.model.Link;
+import administrativo.model.Mensagem;
 import arquitetura.dao.AbstractDAO;
 import arquitetura.utils.Utils;
 
-public class LinkDAO extends AbstractDAO<Link> {
+public class MensagemDAO extends AbstractDAO<Mensagem> {
 
-	public LinkDAO() {
-		setClazz(Link.class);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6032713621553762618L;
+
+	public MensagemDAO() {
+		setClazz(Mensagem.class);
 
 	}
 
-	public List<Link> queryLinkByDescricaoAndURL(String titulo, String url){
-		 
+	public List<Mensagem> queryByTituloAndTexto(String titulo, String texto) {
+
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Link> query = cb.createQuery(Link.class);
-		Root<Link> m = query.from(Link.class);
+		CriteriaQuery<Mensagem> query = cb.createQuery(Mensagem.class);
+		Root<Mensagem> m = query.from(Mensagem.class);
 		
 		query.select(m);
 		
@@ -37,16 +42,18 @@ public class LinkDAO extends AbstractDAO<Link> {
 			predicate.add(cb.like(upperTitulo,"%"+titulo.toUpperCase()+"%"));
 		}
 		
-		if(!Utils.emptyParam(url)) {
+		if(!Utils.emptyParam(texto)) {
 			
-			Expression<String> upperUrl = cb.upper(m.get("url"));
+			Expression<String> upperUrl = cb.upper(m.get("texto"));
 			
-			predicate.add(cb.like(upperUrl,"%"+url+"%" ));		
+			predicate.add(cb.like(upperUrl,"%"+texto+"%" ));		
 		}
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
  
 		return entityManager.createQuery(query).getResultList();
+		
 	}
 
+	 
 }

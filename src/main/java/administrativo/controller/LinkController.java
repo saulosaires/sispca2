@@ -32,7 +32,21 @@ public class LinkController implements Serializable {
 
 		return linkDAO.findAll();
 	}
+
+	public void create(Link link) {
+
+		linkDAO.create(link);
+	}
 	
+	public Link update(Link link) {
+
+		return linkDAO.update(link);
+	}
+
+	public Link delete(Link link) {
+
+		return linkDAO.delete(link);
+	}
 	
 	public List<Link> queryLinkByDescricaoAndURL(String titulo, String url){
 		

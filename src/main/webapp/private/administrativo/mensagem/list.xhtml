@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			 
+			<h:form>
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<p:messages autoUpdate="true" closable="true" />
+					</div>	
+					<div class="row-fluid">
+							<ui:include src="/template/tutorial_form.xhtml" />
+					</div>			
+					<div class="row-fluid">
+						<div class="span12">
+							<fieldset>								
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="TÍTULO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="tituloInput" styleClass="form-control input-sm up" value="#{mensagemListMBean.titulo}" />												
+										</div>
+									</div>
+									
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="TEXTO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="textoInput"  styleClass="form-control input-sm up" value="#{mensagemListMBean.texto}" />										
+										</div>
+									</div>				
+								</div>
+								<br/>								
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction" >
+											<f:ajax
+												execute="@this tituloInput textoInput"
+												event="click" listener="#{mensagemListMBean.pesquisar()}"
+												render="dtMensagem" />
+										
+										</h:commandButton>
+										&nbsp;
+										<h:commandButton value="Adicionar" styleClass=" btnAction btn btn-primary" action="mensagemAdd" />
+										
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row-fluid">
+					<div class="span12">
+						<legend class="outBusc">RESULTADOS</legend>
+					</div>
+				</div>				
+				<center>
+					<p:dataTable id="dtMensagem" styleClass="tableDados" value="#{mensagemListMBean.listMensagens}" var="msg" style="width: 90%;"
+											     emptyMessage="Sem Mensagem" rows="10" paginator="true">
+											     
+						<p:column headerText="Titulo">
+							<h:outputText value="#{msg.titulo}" />
+						</p:column>
+						<p:column headerText="Mensagem" width="55%">
+							<h:outputText value="#{msg.texto}" escape="false" />
+						</p:column>
+						<p:column headerText="Data Expiração">
+							<h:outputText value="#{msg.dataExpiracao}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="date" timeZone="GMT-3" />	
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Operação">
+							<center>
+								<p:button title="Editar" icon="ui-icon-pencil" outcome="msgEdit">
+								   <f:param name="msgId" value="#{msg.id}" /> 
+								</p:button>
+								
+								
+								<p:commandButton title="Deletar" action="#{mensagemListMBean.delete(msg)}" icon="ui-icon-trash" update="dtMensagem">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
+								</p:commandButton>
+							</center>
+						</p:column>
+					</p:dataTable>
+				</center>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

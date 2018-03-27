@@ -28,10 +28,7 @@ public class Link extends Model implements Serializable, Auditable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_link")
 	private Long id;
-
-	@Lob
-	@Column(name="arquivo")    
-	private byte[] arquivo;
+ 
  
 	@Column(name="titulo",length=500,nullable=false)
 	private String titulo;
@@ -67,14 +64,7 @@ public class Link extends Model implements Serializable, Auditable {
 	public void setUrl(String url) {
 		this.url = url;
 	}	
-
-	public byte[] getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(byte[] arquivo) {
-		this.arquivo = arquivo;
-	}
+ 
 
 	public TipoLink getTipoLink() {
 		return tipoLink;
@@ -89,7 +79,6 @@ public class Link extends Model implements Serializable, Auditable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Link Id: ").append(id);
 		sb.append(" Link Título: ").append(titulo);
-		sb.append(" Link Ativo: ").append(getArquivo());
 		sb.append(" Link URL: ").append(url);
 		sb.append(" Link TipoLink: ").append(tipoLink.getId());
 

@@ -39,4 +39,22 @@ public class LinkService implements Serializable {
 
 	}
 
+	public void create(Link link) {
+
+		linkController.create(link);
+
+	}
+
+	public Link update(Link link) {
+
+		return linkController.update(link);
+
+	}
+
+	public Link delete(Link link) {
+
+		return linkController.delete(link);
+
+	}
+
 }

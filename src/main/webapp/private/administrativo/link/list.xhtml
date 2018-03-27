@@ -13,7 +13,7 @@
 <body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">	
-			<h:form>
+			<h:form prependId="false" id="form">
 				<div class="container-fluid">
 					<div class="row-fluid">
 						<p:messages autoUpdate="true" showDetail="true" closable="true"/>
@@ -53,7 +53,7 @@
 												render="tableLinks" />
 										</h:commandButton>
 										&nbsp;
-										<h:commandButton value="Adicionar" styleClass="btnAction btn btn-primary" action="listInsert" />
+										<h:commandButton value="Adicionar" styleClass="btnAction btn btn-primary" action="linksArquivosAdd" />
 									</div>
 								</div>
 							</fieldset>
@@ -81,7 +81,7 @@
 								 	  <f:param name="linkId" value="#{link.id}" /> 
 								</p:button>
 								
-								<p:commandButton title="Deletar" action="#{linkListMBean.delete(link)}" icon="ui-icon-trash">
+								<p:commandButton title="Deletar" action="#{linkListMBean.deletar(link)}" icon="ui-icon-trash"  update="tableLinks">
 									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>
@@ -89,7 +89,7 @@
 					</p:dataTable>
 				</center>	
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
-	        			<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        			<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
 	        			<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 	    			</p:confirmDialog>	
     		</h:form>

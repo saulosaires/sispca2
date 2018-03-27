@@ -19,6 +19,7 @@
    	  <class>administrativo.model.Menu</class>
    	  <class>administrativo.model.Link</class>
    	  <class>administrativo.model.TipoLink</class>
+      <class>administrativo.model.Mensagem</class>
       
       <class>monitoramento.model.Execucao</class>
       <class>monitoramento.model.Observacao</class>

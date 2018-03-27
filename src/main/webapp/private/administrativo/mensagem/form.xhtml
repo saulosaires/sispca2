@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<f:metadata>
+    			<f:viewParam name="msgId" value="#{mensagemFormMBean.msgId}"/>
+    			<f:viewAction action="#{mensagemFormMBean.init}" />
+			</f:metadata>
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid row-fluid">
+					<div class="span12">
+						<p:messages closable="true" />
+					</div>
+					<legend class="outBusc">CADASTRO</legend>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="TÍTULO: " styleClass="labelOutText" />
+								<h:inputText value="#{mensagemFormMBean.mensagem.titulo}"
+									styleClass="form-control input-sm" required="true"
+									requiredMessage="Título: campo obrigatório" />
+							</div>
+						</div><br/>
+						
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="MENSAGEM: "
+									styleClass="labelOutText" />
+								<p:editor
+								value="#{mensagemFormMBean.mensagem.texto}" width="600" required="true"
+								requiredMessage="Mensagem: campo é obrigatório" />
+							</div>
+						</div><br/>
+						
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="DATA EXPIRAÇÃO: "  styleClass="labelOutText" />
+								<p:calendar value="#{mensagemFormMBean.mensagem.dataExpiracao}" pattern="dd/MM/yyyy HH:mm" styleClass="input-sm" locale="pt"
+									required="true"	requiredMessage="Data Expiração: campo é obrigatório">
+										<p:ajax event="dateSelect" process="@this"/>
+								</p:calendar>
+							</div>
+						</div><br/>
+
+						<div class="row">
+							<div class="col-lg-4">
+								<p:selectBooleanCheckbox value="#{mensagemFormMBean.mensagem.ativo}">
+								</p:selectBooleanCheckbox>
+								<h:outputText style="margin-left: 5px;" value="ATIVO"  styleClass="labelOutText"/>
+							</div>
+						</div>
+					</div>
+
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">
+							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{mensagemFormMBean.salvar()}"    rendered="#{mensagemFormMBean.mensagem.id ==null}"  />
+							&nbsp;
+							<h:commandButton styleClass="btnAction btn btn-primary"  value="Editar" action="#{mensagemFormMBean.atualizar()}" rendered="#{mensagemFormMBean.mensagem.id !=null}"  />
+							&nbsp;
+							<h:commandButton styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" action="mensagensList" immediate="true" />
+						</div>
+					</div>
+				</div>		
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

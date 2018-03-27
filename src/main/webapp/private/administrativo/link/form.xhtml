@@ -18,7 +18,7 @@
     			<f:viewAction action="#{linkFormMBean.init}" />
 			</f:metadata>
 		
-			<h:form enctype="multipart/form-data" acceptcharset="UTF-8">
+			<h:form enctype="multipart/form-data" acceptcharset="UTF-8" prependId="false" id="form">
 				<div class="container-fluid row-fluid">
 					<div class="span12">
 						<p:messages autoUpdate="true" closable="true" showDetail="true"/>
@@ -30,46 +30,50 @@
 						<div class="row">
 							<div class="col-lg-2">
 								<h:outputText value="TIPO DE LINK:  " styleClass="labelOutText"/>							
-								<h:selectOneMenu value="#{linkFormMBean.link.tipoLink}" required="true" requiredMessage="Tipo Link: campo é obrigatório"  styleClass="form-control input-sm">
-									<f:selectItem itemLabel="--SELECIONE--"/>
+								<h:selectOneMenu value="#{linkFormMBean.link.tipoLink}" required="true" requiredMessage="Tipo Link é obrigatório"  styleClass="form-control input-sm" converter="tipoLinkConverter">
 									<f:selectItems var="tipoLink" value="#{linkFormMBean.listTipoLink}" itemLabel="#{fn:toUpperCase(tipoLink.descricao)}" itemValue="#{tipoLink}"/>
-									<f:ajax execute="@this" event="change" render="tipoLinkInput"/>
+									<p:ajax  event="change" update="tipoLinkInput" />
 								</h:selectOneMenu>
 								
 							</div>
-							<div class="col-lg-3" id="tipoLinkInput">
-								<c:if test="#{linkFormMBean.link.tipoLink.descricao != 'INTERNO'}">
-									<h:outputText value="ARQUIVO:  " styleClass="labelOutText"/>						
-									<p:fileUpload value="#{linkFormMBean.arquivo}" mode="simple" skinSimple="true" required="true" requiredMessage="Arquivo: campo é obrigatório">
-										<f:validator validatorId="arquivoValidator"/>
+							<div class="col-lg-4" >
+								<p:outputPanel id="tipoLinkInput">
+								<c:if test="#{linkFormMBean.link.tipoLink.descricao == 'ARQUIVO'}">
+									<h:outputText value="ARQUIVO: #{linkFormMBean.arquivo.fileName}" styleClass="labelOutText"/>						
+									<p:fileUpload fileUploadListener="#{linkFormMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true" required="true" requiredMessage="Arquivo: Campo é obrigatório" 
+												  allowTypes="/(\.|\/)(pdf)$/" update="tipoLinkInput">
+											   
 									</p:fileUpload>
+									  
 								</c:if>
 								<c:if test="#{linkFormMBean.link.tipoLink.descricao == 'EXTERNO'}">
 									<h:outputText value="URL:  " styleClass="labelOutText"/>
 									<h:inputText value="#{linkFormMBean.link.url}" required="true" requiredMessage="URL: Campo é obrigatório" styleClass="form-control input-sm"/>
 								</c:if>	
+								</p:outputPanel>
 							</div>
 						</div>
 						<div class="row" style="margin-top: 1%">
-							<div class="col-lg-4">
+							<div class="col-lg-6">
 								<h:outputText value="TÍTULO:  " styleClass="labelOutText"/>							
 								<h:inputText value="#{linkFormMBean.link.titulo}" required="true"
-									requiredMessage="Título: campo é obrigatório"
+									requiredMessage="Título: Campo é obrigatório"
 									styleClass="form-control input-sm"/>
 							</div>			
 						</div>						
 						<div class="row-fluid" style="margin-top: 2%;">
 							<div class="spaceBtnAcao">
-								<h:commandButton styleClass=" btnAction btn btn-primary"
-									value="Salvar" action="#{linkFormMBean.salvar()}"
-									rendered="#{linkFormMBean.link.id==0}" />
+								<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{linkFormMBean.salvar()}" rendered="#{linkFormMBean.link.id ==null}" >
+								  <f:ajax execute="form" render="form" />
+								</h:commandButton>
 								&nbsp;	
-								<h:commandButton styleClass="btnAction btn btn-primary"
-									value="Editar" action="#{linkFormMBean.atualizar()}"
-									rendered="#{linkFormMBean.link.id>0}" />
-								&nbsp;	
-								<h:commandButton styleClass="btnAction btn btn-primary"
-									style="margin-left: 0px" value="Cancelar" action="linksArquivosList" immediate="true" />												
+								<h:commandButton styleClass="btnAction btn btn-primary" value="Editar" action="#{linkFormMBean.atualizar()}" rendered="#{linkFormMBean.link.id !=null}">
+								  <f:ajax execute="form" render="form" />
+								</h:commandButton>
+								 
+								&nbsp;
+									
+								<h:commandButton styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" action="linksArquivosList" immediate="true" />												
 							</div>			
 						</div>		
 					</div>

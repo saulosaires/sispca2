@@ -29,7 +29,10 @@ public class TipoLinkController implements Serializable {
 	}
 	
 	
- 
+	public TipoLink findById(Long id) {
+
+		return tipoLinkDAO.findOne(id);
+	}
 	
 
 }
