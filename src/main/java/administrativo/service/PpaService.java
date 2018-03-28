@@ -27,22 +27,37 @@ public class PpaService implements Serializable {
 		return ppaController.findAll();
 	}
 
-	
-	public List<Ppa> queryPpa(String sigla, String descricao, Integer anoInicio, Integer anoFim){
-		
-		
-		if (Utils.emptyParam(sigla) && Utils.emptyParam(descricao) && Utils.invalidYear(anoInicio) && Utils.invalidYear(anoFim)) {
+	public List<Ppa> queryPpa(String sigla, String descricao, Integer anoInicio, Integer anoFim) {
+
+		if (Utils.emptyParam(sigla) && Utils.emptyParam(descricao) && 
+		    Utils.invalidYear(anoInicio) && Utils.invalidYear(anoFim)) {
 			return ppaController.findAll();
 		} else {
 			return ppaController.queryPpa(sigla, descricao, anoInicio, anoFim);
 		}
-		
+
 	}
 
 	public void delete(Ppa ppa) {
 
 		ppaController.delete(ppa);
-		
+
+	}
+
+	public Ppa findById(Long id) {
+
+		return ppaController.findById(id);
+
+	}
+
+	public Ppa create(Ppa ppa) {
+		return ppaController.create(ppa);
+
+	}
+
+	public Ppa update(Ppa ppa) {
+		return ppaController.update(ppa);
+
 	}
 	
 }

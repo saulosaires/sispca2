@@ -99,11 +99,6 @@
 
 	<navigation-rule>
 		<from-view-id>/private/administrativo/ppa/list.xhtml</from-view-id>
-
-		<navigation-case>
-			<from-outcome>ppaEdit</from-outcome>
-			<to-view-id>/private/administrativo/ppa/form.xhtml</to-view-id>
-		</navigation-case>
 		
 		<navigation-case>
 			<from-outcome>ppaAdd</from-outcome>

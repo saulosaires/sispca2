@@ -33,4 +33,21 @@ public class PpaController implements Serializable {
 
 	}
 
+	public Ppa findById(Long id) {
+		return ppaDAO.findOne(id);
+		
+	}
+
+	public Ppa create(Ppa ppa) {
+		return ppaDAO.create(ppa);
+		
+	}
+
+	public Ppa update(Ppa ppa) {
+		return ppaDAO.update(ppa);
+		
+	}
+
+	
+	
 }

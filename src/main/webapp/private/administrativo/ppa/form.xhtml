@@ -12,10 +12,7 @@
 <body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
-			<f:metadata>
-				<f:event type="preRenderView"
-					listener="#{usuarioMBean.checkPermissionInView(ppaMBean.controllerName, ppaMBean.actionName)}" />
-			</f:metadata>
+			
 			<h:form acceptcharset="UTF-8">
 				<div class="container-fluid row-fluid">
 					<div class="span12">
@@ -25,30 +22,24 @@
 				</div>
 				<div class="spaceContainerForm">
 					<div class="container-fluid">						
-						<c:if test="#{ppaMBean.operation  eq 'Inserir'}">
+						 
 							<div class="row">
 								<div class="col-lg-2">
 									<h:outputText value="SIGLA:  " styleClass="labelOutText" />
-									<h:inputText value="#{ppaMBean.entity.sigla}"
-										styleClass="form-control input-sm up" required="true"
-										requiredMessage="Sigla: campo obrigatório" />
+									<h:inputText value="#{ppaFormMBean.ppa.sigla}" styleClass="form-control input-sm up" required="true" requiredMessage="Sigla: campo obrigatório" />
 								</div>	
 							</div>
 							<div class="row" style="margin-top: 1%">
 								<div class="col-lg-3">
 									<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText" />
-									<h:inputText value="#{ppaMBean.entity.descricao}"
-									styleClass="form-control input-sm up" required="true"
-									requiredMessage="Descrição: campo obrigatório" />
+									<h:inputText value="#{ppaFormMBean.ppa.descricao}" styleClass="form-control input-sm up" required="true" requiredMessage="Descrição: campo obrigatório" />
 								</div>	
 							</div>
 							<div class="row" style="margin-top: 1%">
 								<div class="col-lg-2">
 									<h:outputText value="ANO INICIAL:  " styleClass="labelOutText" />
-									<h:inputText value="#{ppaMBean.entity.anoInicio}"
-										styleClass="form-control labelInputText" required="true"
-										requiredMessage="Ano Inicial: campo obrigatório"
-										converterMessage="Ano Inicial: digite apenas números">
+									<h:inputText value="#{ppaFormMBean.ppa.anoInicio}"
+										styleClass="form-control labelInputText" required="true" requiredMessage="Ano Inicial: campo obrigatório" converterMessage="Ano Inicial: digite apenas números">
 										<f:validateLongRange minimum="2010" maximum="2050" />
 										<f:convertNumber />
 									</h:inputText>
@@ -57,30 +48,19 @@
 							<div class="row" style="margin-top: 1%">
 								<div class="col-lg-2">
 									<h:outputText value="ANO FINAL:  " styleClass="labelOutText" />
-									<h:inputText value="#{ppaMBean.entity.anoFim}"
-										styleClass="form-control labelInputText" required="true"
-										requiredMessage="Ano Final: campo obrigatório"
-										converterMessage="Ano Final: digite apenas números">
+									<h:inputText value="#{ppaFormMBean.ppa.anoFim}" styleClass="form-control labelInputText" required="true" requiredMessage="Ano Final: campo obrigatório" converterMessage="Ano Final: digite apenas números">
 										<f:validateLongRange minimum="2010" maximum="2050" />
 										<f:convertNumber/>										
 									</h:inputText>
 								</div>
 							</div>
-						</c:if>
+						 
 						
 						<div class="row-fluid" style="margin-top: 2%;">
 							<div class="spaceBtnAcao">					
-								<h:commandButton styleClass=" btnAction btn btn-primary"
-									value="#{ppaMBean.operation}" action="#{ppaMBean.insert()}"
-									rendered="#{ppaMBean.operation  eq 'Inserir'}" />
+								<h:commandButton styleClass=" btnAction btn btn-primary" value="Inserir" action="#{ppaFormMBean.salvar()}" />
 								&nbsp;
-								<h:commandButton styleClass="btnAction btn btn-primary"
-									value="#{ppaMBean.operation}" action="#{ppaMBean.edit()}"
-									rendered="#{ppaMBean.operation  eq 'Editar'}" />
-								&nbsp;
-								<h:commandButton styleClass="btnAction btn btn-primary"
-									style="margin-left: 0px" value="Cancela"
-									action="#{ppaMBean.getUrlList()}" immediate="true" />	
+								<h:commandButton styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" action="ppaList" immediate="true" />	
 							</div>
 						</div>
 					</div>

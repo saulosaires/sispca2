@@ -46,7 +46,7 @@ public class MensagemDAO extends AbstractDAO<Mensagem> {
 			
 			Expression<String> upperUrl = cb.upper(m.get("texto"));
 			
-			predicate.add(cb.like(upperUrl,"%"+texto+"%" ));		
+			predicate.add(cb.like(upperUrl,"%"+texto.toUpperCase()+"%" ));		
 		}
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));

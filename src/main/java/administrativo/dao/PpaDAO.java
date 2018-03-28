@@ -41,7 +41,7 @@ public class PpaDAO extends AbstractDAO<Ppa> {
 
 			Expression<String> upperDes = cb.upper(m.get("descricao"));
 
-			predicate.add(cb.like(upperDes, "%" + descricao + "%"));
+			predicate.add(cb.like(upperDes, "%" + descricao.toUpperCase() + "%"));
 		}
 
 		if (!Utils.invalidYear((anoInicio))) {

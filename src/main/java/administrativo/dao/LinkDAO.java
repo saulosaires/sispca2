@@ -41,7 +41,7 @@ public class LinkDAO extends AbstractDAO<Link> {
 			
 			Expression<String> upperUrl = cb.upper(m.get("url"));
 			
-			predicate.add(cb.like(upperUrl,"%"+url+"%" ));		
+			predicate.add(cb.like(upperUrl,"%"+url.toUpperCase()+"%" ));		
 		}
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
