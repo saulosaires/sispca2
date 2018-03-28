@@ -10,10 +10,7 @@ import arquitetura.model.Model;
 
 import java.util.List;
 
-/**
- * The persistent class for the ppa database table.
- * 
- */
+ 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "ppa", schema = "planejamento")
