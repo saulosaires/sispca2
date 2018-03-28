@@ -106,8 +106,10 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	
 	private String cargo;
 	
+	private transient String loginSegundaSugestao;
 	
-	public Usuario() {
+	public Usuario() { 
+	
 	}
 
 	public Usuario(Long id){
@@ -149,14 +151,7 @@ public class Usuario  extends Model implements Serializable, Auditable {
 		this.primeiroAcesso = primeiroAcesso;
 	}
 
-	public Date getLastLogin() {
-		return ultimoLogin;
-	}
-
-	public void setLastLogin(Date lastLogin) {
-		this.ultimoLogin = lastLogin;
-	}
-
+	 
 	public String getName() {
 		return this.name;
 	}
@@ -276,6 +271,24 @@ public class Usuario  extends Model implements Serializable, Auditable {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+	
+	
+
+	public Date getUltimoLogin() {
+		return ultimoLogin;
+	}
+
+	public void setUltimoLogin(Date ultimoLogin) {
+		this.ultimoLogin = ultimoLogin;
+	}
+
+	public String getLoginSegundaSugestao() {
+		return loginSegundaSugestao;
+	}
+
+	public void setLoginSegundaSugestao(String loginSegundaSugestao) {
+		this.loginSegundaSugestao = loginSegundaSugestao;
 	}
 
 	@Override

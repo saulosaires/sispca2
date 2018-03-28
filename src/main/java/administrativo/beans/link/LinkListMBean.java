@@ -21,10 +21,10 @@ public class LinkListMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
 
-	public static final String FAIL_DELETE_LINK_MSG    = "Falha inesperada ao tentar Deletar Link";
-	public static final String SUCCESS_DELETE_LINK_MSG   = "Link deletado com Sucesso";
+	public static final String FAIL_DELETE_LINK_MSG = "Falha inesperada ao tentar Deletar Link";
+	public static final String SUCCESS_DELETE_LINK_MSG = "Link deletado com Sucesso";
+	public static final String FAIL_SEARCH = "Falha ao pesquisar Links";
 
-	
 	private String titulo;
 	private String url;
 	private List<Link> listLinks;
@@ -38,35 +38,38 @@ public class LinkListMBean implements Serializable {
 
 	public void queryLinkByDescricaoAndURL() {
 
-		
-		listLinks = linkService.queryLinkByDescricaoAndURL(titulo, url);
-		
-	}
- 
-	public String deletar(Link link) {
-		
-		
 		try {
-  
+			listLinks = linkService.queryLinkByDescricaoAndURL(titulo, url);
+
+		} catch (Exception e) {
+			SispcaLogger.logError(e.getLocalizedMessage());
+
+			Messages.addMessageError(FAIL_SEARCH);
+
+		}
+	}
+
+	public String deletar(Link link) {
+
+		try {
+
 			linkService.delete(link);
 
 			Messages.addMessageInfo(SUCCESS_DELETE_LINK_MSG);
-			
+
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 
 			Messages.addMessageError(FAIL_DELETE_LINK_MSG);
-			
-			 
+
 		}
 
 		queryLinkByDescricaoAndURL();
-		
+
 		return "";
-		
+
 	}
-	
-	
+
 	public String getTitulo() {
 		return titulo;
 	}

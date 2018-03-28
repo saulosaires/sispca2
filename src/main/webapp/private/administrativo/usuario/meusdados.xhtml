@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<h1 class="titScreen">MEUS DADOS</h1>
+			<h:form enctype="multipart/form-data" id="formdados">
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="span12">
+								<p:messages closable="true" />
+							</div>
+						</div>
+						<div class="row-fluid">
+							<h:outputText value="NOME:  " styleClass="labelOutText" />
+							<h:inputText value="#{usuarioMBean.usuarioLogado.name}"
+								styleClass="form-control labelInputText" required="true"
+								requiredMessage="Nome: campo obrigatório" />
+						</div>
+						
+						<div class="row-fluid">
+							<h:outputText value="EMAIL:  " styleClass="labelOutText" />
+							<h:inputText value="#{usuarioMBean.usuarioLogado.email}"
+								styleClass="form-control labelInputText" required="true"
+								validator="EmailValidator"
+								requiredMessage="Email: campo é obrigatório" />
+						</div>
+						<div class="row-fluid">
+							<h:outputText value="NOVA SENHA:  " styleClass="labelOutText" />
+							<p:password value="#{usuarioMBean.password}"
+								styleClass="form-control labelInputText" />
+						</div>
+						<div class="row-fluid">
+							<h:outputText value="CONFIRMAR NOVA SENHA:  "
+								styleClass="labelOutText" />
+							<p:password value="#{usuarioMBean.passwordConfirmacao}"
+								styleClass="form-control labelInputText" />
+						</div>
+						<div class="row-fluid">
+							<h:outputText value="FOTO:  " styleClass="labelOutText" />
+							<p:fileUpload value="#{usuarioMBean.foto}" mode="simple"
+								validator="FotoValidator" skinSimple="true" />
+						</div>
+
+					</div>
+				</div>
+				<div class="spaceBtnAcao">
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<h:commandButton styleClass=" btnAction btn btn-primary"
+								value="Alterar" action="#{usuarioMBean.meusDados()}" />
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -10,7 +10,7 @@ public class Utils {
 
 	public static int randomNumber() {
 
-		return new Random().nextInt();
+		return new Random().nextInt(999999 - 100000) + 100000;
 	}
 
 	public static boolean emptyParam(String param) {

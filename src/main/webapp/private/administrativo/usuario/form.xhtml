@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<f:metadata>
+    			<f:viewParam name="id" value="#{usuarioFormMBean.id}"/>
+    			<f:viewAction action="#{usuarioFormMBean.init}" />
+			</f:metadata>
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid row-fluid">
+					<div class="span12">
+						<p:messages closable="true" />
+					</div>
+					<legend class="outBusc">CADASTRO</legend>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="NOME: " styleClass="labelOutText" />
+								<h:inputText value="#{usuarioFormMBean.usuario.name}" styleClass="form-control input-sm up"  required="true" requiredMessage="Nome: campo obrigatório" converter="toUpperCaseConverter">
+									<f:ajax event="blur" execute="@this" listener="#{usuarioFormMBean.sugestoesLogin()}" render="@form" />
+								</h:inputText>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-1">
+								<h:outputText value="DDD:" styleClass="labelOutText"/>
+								<h:inputText value="#{usuarioFormMBean.usuario.dddCelular}" styleClass="form-control input-sm up" converterMessage="DDD (Celular): Digite apenas números" maxlength="2" size="2">
+									<f:convertNumber/>
+								</h:inputText>
+							</div>
+							<div class="col-lg-1">
+								<h:outputText value="CELULAR:" styleClass="labelOutText"/>
+								<h:inputText value="#{usuarioFormMBean.usuario.numeroCelular}" styleClass="form-control input-sm up" converterMessage="Número de Celular: Digite apenas números" maxlength="9" size="9">
+									<f:convertNumber/>
+								</h:inputText>
+							</div>
+							<div class="col-lg-1">
+								<h:outputText value="DDD:" styleClass="labelOutText"/>
+								<h:inputText value="#{usuarioFormMBean.usuario.dddResidencial}" styleClass="form-control input-sm up" converterMessage="DDD(Residencial): Digite apenas números" maxlength="2">
+									<f:convertNumber/>
+								</h:inputText>
+							</div>
+							<div class="col-lg-1">
+								<h:outputText value="RESIDENCIAL:" styleClass="labelOutText"/>
+								<h:inputText value="#{usuarioFormMBean.usuario.numeroResidencial}" styleClass="form-control input-sm up" converterMessage="Número Residencial: Digite apenas números" maxlength="8">
+									<f:convertNumber/>
+								</h:inputText>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="CARGO:" styleClass="labelOutText"/>
+								<h:inputText value="#{usuarioFormMBean.usuario.cargo}" styleClass="form-control input-sm up" required="true" requiredMessage="Cargo: campo é obrigatório" converter="toUpperCaseConverter"/>
+							</div>						
+						</div>
+						
+						
+						<div class="row" id="divLogin" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="LOGIN:" styleClass="labelOutText" rendered="#{usuarioFormMBean.usuario.login != null}" />
+									
+								<p:selectOneRadio  id="idRadio" value="#{usuarioFormMBean.usuario.login}" rendered="#{usuarioFormMBean.usuario.login != null}" required="true" requiredMessage="LOGIN: campo obrigatório" style="width: 25%">
+									<f:selectItem itemValue="#{usuarioFormMBean.usuario.login}"  				itemLabel="#{usuarioFormMBean.usuario.login}" />
+									&nbsp;
+									<f:selectItem itemValue="#{usuarioFormMBean.usuario.loginSegundaSugestao}"  itemLabel="#{usuarioFormMBean.usuario.loginSegundaSugestao}" />
+								</p:selectOneRadio >
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="EMAIL:" styleClass="labelOutText" />
+								<h:inputText value="#{usuarioFormMBean.usuario.email}" styleClass="form-control input-sm" required="true"  requiredMessage="Email: campo é obrigatório" converter="toUpperCaseConverter"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="CPF:" styleClass="labelOutText" />
+								<h:inputText value="#{usuarioFormMBean.usuario.cpf}" styleClass="form-control input-sm" required="true" validator="cpfValidator" maxlength="11" requiredMessage="CPF: campo é obrigatório" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="PERFIL:" styleClass="labelOutText" />
+								<h:selectOneMenu value="#{usuarioFormMBean.perfilSelecionado}"  required="true" requiredMessage="Perfil: campo é obrigatório" 
+												 styleClass="form-control input-sm"  >
+									<f:selectItems value="#{usuarioFormMBean.listPerfil}" var="perfil" itemLabel="#{fn:toUpperCase(perfil.name)}" itemValue="#{perfil.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA:" styleClass="labelOutText" />
+								<h:selectOneMenu value="#{usuarioFormMBean.uoSelecionada}"  required="true" requiredMessage="Unidade Orçamentário: campo é obrigatório" 
+											     styleClass="form-control input-sm" >
+									<f:selectItems value="#{usuarioFormMBean.listUnidadeOrcamentaria}" var="uo" itemLabel="#{fn:toUpperCase(uo.sigla)}" itemValue="#{uo.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">
+								<h:commandButton styleClass=" btnAction btn btn-primary" value="Inserir"
+												 action="#{usuarioFormMBean.salvar()}"   rendered="#{usuarioFormMBean.usuario.id ==null}"  />
+								&nbsp;
+								<h:commandButton styleClass="btnAction btn btn-primary"   value="Editar"
+												 action="#{usuarioFormMBean.atualizar()}" rendered="#{usuarioFormMBean.usuario.id !=null}"  />
+								&nbsp;
+								<h:commandButton styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" action="usuarioList" immediate="true" />
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

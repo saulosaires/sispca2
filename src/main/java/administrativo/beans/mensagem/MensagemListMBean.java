@@ -23,6 +23,7 @@ public class MensagemListMBean implements Serializable {
 
 	public static final String FAIL_DELETE = "Falha inesperada ao tentar Deletar Mensagem";
 	public static final String SUCCESS_DELETE = "Mensagem deletada com Sucesso";
+	public static final String FAIL_SEARCH = "Falha ao pesquisar Mensagem";
 
 	private String titulo;
 	private String texto;
@@ -37,7 +38,15 @@ public class MensagemListMBean implements Serializable {
 
 	public void pesquisar() {
 
-		listMensagens = mensagemService.queryByTituloAndTexto(titulo, texto);
+		try {
+			listMensagens = mensagemService.queryByTituloAndTexto(titulo, texto);
+
+		} catch (Exception e) {
+			SispcaLogger.logError(e.getLocalizedMessage());
+
+			Messages.addMessageError(FAIL_SEARCH);
+
+		}
 
 	}
 
@@ -48,7 +57,7 @@ public class MensagemListMBean implements Serializable {
 			mensagemService.delete(msg);
 
 			pesquisar();
-			
+
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {

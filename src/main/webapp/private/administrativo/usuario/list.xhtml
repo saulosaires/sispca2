@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		 					
+			<h:form prependId="false">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<p:messages autoUpdate="true" closable="true" />
+					</div>
+					<div class="row-fluid">
+						<ui:include src="/template/tutorial_form.xhtml" />
+					</div>
+					<div class="row-fluid">
+						<div class="span12">
+							<fieldset>
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="USUÁRIO: " />
+										</div>
+										<div class="span3">
+											<h:inputText value="#{usuarioListMBean.name}" styleClass="form-control input-sm up" converter="toUpperCaseConverter"/>
+										 
+										</div>
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="EMAIL: " />
+										</div>
+										<div class="span3">
+											<h:inputText  value="#{usuarioListMBean.email}" styleClass="form-control input-sm" />
+										</div>
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="PERFIL: " />
+										</div>
+										<div class="span3">
+											<h:inputText  value="#{usuarioListMBean.perfil}" styleClass="form-control input-sm up" converter="toUpperCaseConverter"/>
+										</div>
+										<div class="span3">
+											<h:outputText styleClass="labelOutText"
+												value="UNIDADE ORÇAMENTÁRIA: " />
+										</div>
+										<div class="span3">
+											<h:inputText value="#{usuarioListMBean.unidadeOrcamentaria}" styleClass="form-control input-sm up" converter="toUpperCaseConverter"/>
+										</div>
+									</div>
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction" action="#{usuarioListMBean.pesquisar()}">
+											 <f:ajax render="tableUsuario" execute="@form"/>
+										</h:commandButton>
+										&nbsp;
+										<h:commandButton value="Adicionar" styleClass="btnAction btn btn-primary" action="userAdd" />
+										&nbsp;
+										<h:commandButton  value="Imprimir Usuários" styleClass="btnAction btn btn-primary" action="userReport" />	
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<legend class="outBusc">RESULTADOS</legend>
+				</div>			
+				<center>
+					<p:dataTable id="tableUsuario" value="#{usuarioListMBean.listaUsuarios}" var="usuario" paginator="true" rows="10" style="width: 90%;" emptyMessage="Não há usuários a serem mostrados">
+						
+						<p:column headerText="USUÁRIO" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(usuario.name)}" />
+						</p:column>
+						<p:column headerText="LOGIN" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(usuario.login)}" />
+						</p:column>
+						<p:column headerText="EMAIL" styleClass="outTextTable">
+							<h:outputText value="#{usuario.email}" />
+						</p:column>
+						<p:column headerText="PERFIL" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(usuario.perfis.get(0).name)}" />
+						</p:column>
+						<p:column headerText="UNIDADE ORÇAMENTÁRIA"
+							styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(usuario.unidadeOrcamentaria.sigla)}" />
+						</p:column>
+						<p:column headerText="OPERAÇÃO" styleClass="outTextTable" style="width: 12%;" footerText="Quantidade Total: #{usuarioListMBean.listaUsuarios.size()}">
+							<center>
+							
+								<p:button title="Editar" outcome="userEdit" icon="ui-icon-pencil" >
+								  <f:param name="id" value="#{usuario.id}" /> 
+								</p:button>
+								
+								<p:commandButton title="Deletar" action="#{usuarioListMBean.delete(usuario)}" icon="ui-icon-trash" update="tableUsuario">
+									<p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
+								</p:commandButton>
+								
+							</center>
+						</p:column>
+					</p:dataTable>
+				</center>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no"  icon="ui-icon-close" />
+				</p:confirmDialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -42,7 +42,7 @@ public class LoginController implements Serializable {
 
 		Usuario u = user.get();
 
-		u.setLastLogin(new Date());
+		u.setUltimoLogin(new Date());
 		u.setHash(null);
 		u.setValidadeHash(null);
 		

@@ -51,6 +51,18 @@
 		
 	</navigation-rule>	 
  
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>usuarioList</from-outcome>
+			<to-view-id>/private/administrativo/usuario/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>	 
+ 
+ 
+ 
  
 	<navigation-rule>
 		<from-view-id>/public/login.xhtml</from-view-id>
@@ -107,6 +119,30 @@
  
 
 	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/private/administrativo/usuario/list.xhtml</from-view-id>
+		
+		<navigation-case>
+			<from-outcome>userAdd</from-outcome>
+			<to-view-id>/private/administrativo/usuario/form.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>userEdit</from-outcome>
+			<to-view-id>/private/administrativo/usuario/form.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>userReport</from-outcome>
+			<to-view-id>/private/administrativo/usuario/report.xhtml</to-view-id>
+		</navigation-case>
+  
+
+	</navigation-rule>
+
+
+
+
+
 
 	<navigation-rule>
 		<from-view-id>/private/administrativo/exercicio/list.xhtml</from-view-id>

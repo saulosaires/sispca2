@@ -24,6 +24,7 @@ public class PpaListMBean implements Serializable {
 
 	public static final String FAIL_DELETE = "Falha inesperada ao tentar Deletar Ppa";
 	public static final String SUCCESS_DELETE = "Ppa deletado com Sucesso";
+	public static final String FAIL_SEARCH    = "Falha ao pesquisar Ppa";
 
 	public static final String FAIL_ANO_INICIO = "Ano inicio Inválido";
 	public static final String FAIL_ANO_FIM = "Ano Fim Inválido";
@@ -45,8 +46,15 @@ public class PpaListMBean implements Serializable {
 
 	public void pesquisar() {
  
-		listPpas = ppaService.queryPpa(sigla, descricao, anoInicio,anoFim);
+		try {
+			listPpas = ppaService.queryPpa(sigla, descricao, anoInicio,anoFim);
 
+		} catch (Exception e) {
+			SispcaLogger.logError(e.getLocalizedMessage());
+
+			Messages.addMessageError(FAIL_SEARCH);
+
+		}
 	}
 
 	public String delete(Ppa ppa) {
