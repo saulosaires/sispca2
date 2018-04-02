@@ -11,7 +11,6 @@ import administrativo.model.Ppa;
 import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.Utils;
 
 @Named
 @ViewScoped

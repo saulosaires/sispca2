@@ -1,34 +1,23 @@
 package administrativo.beans.usuario;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletContext;
 
-import org.hibernate.Session;
-import org.hibernate.internal.SessionImpl;
 import org.primefaces.model.StreamedContent;
 
 import administrativo.model.Exercicio;
 import administrativo.model.Usuario;
+import administrativo.service.ExercicioService;
 import administrativo.service.UserService;
+import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
-import arquitetura.utils.SispcaLogger;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
  
 
 @Named
@@ -46,27 +35,48 @@ public class UserReportMBean implements Serializable {
 
 	private List<Usuario> listaUsuarios;
 
-	private UserService service;
+	private UserService userService;
+	private ExercicioService exercicioService;
 
 	@Inject
-	public UserReportMBean(UserService service) {
-		this.service = service;
+	public UserReportMBean(UserService userService,ExercicioService exercicioService) {
+		this.userService = userService;
+		this.exercicioService=exercicioService;
 	}
 
-	public void imprimirUsuarios() {
+	public void init() {
 
-	 
-		 
-		this.exercicioSelecionado = new ExercicioDao(HibernateUtil.getSession(), Exercicio.class).retornaExercicioVigente();
+		Exercicio exercicio=null;
+		Optional<Exercicio> ex = exercicioService.exercicioVigente();
+		
+		if(ex.isPresent()) {
+			exercicio = ex.get();
+		}else {
+			Messages.addMessageError(FAIL);
+			return;
+		}
+ 	 
+ 
+		Map<String, String> parameters = new HashMap<>();
+		
+		String brasaoMa=FileUtil.getRealPath("/images/brasao_ma.png");
+		
+		parameters.put("param_imagem", brasaoMa);
+		parameters.put("param_exercicio",exercicio.getAno().toString());
+				
+		String report=FileUtil.getRealPath("/relatorios/usuario/relatorio_usuario.jasper");
+
+/*
 		try(Session hiSession = HibernateUtil.getSession()){
+			
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			FacesContext facesContext = FacesContext.getCurrentInstance();
-			ServletContext sc = (ServletContext) FacesContext
-					.getCurrentInstance().getExternalContext().getContext();
+			ServletContext sc = (ServletContext) FacesContext .getCurrentInstance().getExternalContext().getContext();
 			String imagem = sc.getRealPath("/images/brasao_ma.png");
 			parameters.put("param_imagem", imagem);
 			parameters.put("param_exercicio", this.exercicioSelecionado.getAno().toString());
 			String caminho = null;
+			
 			caminho = sc.getRealPath("/relatorios/usuario/relatorio_usuario.jasper");
 			JasperPrint preencher = JasperFillManager.fillReport(caminho, parameters, ((SessionImpl) hiSession).connection());
 			if (preencher.getPages().size()==0){
@@ -104,7 +114,8 @@ public class UserReportMBean implements Serializable {
 
 			Messages.addMessageError(FAIL);
 		}
-		 		
+	
+*/
 	
 	}
 

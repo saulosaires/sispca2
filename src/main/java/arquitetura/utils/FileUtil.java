@@ -8,40 +8,49 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
 
 public class FileUtil {
 
 	private FileUtil() {
-		  throw new IllegalStateException("File Utility class");
+		throw new IllegalStateException("File Utility class");
 	}
-	
+
 	private static final String FOLDER = "/sispca-documents";
 	private static final String PATH = "/var" + FOLDER;
 
-	
 	public static String uploadArquivo(UploadedFile arquivo) throws IOException {
- 
+
 		String filename = FilenameUtils.getBaseName(arquivo.getFileName());
 		String extension = FilenameUtils.getExtension(arquivo.getFileName());
 
-		int number=Utils.randomNumber();
-		
+		int number = Utils.randomNumber();
+
 		StringBuilder sb = new StringBuilder("");
-		
-		sb=sb.append(PATH).append("/").append(filename).append("_").append(number).append(".").append(extension);
-		
-		File file= new File(sb.toString());
-		     file.createNewFile();
- 
-		     Path path = Paths.get(file.getAbsolutePath());
-		     
+
+		sb = sb.append(PATH).append("/").append(filename).append("_").append(number).append(".").append(extension);
+
+		File file = new File(sb.toString());
+		file.createNewFile();
+
+		Path path = Paths.get(file.getAbsolutePath());
+
 		try (InputStream input = arquivo.getInputstream()) {
 			Files.copy(input, path, StandardCopyOption.REPLACE_EXISTING);
 		}
 
 		return file.toString();
+
+	}
+
+	public static String getRealPath(String resource) {
+
+		ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		return sc.getRealPath(resource);
 
 	}
 

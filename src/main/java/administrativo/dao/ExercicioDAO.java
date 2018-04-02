@@ -2,6 +2,7 @@ package administrativo.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -57,6 +58,20 @@ public class ExercicioDAO extends AbstractDAO< Exercicio >  {
 		
 		return entityManager.createQuery(query).getResultList().size();
 		
+		
+	}
+
+	public Optional<Exercicio> exercicioVigente() {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Exercicio> query = cb.createQuery(Exercicio.class);
+		Root<Exercicio> m = query.from(Exercicio.class);
+		query.select(m);
+	 
+		query.where(cb.equal(m.get("vigente"), Boolean.TRUE));
+ 
+		
+		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();
 		
 	}
  

@@ -1,9 +1,21 @@
 package qualitativo.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import arquitetura.model.Model;
 
 
 /**
@@ -11,8 +23,9 @@ import java.util.List;
  * 
  */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="diretriz", schema="planejamento")
-public class Diretriz implements Serializable {
+public class Diretriz extends Model implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,8 +46,7 @@ public class Diretriz implements Serializable {
 			}
 		)
 	private List<Programa> programas;
-	
-	private boolean ativo;
+ 
 	
 	public Diretriz() {
 		//empty constructor
@@ -63,14 +75,7 @@ public class Diretriz implements Serializable {
 	public void setProgramas(List<Programa> programas) {
 		this.programas = programas;
 	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
+ 
 	
 	 
 	

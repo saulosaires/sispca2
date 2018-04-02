@@ -2,6 +2,7 @@ package administrativo.controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -42,6 +43,11 @@ public class ExercicioController implements Serializable{
 		
 		
 	}
+	
+	public Optional<Exercicio> exercicioVigente(){
+		return exercicioDAO.exercicioVigente();
+	}
+	
 	
 	public Exercicio findOne(Long exercicioId) {
 		

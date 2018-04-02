@@ -6,7 +6,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import administrativo.model.Usuario;
 import arquitetura.dao.AbstractDAO;
 import qualitativo.model.UnidadeOrcamentaria;
 

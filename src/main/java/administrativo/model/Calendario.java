@@ -17,6 +17,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "calendario", schema = "planejamento")
 public class Calendario extends Model implements Serializable, Auditable {
 	private static final long serialVersionUID = 1L;

@@ -19,7 +19,7 @@ public class ExercicioService implements Serializable {
 	 */
 	private static final long serialVersionUID = -2698541591873129072L;
 
-	private ExercicioController exercicioController;
+	private ExercicioController  exercicioController;
 	private CalendarioController calendarioController;
 
 	@Inject
@@ -41,6 +41,10 @@ public class ExercicioService implements Serializable {
 
 		exercicioController.update(exercicio);
 
+	}
+	
+	public Optional<Exercicio> exercicioVigente(){
+		return exercicioController.exercicioVigente();
 	}
 
 	public Exercicio findOne(Long exercicioId) {

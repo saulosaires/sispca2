@@ -3,6 +3,7 @@ package administrativo.beans;
 import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import administrativo.model.Usuario;
@@ -26,7 +27,7 @@ public class AlterarSenhaMBean implements Serializable{
 	
 	private  LoginService loginService;
 	
-	
+	@Inject
 	public AlterarSenhaMBean(LoginService loginService) {
 		
 		this.loginService=loginService;

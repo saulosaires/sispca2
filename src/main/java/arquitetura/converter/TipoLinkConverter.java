@@ -13,13 +13,8 @@ import administrativo.model.TipoLink;
 public class TipoLinkConverter implements Converter {
 
 	
-	 TipoLinkController tipoLinkController;
-	
-	 {
-		 tipoLinkController= CDI.current().select(TipoLinkController.class).get();
-	 }
-	 
-	 
+	 TipoLinkController tipoLinkController= CDI.current().select(TipoLinkController.class).get();
+  
 	
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {

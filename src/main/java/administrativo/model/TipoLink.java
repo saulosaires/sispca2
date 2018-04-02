@@ -13,6 +13,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="tipo_link", schema="comum")
 public class TipoLink extends Model implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -51,12 +52,5 @@ public class TipoLink extends Model implements Serializable {
 	public void setLinks(List<Link> links) {
 		this.links = links;
 	}
-
-	@Override
-	public boolean equals(Object object){
-		if(object != null && object instanceof TipoLink){
-			return ((TipoLink)object).getId() == this.id;
-		}
-		return false;
-	}
+ 
 }
