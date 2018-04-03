@@ -1,6 +1,11 @@
 package arquitetura.utils;
 
-import org.primefaces.context.RequestContext;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import org.primefaces.PrimeFaces;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 public class PrimeFacesUtils {
 
@@ -11,6 +16,15 @@ public class PrimeFacesUtils {
 	
 	public static void execute(String cmd) {
 		
-		RequestContext.getCurrentInstance().execute(cmd);
+		 PrimeFaces.current().executeScript(cmd);
 	}
+	
+	public static StreamedContent converBytesToStreamedContent(byte[] bytes,String contentType, String titulo) { 
+		StreamedContent file = null;
+		InputStream inputStream = null; 
+		inputStream = new ByteArrayInputStream(bytes);
+		file = new DefaultStreamedContent(inputStream,contentType, titulo, "UTF-8"); 
+		return file;
+	} 
+	
 }

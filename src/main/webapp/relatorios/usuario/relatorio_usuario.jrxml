@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
+	<property name="ireport.zoom" value="1.500000000000002"/>
+	<property name="ireport.x" value="292"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="635"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="354"/>
+	<parameter name="param_sql" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["	SELECT	fm.unidade_orcamentaria as cod_uo_siafem,"+
+
+"	(SELECT DISTINCT(uo.descricao) FROM comum.unidade_orcamentaria uo WHERE uo.codigo like fm.unidade_orcamentaria AND uo.ativo is TRUE) as uo_siafem,"+
+
+"	fm.programa as cod_programa_siafem, "+
+
+"	fm.acao as cod_acao_siafem,"+
+
+"	(SELECT ac.denominacao FROM planejamento.acao ac WHERE ac.codigo like fm.acao AND ac.ativo is TRUE LIMIT 1) as acao_siafem,"+
+
+"	(SELECT ac.produto FROM planejamento.acao ac WHERE ac.codigo like fm.acao AND ac.ativo is TRUE LIMIT 1) as produto,"+
+
+"	(SELECT um.descricao FROM planejamento.acao ac"+
+"		INNER JOIN planejamento.unidade_medida um ON (ac.id_unidade_medida = um.id_unidade)"+
+"		WHERE ac.codigo like fm.acao AND ac.ativo is TRUE LIMIT 1) as unidade_medida,"+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 1 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_jan,"+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 2 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_fev,"+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 3 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_mar,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 4 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_abr,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 5 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_mai,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 6 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_jun,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 7 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_jul,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 8 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_ago,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 9 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_set,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 10 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_out,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 11 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_nov,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.mes = 12 AND fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_dez,"+
+
+
+
+"	(SELECT SUM(fms.dotacao_inicial) "+
+"		FROM siafem.financeiro_mensal fms WHERE"+
+"		fms.programa = fm.programa AND"+
+"		fms.unidade_orcamentaria = fm.unidade_orcamentaria AND"+
+"		fms.acao = fm.acao) as valor_dot_inicial_total"+
+
+
+
+"	FROM siafem.financeiro_mensal fm WHERE fm.unidade_orcamentaria = '11123' AND fm.acao = '4450'"+
+
+"	GROUP BY 1, 2, 3, 4, 5, 6, 7"+
+
+"	ORDER BY 1, 3"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String ("2016")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/fabio/workspace/sisppa/SIspca/WebContent/images/brasao_ma.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_sql_valor_empenhado" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/jrwalteram/WorkspaceSEATI/sisppa/SIspca/WebContent/relatorios/financeiro/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_sql_valor_liquidado" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_sql_quantidade_planejado" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_sql_quantidade_executado" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_sql_valor_atual" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[ ]]>
+	</queryString>
+	<field name="unidadeOrcamentaria" class="qualitativo.model.UnidadeOrcamentaria">
+		<fieldDescription><![CDATA[unidadeOrcamentaria]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[cpf]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[name]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="dddCelular" class="java.lang.String">
+		<fieldDescription><![CDATA[dddCelular]]></fieldDescription>
+	</field>
+	<field name="numeroCelular" class="java.lang.String">
+		<fieldDescription><![CDATA[numeroCelular]]></fieldDescription>
+	</field>
+	<field name="dddResidencial" class="java.lang.String">
+		<fieldDescription><![CDATA[dddResidencial]]></fieldDescription>
+	</field>
+	<field name="numeroResidencial" class="java.lang.String">
+		<fieldDescription><![CDATA[numeroResidencial]]></fieldDescription>
+	</field>
+	<field name="cargo" class="java.lang.String">
+		<fieldDescription><![CDATA[cargo]]></fieldDescription>
+	</field>
+	<group name="unidade_orc">
+		<groupExpression><![CDATA[$F{unidadeOrcamentaria}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="-1" width="801" height="20" backcolor="#CBCBCB" uuid="33091c45-3067-42c0-9857-03a0d4cce3a5"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["("+ $F{unidadeOrcamentaria}.getSigla().toUpperCase()+") - "+ $F{unidadeOrcamentaria}. getDescricao().toUpperCase()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="19" width="201" height="11" uuid="c88168a2-74b0-4fd2-80cd-fa574a74340e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[NOME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="201" y="19" width="178" height="11" uuid="c88168a2-74b0-4fd2-80cd-fa574a74340e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[EMAIL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="379" y="19" width="94" height="11" uuid="c88168a2-74b0-4fd2-80cd-fa574a74340e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[CPF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="473" y="19" width="114" height="11" uuid="c88168a2-74b0-4fd2-80cd-fa574a74340e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[TELEFONE CELULAR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="587" y="19" width="98" height="11" uuid="c88168a2-74b0-4fd2-80cd-fa574a74340e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[TELEFONE RESIDENCIAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="685" y="19" width="116" height="11" uuid="c88168a2-74b0-4fd2-80cd-fa574a74340e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[CARGO]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="157" splitType="Stretch">
+			<rectangle>
+				<reportElement x="701" y="75" width="100" height="31" uuid="5b57019b-2e58-4c01-b320-5f2a215dc7dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="701" y="25" width="100" height="31" uuid="5b57019b-2e58-4c01-b320-5f2a215dc7dd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="701" y="75" width="100" height="14" uuid="c1779381-d8b6-4993-aaa0-9bc416f180c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EMISSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="300" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO MARANHÃO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="105" height="43" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
+				<imageExpression><![CDATA[new File($P{param_imagem})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="700" y="39" width="101" height="18" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_exercicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="87" width="300" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA ADJUNTA DE PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="701" y="88" width="100" height="18" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="701" y="25" width="100" height="14" uuid="c1779381-d8b6-4993-aaa0-9bc416f180c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EXERCÍCIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="123" width="555" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Usuários do Sistema SISPCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="300" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="12" forecolor="#FFFFFF" backcolor="#E0E0E0" uuid="2e182a68-f3f7-4402-9ac1-79529ef129be">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 1)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="201" height="12" uuid="e1f011fa-2aa8-447e-a4be-496e336a6b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="201" y="0" width="178" height="12" uuid="e1f011fa-2aa8-447e-a4be-496e336a6b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}!=null && !$F{email}.isEmpty()
+
+? $F{email} : "--"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="473" y="0" width="114" height="12" uuid="e1f011fa-2aa8-447e-a4be-496e336a6b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dddCelular}!=null && $F{numeroCelular}!=null &&
+
+!$F{dddCelular}.trim().isEmpty() && !$F{numeroCelular}.trim().isEmpty() &&
+
+$F{dddCelular}.length()==2 && $F{numeroCelular}.length()==9
+
+? "("+$F{dddCelular}+") "+ $F{numeroCelular}.substring(0,5) + "-" + $F{numeroCelular}.substring(5,9)  :
+
+"--"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="378" y="0" width="95" height="12" uuid="e1f011fa-2aa8-447e-a4be-496e336a6b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpf}!=null && !$F{cpf}.trim().isEmpty() ? $F{cpf}.substring(0, 3) + "." + $F{cpf}.substring(3, 6) + "." + $F{cpf}.substring(6, 9) + " - " + $F{cpf}.substring(9, 11) : "--"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="685" y="0" width="116" height="12" uuid="e1f011fa-2aa8-447e-a4be-496e336a6b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo}!=null && !$F{cargo}.trim().isEmpty() ? $F{cargo}.toUpperCase() : "--"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="587" y="0" width="98" height="12" uuid="e1f011fa-2aa8-447e-a4be-496e336a6b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dddResidencial}!=null && $F{numeroResidencial}!=null &&
+
+!$F{dddResidencial}.isEmpty() && !$F{numeroResidencial}.isEmpty() &&
+
+$F{dddResidencial}.length()==2 && $F{numeroResidencial}.length()==8
+
+? "("+$F{dddResidencial}+") "+ $F{numeroResidencial}.substring(0,4) + "-" + $F{numeroResidencial}.substring(4,8)  :
+
+"--"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="681" y="5" width="80" height="10" uuid="94b0e89b-936b-4a10-a6fa-3ce6581c9032"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="761" y="5" width="40" height="10" uuid="c15f59d1-a7b1-43bf-a46b-fbec902f4634"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

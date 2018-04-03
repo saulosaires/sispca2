@@ -54,4 +54,16 @@ public class FileUtil {
 
 	}
 
+	public static File byteToFile(byte[] bytes, String prefix, String suffix) throws IOException {
+
+		File file = File.createTempFile(prefix, suffix);
+
+		Path path = Paths.get(file.getAbsolutePath());
+
+		Files.write(path, bytes);
+
+		return file;
+
+	}
+
 }

@@ -8,9 +8,9 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 @FacesValidator("cpfValidator")
-public class CpfValidator implements Validator<String> {
+public class CpfValidator implements Validator {
     @Override
-    public void validate(FacesContext arg0, UIComponent arg1, String cpf)  {
+    public void validate(FacesContext arg0, UIComponent arg1, Object cpf)  throws ValidatorException{
          if (!validaCPF(String.valueOf(cpf))) {
               FacesMessage message = new FacesMessage();
               message.setSeverity(FacesMessage.SEVERITY_ERROR);

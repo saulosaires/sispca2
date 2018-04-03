@@ -10,9 +10,9 @@
 <body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
-			<f:metadata>
-				<f:event type="preRenderView"
-					listener="#{usuarioMBean.checkPermissionInView(usuarioMBean.controllerName, 'list')}" />
+		 <f:metadata>
+    			 
+    			<f:viewAction action="#{userReportMBean.init}" />
 			</f:metadata>
 			<h:form>
 				<div class="spaceBtnAcao">
@@ -21,16 +21,15 @@
 
 							<h:commandButton styleClass="btnAction btn btn-primary" value="voltar" action="usuarioList" />
 
-
+ 
 						</div>
 					</div>
 				</div>
 
 				<div class="spaceBtnAcao">
 					<div class="row-fluid" align="center">
-						 
+ 				 		<pe:documentViewer  value="#{userReportMBean.file}" height="800" width="1000" />
 
-						<pe:documentViewer height="800" width="1000" value="#{usuarioMBean.file}" />
 
 					</div>
 				</div>

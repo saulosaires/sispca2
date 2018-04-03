@@ -43,6 +43,12 @@ public class UserService implements Serializable {
 		
 		
 	}
+	
+	public  List<Usuario> findAll() {
+		return userController.findAll();
+
+	}
+
 
 	public void delete(Usuario user) {
 		userController.delete(user);
