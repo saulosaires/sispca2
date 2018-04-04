@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<meta name="description" content="Sistema de Tecnologia Integrada" />
 	<meta name="author" content="SEATI" /> 
-	<link rel="shortcut icon" 			   href="#{facesContext.externalContext.request.contextPath}/resources/images/logo_gov_ma.png" />
+	<link rel="shortcut icon" 			   href="../resources/images/logo_gov_ma.png" />
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/resources/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/resources/css/estilo.css" />
 	<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.contextPath}/resources/css/bootstrap.min.css" />
@@ -71,30 +71,13 @@
 				<div class="content">
 					<!-- start:breadcrumb -->
 					<ol class="breadcrumb">
-						<li><c:choose>
-								<c:when
-									test="${fn:contains( view.viewId , 'public') or fn:contains( view.viewId , 'index') or fn:contains( view.viewId , 'alterasenha') or fn:contains( view.viewId , 'meusdados') or fn:contains( view.viewId , 'erro')}">
-									<a
-										href="#{facesContext.externalContext.request.contextPath}/views/private/index.jsf"><i
-										class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
-								</c:when>
-								<c:otherwise>
-									<c:choose>
-										<c:when test="${not empty usuarioMBean}">
-											<a
-												href="#{facesContext.externalContext.request.contextPath}/views/private/index.jsf"><i
-												class="fa fa-home"></i>&nbsp;&nbsp;Home</a> > 
-										#{usuarioMBean.moduloAtual} ><a style="font-weight: bold;"
-												href="#{facesContext.externalContext.request.contextPath}/views/private/${fn:toLowerCase(usuarioMBean.moduloAtual)}/${fn:toLowerCase(usuarioMBean.nameControllerAtual)}/list.jsf">&nbsp;&nbsp;#{usuarioMBean.controllerAtual}</a> > #{usuarioMBean.actionAtual}
-										</c:when>
-										<c:otherwise>
-											<a
-												href="#{facesContext.externalContext.request.contextPath}/views/public/index.jsf"><i
-												class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
-										</c:otherwise>
-									</c:choose>
-								</c:otherwise>
-							</c:choose></li>
+						<li>
+							 
+							<a href="../private/index.xhtml" >
+							<i class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
+							&nbsp;
+							 #{menuMBean.urlNavigation} 
+						 </li>
 					</ol>
 					<!-- Conteúdo do site principal aqui -->
 					<div class="row conteudo">
@@ -120,7 +103,6 @@
 	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/bootstrap-modal.js"></script>
 	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/mascara.js"></script>
 	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/bootstrap-carousel.js"></script>
-	<!--  <script src="#{facesContext.externalContext.request.contextPath}/resources/js/maiuscula.js"></script> -->
 	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/jquery-migrate-1.0.0.js"></script>
 	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/wizard.js"></script>
 	<script src="#{facesContext.externalContext.request.contextPath}/resources/js/jquery.rate.min.js"></script>

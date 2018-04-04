@@ -120,7 +120,7 @@
 								<h:commandButton styleClass="btnAction btn btn-primary"   value="Editar"
 												 action="#{usuarioFormMBean.atualizar()}" rendered="#{usuarioFormMBean.usuario.id !=null}"  />
 								&nbsp;
-								<h:commandButton styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" action="usuarioList" immediate="true" />
+								<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="usuarioList" immediate="true" />
 							</div>
 
 						</div>

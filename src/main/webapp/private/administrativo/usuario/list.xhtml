@@ -18,9 +18,6 @@
 			<h:form prependId="false">
 				<div class="container-fluid">
 					<div class="row-fluid">
-						<p:messages autoUpdate="true" closable="true" />
-					</div>
-					<div class="row-fluid">
 						<ui:include src="/template/tutorial_form.xhtml" />
 					</div>
 					<div class="row-fluid">
@@ -63,7 +60,7 @@
 											 <f:ajax render="tableUsuario" execute="@form"/>
 										</h:commandButton>
 										&nbsp;
-										<h:commandButton value="Adicionar" styleClass="btnAction btn btn-primary" action="userAdd" />
+										 <h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="userAdd" />
 										&nbsp;
 										<h:commandButton  value="Imprimir Usuários" styleClass="btnAction btn btn-primary" action="userReport" />	
 									</div>
@@ -86,7 +83,7 @@
 							<h:outputText value="#{usuario.email}" />
 						</p:column>
 						<p:column headerText="PERFIL" styleClass="outTextTable">
-							<h:outputText value="#{fn:toUpperCase(usuario.perfis.get(0).name)}" />
+							<h:outputText value="#{fn:toUpperCase(usuario.perfilLabel)}" />
 						</p:column>
 						<p:column headerText="UNIDADE ORÇAMENTÁRIA"
 							styleClass="outTextTable">

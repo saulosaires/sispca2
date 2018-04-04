@@ -34,7 +34,10 @@ public class Menu extends Model implements Serializable{
 
 	@Column(name="name",length=150,nullable=false)
 	private String name;
- 
+
+	@Column(name="url",length=250)
+	private String url;	
+	
 	@ManyToOne
 	@JoinColumn(name = "id_menu_pai",nullable=true)
 	private Menu pai;
@@ -106,6 +109,14 @@ public class Menu extends Model implements Serializable{
 
 	public void setSubMenu(List<Menu> subMenu) {
 		this.subMenu = subMenu;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	 

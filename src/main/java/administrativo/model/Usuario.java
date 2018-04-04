@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,9 +61,9 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	private String password;
 
  
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
-		name="usuario_perfil",
+		name="papel",
 		schema="controle_acesso",
 		joinColumns=@JoinColumn(name="id_usuario"),
 		inverseJoinColumns=@JoinColumn(name="id_perfil")
@@ -272,8 +273,6 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	
-	
 
 	public Date getUltimoLogin() {
 		return ultimoLogin;
@@ -291,6 +290,23 @@ public class Usuario  extends Model implements Serializable, Auditable {
 		this.loginSegundaSugestao = loginSegundaSugestao;
 	}
 
+	public String getPerfilLabel() {
+		
+    	if(!perfis.isEmpty()) {
+    		StringJoiner sj = new StringJoiner(",");
+    	
+    		for(Perfil p:perfis) {
+    			sj.add(p.getName());
+    		}
+    		
+    		return sj.toString();
+    	
+    	}
+    	
+    	return "";
+		
+	}
+	
 	@Override
 	public String getLogDetail() {		
 		StringBuilder sb = new StringBuilder();

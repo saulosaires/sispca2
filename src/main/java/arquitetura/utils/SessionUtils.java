@@ -28,6 +28,16 @@ public class SessionUtils {
 		
 	}
 	
+	public static Object getBean(String beanName) {
+		
+		 FacesContext context = FacesContext.getCurrentInstance();
+		 return context.getApplication().evaluateExpressionGet(context, "#{" + beanName + "}", Object.class);
+
+ 
+		
+	}
+
+	
 	public static Object get(Object key) {
 		
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
