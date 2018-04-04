@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		 
+			
+			<h:form>				
+				<div class="container-fluid row-fluid">
+					 
+					<legend class="outBusc">CADASTRO</legend>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+		
+						<div class="row" >	
+							<div class="col-lg-2">
+								<h:outputText value="NOME:  " styleClass="labelOutText"/>
+								<h:inputText id="inputNome" value="#{objetoFormMBean.permissao.acao}" styleClass="form-control input-sm"/>
+							</div>
+						</div>
+						 
+						
+					 
+						
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">
+							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{objetoFormMBean.salvar()}"    />
+ 							&nbsp;
+							<h:commandButton styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" action="objetoList" immediate="true" />
+						</div>
+					</div>	
+														
+					</div>
+				</div>			
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

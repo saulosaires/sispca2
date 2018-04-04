@@ -62,7 +62,7 @@ public class Usuario  extends Model implements Serializable, Auditable {
  
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
-		name="papel",
+		name="usuario_perfil",
 		schema="controle_acesso",
 		joinColumns=@JoinColumn(name="id_usuario"),
 		inverseJoinColumns=@JoinColumn(name="id_perfil")

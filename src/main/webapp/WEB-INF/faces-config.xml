@@ -61,7 +61,25 @@
 		
 	</navigation-rule>	 
  
- 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>objetoList</from-outcome>
+			<to-view-id>/private/administrativo/objeto/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>permissaoList</from-outcome>
+			<to-view-id>/private/administrativo/permissao/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 
  
  
 	<navigation-rule>
@@ -138,12 +156,7 @@
   
 
 	</navigation-rule>
-
-
-
-
-
-
+ 
 	<navigation-rule>
 		<from-view-id>/private/administrativo/exercicio/list.xhtml</from-view-id>
 
@@ -158,5 +171,17 @@
 		</navigation-case>
 
 	</navigation-rule>
+ 
+ 	<navigation-rule>
+		<from-view-id>/private/administrativo/objeto/list.xhtml</from-view-id>
+
+		 
+		<navigation-case>
+			<from-outcome>objetoForm</from-outcome>
+			<to-view-id>/private/administrativo/objeto/form.xhtml</to-view-id>
+		</navigation-case> 
+
+	</navigation-rule>
+ 
  
 </faces-config>

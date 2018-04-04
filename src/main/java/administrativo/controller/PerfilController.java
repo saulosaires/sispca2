@@ -2,6 +2,7 @@ package administrativo.controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -33,9 +34,9 @@ public class PerfilController implements Serializable {
 		return perfilDAO.findAllOrderByName();
 	}
 
-	public void create(Perfil perfil) {
+	public Perfil create(Perfil perfil) {
 
-		perfilDAO.create(perfil);
+		return perfilDAO.create(perfil);
 	}
 	
 	public Perfil update(Perfil perfil) {
@@ -46,6 +47,11 @@ public class PerfilController implements Serializable {
 	public Perfil delete(Perfil perfil) {
 
 		return perfilDAO.delete(perfil);
+	}
+
+	public Optional<Perfil> findByDescription(String desc) {
+		 
+		return perfilDAO.findByDescription(desc);
 	}
  
 

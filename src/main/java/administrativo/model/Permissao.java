@@ -3,22 +3,24 @@ package administrativo.model;
  
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.StringJoiner;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-/*
- * Representa as Permissões que um determinado Perfil possui com relação às Actions, Datas e Locais
- * 
- * @author Saul Raposo
- * @version 1.0
- */
+ 
 @Entity
 @Table(name = "permissao", schema = "controle_acesso")
 public class Permissao implements Serializable{
@@ -33,12 +35,17 @@ public class Permissao implements Serializable{
 	@Column(name = "id_permissao")
 	private Long id;
  
-	@ManyToMany(mappedBy="permissoes")
-	private List<Perfil> perfil;
+	@ManyToMany
+	  @JoinTable(
+	      name="perfil_permissao",schema="controle_acesso",
+	    		  inverseJoinColumns =@JoinColumn(name="id_perfil", referencedColumnName="id_perfil"),
+	    		  joinColumns=@JoinColumn(name="id_permissao", referencedColumnName="id_permissao"))
+	private List<Perfil> perfil=new ArrayList<>();
+	
 	
 	 
-	@Column(name="action",length=100)//TODO CHANGE TO NOT NULL
-	private String action;
+	@Column(name="acao",length=100,nullable=false)
+	private String acao;
  
 
 	public void setId(Long id) {
@@ -48,16 +55,16 @@ public class Permissao implements Serializable{
 	public Long getId() {
 		return id;
 	}
+ 
+	
 
-	public String getAction() {
-		return action;
+	public String getAcao() {
+		return acao;
 	}
 
-	public void setAction(String action) {
-		this.action = action;
+	public void setAcao(String acao) {
+		this.acao = acao;
 	}
-
-
 
 	public List<Perfil> getPerfil() {
 		return perfil;
@@ -69,9 +76,39 @@ public class Permissao implements Serializable{
 		this.perfil = perfil;
 	}
 
-
+    public String getPerfilLabel() {
+    
+    	if(!perfil.isEmpty()) {
+    		StringJoiner sj = new StringJoiner(",");
+    	
+    		for(Perfil p:perfil) {
+    			sj.add(p.getName());
+    		}
+    		
+    		return sj.toString();
+    	
+    	}
+    	
+    	return "";
+    }
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		 
+		if(!(obj instanceof Permissao)) {
+			return false;
+		}
+		
+		Permissao p = (Permissao) obj;
+		
+		return ((p.getId().equals(this.getId())) && (p.getAcao().equals(this.getAcao()))) ?true:false;
+			 
+	}
  
+	@Override
+	public int hashCode() {
+		 
+		return Objects.hash(id,acao);
+	}
 	
 }

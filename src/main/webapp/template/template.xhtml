@@ -99,6 +99,11 @@
 					<!-- Conteúdo do site principal aqui -->
 					<div class="row conteudo">
 <!--  						<img id="ajaxloader" src="#{facesContext.externalContext.request.contextPath}/resources/images/ajax-loader.gif" style="display:none;width:40px; height: 50px;"></img>  -->
+						<div class="row-fluid">
+							<p:messages closable="true" >
+							  <p:autoUpdate disabled="false"></p:autoUpdate>
+							</p:messages>
+						</div>	
 						<ui:insert name="conteudo" />
 					</div>
 				</div>

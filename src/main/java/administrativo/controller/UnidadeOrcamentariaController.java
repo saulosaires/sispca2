@@ -33,9 +33,9 @@ public class UnidadeOrcamentariaController implements Serializable {
 		return dao.findAllOrderBySigla();
 	}
 
-	public void create(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public UnidadeOrcamentaria create(UnidadeOrcamentaria unidadeOrcamentaria) {
 
-		dao.create(unidadeOrcamentaria);
+		return dao.create(unidadeOrcamentaria);
 	}
 	
 	public UnidadeOrcamentaria update(UnidadeOrcamentaria unidadeOrcamentaria) {

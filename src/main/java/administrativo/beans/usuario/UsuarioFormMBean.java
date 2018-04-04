@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import administrativo.model.Perfil;
 import administrativo.model.Usuario;
+import administrativo.service.PerfilService;
+import administrativo.service.UnidadeOrcamentariaService;
 import administrativo.service.UserService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -50,21 +52,26 @@ public class UsuarioFormMBean implements Serializable {
 	private List<Perfil>listPerfil;
 	private List<UnidadeOrcamentaria>listUnidadeOrcamentaria;
 	
-	private UserService service;
+	private UserService userService;
+	private PerfilService perfilService;
+	private UnidadeOrcamentariaService unidadeOrcamentariaService;
 
 	@Inject
-	public UsuarioFormMBean(UserService service) {
-		this.service = service;
+	public UsuarioFormMBean(UserService userService,PerfilService perfilService,UnidadeOrcamentariaService unidadeOrcamentariaService) {
 		
-		listPerfil 				= service.perfilFindAll();
-		listUnidadeOrcamentaria = service.uoFindAll();
+		this.userService 				= userService;
+		this.perfilService			    = perfilService;
+		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
+		
+		listPerfil 				= perfilService.findAll();
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAll();
 	}
 
 	public void init() {
 
 		if (!Utils.invalidId(id)) {
 			
-			usuario = service.findById(id);
+			usuario = userService.findById(id);
 			uoSelecionada = usuario.getUnidadeOrcamentaria().getId();
 			
 			if(!usuario.getPerfis().isEmpty())
@@ -76,7 +83,7 @@ public class UsuarioFormMBean implements Serializable {
 			
 			login2.append(names[names.length-1]).append(".").append(names[0]);
 			
-			Optional<Usuario> user2 = service.queryByUserName(usuario.getLogin());
+			Optional<Usuario> user2 = userService.queryByUserName(usuario.getLogin());
 			
 			if(user2.isPresent()) {
 				login2.append(Utils.randomNumber());
@@ -99,7 +106,7 @@ public class UsuarioFormMBean implements Serializable {
 			setDependency();
 			createPassword();
 			
-			usuario=service.create(usuario);
+			usuario=userService.create(usuario);
 
 			boolean sent =  enviarEmailUsuarioCriado();
 			
@@ -129,7 +136,7 @@ public class UsuarioFormMBean implements Serializable {
 			}
 
 			setDependency();
-			usuario = service.update(usuario);
+			usuario = userService.update(usuario);
 
 			Messages.addMessageInfo(SUCCESS_UPDATE);
 
@@ -195,14 +202,12 @@ public class UsuarioFormMBean implements Serializable {
 		
 		usuario.getPerfis().clear();
 		
-		usuario.getPerfis().add(service.perfilFindById(perfilSelecionado));
+		usuario.getPerfis().add(perfilService.findById(perfilSelecionado));
 	}
 	
 	private void setUO() {
-		
-		
-		
-		usuario.setUnidadeOrcamentaria(service.uoFindById(uoSelecionada));
+ 
+		usuario.setUnidadeOrcamentaria(unidadeOrcamentariaService.findById(uoSelecionada));
 	}
 	
 	private void createPassword() {
@@ -226,13 +231,13 @@ public class UsuarioFormMBean implements Serializable {
 				login1.append(names[0]).append(".").append(names[lastPos]);
 				login2.append(names[lastPos]).append(".").append(names[0]);
 			 				
-				Optional<Usuario> user1 = service.queryByUserName(login1.toString());
+				Optional<Usuario> user1 = userService.queryByUserName(login1.toString());
 				
 				if(user1.isPresent()) {
 					login1.append(Utils.randomNumber());
 				}
 				
-				Optional<Usuario> user2 = service.queryByUserName(login2.toString());
+				Optional<Usuario> user2 = userService.queryByUserName(login2.toString());
 				
 				if(user2.isPresent()) {
 					login2.append(Utils.randomNumber());
@@ -254,7 +259,7 @@ public class UsuarioFormMBean implements Serializable {
 		int port         = request.getServerPort();
 		String path      = request.getContextPath();
 		
-		return service.enviarEmailUsuarioCriado(usuario, scheme, serveName, port, path);
+		return userService.enviarEmailUsuarioCriado(usuario, scheme, serveName, port, path);
 		
 	}
 	
