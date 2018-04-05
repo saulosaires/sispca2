@@ -1,14 +1,19 @@
 package administrativo.beans;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import administrativo.model.Perfil;
+import administrativo.model.Permissao;
 import administrativo.model.Usuario;
 import administrativo.service.LoginService;
+import administrativo.service.PermissaoService;
 import arquitetura.utils.JPAUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -25,28 +30,39 @@ public class LoginMBean implements Serializable{
 	private String password;
 	private String emailUsuario;
 	
-	@Inject private  LoginService loginService;
+	private LoginService loginService;
+	private PermissaoService permissaoService;
 	
+	 @Inject
+	public LoginMBean(LoginService loginService,PermissaoService permissaoService){
+	
+		 this.loginService=loginService;
+		 this.permissaoService=permissaoService;
+	}
  	
 	public String login() {
 		
 		try {
  			
-			Usuario u= loginService.loginByUserNameAndPassword(login,password);
+			Usuario usuario= loginService.loginByUserNameAndPassword(login,password);
 			
-			if(!JPAUtil.validId(u.getId())) {
+			if(!JPAUtil.validId(usuario.getId())) {
 				Messages.addMessageError("Login ou senha Inválidos");
 				return "";
 			}
  
-			SessionUtils.put("user", u);
+			SessionUtils.put("user", usuario);
 			
-			if(u.getPrimeiroAcesso()) {
+			if(usuario.getPrimeiroAcesso()) {
 				
 				return "alterarsenha";
 			}else {
-				// carregar permissao
+				
+				initPermissao(usuario);
+				initMenu();
+				initTopMenu();
 				return "home";
+				
 			}
 
 		}catch(Exception e) {
@@ -94,6 +110,38 @@ public class LoginMBean implements Serializable{
 		return "";
 	}
 
+	private void initMenu() {
+		
+		MenuMBean menuMBean = (MenuMBean) SessionUtils.getBean("menuMBean");
+		menuMBean.initMenu();
+	}
+	
+	private void  initTopMenu(){
+		
+		UserMBean userMBean= (UserMBean) SessionUtils.getBean("userMBean");
+				  userMBean.init();
+	}
+	
+	private void initPermissao(Usuario usuario) {
+	
+		List<Perfil> perfis = usuario.getPerfis();
+		
+		Iterator<Perfil> it = perfis.iterator();
+		
+		while(it.hasNext()) {
+			
+			Perfil perfil = it.next();
+			
+			List<Permissao> permissoes = permissaoService.findPermissaoAssociada(perfil.getId());
+			
+			for(Permissao permissao:permissoes) {
+				SessionUtils.put(permissao.getAcao(),permissao.getAcao());
+			}
+		}
+		
+		
+	}
+	
 	public String getLogin() {
 		return login;
 	}

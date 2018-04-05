@@ -1,6 +1,7 @@
 package administrativo.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringJoiner;
@@ -13,6 +14,7 @@ import org.apache.commons.text.WordUtils;
 
 import administrativo.model.Menu;
 import administrativo.service.MenuService;
+import arquitetura.utils.SessionUtils;
 
 @Named
 @SessionScoped
@@ -25,40 +27,66 @@ public class MenuMBean implements Serializable{
 	private static final long serialVersionUID = -6457168508738709185L;
  
 	
-	private  List<Menu> menu;
+	private  List<Menu> menu= new ArrayList<>();
 	
 	private String urlNavigation;
 	
-	private final int INDEX_FORM=5;
+ 
 	String[][] arr= {
 					 {"/sispca2/",""},
 					 {"public/",""},
 					 { "private/",""},
 					 {".xhtml",""},
 					 {"list"," Listar"},
-					 {"form",""},
+					 {"edit"," Editar"},
+					 {"form"," Salvar"},
 					 {"login",""}
 	  				};
+	
+	private MenuService menuService;
 	
 	@Inject
 	public MenuMBean(MenuService menuService) {
 		
-		menu = menuService.findRoot();
+		this.menuService=menuService;
 		
-		Iterator<Menu> it = menu.iterator();
+		initMenu() ;
+		
+	}
+
+	public void initMenu() {
+		
+		menu.clear();
+		
+		List<Menu> listMenu = menuService.findRoot();
+		
+		Iterator<Menu> it = listMenu.iterator();
 		
 		while(it.hasNext()) {
 			
 			Menu m= it.next();
-			
-			List<Menu> subMenu = menuService.findChildMenu(m.getId());
-			
-			m.setSubMenu(subMenu);
-		}
+			m.getSubMenu().clear();
+			if(SessionUtils.containsKey(m.getName())) {
  
+				List<Menu> subMenu = menuService.findChildMenu(m.getId());
+				
+				for(Menu subM:subMenu) {
+					
+					if(SessionUtils.containsKey(subM.getName())) {
+						m.getSubMenu().add(subM);
+					}
+					
+				}
+					
+			 menu.add(m);
+			}
+			
+
+		}
+		
 		
 	}
-
+	
 	public List<Menu> getMenu() {
 		return menu;
 	}
@@ -68,10 +96,8 @@ public class MenuMBean implements Serializable{
 	}
 
 	//TODO Assim que possivel desfazer essa gambi
-	public void proccessUrl(String url,boolean hasParameters) {
-			
-		arr[INDEX_FORM][1]= hasParameters?"Inserir":"Atualizar";
- 	 
+	public void proccessUrl(String url) {
+	 	 
 		for(int i=0; i<arr.length;i++) {
 			url = url.replace(arr[i][0],arr[i][1]);
 		}

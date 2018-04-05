@@ -20,6 +20,19 @@ public class SessionUtils {
 		session.invalidate();
 	}
 	
+	public static Object getApplicationBean(String beanName) {
+		 
+		return  FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().get(beanName);
+		
+	}
+	
+	public static Object getBean(String beanName) {
+		
+		 FacesContext context = FacesContext.getCurrentInstance();
+		 return context.getApplication().evaluateExpressionGet(context, "#{" + beanName + "}", Object.class);
+		
+	}
+
 	public static Object put(String key, Object value) {
 		
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
@@ -28,15 +41,6 @@ public class SessionUtils {
 		
 	}
 	
-	public static Object getBean(String beanName) {
-		
-		 FacesContext context = FacesContext.getCurrentInstance();
-		 return context.getApplication().evaluateExpressionGet(context, "#{" + beanName + "}", Object.class);
-
- 
-		
-	}
-
 	
 	public static Object get(Object key) {
 		
@@ -45,6 +49,15 @@ public class SessionUtils {
 		return sessionMap.get(key);
 		
 	}
+	
+	public static boolean containsKey(Object key) {
+		
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		
+		return sessionMap.containsKey(key);
+		
+	}
+	
 	
 	public static HttpServletRequest getRequest() {
 		

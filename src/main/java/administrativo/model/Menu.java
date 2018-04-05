@@ -1,6 +1,7 @@
 package administrativo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class Menu extends Model implements Serializable{
 	@JoinColumn(name = "id_menu_pai",nullable=true)
 	private Menu pai;
 	
-	private transient List<Menu> subMenu; 
+	private transient List<Menu> subMenu= new ArrayList<>();
 	
 	public Menu() {
 	

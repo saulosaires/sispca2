@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<div class="spaceContainerForm">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-6">
+							<h4>Ocorreu um erro inesperado.</h4>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<h6 style="color:red;" > #{errorMBean.message}</h6>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-2">
+							<h:outputText value="Código erro: " /> 
+						</div>
+						<div class="col-lg-6">
+							<h:outputText style="color:red;" value="#{errorMBean.code}"/>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-2">
+							<h:outputText value="Tipo de erro: "/>
+						</div>
+						<div class="col-lg-6">
+							<h:outputText style="color:red;" value="#{errorMBean.type}"/>
+						</div>
+					</div>
+					<br />
+					<br />
+					<div class="row">
+						<div class="col-lg-6">
+							<a href="#{facesContext.externalContext.request.contextPath}/private/index.xhtml" style="font-size: 20px"><b><u>Clique aqui</u> para ir à página inicial</b></a>
+						</div>
+					</div>
+				</div>
+			</div>       
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

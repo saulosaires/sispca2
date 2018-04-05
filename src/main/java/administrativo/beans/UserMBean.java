@@ -27,6 +27,11 @@ public class UserMBean implements Serializable {
 	transient StreamedContent fotoPerfil;
 	
 	public UserMBean() {
+		init();
+	}
+	
+	public void init() {
+		
 		usuario = (Usuario) SessionUtils.get("user");
 		
 		initFotoPerfil();
