@@ -7,7 +7,6 @@ import java.util.Optional;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
 import administrativo.model.Perfil;
 import administrativo.model.Usuario;
@@ -15,86 +14,102 @@ import administrativo.service.PerfilService;
 import administrativo.service.UnidadeOrcamentariaService;
 import administrativo.service.UserService;
 import arquitetura.utils.Messages;
-import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.UnidadeOrcamentaria;
 
 @Named
 @ViewScoped
-public class UsuarioFormMBean implements Serializable {
+public class UsuarioEditMBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -943431499633986156L;
 
+	 
+	
+ 	public static final String FAIL_UPDATE   = "Falha inesperada ao tentar Atualizar Usuário";
+	public static final String SUCCESS_UPDATE = "Usuário atualizada com Sucesso";
 
-	public static final String SUCCESS_EMAIL_SENT = "Sua senha foi enviada por email";
-	public static final String FAIL_EMAIL_SENT    = "Falha ao enviar email";
+	private Long id;
 
-	public static final String FAIL_SAVE  = "Falha inesperada ao tentar Salvar Usuário";
-	public static final String SUCCESS_SAVE = "Usuário Salvo com Sucesso";
- 
 	private Usuario usuario = new Usuario();
 	private Long perfilSelecionado;
 	private Long uoSelecionada;
 	private List<Perfil>listPerfil;
 	private List<UnidadeOrcamentaria>listUnidadeOrcamentaria;
 	
-	private UserValidate userValidate;
 	private UserService userService;
 	private PerfilService perfilService;
 	private UnidadeOrcamentariaService unidadeOrcamentariaService;
+	private UserValidate userValidate;
 
 	@Inject
-	public UsuarioFormMBean(UserService userService,PerfilService perfilService,UnidadeOrcamentariaService unidadeOrcamentariaService,UserValidate userValidate) {
+	public UsuarioEditMBean(UserService userService,PerfilService perfilService,UnidadeOrcamentariaService unidadeOrcamentariaService,UserValidate userValidate) {
 		
 		this.userService 				= userService;
 		this.perfilService			    = perfilService;
 		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
-		this.userValidate			    =userValidate;
+		this.userValidate			    = userValidate;
 		
 		listPerfil 				= perfilService.findAll();
 		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAll();
 	}
 
+	public void init() {
+
+		if (!Utils.invalidId(id)) {
+			
+			usuario = userService.findById(id);
+			uoSelecionada = usuario.getUnidadeOrcamentaria().getId();
+			
+			if(!usuario.getPerfis().isEmpty())
+				perfilSelecionado=usuario.getPerfis().get(0).getId();
+			
+			String[] names=usuario.getName().split(" ");
+			
+			StringBuilder login2 = new StringBuilder("");
+			
+			login2.append(names[names.length-1]).append(".").append(names[0]);
+			
+			Optional<Usuario> user2 = userService.queryByUserName(usuario.getLogin());
+			
+			if(user2.isPresent()) {
+				login2.append(Utils.randomNumber());
+			}
+			 
+			usuario.setLoginSegundaSugestao(login2.toString());
+			
+		}
+
+	}
+
  
-	public String salvar() {
+
+	public String atualizar() {
 
 		try {
 
 			if (!userValidate.validar(usuario)) {
 				return "";
 			}
-			
-			setDependency();
-			createPassword();
-			
-			usuario=userService.create(usuario);
 
-			boolean sent =  enviarEmailUsuarioCriado();
-			
-			if(sent) {
-				Messages.addMessageInfo(SUCCESS_EMAIL_SENT);
-			}else {
-				Messages.addMessageError(FAIL_EMAIL_SENT);
-			}
-			
-			Messages.addMessageInfo(SUCCESS_SAVE);
+			setDependency();
+			usuario = userService.update(usuario);
+
+			Messages.addMessageInfo(SUCCESS_UPDATE);
 
 			return "usuarioList";
 			
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 
-			Messages.addMessageError(FAIL_SAVE);
+			Messages.addMessageError(FAIL_UPDATE);
 		}
 
 		return "";
 	}
-
- 
 
 	 
 
@@ -117,11 +132,7 @@ public class UsuarioFormMBean implements Serializable {
 		usuario.setUnidadeOrcamentaria(unidadeOrcamentariaService.findById(uoSelecionada));
 	}
 	
-	private void createPassword() {
-		
-		usuario.setPassword(Utils.randomNumber()+"");
-		usuario.setSenhaDescriptografada(usuario.getPassword());
-	}
+ 
 	
 	public void sugestoesLogin() {
 		
@@ -157,19 +168,15 @@ public class UsuarioFormMBean implements Serializable {
 		
 	}
 	
-	private boolean enviarEmailUsuarioCriado() {
-		
-		HttpServletRequest request = SessionUtils.getRequest();
-		
-		String scheme    = request.getScheme();
-		String serveName = request.getServerName();
-		int port         = request.getServerPort();
-		String path      = request.getContextPath();
-		
-		return userService.enviarEmailUsuarioCriado(usuario, scheme, serveName, port, path);
-		
-	}
  
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;

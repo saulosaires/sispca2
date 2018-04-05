@@ -25,7 +25,7 @@ public class ObjetoFormMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 4306070990599784210L;
 
-	public static final String NOME_REQUIRED_MSG = " Nome é um campo obrigatório";
+
  
 	public static final String FAIL_SAVE_MSG = "Falha inesperada ao tentar Salvar Permisão";
 	public static final String FAIL_UPDATE_MSG = "Falha inesperada ao tentar Atualizar Permisão";
@@ -38,11 +38,12 @@ public class ObjetoFormMBean implements Serializable {
 	private Permissao permissao = new Permissao();
 
 	private PermissaoService permissaoService;
-	private PerfilService perfilService;
+	private PermissaoValidate permissaoValidate;
 
 	@Inject
-	public ObjetoFormMBean(PermissaoService permissaoService) {
+	public ObjetoFormMBean(PermissaoService permissaoService, PermissaoValidate permissaoValidate) {
 		this.permissaoService = permissaoService;
+		this.permissaoValidate=permissaoValidate;
 
 	}
 
@@ -52,7 +53,7 @@ public class ObjetoFormMBean implements Serializable {
 
 		try {
 
-			if (!validar()) {
+			if (!permissaoValidate.validar(permissao)) {
 				return "";
 			}
 		
@@ -72,26 +73,7 @@ public class ObjetoFormMBean implements Serializable {
 		
 	}
 
- 
-
-	private boolean validar() {
-
-		if (permissao == null) {
-			Messages.addMessageError(FAIL_SAVE_MSG);
-			return false;
-
-		}
-
-		if (Utils.emptyParam(permissao.getAcao())) {
-			Messages.addMessageError(NOME_REQUIRED_MSG);
-			return false;
-
-		}
-
-
-
-		return true;
-	}
+  
 
 	public Permissao getPermissao() {
 		return permissao;

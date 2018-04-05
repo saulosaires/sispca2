@@ -13,36 +13,40 @@
 <body> 
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
- 		
+			<f:metadata>
+    			<f:viewParam name="linkId" value="#{linkEditMBean.linkId}"/>
+    			<f:viewAction action="#{linkEditMBean.init}" />
+			</f:metadata>
+		
 			<h:form enctype="multipart/form-data" acceptcharset="UTF-8" prependId="false" id="form">
 				<div class="container-fluid row-fluid">
 					 
-					<div class="outBusc">CADASTRO</div>
+				 <div class="outBusc">EDITAR</div>
 				</div>
 				<div class="spaceContainerForm">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-lg-2">
 								<h:outputText value="TIPO DE LINK:  " styleClass="labelOutText"/>							
-								<h:selectOneMenu value="#{linkFormMBean.link.tipoLink}" required="true" requiredMessage="Tipo Link é obrigatório"  styleClass="form-control input-sm" converter="tipoLinkConverter">
-									<f:selectItems var="tipoLink" value="#{linkFormMBean.listTipoLink}" itemLabel="#{fn:toUpperCase(tipoLink.descricao)}" itemValue="#{tipoLink}"/>
+								<h:selectOneMenu value="#{linkEditMBean.link.tipoLink}" required="true" requiredMessage="Tipo Link é obrigatório"  styleClass="form-control input-sm" converter="tipoLinkConverter">
+									<f:selectItems var="tipoLink" value="#{linkEditMBean.listTipoLink}" itemLabel="#{fn:toUpperCase(tipoLink.descricao)}" itemValue="#{tipoLink}"/>
 									<p:ajax  event="change" update="tipoLinkInput" />
 								</h:selectOneMenu>
 								
 							</div>
 							<div class="col-lg-4" >
 								<p:outputPanel id="tipoLinkInput">
-								<c:if test="#{linkFormMBean.link.tipoLink.descricao == 'ARQUIVO'}">
-									<h:outputText value="ARQUIVO: #{linkFormMBean.arquivo.fileName}" styleClass="labelOutText"/>						
-									<p:fileUpload fileUploadListener="#{linkFormMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true" required="true" requiredMessage="Arquivo: Campo é obrigatório" 
+								<c:if test="#{linkEditMBean.link.tipoLink.descricao == 'ARQUIVO'}">
+									<h:outputText value="ARQUIVO: #{linkEditMBean.arquivo.fileName}" styleClass="labelOutText"/>						
+									<p:fileUpload fileUploadListener="#{linkEditMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true" required="true" requiredMessage="Arquivo: Campo é obrigatório" 
 												  allowTypes="/(\.|\/)(pdf)$/" update="tipoLinkInput">
 											   
 									</p:fileUpload>
 									  
 								</c:if>
-								<c:if test="#{linkFormMBean.link.tipoLink.descricao == 'EXTERNO'}">
+								<c:if test="#{linkEditMBean.link.tipoLink.descricao == 'EXTERNO'}">
 									<h:outputText value="URL:  " styleClass="labelOutText"/>
-									<h:inputText value="#{linkFormMBean.link.url}" required="true" requiredMessage="URL: Campo é obrigatório" styleClass="form-control input-sm"/>
+									<h:inputText value="#{linkEditMBean.link.url}" required="true" requiredMessage="URL: Campo é obrigatório" styleClass="form-control input-sm"/>
 								</c:if>	
 								</p:outputPanel>
 							</div>
@@ -50,15 +54,17 @@
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-6">
 								<h:outputText value="TÍTULO:  " styleClass="labelOutText"/>							
-								<h:inputText value="#{linkFormMBean.link.titulo}" required="true"
+								<h:inputText value="#{linkEditMBean.link.titulo}" required="true"
 									requiredMessage="Título: Campo é obrigatório"
 									styleClass="form-control input-sm"/>
 							</div>			
 						</div>						
 						<div class="row-fluid" style="margin-top: 2%;">
 							<div class="spaceBtnAcao">
-								<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{linkFormMBean.salvar()}" rendered="#{linkFormMBean.link.id ==null}" />
-							 
+								 
+								<h:commandButton styleClass="btnAction btn btn-primary" value="Editar" action="#{linkEditMBean.atualizar()}" rendered="#{linkEditMBean.link.id !=null}" />
+								  
+								 
 								&nbsp;
 									
 								<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="linksArquivosList" immediate="true" />												

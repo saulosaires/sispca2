@@ -103,7 +103,7 @@
 
 		<navigation-case>
 			<from-outcome>linkEdit</from-outcome>
-			<to-view-id>/private/administrativo/link/form.xhtml</to-view-id>
+			<to-view-id>/private/administrativo/link/edit.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>linksArquivosAdd</from-outcome>
@@ -118,7 +118,7 @@
 
 		<navigation-case>
 			<from-outcome>msgEdit</from-outcome>
-			<to-view-id>/private/administrativo/mensagem/form.xhtml</to-view-id>
+			<to-view-id>/private/administrativo/mensagem/edit.xhtml</to-view-id>
 		</navigation-case>
 		
 		<navigation-case>
@@ -151,7 +151,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>userEdit</from-outcome>
-			<to-view-id>/private/administrativo/usuario/form.xhtml</to-view-id>
+			<to-view-id>/private/administrativo/usuario/edit.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>userReport</from-outcome>

@@ -18,22 +18,27 @@ import administrativo.service.LinkService;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.Utils;
 
 @Named
 @ViewScoped
-public class LinkFormMBean implements Serializable {
+public class LinkEditMBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
 
- 	
-	public static final String FAIL_SAVE_LINK_MSG      = "Falha inesperada ao tentar Salvar Link"; 
-	public static final String SUCCESS_SAVE_LINK_MSG     = "Link salvo com Sucesso"; 
 	private static final String TIPO_LINK_ARQUIVO = "ARQUIVO";
+	
+ 	public static final String FAIL_UPDATE_LINK_MSG    = "Falha inesperada ao tentar Atualizar Link";
+
+ 	public static final String SUCCESS_UPDATE_LINK_MSG   = "Link atualizado com Sucesso";
+	
+
  	
-	 
+	private Long linkId;
+
 	private Link link = new Link();
 
 	private List<TipoLink> listTipoLink;
@@ -45,7 +50,7 @@ public class LinkFormMBean implements Serializable {
 
 
 	@Inject
-	public LinkFormMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkEditValidate linkEditValidate) {
+	public LinkEditMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkEditValidate linkEditValidate) {
 		this.linkService = linkService;
 		this.linkEditValidate=linkEditValidate;
 		
@@ -54,13 +59,22 @@ public class LinkFormMBean implements Serializable {
 
 	}
 
-	 
+	public void init() {
+
+		if (!Utils.invalidId(linkId)) {
+
+			link = linkService.findById(linkId);
+
+		}
+
+	}
 
 	public void handleFileUpload(FileUploadEvent event) {
 		arquivo = event.getFile();
 	}
 
-	public String salvar() {
+ 
+	public String atualizar() {
 
 		try {
 
@@ -70,22 +84,22 @@ public class LinkFormMBean implements Serializable {
 
 			beforeMerge(link);
 
-			linkService.create(link);
+			link=linkService.update(link);
 
-			Messages.addMessageInfo(SUCCESS_SAVE_LINK_MSG);
+			Messages.addMessageInfo(SUCCESS_UPDATE_LINK_MSG);
 			
 			return "linksArquivosList";
 			
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 
-			Messages.addMessageError(FAIL_SAVE_LINK_MSG);
+			Messages.addMessageError(FAIL_UPDATE_LINK_MSG);
 		}
 
 		return "";
 	}
 
-	 
+
 		
 	private void beforeMerge(Link link) throws IOException {
 
@@ -98,9 +112,16 @@ public class LinkFormMBean implements Serializable {
 
 	}
 
-	 
 
- 
+
+	public Long getLinkId() {
+		return linkId;
+	}
+
+	public void setLinkId(Long linkId) {
+		this.linkId = linkId;
+	}
+
 	public Link getLink() {
 		return link;
 	}
