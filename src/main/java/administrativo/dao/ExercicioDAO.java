@@ -17,6 +17,11 @@ import arquitetura.dao.AbstractDAO;
 public class ExercicioDAO extends AbstractDAO< Exercicio >  {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1756832461206322840L;
+
 	public ExercicioDAO() {
 		setClazz(Exercicio.class );
 	 

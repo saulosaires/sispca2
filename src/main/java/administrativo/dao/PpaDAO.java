@@ -15,6 +15,11 @@ import arquitetura.utils.Utils;
 
 public class PpaDAO extends AbstractDAO<Ppa> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3992569647283846129L;
+
 	public PpaDAO() {
 		setClazz(Ppa.class);
 

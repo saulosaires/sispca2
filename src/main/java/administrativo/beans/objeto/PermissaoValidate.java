@@ -9,6 +9,10 @@ import arquitetura.utils.Utils;
 
 public class PermissaoValidate implements Validate<Permissao>,Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1539192572985371866L;
 	public static final String NOME_REQUIRED_MSG = " Nome é um campo obrigatório";
 	public static final String FAIL_PERMISSAO = "Falha inesperada ao tentar Salvar Permisão";
 	@Override

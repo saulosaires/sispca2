@@ -14,6 +14,12 @@ import arquitetura.dao.AbstractDAO;
 public class CalendarioDAO extends AbstractDAO< Calendario >  {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1358843609602731648L;
+
+
 	public CalendarioDAO() {
 		setClazz(Calendario.class );
 	 

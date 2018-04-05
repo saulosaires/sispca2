@@ -16,10 +16,8 @@ import javax.persistence.Table;
 
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
-/**
- * The persistent class for the link database table.
- * 
- */
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="link", schema="comum")

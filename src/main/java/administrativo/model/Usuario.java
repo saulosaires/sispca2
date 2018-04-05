@@ -21,7 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import arquitetura.interfaces.Auditable;
@@ -80,8 +79,10 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	@Column(name="cpf",length=11,nullable=false)
 	private String cpf;
 
+	@Column(name="cargo")
+	private String cargo;
 
-
+	@Column(name="hash")
 	private String hash;
 
 	@Column(name = "validade_hash")
@@ -90,8 +91,6 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	@Column(name= "foto" )
 	private byte[] foto;
 
-	@Transient
-	private String senhaDescriptografada;
 	
 	@Column(name="ddd_celular",length=2)
 	private String dddCelular;
@@ -105,8 +104,8 @@ public class Usuario  extends Model implements Serializable, Auditable {
 	@Column(name="numero_residencial",length=9)
 	private String numeroResidencial;
 	
-	private String cargo;
-	
+	private transient String senhaDescriptografada;
+
 	private transient String loginSegundaSugestao;
 	
 	public Usuario() { 

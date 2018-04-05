@@ -32,10 +32,8 @@ import arquitetura.utils.FormatoUtils;
 public class ActionCalendario extends Model implements Serializable, Auditable{
 	private static final long serialVersionUID = 1L;
 
-	/* Chave primária */
+
 	@Id
-//	@SequenceGenerator(name = "action_calendario_id_seq", sequenceName = "planejamento.action_calendario_id_seq")
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "action_calendario_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;

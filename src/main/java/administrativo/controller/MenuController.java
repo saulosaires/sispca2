@@ -11,6 +11,10 @@ import administrativo.model.Menu;
 public class MenuController implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2753896240998617710L;
 	private MenuDAO menuDAO;
 	
 	@Inject 

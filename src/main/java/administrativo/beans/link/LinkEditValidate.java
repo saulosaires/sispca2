@@ -9,6 +9,10 @@ import arquitetura.utils.Utils;
 
 public class LinkEditValidate implements Validate<Link>,Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6174506586329370046L;
 	public static final String URL_REQUIRED_MSG 	   = "Url é um campo obrigatório";
 	public static final String TITULO_REQUIRED_MSG 	   = "Título é um campo obrigatório";
 

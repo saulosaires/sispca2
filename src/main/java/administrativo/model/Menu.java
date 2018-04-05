@@ -1,6 +1,5 @@
 package administrativo.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,13 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "menu", schema = "controle_acesso")
-public class Menu extends Model implements Serializable{
+public class Menu extends Model{
+
+	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8204621574018445105L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

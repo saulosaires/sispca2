@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Model implements Serializable{
+public abstract  class Model implements Serializable{
 
 	/**
 	 * 

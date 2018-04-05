@@ -11,6 +11,11 @@ import arquitetura.dao.AbstractDAO;
 
 public class MenuDAO extends AbstractDAO<Menu> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6194919124690666522L;
+
 	public MenuDAO() {
 		setClazz(Menu.class);
 

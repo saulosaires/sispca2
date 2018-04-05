@@ -22,11 +22,9 @@ import java.util.List;
 public class Calendario extends Model implements Serializable, Auditable {
 	private static final long serialVersionUID = 1L;
 
-	/* Chave primária */
+ 
 	@Id
-//	@SequenceGenerator(name = "calendario_id_calendario_seq", sequenceName = "planejamento.calendario_id_calendario_seq")
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "calendario_id_calendario_seq")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+ 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_calendario")
 	private Long id;
  
@@ -39,17 +37,14 @@ public class Calendario extends Model implements Serializable, Auditable {
 	@Column(name="data_inicio")
 	private Date dataInicio;
 
-	//bi-directional many-to-one association to Exercicio
+ 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_exercicio")
 	private Exercicio exercicio;
 	
 	@OneToMany(mappedBy = "calendario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval=true)
 	private List<ActionCalendario> listActionCalendario;
- 
-	public Calendario() {
-		// empty constructor
-	}
+  
 	
 	public Long getId() {
 		return this.id;

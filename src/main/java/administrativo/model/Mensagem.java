@@ -18,11 +18,7 @@ import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import arquitetura.utils.FormatoUtils;
 
-
-/**
- * The persistent class for the categoria database table.
- * 
- */
+ 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="mensagem", schema="comum")

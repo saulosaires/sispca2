@@ -12,6 +12,10 @@ public class MenuService implements Serializable{
 
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4923079177213762511L;
 	MenuController menuController;
 	
 	@Inject

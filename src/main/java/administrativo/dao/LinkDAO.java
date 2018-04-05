@@ -15,6 +15,11 @@ import arquitetura.utils.Utils;
 
 public class LinkDAO extends AbstractDAO<Link> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2591235993911028241L;
+
 	public LinkDAO() {
 		setClazz(Link.class);
 
