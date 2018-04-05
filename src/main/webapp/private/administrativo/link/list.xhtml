@@ -51,7 +51,7 @@
 												render="tableLinks" />
 										</h:commandButton>
 										&nbsp;
-										<h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="linksArquivosAdd" />
+										<h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="linksArquivosAdd" rendered="#{linkListMBean.linkSalvar}"/>
 									</div>
 								</div>
 							</fieldset>
@@ -75,11 +75,11 @@
 						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable"
 							footerText="Quantidade Total: #{linkListMBean.listLinks.size()}">
 							<center>
-								<p:button title="Editar"  outcome="linkEdit" icon="ui-icon-pencil">
+								<p:button title="Editar"  outcome="linkEdit" icon="ui-icon-pencil" rendered="#{linkListMBean.linkAtualizar}">
 								 	  <f:param name="linkId" value="#{link.id}" /> 
 								</p:button>
 								
-								<p:commandButton title="Deletar" action="#{linkListMBean.deletar(link)}" icon="ui-icon-trash"  update="tableLinks">
+								<p:commandButton title="Deletar" action="#{linkListMBean.deletar(link)}" icon="ui-icon-trash"  update="tableLinks" rendered="#{linkListMBean.linkDeletar}">
 									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>

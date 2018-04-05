@@ -1,6 +1,7 @@
 package administrativo.beans.permissao;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -58,6 +59,9 @@ public class PermissaoMBean implements Serializable {
  	 
 		initNaoAssociada(perfil);
  		 
+		Collections.sort(listPermissaoNaoAssociada, (p1, p2) -> p1.getAcao().compareTo(p2.getAcao()));
+		Collections.sort(perfil.getPermissoes(), (p1, p2) -> p1.getAcao().compareTo(p2.getAcao()));
+		
 	}
 	
 	

@@ -10,6 +10,7 @@ import javax.inject.Named;
 import administrativo.model.Link;
 import administrativo.service.LinkService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 
 @Named
@@ -30,10 +31,18 @@ public class LinkListMBean implements Serializable {
 	private List<Link> listLinks;
 
 	private LinkService linkService;
-
+	
+	private boolean linkAtualizar;
+	private boolean linkDeletar;
+	private boolean linkSalvar;
+	
 	@Inject
 	public LinkListMBean(LinkService linkService) {
 		this.linkService = linkService;
+		
+		linkAtualizar = SessionUtils.containsKey("linkAtualizar"); 
+		linkDeletar   = SessionUtils.containsKey("linkDeletar");
+		linkSalvar    = SessionUtils.containsKey("linkSalvar");
 	}
 
 	public void queryLinkByDescricaoAndURL() {
@@ -94,4 +103,30 @@ public class LinkListMBean implements Serializable {
 		this.listLinks = listLinks;
 	}
 
+	public boolean isLinkAtualizar() {
+		return linkAtualizar;
+	}
+
+	public void setLinkAtualizar(boolean linkAtualizar) {
+		this.linkAtualizar = linkAtualizar;
+	}
+
+	public boolean isLinkDeletar() {
+		return linkDeletar;
+	}
+
+	public void setLinkDeletar(boolean linkDeletar) {
+		this.linkDeletar = linkDeletar;
+	}
+
+	public boolean isLinkSalvar() {
+		return linkSalvar;
+	}
+
+	public void setLinkSalvar(boolean linkSalvar) {
+		this.linkSalvar = linkSalvar;
+	}
+
+	
+	
 }

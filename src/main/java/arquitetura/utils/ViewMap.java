@@ -26,22 +26,18 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/administrativo/link/list.xhtml","linkListar");
 		mapLinks.put("/sispca2/private/administrativo/link/form.xhtml","linkSalvar");
 		mapLinks.put("/sispca2/private/administrativo/link/edit.xhtml","linkAtualizar");
-		mapLinks.put("/sispca2/private/administrativo/link/list.xhtml","linkDeletar");
 
 		mapLinks.put("/sispca2/private/administrativo/mensagem/list.xhtml","mensagemListar");
 		mapLinks.put("/sispca2/private/administrativo/mensagem/form.xhtml","mensagemSalvar");
 		mapLinks.put("/sispca2/private/administrativo/mensagem/edit.xhtml","mensagemAtualizar");
-		mapLinks.put("/sispca2/private/administrativo/mensagem/list.xhtml","mensagemDeletar");
 		
 		mapLinks.put("/sispca2/private/administrativo/ppa/list.xhtml","ppaListar");
 		mapLinks.put("/sispca2/private/administrativo/ppa/form.xhtml","ppaSalvar"); 
-		mapLinks.put("/sispca2/private/administrativo/ppa/list.xhtml","ppaDeletar"); 
 
 		mapLinks.put("/sispca2/private/administrativo/usuario/list.xhtml","usuarioListar");
 		mapLinks.put("/sispca2/private/administrativo/usuario/form.xhtml","usuarioSalvar");
 		mapLinks.put("/sispca2/private/administrativo/usuario/edit.xhtml","usuarioAtualizar");
 		mapLinks.put("/sispca2/private/administrativo/usuario/report.xhtml","usuarioRelatorio");
-		mapLinks.put("/sispca2/private/administrativo/usuario/list.xhtml","usuarioDeletar");
 		mapLinks.put("/sispca2/private/administrativo/usuario/meusdados.xhtml","usuarioMeusDados");
 	}
 
