@@ -1,20 +1,15 @@
 package administrativo.beans.objeto;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import administrativo.model.Perfil;
 import administrativo.model.Permissao;
-import administrativo.service.PerfilService;
 import administrativo.service.PermissaoService;
-
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.Utils;
 
 @Named
 @ViewScoped

@@ -11,6 +11,7 @@ import administrativo.controller.ExercicioController;
 import administrativo.model.Calendario;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
+import arquitetura.exception.JpaException;
 
 public class ExercicioService implements Serializable {
 
@@ -35,7 +36,7 @@ public class ExercicioService implements Serializable {
 
 	}
 
-	public void trocarVigencia(Exercicio exercicio) {
+	public void trocarVigencia(Exercicio exercicio) throws JpaException {
 
 		exercicio.setVigente(!exercicio.getVigente());
 

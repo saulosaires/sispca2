@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import administrativo.controller.UnidadeOrcamentariaController;
+import arquitetura.exception.JpaException;
 import qualitativo.model.UnidadeOrcamentaria;
  
 
@@ -29,7 +30,7 @@ public class UnidadeOrcamentariaService implements Serializable {
 
 	 
 
-	public void delete(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public void delete(UnidadeOrcamentaria unidadeOrcamentaria) throws JpaException {
 
 		controller.delete(unidadeOrcamentaria);
 
@@ -41,12 +42,12 @@ public class UnidadeOrcamentariaService implements Serializable {
 
 	}
 
-	public UnidadeOrcamentaria create(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public UnidadeOrcamentaria create(UnidadeOrcamentaria unidadeOrcamentaria) throws JpaException {
 		return controller.create(unidadeOrcamentaria);
 
 	}
 
-	public UnidadeOrcamentaria update(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public UnidadeOrcamentaria update(UnidadeOrcamentaria unidadeOrcamentaria) throws JpaException {
 		return controller.update(unidadeOrcamentaria);
 
 	}

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.MensagemController;
 import administrativo.model.Mensagem;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Utils;
 
 public class MensagemService implements Serializable {
@@ -32,19 +33,19 @@ public class MensagemService implements Serializable {
 
 	}
 
-	public void create(Mensagem mensagem) {
+	public void create(Mensagem mensagem) throws JpaException {
 
 		mensagemController.create(mensagem);
 
 	}
 
-	public Mensagem update(Mensagem mensagem) {
+	public Mensagem update(Mensagem mensagem) throws JpaException {
 
 		return mensagemController.update(mensagem);
 
 	}
 
-	public Mensagem delete(Mensagem mensagem) {
+	public Mensagem delete(Mensagem mensagem) throws JpaException {
 
 		return mensagemController.delete(mensagem);
 

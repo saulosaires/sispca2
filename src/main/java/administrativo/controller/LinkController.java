@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.dao.LinkDAO;
 import administrativo.model.Link;
+import arquitetura.exception.JpaException;
 
 public class LinkController implements Serializable {
 
@@ -33,17 +34,17 @@ public class LinkController implements Serializable {
 		return linkDAO.findAll();
 	}
 
-	public void create(Link link) {
+	public void create(Link link) throws JpaException {
 
 		linkDAO.create(link);
 	}
 	
-	public Link update(Link link) {
+	public Link update(Link link) throws JpaException {
 
 		return linkDAO.update(link);
 	}
 
-	public Link delete(Link link) {
+	public Link delete(Link link) throws JpaException {
 
 		return linkDAO.delete(link);
 	}

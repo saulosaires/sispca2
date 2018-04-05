@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import administrativo.dao.ExercicioDAO;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
+import arquitetura.exception.JpaException;
 
 public class ExercicioController implements Serializable{
 
@@ -35,7 +36,7 @@ public class ExercicioController implements Serializable{
 		
 	}
 	
-	public void trocarVigencia(Exercicio exercicio) {
+	public void trocarVigencia(Exercicio exercicio) throws JpaException {
 		
 		exercicio.setVigente(!exercicio.getVigente());
 		
@@ -55,7 +56,7 @@ public class ExercicioController implements Serializable{
 		
 	}
 	
-	public Exercicio update(Exercicio exercicio) {
+	public Exercicio update(Exercicio exercicio) throws JpaException {
 		
 		return exercicioDAO.update(exercicio);
 		

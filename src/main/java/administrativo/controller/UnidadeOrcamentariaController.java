@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import administrativo.dao.UnidadeOrcamentariaDAO;
+import arquitetura.exception.JpaException;
 import qualitativo.model.UnidadeOrcamentaria;
 
 public class UnidadeOrcamentariaController implements Serializable {
@@ -33,17 +34,17 @@ public class UnidadeOrcamentariaController implements Serializable {
 		return dao.findAllOrderBySigla();
 	}
 
-	public UnidadeOrcamentaria create(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public UnidadeOrcamentaria create(UnidadeOrcamentaria unidadeOrcamentaria) throws JpaException {
 
 		return dao.create(unidadeOrcamentaria);
 	}
 	
-	public UnidadeOrcamentaria update(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public UnidadeOrcamentaria update(UnidadeOrcamentaria unidadeOrcamentaria) throws JpaException {
 
 		return dao.update(unidadeOrcamentaria);
 	}
  
-	public UnidadeOrcamentaria delete(UnidadeOrcamentaria unidadeOrcamentaria) {
+	public UnidadeOrcamentaria delete(UnidadeOrcamentaria unidadeOrcamentaria) throws JpaException {
 
 		return dao.delete(unidadeOrcamentaria);
 	}

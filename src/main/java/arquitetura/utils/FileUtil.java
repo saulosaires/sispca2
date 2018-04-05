@@ -35,8 +35,10 @@ public class FileUtil {
 		sb = sb.append(PATH).append("/").append(filename).append("_").append(number).append(".").append(extension);
 
 		File file = new File(sb.toString());
-		file.createNewFile();
+		boolean created= file.createNewFile();
 
+		if(!created)return "";
+		
 		Path path = Paths.get(file.getAbsolutePath());
 
 		try (InputStream input = arquivo.getInputstream()) {

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.PerfilController;
 import administrativo.model.Perfil;
+import arquitetura.exception.JpaException;
 
 public class PerfilService implements Serializable {
 
@@ -29,7 +30,7 @@ public class PerfilService implements Serializable {
 
 	 
 
-	public void delete(Perfil perfil) {
+	public void delete(Perfil perfil) throws JpaException {
 
 		perfilController.delete(perfil);
 
@@ -45,12 +46,12 @@ public class PerfilService implements Serializable {
 		return perfilController.findByDescription(desc);
 	}
 	
-	public Perfil create(Perfil perfil) {
+	public Perfil create(Perfil perfil) throws JpaException {
 		return perfilController.create(perfil);
 
 	}
 
-	public Perfil update(Perfil perfil) {
+	public Perfil update(Perfil perfil) throws JpaException {
 		return perfilController.update(perfil);
 
 	}

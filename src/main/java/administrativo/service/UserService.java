@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.UserController;
 import administrativo.model.Usuario;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Utils;
 
 public class UserService implements Serializable {
@@ -42,7 +43,7 @@ public class UserService implements Serializable {
 	}
 
 
-	public void delete(Usuario user) {
+	public void delete(Usuario user) throws JpaException {
 		userController.delete(user);
 
 	}
@@ -51,12 +52,12 @@ public class UserService implements Serializable {
 		return userController.findById(id);
 	}
 
-	public Usuario create(Usuario usuario) {
+	public Usuario create(Usuario usuario) throws JpaException {
 		return userController.create(usuario);
 		
 	}
 
-	public Usuario update(Usuario usuario) {
+	public Usuario update(Usuario usuario) throws JpaException {
 		return userController.update(usuario);
 	}
 

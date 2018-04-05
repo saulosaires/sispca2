@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import administrativo.dao.UsuarioDAO;
 import administrativo.model.Usuario;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Cryptography;
 import arquitetura.utils.EmailUtil;
 import arquitetura.utils.SispcaLogger;
@@ -33,7 +34,7 @@ public class LoginController implements Serializable {
 		this.usuarioDao=usuarioDao;
 	}
 
-	public Usuario loginByUserNameAndPassword(String username, String password) {
+	public Usuario loginByUserNameAndPassword(String username, String password) throws JpaException {
 
 		Optional<Usuario> user = usuarioDao.queryByUserNameAndPassword(username, password);
 
@@ -51,7 +52,7 @@ public class LoginController implements Serializable {
 		return u;
 	}
 	
-	public Usuario atualizarUsuarioPrimeiroAcesso(Usuario usuario,String password) {
+	public Usuario atualizarUsuarioPrimeiroAcesso(Usuario usuario,String password) throws JpaException {
 		
 		usuario.setPassword(password);
 		usuario.setHash(null);
@@ -67,7 +68,7 @@ public class LoginController implements Serializable {
 		return usuarioDao.queryByEmail(email);
 	}
 
-    public boolean recuperarSenha(Usuario usuario, String scheme,String serveName,int port,String path) {
+    public boolean recuperarSenha(Usuario usuario, String scheme,String serveName,int port,String path) throws JpaException {
     	
     	usuario= criarNovaSenha( usuario);
     	usuario=definiValidadeDoHash(usuario);

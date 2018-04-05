@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.LinkController;
 import administrativo.model.Link;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Utils;
 
 public class LinkService implements Serializable {
@@ -39,19 +40,19 @@ public class LinkService implements Serializable {
 
 	}
 
-	public void create(Link link) {
+	public void create(Link link) throws JpaException {
 
 		linkController.create(link);
 
 	}
 
-	public Link update(Link link) {
+	public Link update(Link link) throws JpaException {
 
 		return linkController.update(link);
 
 	}
 
-	public Link delete(Link link) {
+	public Link delete(Link link) throws JpaException {
 
 		return linkController.delete(link);
 

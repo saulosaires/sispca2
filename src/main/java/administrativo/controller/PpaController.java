@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.dao.PpaDAO;
 import administrativo.model.Ppa;
+import arquitetura.exception.JpaException;
 
 public class PpaController implements Serializable {
 
@@ -28,7 +29,7 @@ public class PpaController implements Serializable {
 		return ppaDAO.queryPpa(sigla, descricao, anoInicio, anoFim);
 	}
 
-	public void delete(Ppa ppa) {
+	public void delete(Ppa ppa) throws JpaException {
 		ppaDAO.delete(ppa);
 
 	}
@@ -38,12 +39,12 @@ public class PpaController implements Serializable {
 		
 	}
 
-	public Ppa create(Ppa ppa) {
+	public Ppa create(Ppa ppa) throws JpaException {
 		return ppaDAO.create(ppa);
 		
 	}
 
-	public Ppa update(Ppa ppa) {
+	public Ppa update(Ppa ppa) throws JpaException {
 		return ppaDAO.update(ppa);
 		
 	}

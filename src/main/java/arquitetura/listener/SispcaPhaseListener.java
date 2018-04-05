@@ -43,7 +43,6 @@ public class SispcaPhaseListener implements PhaseListener {
 
 			if(ViewMap.isPublic(uri))return;
 			
-			MenuMBean menuMBean = (MenuMBean) SessionUtils.getBean("menuMBean");
 
 			boolean userLoggedIn = SessionUtils.get("user") != null ? true : false;
 
@@ -68,7 +67,9 @@ public class SispcaPhaseListener implements PhaseListener {
 				}
 
 			}
-
+			
+			
+			MenuMBean menuMBean = (MenuMBean) SessionUtils.getBean("menuMBean");
 			menuMBean.proccessUrl(uri);
 
 		} catch (IOException e) {

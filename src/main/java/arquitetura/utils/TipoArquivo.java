@@ -1,7 +1,5 @@
 package arquitetura.utils;
 
-import java.util.HashMap;
-
 public enum TipoArquivo {
 
 	PDF("application/pdf"),

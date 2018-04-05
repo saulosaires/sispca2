@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import arquitetura.exception.JpaException;
+
 public abstract class AbstractDAO<T extends Serializable> implements Serializable {
 
 	/**
@@ -35,7 +37,7 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
 
-	public T create(T entity) {
+	public T create(T entity) throws JpaException {
 		EntityTransaction t = null;
 		try {
 			t = entityManager.getTransaction();
@@ -49,12 +51,12 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 			if (t != null)
 				t.rollback();
 
-			throw new RuntimeException(e.getMessage());
+			throw new JpaException("Erro ao salvar "+entity.toString(),e);
 		}
 
 	}
 
-	public T update(T entity) {
+	public T update(T entity) throws JpaException {
 		EntityTransaction t = null;
 		try {
 			t = entityManager.getTransaction();
@@ -68,12 +70,12 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 			if (t != null)
 				t.rollback();
 
-			throw new RuntimeException(e.getMessage());
+			throw new JpaException("Erro ao atualizar "+entity.toString(),e);
 		}
 
 	}
  
-	public T delete(T entity) {
+	public T delete(T entity) throws JpaException {
 		EntityTransaction t = null;
 		try {
 			t = entityManager.getTransaction();
@@ -87,14 +89,14 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 			if (t != null)
 				t.rollback();
 
-			throw new RuntimeException(e.getMessage());
+			throw new JpaException("Erro ao deletar "+entity.toString(),e);
 		}
 
 	}
 	
 	
 	
-	public void deleteById(long entityId) {
+	public void deleteById(long entityId) throws JpaException {
 		T entity = findOne(entityId);
 		delete(entity);
 	}

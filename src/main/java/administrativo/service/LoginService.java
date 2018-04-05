@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.LoginController;
 import administrativo.model.Usuario;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Cryptography;
 import arquitetura.utils.JPAUtil;
 
@@ -24,7 +25,7 @@ public class LoginService implements Serializable{
 		this.loginController=loginController;
 	}
 
-	public Usuario loginByUserNameAndPassword(String login, String password) {
+	public Usuario loginByUserNameAndPassword(String login, String password) throws JpaException {
 
 		String senhaMD5= Cryptography.md5(password);
 		
@@ -38,7 +39,7 @@ public class LoginService implements Serializable{
 		return u;
 	}
 
-	public boolean solicitaRecuperacaoSenha(String emailUsuario,String scheme,String serveName,int port,String path) {
+	public boolean solicitaRecuperacaoSenha(String emailUsuario,String scheme,String serveName,int port,String path) throws JpaException {
 		
 		
 		Optional<Usuario> u = loginController.buscarUsuarioByEmail(emailUsuario);
@@ -52,7 +53,7 @@ public class LoginService implements Serializable{
 		
 	}
 
-	public boolean atualizarSenhaPrimeiroAcesso(String login, String password,String newPassword) {
+	public boolean atualizarSenhaPrimeiroAcesso(String login, String password,String newPassword) throws JpaException {
 		
 		String senhaMD5= Cryptography.md5(password);
 		

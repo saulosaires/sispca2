@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.PermissaoController;
 import administrativo.model.Permissao;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Utils;
 
 public class PermissaoService implements Serializable {
@@ -37,7 +38,7 @@ public class PermissaoService implements Serializable {
 
 	}
 
-	public void delete(Permissao permissao) {
+	public void delete(Permissao permissao) throws JpaException {
 
 		permissaoController.delete(permissao);
 
@@ -49,12 +50,12 @@ public class PermissaoService implements Serializable {
 
 	}
 
-	public Permissao create(Permissao permissao) {
+	public Permissao create(Permissao permissao) throws JpaException {
 		return permissaoController.create(permissao);
 
 	}
 
-	public Permissao update(Permissao permissao) {
+	public Permissao update(Permissao permissao) throws JpaException {
 		return permissaoController.update(permissao);
 
 	}

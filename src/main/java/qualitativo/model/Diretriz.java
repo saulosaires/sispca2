@@ -1,6 +1,5 @@
 package qualitativo.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,8 +24,12 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="diretriz", schema="planejamento")
-public class Diretriz extends Model implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Diretriz extends Model  {
+	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 190586051296173639L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

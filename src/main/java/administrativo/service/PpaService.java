@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.controller.PpaController;
 import administrativo.model.Ppa;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Utils;
 
 public class PpaService implements Serializable {
@@ -38,7 +39,7 @@ public class PpaService implements Serializable {
 
 	}
 
-	public void delete(Ppa ppa) {
+	public void delete(Ppa ppa) throws JpaException {
 
 		ppaController.delete(ppa);
 
@@ -50,12 +51,12 @@ public class PpaService implements Serializable {
 
 	}
 
-	public Ppa create(Ppa ppa) {
+	public Ppa create(Ppa ppa) throws JpaException {
 		return ppaController.create(ppa);
 
 	}
 
-	public Ppa update(Ppa ppa) {
+	public Ppa update(Ppa ppa) throws JpaException {
 		return ppaController.update(ppa);
 
 	}

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import administrativo.dao.PerfilDAO;
 import administrativo.model.Perfil;
+import arquitetura.exception.JpaException;
 
 public class PerfilController implements Serializable {
  
@@ -34,17 +35,17 @@ public class PerfilController implements Serializable {
 		return perfilDAO.findAllOrderByName();
 	}
 
-	public Perfil create(Perfil perfil) {
+	public Perfil create(Perfil perfil) throws JpaException {
 
 		return perfilDAO.create(perfil);
 	}
 	
-	public Perfil update(Perfil perfil) {
+	public Perfil update(Perfil perfil) throws JpaException {
 
 		return perfilDAO.update(perfil);
 	}
  
-	public Perfil delete(Perfil perfil) {
+	public Perfil delete(Perfil perfil) throws JpaException {
 
 		return perfilDAO.delete(perfil);
 	}

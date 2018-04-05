@@ -3,13 +3,8 @@ package arquitetura.utils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
@@ -21,16 +16,20 @@ import org.primefaces.model.StreamedContent;
  
 public class RelatorioUtil {
 	
+	public static final String ENCODING="UTF-8";
+	public static final String FILE_TYPE_PDF="application/pdf";
+	public static final String FILE_TYPE_XLS="application/xls";
+	
 	private RelatorioUtil() {
 	    throw new IllegalStateException("Utility class");
 	}
 
 	
 	public static StreamedContent converBytesToStreamedContent(byte[] bytes,String titulo) { 
-		StreamedContent file = null;
+		StreamedContent file = null;	
 		InputStream inputStream = null; 
 		inputStream = new ByteArrayInputStream(bytes);
-		file = new DefaultStreamedContent(inputStream, "application/pdf", titulo, "UTF-8"); 
+		file = new DefaultStreamedContent(inputStream,FILE_TYPE_PDF, titulo, ENCODING); 
 		return file;
 	} 
 	
@@ -39,27 +38,19 @@ public class RelatorioUtil {
 		InputStream inputStream = null; 
 		inputStream = new ByteArrayInputStream(bytes);
 		if(tipoArquivo.equals(TipoArquivo.PDF))
-			file = new DefaultStreamedContent(inputStream, "application/pdf", titulo, "UTF-8"); 
+			file = new DefaultStreamedContent(inputStream,FILE_TYPE_PDF, titulo,ENCODING); 
 		if(tipoArquivo.equals(TipoArquivo.XLS))
-			file = new DefaultStreamedContent(inputStream, "application/xls", titulo, "UTF-8");
+			file = new DefaultStreamedContent(inputStream, FILE_TYPE_XLS, titulo, ENCODING);
 		return file;
 	}   
 	
-	public static String DataHoraAtual() { 
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt","PT"));
+	public static String getDataHoraAtual() { 
+		
+		LocalDateTime now = LocalDateTime.now();
 
-		Calendar data = Calendar.getInstance();
-		int hora = data.get(Calendar.HOUR_OF_DAY);
-		int min = data.get(Calendar.MINUTE);
-		int seg = data.get(Calendar.SECOND);
-
-		NumberFormat nf = new DecimalFormat("00");
-
-		String HORA = String.valueOf(nf.format(hora)) + ":"
-					+ String.valueOf(nf.format(min)) + ":"
-					+ String.valueOf(nf.format(seg)) + "";
-		String DIA = df.format(new Date());
-		return DIA + " " + HORA;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		
+		return  now.format(formatter);
 	}
 	
 	public static void mostraNaPagina(byte[] bytes,String titulo,TipoArquivo tipoArquivo) throws IOException {
@@ -70,12 +61,11 @@ public class RelatorioUtil {
 		if (bytes != null && bytes.length > 0) {
 
 			if(tipoArquivo.equals(TipoArquivo.PDF))
-				response.setContentType("application/pdf");
+				response.setContentType(FILE_TYPE_PDF);
 			if(tipoArquivo.equals(TipoArquivo.XLS))
-				response.setContentType("application/xls");
+				response.setContentType(FILE_TYPE_XLS);
 
-			response.setHeader("Content-Disposition", 
-					"inline; filename=\"" + titulo + "\"");
+			response.setHeader("Content-Disposition","inline; filename=\"" + titulo + "\"");
 
 			response.setContentLength(bytes.length);
 

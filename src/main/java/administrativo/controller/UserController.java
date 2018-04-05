@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import administrativo.dao.UsuarioDAO;
 import administrativo.model.Usuario;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.EmailUtil;
 import arquitetura.utils.SispcaLogger;
  
@@ -37,7 +38,7 @@ public class UserController implements Serializable {
 		return usuarioDAO.queryUser(name, email, perfil,unidadeOrcamentaria);
 	}
 
-	public void delete(Usuario user) {
+	public void delete(Usuario user) throws JpaException {
 		usuarioDAO.delete(user);
 
 	}
@@ -47,12 +48,12 @@ public class UserController implements Serializable {
 		
 	}
 
-	public Usuario create(Usuario user) {
+	public Usuario create(Usuario user) throws JpaException {
 		return usuarioDAO.create(user);
 		
 	}
 
-	public Usuario update(Usuario user) {
+	public Usuario update(Usuario user) throws JpaException {
 		return usuarioDAO.update(user);
 		
 	}

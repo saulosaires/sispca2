@@ -10,9 +10,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import administrativo.model.Mensagem;
 import administrativo.model.Perfil;
-import administrativo.model.Usuario;
 import arquitetura.dao.AbstractDAO;
 import arquitetura.utils.Utils;
 
