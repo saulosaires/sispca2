@@ -10,6 +10,7 @@ import javax.inject.Named;
 import administrativo.model.Ppa;
 import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 
 @Named
@@ -38,9 +39,15 @@ public class PpaListMBean implements Serializable {
 
 	private PpaService ppaService;
 
+	private boolean deletar;
+	private boolean salvar;
+	
 	@Inject
 	public PpaListMBean(PpaService ppaService) {
 		this.ppaService = ppaService;
+		 
+		deletar   = SessionUtils.containsKey("ppaDeletar");
+		salvar    = SessionUtils.containsKey("ppaSalvar");
 	}
 
 	public void pesquisar() {
@@ -115,6 +122,22 @@ public class PpaListMBean implements Serializable {
 
 	public void setListPpas(List<Ppa> listPpas) {
 		this.listPpas = listPpas;
+	}
+
+	public boolean isDeletar() {
+		return deletar;
+	}
+
+	public void setDeletar(boolean deletar) {
+		this.deletar = deletar;
+	}
+
+	public boolean isSalvar() {
+		return salvar;
+	}
+
+	public void setSalvar(boolean salvar) {
+		this.salvar = salvar;
 	}
 
  

@@ -34,10 +34,10 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/administrativo/ppa/list.xhtml","ppaListar");
 		mapLinks.put("/sispca2/private/administrativo/ppa/form.xhtml","ppaSalvar"); 
 
-		mapLinks.put("/sispca2/private/administrativo/usuario/list.xhtml","usuarioListar");
-		mapLinks.put("/sispca2/private/administrativo/usuario/form.xhtml","usuarioSalvar");
-		mapLinks.put("/sispca2/private/administrativo/usuario/edit.xhtml","usuarioAtualizar");
-		mapLinks.put("/sispca2/private/administrativo/usuario/report.xhtml","usuarioRelatorio");
+		mapLinks.put("/sispca2/private/administrativo/usuario/list.xhtml",     "usuarioListar");
+		mapLinks.put("/sispca2/private/administrativo/usuario/form.xhtml",     "usuarioSalvar");
+		mapLinks.put("/sispca2/private/administrativo/usuario/edit.xhtml",     "usuarioAtualizar");
+		mapLinks.put("/sispca2/private/administrativo/usuario/report.xhtml",   "usuarioRelatorio");
 		mapLinks.put("/sispca2/private/administrativo/usuario/meusdados.xhtml","usuarioMeusDados");
 	}
 

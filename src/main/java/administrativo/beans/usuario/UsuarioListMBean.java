@@ -10,6 +10,7 @@ import javax.inject.Named;
 import administrativo.model.Usuario;
 import administrativo.service.UserService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 
 @Named
@@ -34,10 +35,21 @@ public class UsuarioListMBean implements Serializable {
 
 	private UserService service;
 
+	private boolean deletar;
+	private boolean salvar;
+	private boolean atualizar;
+	private boolean relatorio;
+	
 	@Inject
 	public UsuarioListMBean(UserService service) {
 		this.service = service;
-	}
+		
+		deletar   = SessionUtils.containsKey("usuarioDeletar");
+		salvar    = SessionUtils.containsKey("usuarioSalvar");
+		atualizar = SessionUtils.containsKey("usuarioAtualizar");
+		relatorio = SessionUtils.containsKey("usuarioRelatorio");
+		
+	} 
  	
 	public String pesquisar() {
  
@@ -117,9 +129,37 @@ public class UsuarioListMBean implements Serializable {
 		this.listaUsuarios = listaUsuarios;
 	}
 
+	public boolean isDeletar() {
+		return deletar;
+	}
+
+	public void setDeletar(boolean deletar) {
+		this.deletar = deletar;
+	}
+
+	public boolean isSalvar() {
+		return salvar;
+	}
+
+	public void setSalvar(boolean salvar) {
+		this.salvar = salvar;
+	}
+
+	public boolean isAtualizar() {
+		return atualizar;
+	}
+
+	public void setAtualizar(boolean atualizar) {
+		this.atualizar = atualizar;
+	}
+
+	public boolean isRelatorio() {
+		return relatorio;
+	}
+
+	public void setRelatorio(boolean relatorio) {
+		this.relatorio = relatorio;
+	}
  
- 
-	
-	
 	
 }

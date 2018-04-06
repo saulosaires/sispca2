@@ -60,9 +60,9 @@
 											 <f:ajax render="tableUsuario" execute="@form"/>
 										</h:commandButton>
 										&nbsp;
-										 <h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="userAdd" />
+										 <h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="userAdd" rendered="#{usuarioListMBean.salvar}"/>
 										&nbsp;
-										<h:commandButton  value="Imprimir Usuários" styleClass="btnAction btn btn-primary" action="userReport" />	
+										<h:commandButton  value="Imprimir Usuários" styleClass="btnAction btn btn-primary" action="userReport" rendered="#{usuarioListMBean.relatorio}"/>	
 									</div>
 								</div>
 							</fieldset>
@@ -92,11 +92,11 @@
 						<p:column headerText="OPERAÇÃO" styleClass="outTextTable" style="width: 12%;" footerText="Quantidade Total: #{usuarioListMBean.listaUsuarios.size()}">
 							<center>
 							
-								<p:button title="Editar" outcome="userEdit" icon="ui-icon-pencil" >
+								<p:button title="Editar" outcome="userEdit" icon="ui-icon-pencil" rendered="#{usuarioListMBean.atualizar}">
 								  <f:param name="id" value="#{usuario.id}" /> 
 								</p:button>
-								
-								<p:commandButton title="Deletar" action="#{usuarioListMBean.delete(usuario)}" icon="ui-icon-trash" update="tableUsuario">
+								 
+								<p:commandButton title="Deletar" action="#{usuarioListMBean.delete(usuario)}" icon="ui-icon-trash" update="tableUsuario" rendered="#{usuarioListMBean.deletar}">
 									<p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 								

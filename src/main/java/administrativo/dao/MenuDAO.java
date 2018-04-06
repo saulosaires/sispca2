@@ -35,6 +35,7 @@ public class MenuDAO extends AbstractDAO<Menu> {
 			    	  cb.equal(m.get("ativo"),Boolean.TRUE)
 			    	);
  
+		query.orderBy(cb.asc(m.get("label")));
 		
 		return entityManager.createQuery(query).getResultList();
 		
@@ -53,6 +54,7 @@ public class MenuDAO extends AbstractDAO<Menu> {
 			    	  cb.equal(m.get("ativo"),Boolean.TRUE)
 			    	);
  
+		query.orderBy(cb.asc(m.get("label")));
 		
 		return entityManager.createQuery(query).getResultList();
 		

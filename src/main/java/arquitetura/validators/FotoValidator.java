@@ -14,11 +14,11 @@ public class FotoValidator implements Validator {
 
 	private static final int MAX_SIZE = 2 * 1024 * 1024;
 
-	public void validate(FacesContext facesContext, UIComponent uIComponent,
-			Object value) throws ValidatorException {
+	public void validate(FacesContext facesContext, UIComponent uIComponent,Object value) throws ValidatorException {
 
 		UploadedFile arquivo = (UploadedFile) value;
 		if (arquivo != null) {
+			
 			if (arquivo.getSize() > MAX_SIZE) {
 				FacesMessage msg = new FacesMessage(
 						FacesMessage.SEVERITY_ERROR,
@@ -34,6 +34,7 @@ public class FotoValidator implements Validator {
 						"O arquivo deve ser do tipo texto.");
 				throw new ValidatorException(msg);
 			}
+			
 		}
 	}
 

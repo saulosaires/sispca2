@@ -54,7 +54,7 @@
 										
 										</h:commandButton>
 										&nbsp;
-										<h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="mensagemAdd" />
+										<h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="mensagemAdd" rendered="#{mensagemListMBean.salvar}"/>
 										
 									</div>
 								</div>
@@ -85,12 +85,12 @@
 						</p:column>
 						<p:column headerText="Operação">
 							<center>
-								<p:button title="Editar" icon="ui-icon-pencil" outcome="msgEdit">
+								<p:button title="Editar" icon="ui-icon-pencil" outcome="msgEdit"  rendered="#{mensagemListMBean.atualizar}">
 								   <f:param name="msgId" value="#{msg.id}" /> 
 								</p:button>
 								
 								
-								<p:commandButton title="Deletar" action="#{mensagemListMBean.delete(msg)}" icon="ui-icon-trash" update="dtMensagem">
+								<p:commandButton title="Deletar" action="#{mensagemListMBean.delete(msg)}" icon="ui-icon-trash" update="dtMensagem"  rendered="#{mensagemListMBean.deletar}">
 									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>

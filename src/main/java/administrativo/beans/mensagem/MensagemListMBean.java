@@ -10,6 +10,7 @@ import javax.inject.Named;
 import administrativo.model.Mensagem;
 import administrativo.service.MensagemService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 
 @Named
@@ -31,9 +32,18 @@ public class MensagemListMBean implements Serializable {
 
 	private MensagemService mensagemService;
 
+	private boolean atualizar;
+	private boolean deletar;
+	private boolean salvar;
+	
 	@Inject
 	public MensagemListMBean(MensagemService mensagemService) {
 		this.mensagemService = mensagemService;
+		
+		atualizar = SessionUtils.containsKey("mensagemAtualizar"); 
+		deletar   = SessionUtils.containsKey("mensagemDeletar");
+		salvar    = SessionUtils.containsKey("mensagemSalvar");
+		
 	}
 
 	public void pesquisar() {
@@ -95,4 +105,31 @@ public class MensagemListMBean implements Serializable {
 		this.listMensagens = listMensagens;
 	}
 
+	public boolean isAtualizar() {
+		return atualizar;
+	}
+
+	public void setAtualizar(boolean atualizar) {
+		this.atualizar = atualizar;
+	}
+
+	public boolean isDeletar() {
+		return deletar;
+	}
+
+	public void setDeletar(boolean deletar) {
+		this.deletar = deletar;
+	}
+
+	public boolean isSalvar() {
+		return salvar;
+	}
+
+	public void setSalvar(boolean salvar) {
+		this.salvar = salvar;
+	}
+
+	
+	
+	
 }
