@@ -1,7 +1,5 @@
 package qualitativo.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +23,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="macro_objetivo", schema="planejamento")
-public class MacroObjetivo extends Model implements Serializable {
+public class MacroObjetivo extends Model  {
 	private static final long serialVersionUID = 1L;
 
 	@Id

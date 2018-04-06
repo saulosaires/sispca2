@@ -1,6 +1,5 @@
 package qualitativo.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import arquitetura.controller.AbstractController;
 import qualitativo.dao.AcaoDAO;
 import qualitativo.model.Acao;
 
-public class AcaoController  extends AbstractController<Acao> implements Serializable{
+public class AcaoController  extends AbstractController<Acao>{
 
 	/**
 	 * 

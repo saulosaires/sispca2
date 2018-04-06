@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,7 +19,7 @@ import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
  
 
-public class UserController extends AbstractController<Usuario> implements Serializable{
+public class UserController extends AbstractController<Usuario>{
 
 	/**
 	 * 

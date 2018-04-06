@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +9,7 @@ import administrativo.model.Permissao;
 import arquitetura.controller.AbstractController;
  
 
-public class PermissaoController extends AbstractController<Permissao> implements Serializable{
+public class PermissaoController extends AbstractController<Permissao> {
 
 	 
 

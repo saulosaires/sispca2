@@ -1,14 +1,12 @@
 package administrativo.controller;
 
-import java.io.Serializable;
-
 import javax.inject.Inject;
 
 import administrativo.dao.TipoLinkDAO;
 import administrativo.model.TipoLink;
 import arquitetura.controller.AbstractController;
 
-public class TipoLinkController extends AbstractController<TipoLink> implements Serializable {
+public class TipoLinkController extends AbstractController<TipoLink> {
 
 	/**
 	 * 

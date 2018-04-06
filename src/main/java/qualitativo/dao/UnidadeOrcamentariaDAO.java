@@ -35,5 +35,21 @@ public class UnidadeOrcamentariaDAO extends AbstractDAO<UnidadeOrcamentaria> {
 		return  entityManager.createQuery(q).getResultList();
 
 	}
+	
+	public List<UnidadeOrcamentaria> findAllOrderByDescricao() {
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<UnidadeOrcamentaria> q = cb.createQuery(UnidadeOrcamentaria.class);
+		
+		Root<UnidadeOrcamentaria> c = q.from(UnidadeOrcamentaria.class);
+		
+		q.select(c);
+		q.orderBy(cb.asc(c.get("descricao")));
+ 
+		return  entityManager.createQuery(q).getResultList();
+
+	}
+
 
 }

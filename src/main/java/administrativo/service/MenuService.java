@@ -1,6 +1,5 @@
 package administrativo.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import administrativo.controller.MenuController;
 import administrativo.model.Menu;
 import arquitetura.service.AbstractService;
 
-public class MenuService extends AbstractService<Menu> implements Serializable {
+public class MenuService extends AbstractService<Menu> {
 
 	
 	

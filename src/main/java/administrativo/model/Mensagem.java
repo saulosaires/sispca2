@@ -1,6 +1,5 @@
 package administrativo.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,7 +21,7 @@ import arquitetura.utils.FormatoUtils;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="mensagem", schema="comum")
-public class Mensagem extends Model implements Serializable, Auditable {
+public class Mensagem extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

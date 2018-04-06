@@ -1,6 +1,5 @@
 package administrativo.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,14 +21,11 @@ import arquitetura.model.Model;
 import arquitetura.utils.FormatoUtils;
 
  
-/**
- * @author Saul Raposo
- * @version 1.0
- */
+ 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "action_calendario", schema = "planejamento")
-public class ActionCalendario extends Model implements Serializable, Auditable{
+public class ActionCalendario extends Model implements  Auditable{
 	private static final long serialVersionUID = 1L;
 
 

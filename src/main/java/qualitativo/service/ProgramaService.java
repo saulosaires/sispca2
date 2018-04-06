@@ -1,6 +1,6 @@
 package qualitativo.service;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,7 +8,7 @@ import arquitetura.service.AbstractService;
 import qualitativo.controller.ProgramaController;
 import qualitativo.model.Programa;
 
-public class ProgramaService extends AbstractService<Programa> implements Serializable {
+public class ProgramaService extends AbstractService<Programa>  {
 
 	/**
 	 * 
@@ -20,6 +20,9 @@ public class ProgramaService extends AbstractService<Programa> implements Serial
 		super(controller);
 	}
 
- 
+	public List<Programa> findAllOrderByDenominacao() {
+		
+		return((ProgramaController)getController()).findAllOrderByDenominacao();
+	}
 
 }

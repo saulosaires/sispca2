@@ -1,18 +1,25 @@
 package qualitativo.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import arquitetura.model.Model;
-
-import java.util.List;
 
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="tipo_orcamento", schema="planejamento")
-public class TipoOrcamento extends Model implements Serializable {
+public class TipoOrcamento extends Model  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,11 +32,7 @@ public class TipoOrcamento extends Model implements Serializable {
 
 	@OneToMany(mappedBy="tipoOrcamento")
 	private List<Acao> acaos;
-
-	public TipoOrcamento() {
-		//empty constructor
-	}	
-
+ 
 	public Long getId() {
 		return id;
 	}

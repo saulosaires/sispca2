@@ -1,6 +1,5 @@
 package qualitativo.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +9,7 @@ import arquitetura.utils.Utils;
 import qualitativo.controller.AcaoController;
 import qualitativo.model.Acao;
 
-public class AcaoService  extends AbstractService<Acao> implements Serializable {
+public class AcaoService  extends AbstractService<Acao> {
 
 	/**
 	 * 

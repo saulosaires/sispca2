@@ -1,13 +1,21 @@
 package qualitativo.model;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
-
-import java.util.List;
 
 
 /**
@@ -17,7 +25,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="plano_interno", schema="planejamento")
-public class PlanoInterno extends Model implements Serializable, Auditable {
+public class PlanoInterno extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

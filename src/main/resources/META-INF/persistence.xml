@@ -33,7 +33,7 @@
       <class>qualitativo.model.Orgao</class>
       <class>qualitativo.model.PlanoInterno</class>
       <class>qualitativo.model.Programa</class>
-      <class>qualitativo.model.Subfuncao</class>
+      <class>qualitativo.model.SubFuncao</class>
       <class>qualitativo.model.TipoAcao</class>
       <class>qualitativo.model.TipoCalculoMeta</class>
       <class>qualitativo.model.TipoFormaImplementacao</class>
@@ -60,7 +60,7 @@
 		 <property name="hibernate.show_sql" value="true"/>
 		 <property name="hibernate.format_sql" value="true"/>
 		
-<!-- 		 <property name="hibernate.hbm2ddl.auto" value="update"/> -->
+		 <property name="hibernate.hbm2ddl.auto" value="update"/>
 		
       </properties>
    </persistence-unit>

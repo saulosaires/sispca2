@@ -1,6 +1,6 @@
 package qualitativo.controller;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,7 +8,7 @@ import arquitetura.controller.AbstractController;
 import qualitativo.dao.ProgramaDAO;
 import qualitativo.model.Programa;
 
-public class ProgramaController extends AbstractController<Programa> implements Serializable{
+public class ProgramaController extends AbstractController<Programa> {
 
 	/**
 	 * 
@@ -21,7 +21,10 @@ public class ProgramaController extends AbstractController<Programa> implements 
 		 
 	}
 
- 
+	public List<Programa> findAllOrderByDenominacao() {
+	
+		return((ProgramaDAO)getDao()).findAllOrderByDenominacao();
+	}
  
 	
 

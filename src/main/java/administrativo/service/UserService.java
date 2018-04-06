@@ -1,6 +1,5 @@
 package administrativo.service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +13,7 @@ import arquitetura.utils.Cryptography;
 import arquitetura.utils.JPAUtil;
 import arquitetura.utils.Utils;
 
-public class UserService  extends AbstractService<Usuario> implements Serializable {
+public class UserService  extends AbstractService<Usuario> {
 
 	/**
 	 * 

@@ -1,22 +1,32 @@
 package qualitativo.model;
 
-import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import arquitetura.utils.FormatoUtils;
 import quantitativo.model.FisicoFinanceiro;
-
-import java.util.Date;
-import java.util.List;
  
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="acao", schema="planejamento")
-public class Acao extends Model implements Serializable, Auditable {
+public class Acao extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -59,12 +69,12 @@ public class Acao extends Model implements Serializable, Auditable {
 
 	@ManyToOne
 	@JoinColumn(name="id_orgao")
-	private Orgao orgao;
+	private Orgao orgao = new Orgao();
 
 	@ManyToOne
 	@JoinColumn(name="id_unidade_orcamentaria")
 	@NotNull(message="Unidade Orçamentária: campo é obrigatório")
-	private UnidadeOrcamentaria unidadeOrcamentaria;
+	private UnidadeOrcamentaria unidadeOrcamentaria = new UnidadeOrcamentaria();
 
 	@Column(name="impacto_idh",length=10000)
 	private String impactoIdh;
@@ -98,42 +108,42 @@ public class Acao extends Model implements Serializable, Auditable {
 	@ManyToOne
 	@JoinColumn(name="id_funcao")
 	@NotNull(message="Função: campo é obrigatório")
-	private Funcao funcao;
+	private Funcao funcao = new Funcao();
 
 	@ManyToOne
 	@JoinColumn(name="id_programa")
 	@NotNull(message="Programa: campo é obrigatório")
-	private Programa programa;
+	private Programa programa = new Programa();
 
 	@ManyToOne
 	@JoinColumn(name="id_subfuncao")
 	@NotNull(message="Subfunção: campo é obrigatório")
-	private Subfuncao subfuncao;
+	private SubFuncao subfuncao = new SubFuncao();
 
 	@ManyToOne
 	@JoinColumn(name="id_tipo_acao")
-	private TipoAcao tipoAcao;
+	private TipoAcao tipoAcao = new TipoAcao();
 
 	@ManyToOne
 	@JoinColumn(name="id_tipo_calculo_meta")
-	private TipoCalculoMeta tipoCalculoMeta;
+	private TipoCalculoMeta tipoCalculoMeta = new TipoCalculoMeta();
 
 	@ManyToOne
 	@JoinColumn(name="id_tipo_forma_implementacao")
-	private TipoFormaImplementacao tipoFormaImplementacao;
+	private TipoFormaImplementacao tipoFormaImplementacao = new TipoFormaImplementacao();
 
 	@ManyToOne
 	@JoinColumn(name="id_tipo_horizonte_temporal")
-	private TipoHorizonteTemporal tipoHorizonteTemporal;
+	private TipoHorizonteTemporal tipoHorizonteTemporal = new TipoHorizonteTemporal();
 
 	@ManyToOne
 	@JoinColumn(name="id_tipo_orcamento")
-	private TipoOrcamento tipoOrcamento;
+	private TipoOrcamento tipoOrcamento = new TipoOrcamento();
 
 
 	@ManyToOne
 	@JoinColumn(name="id_unidade_medida")
-	private UnidadeMedida unidadeMedida;
+	private UnidadeMedida unidadeMedida = new UnidadeMedida();
 
 
 	@OneToMany(mappedBy="acao")
@@ -343,11 +353,11 @@ public class Acao extends Model implements Serializable, Auditable {
 		this.programa = programa;
 	}
 
-	public Subfuncao getSubfuncao() {
+	public SubFuncao getSubfuncao() {
 		return this.subfuncao;
 	}
 
-	public void setSubfuncao(Subfuncao subfuncao) {
+	public void setSubfuncao(SubFuncao subfuncao) {
 		this.subfuncao = subfuncao;
 	}
 

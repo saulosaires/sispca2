@@ -1,6 +1,5 @@
 package administrativo.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +9,7 @@ import administrativo.model.Link;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 
-public class LinkService extends AbstractService<Link> implements Serializable {
+public class LinkService extends AbstractService<Link> {
 
 	/**
 	 * 

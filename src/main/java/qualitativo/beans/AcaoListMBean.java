@@ -47,8 +47,8 @@ public class AcaoListMBean implements Serializable {
 	public AcaoListMBean(AcaoService acaoService,UnidadeOrcamentariaService unidadeOrcamentariaService,ProgramaService programaService) {
 		this.acaoService = acaoService;
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAll();
-		listPrograma	        = programaService.findAll();
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		listPrograma	        = programaService.findAllOrderByDenominacao();
 		
 		atualizar = SessionUtils.containsKey("acaoAtualizar"); 
 		deletar   = SessionUtils.containsKey("acaoDeletar");

@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import administrativo.dao.PerfilDAO;
 import administrativo.model.Perfil;
 import arquitetura.controller.AbstractController;
 
-public class PerfilController extends AbstractController<Perfil> implements Serializable{
+public class PerfilController extends AbstractController<Perfil>{
  
 	 
 	/**

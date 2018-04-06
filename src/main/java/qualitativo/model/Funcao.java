@@ -1,46 +1,41 @@
 package qualitativo.model;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import arquitetura.model.Model;
 
-import java.util.List;
-
-
-/**
- * The persistent class for the funcao database table.
- * 
- */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name="funcao", schema="planejamento")
-public class Funcao extends Model implements Serializable {
+@Table(name = "funcao", schema = "planejamento")
+public class Funcao extends Model  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_funcao")
+	@Column(name = "id_funcao")
 	private Long id;
- 
-	@Column(name="codigo")
+
+	@Column(name = "codigo")
 	private String codigo;
 
-	@Column(name="descricao")
+	@Column(name = "descricao")
 	private String descricao;
 
-	//bi-directional many-to-one association to Acao
-	@OneToMany(mappedBy="funcao")
+	@OneToMany(mappedBy = "funcao")
 	private List<Acao> acaos;
 
-	//bi-directional many-to-one association to Subfuncao
-	@OneToMany(mappedBy="funcao")
-	private List<Subfuncao> subfuncaos;
-
-	public Funcao() {
-		//empty constructor
-	}	
+	@OneToMany(mappedBy = "funcao")
+	private List<SubFuncao> subfuncaos;
 
 	public Long getId() {
 		return id;
@@ -49,7 +44,6 @@ public class Funcao extends Model implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
- 
 
 	public String getCodigo() {
 		return this.codigo;
@@ -75,41 +69,12 @@ public class Funcao extends Model implements Serializable {
 		this.acaos = acaos;
 	}
 
-	public Acao addAcao(Acao acao) {
-		getAcaos().add(acao);
-		acao.setFuncao(this);
-
-		return acao;
-	}
-
-	public Acao removeAcao(Acao acao) {
-		getAcaos().remove(acao);
-		acao.setFuncao(null);
-
-		return acao;
-	}
-
-	public List<Subfuncao> getSubfuncaos() {
+	public List<SubFuncao> getSubfuncaos() {
 		return this.subfuncaos;
 	}
 
-	public void setSubfuncaos(List<Subfuncao> subfuncaos) {
+	public void setSubfuncaos(List<SubFuncao> subfuncaos) {
 		this.subfuncaos = subfuncaos;
 	}
-
-	public Subfuncao addSubfuncao(Subfuncao subfuncao) {
-		getSubfuncaos().add(subfuncao);
-		subfuncao.setFuncao(this);
-
-		return subfuncao;
-	}
-
-	public Subfuncao removeSubfuncao(Subfuncao subfuncao) {
-		getSubfuncaos().remove(subfuncao);
-		subfuncao.setFuncao(null);
-
-		return subfuncao;
-	}
- 
 
 }

@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import administrativo.dao.MensagemDAO;
 import administrativo.model.Mensagem;
 import arquitetura.controller.AbstractController;
 
-public class MensagemController extends AbstractController<Mensagem> implements Serializable{
+public class MensagemController extends AbstractController<Mensagem>{
 
  
 	/**

@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import administrativo.dao.PpaDAO;
 import administrativo.model.Ppa;
 import arquitetura.controller.AbstractController;
 
-public class PpaController extends AbstractController<Ppa> implements Serializable {
+public class PpaController extends AbstractController<Ppa> {
 
 	/**
 	 * 

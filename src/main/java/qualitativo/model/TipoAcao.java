@@ -1,11 +1,18 @@
 package qualitativo.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import arquitetura.model.Model;
-
-import java.util.List;
 
 
 /**
@@ -15,7 +22,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="tipo_acao", schema="planejamento")
-public class TipoAcao extends Model implements Serializable {
+public class TipoAcao extends Model  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -28,11 +35,7 @@ public class TipoAcao extends Model implements Serializable {
 
 	@OneToMany(mappedBy="tipoAcao")
 	private List<Acao> acaos;
-
-	public TipoAcao() {
-		//empty constructor
-	}
-
+ 
 	public Long getId() {
 		return this.id;
 	}

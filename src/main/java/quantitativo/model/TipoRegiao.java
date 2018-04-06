@@ -1,6 +1,5 @@
 package quantitativo.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,7 +18,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="tipo_regiao", schema="comum")
-public class TipoRegiao extends Model implements Serializable{
+public class TipoRegiao extends Model{
 
 	private static final long serialVersionUID = 1L;
 

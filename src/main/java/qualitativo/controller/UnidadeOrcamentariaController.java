@@ -1,6 +1,6 @@
 package qualitativo.controller;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,7 +8,7 @@ import arquitetura.controller.AbstractController;
 import qualitativo.dao.UnidadeOrcamentariaDAO;
 import qualitativo.model.UnidadeOrcamentaria;
 
-public class UnidadeOrcamentariaController  extends AbstractController<UnidadeOrcamentaria> implements Serializable{
+public class UnidadeOrcamentariaController  extends AbstractController<UnidadeOrcamentaria> {
  
 	 
 	/**
@@ -24,5 +24,9 @@ public class UnidadeOrcamentariaController  extends AbstractController<UnidadeOr
 	}
  
  
+	public List<UnidadeOrcamentaria> findAllOrderByDescricao() {
+		
+		return ((UnidadeOrcamentariaDAO)getDao()).findAllOrderByDescricao();
+	}
 
 }

@@ -1,6 +1,5 @@
 package qualitativo.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,7 +22,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="tipo_calculo_meta", schema="planejamento")
-public class TipoCalculoMeta extends Model implements Serializable {
+public class TipoCalculoMeta extends Model  {
 	private static final long serialVersionUID = 1L;
 
 	@Id

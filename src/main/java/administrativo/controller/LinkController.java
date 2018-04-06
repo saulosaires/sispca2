@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,7 @@ import administrativo.dao.LinkDAO;
 import administrativo.model.Link;
 import arquitetura.controller.AbstractController;
 
-public class LinkController extends AbstractController<Link> implements Serializable {
+public class LinkController extends AbstractController<Link> {
 
 
 

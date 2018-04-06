@@ -1,7 +1,5 @@
 package administrativo.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +19,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="link", schema="comum")
-public class Link extends Model implements Serializable, Auditable {
+public class Link extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

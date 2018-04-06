@@ -1,6 +1,5 @@
 package administrativo.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "perfil", schema = "controle_acesso")
-public class Perfil extends Model implements Serializable, Auditable {
+public class Perfil extends Model implements  Auditable {
 	
 	private static final long serialVersionUID = 1L;
 

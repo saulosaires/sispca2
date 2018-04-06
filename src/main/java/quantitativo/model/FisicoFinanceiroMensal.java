@@ -1,6 +1,5 @@
 package quantitativo.model;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +22,7 @@ import qualitativo.model.Mes;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="fisico_financeiro_mensal", schema="planejamento")
-public class FisicoFinanceiroMensal extends Model implements Serializable, Auditable{
+public class FisicoFinanceiroMensal extends Model implements  Auditable{
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -1,23 +1,25 @@
 package qualitativo.model;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 
-import java.util.List;
-
-
-/**
- * The persistent class for the unidade_medida database table.
- * 
- */
+ 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="unidade_medida", schema="planejamento")
-public class UnidadeMedida extends Model implements Serializable, Auditable {
+public class UnidadeMedida extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,18 +35,13 @@ public class UnidadeMedida extends Model implements Serializable, Auditable {
 
 	@Column(name="sigla")
 	private String sigla;
-
-	//bi-directional many-to-one association to Acao
+ 
 	@OneToMany(mappedBy="unidadeMedida")
 	private List<Acao> acaos;
-
-	//bi-directional many-to-one association to EtapasExecucao
+ 
 	@OneToMany(mappedBy="unidadeMedida")
 	private List<EtapasExecucao> etapasExecucaos;
-
-	public UnidadeMedida() {
-		//empty constructor
-	}	
+ 
 
 	public Long getId() {
 		return id;

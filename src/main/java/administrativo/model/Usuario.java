@@ -1,6 +1,5 @@
 package administrativo.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +31,7 @@ import qualitativo.model.UnidadeOrcamentaria;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "usuario", schema = "controle_acesso")
-public class Usuario  extends Model implements Serializable, Auditable {
+public class Usuario  extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
  
 	@Id

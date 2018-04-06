@@ -1,7 +1,6 @@
 package quantitativo.model;
 
 import java.beans.Transient;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,7 +22,7 @@ import monitoramento.model.Execucao;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="regiao_municipio", schema="comum")
-public class RegiaoMunicipio extends Model implements Serializable{
+public class RegiaoMunicipio extends Model{
 	/**
 	 * 
 	 */
