@@ -7,51 +7,28 @@ import javax.inject.Inject;
 
 import administrativo.dao.LinkDAO;
 import administrativo.model.Link;
-import arquitetura.exception.JpaException;
+import arquitetura.controller.AbstractController;
 
-public class LinkController implements Serializable {
+public class LinkController extends AbstractController<Link> implements Serializable {
+
+
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1344916015518730440L;
-
-	private LinkDAO linkDAO;
-
+ 
+	
 	@Inject
-	public LinkController(LinkDAO linkDAO) {
-
-		this.linkDAO = linkDAO;
+	LinkController(LinkDAO linkDAO) {
+		super(linkDAO);
+		 
 	}
-
-	public Link findById(Long id) {
-
-		return linkDAO.findOne(id);
-	}
-	
-	public List<Link> findAll() {
-
-		return linkDAO.findAll();
-	}
-
-	public void create(Link link) throws JpaException {
-
-		linkDAO.create(link);
-	}
-	
-	public Link update(Link link) throws JpaException {
-
-		return linkDAO.update(link);
-	}
-
-	public Link delete(Link link) throws JpaException {
-
-		return linkDAO.delete(link);
-	}
+ 
 	
 	public List<Link> queryLinkByDescricaoAndURL(String titulo, String url){
 		
-		return linkDAO.queryLinkByDescricaoAndURL(titulo, url);
+		return ((LinkDAO) getDao()).queryLinkByDescricaoAndURL(titulo, url);
 	}
 	
 

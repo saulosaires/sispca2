@@ -24,33 +24,37 @@ public class Acao extends Model implements Serializable, Auditable {
 	@Column(name="id_acao")
 	private Long id;
  
-	@Column(name="base_legal")
+	@Column(name="base_legal",length=10000)
 	private String baseLegal;
 
-	@Column(name="calculo_meta")
+	@Column(name="calculo_meta",length=4)
 	private String calculoMeta;
 
 	@NotNull(message="Código: campo é obrigatório")
+	@Column(name="codigo",length=5)
 	private String codigo;
 
 	@NotNull(message="Denominação: campo é obrigatório")
+	@Column(name="denominacao",length=10000)
 	private String denominacao;
 
 	@NotNull(message="Descrição: campo é obrigatório")
+	@Column(name="descricao",length=10000)
 	private String descricao;
 
-	@Column(name="detalhamento_implementacao")
+	@Column(name="detalhamento_implementacao",length=10000)
 	private String detalhamentoImplementacao;
 
-	@Column(name="especificao_produto")
+	@Column(name="especificao_produto",length=10000)
 	private String especificaoProduto;
 
+	@Column(name="finalidade",length=10000)
 	private String finalidade;
 
-	@Column(name="forma_implementacao")
+	@Column(name="forma_implementacao",length=4)
 	private String formaImplementacao;
 
-	@Column(name="horizonte_temporal")
+	@Column(name="horizonte_temporal",length=4)
 	private String horizonteTemporal;
 
 	@ManyToOne
@@ -62,7 +66,7 @@ public class Acao extends Model implements Serializable, Auditable {
 	@NotNull(message="Unidade Orçamentária: campo é obrigatório")
 	private UnidadeOrcamentaria unidadeOrcamentaria;
 
-	@Column(name="impacto_idh")
+	@Column(name="impacto_idh",length=10000)
 	private String impactoIdh;
 
 	@Column(name="medido_despesa")
@@ -76,85 +80,75 @@ public class Acao extends Model implements Serializable, Auditable {
 	@Column(name="mes_termino")
 	private Date mesTermino;
 
+	@Column(name="produto",length=10000)
 	private String produto;
-	
-	@Column(name="medido_despesa_")
-	private String medidoDespesaDep;
-
+ 
+	@Column(name="repercussao",length=10000)
 	private String repercussao;
 
-	@Column(name="tipo_acao")
+	@Column(name="tipo_acao",length=4)
 	private String tipoAcaoDep;
 
-	@Column(name="tipo_orcamento")
+	@Column(name="tipo_orcamento",length=4)
 	private String tipoOrcamentoDep;
 
+	@Column(name="valores",length=10000)
 	private String valores;
 
-	//bi-directional many-to-one association to Funcao
 	@ManyToOne
 	@JoinColumn(name="id_funcao")
 	@NotNull(message="Função: campo é obrigatório")
 	private Funcao funcao;
 
-	//bi-directional many-to-one association to Programa
 	@ManyToOne
 	@JoinColumn(name="id_programa")
 	@NotNull(message="Programa: campo é obrigatório")
 	private Programa programa;
 
-	//bi-directional many-to-one association to Subfuncao
 	@ManyToOne
 	@JoinColumn(name="id_subfuncao")
 	@NotNull(message="Subfunção: campo é obrigatório")
 	private Subfuncao subfuncao;
 
-	//bi-directional many-to-one association to TipoAcao
 	@ManyToOne
 	@JoinColumn(name="id_tipo_acao")
 	private TipoAcao tipoAcao;
 
-	//bi-directional many-to-one association to TipoCalculoMeta
 	@ManyToOne
 	@JoinColumn(name="id_tipo_calculo_meta")
 	private TipoCalculoMeta tipoCalculoMeta;
 
-	//bi-directional many-to-one association to TipoFormaImplementacao
 	@ManyToOne
 	@JoinColumn(name="id_tipo_forma_implementacao")
 	private TipoFormaImplementacao tipoFormaImplementacao;
 
-	//bi-directional many-to-one association to TipoHorizonteTemporal
 	@ManyToOne
 	@JoinColumn(name="id_tipo_horizonte_temporal")
 	private TipoHorizonteTemporal tipoHorizonteTemporal;
 
-	//bi-directional many-to-one association to TipoOrcamento
 	@ManyToOne
 	@JoinColumn(name="id_tipo_orcamento")
 	private TipoOrcamento tipoOrcamento;
 
-	//bi-directional many-to-one association to UnidadeMedida
+
 	@ManyToOne
 	@JoinColumn(name="id_unidade_medida")
 	private UnidadeMedida unidadeMedida;
 
-	//bi-directional many-to-one association to EtapasExecucao
+
 	@OneToMany(mappedBy="acao")
 	private List<EtapasExecucao> etapasExecucaos;
 
-	//bi-directional many-to-one association to FisicoFinanceiro
+
 	@OneToMany(mappedBy="acao")
 	private List<FisicoFinanceiro> fisicoFinanceiros;
 	
 	@OneToMany(mappedBy="acao")
 	private List<PlanoInterno> planoInternos;
 	
+	@Column(name="observacao",length=2000)
 	private String observacao;
-
-	public Acao() {
-		//empty
-	}	
+ 
 
 	public Long getId() {
 		return id;
@@ -429,15 +423,7 @@ public class Acao extends Model implements Serializable, Auditable {
 		this.fisicoFinanceiros = fisicoFinanceiros;
 	}	
 
-	public String getMedidoDespesaDep() {
-		return medidoDespesaDep;
-	}
-
-	public void setMedidoDespesaDep(String medidoDespesaDep) {
-		this.medidoDespesaDep = medidoDespesaDep;
-	}	
-
-	public List<PlanoInterno> getPlanoInternos() {
+ 	public List<PlanoInterno> getPlanoInternos() {
 		return planoInternos;
 	}
 

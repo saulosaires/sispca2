@@ -3,7 +3,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
 
@@ -14,19 +13,12 @@
 <body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
-			<f:metadata>
-				<f:event type="preRenderView"
-					listener="#{usuarioMBean.checkPermissionInView(acaoMBean.controllerName, 'list')}" />
-				<f:event type="preRenderView"
-					listener="#{acaoMBean.reset()}" />	
-			</f:metadata>	
+			 
 			<h:form>
 				<div class="container-fluid">
+					 
 					<div class="row-fluid">
-						<p:messages autoUpdate="true" closable="true"/>
-					</div>
-					<div class="row-fluid">
-						<ui:include src="/pages/page_advertencia_crud.xhtml"/>
+						<ui:include src="/template/tutorial_form.xhtml" />
 					</div>
 					<div class="row-fluid">
 						<div class="span12">
@@ -37,11 +29,7 @@
 											<h:outputText styleClass="labelOutText" value="CÓDIGO: " />
 										</div>
 										<div class="span3">
-											<h:inputText id="inpCod" value="#{acaoMBean.buscaCodigo}" styleClass="form-control input-sm"
-												onkeypress="if (event.keyCode == 13) {event.target.blur(); event.stopPropagation();return false;} else {return true;};">
-													<f:ajax render="tableAcao" execute="inpCod inpDen inputMenUnidOrc inputMenProg"  
-													event="change" listener="#{acaoMBean.procuraAcaoPorCodDenProgUnid()}"/> 
-											</h:inputText>	
+											<h:inputText id="inpCod" value="#{acaoListMBean.codigo}" styleClass="form-control input-sm" />	
 										</div>
 									</div>
 									<div class="span12">
@@ -49,11 +37,7 @@
 											<h:outputText styleClass="labelOutText" value="DENOMINAÇÃO: " />
 										</div>
 										<div class="span3">
-											<h:inputText id="inpDen" value="#{acaoMBean.buscaDenominacao}" styleClass="form-control input-sm up"
-												onkeypress="if (event.keyCode == 13) {event.target.blur(); event.stopPropagation();return false;} else {return true;};">
-													<f:ajax render="tableAcao" execute="inpCod inpDen inputMenUnidOrc inputMenProg"  
-													event="change" listener="#{acaoMBean.procuraAcaoPorCodDenProgUnid()}"/> 
-											</h:inputText>	
+											<h:inputText id="inpDen" value="#{acaoListMBean.denominacao}" styleClass="form-control input-sm up" />	
 										</div>
 									</div>
 									<div class="span12">
@@ -61,14 +45,9 @@
 											<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenUnidOrc" value="#{acaoMBean.buscaUnidade}"
-												converter="simpleConverter" styleClass="form-control input-sm">
+											<h:selectOneMenu id="inputMenUnidOrc" value="#{acaoListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{acaoMBean.listUnidadeOrcamentaria}" var="uo"
-													itemValue="#{uo}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
-												<f:ajax event="change" render="tableAcao"
-													execute="inpCod inpDen inputMenUnidOrc inputMenProg"
-													listener="#{acaoMBean.procuraAcaoPorCodDenProgUnid()}"/>
+												<f:selectItems value="#{acaoListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
 											</h:selectOneMenu>											
 										</div>
 									</div>
@@ -77,14 +56,9 @@
 											<h:outputText value="PROGRAMA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenProg" value="#{acaoMBean.buscaPrograma}"
-												converter="simpleConverter" styleClass="form-control input-sm">
+											<h:selectOneMenu id="inputMenProg" value="#{acaoListMBean.programaId}"  styleClass="form-control input-sm">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{acaoMBean.listPrograma}" var="prog"
-													itemValue="#{prog}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
-												<f:ajax event="change" render="tableAcao"
-													execute="inpCod inpDen inputMenUnidOrc inputMenProg"
-													listener="#{acaoMBean.procuraAcaoPorCodDenProgUnid()}"/>
+												<f:selectItems value="#{acaoListMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
 											</h:selectOneMenu>											
 										</div>
 									</div>	
@@ -95,22 +69,21 @@
 										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 											<f:ajax
 												execute="@this inpCod inpDen inputMenUnidOrc inputMenProg"
-												event="click" listener="#{acaoMBean.procuraAcaoPorCodDenProgUnid()}"
+												event="click" listener="#{acaoListMBean.buscar()}"
 												render="tableAcao" />
 										</h:commandButton>
 										&nbsp;
-										<h:commandButton value="Adicionar" styleClass="btnAction btn btn-primary"
-											action="#{acaoMBean.beforeInsert()}" />
+										<h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="qualitativoAcaoAdd" />
 									</div>
 								</div>
 							</fieldset>
 						</div>
 					</div>
-					<legend class="outBusc">RESULTADOS</legend>
+					<div class="outBusc">RESULTADOS</div>
 				</div>			
 				<center>
-					<p:dataTable id="tableAcao" value="#{acaoMBean.list}" var="acao" paginator="true"
-						rows="10" style="width: 90%;" emptyMessage="Não há ações a serem mostradas">
+					<p:dataTable id="tableAcao" value="#{acaoListMBean.listAcoes}" var="acao" paginator="true" rows="10" style="width: 90%;" emptyMessage="Não há ações a serem mostradas">
+					
 						<p:column headerText="CÓDIGO" styleClass="outTextTable" style="width: 7%;" sortBy="#{acao.codigo}">
 							<h:outputText value="#{fn:toUpperCase(acao.codigo)}" />
 						</p:column>
@@ -124,11 +97,18 @@
 							<h:outputText value="#{fn:toUpperCase(acao.programa.denominacao)}"/>
 						</p:column>
 						
-						<p:column headerText="Operação" style="width: 14%;" footerText="Quantidade Total: ${fn:length(acaoMBean.list)}">
+						<p:column headerText="Operação" style="width: 14%;" footerText="Quantidade Total: ${fn:length(acaoListMBean.listAcoes)}">
 							<center>
-								<p:commandButton title="Visualizar" action="#{acaoMBean.view(acao)}" icon="ui-icon-search"/>
-								<p:commandButton title="Editar" action="#{acaoMBean.beforeEdit(acao)}" icon="ui-icon-pencil"/>
-								<p:commandButton title="Deletar" action="#{acaoMBean.delete(acao)}" icon="ui-icon-trash">
+
+								<p:button title="Editar"  outcome="qualitativoAcaoView" icon="ui-icon-pencil" >
+								 	  <f:param name="id" value="#{acao.id}" /> 
+								</p:button>
+
+								<p:button title="Editar"  outcome="qualitativoAcaoEdit" icon="ui-icon-pencil" >
+								 	  <f:param name="id" value="#{acao.id}" /> 
+								</p:button>
+							
+								<p:commandButton title="Deletar" action="#{acaoListMBean.deletar(acao)}" icon="ui-icon-trash">
 									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>

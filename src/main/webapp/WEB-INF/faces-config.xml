@@ -210,4 +210,23 @@
 	</navigation-rule>
  
  
+  	<navigation-rule>
+		<from-view-id>/private/qualitativo/acao/list.xhtml</from-view-id>
+
+		 
+		 <navigation-case>
+			<from-outcome>qualitativoAcaoAdd</from-outcome>
+			<to-view-id>/private/qualitativo/acao/form.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoAcaoEdit</from-outcome>
+			<to-view-id>/private/qualitativo/acao/edit.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoAcaoView</from-outcome>
+			<to-view-id>/private/qualitativo/acao/view.xhtml</to-view-id>
+		</navigation-case> 
+
+	</navigation-rule>
+ 
 </faces-config>

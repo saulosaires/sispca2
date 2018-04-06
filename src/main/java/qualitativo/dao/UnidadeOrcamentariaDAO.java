@@ -1,4 +1,4 @@
-package administrativo.dao;
+package qualitativo.dao;
 
 import java.util.List;
 

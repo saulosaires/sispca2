@@ -11,12 +11,12 @@ import javax.inject.Named;
 import administrativo.model.Perfil;
 import administrativo.model.Usuario;
 import administrativo.service.PerfilService;
-import administrativo.service.UnidadeOrcamentariaService;
 import administrativo.service.UserService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.UnidadeOrcamentaria;
+import qualitativo.service.UnidadeOrcamentariaService;
 
 @Named
 @ViewScoped
