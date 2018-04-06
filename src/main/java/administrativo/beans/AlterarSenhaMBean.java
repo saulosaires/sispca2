@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import administrativo.model.Usuario;
-import administrativo.service.LoginService;
+import administrativo.service.UserService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -25,12 +25,12 @@ public class AlterarSenhaMBean implements Serializable{
 	private String newPassword;
 	private String confirmPassword;
 	
-	private  LoginService loginService;
+	private  UserService userService;
 	
 	@Inject
-	public AlterarSenhaMBean(LoginService loginService) {
+	public AlterarSenhaMBean(UserService userService) {
 		
-		this.loginService=loginService;
+		this.userService=userService;
 		
 		usuario = (Usuario) SessionUtils.get("user");
  
@@ -46,7 +46,7 @@ public class AlterarSenhaMBean implements Serializable{
 				return "";
 			}
 			
-			boolean updated=loginService.atualizarSenhaPrimeiroAcesso(usuario.getLogin(),password,newPassword);
+			boolean updated=userService.atualizarSenhaPrimeiroAcesso(usuario.getLogin(),password,newPassword);
 			
 			if(!updated) {
 				Messages.addMessageError("Senha antiga Inválida");

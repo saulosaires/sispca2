@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import administrativo.model.Perfil;
 import administrativo.model.Permissao;
 import administrativo.model.Usuario;
-import administrativo.service.LoginService;
 import administrativo.service.PermissaoService;
+import administrativo.service.UserService;
 import arquitetura.utils.JPAUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -30,13 +30,13 @@ public class LoginMBean implements Serializable{
 	private String password;
 	private String emailUsuario;
 	
-	private LoginService loginService;
+	private UserService userService;
 	private PermissaoService permissaoService;
 	
 	 @Inject
-	public LoginMBean(LoginService loginService,PermissaoService permissaoService){
+	public LoginMBean(UserService userService,PermissaoService permissaoService){
 	
-		 this.loginService=loginService;
+		 this.userService=userService;
 		 this.permissaoService=permissaoService;
 	}
  	
@@ -44,7 +44,7 @@ public class LoginMBean implements Serializable{
 		
 		try {
  			
-			Usuario usuario= loginService.loginByUserNameAndPassword(login,password);
+			Usuario usuario= userService.loginByUserNameAndPassword(login,password);
 			
 			if(!JPAUtil.validId(usuario.getId())) {
 				Messages.addMessageError("Login ou senha Inválidos");
@@ -90,7 +90,7 @@ public class LoginMBean implements Serializable{
 			int port         = request.getServerPort();
 			String path      = request.getContextPath();
 			
-			boolean sent = loginService.solicitaRecuperacaoSenha(emailUsuario, scheme, serveName, port, path);
+			boolean sent = userService.solicitaRecuperacaoSenha(emailUsuario, scheme, serveName, port, path);
  
 			if(sent) {
 				Messages.addMessageError("Email não encontrado");

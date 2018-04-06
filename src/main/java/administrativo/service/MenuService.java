@@ -7,8 +7,9 @@ import javax.inject.Inject;
 
 import administrativo.controller.MenuController;
 import administrativo.model.Menu;
+import arquitetura.service.AbstractService;
 
-public class MenuService implements Serializable{
+public class MenuService extends AbstractService<Menu> implements Serializable {
 
 	
 	
@@ -16,22 +17,21 @@ public class MenuService implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4923079177213762511L;
-	MenuController menuController;
-	
+ 	
 	@Inject
 	public MenuService(MenuController menuController){
-		this.menuController=menuController;
+		super(menuController);
 	}
 	
 	
 	public List<Menu> findRoot(){
 		
-		return menuController.findRoot();
+		return ((MenuController) getController()).findRoot();
 	}
 	
 	public List<Menu> findChildMenu(Long idRoot){
 		
-		return menuController.findChildMenu(idRoot);
+		return ((MenuController) getController()).findChildMenu(idRoot);
 	}
 	
 	

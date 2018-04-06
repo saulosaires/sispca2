@@ -7,55 +7,31 @@ import javax.inject.Inject;
 
 import administrativo.controller.LinkController;
 import administrativo.model.Link;
-import arquitetura.exception.JpaException;
+import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 
-public class LinkService implements Serializable {
+public class LinkService extends AbstractService<Link> implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2854975367734660857L;
-
-	private LinkController linkController;
+ 
 
 	@Inject
 	public LinkService(LinkController linkController) {
-		this.linkController = linkController;
+		super(linkController);
 	}
 
 	public List<Link> queryLinkByDescricaoAndURL(String titulo, String url) {
 
 		if (Utils.emptyParam(titulo) && Utils.emptyParam(url)) {
-			return linkController.findAll();
+			return findAll();
 		} else {
-			return linkController.queryLinkByDescricaoAndURL(titulo, url);
+			return ((LinkController) getController()).queryLinkByDescricaoAndURL(titulo, url);
 		}
 
 	}
 
-	public Link findById(Long id) {
-
-		return linkController.findById(id);
-
-	}
-
-	public void create(Link link) throws JpaException {
-
-		linkController.create(link);
-
-	}
-
-	public Link update(Link link) throws JpaException {
-
-		return linkController.update(link);
-
-	}
-
-	public Link delete(Link link) throws JpaException {
-
-		return linkController.delete(link);
-
-	}
-
+ 
 }

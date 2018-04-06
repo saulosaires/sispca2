@@ -7,29 +7,29 @@ import javax.inject.Inject;
 
 import administrativo.dao.MenuDAO;
 import administrativo.model.Menu;
+import arquitetura.controller.AbstractController;
 
-public class MenuController implements Serializable {
+public class MenuController  extends AbstractController<Menu> implements Serializable{
 
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2753896240998617710L;
-	private MenuDAO menuDAO;
-	
+ 	
 	@Inject 
 	MenuController(MenuDAO menuDAO){
-		this.menuDAO=menuDAO;
+		super(menuDAO);
 	}
 	
 	public List<Menu> findRoot(){
 		
-		return menuDAO.findRoot();
+		return ((MenuDAO) getDao()).findRoot();
 	}
 	
 	public List<Menu> findChildMenu(Long idRoot){
 		
-		return menuDAO.findChildMenu(idRoot);
+		return ((MenuDAO) getDao()).findChildMenu(idRoot);
 	}
 	
 }

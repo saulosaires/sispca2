@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import administrativo.dao.PpaDAO;
 import administrativo.model.Ppa;
-import arquitetura.exception.JpaException;
+import arquitetura.controller.AbstractController;
 
-public class PpaController implements Serializable {
+public class PpaController extends AbstractController<Ppa> implements Serializable {
 
 	/**
 	 * 
@@ -17,38 +17,13 @@ public class PpaController implements Serializable {
 	private static final long serialVersionUID = 1370755486293182418L;
 
 	@Inject
-	PpaDAO ppaDAO;
-
-	public List<Ppa> findAll() {
-
-		return ppaDAO.findAll();
+	public PpaController(PpaDAO ppaDAO) {
+		super(ppaDAO);
 	}
 
 	public List<Ppa> queryPpa(String sigla, String descricao, Integer anoInicio, Integer anoFim) {
 
-		return ppaDAO.queryPpa(sigla, descricao, anoInicio, anoFim);
+		return ((PpaDAO) getDao()).queryPpa(sigla, descricao, anoInicio, anoFim);
 	}
 
-	public void delete(Ppa ppa) throws JpaException {
-		ppaDAO.delete(ppa);
-
-	}
-
-	public Ppa findById(Long id) {
-		return ppaDAO.findOne(id);
-		
-	}
-
-	public Ppa create(Ppa ppa) throws JpaException {
-		return ppaDAO.create(ppa);
-		
-	}
-
-	public Ppa update(Ppa ppa) throws JpaException {
-		return ppaDAO.update(ppa);
-		
-	}
-
-	
-	
 }

@@ -9,68 +9,94 @@ import javax.inject.Inject;
 import administrativo.controller.UserController;
 import administrativo.model.Usuario;
 import arquitetura.exception.JpaException;
+import arquitetura.service.AbstractService;
+import arquitetura.utils.Cryptography;
+import arquitetura.utils.JPAUtil;
 import arquitetura.utils.Utils;
 
-public class UserService implements Serializable {
+public class UserService  extends AbstractService<Usuario> implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8096731496831193743L;
-
-	private UserController userController;
+ 
  
 	@Inject
 	public UserService(UserController userController){
-		this.userController=userController;
+		super(userController);
 	}
 	
 	public List<Usuario> queryUser(String name, String email, String perfil, String unidadeOrcamentaria) {
 		
 		if(Utils.emptyParam(name)   && Utils.emptyParam(email)  && 
 		   Utils.emptyParam(perfil) && Utils.emptyParam(unidadeOrcamentaria)) {
-			return userController.findAll();
+			return findAll();
 		}else {
-			return userController.queryUser(name, email, perfil, unidadeOrcamentaria);
+			return ((UserController) getController()).queryUser(name, email, perfil, unidadeOrcamentaria);
 		}
 		
 		
 	}
-	
-	public  List<Usuario> findAll() {
-		return userController.findAll();
-
-	}
-
-
-	public void delete(Usuario user) throws JpaException {
-		userController.delete(user);
-
-	}
-
-	public Usuario findById(Long id) {
-		return userController.findById(id);
-	}
-
-	public Usuario create(Usuario usuario) throws JpaException {
-		return userController.create(usuario);
-		
-	}
-
-	public Usuario update(Usuario usuario) throws JpaException {
-		return userController.update(usuario);
-	}
-
+ 
 	public Optional<Usuario> queryByUserName(String login) {
-		return userController.queryByUserName(login);
+		return ((UserController) getController()).queryByUserName(login);
 	}
  
  
 	
 	public boolean enviarEmailUsuarioCriado(Usuario usuario, String scheme,String serveName,int port,String path) {
 		
-		return userController.enviarEmailUsuarioCriado(usuario, scheme, serveName, port, path);
+		return ((UserController) getController()).enviarEmailUsuarioCriado(usuario, scheme, serveName, port, path);
 	}
 	
+	public Usuario loginByUserNameAndPassword(String login, String password) throws JpaException {
+
+		String senhaMD5= Cryptography.md5(password);
+		
+		Usuario u= ((UserController) getController()).loginByUserNameAndPassword(login,senhaMD5);
+		
+		if(!JPAUtil.validId(u.getId())) {
+			return u;
+		}
+		
+		
+		return u;
+	}
+
+	public boolean solicitaRecuperacaoSenha(String emailUsuario,String scheme,String serveName,int port,String path) throws JpaException {
+		
+		UserController controller = (UserController) getController();
+		
+		Optional<Usuario> u = controller.buscarUsuarioByEmail(emailUsuario);
+		
+		if(!u.isPresent()) {
+			return false;
+		}
+		
+		
+		return controller.recuperarSenha(u.get(),scheme,serveName,port,path);
+		
+	}
+
+	public boolean atualizarSenhaPrimeiroAcesso(String login, String password,String newPassword) throws JpaException {
+		
+		UserController controller = (UserController) getController();
+		
+		String senhaMD5= Cryptography.md5(password);
+		
+		Usuario u= controller.loginByUserNameAndPassword(login,senhaMD5);
+		
+		if(!JPAUtil.validId(u.getId())) {
+			return false;
+		}
+		
+		u=controller.atualizarUsuarioPrimeiroAcesso(u,Cryptography.md5(newPassword));
+		
+		return JPAUtil.validId(u.getId());
+		
+		 
+		
+	}
 	
 }

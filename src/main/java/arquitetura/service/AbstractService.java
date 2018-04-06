@@ -25,9 +25,9 @@ public abstract class AbstractService<T extends Serializable> implements Seriali
 		return controller.findAll();
 	}
 
-	public void create(T t) throws JpaException {
+	public T create(T t) throws JpaException {
 
-		controller.create(t);
+		return controller.create(t);
 	}
 
 	public T update(T t) throws JpaException {

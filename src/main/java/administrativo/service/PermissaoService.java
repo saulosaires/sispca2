@@ -7,63 +7,33 @@ import javax.inject.Inject;
 
 import administrativo.controller.PermissaoController;
 import administrativo.model.Permissao;
-import arquitetura.exception.JpaException;
+import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 
-public class PermissaoService implements Serializable {
+public class PermissaoService extends AbstractService<Permissao> implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3288174422611664897L;
 
-	PermissaoController permissaoController;
-
 	@Inject
 	public PermissaoService(PermissaoController permissaoController) {
-		this.permissaoController = permissaoController;
+		super(permissaoController);
 	}
 
-	public List<Permissao> findAll() {
-		return permissaoController.findAll();
-	}
+	public List<Permissao> buscaPermissao(String busca) {
 
-	public List<Permissao> buscaPermissao(String busca){
-
-		if (Utils.emptyParam(busca) ) {
-			return permissaoController.findAll();
+		if (Utils.emptyParam(busca)) {
+			return findAll();
 		} else {
-			return permissaoController.buscaPermissao(busca);
+			return ((PermissaoController) getController()).buscaPermissao(busca);
 		}
 
 	}
 
-	public void delete(Permissao permissao) throws JpaException {
-
-		permissaoController.delete(permissao);
-
-	}
-
-	public Permissao findById(Long id) {
-
-		return permissaoController.findById(id);
-
-	}
-
-	public Permissao create(Permissao permissao) throws JpaException {
-		return permissaoController.create(permissao);
-
-	}
-
-	public Permissao update(Permissao permissao) throws JpaException {
-		return permissaoController.update(permissao);
-
-	}
- 
-
 	public List<Permissao> findPermissaoAssociada(Long perfilId) {
-		return permissaoController.findPermissaoAssociada(perfilId) ;
+		return ((PermissaoController) getController()).findPermissaoAssociada(perfilId);
 	}
-	
-	
+
 }

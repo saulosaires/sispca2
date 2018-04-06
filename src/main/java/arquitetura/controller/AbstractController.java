@@ -25,9 +25,9 @@ public abstract class AbstractController<T extends Serializable> implements Seri
 		return dao.findAll();
 	}
 
-	public void create(T t) throws JpaException {
+	public T create(T t) throws JpaException {
 
-		dao.create(t);
+		return dao.create(t);
 	}
 
 	public T update(T t) throws JpaException {
