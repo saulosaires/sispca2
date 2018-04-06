@@ -10,10 +10,11 @@ import administrativo.model.Permissao;
 import administrativo.service.PermissaoService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.Utils;
 
 @Named
 @ViewScoped
-public class ObjetoFormMBean implements Serializable {
+public class ObjetoEditMBean implements Serializable {
 
 	/**
 	 * 
@@ -22,25 +23,35 @@ public class ObjetoFormMBean implements Serializable {
 
 
  
-	public static final String FAIL_SAVE_MSG = "Falha inesperada ao tentar Salvar Permisão";
- 
-	public static final String SUCCESS_SAVE_MSG = "Permisão salva com Sucesso";
- 
+ 	public static final String FAIL_UPDATE_MSG = "Falha inesperada ao tentar Atualizar Permisão";
+
+ 	public static final String SUCCESS_UPDATE_MSG = "Permisão atualizada com Sucesso";
+
+    private Long id;
+
 	private Permissao permissao = new Permissao();
 
 	private PermissaoService permissaoService;
 	private PermissaoValidate permissaoValidate;
 
 	@Inject
-	public ObjetoFormMBean(PermissaoService permissaoService, PermissaoValidate permissaoValidate) {
+	public ObjetoEditMBean(PermissaoService permissaoService, PermissaoValidate permissaoValidate) {
 		this.permissaoService = permissaoService;
 		this.permissaoValidate=permissaoValidate;
 
 	}
 
-	
+	public void init() {
 
-	public String salvar() {
+		if (!Utils.invalidId(id)) {
+
+			permissao = permissaoService.findById(id);
+
+		}
+
+	}
+
+	public String atualizar() {
 
 		try {
 
@@ -48,16 +59,16 @@ public class ObjetoFormMBean implements Serializable {
 				return "";
 			}
 		
-			permissaoService.create(permissao);
+			permissaoService.update(permissao);
 
-			Messages.addMessageInfo(SUCCESS_SAVE_MSG);
+			Messages.addMessageInfo(SUCCESS_UPDATE_MSG);
 			
 			return "objetoList";
 			
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 
-			Messages.addMessageError(FAIL_SAVE_MSG);
+			Messages.addMessageError(FAIL_UPDATE_MSG);
 		}
 
 		return "";
@@ -72,6 +83,14 @@ public class ObjetoFormMBean implements Serializable {
 
 	public void setPermissao(Permissao permissao) {
 		this.permissao = permissao;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 

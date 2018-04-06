@@ -95,7 +95,15 @@
 		
 	</navigation-rule> 
  
- 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>acaoQualitativoList</from-outcome>
+			<to-view-id>/private/qualitativo/acao/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>  
 	<navigation-rule>
 		<from-view-id>/public/login.xhtml</from-view-id>
 
@@ -190,6 +198,10 @@
 		<from-view-id>/private/administrativo/objeto/list.xhtml</from-view-id>
 
 		 
+		 <navigation-case>
+			<from-outcome>objEdit</from-outcome>
+			<to-view-id>/private/administrativo/objeto/edit.xhtml</to-view-id>
+		</navigation-case> 
 		<navigation-case>
 			<from-outcome>objetoForm</from-outcome>
 			<to-view-id>/private/administrativo/objeto/form.xhtml</to-view-id>

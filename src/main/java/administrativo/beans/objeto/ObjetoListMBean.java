@@ -1,6 +1,7 @@
 package administrativo.beans.objeto;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -10,6 +11,7 @@ import javax.inject.Named;
 import administrativo.model.Permissao;
 import administrativo.service.PermissaoService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 
 @Named
@@ -32,10 +34,17 @@ public class ObjetoListMBean implements Serializable {
 
 	private PermissaoService permissaoService;
 	 
+	private boolean atualizar;
+	private boolean deletar;
+	private boolean salvar;
 	
 	@Inject
 	public ObjetoListMBean(PermissaoService permissaoService) {
 		this.permissaoService = permissaoService;
+		
+		atualizar= SessionUtils.containsKey("objetoAtualizar"); 
+		deletar	 = SessionUtils.containsKey("objetoDeletar"); 
+		salvar   = SessionUtils.containsKey("objetoSalvar"); 
 	 
 	}
 
@@ -44,6 +53,7 @@ public class ObjetoListMBean implements Serializable {
 		try {
 			listPermissao = permissaoService.buscaPermissao(busca);
 
+			Collections.sort(listPermissao, (p1, p2) -> p1.getAcao().compareTo(p2.getAcao()));
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 
@@ -88,6 +98,30 @@ public class ObjetoListMBean implements Serializable {
 
 	public void setListPermissao(List<Permissao> listPermissao) {
 		this.listPermissao = listPermissao;
+	}
+
+	public boolean isAtualizar() {
+		return atualizar;
+	}
+
+	public void setAtualizar(boolean atualizar) {
+		this.atualizar = atualizar;
+	}
+
+	public boolean isDeletar() {
+		return deletar;
+	}
+
+	public void setDeletar(boolean deletar) {
+		this.deletar = deletar;
+	}
+
+	public boolean isSalvar() {
+		return salvar;
+	}
+
+	public void setSalvar(boolean salvar) {
+		this.salvar = salvar;
 	}
 
  

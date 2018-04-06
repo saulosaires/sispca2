@@ -50,7 +50,7 @@
 											render="table" />
 									</h:commandButton>
 									&nbsp;
-									<h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="objetoForm"/>
+									<h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="objetoForm" rendered="#{objetoListMBean.salvar}"/>
 									</div>
 								</div>
 							</fieldset>
@@ -60,22 +60,28 @@
 				</div>			
 				<center>
 					<p:dataTable id="table" value="#{objetoListMBean.listPermissao}" var="permissao"
-											paginator="true" rows="10" 					styleClass="tableDados"
+											paginator="true" rows="50" 					styleClass="tableDados"
 											emptyMessage="Não há Permissões a serem mostrados">
 						
-						<p:column headerText="Perfil" styleClass="outTextTable">
-							<h:outputText value="#{permissao.perfilLabel}"/>
-						</p:column>
 						
 						<p:column headerText="Ação" styleClass="outTextTable">
 							<h:outputText value="#{permissao.acao}"/>
 						</p:column>
 					
+						<p:column headerText="Descrição" styleClass="outTextTable">
+							<h:outputText value="#{permissao.descricao}"/>
+						</p:column>
+					
+					
 						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable">
 							<center>
 								 
+								 <p:button title="Editar" icon="ui-icon-pencil" outcome="objEdit"  rendered="#{objetoListMBean.atualizar}">
+								   <f:param name="id" value="#{permissao.id}" /> 
+								</p:button>
+								
 	 													
-								<p:commandButton title="Deletar" action="#{objetoListMBean.deletar(permissao)}" icon="ui-icon-trash" process="@this"   update="table">
+								<p:commandButton title="Deletar" action="#{objetoListMBean.deletar(permissao)}" icon="ui-icon-trash" process="@this"   update="table"  rendered="#{objetoListMBean.deletar}">
 								    <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>                 								
 							</center>

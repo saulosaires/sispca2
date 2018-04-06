@@ -44,7 +44,9 @@ public class Permissao implements Serializable{
 	 
 	@Column(name="acao",length=100,nullable=false)
 	private String acao;
- 
+	
+	@Column(name="descricao",length=150,nullable=true)
+	private String descricao; 
 
 	public void setId(Long id) {
 		this.id = id;
@@ -54,8 +56,6 @@ public class Permissao implements Serializable{
 		return id;
 	}
  
-	
-
 	public String getAcao() {
 		return acao;
 	}
@@ -67,8 +67,6 @@ public class Permissao implements Serializable{
 	public List<Perfil> getPerfil() {
 		return perfil;
 	}
-
-
 
 	public void setPerfil(List<Perfil> perfil) {
 		this.perfil = perfil;
@@ -90,6 +88,15 @@ public class Permissao implements Serializable{
     	return "";
     }
 	
+    
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		 

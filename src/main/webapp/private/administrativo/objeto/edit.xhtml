@@ -14,7 +14,11 @@
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
 		 
-			
+		 
+			<f:metadata>
+    			<f:viewParam name="id" value="#{objetoEditMBean.id}"/>
+    			<f:viewAction action="#{objetoEditMBean.init}" />
+			</f:metadata>
 			<h:form>				
 				<div class="container-fluid row-fluid">
 					 
@@ -26,14 +30,14 @@
 						<div class="row" >	
 							<div class="col-lg-2">
 								<h:outputText value="NOME:  " styleClass="labelOutText"/>
-								<h:inputText id="inputNome" value="#{objetoFormMBean.permissao.acao}" styleClass="form-control input-sm" required="true" requiredMessage="Nome é obrigatório "/>
+								<h:outputText id="inputNome" value="#{objetoEditMBean.permissao.acao}" styleClass="form-control input-sm" />
 							</div>
 						</div>
 						 <br/>
 						<div class="row" >	
 							<div class="col-lg-4">
 								<h:outputText value="DESCRIÇÃO  " styleClass="labelOutText"/>
-								<h:inputText id="inputDesc" value="#{objetoFormMBean.permissao.descricao}" styleClass="form-control input-sm" required="true" requiredMessage="Descrição é obrigatória "/>
+								<h:inputText id="inputDesc" value="#{objetoEditMBean.permissao.descricao}" styleClass="form-control input-sm" required="true" requiredMessage="Descrição é obrigatória "/>
 							</div>
 						</div>
 						
@@ -41,7 +45,7 @@
 						
 					<div class="row-fluid" style="margin-top: 2%;">
 						<div class="spaceBtnAcao">
-							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{objetoFormMBean.salvar()}"    />
+							<h:commandButton styleClass=" btnAction btn btn-primary" value="Atualizar" action="#{objetoEditMBean.atualizar()}"    />
  							&nbsp;
 							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="objetoList" immediate="true" />
 						</div>

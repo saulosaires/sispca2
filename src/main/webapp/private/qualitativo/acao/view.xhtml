@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<legend class="outBusc">VISUALIZAÇÃO</legend>
+				</div>
+			</div>
+			<div class="spaceContainerForm">			
+				<div class="container-fluid" style="margin-top: 3%;">
+					<div class="row">
+						<div class="col-lg-1">
+							<h:outputText value="CÓDIGO:  " styleClass="labelOutText" />
+							<h:outputText value="#{acaoMBean.entity.codigo}" styleClass="labelInputText"/>									
+						</div>
+						<div class="col-lg-6">
+							<h:outputText value="DENOMINAÇÃO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.denominacao)}" styleClass="labelInputText"
+								required="true" requiredMessage="Descrição: campo é obrigatório" />
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							<h:outputText value="PROGRAMA:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.programa.denominacao)}" styleClass="labelInputText"/>									
+						</div>	
+						<div class="col-lg-3">
+							<h:outputText value="FUNÇÃO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.funcao.descricao)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							<h:outputText value="SUBFUNÇÃO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.subfuncao.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText value="UNIDADE ORÇAMENTÁRIA:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.unidadeOrcamentaria.descricao)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<hr class="linhaTransversal"></hr>						
+					</div>						
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							<h:outputText value="MEDIDO PELA DESPESA: " styleClass="labelOutText"/>
+							<h:outputText value="SIM" rendered="#{acaoMBean.entity.medidoDespesa eq true}" styleClass="labelInputText"/>
+							<h:outputText value="NÃO" rendered="#{acaoMBean.entity.medidoDespesa eq false}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-5">
+							<h:outputText value="PRODUTO: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.produto)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							<h:outputText value="UNIDADE DE MEDIDA: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.unidadeMedida.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-9">
+							<h:outputText value="ESPECIFICAÇÃO DO PRODUTO: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.especificaoProduto)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							<h:outputText value="TIPO DE AÇÃO: "  styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.tipoAcao.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-5">
+							<h:outputText value="TIPO HORIZONTE TEMPORAL: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.tipoHorizonteTemporal.descricao)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<hr class="linhaTransversal"></hr>						
+					</div>	
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							<h:outputText value="TIPO FORMA DE IMPLEMENTAÇÃO: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.tipoFormaImplementacao.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-4">
+							<h:outputText value="TIPO DE ORÇAMENTO: "  styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.tipoOrcamento.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-4">
+							<h:outputText value="TIPO DE CÁLCULO DA META: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.tipoCalculoMeta.descricao)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							&nbsp;
+						</div>
+						<div class="col-lg-4">
+							<h:outputText value="BASE LEGAL: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.baseLegal)}" styleClass="labelInputText" />
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-3">
+							&nbsp;
+						</div>
+						<div class="col-lg-4">
+							<h:outputText value="DETALHAMENTO DA IMPLEMENTAÇÃO: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.detalhamentoImplementacao)}" styleClass="labelInputText"/>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<hr class="linhaTransversal"></hr>						
+					</div>	
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-2">
+							<h:outputText value="MÊS INÍCIO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{acaoMBean.entity.mesInicio}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</div>
+						<div class="col-lg-2">
+							<h:outputText value="MÊS TÉRMINO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{acaoMBean.entity.mesTermino}">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>	
+						</div>
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<hr class="linhaTransversal"></hr>						
+					</div>	
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-12">
+							<h:outputText value="FINALIDADE: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.finalidade)}" styleClass="labelInputText"/>	
+						</div>						
+					</div>	
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-12">
+							<h:outputText value="DESCRIÇÃO: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.descricao)}" styleClass="labelInputText"/>								
+						</div>						
+					</div>	
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-12">
+							<h:outputText value="REPERCUSSÃO: " styleClass="labelOutText" />
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.repercussao)}" styleClass="labelInputText"/>		
+						</div>						
+					</div>
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-12">
+							<h:outputText value="OBSERVAÇÃO: " styleClass="labelOutText" />
+							<h:outputText value="#{fn:toUpperCase(acaoMBean.entity.observacao)}" styleClass="labelInputText"/>		
+						</div>						
+					</div>
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">		
+							<h:form>		
+								<h:commandButton styleClass="btn btn-primary" action="#{acaoMBean.gerarRelatorio()}" value="Imprimir" />
+								&nbsp;
+								<h:commandButton styleClass="btn btn-primary" action="#{acaoMBean.getUrlList()}" value="Voltar" />
+							</h:form>	
+						</div>
+					</div>	
+				</div>
+			</div>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

@@ -22,6 +22,7 @@ public class ViewMap  {
 		
 		mapLinks.put("/sispca2/private/administrativo/objeto/list.xhtml","objetoListar");
 		mapLinks.put("/sispca2/private/administrativo/objeto/form.xhtml","objetoSalvar");
+		mapLinks.put("/sispca2/private/administrativo/objeto/edit.xhtml","objetoAtualizar");
 		
 		mapLinks.put("/sispca2/private/administrativo/link/list.xhtml","linkListar");
 		mapLinks.put("/sispca2/private/administrativo/link/form.xhtml","linkSalvar");
@@ -39,6 +40,13 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/administrativo/usuario/edit.xhtml",     "usuarioAtualizar");
 		mapLinks.put("/sispca2/private/administrativo/usuario/report.xhtml",   "usuarioRelatorio");
 		mapLinks.put("/sispca2/private/administrativo/usuario/meusdados.xhtml","usuarioMeusDados");
+		
+		mapLinks.put("/sispca2/private/qualitativo/acao/list.xhtml","planejamentoQualitativoAcaoListar");
+		mapLinks.put("/sispca2/private/qualitativo/acao/form.xhtml","planejamentoQualitativoAcaoSalvar");
+		mapLinks.put("/sispca2/private/qualitativo/acao/edit.xhtml","planejamentoQualitativoAcaoAtualizar");
+		mapLinks.put("/sispca2/private/qualitativo/acao/view.xhtml","planejamentoQualitativoAcaoVizualizar");
+		
+		
 	}
 
 	private  ViewMap() {
