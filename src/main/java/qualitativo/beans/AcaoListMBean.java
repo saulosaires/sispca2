@@ -43,6 +43,7 @@ public class AcaoListMBean implements Serializable {
 	private boolean atualizar;
 	private boolean deletar;
 	private boolean salvar;
+	private boolean view;
 	
 	@Inject
 	public AcaoListMBean(AcaoService acaoService,UnidadeOrcamentariaService unidadeOrcamentariaService,ProgramaService programaService) {
@@ -51,9 +52,10 @@ public class AcaoListMBean implements Serializable {
 		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
 		listPrograma	        = programaService.findAllOrderByDenominacao();
 		
-		atualizar = SessionUtils.containsKey("acaoAtualizar"); 
-		deletar   = SessionUtils.containsKey("acaoDeletar");
-		salvar    = SessionUtils.containsKey("acaoSalvar");
+		atualizar = SessionUtils.containsKey("planejamentoQualitativoAcaoAtualizar"); 
+		deletar   = SessionUtils.containsKey("planejamentoQualitativoAcaoDeletar");
+		salvar    = SessionUtils.containsKey("planejamentoQualitativoAcaoSalvar");
+		view      = SessionUtils.containsKey("planejamentoQualitativoAcaoVizualizar");
 	}
 
 	public void buscar() {
@@ -172,6 +174,14 @@ public class AcaoListMBean implements Serializable {
 
 	public void setListPrograma(List<Programa> listPrograma) {
 		this.listPrograma = listPrograma;
+	}
+
+	public boolean isView() {
+		return view;
+	}
+
+	public void setView(boolean view) {
+		this.view = view;
 	}
 	
 	

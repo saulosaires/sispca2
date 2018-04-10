@@ -29,7 +29,9 @@
 											<h:outputText styleClass="labelOutText" value="CÓDIGO: " />
 										</div>
 										<div class="span3">
-											<h:inputText id="inpCod" value="#{acaoListMBean.codigo}" styleClass="form-control input-sm" />	
+											<h:inputText id="inpCod" value="#{acaoListMBean.codigo}" styleClass="form-control input-sm" maxlength="5">
+											 <f:convertNumber/>
+											</h:inputText>	
 										</div>
 									</div>
 									<div class="span12">
@@ -73,7 +75,7 @@
 												render="tableAcao" />
 										</h:commandButton>
 										&nbsp;
-										<h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="qualitativoAcaoAdd" />
+										<h:button value="Adicionar" styleClass="btnAction btn btn-primary" outcome="qualitativoAcaoAdd" rendered="#{acaoListMBean.salvar}"/>
 									</div>
 								</div>
 							</fieldset>
@@ -100,15 +102,15 @@
 						<p:column headerText="Operação" style="width: 14%;" footerText="Quantidade Total: ${fn:length(acaoListMBean.listAcoes)}">
 							<center>
 
-								<p:button title="Visualizar"  outcome="qualitativoAcaoView" icon="ui-icon-search" >
+								<p:button title="Visualizar"  outcome="qualitativoAcaoView" icon="ui-icon-search"  rendered="#{acaoListMBean.view}">
 								 	  <f:param name="id" value="#{acao.id}" /> 
 								</p:button>
 
-								<p:button title="Editar"  outcome="qualitativoAcaoEdit" icon="ui-icon-pencil" >
+								<p:button title="Editar"  outcome="qualitativoAcaoEdit" icon="ui-icon-pencil"  rendered="#{acaoListMBean.atualizar}">
 								 	  <f:param name="id" value="#{acao.id}" /> 
 								</p:button>
 							
-								<p:commandButton title="Deletar" actionListener="#{acaoListMBean.deletar(acao)}" icon="ui-icon-trash" update="tableAcao">
+								<p:commandButton title="Deletar" actionListener="#{acaoListMBean.deletar(acao)}" icon="ui-icon-trash" update="tableAcao"  rendered="#{acaoListMBean.deletar}">
 									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>
