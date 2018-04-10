@@ -1,4 +1,4 @@
-package qualitativo.beans;
+package qualitativo.beans.acao;
 
 import java.io.Serializable;
 

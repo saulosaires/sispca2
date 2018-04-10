@@ -43,6 +43,7 @@
       <class>qualitativo.model.UnidadeGestora</class>
       <class>qualitativo.model.UnidadeMedida</class>
       <class>qualitativo.model.UnidadeOrcamentaria</class>
+      <class>qualitativo.model.Indicador</class>
              
       <class>quantitativo.model.FisicoFinanceiro</class>
       <class>quantitativo.model.FisicoFinanceiroMensal</class>

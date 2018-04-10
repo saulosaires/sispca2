@@ -1,4 +1,4 @@
-package qualitativo.beans;
+package qualitativo.beans.acao;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,7 +26,7 @@ public class AcaoListMBean implements Serializable {
 	private static final long serialVersionUID = 5940179508090218836L;
 
 	public static final String FAIL_DELETE = "Falha inesperada ao tentar Deletar Ação";
-	public static final String SUCCESS_DELETE = "Link deletado com Ação";
+	public static final String SUCCESS_DELETE = "Ação deletado com sucesso";
 	public static final String FAIL_SEARCH = "Falha ao pesquisar Ações";
 	public static final String  ACAO_NO_RECORDS="Nenhuma Ação retornada";
 	

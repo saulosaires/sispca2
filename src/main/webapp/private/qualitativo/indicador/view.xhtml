@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		    <f:metadata>
+	    		<f:viewParam name="id" value="#{indicadorViewMBean.id}"/>
+	    		<f:viewAction action="#{indicadorViewMBean.init}" />
+			 </f:metadata>
+			 
+		
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="outBusc">VISUALIZAÇÃO</div>
+				</div>
+			</div>
+			<div class="spaceContainerForm">
+				<div class="container-fluid" style="margin-top: 3%;">
+					<div class="row">							
+							<div class="col-lg-4">
+								<h:outputText value="INDICADOR:  " styleClass="labelOutText"/>
+								<h:outputText value="#{indicadorViewMBean.indicador.indicador}" styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-3">
+								<h:outputText value="FONTE DE ÍNDICE:  " styleClass="labelOutText"/>
+								<h:outputText value="#{indicadorViewMBean.indicador.fonteIndice}" styleClass="labelInputText"/>
+							</div>
+							<div class="col-lg-4">
+								<h:outputText value="DATA DE APURAÇÃO:  " styleClass="labelOutText"/>
+								<h:outputText value="#{indicadorViewMBean.indicador.dataApuracao}" styleClass="labelInputText">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
+							</div>
+						</div>	
+						<div class="row" style="margin-top: 1%">
+							<hr class="linhaTransversal"></hr>
+						</div>	
+						
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-3">
+								<h:outputText value="BASE GEOGRÁFICA:  " styleClass="labelOutText"/>
+								<h:outputText value="MUNICIPAL" rendered="#{indicadorViewMBean.indicador.baseGeografica eq 1}" styleClass="labelInputText"/>
+								<h:outputText value="ESTADUAL"  rendered="#{indicadorViewMBean.indicador.baseGeografica eq 2}" styleClass="labelInputText"/>
+								<h:outputText value="REGIONAL"  rendered="#{indicadorViewMBean.indicador.baseGeografica eq 3}" styleClass="labelInputText"/>
+								<h:outputText value="NACIONAL"  rendered="#{indicadorViewMBean.indicador.baseGeografica eq 4}" styleClass="labelInputText"/>						
+							</div>
+							<div class="col-lg-3">
+								<h:outputText value="PERIODICIDADE:  " styleClass="labelOutText"/>
+								<h:outputText value="MENSAL"     rendered="#{indicadorViewMBean.indicador.periodicidade eq 1}" styleClass="labelInputText"/>
+								<h:outputText value="BIMESTRAL"  rendered="#{indicadorViewMBean.indicador.periodicidade eq 2}" styleClass="labelInputText"/>
+								<h:outputText value="TRIMESTRAL" rendered="#{indicadorViewMBean.indicador.periodicidade eq 3}" styleClass="labelInputText"/>
+								<h:outputText value="SEMESTRAL"  rendered="#{indicadorViewMBean.indicador.periodicidade eq 4}" styleClass="labelInputText"/>
+								<h:outputText value="ANUAL" 	 rendered="#{indicadorViewMBean.indicador.periodicidade eq 5}" styleClass="labelInputText"/>						
+							</div>
+							<div class="col-lg-5">
+								<h:outputText value="FÓRMULA:  " styleClass="labelOutText"/>
+								<h:outputText value="#{fn:toUpperCase(indicadorViewMBean.indicador.formula)}" styleClass="labelInputText"/>
+							</div>							
+						</div>
+							
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">					
+								<h:form>
+									<h:button styleClass="btnAction btn btn-primary" value="Voltar" style="margin-left: 0px"  outcome="indicadorQualitativoList"  />
+								</h:form>
+							</div>
+						</div>	
+				</div>
+			</div>	
+				
+			
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

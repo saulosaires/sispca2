@@ -1,4 +1,4 @@
-package qualitativo.beans;
+package qualitativo.beans.acao;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
 import qualitativo.model.Funcao;
 import qualitativo.model.Programa;
@@ -35,7 +34,7 @@ import qualitativo.service.UnidadeOrcamentariaService;
 
 @Named
 @ViewScoped
-public class AcaoEditMBean implements Serializable {
+public class AcaoFormMBean implements Serializable {
 
 	/**
 	 * 
@@ -44,7 +43,7 @@ public class AcaoEditMBean implements Serializable {
 
 	public static final String FAIL_SAVE = "Falha inesperada ao tentar Salvar Ação";
 	 
-	private Long id;
+  
 	
 	private Acao acao = new Acao();
 	
@@ -64,7 +63,7 @@ public class AcaoEditMBean implements Serializable {
 	private AcaoValidate acaoValidate;
 	
 	@Inject
-	public AcaoEditMBean(AcaoService acaoService,
+	public AcaoFormMBean(AcaoService acaoService,
 						 UnidadeOrcamentariaService    unidadeOrcamentariaService,
 						 ProgramaService 		       programaService,
 						 FuncaoService 				   funcaoService,
@@ -95,19 +94,8 @@ public class AcaoEditMBean implements Serializable {
 		
 		
 	}
-	
-	public void init() {
 
-		if (!Utils.invalidId(id)) {
-
-			acao = acaoService.findById(id);
-
-			acao = acaoValidate.init(acao);
-		}
-
-	}
-
-	public String atualizar() {
+	public String salvar() {
 
 		try {
 
@@ -117,7 +105,7 @@ public class AcaoEditMBean implements Serializable {
 			
 			acaoValidate.beforePersist(acao);
 			
-			acaoService.update(acao);
+			acaoService.create(acao);
 
 			return "acaoQualitativoList";
 
@@ -237,14 +225,6 @@ public class AcaoEditMBean implements Serializable {
 
 	public void setListTipoCalculoMeta(List<TipoCalculoMeta> listTipoCalculoMeta) {
 		this.listTipoCalculoMeta = listTipoCalculoMeta;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	 

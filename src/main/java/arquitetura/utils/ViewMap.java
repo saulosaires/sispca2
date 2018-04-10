@@ -46,6 +46,10 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/qualitativo/acao/edit.xhtml","planejamentoQualitativoAcaoAtualizar");
 		mapLinks.put("/sispca2/private/qualitativo/acao/view.xhtml","planejamentoQualitativoAcaoVizualizar");
 		
+		mapLinks.put("/sispca2/private/qualitativo/indicador/list.xhtml","planejamentoQualitativoIndicadorListar");
+		mapLinks.put("/sispca2/private/qualitativo/indicador/form.xhtml","planejamentoQualitativoIndicadorSalvar");
+		mapLinks.put("/sispca2/private/qualitativo/indicador/edit.xhtml","planejamentoQualitativoIndicadorAtualizar");
+		mapLinks.put("/sispca2/private/qualitativo/indicador/view.xhtml","planejamentoQualitativoIndicadorVizualizar");
 		
 	}
 
