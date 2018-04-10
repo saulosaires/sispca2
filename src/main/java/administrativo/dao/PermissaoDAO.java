@@ -27,6 +27,31 @@ public class PermissaoDAO extends AbstractDAO<Permissao> {
 
 	}
 
+	public List<Permissao> buscaPermissaoEqAcao(String busca){
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Permissao> query = cb.createQuery(Permissao.class);
+		Root<Permissao> m = query.from(Permissao.class);
+
+		query.select(m);
+
+		List<Predicate> predicate = new ArrayList<>();
+
+		if (!Utils.emptyParam(busca)) {
+
+			Expression<String> upperSigla = cb.upper(m.get("acao"));
+
+			predicate.add(cb.equal(upperSigla, busca.toUpperCase()));
+		}
+
+ 
+		query.where(predicate.toArray(new Predicate[predicate.size()]));
+
+		return entityManager.createQuery(query).getResultList();
+
+	}
+
+	
 	public List<Permissao> buscaPermissao(String busca){
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

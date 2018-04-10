@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			
+			 <f:metadata>
+	    		<f:viewParam name="id" value="#{planoInternoEditMBean.id}"/>
+	    		<f:viewAction action="#{planoInternoEditMBean.init}" />
+			 </f:metadata>
+			
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid row-fluid">
+					
+					<div class="outBusc">CADASTRO</div>
+				</div>		
+				<div class="spaceContainerForm">
+					<div class="container-fluid" >				
+						<div class="row">
+							<div class="col-lg-1">
+								<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
+								<h:inputText value="#{planoInternoEditMBean.planoInterno.sigla}" styleClass="form-control input-sm up" required="true" requiredMessage="Sigla: campo é obrigatório">
+								</h:inputText>					
+							</div>															
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-2">
+								<h:outputText value="TITULO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{planoInternoEditMBean.planoInterno.titulo}" styleClass="form-control input-sm up" required="true" requiredMessage="Título: campo é obrigatório">
+								</h:inputText>					
+							</div>															
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="OBJETIVO:  " styleClass="labelOutText"/>
+								<h:inputTextarea value="#{planoInternoEditMBean.planoInterno.objetivo}" styleClass="form-control input-sm up" required="true" requiredMessage="Objetivo: campo é obrigatório">
+								</h:inputTextarea>					
+							</div>															
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-3">
+								<h:outputText value="AÇÃO:  " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{planoInternoEditMBean.planoInterno.acao.id}" styleClass="form-control input-sm" required="true" requiredMessage="Ação: campo é obrigatório">
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+									<f:selectItems value="#{planoInternoEditMBean.listAcao}" var="ac" itemValue="#{ac.id}" 
+										itemLabel="#{ac.codigo} | #{fn:toUpperCase(ac.denominacao)} | PROGRAMA: #{fn:toUpperCase(ac.programa.denominacao)} | UNIDADE ORÇAMENTÁRIA: #{fn:toUpperCase(ac.unidadeOrcamentaria.descricao)}"/>
+								</h:selectOneMenu>
+							</div>
+						</div>	
+						
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">
+						
+								<h:commandButton styleClass=" btnAction btn btn-primary" value="Atualizar" action="#{planoInternoEditMBean.atualizar()}" />
+								&nbsp;	
+								<h:button styleClass="btnAction btn btn-primary"
+									style="margin-left: 0px" value="Cancelar" outcome="planoInternoQualitativoList" immediate="true" />
+							</div>	
+						</div>	
+												
+					</div>
+				</div>						
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

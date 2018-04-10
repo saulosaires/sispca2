@@ -44,18 +44,22 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/qualitativo/acao/list.xhtml","planejamentoQualitativoAcaoListar");
 		mapLinks.put("/sispca2/private/qualitativo/acao/form.xhtml","planejamentoQualitativoAcaoSalvar");
 		mapLinks.put("/sispca2/private/qualitativo/acao/edit.xhtml","planejamentoQualitativoAcaoAtualizar");
-		mapLinks.put("/sispca2/private/qualitativo/acao/view.xhtml","planejamentoQualitativoAcaoVizualizar");
+		mapLinks.put("/sispca2/private/qualitativo/acao/view.xhtml","planejamentoQualitativoAcaoVisualizar");
 		
 		mapLinks.put("/sispca2/private/qualitativo/indicador/list.xhtml","planejamentoQualitativoIndicadorListar");
 		mapLinks.put("/sispca2/private/qualitativo/indicador/form.xhtml","planejamentoQualitativoIndicadorSalvar");
 		mapLinks.put("/sispca2/private/qualitativo/indicador/edit.xhtml","planejamentoQualitativoIndicadorAtualizar");
-		mapLinks.put("/sispca2/private/qualitativo/indicador/view.xhtml","planejamentoQualitativoIndicadorVizualizar");
+		mapLinks.put("/sispca2/private/qualitativo/indicador/view.xhtml","planejamentoQualitativoIndicadorVisualizar");
 		
 		mapLinks.put("/sispca2/private/qualitativo/orgao/list.xhtml","planejamentoQualitativoOrgaoListar");
 		mapLinks.put("/sispca2/private/qualitativo/orgao/form.xhtml","planejamentoQualitativoOrgaoSalvar");
 		mapLinks.put("/sispca2/private/qualitativo/orgao/edit.xhtml","planejamentoQualitativoOrgaoAtualizar");
-		mapLinks.put("/sispca2/private/qualitativo/orgao/view.xhtml","planejamentoQualitativoOrgaoVizualizar");
+		mapLinks.put("/sispca2/private/qualitativo/orgao/view.xhtml","planejamentoQualitativoOrgaoVisualizar");
 		
+		mapLinks.put("/sispca2/private/qualitativo/planointerno/list.xhtml","planejamentoQualitativoPlanoInternoListar");
+		mapLinks.put("/sispca2/private/qualitativo/planointerno/form.xhtml","planejamentoQualitativoPlanoInternoSalvar");
+		mapLinks.put("/sispca2/private/qualitativo/planointerno/edit.xhtml","planejamentoQualitativoPlanoInternoAtualizar");
+		mapLinks.put("/sispca2/private/qualitativo/planointerno/view.xhtml","planejamentoQualitativoPlanoInternoVisualizar");
 		
 		
 	}

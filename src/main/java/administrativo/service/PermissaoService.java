@@ -9,7 +9,7 @@ import administrativo.model.Permissao;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 
-public class PermissaoService extends AbstractService<Permissao>{
+public class PermissaoService extends AbstractService<Permissao> {
 
 	/**
 	 * 
@@ -28,6 +28,12 @@ public class PermissaoService extends AbstractService<Permissao>{
 		} else {
 			return ((PermissaoController) getController()).buscaPermissao(busca);
 		}
+
+	}
+
+	public List<Permissao> buscaPermissaoEqAcao(String busca) {
+
+		return ((PermissaoController) getController()).buscaPermissaoEqAcao(busca);
 
 	}
 

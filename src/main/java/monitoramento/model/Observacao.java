@@ -39,16 +39,12 @@ public class Observacao extends Model implements  Auditable {
 	private Date data;
 
 	private String descricao;
-	
-	private Boolean ativo;
+	 
 
 	//bi-directional many-to-one association to Execucao
 	@OneToMany(mappedBy="observacao")
 	private List<Execucao> execucaos;
-
-	public Observacao() {
-		this.ativo = Boolean.TRUE;
-	}
+ 
 
 	public Long getId() {
 		return this.id;
@@ -90,7 +86,7 @@ public class Observacao extends Model implements  Auditable {
 		sb.append(" Observação id: ").append(id);
 		sb.append(" Observacao Descricao: ").append(descricao);
 		sb.append(" Observacao Data: ").append(FormatoUtils.formataData(getData()));
-		sb.append(" Observacao Ativo: ").append(ativo);
+		sb.append(" Observacao Ativo: ").append(getAtivo());
 		return sb.toString();
 	}
 

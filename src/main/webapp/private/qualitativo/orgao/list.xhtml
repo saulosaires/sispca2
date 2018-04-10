@@ -58,7 +58,7 @@
 											    render="tableOrg" />
 									</h:commandButton>
 									&nbsp;
-									<h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="add" rendered="#{orgaoListMBean.salvar}"/>
+									<h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="qualitativoOrgaoAdd" rendered="#{orgaoListMBean.salvar}"/>
 									</div>
 								</div>
 							</fieldset>
@@ -85,11 +85,11 @@
 							footerText="Quantidade Total: ${fn:length(orgaoListMBean.listOrgoes)}">
 							<center>
 
-								<p:button title="Visualizar"  outcome="view" icon="ui-icon-search"  rendered="#{orgaoListMBean.view}">
+								<p:button title="Visualizar"  outcome="qualitativoOrgaoView" icon="ui-icon-search"  rendered="#{orgaoListMBean.view}">
 								 	  <f:param name="id" value="#{org.id}" /> 
 								</p:button>
 
-								<p:button title="Editar"  outcome="edit" icon="ui-icon-pencil"  rendered="#{orgaoListMBean.atualizar}">
+								<p:button title="Editar"  outcome="qualitativoOrgaoEdit" icon="ui-icon-pencil"  rendered="#{orgaoListMBean.atualizar}">
 								 	  <f:param name="id" value="#{org.id}" /> 
 								</p:button>
 							

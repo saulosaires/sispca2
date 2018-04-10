@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+	
+			<h:form>
+				<div class="container-fluid">
+					
+					<div class="row-fluid">
+						<ui:include src="/pages/page_advertencia_crud.xhtml"/>
+					</div>
+					<div class="row-fluid">
+						<div class="span12">
+							<fieldset>
+								<div class="span12 spaceParamBusca">									
+									
+									<div class="span12">
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="SIGLA: " />
+										</div>
+										<div class="span3">
+											<h:inputText id="inputBusPlan" value="#{planoInternoListMBean.codigo}" styleClass="form-control input-sm up" />	
+										</div>
+									</div>									
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
+											<f:ajax
+												execute="@this inputBusPlan"
+												event="click" listener="#{planoInternoListMBean.buscar()}"
+												render="tablePlanos" />
+										</h:commandButton>
+										&nbsp;
+										<h:button value="Adicionar" outcome="qualitativoPlanoInternoAdd" styleClass="btnAction btn btn-primary"  />
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<div class="outBusc">RESULTADOS</div>
+				</div>				
+				<center>
+					<p:dataTable id="tablePlanos" value="#{planoInternoListMBean.listPlanoInterno}" var="plan" paginator="true" rows="15" emptyMessage="Não há Planos Internos a serem mostrados" styleClass="tableDados">
+						<p:column headerText="SIGLA" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(plan.sigla)}" />
+						</p:column>	
+						
+						<p:column headerText="TÍTULO" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(plan.titulo)}" />
+						</p:column>	
+						
+						<p:column headerText="AÇÃO" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(plan.acao.denominacao)}" />
+						</p:column>						
+												
+						<p:column headerText="PROGRAMA" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(plan.acao.programa.denominacao)}" />
+						</p:column>		
+						
+						<p:column headerText="UNIDADE ORÇAMENTÁRIA" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(plan.acao.unidadeOrcamentaria.descricao)}" />
+						</p:column>			
+						
+						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable"
+							footerText="Quantidade Total: ${fn:length(planoInternoMBean.listPlanoInterno)}">
+							<center>
+								
+								<p:button title="Visualizar"  outcome="qualitativoPlanoInternoView" icon="ui-icon-search"  rendered="#{planoInternoListMBean.view}">
+								 	  <f:param name="id" value="#{plan.id}" /> 
+								</p:button>
+
+								<p:button title="Editar"  outcome="qualitativoPlanoInternoEdit" icon="ui-icon-pencil"  rendered="#{planoInternoListMBean.atualizar}">
+								 	  <f:param name="id" value="#{plan.id}" /> 
+								</p:button>
+							
+								<p:commandButton title="Deletar" actionListener="#{planoInternoListMBean.deletar(ind)}" icon="ui-icon-trash" update="tablePlanos"  rendered="#{planoInternoListMBean.deletar}">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
+								</p:commandButton>	
+
+							</center>
+						</p:column>						
+					</p:dataTable>
+				</center>	
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    		</p:confirmDialog>	
+    		</h:form>
+		</ui:define>
+	</ui:composition>	
+</body>
+</html>

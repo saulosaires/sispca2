@@ -1,4 +1,4 @@
-package qualitativo.beans.orgao;
+package qualitativo.beans.planointerno;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,30 +10,28 @@ import javax.inject.Named;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
-import qualitativo.model.Orgao;
-import qualitativo.service.OrgaoService;
+import qualitativo.model.PlanoInterno;
+import qualitativo.service.PlanoInternoService;
 
 @Named
 @ViewScoped
-public class OrgaoListMBean implements Serializable {
+public class PlanoInternoListMBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
 
-	public static final String FAIL_DELETE 	  = "Falha inesperada ao tentar Indicador Orgão";
-	public static final String SUCCESS_DELETE = "Orgão deletado com Sucesso";
-	public static final String FAIL_SEARCH 	  = "Falha ao pesquisar Orgão";
-	public static final String NO_RECORDS	  = "Nenhum Orgão retornada";
+	public static final String FAIL_DELETE = "Falha inesperada ao tentar deletar PlanoInterno";
+	public static final String SUCCESS_DELETE = "PlanoInterno deletado com Sucesso";
+	public static final String FAIL_SEARCH = "Falha ao pesquisar PlanoInterno";
+	public static final String  NO_RECORDS="Nenhum PlanoInterno retornado";
 	
 	private String codigo;
-	private String sigla;
-	private String descricao;
  
-	private List<Orgao> listOrgoes;
+	private List<PlanoInterno> listPlanoInterno;
  
-	private OrgaoService service;
+	private PlanoInternoService service;
 	
 	private boolean atualizar;
 	private boolean deletar;
@@ -41,13 +39,13 @@ public class OrgaoListMBean implements Serializable {
 	private boolean view;
 	
 	@Inject
-	public OrgaoListMBean(OrgaoService service) {
+	public PlanoInternoListMBean(PlanoInternoService service) {
 		this.service = service;
  		
-		atualizar = SessionUtils.containsKey("planejamentoQualitativoOrgaoAtualizar"); 
-		deletar   = SessionUtils.containsKey("planejamentoQualitativoOrgaoDeletar");
-		salvar    = SessionUtils.containsKey("planejamentoQualitativoOrgaoSalvar");
-		view      = SessionUtils.containsKey("planejamentoQualitativoOrgaoVisualizar");
+		atualizar = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoAtualizar"); 
+		deletar   = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoDeletar");
+		salvar    = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoSalvar");
+		view      = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoVisualizar");
 		
 	}
 
@@ -55,9 +53,9 @@ public class OrgaoListMBean implements Serializable {
 
 		try {
 			
-			listOrgoes = service.buscar(codigo, sigla, descricao);
+			listPlanoInterno = service.buscar(codigo);
 
-			if(listOrgoes.isEmpty()) {
+			if(listPlanoInterno.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);
 			}
 			
@@ -69,11 +67,11 @@ public class OrgaoListMBean implements Serializable {
 		}
 	}
 
-	public String deletar(Orgao orgao) {
+	public String deletar(PlanoInterno planoInterno) {
 
 		try {
 
-			service.delete(orgao);
+			service.delete(planoInterno);
 
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
@@ -98,36 +96,12 @@ public class OrgaoListMBean implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public String getSigla() {
-		return sigla;
+	public List<PlanoInterno> getListPlanoInterno() {
+		return listPlanoInterno;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public List<Orgao> getListOrgoes() {
-		return listOrgoes;
-	}
-
-	public void setListOrgoes(List<Orgao> listOrgoes) {
-		this.listOrgoes = listOrgoes;
-	}
-
-	public OrgaoService getService() {
-		return service;
-	}
-
-	public void setService(OrgaoService service) {
-		this.service = service;
+	public void setListPlanoInterno(List<PlanoInterno> listPlanoInterno) {
+		this.listPlanoInterno = listPlanoInterno;
 	}
 
 	public boolean isAtualizar() {
@@ -161,8 +135,8 @@ public class OrgaoListMBean implements Serializable {
 	public void setView(boolean view) {
 		this.view = view;
 	}
+
+	 
+	
  
-	
-	
-	
 }

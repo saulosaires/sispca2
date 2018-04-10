@@ -22,7 +22,7 @@ public class IndicadorListMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
 
-	public static final String FAIL_DELETE = "Falha inesperada ao tentar Indicador Ação";
+	public static final String FAIL_DELETE = "Falha inesperada ao tentar deletar Indicador";
 	public static final String SUCCESS_DELETE = "Indicador deletado com Sucesso";
 	public static final String FAIL_SEARCH = "Falha ao pesquisar Indicadores";
 	public static final String  NO_RECORDS="Nenhum Indicador retornada";
@@ -45,7 +45,7 @@ public class IndicadorListMBean implements Serializable {
 		atualizar = SessionUtils.containsKey("planejamentoQualitativoIndicadorAtualizar"); 
 		deletar   = SessionUtils.containsKey("planejamentoQualitativoIndicadorDeletar");
 		salvar    = SessionUtils.containsKey("planejamentoQualitativoIndicadorSalvar");
-		view      = SessionUtils.containsKey("planejamentoQualitativoIndicadorVizualizar");
+		view      = SessionUtils.containsKey("planejamentoQualitativoIndicadorVisualizar");
 		
 	}
 

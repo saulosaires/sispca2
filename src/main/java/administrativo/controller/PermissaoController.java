@@ -31,7 +31,10 @@ public class PermissaoController extends AbstractController<Permissao> {
 	}
 
 	 
- 
+	public List<Permissao> buscaPermissaoEqAcao(String busca){
+
+		return ((PermissaoDAO) getDao()).buscaPermissaoEqAcao(busca);
+	} 
 
  
 	public List<Permissao> findPermissaoAssociada(Long perfilId) {

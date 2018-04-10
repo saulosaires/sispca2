@@ -55,7 +55,7 @@ public class AcaoListMBean implements Serializable {
 		atualizar = SessionUtils.containsKey("planejamentoQualitativoAcaoAtualizar"); 
 		deletar   = SessionUtils.containsKey("planejamentoQualitativoAcaoDeletar");
 		salvar    = SessionUtils.containsKey("planejamentoQualitativoAcaoSalvar");
-		view      = SessionUtils.containsKey("planejamentoQualitativoAcaoVizualizar");
+		view      = SessionUtils.containsKey("planejamentoQualitativoAcaoVisualizar");
 	}
 
 	public void buscar() {

@@ -28,14 +28,14 @@
 					<div class="container-fluid">
 		
 						<div class="row" >	
-							<div class="col-lg-2">
+							<div class="col-lg-3">
 								<h:outputText value="NOME:  " styleClass="labelOutText"/>
-								<h:outputText id="inputNome" value="#{objetoEditMBean.permissao.acao}" styleClass="form-control input-sm" />
+								<h:inputText id="inputNome" value="#{objetoEditMBean.permissao.acao}" styleClass="form-control input-sm" />
 							</div>
 						</div>
 						 <br/>
 						<div class="row" >	
-							<div class="col-lg-4">
+							<div class="col-lg-6">
 								<h:outputText value="DESCRIÇÃO  " styleClass="labelOutText"/>
 								<h:inputText id="inputDesc" value="#{objetoEditMBean.permissao.descricao}" styleClass="form-control input-sm" required="true" requiredMessage="Descrição é obrigatória "/>
 							</div>
