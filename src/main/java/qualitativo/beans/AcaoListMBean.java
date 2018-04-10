@@ -28,7 +28,8 @@ public class AcaoListMBean implements Serializable {
 	public static final String FAIL_DELETE = "Falha inesperada ao tentar Deletar Ação";
 	public static final String SUCCESS_DELETE = "Link deletado com Ação";
 	public static final String FAIL_SEARCH = "Falha ao pesquisar Ações";
-
+	public static final String  ACAO_NO_RECORDS="Nenhuma Ação retornada";
+	
 	private String codigo;
 	private String denominacao;
 	private Long unidadeOrcamentariaId;
@@ -60,6 +61,10 @@ public class AcaoListMBean implements Serializable {
 		try {
 			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId);
 
+			if(listAcoes.isEmpty()) {
+				Messages.addMessageWarn(ACAO_NO_RECORDS);
+			}
+			
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 

@@ -1,6 +1,5 @@
 package administrativo.beans.link;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import administrativo.controller.TipoLinkController;
 import administrativo.model.Link;
 import administrativo.model.TipoLink;
 import administrativo.service.LinkService;
-import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -28,9 +26,7 @@ public class LinkEditMBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
-
-	private static final String TIPO_LINK_ARQUIVO = "ARQUIVO";
-	
+ 	
  	public static final String FAIL_UPDATE_LINK_MSG    = "Falha inesperada ao tentar Atualizar Link";
 
  	public static final String SUCCESS_UPDATE_LINK_MSG   = "Link atualizado com Sucesso";
@@ -46,11 +42,11 @@ public class LinkEditMBean implements Serializable {
 	private transient UploadedFile arquivo;
 
 	private LinkService linkService;
-	private LinkEditValidate linkEditValidate;
+	private LinkValidate linkEditValidate;
 
 
 	@Inject
-	public LinkEditMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkEditValidate linkEditValidate) {
+	public LinkEditMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkValidate linkEditValidate) {
 		this.linkService = linkService;
 		this.linkEditValidate=linkEditValidate;
 		
@@ -82,7 +78,7 @@ public class LinkEditMBean implements Serializable {
 				return "";
 			}
 
-			beforeMerge(link);
+			linkEditValidate.beforeMerge(link,arquivo);
 
 			link=linkService.update(link);
 
@@ -101,17 +97,7 @@ public class LinkEditMBean implements Serializable {
 
 
 		
-	private void beforeMerge(Link link) throws IOException {
-
-		if (TIPO_LINK_ARQUIVO.equals(link.getTipoLink().getDescricao())) {
-
-			String url = FileUtil.uploadArquivo(arquivo);
-
-			link.setUrl(url);
-		}
-
-	}
-
+ 
 
 
 	public Long getLinkId() {

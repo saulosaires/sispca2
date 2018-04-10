@@ -108,7 +108,7 @@
 								 	  <f:param name="id" value="#{acao.id}" /> 
 								</p:button>
 							
-								<p:commandButton title="Deletar" action="#{acaoListMBean.deletar(acao)}" icon="ui-icon-trash">
+								<p:commandButton title="Deletar" actionListener="#{acaoListMBean.deletar(acao)}" icon="ui-icon-trash" update="tableAcao">
 									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>

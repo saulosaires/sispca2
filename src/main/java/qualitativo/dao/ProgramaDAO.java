@@ -8,7 +8,6 @@ import javax.persistence.criteria.Root;
 
 import arquitetura.dao.AbstractDAO;
 import qualitativo.model.Programa;
-import qualitativo.model.UnidadeOrcamentaria;
 
 public class ProgramaDAO extends AbstractDAO<Programa> {
  

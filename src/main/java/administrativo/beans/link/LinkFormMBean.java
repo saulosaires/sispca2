@@ -1,6 +1,5 @@
 package administrativo.beans.link;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import administrativo.controller.TipoLinkController;
 import administrativo.model.Link;
 import administrativo.model.TipoLink;
 import administrativo.service.LinkService;
-import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 
@@ -31,9 +29,7 @@ public class LinkFormMBean implements Serializable {
  	
 	public static final String FAIL_SAVE_LINK_MSG      = "Falha inesperada ao tentar Salvar Link"; 
 	public static final String SUCCESS_SAVE_LINK_MSG     = "Link salvo com Sucesso"; 
-	private static final String TIPO_LINK_ARQUIVO = "ARQUIVO";
- 	
-	 
+ 	 
 	private Link link = new Link();
 
 	private List<TipoLink> listTipoLink;
@@ -41,11 +37,11 @@ public class LinkFormMBean implements Serializable {
 	private transient UploadedFile arquivo;
 
 	private LinkService linkService;
-	private LinkEditValidate linkEditValidate;
+	private LinkValidate linkEditValidate;
 
 
 	@Inject
-	public LinkFormMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkEditValidate linkEditValidate) {
+	public LinkFormMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkValidate linkEditValidate) {
 		this.linkService = linkService;
 		this.linkEditValidate=linkEditValidate;
 		
@@ -68,7 +64,7 @@ public class LinkFormMBean implements Serializable {
 				return "";
 			}
 
-			beforeMerge(link);
+			linkEditValidate.beforeMerge(link,arquivo);
 
 			linkService.create(link);
 
@@ -84,20 +80,7 @@ public class LinkFormMBean implements Serializable {
 
 		return "";
 	}
-
-	 
-		
-	private void beforeMerge(Link link) throws IOException {
-
-		if (TIPO_LINK_ARQUIVO.equals(link.getTipoLink().getDescricao())) {
-
-			String url = FileUtil.uploadArquivo(arquivo);
-
-			link.setUrl(url);
-		}
-
-	}
-
+ 
 	 
 
  

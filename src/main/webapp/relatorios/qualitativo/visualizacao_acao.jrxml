@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_visualizacao_acao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
+	<property name="ireport.zoom" value="1.1000000000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="param_imagem" class="java.lang.String"/>
+	<parameter name="codigo_acao" class="java.lang.String"/>
+	<parameter name="acao" class="java.lang.String"/>
+	<parameter name="programa" class="java.lang.String"/>
+	<parameter name="funcao" class="java.lang.String"/>
+	<parameter name="subfuncao" class="java.lang.String"/>
+	<parameter name="unidade_orcamentaria" class="java.lang.String"/>
+	<parameter name="medido_despesa" class="java.lang.Boolean"/>
+	<parameter name="produto" class="java.lang.String"/>
+	<parameter name="unidade_medida" class="java.lang.String"/>
+	<parameter name="especificacao_produto" class="java.lang.String"/>
+	<parameter name="tipo_acao" class="java.lang.String"/>
+	<parameter name="tipo_horizonte_temporal" class="java.lang.String"/>
+	<parameter name="tipo_forma_implementacao" class="java.lang.String"/>
+	<parameter name="tipo_orcamento" class="java.lang.String"/>
+	<parameter name="base_legal" class="java.lang.String"/>
+	<parameter name="detalhamento_implementacao" class="java.lang.String"/>
+	<parameter name="mes_inicio" class="java.lang.String"/>
+	<parameter name="mes_termino" class="java.lang.String"/>
+	<parameter name="finalidade" class="java.lang.String"/>
+	<parameter name="descricao_acao" class="java.lang.String"/>
+	<parameter name="repercussao" class="java.lang.String"/>
+	<parameter name="tipo_calculo_meta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="116" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="44" width="802" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO MARANHÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="67" width="802" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Planejamento e Orçamento (SEPLAN)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="90" width="800" height="16" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[VISUALIZAÇÃO - AÇÃO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="367" y="0" width="105" height="43" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
+				<imageExpression><![CDATA[$P{param_imagem}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<summary>
+		<band height="395" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="4" y="8" width="796" height="20" uuid="af0e22b3-7f7b-489f-9cad-5b9c779b2187"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="1" width="493" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>Denominação:</b> "+$P{acao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="2" y="1" width="239" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font fontName="SansSerif" size="7" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style isBold='true'>Código</style>: "+$P{codigo_acao}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="1" y="38" width="801" height="48" backcolor="#EEEEEE" uuid="af0e22b3-7f7b-489f-9cad-5b9c779b2187"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="0" width="238" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{programa}==null ? "<b>Programa:</b> " : "<b>Programa:</b> "+$P{programa}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="17" width="238" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subfuncao}==null ? "<b>Subfunção:</b> " : "<b>Subfunção:</b> "+$P{subfuncao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="17" width="506" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{unidade_orcamentaria}==null ? "<b>Unidade Orçamentária:</b> " : "<b>Unidade Orçamentária:</b> "+$P{unidade_orcamentaria}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="0" width="506" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{funcao}==null ? "<b>Função:</b> " : "<b>Função:</b> "+$P{funcao}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="1" y="98" width="801" height="64" uuid="af0e22b3-7f7b-489f-9cad-5b9c779b2187"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="25" width="505" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{especificacao_produto}==null ? "<b>Especificação do Produto:</b> " : "<b>Especificação do Produto:</b> "+$P{especificacao_produto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="8" width="505" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{produto}==null ? "<b>Produto:</b> " : "<b>Produto:</b> "+$P{produto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="24" width="235" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{unidade_medida}==null ? "<b>Unidade de Medida:</b> " : "<b>Unidade de Medida:</b> "+$P{unidade_medida}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="8" width="234" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{medido_despesa} ? "<b>Medido pela Despesa:</b> Sim" : "<b>Medido pela Despesas:</b> Não"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="41" width="235" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tipo_acao}==null ? "<b>Tipo de Ação:</b> " : "<b>Tipo de Ação:</b> "+$P{tipo_acao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="41" width="505" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tipo_horizonte_temporal}==null ? "<b>Tipo Horizonte Temporal:</b> " : "<b>Tipo Horizonte Temporal:</b> "+$P{tipo_horizonte_temporal}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="1" y="178" width="801" height="64" backcolor="#EEEEEE" uuid="af0e22b3-7f7b-489f-9cad-5b9c779b2187"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="295" y="7" width="219" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tipo_orcamento}==null ? "<b>Tipo de Orçamento:</b> " : "<b>Tipo de Orçamento:</b> "+$P{tipo_orcamento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="295" y="41" width="219" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{detalhamento_implementacao}==null ? "<b>Detalhamento de Implementação:</b> " : "<b>Detalhamento de Implementação:</b> "+$P{detalhamento_implementacao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="605" y="7" width="196" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tipo_calculo_meta}==null ? "<b>Tipo de Cálculo da Meta:</b> " : "<b>Tipo de Cálculo da Meta:</b> "+$P{tipo_calculo_meta}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="295" y="24" width="219" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{base_legal}==null ? "<b>Base Legal:</b> " : "<b>Base Legal:</b> "+$P{base_legal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="7" width="236" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tipo_forma_implementacao}==null ? "<b>Tipo Forma de Implementação:</b> " : "<b>Tipo Forma de Implementação:</b> "+$P{tipo_forma_implementacao}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="248" width="802" height="25" uuid="cea7a7da-c1cf-49c4-8d26-def87f9cd99f"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="295" y="4" width="219" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{mes_termino}==null ? "<b>Mês de Término:</b> " : "<b>Mês de Término:</b> "+$P{mes_termino}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="4" width="235" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="styled">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{mes_inicio}==null ? "<b>Mês de Início:</b> " : "<b>Mês de Início:</b> "+$P{mes_inicio}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="278" width="802" height="69" backcolor="#EEEEEE" uuid="338e2379-3887-4c5d-8062-1d244bd5c833"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="44" width="799" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{repercussao}==null ? "<b>Repercussão:</b> " : "<b>Repercussão:</b> "+$P{repercussao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="10" width="799" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{finalidade}==null ? "<b>Finalidade:</b> " : "<b>Finalidade:</b> "+$P{finalidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="3" y="27" width="799" height="17" uuid="68f97300-a4b3-4e0d-aa90-99106f713895"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{descricao_acao}==null ? "<b>Descrição:</b> " : "<b>Descrição:</b> "+$P{descricao_acao}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="0" y="354" width="132" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="705" y="354" width="74" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+String.valueOf($V{PAGE_NUMBER})+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="782" y="354" width="19" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

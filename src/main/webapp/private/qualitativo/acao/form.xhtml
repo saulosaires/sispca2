@@ -21,8 +21,8 @@
 							<div class="col-lg-1">
 								<h:outputText value="CÓDIGO:  " styleClass="labelOutText" />
 								<h:inputText value="#{acaoFormMBean.acao.codigo}" styleClass="form-control input-sm" required="true" maxlength="5" 
-									    	 converterMessage="Digite apenas números para o código"
-											 requiredMessage="Código: campo obrigatório">
+									    	 																		 converterMessage="Digite apenas números para o código"
+											 																		 requiredMessage="Código: campo obrigatório">
 										<f:convertNumber/>
 								</h:inputText>
 							</div>
@@ -83,10 +83,12 @@
 								<h:inputText value="#{acaoFormMBean.acao.produto}" styleClass="form-control input-sm up"/>
 							</div>
 						</div>
+						
 						<div class="row" style="margin-top: 1%;">
 							<div class="col-lg-2">
 								<h:outputText value="UNIDADE DE MEDIDA: " styleClass="labelOutText"/>
-								<h:selectOneMenu value="#{acaoFormMBean.acao.unidadeMedida.id}" styleClass="form-control input-sm">
+								<h:selectOneMenu value="#{acaoFormMBean.acao.unidadeMedida.id}"  styleClass="form-control input-sm">
+								 
 									<f:selectItem itemValue="#{null}" itemLabel="SELECIONE"/>
 									<f:selectItems value="#{acaoFormMBean.listUnidadeMedida}" var="um" itemValue="#{um.id}" itemLabel="#{fn:toUpperCase(um.descricao)}"/>
 								</h:selectOneMenu>
@@ -175,7 +177,8 @@
 						<div class="row" style="margin-top: 1%;">
 							<div class="col-lg-7">
 								<h:outputText value="DESCRIÇÃO: " styleClass="labelOutText"/>
-								<h:inputTextarea value="#{acaoFormMBean.acao.descricao}" rows="3" styleClass="form-control up"/>								
+								<h:inputTextarea value="#{acaoFormMBean.acao.descricao}" rows="3" styleClass="form-control up" required="true" maxlength="5"  
+											 																		 		   requiredMessage="Descrição campo obrigatório"/>								
 							</div>						
 						</div>	
 						<div class="row" style="margin-top: 1%;">

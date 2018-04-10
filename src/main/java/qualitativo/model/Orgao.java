@@ -18,11 +18,7 @@ import javax.validation.constraints.NotNull;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
  
-
-/**
- * The persistent class for the orgao database table.
- * 
- */
+ 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "orgao", schema = "comum")
@@ -30,14 +26,10 @@ public class Orgao extends Model implements   Auditable  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@SequenceGenerator(name = "seq_orgao_id_orgao", sequenceName = "comum.seq_orgao_id_orgao")
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_orgao_id_orgao")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+ 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_orgao")
 	private Long id;
-
-	@Column(columnDefinition = "boolean default true")
-	private Boolean ativo;
+ 
 
 	@NotNull(message = "Código: campo é obrigatório")
 	private String codigo="";
@@ -53,10 +45,7 @@ public class Orgao extends Model implements   Auditable  {
 	
 	@OneToMany(mappedBy = "orgao", fetch = FetchType.LAZY)
 	private List<Programa> programas;
-	
-	public Orgao() {
-		this.ativo = Boolean.TRUE;
-	}
+ 
 
 	public Long getId() {
 		return this.id;

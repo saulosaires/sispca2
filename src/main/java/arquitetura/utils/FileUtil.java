@@ -10,6 +10,8 @@ import java.nio.file.StandardCopyOption;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
@@ -68,4 +70,25 @@ public class FileUtil {
 
 	}
 
+	public static void sendFileOnResponse(byte[] bytes, String name, String contentType) throws IOException {
+		
+		if (bytes != null && bytes.length>0){
+		
+			FacesContext context = FacesContext.getCurrentInstance();
+			
+			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();	    
+			
+			response.setContentType(contentType);				
+			response.setHeader("Content-disposition", "attachment; filename="+name);
+			response.setContentLength(bytes.length);
+			ServletOutputStream outputStream = response.getOutputStream();				
+			outputStream.write(bytes, 0, bytes.length);
+			outputStream.flush();
+			outputStream.close();
+			
+			context.responseComplete(); 	
+	   }
+		
+	}
+	
 }

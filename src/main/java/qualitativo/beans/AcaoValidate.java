@@ -1,0 +1,163 @@
+package qualitativo.beans;
+
+import java.io.Serializable;
+
+import arquitetura.interfaces.Validate;
+import arquitetura.utils.Messages;
+import arquitetura.utils.Utils;
+import qualitativo.model.Acao;
+import qualitativo.model.Funcao;
+import qualitativo.model.Programa;
+import qualitativo.model.SubFuncao;
+import qualitativo.model.TipoAcao;
+import qualitativo.model.TipoCalculoMeta;
+import qualitativo.model.TipoFormaImplementacao;
+import qualitativo.model.TipoHorizonteTemporal;
+import qualitativo.model.TipoOrcamento;
+import qualitativo.model.UnidadeMedida;
+import qualitativo.model.UnidadeOrcamentaria;
+
+public class AcaoValidate implements Validate<Acao>,Serializable{
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8850827058229914224L;
+	
+	public static final String ACAO_REQUIRED 	   			= "Falha inesperada ao Salvar Ação";
+	public static final String CODIGO_REQUIRED 	   			= "Código é um campo obrigatório";
+	public static final String DENOMINACAO_REQUIRED 	    = "Denominação é um campo obrigatório";
+	public static final String PROGRAMA_REQUIRED 	   		= "Programa é um campo obrigatório";
+	public static final String FUNCAO_REQUIRED 	   		    = "Função é um campo obrigatório";
+	public static final String SUBFUNCAO_REQUIRED 	        = "SubFunção é um campo obrigatório";
+	public static final String UNIDADE_ORCAMENTARIA_REQUIRED= "Unidade Orçamentária é um campo obrigatório";
+	public static final String DESCRICAO_REQUIRED 	   		= "Descrição é um campo obrigatório";
+	
+	
+ 
+	
+	@Override
+	public boolean validar(Acao acao) {
+
+		
+		if (acao == null) {
+			Messages.addMessageError(ACAO_REQUIRED);
+			return false;
+		}
+
+		boolean valido=true;
+		
+		if (Utils.emptyParam(acao.getCodigo())) {
+			Messages.addMessageError(CODIGO_REQUIRED);
+			valido= false;
+		}
+
+		if (Utils.emptyParam(acao.getDenominacao())) {
+			Messages.addMessageError(DENOMINACAO_REQUIRED);
+			valido= false;
+		}
+
+		if (acao.getPrograma() ==null || Utils.invalidId(acao.getPrograma().getId())) {
+			Messages.addMessageError(PROGRAMA_REQUIRED);
+			valido= false;
+		}
+
+		if (acao.getFuncao() ==null || Utils.invalidId(acao.getFuncao().getId())) {
+			Messages.addMessageError(FUNCAO_REQUIRED);
+			valido= false;
+		}
+		
+		if (acao.getSubfuncao() ==null || Utils.invalidId(acao.getSubfuncao().getId())) {
+			Messages.addMessageError(SUBFUNCAO_REQUIRED);
+			valido= false;
+		}
+		
+		if (acao.getUnidadeOrcamentaria() ==null || Utils.invalidId(acao.getUnidadeOrcamentaria().getId())) {
+			Messages.addMessageError(UNIDADE_ORCAMENTARIA_REQUIRED);
+			valido= false;
+		}
+
+		if (Utils.emptyParam(acao.getDescricao())) {
+			Messages.addMessageError(DESCRICAO_REQUIRED);
+			valido= false;
+		}
+		
+		
+		
+		return valido;
+	}
+
+
+	public Acao init(Acao acao) {
+ 
+		
+		if(acao.getUnidadeOrcamentaria()==null) {
+			acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());	
+		}
+		
+		if(acao.getFuncao()==null) {
+			acao.setFuncao(new Funcao());	
+		}
+		
+		if(acao.getSubfuncao()==null) {
+			acao.setSubfuncao(new SubFuncao());	
+		}
+
+		if(acao.getTipoAcao()==null) {
+			acao.setTipoAcao(new TipoAcao());	
+		}
+		
+		if(acao.getTipoCalculoMeta()==null) {
+			acao.setTipoCalculoMeta(new TipoCalculoMeta());	
+		}
+		
+		if(acao.getTipoFormaImplementacao()==null) {
+			acao.setTipoFormaImplementacao(new TipoFormaImplementacao());	
+		}
+		
+		if(acao.getTipoHorizonteTemporal()==null) {
+			acao.setTipoHorizonteTemporal(new TipoHorizonteTemporal());	
+		}
+
+		if(acao.getTipoOrcamento()==null) {
+			acao.setTipoOrcamento(new TipoOrcamento());	
+		}
+		
+		if(acao.getUnidadeMedida()==null) {
+			acao.setUnidadeMedida(new UnidadeMedida());	
+		}
+	
+		
+		return acao;
+		
+	}
+
+	public void beforePersist(Acao acao) {
+		 
+		if( Utils.invalidId(acao.getUnidadeMedida().getId())) {
+			acao.setUnidadeMedida(null);
+		}
+
+		if( Utils.invalidId(acao.getTipoAcao().getId())) {
+			acao.setTipoAcao(null);
+		}
+
+		if( Utils.invalidId(acao.getTipoHorizonteTemporal().getId())) {
+			acao.setTipoHorizonteTemporal(null);
+		}
+		
+		if( Utils.invalidId(acao.getTipoFormaImplementacao().getId())) {
+			acao.setTipoFormaImplementacao(null);
+		}
+		
+		if( Utils.invalidId(acao.getTipoOrcamento().getId())) {
+			acao.setTipoOrcamento(null);
+		}
+		
+		if( Utils.invalidId(acao.getTipoCalculoMeta().getId())) {
+			acao.setTipoCalculoMeta(null);
+		}
+		
+	}
+
+}

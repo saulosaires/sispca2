@@ -69,7 +69,7 @@ public class Acao extends Model implements  Auditable {
 
 	@ManyToOne
 	@JoinColumn(name="id_orgao")
-	private Orgao orgao = new Orgao();
+	private Orgao orgao = null;
 
 	@ManyToOne
 	@JoinColumn(name="id_unidade_orcamentaria")
@@ -360,14 +360,7 @@ public class Acao extends Model implements  Auditable {
 	public void setSubfuncao(SubFuncao subfuncao) {
 		this.subfuncao = subfuncao;
 	}
-
-	public TipoAcao getTipoAcaoBean() {
-		return this.tipoAcao;
-	}
-
-	public void setTipoAcaoBean(TipoAcao tipoAcaoBean) {
-		this.tipoAcao = tipoAcaoBean;
-	}
+ 
 
 	public TipoCalculoMeta getTipoCalculoMeta() {
 		return this.tipoCalculoMeta;
