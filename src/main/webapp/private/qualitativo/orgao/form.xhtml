@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid row-fluid">
+				
+					<div class="outBusc">CADASTRO</div>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-1">
+								<h:outputText value="CÓDIGO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{orgaoFormMBean.orgao.codigo}" styleClass="form-control input-sm" maxlength="10"
+																				 required="true" requiredMessage="Código: campo obrigatório" 
+																				 converterMessage="Código: digite apenas números"/>
+							</div>
+							<div class="col-lg-1">
+								<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
+								<h:inputText value="#{orgaoFormMBean.orgao.sigla}" styleClass="form-control input-sm up" required="true" requiredMessage="Sigla: campo é obrigatório"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-6">
+								<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{orgaoFormMBean.orgao.descricao}" styleClass="form-control input-sm up" required="true" requiredMessage="Descrição: campo é obrigatório"/>
+							</div>
+						</div>
+						
+						<div class="spaceBtnAcao">							
+							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{orgaoFormMBean.salvar()}" />
+							&nbsp;	
+							<h:button styleClass="btnAction  btn btn-primary" value="Cancelar" style="margin-left: 0px"  outcome="orgaoQualitativoList"  />						
+						</div>										
+					</div>
+				</div>	
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>
