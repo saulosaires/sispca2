@@ -25,9 +25,9 @@ public class UnidadeGestoraListMBean implements Serializable {
 	private static final long serialVersionUID = 5940179508090218836L;
 
 	public static final String FAIL_DELETE 	  = "Falha inesperada ao tentar deletar Unidade Gestora";
-	public static final String SUCCESS_DELETE = "Unidade Gestora deletadA com Sucesso";
+	public static final String SUCCESS_DELETE = "Unidade Gestora deletada com Sucesso";
 	public static final String FAIL_SEARCH 	  = "Falha ao pesquisar Unidade Gestora";
-	public static final String  NO_RECORDS	  = "NenhumA Unidade Gestora retornadA";
+	public static final String  NO_RECORDS	  = "Nenhuma Unidade Gestora retornada";
 	
 	private String codigo;
 	private String descricao;

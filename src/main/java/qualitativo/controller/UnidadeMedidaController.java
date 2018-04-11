@@ -25,6 +25,11 @@ public class UnidadeMedidaController extends AbstractController<UnidadeMedida>{
 	
 		return((UnidadeMedidaDAO)getDao()).findAllOrderByDescricao();
 	}
+
+	public  List<UnidadeMedida> buscar(String sigla, String descricao) {
+		return ((UnidadeMedidaDAO) getDao()).buscar(sigla, descricao);
+		
+	}
  
 	
 

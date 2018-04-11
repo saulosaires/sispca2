@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<legend class="outBusc">VISUALIZAÇÃO</legend>
+				</div>
+			</div>
+			<div class="spaceContainerForm">
+				<div class="container-fluid" style="margin-top: 3%;">
+					<div class="row">
+						<div class="col-lg-1">
+							<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(unidadeMedidaMBean.entity.sigla)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-5">
+							<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(unidadeMedidaMBean.entity.descricao)}" styleClass="labelInputText" />
+							
+						</div>																		
+					</div>
+					
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">		
+							<h:form>
+								<h:commandButton styleClass="btn btn-primary" action="#{unidadeMedidaMBean.getUrlList()}" value="Voltar" />
+							</h:form>
+						</div>
+					</div>
+		
+				</div>
+			</div>
+			
+			
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>
