@@ -42,11 +42,7 @@ public class TipoHorizonteTemporal extends Model {
 	//bi-directional many-to-one association to Programa
 	@OneToMany(mappedBy="tipoHorizonteTemporal")
 	private List<Programa> programas;
-
-	public TipoHorizonteTemporal() {
-		//empty constructor
-	}	
-
+ 
 	public Long getId() {
 		return id;
 	}

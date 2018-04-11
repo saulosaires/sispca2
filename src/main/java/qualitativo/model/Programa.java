@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,19 +50,18 @@ public class Programa extends Model implements  Auditable {
 	@Column(name="horizonte_temporal")
 	private String horizonteTemporal;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_orgao")
 	@NotNull(message="Órgão: campo é obrigatório")
-	private Orgao orgao;
+	private Orgao orgao = new Orgao();
 
-	@Column(name="id_programa_novo")
-	private Integer idProgramaNovo;
-
-	@ManyToOne
+ 
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_unidade_orcamentaria")
 	@NotNull(message="Unidade Orçamentária: campo é obrigatório")
-	private UnidadeOrcamentaria unidadeOrcamentaria;
+	private UnidadeOrcamentaria unidadeOrcamentaria = new UnidadeOrcamentaria();
 
+	@Column(name="justificativa")
 	private String justificativa;
 
 	@Temporal(TemporalType.DATE)
@@ -72,13 +72,16 @@ public class Programa extends Model implements  Auditable {
 	@Column(name="mes_termino")
 	private Date mesTermino;
 
+	@Column(name="objetivo")
 	private String objetivo;
 
+	@Column(name="problema")
 	private String problema;
 
 	@Column(name="publico_alvo")
 	private String publicoAlvo;
 
+	@Column(name="responsavel")
 	private String responsavel;
 
 	@Column(name="tipo_politica")
@@ -103,16 +106,16 @@ public class Programa extends Model implements  Auditable {
 	@OneToMany(mappedBy="programa")
 	private List<MacroObjetivo> macroObjetivos;
  
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_tipo_horizonte_temporal")
 	@NotNull(message="Tipo Horizonte Temporal: campo é obrigatório")
-	private TipoHorizonteTemporal tipoHorizonteTemporal;
+	private TipoHorizonteTemporal tipoHorizonteTemporal = new TipoHorizonteTemporal();
 
  
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_tipo_programa")
 	@NotNull(message="Tipo de Programa: campo é obrigatório")
-	private TipoPrograma tipoPrograma;
+	private TipoPrograma tipoPrograma = new TipoPrograma();
 
 	 
 
@@ -157,14 +160,7 @@ public class Programa extends Model implements  Auditable {
 	public void setHorizonteTemporal(String horizonteTemporal) {
 		this.horizonteTemporal = horizonteTemporal;
 	}
-
-	public Integer getIdProgramaNovo() {
-		return this.idProgramaNovo;
-	}
-
-	public void setIdProgramaNovo(Integer idProgramaNovo) {
-		this.idProgramaNovo = idProgramaNovo;
-	}
+ 
 
 
 	public String getJustificativa() {

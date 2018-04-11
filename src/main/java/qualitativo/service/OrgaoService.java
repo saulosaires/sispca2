@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import qualitativo.controller.OrgaoController;
+import qualitativo.dao.OrgaoDAO;
 import qualitativo.model.Orgao;
 
 public class OrgaoService extends AbstractService<Orgao>  {
@@ -33,6 +34,9 @@ public class OrgaoService extends AbstractService<Orgao>  {
 		 
 	}
 
- 
+	public List<Orgao> findAllOrderByDescricao() {
+		 
+		return ((OrgaoController)getController()).findAllOrderByDescricao();
+	}	
 
 }

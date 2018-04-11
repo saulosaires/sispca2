@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid row-fluid">
+					
+					<div class="outBusc">CADASTRO</div>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-1">
+								<h:outputText value="CÓDIGO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{programaFormMBean.programa.codigo}" styleClass="form-control input-sm"  maxlength="10" size="110"
+																				    required="true" requiredMessage="Código: campo obrigatório"/>
+							</div>
+							<div class="col-lg-5">
+								<h:outputText value="DENOMINAÇÃO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{programaFormMBean.programa.denominacao}" styleClass="form-control input-sm up"  required="true" 
+																															    requiredMessage="Denominacão: campo é obrigatório"/>
+							</div>							
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<hr class="linhaTransversal"/>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-2">
+								<h:outputText value="ÓRGÃO:  " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{programaFormMBean.programa.orgao.id}"   styleClass="form-control input-sm"
+									 															  required="true" requiredMessage="Orgão: campo é obrigatório" >
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+									<f:selectItems value="#{programaFormMBean.listOrgoes}" var="org" itemValue="#{org.id}" itemLabel="(#{org.codigo}) - #{fn:toUpperCase(org.descricao)}"/>
+								</h:selectOneMenu>
+							</div>
+							<div class="col-lg-2">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA:  " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{programaFormMBean.programa.unidadeOrcamentaria.id}" styleClass="form-control input-sm" required="true" requiredMessage="Unidade Orçamentária: campo é obrigatório" >	
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+									<f:selectItems value="#{programaFormMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="(#{unid.codigo}) - #{fn:toUpperCase(unid.descricao)}"/>
+								</h:selectOneMenu>							
+							</div>						
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<hr class="linhaTransversal"/>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-5">
+								<h:outputText value="PROBLEMA:  " styleClass="labelOutText"/>
+								<h:inputTextarea value="#{programaFormMBean.programa.problema}" styleClass="form-control input-sm up" rows="3"/>
+							</div>							
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-5">
+								<h:outputText value="OBJETIVO:  " styleClass="labelOutText"/>
+								<h:inputTextarea value="#{programaFormMBean.programa.objetivo}" styleClass="form-control input-sm up" rows="3"/>
+							</div>							
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-5">
+								<h:outputText value="PÚBLICO ALVO:  " styleClass="labelOutText"/>
+								<h:inputTextarea value="#{programaFormMBean.programa.publicoAlvo}" styleClass="form-control input-sm up" rows="3"/>
+							</div>							
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-5">
+								<h:outputText value="JUSTIFICATIVA:  " styleClass="labelOutText"/>
+								<h:inputTextarea value="#{programaFormMBean.programa.justificativa}" styleClass="form-control input-sm up" rows="3"/>
+							</div>							
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<hr class="linhaTransversal"/>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-2">
+								<h:outputText value="TIPO DE PROGRAMA:  " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{programaFormMBean.programa.tipoPrograma.id}" required="true" requiredMessage="Tipo de Programa: campo é obrigatório"  styleClass="form-control input-sm">
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>	
+									<f:selectItems value="#{programaFormMBean.listTipoPrograma}" var="tipProg" itemValue="#{tipProg.id}" itemLabel="#{fn:toUpperCase(tipProg.descricao)}"/>		
+								</h:selectOneMenu>
+							</div>
+							<div class="col-lg-2">
+								<h:outputText value="TIPO HORIZONTE TEMPORAL:  " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{programaFormMBean.programa.tipoHorizonteTemporal.id}" required="true" requiredMessage="Tipo Horizonte Temporal: campo é obrigatório" styleClass="form-control input-sm">
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>	
+									<f:selectItems value="#{programaFormMBean.listTipoHorizonteTemporal}" var="tipHor" itemValue="#{tipHor.id}" itemLabel="#{fn:toUpperCase(tipHor.descricao)}"/>		
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="spaceBtnAcao">
+							<h:commandButton styleClass="btnAction  btn btn-primary" value="Salvar" action="#{programaFormMBean.salvar()}" />
+							
+							&nbsp;	
+							<h:button styleClass="btnAction  btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="programaQualitativoList" immediate="true" />
+						</div>						
+								
+					</div>
+				</div>	
+
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

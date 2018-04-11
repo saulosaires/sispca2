@@ -136,6 +136,17 @@
 	</navigation-rule> 		
 	
 	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>programaQualitativoList</from-outcome>
+			<to-view-id>/private/qualitativo/programa/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 		
+	
+	
+	<navigation-rule>
 		<from-view-id>/public/login.xhtml</from-view-id>
 
 		<navigation-case>
@@ -316,5 +327,26 @@
 		</navigation-case> 
 
 	</navigation-rule>
+	
+	 <navigation-rule>
+		<from-view-id>/private/qualitativo/programa/list.xhtml</from-view-id>
+
+		 
+		 <navigation-case>
+			<from-outcome>qualitativoProgramaAdd</from-outcome>
+			<to-view-id>/private/qualitativo/programa/form.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoProgramaEdit</from-outcome>
+			<to-view-id>/private/qualitativo/programa/edit.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoProgramaView</from-outcome>
+			<to-view-id>/private/qualitativo/programa/view.xhtml</to-view-id>
+		</navigation-case> 
+
+	</navigation-rule>
+ 
+ 
  
 </faces-config>

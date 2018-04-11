@@ -25,6 +25,19 @@ public class OrgaoDAO extends AbstractDAO<Orgao> {
 
 	}
 
+	public List<Orgao> findAllOrderByDescricao() {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Orgao> query = cb.createQuery(Orgao.class);
+		Root<Orgao> m = query.from(Orgao.class);
+
+		query.select(m);
+		
+		query.orderBy(cb.asc(m.get("descricao")));
+
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	
 	public List<Orgao> buscar(String codigo,String sigla,String descricao) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

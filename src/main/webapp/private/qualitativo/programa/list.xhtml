@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+	
+			<h:form>				
+				<div class="container-fluid">
+					
+					<div class="row-fluid">
+						<ui:include src="/template/tutorial_form.xhtml" />
+					</div>
+					<div class="row-fluid">
+						<div class="span12">
+							<fieldset>
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="CÓDIGO: " />
+										</div>
+										<div class="span3">
+											<h:inputText id="inputBuscCod" value="#{programaListMBean.codigo}" styleClass="form-control input-sm" />	
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="DENOMINAÇÃO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="inputBuscDen" value="#{programaListMBean.denominacao}" styleClass="form-control input-sm up"  />
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="ÓRGÃO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:selectOneMenu id="inputMenuUnid" value="#{programaListMBean.orgao}" styleClass="form-control input-sm">
+												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+												<f:selectItems value="#{programaListMBean.listOrgoes}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org.descricao)}"/>
+											</h:selectOneMenu>											
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="TIPO PROGRAMA: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:selectOneMenu id="inputBuscTipProg"  value="#{programaListMBean.tipoPrograma}" styleClass="form-control input-sm">
+												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+												<f:selectItems value="#{programaListMBean.listTipoPrograma}" var="tipProg" itemValue="#{tipProg.id}" itemLabel="#{fn:toUpperCase(tipProg.descricao)}"/>
+											</h:selectOneMenu>		
+										</div>
+									</div>
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
+											<f:ajax
+												execute="@this inputBuscCod inputBuscDen inputMenuUnid inputBuscTipProg"
+												event="click" listener="#{programaListMBean.buscar()}"
+												render="tableProgr" />
+										</h:commandButton>
+										&nbsp;
+										<h:button value="Adicionar" outcome="qualitativoProgramaAdd" styleClass="btnAction btn btn-primary"  rendered="#{programaListMBean.salvar}"/>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<div class="outBusc">RESULTADOS</div>
+				</div>				
+				<center>
+					<p:dataTable value="#{programaListMBean.listPrograma}" var="prog" paginator="true" rows="10" styleClass="tableDados" id="tableProgr" 
+																	   emptyMessage="Não há programas a serem mostrados">
+						
+						<p:column headerText="CÓDIGO" style="width: 7%"  styleClass="outTextTable" sortBy="#{prog.codigo}">
+							<h:outputText value="#{fn:toUpperCase(prog.codigo)}"/>
+						</p:column>
+						<p:column headerText="DENOMINAÇÃO"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(prog.denominacao)}"/>
+						</p:column>
+						<p:column headerText="UNIDADE ORÇAMENTÁRIA"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(prog.unidadeOrcamentaria.descricao)}"/>
+						</p:column>
+						<p:column headerText="ÓRGÃO"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(prog.orgao.descricao)}"/>
+						</p:column>
+						
+							<p:column headerText="Operação" style="width: 14%;" footerText="Quantidade Total: ${fn:length(programaListMBean.listPrograma)}">
+								<center>
+								
+								<p:button title="Visualizar"  outcome="qualitativoProgramaView" icon="ui-icon-search"  rendered="#{programaListMBean.view}">
+								 	  <f:param name="id" value="#{prog.id}" /> 
+								</p:button>
+
+								<p:button title="Editar"  outcome="qualitativoProgramaEdit" icon="ui-icon-pencil"  rendered="#{programaListMBean.atualizar}">
+								 	  <f:param name="id" value="#{prog.id}" /> 
+								</p:button>
+							
+								<p:commandButton title="Deletar" actionListener="#{programaListMBean.deletar(prog)}" icon="ui-icon-trash" update="tableProgr"  rendered="#{programaListMBean.deletar}">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
+								</p:commandButton>	
+									
+								</center>
+							</p:column>						
+					</p:dataTable>
+				</center>	
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    		</p:confirmDialog>	
+    		
+    		</h:form>
+		</ui:define>
+	</ui:composition>	
+</body>
+</html>

@@ -26,4 +26,9 @@ public class OrgaoController extends AbstractController<Orgao> {
 		return ((OrgaoDAO)getDao()).buscar(codigo,sigla,descricao);
 	}
 
+	public List<Orgao> findAllOrderByDescricao() {
+		 
+		return ((OrgaoDAO)getDao()).findAllOrderByDescricao();
+	}	
+	
 }
