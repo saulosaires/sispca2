@@ -44,7 +44,7 @@
 												render="tablePlanos" />
 										</h:commandButton>
 										&nbsp;
-										<h:button value="Adicionar" outcome="qualitativoPlanoInternoAdd" styleClass="btnAction btn btn-primary"  />
+										<h:button value="Adicionar" outcome="qualitativoPlanoInternoAdd" styleClass="btnAction btn btn-primary"  rendered="#{planoInternoListMBean.salvar}"/>
 									</div>
 								</div>
 							</fieldset>
@@ -75,7 +75,7 @@
 						</p:column>			
 						
 						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable"
-							footerText="Quantidade Total: ${fn:length(planoInternoMBean.listPlanoInterno)}">
+							footerText="Quantidade Total: ${fn:length(planoInternoListMBean.listPlanoInterno)}">
 							<center>
 								
 								<p:button title="Visualizar"  outcome="qualitativoPlanoInternoView" icon="ui-icon-search"  rendered="#{planoInternoListMBean.view}">

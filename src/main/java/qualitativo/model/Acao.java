@@ -19,9 +19,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import arquitetura.utils.FormatoUtils;
@@ -114,7 +111,7 @@ public class Acao extends Model implements  Auditable {
 	@NotNull(message="Função: campo é obrigatório")
 	private Funcao funcao = new Funcao();
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_programa",nullable=false)
 	private Programa programa = new Programa();
 

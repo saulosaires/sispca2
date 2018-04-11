@@ -125,7 +125,15 @@
 		
 	</navigation-rule> 	
 	
-	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>planoInternoQualitativoList</from-outcome>
+			<to-view-id>/private/qualitativo/planointerno/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 		
 	
 	<navigation-rule>
 		<from-view-id>/public/login.xhtml</from-view-id>
@@ -276,19 +284,37 @@
 
 		 
 		 <navigation-case>
-			<from-outcome>add</from-outcome>
+			<from-outcome>qualitativoOrgaoAdd</from-outcome>
 			<to-view-id>/private/qualitativo/orgao/form.xhtml</to-view-id>
 		</navigation-case> 
 		<navigation-case>
-			<from-outcome>edit</from-outcome>
+			<from-outcome>qualitativoOrgaoEdit</from-outcome>
 			<to-view-id>/private/qualitativo/orgao/edit.xhtml</to-view-id>
 		</navigation-case> 
 		<navigation-case>
-			<from-outcome>view</from-outcome>
+			<from-outcome>qualitativoOrgaoView</from-outcome>
 			<to-view-id>/private/qualitativo/orgao/view.xhtml</to-view-id>
 		</navigation-case> 
 
 	</navigation-rule>	
 	
+	 <navigation-rule>
+		<from-view-id>/private/qualitativo/planointerno/list.xhtml</from-view-id>
+
+		 
+		 <navigation-case>
+			<from-outcome>qualitativoPlanoInternoAdd</from-outcome>
+			<to-view-id>/private/qualitativo/planointerno/form.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoPlanoInternoEdit</from-outcome>
+			<to-view-id>/private/qualitativo/planointerno/edit.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoPlanoInternoView</from-outcome>
+			<to-view-id>/private/qualitativo/planointerno/view.xhtml</to-view-id>
+		</navigation-case> 
+
+	</navigation-rule>
  
 </faces-config>

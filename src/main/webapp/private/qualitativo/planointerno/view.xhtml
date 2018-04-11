@@ -11,9 +11,16 @@
 <body> 
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
+		
+			 <f:metadata>
+	    		<f:viewParam name="id" value="#{planoInternoViewMBean.id}"/>
+	    		<f:viewAction action="#{planoInternoViewMBean.init}" />
+			 </f:metadata>
+		
+		
 			<div class="container-fluid">
 				<div class="row-fluid">
-					<legend class="outBusc">VISUALIZAÇÃO</legend>
+					<div class="outBusc">VISUALIZAÇÃO</div>
 				</div>
 			</div>
 			<div class="spaceContainerForm">
@@ -21,35 +28,35 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
-							<h:outputText value="#{fn:toUpperCase(planoInternoMBean.entity.cod)}" styleClass="labelInputText"/>
+							<h:outputText value="#{fn:toUpperCase(planoInternoViewMBean.planoInterno.sigla)}" styleClass="labelInputText"/>
 						</div>	
 					</div>	
 					
 					<div class="row" style="margin-top: 1%">
 						<div class="col-lg-4">
 							<h:outputText value="TITULO:  " styleClass="labelOutText"/>
-							<h:outputText value="#{fn:toUpperCase(planoInternoMBean.entity.titulo)}" styleClass="labelInputText"/>
+							<h:outputText value="#{fn:toUpperCase(planoInternoViewMBean.planoInterno.titulo)}" styleClass="labelInputText"/>
 						</div>	
 					</div>	
 					
 					<div class="row" style="margin-top: 1%">
 						<div class="col-lg-12" >
 							<h:outputText value="OBJETIVO:  " styleClass="labelOutText"/>
-							<h:outputText value="#{fn:toUpperCase(planoInternoMBean.entity.objetivo)}" styleClass="labelInputText"/>
+							<h:outputText value="#{fn:toUpperCase(planoInternoViewMBean.planoInterno.objetivo)}" styleClass="labelInputText"/>
 						</div>	
 					</div>	
 					
 					<div class="row" style="margin-top: 1%">
 						<div class="col-lg-12" >
 							<h:outputText value="AÇÃO:  " styleClass="labelOutText"/>
-							<h:outputText value="#{fn:toUpperCase(planoInternoMBean.entity.acao.denominacao)}" styleClass="labelInputText"/>
+							<h:outputText value="#{fn:toUpperCase(planoInternoViewMBean.planoInterno.acao.denominacao)}" styleClass="labelInputText"/>
 						</div>	
 					</div>	
 					
 					<div class="row-fluid" style="margin-top: 2%;">
 						<div class="spaceBtnAcao">					
 							<h:form>
-								<h:commandButton styleClass="btn btn-primary" action="#{planoInternoMBean.getUrlList()}" value="Voltar" />
+								<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="planoInternoQualitativoList" immediate="true" />
 							</h:form>
 						</div>
 					</div>				
