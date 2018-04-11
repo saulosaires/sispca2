@@ -55,6 +55,9 @@ public class PlanoInternoEditMBean implements Serializable {
 
 			planoInterno = service.findById(id);
 
+			if(planoInterno.getAcao()!=null)
+				planoInterno.setAcao(new Acao(planoInterno.getAcao().getId()));
+			
 		}
 
 	}

@@ -159,7 +159,12 @@ public class Acao extends Model implements  Auditable {
 	@Column(name="observacao",length=2000)
 	private String observacao;
  
-
+	public Acao() {}
+	
+	public Acao(Long id) {
+		this.id=id;
+	}
+	
 	public Long getId() {
 		return id;
 	}

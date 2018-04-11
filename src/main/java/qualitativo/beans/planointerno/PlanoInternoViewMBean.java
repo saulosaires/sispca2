@@ -10,6 +10,7 @@ import javax.inject.Named;
 import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
 import qualitativo.model.PlanoInterno;
+import qualitativo.service.AcaoService;
 import qualitativo.service.PlanoInternoService;
 
 @Named
@@ -27,14 +28,15 @@ public class PlanoInternoViewMBean implements Serializable {
 	private PlanoInterno planoInterno = new PlanoInterno();
 	
 	private PlanoInternoService service; 
+	private AcaoService acaoService;
 	
 	private List<Acao> listAcao;
 	
 	@Inject
-	public PlanoInternoViewMBean(PlanoInternoService service ) {
+	public PlanoInternoViewMBean(PlanoInternoService service,AcaoService acaoService ) {
 		
 		this.service = service;
- 
+		this.acaoService=acaoService;
 	}
 
 	public void init() {
@@ -42,6 +44,10 @@ public class PlanoInternoViewMBean implements Serializable {
 		if (!Utils.invalidId(id)) {
 
 			planoInterno = service.findById(id);
+			
+			if(planoInterno.getAcao()!=null && !Utils.invalidId(planoInterno.getAcao().getId())) {
+				planoInterno.setAcao(acaoService.findById(planoInterno.getAcao().getId()));
+			}
 
 		}
 
