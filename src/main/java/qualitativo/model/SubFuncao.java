@@ -47,6 +47,12 @@ public class SubFuncao extends Model  {
 	@JoinColumn(name = "id_funcao")
 	private Funcao funcao;
  
+	public SubFuncao() {}
+	
+	public SubFuncao(Long id) {
+		this.id=id;
+	}
+	
 	public Long getId() {
 		return id;
 	}

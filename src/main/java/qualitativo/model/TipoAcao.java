@@ -36,6 +36,12 @@ public class TipoAcao extends Model  {
 	@OneToMany(mappedBy="tipoAcao")
 	private List<Acao> acaos;
  
+	public TipoAcao() {}
+	
+	public TipoAcao(Long id){
+		this.id=id;
+	}
+	
 	public Long getId() {
 		return this.id;
 	}

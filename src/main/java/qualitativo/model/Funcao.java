@@ -37,6 +37,12 @@ public class Funcao extends Model  {
 	@OneToMany(mappedBy = "funcao")
 	private List<SubFuncao> subfuncaos;
 
+	public Funcao() {}
+	
+	public Funcao(Long id) {
+		this.id=id;
+	}
+	
 	public Long getId() {
 		return id;
 	}

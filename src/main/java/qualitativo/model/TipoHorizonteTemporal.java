@@ -43,6 +43,10 @@ public class TipoHorizonteTemporal extends Model {
 	@OneToMany(mappedBy="tipoHorizonteTemporal")
 	private List<Programa> programas;
  
+	public TipoHorizonteTemporal() {}
+
+	public TipoHorizonteTemporal(Long id) {this.id=id;}
+	
 	public Long getId() {
 		return id;
 	}

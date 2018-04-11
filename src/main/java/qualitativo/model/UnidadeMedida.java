@@ -42,7 +42,10 @@ public class UnidadeMedida extends Model implements  Auditable {
 	@OneToMany(mappedBy="unidadeMedida")
 	private List<EtapasExecucao> etapasExecucaos;
  
+	public UnidadeMedida() {}
 
+	public UnidadeMedida(Long id) {this.id=id;}
+	
 	public Long getId() {
 		return id;
 	}

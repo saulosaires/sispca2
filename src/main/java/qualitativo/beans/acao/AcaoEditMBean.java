@@ -41,8 +41,9 @@ public class AcaoEditMBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
-
-	public static final String FAIL_SAVE = "Falha inesperada ao tentar Salvar Ação";
+	
+	public static final String SUCCESS="Ação alterada com sucesso";
+	public static final String FAIL = "Falha inesperada ao tentar Alterar Ação";
 	 
 	private Long id;
 	
@@ -118,13 +119,13 @@ public class AcaoEditMBean implements Serializable {
 			acaoValidate.beforePersist(acao);
 			
 			acaoService.update(acao);
-
+			Messages.addMessageInfo(SUCCESS);
 			return "acaoQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
-			Messages.addMessageError(FAIL_SAVE);
+			Messages.addMessageError(FAIL);
 		}
 
 		return "";

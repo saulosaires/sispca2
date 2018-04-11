@@ -117,8 +117,10 @@ public class Programa extends Model implements  Auditable {
 	@NotNull(message="Tipo de Programa: campo é obrigatório")
 	private TipoPrograma tipoPrograma = new TipoPrograma();
 
-	 
+	public Programa() {}
 
+	public Programa(Long id) {this.id=id;}
+	
 	public Long getId() {
 		return id;
 	}

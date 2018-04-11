@@ -72,7 +72,7 @@ public class Acao extends Model implements  Auditable {
 	@JoinColumn(name="id_orgao")
 	private Orgao orgao = null;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_unidade_orcamentaria")
 	@NotNull(message="Unidade Orçamentária: campo é obrigatório")
 	private UnidadeOrcamentaria unidadeOrcamentaria = new UnidadeOrcamentaria();

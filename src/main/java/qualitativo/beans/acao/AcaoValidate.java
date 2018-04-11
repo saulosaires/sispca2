@@ -90,41 +90,64 @@ public class AcaoValidate implements Validate<Acao>,Serializable{
 
 	public Acao init(Acao acao) {
  
+		if(acao.getPrograma()==null) {
+			acao.setPrograma(new Programa());	
+		}else {
+			acao.setPrograma(new Programa(acao.getPrograma().getId()));
+		}
 		
 		if(acao.getUnidadeOrcamentaria()==null) {
 			acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());	
+		}else {
+			acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria(acao.getUnidadeOrcamentaria().getId()));
 		}
 		
 		if(acao.getFuncao()==null) {
 			acao.setFuncao(new Funcao());	
+		}else {
+			acao.setFuncao(new Funcao(acao.getFuncao().getId()));
 		}
 		
 		if(acao.getSubfuncao()==null) {
 			acao.setSubfuncao(new SubFuncao());	
+		}else {
+			acao.setSubfuncao(new SubFuncao(acao.getSubfuncao().getId()));
 		}
 
 		if(acao.getTipoAcao()==null) {
 			acao.setTipoAcao(new TipoAcao());	
+		}else {
+			acao.setTipoAcao(new TipoAcao(acao.getTipoAcao().getId()));	
 		}
 		
 		if(acao.getTipoCalculoMeta()==null) {
 			acao.setTipoCalculoMeta(new TipoCalculoMeta());	
+		}else {
+			acao.setTipoCalculoMeta(new TipoCalculoMeta(acao.getTipoCalculoMeta().getId()));	
 		}
 		
 		if(acao.getTipoFormaImplementacao()==null) {
 			acao.setTipoFormaImplementacao(new TipoFormaImplementacao());	
+		}else {
+			acao.setTipoFormaImplementacao(new TipoFormaImplementacao(acao.getTipoFormaImplementacao().getId()));
 		}
 		
 		if(acao.getTipoHorizonteTemporal()==null) {
 			acao.setTipoHorizonteTemporal(new TipoHorizonteTemporal());	
+		}else {
+			acao.setTipoHorizonteTemporal(new TipoHorizonteTemporal(acao.getTipoHorizonteTemporal().getId()));
 		}
 
 		if(acao.getTipoOrcamento()==null) {
 			acao.setTipoOrcamento(new TipoOrcamento());	
+		}else {
+			acao.setTipoOrcamento(new TipoOrcamento(acao.getTipoOrcamento().getId()));	
 		}
 		
 		if(acao.getUnidadeMedida()==null) {
 			acao.setUnidadeMedida(new UnidadeMedida());	
+		}else {
+			acao.setUnidadeMedida(new UnidadeMedida(acao.getUnidadeMedida().getId()));	
 		}
 	
 		

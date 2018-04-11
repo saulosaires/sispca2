@@ -33,6 +33,10 @@ public class TipoOrcamento extends Model  {
 	@OneToMany(mappedBy="tipoOrcamento")
 	private List<Acao> acaos;
  
+	public TipoOrcamento() {}
+
+	public TipoOrcamento(Long id) {this.id=id;}
+	
 	public Long getId() {
 		return id;
 	}

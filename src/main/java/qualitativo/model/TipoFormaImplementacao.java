@@ -36,8 +36,10 @@ public class TipoFormaImplementacao extends Model {
 	@OneToMany(mappedBy="tipoFormaImplementacao")
 	private List<Acao> acaos;
 
-	public TipoFormaImplementacao() {
-		//empty constructor
+	public TipoFormaImplementacao() {}	
+	
+	public TipoFormaImplementacao(Long id) {
+		 this.id=id;
 	}	
 
 	public Long getId() {
