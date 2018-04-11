@@ -66,6 +66,13 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/qualitativo/programa/edit.xhtml","planejamentoQualitativoProgramaAtualizar");
 		mapLinks.put("/sispca2/private/qualitativo/programa/view.xhtml","planejamentoQualitativoProgramaVisualizar");
 		
+		mapLinks.put("/sispca2/private/qualitativo/unidadegestora/list.xhtml","planejamentoQualitativoUnidadeGestoraListar");
+		mapLinks.put("/sispca2/private/qualitativo/unidadegestora/form.xhtml","planejamentoQualitativoUnidadeGestoraSalvar");
+		mapLinks.put("/sispca2/private/qualitativo/unidadegestora/edit.xhtml","planejamentoQualitativoUnidadeGestoraAtualizar");
+		mapLinks.put("/sispca2/private/qualitativo/unidadegestora/view.xhtml","planejamentoQualitativoUnidadeGestoraVisualizar");
+		
+		
+		
 	}
 
 	private  ViewMap() {

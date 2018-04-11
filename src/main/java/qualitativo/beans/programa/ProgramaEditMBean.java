@@ -31,8 +31,8 @@ public class ProgramaEditMBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
-
-	public static final String FAIL_SAVE = "Falha inesperada ao tentar Atualizar Programa";
+	public static final String  SUCCESS="Programa atualizado com sucesso";
+	public static final String FAIL = "Falha inesperada ao tentar Atualizar Programa";
    
 	 
 	private Long id;
@@ -86,13 +86,13 @@ public class ProgramaEditMBean implements Serializable {
 			 
 			
 			service.update(programa);
-
+			Messages.addMessageInfo(SUCCESS);
 			return "programaQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
-			Messages.addMessageError(FAIL_SAVE);
+			Messages.addMessageError(FAIL);
 		}
 
 		return "";

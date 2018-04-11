@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			
+			 <f:metadata>
+	    		<f:viewParam name="id" value="#{unidadeGestoraEditMBean.id}"/>
+	    		<f:viewAction action="#{unidadeGestoraEditMBean.init}" />
+			 </f:metadata>
+			
+			
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid row-fluid">
+					 
+					<div class="outBusc">ATUALIZAÇÃO</div>
+				</div>
+				<div class="spaceContainerForm">
+					<div class="container-fluid" style="margin-top: 2%;">	
+						<div class="row">
+							<div class="col-lg-1">
+								<h:outputText value="CÓDIGO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{unidadeGestoraEditMBean.unidadeGestora.codigo}" styleClass="form-control input-sm"  required="true" requiredMessage="Código: campo obrigatório" maxlength="10" size="110"/>
+							</div>
+						</div>	
+						<div class="row" style="margin-top: 1%;">
+							<hr class="linhaTransversal"></hr>						
+						</div>						
+						<div class="row"  style="margin-top: 1%;">
+							<div class="col-lg-1">
+								<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
+								<h:inputText value="#{unidadeGestoraEditMBean.unidadeGestora.sigla}" styleClass="form-control input-sm up" required="true" requiredMessage="Sigla: campo obrigatório"/>	
+							</div>
+							<div class="col-lg-3">
+								<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText"/>
+								<h:inputText value="#{unidadeGestoraEditMBean.unidadeGestora.descricao}" styleClass="form-control input-sm"  required="true" requiredMessage="Descrição: campo obrigatório"/>								
+							</div>						
+						</div>	
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-4">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA:  " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{unidadeGestoraEditMBean.unidadeGestora.unidadeOrcamentaria.id}"  styleClass="form-control input-sm"
+												 required="true" requiredMessage="Unidade Orçamentária: campo é obrigatório" >
+									<f:selectItem itemLabel="--SELECIONE--" itemValue="#{null}"/>
+									<f:selectItems value="#{unidadeGestoraEditMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="(#{uo.codigo}) - #{fn:toUpperCase(uo.descricao)}"/>
+								</h:selectOneMenu>
+							</div>						
+						</div>				
+						
+						<div class="spaceBtnAcao">							
+							<h:commandButton styleClass="btnAction btn btn-primary" value="Atualizar" action="#{unidadeGestoraEditMBean.atualizar()}" />
+							&nbsp;	
+							<h:button styleClass="btnAction  btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="unidadeGestoraQualitativoList" immediate="true" />			
+						</div>
+									
+					</div>
+				</div>
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

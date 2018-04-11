@@ -62,8 +62,10 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	@OneToMany(mappedBy="unidadeOrcamentaria")
 	private List<Acao> acaos;
 
-	public UnidadeOrcamentaria() {
-		//empty constructor
+	public UnidadeOrcamentaria() {}
+	
+	public UnidadeOrcamentaria(Long id) {
+		this.id=id;
 	}
 	
 
