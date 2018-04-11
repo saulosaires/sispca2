@@ -24,8 +24,8 @@ public class UnidadeGestoraFormMBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
-
-	public static final String FAIL_SAVE = "Falha inesperada ao tentar Salvar UnidadeGestora";
+	public static final String SUCCESS = "Unidade Gestora salva com sucesso";
+	public static final String FAIL = "Falha inesperada ao tentar Salvar Unidade Gestora";
   
 	
 	private UnidadeGestora unidadeGestora = new UnidadeGestora();
@@ -58,15 +58,18 @@ public class UnidadeGestoraFormMBean implements Serializable {
 				return "";
 			}
 			 
+			validate.beforeMerge(unidadeGestora);
 			
 			service.create(unidadeGestora);
-
+			
+			Messages.addMessageInfo(SUCCESS);
+			
 			return "unidadeGestoraQualitativoList";
 
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getLocalizedMessage());
 
-			Messages.addMessageError(FAIL_SAVE);
+			Messages.addMessageError(FAIL);
 		}
 
 		return "";

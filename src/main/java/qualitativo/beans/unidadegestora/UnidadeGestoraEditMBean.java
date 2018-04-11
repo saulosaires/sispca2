@@ -73,7 +73,8 @@ public class UnidadeGestoraEditMBean implements Serializable {
 				return "";
 			}
 			 
- 			
+			validate.beforeMerge(unidadeGestora);
+			
 			service.update(unidadeGestora);
 			
 			Messages.addMessageInfo(SUCCESS);

@@ -8,7 +8,9 @@ import javax.inject.Named;
 
 import arquitetura.utils.Utils;
 import qualitativo.model.UnidadeGestora;
+import qualitativo.model.UnidadeOrcamentaria;
 import qualitativo.service.UnidadeGestoraService;
+import qualitativo.service.UnidadeOrcamentariaService;
 
 @Named
 @ViewScoped
@@ -25,12 +27,13 @@ public class UnidadeGestoraViewMBean implements Serializable {
 	private UnidadeGestora unidadeGestora = new UnidadeGestora();
 
 	private UnidadeGestoraService service;
+	private UnidadeOrcamentariaService orcamentariaService;
 
 	@Inject
-	public UnidadeGestoraViewMBean(UnidadeGestoraService service) {
+	public UnidadeGestoraViewMBean(UnidadeGestoraService service,UnidadeOrcamentariaService orcamentariaService) {
 
 		this.service = service;
-
+		this.orcamentariaService=orcamentariaService;
 	}
 
 	public void init() {
@@ -39,6 +42,8 @@ public class UnidadeGestoraViewMBean implements Serializable {
 
 			unidadeGestora = service.findById(id);
 
+			Long idUo = unidadeGestora.getUnidadeOrcamentaria().getId();
+			unidadeGestora.setUnidadeOrcamentaria(orcamentariaService.findById(idUo));
 		}
 
 	}
