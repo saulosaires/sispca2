@@ -46,7 +46,10 @@ public class Orgao extends Model implements   Auditable  {
 	@OneToMany(mappedBy = "orgao", fetch = FetchType.LAZY)
 	private List<Programa> programas;
  
+	public Orgao() { }
 
+	public Orgao(Long id) { this.id=id;}
+	
 	public Long getId() {
 		return this.id;
 	}

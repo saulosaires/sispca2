@@ -40,7 +40,7 @@ public class ProgramaEditMBean implements Serializable {
 	private Programa programa = new Programa();
 	
 	private ProgramaService service;
-	
+ 	
 	private ProgramaValidate validate;
 	
 	private List<Orgao> listOrgoes;
@@ -50,12 +50,15 @@ public class ProgramaEditMBean implements Serializable {
 	
 	
 	@Inject
-	public ProgramaEditMBean(ProgramaService service,ProgramaValidate validate, 	OrgaoService orgaoService,
-						     UnidadeOrcamentariaService unidadeOrcamentariaService, TipoProgramaService tipoProgramaService,
+	public ProgramaEditMBean(ProgramaService service,
+			 				 ProgramaValidate validate, 	
+							 OrgaoService orgaoService,
+						     UnidadeOrcamentariaService unidadeOrcamentariaService, 
+						     TipoProgramaService tipoProgramaService,
 						     TipoHorizonteTemporalService tipoHorizonteTemporalService) {
 		
-		this.service = service;
-	
+		this.service = service; 
+		
 		this.validate =validate;
   
 		listTipoPrograma	      = tipoProgramaService.findAll();
@@ -72,6 +75,22 @@ public class ProgramaEditMBean implements Serializable {
 
 			programa = service.findById(id);
 
+			if(programa.getOrgao()!=null && !Utils.invalidId(programa.getOrgao().getId())) {
+			   programa.setOrgao(new Orgao(programa.getOrgao().getId()));
+			}
+			
+			if(programa.getUnidadeOrcamentaria()!=null && !Utils.invalidId(programa.getUnidadeOrcamentaria().getId())) {
+			   programa.setUnidadeOrcamentaria(new UnidadeOrcamentaria(programa.getUnidadeOrcamentaria().getId()));
+			}
+			
+			if(programa.getTipoPrograma()!=null && !Utils.invalidId(programa.getTipoPrograma().getId())) {
+			   programa.setTipoPrograma(new TipoPrograma(programa.getTipoPrograma().getId()));
+			}
+
+			if(programa.getTipoHorizonteTemporal()!=null && !Utils.invalidId(programa.getTipoHorizonteTemporal().getId())) {
+			   programa.setTipoHorizonteTemporal(new TipoHorizonteTemporal(programa.getTipoHorizonteTemporal().getId()));
+			}
+			
 		}
 
 	}

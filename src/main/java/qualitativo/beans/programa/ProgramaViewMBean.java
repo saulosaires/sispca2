@@ -24,7 +24,11 @@ import qualitativo.model.Programa;
 import qualitativo.model.TipoHorizonteTemporal;
 import qualitativo.model.TipoPrograma;
 import qualitativo.model.UnidadeOrcamentaria;
+import qualitativo.service.OrgaoService;
 import qualitativo.service.ProgramaService;
+import qualitativo.service.TipoHorizonteTemporalService;
+import qualitativo.service.TipoProgramaService;
+import qualitativo.service.UnidadeOrcamentariaService;
 
 @Named
 @ViewScoped
@@ -45,7 +49,11 @@ public class ProgramaViewMBean implements Serializable {
 	private Programa programa = new Programa();
 	
 	private ProgramaService service;
-	 
+
+	private OrgaoService orgaoService;
+	private UnidadeOrcamentariaService unidadeOrcamentariaService; 
+	private TipoProgramaService tipoProgramaService;
+	private TipoHorizonteTemporalService tipoHorizonteTemporalService;
 	
 	private List<Orgao> listOrgoes;
 	private List<UnidadeOrcamentaria> listUnidadeOrcamentaria;
@@ -54,9 +62,17 @@ public class ProgramaViewMBean implements Serializable {
 	
 	
 	@Inject
-	public ProgramaViewMBean(ProgramaService service) {
+	public ProgramaViewMBean(ProgramaService service,
+							 OrgaoService orgaoService,
+						     UnidadeOrcamentariaService unidadeOrcamentariaService, 
+						     TipoProgramaService tipoProgramaService,
+						     TipoHorizonteTemporalService tipoHorizonteTemporalService) {
 		
 		this.service = service; 
+		this.orgaoService=orgaoService;
+		this.unidadeOrcamentariaService=unidadeOrcamentariaService;
+		this.tipoProgramaService=tipoProgramaService;
+		this.tipoHorizonteTemporalService=tipoHorizonteTemporalService;
 		
 	}
 
@@ -65,6 +81,23 @@ public class ProgramaViewMBean implements Serializable {
 		if (!Utils.invalidId(id)) {
 
 			programa = service.findById(id);
+			
+			if(programa.getOrgao()!=null && !Utils.invalidId(programa.getOrgao().getId())) {
+			   programa.setOrgao(orgaoService.findById(programa.getOrgao().getId()));
+			}
+			
+			if(programa.getUnidadeOrcamentaria()!=null && !Utils.invalidId(programa.getUnidadeOrcamentaria().getId())) {
+			   programa.setUnidadeOrcamentaria(unidadeOrcamentariaService.findById(programa.getUnidadeOrcamentaria().getId()));
+			}
+			
+			if(programa.getTipoPrograma()!=null && !Utils.invalidId(programa.getTipoPrograma().getId())) {
+			   programa.setTipoPrograma(tipoProgramaService.findById(programa.getTipoPrograma().getId()));
+			}
+
+			if(programa.getTipoHorizonteTemporal()!=null && !Utils.invalidId(programa.getTipoHorizonteTemporal().getId())) {
+			   programa.setTipoHorizonteTemporal(tipoHorizonteTemporalService.findById(programa.getTipoHorizonteTemporal().getId()));
+			}
+
 
 		}
 

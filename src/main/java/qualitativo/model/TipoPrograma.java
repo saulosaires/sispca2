@@ -33,12 +33,13 @@ public class TipoPrograma extends Model {
 	@Column(name="descricao")
 	private String descricao;
 	 
-
-	//bi-directional many-to-one association to Programa
 	@OneToMany(mappedBy="tipoPrograma")
 	private List<Programa> programas;
  
-
+	public TipoPrograma() {}
+	
+	public TipoPrograma(Long id) {this.id=id;}
+	
 	public Long getId() {
 		return this.id;
 	}
