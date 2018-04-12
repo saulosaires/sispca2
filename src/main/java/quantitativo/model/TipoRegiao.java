@@ -33,10 +33,7 @@ public class TipoRegiao extends Model{
 	
 	@OneToMany(mappedBy="tipoRegiao",fetch=FetchType.LAZY)
 	private List<Regiao> listRegiao;
-
-	public TipoRegiao() {
-		//Empty constructor
-	}
+ 
 	
 	public Long getId() {
 		return id;

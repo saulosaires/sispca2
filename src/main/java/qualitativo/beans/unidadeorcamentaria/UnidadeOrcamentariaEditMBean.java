@@ -67,7 +67,7 @@ public class UnidadeOrcamentariaEditMBean implements Serializable {
 				return "";
 			}
  			
-			service.update(unidadeOrcamentaria);
+			unidadeOrcamentaria= service.update(unidadeOrcamentaria);
 
 			Messages.addMessageInfo(SUCCESS);
 

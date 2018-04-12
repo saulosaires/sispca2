@@ -18,10 +18,6 @@ import arquitetura.model.Model;
 import qualitativo.model.Acao;
  
 
-/**
- * The persistent class for the fisico_financeiro database table.
- * 
- */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="fisico_financeiro", schema="monitoramento")
@@ -48,7 +44,6 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	@NotNull(message="Campo Obrigatório")
 	private Acao acao;
 
-	//bi-directional many-to-one association to Localizador
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_localizador")
 	private Localizador localizador;
@@ -56,10 +51,7 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_regiao_municipio")
 	private RegiaoMunicipio regiaoMunicipio;
-	
-	public FisicoFinanceiro() { 
-		//empty constructor
-	}
+	 
 
 	public Long getId() {
 		return this.id;

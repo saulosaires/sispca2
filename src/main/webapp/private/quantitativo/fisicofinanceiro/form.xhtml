@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+
+	 		 <f:metadata>
+	    			<f:viewParam name="id" value="#{fisicoFinanceiroAnualFormMBean.id}"/>
+	    			<f:viewAction action="#{fisicoFinanceiroAnualFormMBean.init}" />
+			 </f:metadata>
+
+			<div class="container-fluid">
+				 
+				<div class="outBusc">Planejamento Fisico Financeiro</div>
+			</div>
+			
+			<h:form id="form">
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="AÇÃO: " />
+								<h:outputText value="#{fisicoFinanceiroAnualFormMBean.acao.codigo} - #{fn:toUpperCase(fisicoFinanceiroAnualFormMBean.acao.denominacao)}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="ORGÃO: " />
+								<h:outputText value="#{fisicoFinanceiroAnualFormMBean.acao.orgao.codigo} - #{fn:toUpperCase(fisicoFinanceiroAnualFormMBean.acao.orgao.descricao)}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="UNIDADE ORÇAMENTÁRIA: " />
+								<h:outputText value="#{fisicoFinanceiroAnualFormMBean.acao.unidadeOrcamentaria.codigo} - #{fn:toUpperCase(fisicoFinanceiroAnualFormMBean.acao.unidadeOrcamentaria.descricao)}"
+									styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="PROGRAMA: " />
+								<h:outputText value="#{fisicoFinanceiroAnualFormMBean.acao.programa.codigo} - #{fn:toUpperCase(fisicoFinanceiroAnualFormMBean.acao.programa.denominacao)}" 
+									styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="UNIDADE: " />
+								<h:outputText value="#{fn:toUpperCase(fisicoFinanceiroAnualFormMBean.acao.unidadeMedida.descricao)}" 
+									styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="PRODUTO: " />
+								<h:outputText value="#{fn:toUpperCase(fisicoFinanceiroAnualFormMBean.acao.produto)}"  styleClass="labelInputText"/>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText styleClass="labelOutText" value="TIPO DE REGIÃO" />
+								<h:selectOneMenu id="inputTipoRegiao"   value="#{fisicoFinanceiroAnualFormMBean.tipoRegiaoId}" 
+																	    styleClass="form-control input-sm m-bot15">
+																	   
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{fisicoFinanceiroAnualFormMBean.listTipoRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
+									<f:selectItem itemValue="#{-1}" itemLabel="--TODAS--" />
+									<p:ajax event="change" update="inputRegiao" listener="#{fisicoFinanceiroAnualFormMBean.onChangeTipoRegiao()}" />
+									
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText styleClass="labelOutText" value="REGIÃO" />
+								<h:selectOneMenu id="inputRegiao"   value="#{fisicoFinanceiroAnualFormMBean.regiaoId}" styleClass="form-control input-sm m-bot15">
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{fisicoFinanceiroAnualFormMBean.listRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
+									
+									<f:ajax event="change" render="@form" execute="@this" listener="#{fisicoFinanceiroAnualFormMBean.onChangeRegiao()}" />
+									
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						 
+					 
+						 
+					</div>
+				</div>
+				 
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -57,6 +58,7 @@ public class UnidadeOrcamentariaListMBean implements Serializable {
 		
 	}
 
+	
 	public void buscar() {
 
 		try {
