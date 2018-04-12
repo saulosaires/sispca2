@@ -11,26 +11,32 @@
 <body> 
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
+		
+			 <f:metadata>
+	    		<f:viewParam name="id" value="#{unidadeMedidaEditMBean.id}"/>
+	    		<f:viewAction action="#{unidadeMedidaEditMBean.init}" />
+			 </f:metadata>
+		
 			<h:form acceptcharset="UTF-8">
 				<div class="container-fluid row-fluid">
-					<div class="outBusc">CADASTRO</div>
+					<div class="outBusc">ATUALIZAÇÃO</div>
 				</div>
 				<div class="spaceContainerForm">
 					<div class="container-fluid">						
 						<div class="row">
 							<div class="col-lg-1">
 								<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
-								<h:inputText value="#{unidadeMedidaFormMBean.unidadeMedida.sigla}"  styleClass="form-control input-sm up" required="true" maxlength="10" requiredMessage="Sigla: campo é obrigatório"
+								<h:inputText value="#{unidadeMedidaEditMBean.unidadeMedida.sigla}"  styleClass="form-control input-sm up" required="true" maxlength="10" requiredMessage="Sigla: campo é obrigatório"
 									/>
 							</div>
 							<div class="col-lg-5">
 								<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText"/>
-								<h:inputText value="#{unidadeMedidaFormMBean.unidadeMedida.descricao}" styleClass="form-control input-sm up" required="true" requiredMessage="Descrição: campo é obrigatório"/>
+								<h:inputText value="#{unidadeMedidaEditMBean.unidadeMedida.descricao}" styleClass="form-control input-sm up" required="true" requiredMessage="Descrição: campo é obrigatório"/>
 							</div>																		
 						</div>
 						
 						<div class="spaceBtnAcao">
-							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{unidadeMedidaFormMBean.salvar()}"  />
+							<h:commandButton styleClass=" btnAction btn btn-primary" value="Atualizar" action="#{unidadeMedidaEditMBean.atualizar()}"  />
 							&nbsp;	
 							<h:button value="Voltar" outcome="unidadeMedidaQualitativoList" styleClass="btnAction btn btn-primary" />
 						</div>			

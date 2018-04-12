@@ -11,9 +11,16 @@
 <body> 
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
+		
+			<f:metadata>
+	    		<f:viewParam name="id" value="#{unidadeMedidaViewMBean.id}"/>
+	    		<f:viewAction action="#{unidadeMedidaViewMBean.init}" />
+			 </f:metadata>
+		
+		
 			<div class="container-fluid">
 				<div class="row-fluid">
-					<legend class="outBusc">VISUALIZAÇÃO</legend>
+					<div class="outBusc">VISUALIZAÇÃO</div>
 				</div>
 			</div>
 			<div class="spaceContainerForm">
@@ -21,11 +28,11 @@
 					<div class="row">
 						<div class="col-lg-1">
 							<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
-							<h:outputText value="#{fn:toUpperCase(unidadeMedidaMBean.entity.sigla)}" styleClass="labelInputText"/>
+							<h:outputText value="#{fn:toUpperCase(unidadeMedidaViewMBean.unidadeMedida.sigla)}" styleClass="labelInputText"/>
 						</div>
 						<div class="col-lg-5">
 							<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText"/>
-							<h:outputText value="#{fn:toUpperCase(unidadeMedidaMBean.entity.descricao)}" styleClass="labelInputText" />
+							<h:outputText value="#{fn:toUpperCase(unidadeMedidaViewMBean.unidadeMedida.descricao)}" styleClass="labelInputText" />
 							
 						</div>																		
 					</div>
@@ -33,7 +40,7 @@
 					<div class="row-fluid" style="margin-top: 2%;">
 						<div class="spaceBtnAcao">		
 							<h:form>
-								<h:commandButton styleClass="btn btn-primary" action="#{unidadeMedidaMBean.getUrlList()}" value="Voltar" />
+								<h:button value="Voltar" outcome="unidadeMedidaQualitativoList" styleClass="btnAction btn btn-primary" />
 							</h:form>
 						</div>
 					</div>

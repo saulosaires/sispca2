@@ -155,6 +155,15 @@
 		
 	</navigation-rule> 	
 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>unidadeMedidaQualitativoList</from-outcome>
+			<to-view-id>/private/qualitativo/unidademedida/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 	
 	
 	<navigation-rule>
 		<from-view-id>/public/login.xhtml</from-view-id>
@@ -376,5 +385,24 @@
 
 	</navigation-rule>
  
+	 <navigation-rule>
+		<from-view-id>/private/qualitativo/unidademedida/list.xhtml</from-view-id>
+
+		 
+		 <navigation-case>
+			<from-outcome>qualitativoUnidadeMedidaAdd</from-outcome>
+			<to-view-id>/private/qualitativo/unidademedida/form.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoUnidadeMedidaEdit</from-outcome>
+			<to-view-id>/private/qualitativo/unidademedida/edit.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-outcome>qualitativoUnidadeMedidaView</from-outcome>
+			<to-view-id>/private/qualitativo/unidademedida/view.xhtml</to-view-id>
+		</navigation-case> 
+
+	</navigation-rule>
+
  
 </faces-config>

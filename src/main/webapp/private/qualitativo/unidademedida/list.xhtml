@@ -8,7 +8,6 @@
 
 <h:head>
 
-
 </h:head>
 <body>
 	<ui:composition template="/template/template.xhtml">
@@ -16,10 +15,7 @@
 			<h:form>
 				<div class="container-fluid">
 					<div class="row-fluid">
-						<p:messages autoUpdate="true" closable="true"/>
-					</div>
-					<div class="row-fluid">
-						<ui:include src="/pages/page_advertencia_crud.xhtml"/>
+						<ui:include src="/template/tutorial_form.xhtml" />
 					</div>
 					<div class="row-fluid">
 						<div class="span12">
@@ -30,11 +26,7 @@
 											<h:outputText value="DESCRIÇÃO: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="selecDesc" value="#{unidadeMedidaMBean.buscaDescricao}" styleClass="form-control input-sm">
-												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{unidadeMedidaMBean.listUnidadeMedida}" var="medida" itemValue="#{medida}" itemLabel="#{fn:toUpperCase(medida)}"/>
-												 
-											</h:selectOneMenu>											
+											<h:inputText id="selecDesc" value="#{unidadeMedidaListMBean.descricao}" styleClass="form-control input-sm" />										
 										</div>
 									</div>
 									
@@ -43,12 +35,7 @@
 											<h:outputText value="SIGLA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="selecSigla" value="#{unidadeMedidaMBean.buscaSigla}" styleClass="form-control input-sm">
-												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{unidadeMedidaMBean.listSigla}" var="sigla"
-													itemValue="#{sigla}" itemLabel="#{fn:toUpperCase(sigla)}"/>
-												 
-											</h:selectOneMenu>											
+											<h:inputText id="selecSigla" value="#{unidadeMedidaListMBean.sigla}" styleClass="form-control input-sm" />										
 										</div>
 									</div>															
 								</div>
@@ -59,11 +46,11 @@
 										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 											<f:ajax
 												execute="@this selecDesc selecSigla"
-												event="click" listener="#{unidadeMedidaMBean.procuraUnidadeMedidaByDescSigla()}"
+												event="click" listener="#{unidadeMedidaListMBean.buscar()}"
 												render="tableMedida" />
 										</h:commandButton>
 										&nbsp;
-										<h:button value="Adicionar" outcome="qualitativoUnidadeMedidaaAdd" styleClass="btnAction btn btn-primary"  rendered="#{unidadeMedidaMBean.salvar}"/>
+										<h:button value="Adicionar" outcome="qualitativoUnidadeMedidaAdd" styleClass="btnAction btn btn-primary"  rendered="#{unidadeMedidaListMBean.salvar}"/>
 									</div>
 								</div>
 							</fieldset>
@@ -72,7 +59,7 @@
 					<div class="outBusc">RESULTADOS</div>
 				</div>				
 				<center>
-					<p:dataTable id="tableMedida" value="#{unidadeMedidaMBean.list}" var="med" paginator="true"
+					<p:dataTable id="tableMedida" value="#{unidadeMedidaListMBean.listUnidadeMedida}" var="med" paginator="true"
 						rows="10" emptyMessage="Não há Unidades de Medida a serem mostradas" styleClass="tableDados">
 						<p:column headerText="DESCRIÇÃO" styleClass="outTextTable" >
 							<h:outputText value="#{fn:toUpperCase(med.descricao)}" />
@@ -83,13 +70,21 @@
 					
 						
 						
-						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable" footerText="Quantidade Total: ${fn:length(unidadeMedidaMBean.list)}">
+						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable" footerText="Quantidade Total: ${fn:length(unidadeMedidaListMBean.listUnidadeMedida)}">
 							<center>
-								<p:commandButton title="Visualizar" action="#{unidadeMedidaMBean.view(med)}" icon="ui-icon-search"/>
-								<p:commandButton title="Editar" action="#{unidadeMedidaMBean.beforeEdit(med)}" icon="ui-icon-pencil"/>
-								<p:commandButton title="Deletar" action="#{unidadeMedidaMBean.delete(med)}" icon="ui-icon-trash">
-									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
-								</p:commandButton>
+							
+								<p:button title="Visualizar"  outcome="qualitativoUnidadeMedidaView" icon="ui-icon-search"  rendered="#{unidadeMedidaListMBean.view}">
+								 	  <f:param name="id" value="#{med.id}" /> 
+								</p:button>
+
+								<p:button title="Editar"  outcome="qualitativoUnidadeMedidaEdit" icon="ui-icon-pencil"  rendered="#{unidadeMedidaListMBean.atualizar}">
+								 	  <f:param name="id" value="#{med.id}" /> 
+								</p:button>
+							
+								<p:commandButton title="Deletar" actionListener="#{unidadeMedidaListMBean.deletar(med)}" icon="ui-icon-trash" update="tableMedida"  rendered="#{unidadeMedidaListMBean.deletar}">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?"  icon="ui-icon-alert" />
+								</p:commandButton>	
+								
 							</center>
 						</p:column>						
 					</p:dataTable>
