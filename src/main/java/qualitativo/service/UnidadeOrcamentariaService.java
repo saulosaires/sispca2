@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
+import arquitetura.utils.Utils;
 import qualitativo.controller.UnidadeOrcamentariaController;
 import qualitativo.model.UnidadeOrcamentaria;
 
@@ -23,6 +24,16 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 	public List<UnidadeOrcamentaria> findAllOrderByDescricao() {
 
 		return ((UnidadeOrcamentariaController) getController()).findAllOrderByDescricao();
+	}
+
+	public List<UnidadeOrcamentaria> buscar(String codigo, String descricao, Long orgaoId) {
+
+
+		if(Utils.emptyParam(codigo) && Utils.emptyParam(descricao) && Utils.invalidId(orgaoId)) {
+			return findAllOrderByDescricao();
+		}else {
+			return ((UnidadeOrcamentariaController) getController()).buscar(codigo, descricao, orgaoId);
+		}
 	}
 
 }

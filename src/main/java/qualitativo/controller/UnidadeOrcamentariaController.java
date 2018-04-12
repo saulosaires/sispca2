@@ -29,4 +29,10 @@ public class UnidadeOrcamentariaController  extends AbstractController<UnidadeOr
 		return ((UnidadeOrcamentariaDAO)getDao()).findAllOrderByDescricao();
 	}
 
+
+	public List<UnidadeOrcamentaria> buscar(String codigo, String descricao, Long orgaoId) {
+		
+		return ((UnidadeOrcamentariaDAO)getDao()).buscar(codigo, descricao, orgaoId);
+	}
+
 }

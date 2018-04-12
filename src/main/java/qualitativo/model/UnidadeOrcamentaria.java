@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,10 +45,10 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	@Column(name="descricao")
 	private String descricao;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_orgao")
 	@NotNull(message="Órgão: campo é obrigatório")
-	private Orgao orgao;
+	private Orgao orgao = new Orgao();
 
 	@NotNull(message ="Sigla: campo é obrigatório")
 	@Column(name="sigla",length=20)

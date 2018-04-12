@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+			 <f:metadata>
+	    		<f:viewParam name="id" value="#{unidadeOrcamentariaViewMBean.id}"/>
+	    		<f:viewAction action="#{unidadeOrcamentariaViewMBean.init}" />
+			 </f:metadata>
+		
+		
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="outBusc">VISUALIZAÇÃO</div>
+				</div>
+			</div>
+			<div class="spaceContainerForm">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-1">
+							<h:outputText value="CÓDIGO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{unidadeOrcamentariaViewMBean.unidadeOrcamentaria.codigo}"  styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-7">
+							<h:outputText value="SIGLA:  " styleClass="labelOutText"/>
+							<h:outputText value="#{unidadeOrcamentariaViewMBean.unidadeOrcamentaria.sigla}"  styleClass="labelInputText"/>	
+						</div>
+					</div>	
+					<div class="row" style="margin-top: 1%;">
+						<div class="col-lg-2">
+							<h:outputText value="ÓRGÃO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(unidadeOrcamentariaViewMBean.unidadeOrcamentaria.orgao.descricao)}"  styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-7">
+							<h:outputText value="DESCRIÇÃO:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(unidadeOrcamentariaViewMBean.unidadeOrcamentaria.descricao)}"  styleClass="labelInputText"/>
+						</div>
+					</div>
+					
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">	
+							<h:form>
+								 <h:button value="Voltar" outcome="unidadeOrcamentarioQualitativoList" styleClass="btnAction btn btn-primary" />
+							</h:form>
+						</div>
+					</div>				
+								
+				</div>
+			</div>			
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

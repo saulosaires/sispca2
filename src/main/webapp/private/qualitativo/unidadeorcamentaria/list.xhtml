@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			<h:form>
+				 
+				<div class="container-fluid">
+					<div class="row-fluid">
+						 
+						<div class="row-fluid">
+							<ui:include src="/template/tutorial_form.xhtml" />
+						</div>
+						<div class="span12">
+							<fieldset>								
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="CÓDIGO: " />
+										</div>
+										<div class="span3">
+											<h:inputText id="inputCodigo" value="#{unidadeOrcamentariaListMBean.codigo}" styleClass="form-control input-sm" />	
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="ÓRGÃO RESPONSÁVEL: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:selectOneMenu id="inputMenuOrgao" value="#{unidadeOrcamentariaListMBean.orgaoId}" styleClass="form-control input-sm">
+												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+												<f:selectItems value="#{unidadeOrcamentariaListMBean.listOrgao}" var="uo" itemValue="#{uo}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
+											</h:selectOneMenu>											
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="DESCRIÇÃO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="inputDescricao" value="#{unidadeOrcamentariaListMBean.descricao}" styleClass="form-control input-sm up"  />		
+										</div>
+									</div>
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
+											<f:ajax
+												execute="@this inputCodigo inputMenuOrgao inputDescricao"
+												event="click" listener="#{unidadeOrcamentariaListMBean.buscar()}"
+												render="tableUnid" />
+										</h:commandButton>
+										&nbsp;
+										<h:button value="Adicionar" outcome="qualitativoUnidadeOrcamentariaAdd" styleClass="btnAction btn btn-primary"  rendered="#{unidadeOrcamentariaListMBean.salvar}"/>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<div class="outBusc">RESULTADOS</div>
+					</div>
+				</div>
+				<center>
+					<p:dataTable value="#{unidadeOrcamentariaListMBean.listUnidadeOrcamentaria}" var="uo" paginator="true" rows="10" styleClass="tableDados"
+								 id="tableUnid" emptyMessage="Não há unidades orçamentárias a serem mostradas">
+						
+						<p:column headerText="CÓDIGO" style="width: 8%;"  styleClass="outTextTable" sortBy="#{uo.codigo}">
+							<h:outputText value="#{fn:toUpperCase(uo.codigo)}"/>	
+						</p:column>
+						<p:column headerText="ÓRGÃO RESPONSÁVEL"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(uo.orgao.descricao)}"/>	
+						</p:column>
+						<p:column headerText="DESCRIÇÃO"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(uo.descricao)}"/>	
+						</p:column>
+						<p:column headerText="OPERAÇÃO" style="width: 14%;"  styleClass="outTextTable" footerText="Quantidade Total: ${fn:length(unidadeOrcamentariaListMBean.listUnidadeOrcamentaria)}">
+							<center>
+							
+							    <p:button title="Visualizar"  outcome="qualitativoUnidadeOrcamentariaView" icon="ui-icon-search"  rendered="#{unidadeOrcamentariaListMBean.view}">
+								 	  <f:param name="id" value="#{uo.id}" /> 
+								</p:button>
+
+								<p:button title="Editar"  outcome="qualitativoUnidadeOrcamentariaEdit" icon="ui-icon-pencil"  rendered="#{unidadeOrcamentariaListMBean.atualizar}">
+								 	  <f:param name="id" value="#{uo.id}" /> 
+								</p:button>
+							
+								<p:commandButton title="Deletar" actionListener="#{unidadeOrcamentariaListMBean.deletar(uo)}" icon="ui-icon-trash" update="tableUnid"  rendered="#{unidadeOrcamentariaListMBean.deletar}">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?"  icon="ui-icon-alert" />
+								</p:commandButton>								
+							
+							</center>
+						</p:column>				
+					</p:dataTable>				
+				</center>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    		</p:confirmDialog>	
+    		</h:form>			
+		</ui:define>
+	</ui:composition>	
+</body>
+</html>
