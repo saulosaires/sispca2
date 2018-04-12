@@ -58,7 +58,7 @@ public class AlterarSenhaMBean implements Serializable{
 			return "home";
 		
 		}catch(Exception e) {
-			SispcaLogger.logError(e.getMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 			
 			Messages.addMessageError("Falha inesperada ao alterar senha");
 		}

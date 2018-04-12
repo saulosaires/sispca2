@@ -51,7 +51,7 @@ public class LinkListMBean implements Serializable {
 			listLinks = linkService.queryLinkByDescricaoAndURL(titulo, url);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -67,7 +67,7 @@ public class LinkListMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE_LINK_MSG);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_DELETE_LINK_MSG);
 

@@ -73,7 +73,7 @@ public class LinkFormMBean implements Serializable {
 			return "linksArquivosList";
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_SAVE_LINK_MSG);
 		}

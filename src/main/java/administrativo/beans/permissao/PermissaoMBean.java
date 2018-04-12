@@ -116,7 +116,7 @@ public class PermissaoMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_SAVE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_SAVE);
 
@@ -145,7 +145,7 @@ public class PermissaoMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_DELETE);
 

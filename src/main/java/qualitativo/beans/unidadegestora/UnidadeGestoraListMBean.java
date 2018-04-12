@@ -73,7 +73,7 @@ public class UnidadeGestoraListMBean implements Serializable {
 			}
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -89,7 +89,7 @@ public class UnidadeGestoraListMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_DELETE);
 

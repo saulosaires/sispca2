@@ -66,7 +66,7 @@ public class ObjetoEditMBean implements Serializable {
 			return "objetoList";
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_UPDATE_MSG);
 		}

@@ -67,7 +67,7 @@ public class UnidadeGestoraFormMBean implements Serializable {
 			return "unidadeGestoraQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL);
 		}

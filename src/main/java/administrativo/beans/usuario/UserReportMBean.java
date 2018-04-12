@@ -92,7 +92,7 @@ public class UserReportMBean implements Serializable {
 			   
 			 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL);
 		}

@@ -73,7 +73,7 @@ public class SispcaPhaseListener implements PhaseListener {
 			menuMBean.proccessUrl(uri);
 
 		} catch (IOException e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 			
 		}
 

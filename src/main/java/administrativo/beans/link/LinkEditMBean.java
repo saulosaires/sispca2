@@ -87,7 +87,7 @@ public class LinkEditMBean implements Serializable {
 			return "linksArquivosList";
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_UPDATE_LINK_MSG);
 		}

@@ -77,7 +77,7 @@ public class ExercicioListMBean implements Serializable{
 		
 			Messages.addMessageInfo("Processo de atualização de vigência realizado com sucesso!");
 		}catch(Exception e) {
-			SispcaLogger.logError(e.getLocalizedMessage());
+			SispcaLogger.logError(e.getCause().getMessage());
 			
 			Messages.addMessageError("Erro ao realizar o processo de ativação/desativação para o exercício selecionado!");
 		}
