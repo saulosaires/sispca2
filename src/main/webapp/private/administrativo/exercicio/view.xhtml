@@ -23,7 +23,7 @@
 					<div class="span12">
 						<p:messages closable="true"/>
 					</div>
-					<legend class="outBusc">VISUALIZAÇÃO</legend>
+					<div class="outBusc">VISUALIZAÇÃO</div>
 				</div>
 				<div class="spaceContainerForm">
 					<div class="container-fluid">
@@ -39,44 +39,14 @@
 								<h:outputText value="#{exercicioViewMBean.exercicio.ano}" styleClass="labelInputText"/>
 							</div>
 						</div>
-						<div class="row" style="margin-top: 1%">
-							<div class="col-lg-5">
-								<h:outputText value="PERÍODO DE VIGÊNCIA: " styleClass="labelOutText"/>
-								<h:outputText value="#{exercicioViewMBean.dataInicio}" styleClass="labelInputText">
-									<f:convertDateTime pattern="dd/MM/yyyy"/>
-								</h:outputText>
-								<h:outputText value="  a  " styleClass="labelInputText" rendered="#{exercicioViewMBean.dataInicio!=null and exercicioViewMBean.dataFim!=null}"/>
-								
-								<h:outputText value="#{exercicioViewMBean.dataFim}" pattern="dd/MM/yyyy" styleClass="labelInputText">
-									<f:convertDateTime pattern="dd/MM/yyyy"/>
-								</h:outputText>
+						<div class="row" style="margin-top: 1%">	
+							<div class="col-lg-1">
+								<h:outputText value="VIGENTE:  " styleClass="labelOutText"/> 
+								   <h:outputText value="SIM" rendered="#{exercicioFormMBean.exercicio.vigente}"  styleClass="labelInputText"/>
+								   <h:outputText value="NÃO" rendered="#{!exercicioFormMBean.exercicio.vigente}" styleClass="labelInputText"/>
 							</div>
 						</div>
-						
-						<center>
-						<div class="row" style="margin-top: 4%; width: 80%;">	
-							<table id="tableCalend" class="table table-bordered">	
-								<thead>
-									<tr>
-										<th colspan="3"><center><h3><b>CALENDÁRIO</b></h3></center></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<center><h:outputText value="ACTION - CONTROLLER" styleClass="labelOutText"/></center>
-										</td>
-										<td>
-											<center><h:outputText value="DATA INÍCIO x DATA FIM" styleClass="labelOutText"/></center>
-										</td>								
-									</tr>	
-													
  
-									
-								</tbody>
-							</table>
-						</div>
-						</center>						
 						
 						<div class="spaceBtnAcao">						
 							<h:commandButton styleClass="btnAction btn btn-primary"

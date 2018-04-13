@@ -3,7 +3,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
 
@@ -19,11 +18,13 @@
  		
  				<p:dialog id="dlgMensag" header="Ativação/Inativação de Vigência" widgetVar="dlgMensag" minHeight="150" closable="true"
 					modal="true">
-    				<h:outputText id="outMensagem"  value="#{exercicioListMBean.mensagem}" /><br/><br/>
+    				<h:outputText id="outMensagem"  value="Você tem certeza que deseja deletar?" /><br/><br/>
     				<h:commandButton styleClass="btn btn-primary" value="Sim" action="#{exercicioListMBean.atualizaVigencia()}"/>
     				&nbsp;
     				<h:commandButton styleClass="btn btn-primary" value="Não"/>
 				</p:dialog>		
+ 		
+ 				 
  		
 				<div class="container-fluid">	
 					
@@ -39,45 +40,35 @@
 											<h:outputText styleClass="labelOutText" value="PPA: " />
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="selectPpa" value="#{exercicioListMBean.buscaPpa}"  styleClass="form-control input-sm">
+											<h:selectOneMenu id="selectPpa" value="#{exercicioListMBean.ppaId}"  styleClass="form-control input-sm">
 												<f:selectItem itemLabel="--SELECIONE--" itemValue="#{null}"/>
 												<f:selectItems value="#{exercicioListMBean.listPpa}" var="ppa" 
-												 			   itemLabel="#{ppa.descricao}" itemValue="#{ppa}"/>
+												 			   itemLabel="#{ppa.descricao}" itemValue="#{ppa.id}"/>
 												 											
 											</h:selectOneMenu>										
 										</div>
 									</div>
-									<div class="span12">
-										<div class="span3">
-											<h:outputText value="ANO: " styleClass="labelOutText"/>
-										</div>
-										<div class="span3">
-											<h:inputText id="inputAno"
-												value="#{exercicioListMBean.ano}" styleClass="form-control input-sm"  converterMessage="Ano: você deve digitar apenas números">
-													 
-													<f:convertNumber/>	
-											</h:inputText>
-										</div>
-									</div>								
+ 							
 								</div>
 								<br />
 								<div class="form-group">
 									<div class="col-sm-offset-7 col-sm-10">
 
+
 									<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 										<f:ajax
 											execute="@this selectPpa inputAno"
-											event="click" listener="#{exercicioListMBean.buscaExercicioPorPpaAno()}"
+											event="click" listener="#{exercicioListMBean.buscar()}"
 											render="tableExerc" />
 									</h:commandButton>
 									&nbsp;
-									    <h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="exercicioForm"/>
+									    <h:button value="Adicionar" styleClass=" btnAction btn btn-primary" outcome="administrativoExercicioAdd"/>
 									</div>
 								</div>
 							</fieldset>
 						</div>
 					</div>
-					<legend class="outBusc">RESULTADOS</legend>
+					<div class="outBusc">RESULTADOS</div>
 				</div>			
 				<center>
 					<p:dataTable id="tableExerc" value="#{exercicioListMBean.listExercicio}" var="exerc"
@@ -91,15 +82,15 @@
 						</p:column>
 						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable">
 							<center>
-								<p:button   title="Visualizar"  outcome="exercicioView" icon="ui-icon-search">
+								<p:button   title="Visualizar"  outcome="administrativoExercicioView" icon="ui-icon-search">
 									 <f:param name="exercicioId" value="#{exerc.id}" /> 
 								</p:button  >
 								
-								<p:button title="Editar"      outcome="exercicioEdit" icon="ui-icon-pencil" >
-								 	 <f:param name="exercicioId" value="#{exerc.id}" /> 
-								</p:button  >
+								<p:commandButton title="Deletar" actionListener="#{exercicioListMBean.deletar(exerc)}" icon="ui-icon-trash" update="tableExerc" type="submit" rendered="#{exercicioListMBean.deletar}">
+									 <p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
+								</p:commandButton>
 								
-								<p:commandButton title="Tornar sem vigência" actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" 
+								<p:commandButton title="Remover vigência" actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" 
 								                 icon="ui-icon-circle-minus" rendered="#{exerc.vigente}" update="@form" process="@this"/>	
 														
 								<p:commandButton title="Tornar Vigente" actionListener="#{exercicioListMBean.beforeAtualizaVigencia(exerc)}" 
@@ -107,6 +98,16 @@
 							</center>
 						</p:column>
 					</p:dataTable>
+					
+					<p:dialog header="Confirmação" widgetVar="dlg" modal="true" height="100">
+					    <h:outputText value="This is a Modal Dialog." />
+					</p:dialog> 
+					
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+					
 				</center>			
 			</h:form>
 		</ui:define>

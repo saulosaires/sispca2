@@ -32,6 +32,10 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/administrativo/mensagem/form.xhtml","mensagemSalvar");
 		mapLinks.put("/sispca2/private/administrativo/mensagem/edit.xhtml","mensagemAtualizar");
 		
+		mapLinks.put("/sispca2/private/administrativo/exercicio/list.xhtml","administrativoExercicioListar");
+		mapLinks.put("/sispca2/private/administrativo/exercicio/form.xhtml","administrativoExercicioSalvar"); 
+		mapLinks.put("/sispca2/private/administrativo/exercicio/view.xhtml","administrativoExercicioVisualizar");
+		
 		mapLinks.put("/sispca2/private/administrativo/ppa/list.xhtml","ppaListar");
 		mapLinks.put("/sispca2/private/administrativo/ppa/form.xhtml","ppaSalvar"); 
 

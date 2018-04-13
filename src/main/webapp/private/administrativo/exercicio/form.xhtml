@@ -13,24 +13,21 @@
 <body> 
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
-			<f:metadata>
-    			<f:viewParam name="exercicioId" value="#{exercicioFormMBean.exercicioId}"/>
-    			<f:viewAction action="#{exercicioFormMBean.init}" />
-			</f:metadata>
+		 
 			<h:form>				
 				<div class="container-fluid row-fluid">
 					 
-					<legend class="outBusc">CADASTRO</legend>
+					<div class="outBusc">CADASTRO</div>
 				</div>
 				<div class="spaceContainerForm">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-lg-2">
 								<h:outputText value="PPA:  " styleClass="labelOutText"/>
-								<h:selectOneMenu id="selectPpa" value="#{exercicioFormMBean.exercicio.ppa}" styleClass="form-control input-sm" >
+								<h:selectOneMenu id="selectPpa" value="#{exercicioFormMBean.exercicio.ppa.id}" styleClass="form-control input-sm" >
 									<f:selectItem itemLabel="--SELECIONE--"/>
-									<f:selectItems var="ppa" value="#{exercicioMBean.listPpa}"
-										itemLabel="#{fn:toUpperCase(ppa.descricao)}" itemValue="#{ppa}"/>
+									<f:selectItems var="ppa" value="#{exercicioFormMBean.listPpa}"
+										itemLabel="#{fn:toUpperCase(ppa.descricao)}" itemValue="#{ppa.id}"/>
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -40,55 +37,21 @@
 								<h:inputText id="inputAno" value="#{exercicioFormMBean.exercicio.ano}" styleClass="form-control input-sm"/>
 							</div>
 						</div>
-						<div class="row" style="margin-top: 1%">
-							<div class="col-lg-8">
-								<h:outputText value="PERÍODO DE VIGÊNCIA: " styleClass="labelOutText"/>
-								<p:calendar id="calendarDataInicio" value="#{exercicioFormMBean.dataInicio}" pattern="dd/MM/yyyy" styleClass="input-sm"
-									locale="pt"/>
-								<h:outputText value="a"/>
-								<p:calendar id="calendarDataFim" value="#{exercicioFormMBean.dataFim}" pattern="dd/MM/yyyy" styleClass="input-sm"
-									locale="pt"/>
+ 						
+ 						<div class="row" style="margin-top: 1%">	
+							<div class="col-lg-1">
+								<h:outputText value="VIGENTE:  " styleClass="labelOutText"/>
+								<p:selectBooleanCheckbox value="#{exercicioFormMBean.exercicio.vigente}" />
 							</div>
 						</div>
-						
-						<center>
-						<div class="row" style="margin-top: 4%; width: 99%;">
-							<table id="tableCalend" class="table table-bordered">	
-								<thead>
-									<tr>
-										<th colspan="4"><center><h3><b>CALENDÁRIO</b></h3></center></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<center><h:outputText value="EVENTO" styleClass="labelOutText"/></center>
-										</td>
-										<td>
-											<center><h:outputText value="DATA INÍCIO x DATA FIM" styleClass="labelOutText"/></center>
-										</td>
-										<td>
-											<center><h:outputText value="OPERAÇÃO COM MESES" styleClass="labelOutText"/></center>
-										</td>
-										<td>
-											<center><h:outputText value="ADICIONAR/DELETAR DATA" styleClass="labelOutText"/></center>
-										</td>
-									</tr>					
- 
-								</tbody>
-							</table>
-						</div>
-						</center>
-						
+ 						
+ 						 
+					 
 						<div class="spaceBtnAcao">							
-							<h:commandButton value="Inserir" action="exercicioList"
-								styleClass="btnAction btn btn-primary" rendered="true"/>					
+					      	<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{exercicioFormMBean.salvar()}"  />
+							 						
 							&nbsp;	
-							<h:commandButton value="Editar" action="#{exercicioMBean.mostraDados()}"
-								styleClass="btnAction btn btn-primary" rendered="false"/>							
-							&nbsp;	
-							<h:button styleClass="btnAction btn btn-primary"
-								style="margin-left: 0px" value="Cancela" outcome="exercicioList" immediate="true" />							
+							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="exercicioList" immediate="true" />							
 						</div>										
 					</div>
 				</div>			

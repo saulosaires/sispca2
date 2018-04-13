@@ -1,19 +1,21 @@
 package administrativo.beans.exercicio;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
-import administrativo.controller.PpaController;
-import administrativo.model.Calendario;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
 import administrativo.service.ExercicioService;
+import administrativo.service.PpaService;
+import arquitetura.exception.JpaException;
+import arquitetura.utils.Messages;
+import arquitetura.utils.SispcaLogger;
 
 @Named
 @ViewScoped
@@ -25,78 +27,102 @@ public class ExercicioFormMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -8158918034092182434L;
 
-	private ExercicioService exercicioService;
+	public static final String FAIL = "Falha inesperada ao tentar Salvar Exercicio";
+	 
+	public static final String SUCCESS = "Exercicio salvo com Sucesso";
 
-	private Date dataInicio;
-	private Date dataFim;
-	private Long exercicioId;
-	private Exercicio exercicio;
+	private PpaService ppaService;
+	private ExercicioService exercicioService;
+	private ExercicioValidate validate;
+ 
+	private Exercicio exercicio = new Exercicio();
 	
 	private List<Ppa> listPpa;
 
 	@Inject
-	public ExercicioFormMBean(ExercicioService exercicioService,PpaController  ppaController) {
+	public ExercicioFormMBean(ExercicioService exercicioService,
+							  ExercicioValidate validate,
+							  PpaService ppaService) {
 
 		this.exercicioService = exercicioService;
+		this.ppaService		  = ppaService;
+		this.validate=validate;
 		
-		this.listPpa = ppaController.findAll();
+		this.listPpa = ppaService.findAll();
 	}
 
-	public void init() {
+	@Transactional
+	public String salvar() {
 
-		exercicio = exercicioService.findOne(exercicioId);
+		try {
 
-		Optional<Calendario> ca = exercicioService.findCalendario(exercicioId);
+			if (!validate.validar(exercicio)) {
+				return "";
+			}
 
-		if (ca.isPresent()) {
-			Calendario calendario = ca.get();
-			dataInicio = calendario.getDataInicio();
-			dataFim = calendario.getDataFim();
+			Ppa ppa = ppaService.findById(exercicio.getPpa().getId());
+			exercicio.setPpa(ppa);
+			
+			if(exercicio.getVigente()) {
+				removerVigenciaDosOutrosExercicicios(ppa);
+			}
+			
+		 
+			exercicioService.create(exercicio);
+ 
+			
+			Messages.addMessageInfo(SUCCESS);
+			
+			return "exercicioList";
+			
+		} catch (Exception e) {
+			SispcaLogger.logError(e.getCause().getMessage());
 
+			Messages.addMessageError(FAIL);
 		}
 
+		return "";
 	}
 
-	public Long getExercicioId() {
-		return exercicioId;
+	private void removerVigenciaDosOutrosExercicicios(Ppa ppa) throws JpaException {
+		
+		List<Exercicio> listExercicios = exercicioService.buscarPorPpa(ppa.getId());
+		
+		for(int i=0;i<listExercicios.size();i++) {
+			
+			Exercicio exer = listExercicios.get(i);
+			 
+			if(exer.getVigente()) {
+				exer.setVigente(false);
+				exercicioService.update(exer);
+			}
+			
+		}
+		
+	
+		
 	}
-
-	public void setExercicioId(Long exercicioId) {
-		this.exercicioId = exercicioId;
-	}
-
+	
+	
 	public Exercicio getExercicio() {
 		return exercicio;
 	}
+
 
 	public void setExercicio(Exercicio exercicio) {
 		this.exercicio = exercicio;
 	}
 
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
-	}
 
 	public List<Ppa> getListPpa() {
 		return listPpa;
 	}
 
+
 	public void setListPpa(List<Ppa> listPpa) {
 		this.listPpa = listPpa;
 	}
+ 
 	
-	
-
+	 
 }

@@ -1,6 +1,5 @@
 package administrativo.controller;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,30 +8,33 @@ import javax.inject.Inject;
 import administrativo.dao.ExercicioDAO;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
+import arquitetura.controller.AbstractController;
 import arquitetura.exception.JpaException;
 
-public class ExercicioController implements Serializable{
+public class ExercicioController  extends AbstractController<Exercicio>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8543732848604788698L;
-	private ExercicioDAO exercicioDAO;
+	 
 	
-	@Inject 
-	public ExercicioController(ExercicioDAO exercicioDAO){
-		this.exercicioDAO=exercicioDAO;
+	@Inject
+	public ExercicioController(ExercicioDAO exercicioDAO) {
+		super(exercicioDAO);
+		 
 	}
+ 
 	
-	public List<Exercicio> buscaExercicioPorPpaAno(Ppa buscaPpa, Integer ano){
+	public List<Exercicio> buscarPorPpa(Long ppaId){
 		
-		return exercicioDAO.buscaExercicioPorPpaAno(buscaPpa, ano);
+		return ((ExercicioDAO)getDao()).buscarPorPpa(ppaId);
 		
 	}
 	
 	public Integer quantidadeVigente(){
 	
-		return exercicioDAO.quantidadeVigente();
+		return ((ExercicioDAO)getDao()).quantidadeVigente();
 		
 	}
 	
@@ -40,27 +42,18 @@ public class ExercicioController implements Serializable{
 		
 		exercicio.setVigente(!exercicio.getVigente());
 		
-		exercicioDAO.update(exercicio);
+		((ExercicioDAO)getDao()).update(exercicio);
 		
 		
 	}
 	
 	public Optional<Exercicio> exercicioVigente(){
-		return exercicioDAO.exercicioVigente();
+		return ((ExercicioDAO)getDao()).exercicioVigente();
 	}
 	
+ 
 	
-	public Exercicio findOne(Long exercicioId) {
-		
-		return exercicioDAO.findOne(exercicioId);
-		
-	}
-	
-	public Exercicio update(Exercicio exercicio) throws JpaException {
-		
-		return exercicioDAO.update(exercicio);
-		
-	}
+	 
 	
 	
 }

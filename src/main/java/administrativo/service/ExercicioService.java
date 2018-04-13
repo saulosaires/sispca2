@@ -1,38 +1,33 @@
 package administrativo.service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
 
-import administrativo.controller.CalendarioController;
 import administrativo.controller.ExercicioController;
-import administrativo.model.Calendario;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
 import arquitetura.exception.JpaException;
+import arquitetura.service.AbstractService;
+import arquitetura.utils.Utils;
 
-public class ExercicioService implements Serializable {
+public class ExercicioService extends AbstractService<Exercicio>  {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2698541591873129072L;
-
-	private ExercicioController  exercicioController;
-	private CalendarioController calendarioController;
-
+ 
 	@Inject
-	public ExercicioService(ExercicioController exercicioController,CalendarioController calendarioController) {
-
-		this.exercicioController = exercicioController;
-		this.calendarioController=calendarioController;
+	public ExercicioService(ExercicioController exercicioController) {
+		super(exercicioController);
 	}
+
 
 	public Integer quantidadeVigente() {
 
-		return exercicioController.quantidadeVigente();
+		return ((ExercicioController)getController()).quantidadeVigente();
 
 	}
 
@@ -40,26 +35,32 @@ public class ExercicioService implements Serializable {
 
 		exercicio.setVigente(!exercicio.getVigente());
 
-		exercicioController.update(exercicio);
+		((ExercicioController)getController()).update(exercicio);
 
 	}
 	
 	public Optional<Exercicio> exercicioVigente(){
-		return exercicioController.exercicioVigente();
+		return ((ExercicioController)getController()).exercicioVigente();
 	}
+ 
 
-	public Exercicio findOne(Long exercicioId) {
-		return exercicioController.findOne(exercicioId);
-	}
+	public List<Exercicio> buscarPorPpa(Long ppaId) {
 
-	public List<Exercicio> buscaExercicioPorPpaAno(Ppa buscaPpa, Integer ano) {
-
-		return exercicioController.buscaExercicioPorPpaAno(buscaPpa, ano);
+		return ((ExercicioController)getController()).buscarPorPpa(ppaId);
 
 	}
 	
-	public 	Optional<Calendario> findCalendario(Long exercicioId) {
-		return calendarioController.findById(exercicioId);
+	
+	public List<Exercicio> buscar(Long ppaId) {
+
+		if(Utils.invalidId(ppaId))
+			return findAll();
+		
+		return ((ExercicioController)getController()).buscarPorPpa(ppaId);
+
 	}
+	
+	
+	 
 
 }

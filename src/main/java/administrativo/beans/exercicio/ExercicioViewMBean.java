@@ -2,14 +2,13 @@ package administrativo.beans.exercicio;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import administrativo.model.Calendario;
 import administrativo.model.Exercicio;
+import administrativo.model.Ppa;
 import administrativo.service.ExercicioService;
 
 @Named
@@ -38,17 +37,9 @@ public class ExercicioViewMBean implements Serializable {
 
 	public void init() {
 
-		exercicio = exercicioService.findOne(exercicioId);
-
-		Optional<Calendario> ca = exercicioService.findCalendario(exercicioId);
-
-		if (ca.isPresent()) {
-			Calendario calendario = ca.get();
-			dataInicio = calendario.getDataInicio();
-			dataFim = calendario.getDataFim();
-
-		}
-
+		exercicio = exercicioService.findById(exercicioId);
+  
+		
 	}
 
 	public Long getExercicioId() {

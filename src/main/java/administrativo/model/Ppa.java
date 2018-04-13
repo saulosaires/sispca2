@@ -2,8 +2,10 @@ package administrativo.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +28,7 @@ public class Ppa extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ppa")
-	private Integer id;
+	private Long id;
 
 	@Column(name = "ano_fim")
 	private Integer anoFim;
@@ -45,8 +47,7 @@ public class Ppa extends Model {
 	@Column(unique = true,name="sigla")
 	private String sigla;
 
-	// "Ppa" tem muitos "Exercicio"
-	 @OneToMany(mappedBy="ppa")
+	 @OneToMany(mappedBy="ppa",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	 private List<Exercicio> exercicios;
 
 	@Column(name = "periodicidade_avaliacao")
@@ -55,12 +56,25 @@ public class Ppa extends Model {
 	@Column(name = "periodicidade_revisao")
 	private Integer periodicidadeRevisao;
  
+	public Ppa() {}
+	
+	public Ppa(Long id) {
+		this.id=id;
+	}
+	
+	public Ppa(Long id,String sigla,String descricao) {
+		this.id=id;
+		this.sigla=sigla;
+		this.descricao=descricao;
+	}
+	
 
-	public Integer getId() {
+	
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -111,6 +125,14 @@ public class Ppa extends Model {
 
 	public void setPeriodicidadeRevisao(Integer periodicidadeRevisao) {
 		this.periodicidadeRevisao = periodicidadeRevisao;
+	}
+
+	public List<Exercicio> getExercicios() {
+		return exercicios;
+	}
+
+	public void setExercicios(List<Exercicio> exercicios) {
+		this.exercicios = exercicios;
 	}
 	
 	 

@@ -1,5 +1,6 @@
 package administrativo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,11 +38,13 @@ public class Exercicio extends Model implements  Auditable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_ppa")
 	@NotNull(message="PPA: campo é obrigatório")
-	private Ppa ppa;
+	private Ppa ppa = new Ppa();
 	
+	@Column(name = "ano")
 	private Integer ano;
 	
-	private Boolean vigente;	
+	@Column(name = "vigente")
+	private Boolean vigente=false;	
  
 
 	public Long getId() {

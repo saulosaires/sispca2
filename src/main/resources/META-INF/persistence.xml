@@ -21,6 +21,25 @@
    	  <class>administrativo.model.TipoLink</class>
       <class>administrativo.model.Mensagem</class>
       
+      <class>avaliacao.model.Analise</class>
+      <class>avaliacao.model.AvaliacaoFisicoFinanceira</class>
+      <class>avaliacao.model.AvaliadorExercicio</class>
+      <class>avaliacao.model.Custo</class>
+      <class>avaliacao.model.DiretrizAssociada</class>
+      <class>avaliacao.model.ExercicioTopicoAnalise</class>
+      <class>avaliacao.model.ExercicioTopicoAvaliacao</class>
+      <class>avaliacao.model.ExercicioTopicoCusto</class>
+      <class>avaliacao.model.ExercicioTopicoResultado</class>
+      <class>avaliacao.model.IndicadorDesempenhoIntermediario</class>
+      <class>avaliacao.model.PainelAssociado</class>
+      <class>avaliacao.model.Recomendacao</class>
+      <class>avaliacao.model.Resultado</class>
+      <class>avaliacao.model.TopicoAnalise</class>
+      <class>avaliacao.model.TopicoAvaliacao</class>
+      <class>avaliacao.model.TopicoCusto</class>
+      <class>avaliacao.model.TopicoResultado</class>
+  
+      
       <class>monitoramento.model.Execucao</class>
       <class>monitoramento.model.Observacao</class>
       

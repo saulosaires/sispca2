@@ -265,14 +265,20 @@
 		<from-view-id>/private/administrativo/exercicio/list.xhtml</from-view-id>
 
 		<navigation-case>
-			<from-outcome>exercicioView</from-outcome>
+			<from-outcome>administrativoExercicioView</from-outcome>
 			<to-view-id>/private/administrativo/exercicio/view.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
-			<from-outcome>exercicioEdit</from-outcome>
+			<from-outcome>administrativoExercicioAdd</from-outcome>
 			<to-view-id>/private/administrativo/exercicio/form.xhtml</to-view-id>
 		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>administrativoExercicioEdit</from-outcome>
+			<to-view-id>/private/administrativo/exercicio/edit.xhtml</to-view-id>
+		</navigation-case>
+
 
 	</navigation-rule>
  
