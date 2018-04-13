@@ -70,7 +70,7 @@
 							</fieldset>
 						</div>
 					</div>
-					<legend class="outBusc">RESULTADOS</legend>
+					<div class="outBusc">RESULTADOS</div>
 				</div>
 				<center>
 					<p:dataTable id="tablePpa" value="#{ppaListMBean.listPpas}"
@@ -91,20 +91,24 @@
 						<p:column headerText="Operação" style="width: 12%;"
 							footerText="Quantidade Total: #{ppaListMBean.listPpas.size()}">
 							<center>
+							
+								<p:commandButton title="Remover vigência" actionListener="#{ppaListMBean.atualizaVigencia(ppa)}" 
+								                 icon="ui-icon-circle-minus" rendered="#{ppa.vigente}" update="@form" process="@this"/>	
+														
+								<p:commandButton title="Tornar Vigente" actionListener="#{ppaListMBean.atualizaVigencia(ppa)}" 
+								                 icon="ui-icon-circle-plus" process="@this" rendered="#{!ppa.vigente}" update="@form"/>		
 
-								<p:commandButton title="Deletar" update="tablePpa" rendered="#{ppaListMBean.deletar}" action="#{ppaListMBean.delete(ppa)}" icon="ui-icon-trash">
+
+								<p:commandButton title="Deletar" update="tablePpa" rendered="#{ppaListMBean.deletar}" action="#{ppaListMBean.delete(ppa)}" icon="ui-icon-trash"  type="submit">
 									<p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
 								</p:commandButton>
 							</center>
 						</p:column>
 					</p:dataTable>
 				</center>
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
-					closable="true">
-					<p:commandButton value="Sim" type="button"
-						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="Não" type="button"
-						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 				</p:confirmDialog>
 			</h:form>
 		</ui:define>

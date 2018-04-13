@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import administrativo.model.Ppa;
 import administrativo.service.PpaService;
@@ -84,6 +85,38 @@ public class PpaListMBean implements Serializable {
 
 	}
 
+	@Transactional
+	public String atualizaVigencia(Ppa ppa){
+	
+		try {
+			
+			List<Ppa> list = ppaService.findAll();
+			
+			for(Ppa p:list) {
+				
+				if(p.getVigente()) {
+					p.setVigente(false);
+					ppaService.update(p);
+				}
+			}
+		
+			ppa.setVigente(true);
+			
+			ppaService.update(ppa);
+			
+			pesquisar();
+			
+		} catch (Exception e) {
+			SispcaLogger.logError(e.getCause().getMessage());
+
+			Messages.addMessageError(FAIL_DELETE);
+
+		}
+		
+		
+		return "";
+	}
+	
 	public String getSigla() {
 		return sigla;
 	}
