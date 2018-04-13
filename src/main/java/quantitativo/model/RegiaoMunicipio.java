@@ -33,11 +33,11 @@ public class RegiaoMunicipio extends Model{
 	@Column(name="id_regiao_municipio")
 	private Long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_regiao")
 	private Regiao regiao;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_municipio")
 	private Municipio municipio;
  

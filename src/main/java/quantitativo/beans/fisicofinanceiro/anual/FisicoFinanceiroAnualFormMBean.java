@@ -12,7 +12,9 @@ import qualitativo.model.Acao;
 import qualitativo.service.AcaoService;
 import qualitativo.service.ProgramaService;
 import quantitativo.model.Regiao;
+import quantitativo.model.RegiaoMunicipio;
 import quantitativo.model.TipoRegiao;
+import quantitativo.service.RegiaoMunicipioService;
 import quantitativo.service.RegiaoService;
 import quantitativo.service.TipoRegiaoService;
 
@@ -40,17 +42,20 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 	private AcaoService acaoService;
 	private TipoRegiaoService tipoRegiaoService;
 	private RegiaoService regiaoService;
+	private RegiaoMunicipioService regiaoMunicipioService;
 
 	@Inject
-	public FisicoFinanceiroAnualFormMBean(AcaoService acaoService, 
-										 TipoRegiaoService tipoRegiaoService,
-										 RegiaoService regiaoService, 
-										 ProgramaService programaService) {
+	public FisicoFinanceiroAnualFormMBean(AcaoService acaoService,
+										  RegiaoMunicipioService regiaoMunicipioService,
+										  TipoRegiaoService tipoRegiaoService,
+										  RegiaoService regiaoService, 
+										  ProgramaService programaService) {
 
 		this.acaoService = acaoService;
 		this.tipoRegiaoService = tipoRegiaoService;
 		this.regiaoService = regiaoService;
-
+		this.regiaoMunicipioService=regiaoMunicipioService;
+		
 		listTipoRegioes = tipoRegiaoService.findAllOrderByDescricao();
 	}
 
@@ -66,11 +71,18 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 
 	public void onChangeTipoRegiao() {
 
+		List<RegiaoMunicipio> listRegiaoMunicipio = regiaoMunicipioService.findAllByTipoRegiao(tipoRegiaoId);
+		
+		
 		listRegioes = regiaoService.findAllByTipoRegiao(tipoRegiaoId);
 	}
 
 	public void onChangeRegiao() {
 
+		List<RegiaoMunicipio> listRegiaoMunicipio = regiaoMunicipioService.findAllByRegiao(regiaoId);
+		
+		System.out.println(listRegiaoMunicipio.size());
+		
 	}
 
 	public Long getId() {

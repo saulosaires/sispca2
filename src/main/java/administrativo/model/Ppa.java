@@ -47,8 +47,11 @@ public class Ppa extends Model {
 	@Column(unique = true,name="sigla")
 	private String sigla;
 
-	 @OneToMany(mappedBy="ppa",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	 private List<Exercicio> exercicios;
+	@Column(name = "vigente")
+	private Boolean vigente=false;	
+ 
+    @OneToMany(mappedBy="ppa",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	private List<Exercicio> exercicios;
 
 	@Column(name = "periodicidade_avaliacao")
 	private Integer periodicidadeAvaliacao;
@@ -133,6 +136,14 @@ public class Ppa extends Model {
 
 	public void setExercicios(List<Exercicio> exercicios) {
 		this.exercicios = exercicios;
+	}
+
+	public Boolean getVigente() {
+		return vigente;
+	}
+
+	public void setVigente(Boolean vigente) {
+		this.vigente = vigente;
 	}
 	
 	 

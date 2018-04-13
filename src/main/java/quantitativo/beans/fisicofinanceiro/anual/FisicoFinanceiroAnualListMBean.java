@@ -82,7 +82,7 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 		}
 	}
 
-	public String reltorio(FisicoFinanceiro fisicoFinanceiro) {
+	public String relatorio(FisicoFinanceiro fisicoFinanceiro) {
  
 		return "";
 
