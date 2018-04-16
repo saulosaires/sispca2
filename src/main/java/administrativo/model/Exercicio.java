@@ -25,7 +25,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "exercicio", schema = "planejamento")
-public class Exercicio extends Model implements  Auditable {
+public class Exercicio extends Model implements  Auditable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -90,8 +90,9 @@ public class Exercicio extends Model implements  Auditable {
 		sb.append(" Exercicio Vigente: ").append(vigente);
 	
 		return sb.toString();
-	}	
-	
+	}
+
+ 
  
 
 }

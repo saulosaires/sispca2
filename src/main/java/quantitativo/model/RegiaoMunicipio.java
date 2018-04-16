@@ -43,13 +43,13 @@ public class RegiaoMunicipio extends Model{
  
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="regiaoMunicipio")
-	private transient List<FisicoFinanceiro> fisicoFinanceiro;
+	private  List<FisicoFinanceiro> fisicoFinanceiro;
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="regiaoMunicipio")
-	private transient List<FisicoFinanceiroMensal> fisicoFinanceiroMensal;
+	private  List<FisicoFinanceiroMensal> fisicoFinanceiroMensal;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="regiaoMunicipio")
-	private transient List<Execucao> execucoes;
+	private  List<Execucao> execucoes;
 	
 	private transient Double[] valoresMeses;
 	
@@ -73,10 +73,8 @@ public class RegiaoMunicipio extends Model{
 	
 	private transient boolean comitado;
 	
-	public RegiaoMunicipio() {
-		//EMPTY CONSTRUCTOR
-	}
-
+	private transient String label;
+ 
 	public Long getId() {
 		return id;
 	}
@@ -100,8 +98,24 @@ public class RegiaoMunicipio extends Model{
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
- 
-	
+
+	public String getLabel() {
+		
+		if(regiao!=null && municipio==null) {
+			label = regiao.getDescricao();
+		}
+		
+		if(regiao!=null && municipio!=null) {
+			label=municipio.getDescricao();
+		}
+		
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 	@Transient
 	public List<FisicoFinanceiro> getFisicoFinanceiro() {
 		return fisicoFinanceiro;

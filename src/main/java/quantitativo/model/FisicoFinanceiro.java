@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import administrativo.model.Exercicio;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import qualitativo.model.Acao;
@@ -29,8 +30,10 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	@Column(name="id_fisico_financeiro")
 	private Long id;
 
-	@Column(name="ano")
-	private Integer ano; 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_exercicio")
+	@NotNull(message="Exercicio: campo é obrigatório")
+	private Exercicio exercicio = new Exercicio();
 	
 	@Column(name="quantidade")
 	private double quantidade;
@@ -60,14 +63,16 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Integer getAno() {
-		return this.ano;
+ 
+	
+	
+	public Exercicio getExercicio() {
+		return exercicio;
 	}
 
-	public void setAno(Integer ano) {
-		this.ano = ano;
-	}	
+	public void setExercicio(Exercicio exercicio) {
+		this.exercicio = exercicio;
+	}
 
 	public double getQuantidade() {
 		return quantidade;
@@ -115,7 +120,7 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" FisicoFinanceiro Id : ").append(id);
-		sb.append(" ano : ").append(ano);
+		sb.append(" exercicio : ").append(getExercicio().getId());
 		sb.append(" acao : ").append(acao.getId());
 		sb.append(" quantidade : ").append(quantidade);
 		sb.append(" valor : ").append(valor);

@@ -1,6 +1,7 @@
 package administrativo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -23,6 +24,10 @@ public class PpaController extends AbstractController<Ppa> {
 	public List<Ppa> queryPpa(String sigla, String descricao, Integer anoInicio, Integer anoFim) {
 
 		return ((PpaDAO) getDao()).queryPpa(sigla, descricao, anoInicio, anoFim);
+	}
+
+	public Optional<Ppa> ppaVigente() {
+		return ((PpaDAO)getDao()).ppaVigente();
 	}
 
 }

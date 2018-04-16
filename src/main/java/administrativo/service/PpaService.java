@@ -1,6 +1,7 @@
 package administrativo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -30,6 +31,11 @@ public class PpaService extends AbstractService<Ppa>{
 			return ((PpaController) getController()).queryPpa(sigla, descricao, anoInicio, anoFim);
 		}
 
+	}
+	
+	
+	public Optional<Ppa> ppaVigente(){
+		return ((PpaController)getController()).ppaVigente();
 	}
 
 }

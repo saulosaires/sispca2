@@ -31,4 +31,8 @@ public class RegiaoMunicipioController extends AbstractController<RegiaoMunicipi
 		return ((RegiaoMunicipioDAO) getDao()).findByRegiao(regiaoId);
 	}
 
+	public List<RegiaoMunicipio> findTodosTipoRegiao() {
+		return ((RegiaoMunicipioDAO) getDao()).findTodosTipoRegiao();
+	}
+
 }

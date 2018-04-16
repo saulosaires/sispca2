@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,7 +23,7 @@ import arquitetura.model.Model;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "ppa", schema = "planejamento")
-public class Ppa extends Model {
+public class Ppa extends Model  {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -50,6 +51,7 @@ public class Ppa extends Model {
 	@Column(name = "vigente")
 	private Boolean vigente=false;	
  
+	@OrderBy("ano ASC")
     @OneToMany(mappedBy="ppa",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<Exercicio> exercicios;
 

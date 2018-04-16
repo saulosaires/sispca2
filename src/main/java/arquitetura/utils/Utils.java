@@ -20,7 +20,7 @@ public class Utils {
 
 	public static boolean invalidId(Long id) {
 
-		return (id == null || id < 0);
+		return (id == null || id <= 0);
 	}
 
 	public static boolean invalidYear(Integer year) {

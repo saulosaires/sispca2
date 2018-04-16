@@ -2,6 +2,7 @@ package administrativo.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -62,6 +63,21 @@ public class PpaDAO extends AbstractDAO<Ppa> {
 		query.where(predicate.toArray(new Predicate[predicate.size()]));
 
 		return entityManager.createQuery(query).getResultList();
+
+	}
+
+	public Optional<Ppa> ppaVigente() {
+
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Ppa> query = cb.createQuery(Ppa.class);
+		Root<Ppa> m = query.from(Ppa.class);
+		query.select(m);
+	 
+		query.where(cb.equal(m.get("vigente"), Boolean.TRUE));
+ 
+		
+		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();
 
 	}
 

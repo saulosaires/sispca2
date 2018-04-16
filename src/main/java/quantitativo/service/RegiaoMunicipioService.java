@@ -23,7 +23,7 @@ public class RegiaoMunicipioService extends AbstractService<RegiaoMunicipio> {
 	}
 
 	 
-	public List<RegiaoMunicipio> findAllByRegiao(Long regiaoId) {
+	public List<RegiaoMunicipio> findByRegiao(Long regiaoId) {
 
 		if(Utils.invalidId(regiaoId)) {
 			return new ArrayList<>();
@@ -40,7 +40,13 @@ public class RegiaoMunicipioService extends AbstractService<RegiaoMunicipio> {
 			return new ArrayList<>();
 		}
 		
-		return ((RegiaoMunicipioController) getController()).findByTipoRegiao(tipoRegiaoId);
+		List<RegiaoMunicipio> listTipoRegiao = ((RegiaoMunicipioController) getController()).findByTipoRegiao(tipoRegiaoId);
+		
+		List<RegiaoMunicipio> listTodaRegiao = ((RegiaoMunicipioController) getController()).findTodosTipoRegiao();
+		
+		listTodaRegiao.addAll(listTipoRegiao);
+		
+		return listTodaRegiao;
 	}
 
 }

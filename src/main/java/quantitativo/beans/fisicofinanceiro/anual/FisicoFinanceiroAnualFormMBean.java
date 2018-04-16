@@ -1,19 +1,27 @@
 package quantitativo.beans.fisicofinanceiro.anual;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Exercicio;
+import administrativo.model.Ppa;
+import administrativo.service.PpaService;
+import arquitetura.utils.Messages;
 import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
 import qualitativo.service.AcaoService;
 import qualitativo.service.ProgramaService;
+import quantitativo.model.FisicoFinanceiro;
 import quantitativo.model.Regiao;
 import quantitativo.model.RegiaoMunicipio;
 import quantitativo.model.TipoRegiao;
+import quantitativo.service.FisicoFinanceiroService;
 import quantitativo.service.RegiaoMunicipioService;
 import quantitativo.service.RegiaoService;
 import quantitativo.service.TipoRegiaoService;
@@ -36,27 +44,54 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 	private Long tipoRegiaoId;
 	private Long regiaoId;
 
+	private Ppa ppa;
 	private List<TipoRegiao> listTipoRegioes;
 	private List<Regiao> listRegioes;
-
+    private List<RegiaoMunicipio> listRegiaoMunicipio;
+	
+    private int exercicioInicio;
+    private int exercicioFim;
+    
 	private AcaoService acaoService;
 	private TipoRegiaoService tipoRegiaoService;
 	private RegiaoService regiaoService;
 	private RegiaoMunicipioService regiaoMunicipioService;
+	private FisicoFinanceiroService fisicoFinanceiroService;
 
 	@Inject
 	public FisicoFinanceiroAnualFormMBean(AcaoService acaoService,
 										  RegiaoMunicipioService regiaoMunicipioService,
+										  FisicoFinanceiroService fisicoFinanceiroService,
 										  TipoRegiaoService tipoRegiaoService,
-										  RegiaoService regiaoService, 
+										  RegiaoService regiaoService,
+										  PpaService ppaService,
 										  ProgramaService programaService) {
 
 		this.acaoService = acaoService;
 		this.tipoRegiaoService = tipoRegiaoService;
 		this.regiaoService = regiaoService;
 		this.regiaoMunicipioService=regiaoMunicipioService;
+		this.fisicoFinanceiroService=fisicoFinanceiroService;
 		
 		listTipoRegioes = tipoRegiaoService.findAllOrderByDescricao();
+		
+		Optional<Ppa> ppaOptinal = ppaService.ppaVigente();
+		
+		if(!ppaOptinal.isPresent()) {
+		  Messages.addMessageError("Nenhuma PPA Vigente encontrada ");
+			return;
+		}
+		
+		ppa = ppaOptinal.get();
+		
+		if(!ppa.getExercicios().isEmpty()) {
+			
+			exercicioInicio = ppa.getExercicios().get(0).getAno();
+			exercicioFim = ppa.getExercicios().get(ppa.getExercicios().size()-1).getAno();
+			
+		}
+		
+		
 	}
 
 	public void init() {
@@ -71,18 +106,65 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 
 	public void onChangeTipoRegiao() {
 
-		List<RegiaoMunicipio> listRegiaoMunicipio = regiaoMunicipioService.findAllByTipoRegiao(tipoRegiaoId);
+		if(Utils.invalidId(tipoRegiaoId)) {
+			listRegiaoMunicipio=null;
+			return;
+		}
 		
+		listRegiaoMunicipio = regiaoMunicipioService.findAllByTipoRegiao(tipoRegiaoId);
 		
-		listRegioes = regiaoService.findAllByTipoRegiao(tipoRegiaoId);
+		listRegioes = new ArrayList<>();
+ 
+		
+		for(RegiaoMunicipio regiaoMunicipio:listRegiaoMunicipio) {
+			
+			if(!Utils.invalidId(regiaoMunicipio.getRegiao().getId()))
+				listRegioes.add(regiaoMunicipio.getRegiao());
+		}
+		
+		initRegiaoMunicipio();
 	}
 
 	public void onChangeRegiao() {
 
-		List<RegiaoMunicipio> listRegiaoMunicipio = regiaoMunicipioService.findAllByRegiao(regiaoId);
+		if(Utils.invalidId(regiaoId)) {
+			onChangeTipoRegiao();
+		}else {
+			listRegiaoMunicipio = regiaoMunicipioService.findByRegiao(regiaoId);
+			initRegiaoMunicipio();
+		}
+	}
+	
+	private void initRegiaoMunicipio() {
+ 
+		 
+		for(RegiaoMunicipio regiaoMunicipio:listRegiaoMunicipio) {
+			
+			regiaoMunicipio.setFisicoFinanceiro(new ArrayList<>());
+			
+			for(Exercicio exercicio:ppa.getExercicios()) {
+				
+				Optional<FisicoFinanceiro> ff = fisicoFinanceiroService.findByRegiaoMunicipioAndExercicio(regiaoMunicipio.getId(), exercicio.getId());
+				
+				if(ff.isPresent()) {
+					regiaoMunicipio.getFisicoFinanceiro().add(ff.get());
+				}else {
+					regiaoMunicipio.getFisicoFinanceiro().add(new FisicoFinanceiro());
+				}
+			}
+			
+			
+			
+		}
 		
-		System.out.println(listRegiaoMunicipio.size());
 		
+	}
+	
+	public String inserePlanejamento() {
+		
+		System.out.println(listRegiaoMunicipio);
+		
+		return "";
 	}
 
 	public Long getId() {
@@ -133,4 +215,30 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 		this.listRegioes = listRegioes;
 	}
 
+	public List<RegiaoMunicipio> getListRegiaoMunicipio() {
+		return listRegiaoMunicipio;
+	}
+
+	public void setListRegiaoMunicipio(List<RegiaoMunicipio> listRegiaoMunicipio) {
+		this.listRegiaoMunicipio = listRegiaoMunicipio;
+	}
+
+	public int getExercicioInicio() {
+		return exercicioInicio;
+	}
+
+	public void setExercicioInicio(int exercicioInicio) {
+		this.exercicioInicio = exercicioInicio;
+	}
+
+	public int getExercicioFim() {
+		return exercicioFim;
+	}
+
+	public void setExercicioFim(int exercicioFim) {
+		this.exercicioFim = exercicioFim;
+	}
+
+	
+	
 }

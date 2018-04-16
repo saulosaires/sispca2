@@ -33,9 +33,7 @@ public class RegiaoMunicipioDAO extends AbstractDAO<RegiaoMunicipio> {
 		Root<RegiaoMunicipio> m = query.from(RegiaoMunicipio.class);
 
 		query.select(m);
-
-		List<Predicate> predicate = new ArrayList<>();
-
+ 
 		if (!Utils.invalidId((regiaoId))) {
 
 			Join<Object, Object> joinRegiao = m.join("regiao", JoinType.INNER);
@@ -44,7 +42,6 @@ public class RegiaoMunicipioDAO extends AbstractDAO<RegiaoMunicipio> {
  
 		}
  
-		query.where(predicate.toArray(new Predicate[predicate.size()]));
  
 		Join<Object, Object> joinMunicipio = m.join("municipio", JoinType.INNER);
 		
@@ -63,24 +60,45 @@ public class RegiaoMunicipioDAO extends AbstractDAO<RegiaoMunicipio> {
 
 		query.select(m);
 
-		List<Predicate> predicate = new ArrayList<>();
-
+ 
 		if (!Utils.invalidId((tipoRegiaoId))) {
 
 			Join<Object, Object> joinRegiao = m.join("regiao", JoinType.INNER);
 			
+			joinRegiao.on(cb.equal(joinRegiao.get("ativo"), Boolean.TRUE));
+			
 			Join<Object, Object> joinTipoRegiao = joinRegiao.join("tipoRegiao", JoinType.INNER);
 			
-			joinTipoRegiao.on(cb.equal(joinTipoRegiao.get("id"), tipoRegiaoId));
-
+ 			joinTipoRegiao.on(cb.equal(joinTipoRegiao.get("id"), tipoRegiaoId));
+			
 			query.orderBy(cb.asc(joinRegiao.get("descricao")));
+			
 		}
-
-		query.where(predicate.toArray(new Predicate[predicate.size()]));
+  
+		query.where(cb.isNull(m.get("municipio")));
  
 
 		return entityManager.createQuery(query).getResultList();
 
 	}
 
+	public List<RegiaoMunicipio> findTodosTipoRegiao() {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<RegiaoMunicipio> query = cb.createQuery(RegiaoMunicipio.class);
+		Root<RegiaoMunicipio> m = query.from(RegiaoMunicipio.class);
+
+		query.select(m);
+
+		Join<Object, Object> joinRegiao = m.join("regiao", JoinType.INNER);
+
+		joinRegiao.on(cb.equal(joinRegiao.get("ativo"), Boolean.TRUE));
+
+		joinRegiao.on(cb.equal(joinRegiao.get("id"), 0));
+
+		return entityManager.createQuery(query).getResultList();
+
+	}
+	
+	
 }
