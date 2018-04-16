@@ -22,9 +22,9 @@ public class FisicoFinanceiroController extends AbstractController<FisicoFinance
 	}
 
 	
-	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicio(Long regiaoMunicipioId,Long exercicioId){
+	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
-		return ((FisicoFinanceiroDAO)getDao()).findByRegiaoMunicipioAndExercicio(regiaoMunicipioId,exercicioId);
+		return ((FisicoFinanceiroDAO)getDao()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
 	}
 	
 	

@@ -144,7 +144,7 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 			
 			for(Exercicio exercicio:ppa.getExercicios()) {
 				
-				Optional<FisicoFinanceiro> ff = fisicoFinanceiroService.findByRegiaoMunicipioAndExercicio(regiaoMunicipio.getId(), exercicio.getId());
+				Optional<FisicoFinanceiro> ff = fisicoFinanceiroService.findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipio.getId(), exercicio.getId(),acao.getId());
 				
 				if(ff.isPresent()) {
 					regiaoMunicipio.getFisicoFinanceiro().add(ff.get());

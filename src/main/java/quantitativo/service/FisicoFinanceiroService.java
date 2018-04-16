@@ -20,9 +20,9 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 		super(controller);
 	}
 
-	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicio(Long regiaoMunicipioId,Long exercicioId){
+	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
-		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicio(regiaoMunicipioId,exercicioId);
+		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
 	}
 	
 	

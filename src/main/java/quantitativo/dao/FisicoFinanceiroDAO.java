@@ -25,7 +25,7 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 	}
   
 
-	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicio(Long regiaoMunicipioId,Long exercicioId){
+	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
 		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -34,7 +34,7 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 
 		query.select(m);
 
-		if (Utils.invalidId((regiaoMunicipioId)) || Utils.invalidId((exercicioId))) {
+		if (Utils.invalidId((regiaoMunicipioId)) || Utils.invalidId((exercicioId)) || Utils.invalidId((acaoId))) {
 
 			return Optional.ofNullable(null);
 		}
@@ -48,6 +48,13 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 		Join<Object, Object> joinExercicio = m.join("exercicio", JoinType.INNER);
 
 		joinExercicio.on(cb.equal(joinExercicio.get("id"), exercicioId));
+		
+		
+		
+		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
+
+		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+		
 		
 		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();	
 		
