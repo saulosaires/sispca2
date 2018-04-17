@@ -180,7 +180,7 @@
 
 		<navigation-case>
 			<from-outcome>fisicoFinanceiroAnualQuantitativoList</from-outcome>
-			<to-view-id>/private/quantitativo/fisicofinanceiro/list.xhtml</to-view-id>
+			<to-view-id>/private/quantitativo/fisicofinanceiro/anual/list.xhtml</to-view-id>
 		</navigation-case>
 		
 	</navigation-rule> 
@@ -452,11 +452,11 @@
 	</navigation-rule> 
 
  	 <navigation-rule>
-		<from-view-id>/private/quantitativo/fisicofinanceiro/list.xhtml</from-view-id>
+		<from-view-id>/private/quantitativo/fisicofinanceiro/anual/list.xhtml</from-view-id>
 
 		 <navigation-case>
 			<from-outcome>fisicoFinanceiroAnualQuantitativoEdit</from-outcome>
-			<to-view-id>/private/quantitativo/fisicofinanceiro/form.xhtml</to-view-id>
+			<to-view-id>/private/quantitativo/fisicofinanceiro/anual/form.xhtml</to-view-id>
 		</navigation-case> 
 
 	</navigation-rule> 

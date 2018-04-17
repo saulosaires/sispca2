@@ -85,8 +85,8 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/qualitativo/unidadeorcamentaria/edit.xhtml","planejamentoQualitativoUnidadeOrcamentariaAtualizar");
 		mapLinks.put("/sispca2/private/qualitativo/unidadeorcamentaria/view.xhtml","planejamentoQualitativoUnidadeOrcamentariaVisualizar");
 		
-		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/list.xhtml","planejamentoQuantitativoFisicoFinanceiroListar");
-		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/form.xhtml","planejamentoQuantitativoFisicoFinanceiroAtualizar");
+		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/anual/list.xhtml","planejamentoQuantitativoFisicoFinanceiroListar");
+		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/anual/form.xhtml","planejamentoQuantitativoFisicoFinanceiroAtualizar");
 		
 		
 		
