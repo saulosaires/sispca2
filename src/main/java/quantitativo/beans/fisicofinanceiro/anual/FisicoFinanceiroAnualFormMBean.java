@@ -12,6 +12,7 @@ import javax.inject.Named;
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
 import administrativo.service.PpaService;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -24,7 +25,6 @@ import quantitativo.model.RegiaoMunicipio;
 import quantitativo.model.TipoRegiao;
 import quantitativo.service.FisicoFinanceiroService;
 import quantitativo.service.RegiaoMunicipioService;
-import quantitativo.service.RegiaoService;
 import quantitativo.service.TipoRegiaoService;
 
 @Named
@@ -54,8 +54,6 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
     private int exercicioFim;
     
 	private AcaoService acaoService;
-	private TipoRegiaoService tipoRegiaoService;
-	private RegiaoService regiaoService;
 	private RegiaoMunicipioService regiaoMunicipioService;
 	private FisicoFinanceiroService fisicoFinanceiroService;
 
@@ -64,13 +62,10 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 										  RegiaoMunicipioService regiaoMunicipioService,
 										  FisicoFinanceiroService fisicoFinanceiroService,
 										  TipoRegiaoService tipoRegiaoService,
-										  RegiaoService regiaoService,
 										  PpaService ppaService,
 										  ProgramaService programaService) {
 
 		this.acaoService = acaoService;
-		this.tipoRegiaoService = tipoRegiaoService;
-		this.regiaoService = regiaoService;
 		this.regiaoMunicipioService=regiaoMunicipioService;
 		this.fisicoFinanceiroService=fisicoFinanceiroService;
 		
@@ -91,8 +86,7 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 			exercicioFim = ppa.getExercicios().get(ppa.getExercicios().size()-1).getAno();
 			
 		}
-		
-		
+			
 	}
 
 	public void init() {
@@ -176,8 +170,8 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 						
 						for(FisicoFinanceiro fisicoFinanceiro : regiaoMunicipio.getFisicoFinanceiro()) {
 							
-							if(fisicoFinanceiro.getValor()>0 && fisicoFinanceiro.getQuantidade()>0) {
-								fisicoFinanceiroService.merge(fisicoFinanceiro);	
+							if(fisicoFinanceiro.getValor()>0 || fisicoFinanceiro.getQuantidade()>0) {
+								saveFisicoFinanceiro(fisicoFinanceiro);	
 							}
 							
 							
@@ -198,6 +192,20 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 			}
 			
 		return "";
+	}
+	
+	private void saveFisicoFinanceiro(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
+		
+		if(Utils.invalidId(fisicoFinanceiro.getId())) {
+			
+			if(fisicoFinanceiro.getValor()>0 || fisicoFinanceiro.getQuantidade()>0) {
+				fisicoFinanceiroService.merge(fisicoFinanceiro);	
+			}
+			
+		}else {
+			fisicoFinanceiroService.merge(fisicoFinanceiro);	
+		}
+		
 	}
 	
 	/**
