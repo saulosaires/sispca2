@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
+import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
+import arquitetura.utils.Utils;
 import quantitativo.controller.FisicoFinanceiroController;
 import quantitativo.model.FisicoFinanceiro;
 
@@ -24,6 +26,18 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 		
 		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
 	}
+	 
 	
+	public FisicoFinanceiro merge(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
+		
+		if(fisicoFinanceiro==null)return fisicoFinanceiro;
+		
+		if(Utils.invalidId(fisicoFinanceiro.getId())) {
+			return create(fisicoFinanceiro);
+		}else {
+			return update(fisicoFinanceiro);
+		}
+		
+	}
 	
 }

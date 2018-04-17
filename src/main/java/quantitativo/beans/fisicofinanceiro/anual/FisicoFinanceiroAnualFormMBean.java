@@ -13,6 +13,7 @@ import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
 import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
 import qualitativo.service.AcaoService;
@@ -34,9 +35,9 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
-
-	public static final String FAIL_SEARCH = "Falha ao pesquisar Ações";
-	public static final String NO_RECORDS = "Nenhuma Ação Retornada";
+	public static final String FAIL_SAVE="Falha ao Salvar Planejamento";
+	public static final String SUCCESS_SAVE="Planejamento Salvo com sucesso";
+	 
 
 	private Long id;
 
@@ -149,7 +150,13 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 				if(ff.isPresent()) {
 					regiaoMunicipio.getFisicoFinanceiro().add(ff.get());
 				}else {
-					regiaoMunicipio.getFisicoFinanceiro().add(new FisicoFinanceiro());
+					
+					FisicoFinanceiro fisicoFinanceiro = new FisicoFinanceiro();
+									 fisicoFinanceiro.setAcao(acao);
+									 fisicoFinanceiro.setExercicio(exercicio);
+									 fisicoFinanceiro.setRegiaoMunicipio(regiaoMunicipio);
+					
+					regiaoMunicipio.getFisicoFinanceiro().add(fisicoFinanceiro);
 				}
 			}
 			
@@ -161,11 +168,61 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 	
 	public String inserePlanejamento() {
 		
-		System.out.println(listRegiaoMunicipio);
+			try {
+				
+				for(RegiaoMunicipio regiaoMunicipio:listRegiaoMunicipio) {
+					
+					if(temPlanejamento(regiaoMunicipio)) {
+						
+						for(FisicoFinanceiro fisicoFinanceiro : regiaoMunicipio.getFisicoFinanceiro()) {
+							
+							if(fisicoFinanceiro.getValor()>0 && fisicoFinanceiro.getQuantidade()>0) {
+								fisicoFinanceiroService.merge(fisicoFinanceiro);	
+							}
+							
+							
+						}
+						
+					}
+			
+				}
 		
+				Messages.addMessageInfo(SUCCESS_SAVE);
+				
+				return "fisicoFinanceiroAnualQuantitativoList";
+				
+			} catch (Exception e) {
+				SispcaLogger.logError(e.getCause().getMessage());
+		
+				Messages.addMessageError(FAIL_SAVE);
+			}
+			
 		return "";
 	}
-
+	
+	/**
+	 * Metodo usado para, se foi feito alguma planejamento para aquela região/Municipio
+	 * 
+	 * **/
+	public boolean temPlanejamento(RegiaoMunicipio regiaoMunicipio){
+		
+		Double valorTotal = Double.valueOf(0.0);
+		Double quantidadeTotal = Double.valueOf(0.0);
+		
+		for(FisicoFinanceiro ff: regiaoMunicipio.getFisicoFinanceiro()){
+			
+			valorTotal += ff.getValor();
+			quantidadeTotal += ff.getQuantidade();
+		
+		
+			if(valorTotal >0 || quantidadeTotal>0) {return true;}
+		}
+		
+		return false;
+		
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

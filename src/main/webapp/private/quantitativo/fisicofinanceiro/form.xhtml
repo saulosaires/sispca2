@@ -71,7 +71,7 @@
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-4">
 								<h:outputText styleClass="labelOutText" value="TIPO DE REGIÃO" />
-								<h:selectOneMenu  value="#{fisicoFinanceiroAnualFormMBean.tipoRegiaoId}" styleClass="form-control input-sm m-bot15">
+								<h:selectOneMenu  value="#{fisicoFinanceiroAnualFormMBean.tipoRegiaoId}" styleClass="form-control input-sm m-bot15" onchange="carregando();">
 																	   
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 									<f:selectItems value="#{fisicoFinanceiroAnualFormMBean.listTipoRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
@@ -85,7 +85,7 @@
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-4">
 								<h:outputText styleClass="labelOutText" value="REGIÃO" />
-								<h:selectOneMenu id="inputRegiao"   value="#{fisicoFinanceiroAnualFormMBean.regiaoId}" styleClass="form-control input-sm m-bot15">
+								<h:selectOneMenu id="inputRegiao"   value="#{fisicoFinanceiroAnualFormMBean.regiaoId}" styleClass="form-control input-sm m-bot15" onchange="carregando();">
 								
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 									<f:selectItems value="#{fisicoFinanceiroAnualFormMBean.listRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
@@ -185,7 +185,7 @@
 							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{fisicoFinanceiroAnualFormMBean.inserePlanejamento()}" />
 
 							&nbsp;
-							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Cancelar" outcome="fisicoFinanceiroAnualQuantitativoList" immediate="true" />
+							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="fisicoFinanceiroAnualQuantitativoList" immediate="true" />
 						</div>
 
 
