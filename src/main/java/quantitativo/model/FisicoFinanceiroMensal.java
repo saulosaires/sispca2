@@ -31,10 +31,10 @@ public class FisicoFinanceiroMensal extends Model implements  Auditable{
 	private Long id;
 	
 	@Column(name="quantidade")
-	private Double quantidade;
+	private Double quantidade=0D;
 	
 	@Column(name="valor")
-	private Double valor;
+	private Double valor=0D;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_regiao_municipio")

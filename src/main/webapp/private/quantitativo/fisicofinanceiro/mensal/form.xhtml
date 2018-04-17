@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+
+	 		 <f:metadata>
+	    			<f:viewParam name="id" value="#{fisicoFinanceiroMensalFormMBean.id}"/>
+	    			<f:viewAction action="#{fisicoFinanceiroMensalFormMBean.init}" />
+			 </f:metadata>
+
+			<div class="container-fluid">
+				 
+				<legend class="outBusc">Planejamento Fisico Financeiro Mensal</legend>
+			</div>
+			
+			<h:form>
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="AÇÃO: " />
+								<h:outputText value="#{fisicoFinanceiroMensalFormMBean.acao.codigo} - #{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.denominacao)}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="ORGÃO: " />
+								<h:outputText value="#{fisicoFinanceiroMensalFormMBean.acao.orgao.codigo} - #{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.orgao.descricao)}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="UNIDADE ORÇAMENTÁRIA: " />
+								<h:outputText value="#{fisicoFinanceiroMensalFormMBean.acao.unidadeOrcamentaria.codigo} - #{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.unidadeOrcamentaria.descricao)}"
+									styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="PROGRAMA: " />
+								<h:outputText value="#{fisicoFinanceiroMensalFormMBean.acao.programa.codigo} - #{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.programa.denominacao)}" 
+									styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="UNIDADE: " />
+								<h:outputText value="#{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.unidadeMedida.descricao)}" 
+									styleClass="labelInputText"/>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-6">
+								<h:outputText styleClass="labelOutText" value="PRODUTO: " />
+								<h:outputText value="#{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.produto)}"  styleClass="labelInputText"/>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText styleClass="labelOutText" value="TIPO DE REGIÃO" />
+								<h:selectOneMenu  value="#{fisicoFinanceiroMensalFormMBean.tipoRegiaoId}" styleClass="form-control input-sm m-bot15" onchange="">
+																	   
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{fisicoFinanceiroMensalFormMBean.listTipoRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
+									
+									<p:ajax  listener="#{fisicoFinanceiroMensalFormMBean.onChangeTipoRegiao()}" partialSubmit="true" update="inputRegiao regiaoTable" onstart="carregando();" oncomplete="completo();"/>
+									
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText styleClass="labelOutText" value="REGIÃO" />
+								<h:selectOneMenu id="inputRegiao"   value="#{fisicoFinanceiroMensalFormMBean.regiaoId}" styleClass="form-control input-sm m-bot15">
+								
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{fisicoFinanceiroMensalFormMBean.listRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
+									
+									<p:ajax  listener="#{fisicoFinanceiroMensalFormMBean.onChangeRegiao()}"   partialSubmit="true" update="regiaoTable"  onstart="carregando();" oncomplete="completo();" />
+									
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top: 2%;">
+							<legend class="outBusc">CADASTRO DADOS PARA AÇÃO E REGIÃO SELECIONADOS</legend>
+						</div>
+
+
+						<h:panelGroup  id="regiaoTable">
+							<center>
+								<c:if test="${not empty fisicoFinanceiroMensalFormMBean.listRegiaoMunicipio}">
+								
+								<table class="table table-bordered" style="font-size: 12px;">
+								
+									<tr>
+										<td colspan="2"><b>REGIAO/MUNICIPIO</b></td>
+										<c:forEach items="${fisicoFinanceiroMensalFormMBean.listaMes}" var="mes" varStatus="status">
+											<td><b>#{mes.descricao}</b></td>
+										</c:forEach>
+										<td colspan="2"><b>TOTAL</b></td>
+									</tr>
+									<tr class="text-info">
+										<c:if
+											test="${empty fisicoFinanceiroMensalFormMBean.listRegiaoMunicipio}">
+											<td colspan="15" style="text-align: center;"><h:outputText
+													value="Não há itens para apresentar" /></td>
+										</c:if>
+									</tr>
+								
+									<c:forEach items="${fisicoFinanceiroMensalFormMBean.listRegiaoMunicipio}" var="rm" varStatus="status">
+									
+										<tr>
+											<td rowspan="2">
+												<h:outputText value="${rm.label}" /> 
+											</td>
+											<td><h:outputText value="Qtd" /></td>
+											<c:forEach items="${rm.fisicoFinanceiroMensal}" var="ff">
+											
+												<td style="padding: 4px;">
+													<h:inputText
+														class="linha quantidade form-control input-sm m-bot15"
+														value="${ff.quantidade}"
+														onkeypress='return somenteNumeroDecimal(this,event)'
+														onkeyup='return ValidaNumero(event)'
+														style="padding: 2px 2px; font-size: 10px; text-align:right;">
+														<f:convertNumber pattern="#,##0.00" />
+												
+													</h:inputText>
+												</td>
+												
+											</c:forEach>
+											
+											<td style="padding: 4px;">
+											
+													<b><h:inputText 
+															class="linha quantidade form-control input-sm m-bot15"
+															style="padding: 2px 2px;font-size: 10px; text-align:right;"
+															disabled="true" value="#{rm.quantidadeTotal}">
+														</h:inputText>
+													</b>
+												
+											</td>
+										</tr>
+											
+									  	<tr>
+											<td><h:outputText value="Valor" /></td>
+												<c:forEach items="${rm.fisicoFinanceiroMensal}" var="ff">
+													<td style="padding: 4px;">
+														<h:inputText
+															class="linha valor form-control input-sm m-bot15"
+															value="${ff.valor}"
+															onkeypress='return somenteNumeroDecimal(this,event)'
+															style="padding: 2px 2px; font-size: 10px; text-align:right;"
+															onkeyup='return ValidaNumero(event)'>
+															<f:convertNumber pattern="#,##0.00" />
+														</h:inputText>
+													</td>
+												</c:forEach>
+												<td style="padding: 4px;">
+													
+														<b><h:inputText 
+																class="linha valor form-control input-sm m-bot15"
+																style="padding: 2px 2px;font-size: 10px; text-align:right;"
+																disabled="true" value="#{rm.valorTotal}">
+															</h:inputText></b>
+													
+												</td>
+											</tr>
+										</c:forEach>							
+								
+								
+								</table>
+								
+								</c:if>
+							</center>
+						</h:panelGroup >
+
+						<div class="row-fluid" style="margin-top: 2%;">
+							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{fisicoFinanceiroMensalFormMBean.inserePlanejamento()}" />
+
+							&nbsp;
+							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="fisicoFinanceiroMensalQuantitativoList" immediate="true" />
+						</div>
+
+
+
+				<script>
+					String.prototype.replaceAll = function(target, replacement) {
+					  	return this.split(target).join(replacement);
+					};
+				
+					Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
+					    var n = this,
+					        decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+					        decSeparator = decSeparator == undefined ? "." : decSeparator,
+					        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+					        sign = n &lt; 0 ? "-" : "",
+					        i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+					        j = (j = i.length) > 3 ? j % 3 : 0;
+					    return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+					};
+						
+					$('.linha').blur(function(){
+
+						var elementosQuantidade = $(this).parents('tr').children().find('input.quantidade:enabled');
+						var elementosValor = $(this).parents('tr').children().find('input.valor:enabled');
+
+						var valorFinal = $(this).parents('tr').children().find('input.valor:disabled');
+						var quantidadeFinal = $(this).parents('tr').children().find('input.quantidade:disabled');
+
+						var somaQuantidade = 0;
+						for(var i = 0; i &lt; elementosQuantidade.length; i++) {
+// 							somaQuantidade +=  parseInt(((elementosQuantidade[i].value == null) ? 0 : elementosQuantidade[i].value));
+// 							quantidadeFinal.val(somaQuantidade);
+							valor = (elementosQuantidade[i].value == null) ? 0 : elementosQuantidade[i].value;
+							valor = valor.replaceAll('.','');
+							valor = valor.replace(',','.');
+							somaQuantidade += parseFloat(valor);
+							quantidadeFinal.val(somaQuantidade.formatMoney(2,'.',','));
+						}
+
+						var somaValor = 0;
+						for(var i = 0; i &lt; elementosValor.length; i++) {
+							valor = (elementosValor[i].value == null) ? 0 : elementosValor[i].value;
+							valor = valor.replaceAll('.','');
+							valor = valor.replace(',','.');
+							somaValor +=  parseFloat(valor);
+							valorFinal.val(somaValor.formatMoney(2,'.',','));
+						}
+					});
+
+					$('.linha').trigger('blur');
+				</script>
+
+
+					</div>
+				</div>
+				 
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

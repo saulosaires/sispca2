@@ -1,0 +1,43 @@
+package quantitativo.service;
+
+import java.util.Optional;
+
+import javax.inject.Inject;
+
+import arquitetura.exception.JpaException;
+import arquitetura.service.AbstractService;
+import arquitetura.utils.Utils;
+import quantitativo.controller.FisicoFinanceiroMensalController;
+import quantitativo.model.FisicoFinanceiroMensal;
+
+public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinanceiroMensal> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	public FisicoFinanceiroMensalService(FisicoFinanceiroMensalController controller) {
+		super(controller);
+	}
+
+	public Optional<FisicoFinanceiroMensal> findByRegiaoMunicipioAndExercicioAndAcaoAndMes(Long regiaoMunicipioId,Long exercicioId,Long acaoId,Long mesId){
+		
+		return ((FisicoFinanceiroMensalController)getController()).findByRegiaoMunicipioAndExercicioAndAcaoAndMes(regiaoMunicipioId,exercicioId,acaoId,mesId);
+	}
+	 
+	
+	public FisicoFinanceiroMensal merge(FisicoFinanceiroMensal fisicoFinanceiroMensal) throws JpaException {
+		
+		if(fisicoFinanceiroMensal==null)return fisicoFinanceiroMensal;
+		
+		if(Utils.invalidId(fisicoFinanceiroMensal.getId())) {
+			return create(fisicoFinanceiroMensal);
+		}else {
+			return update(fisicoFinanceiroMensal);
+		}
+		
+	}
+	
+}

@@ -26,7 +26,7 @@
 											<h:outputText styleClass="labelOutText" value="CÓDIGO: " />
 										</div>
 										<div class="span3">
-											<h:inputText id="inputCodigo" value="#{fisicoFinanceiroAnualListMBean.codigo}" styleClass="form-control input-sm m-bot15" />	
+											<h:inputText id="inputCodigo" value="#{fisicoFinanceiroMensalListMBean.codigo}" styleClass="form-control input-sm m-bot15" />	
 										</div>
 									</div>
 									<div class="span12">
@@ -34,9 +34,9 @@
 											<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenuUO" value="#{fisicoFinanceiroAnualListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15">
+											<h:selectOneMenu id="inputMenuUO" value="#{fisicoFinanceiroMensalListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{fisicoFinanceiroAnualListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
+												<f:selectItems value="#{fisicoFinanceiroMensalListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
 												 
 											</h:selectOneMenu>											
 										</div>
@@ -46,7 +46,7 @@
 											<h:outputText value="DENOMINAÇÃO: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:inputText id="inputDenominacao" value="#{fisicoFinanceiroAnualListMBean.denominacao}" styleClass="form-control input-sm m-bot15"  />		
+											<h:inputText id="inputDenominacao" value="#{fisicoFinanceiroMensalListMBean.denominacao}" styleClass="form-control input-sm m-bot15"  />		
 										</div>
 									</div>							
 									<div class="span12">
@@ -54,9 +54,9 @@
 											<h:outputText value="PROGRAMA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputPrograma" value="#{fisicoFinanceiroAnualListMBean.programaId}" styleClass="form-control input-sm">
+											<h:selectOneMenu id="inputPrograma" value="#{fisicoFinanceiroMensalListMBean.programaId}" styleClass="form-control input-sm">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{fisicoFinanceiroAnualListMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
+												<f:selectItems value="#{fisicoFinanceiroMensalListMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
 												 
 											</h:selectOneMenu>											
 										</div>
@@ -69,7 +69,7 @@
 										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 											<f:ajax
 												execute="@this inputCodigo inputMenuUO inputDenominacao inputPrograma"
-												event="click" listener="#{fisicoFinanceiroAnualListMBean.buscar()}"
+												event="click" listener="#{fisicoFinanceiroMensalListMBean.buscar()}"
 												render="tableUnid" />
 										</h:commandButton>
 
@@ -82,7 +82,7 @@
 					<div class="outBusc">RESULTADOS</div>
 				</div>
 				<center>
-					<p:dataTable value="#{fisicoFinanceiroAnualListMBean.listAcoes}" var="ff" name="gridff" paginator="true" rows="10" styleClass="tableDados"
+					<p:dataTable value="#{fisicoFinanceiroMensalListMBean.listAcoes}" var="ff" name="gridff" paginator="true" rows="10" styleClass="tableDados"
 								 id="tableUnid" emptyMessage="Não há ações a serem mostradas">
 						
 						<p:column headerText="Código" style="width: 13%;"  styleClass="outTextTable">
@@ -97,16 +97,16 @@
 						<p:column headerText="Programa"  styleClass="outTextTable">
 							<h:outputText value="#{fn:toUpperCase(ff.programa.denominacao)}"/>	
 						</p:column>
-						<p:column headerText="OPERAÇÃO" style="width: 10%;"  styleClass="outTextTable" footerText="Quantidade Total: ${fn:length(fisicoFinanceiroAnualListMBean.listAcoes)}">
+						<p:column headerText="OPERAÇÃO" style="width: 10%;"  styleClass="outTextTable" footerText="Quantidade Total: ${fn:length(fisicoFinanceiroMensalListMBean.listAcoes)}">
 							<center>
 							 
 											
-								<p:button title="Selecionar essa Ação"  outcome="fisicoFinanceiroAnualQuantitativoEdit" icon="ui-icon-pencil"  rendered="#{fisicoFinanceiroAnualListMBean.atualizar}">
+								<p:button title="Selecionar essa Ação"  outcome="fisicoFinanceiroMensalQuantitativoEdit" icon="ui-icon-pencil"  rendered="#{fisicoFinanceiroMensalListMBean.atualizar}">
 								 	  <f:param name="id" value="#{ff.id}" /> 
 								</p:button>
 											
 											
-<!-- 								<p:commandButton action="#{fisicoFinanceiroMBean.relatorio(ff)}" rendered="#{fisicoFinanceiroAnualListMBean.relatorio}" -->
+<!-- 								<p:commandButton action="#{fisicoFinanceiroMBean.relatorio(ff)}" rendered="#{fisicoFinanceiroMensalListMBean.relatorio}" -->
 <!-- 											icon="ui-icon-print" title="Gerar relatório financeiro anual por ação" />	 -->
 													
 							</center>							

@@ -27,16 +27,12 @@ public class Mes  extends Model  {
 	@Column(name="id_mes")
 	private Long id;
 
+	@Column(name="descricao")
 	private String descricao;
 
 	@Column(name="numero_mes")
 	private Integer numeroMes;
- 
-
-	public Mes() {
-		//Empty Constructor
-	}	
-
+  
 	public Long getId() {
 		return id;
 	}

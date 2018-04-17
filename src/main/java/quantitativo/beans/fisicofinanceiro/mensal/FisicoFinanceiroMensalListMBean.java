@@ -1,4 +1,4 @@
-package quantitativo.beans.fisicofinanceiro.anual;
+package quantitativo.beans.fisicofinanceiro.mensal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +20,7 @@ import quantitativo.model.FisicoFinanceiro;
 
 @Named
 @ViewScoped
-public class FisicoFinanceiroAnualListMBean implements Serializable {
+public class FisicoFinanceiroMensalListMBean implements Serializable {
 
 	/**
 	 * 
@@ -47,17 +47,17 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
     private Boolean relatorio;
     
 	@Inject
-	public FisicoFinanceiroAnualListMBean(AcaoService acaoService ,
-										  UnidadeOrcamentariaService  unidadeOrcamentariaService, 
-										  ProgramaService programaService) {
+	public FisicoFinanceiroMensalListMBean(AcaoService acaoService ,
+										   UnidadeOrcamentariaService  unidadeOrcamentariaService, 
+										   ProgramaService programaService) {
 		
 		this.acaoService   = acaoService;
 		
 		this.listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
 		this.listPrograma 		     = programaService.findAllOrderByDenominacao();
  		
-		atualizar = SessionUtils.containsKey("planejamentoQuantitativoFisicoFinanceiroAnualAtualizar");
-		relatorio = SessionUtils.containsKey("planejamentoQuantitativoFisicoFinanceiroAnualRelatorio");
+		atualizar = SessionUtils.containsKey("planejamentoQuantitativoFisicoFinanceiroMensalAtualizar");
+		relatorio = SessionUtils.containsKey("planejamentoQuantitativoFisicoFinanceiroMensalRelatorio");
 		
 		
 		
