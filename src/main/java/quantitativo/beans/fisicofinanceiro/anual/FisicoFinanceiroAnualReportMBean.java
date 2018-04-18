@@ -120,8 +120,7 @@ public class FisicoFinanceiroAnualReportMBean implements Serializable {
 
 		for (FisicoFinanceiro ff : listFF) {
 
-			list.add(new RelatorioFisicoFinanceiroAnualReport(ff.getRegiaoMunicipio().getLabel(),
-					ff.getExercicio().getAno(), ff.getQuantidade(), ff.getValor()));
+			list.add(new RelatorioFisicoFinanceiroAnualReport(ff.getRegiaoMunicipio().getLabel(),ff.getExercicio().getAno(), ff.getQuantidade(), ff.getValor()));
 		}
 
 		return list;
