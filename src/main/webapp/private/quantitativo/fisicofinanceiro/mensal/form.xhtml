@@ -37,7 +37,7 @@
 						<div class="row" style="margin-top: 1%;">
 							<div class="col-lg-6">
 								<h:outputText styleClass="labelOutText" value="ORGÃO: " />
-								<h:outputText value="#{fisicoFinanceiroMensalFormMBean.acao.orgao.codigo} - #{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.orgao.descricao)}" styleClass="labelInputText" />
+								<h:outputText value="#{fisicoFinanceiroMensalFormMBean.acao.unidadeOrcamentaria.orgao.codigo} - #{fn:toUpperCase(fisicoFinanceiroMensalFormMBean.acao.unidadeOrcamentaria.orgao.descricao)}" styleClass="labelInputText" />
 							</div>
 						</div>
 						<div class="row" style="margin-top: 1%;">
@@ -71,7 +71,7 @@
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-4">
 								<h:outputText styleClass="labelOutText" value="TIPO DE REGIÃO" />
-								<h:selectOneMenu  value="#{fisicoFinanceiroMensalFormMBean.tipoRegiaoId}" styleClass="form-control input-sm m-bot15" onchange="">
+								<h:selectOneMenu  value="#{fisicoFinanceiroMensalFormMBean.tipoRegiaoId}" styleClass="form-control input-sm m-bot15"  >
 																	   
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 									<f:selectItems value="#{fisicoFinanceiroMensalFormMBean.listTipoRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
@@ -85,12 +85,12 @@
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-4">
 								<h:outputText styleClass="labelOutText" value="REGIÃO" />
-								<h:selectOneMenu id="inputRegiao"   value="#{fisicoFinanceiroMensalFormMBean.regiaoId}" styleClass="form-control input-sm m-bot15">
+								<h:selectOneMenu id="inputRegiao"   value="#{fisicoFinanceiroMensalFormMBean.regiaoId}" styleClass="form-control input-sm m-bot15" >
 								
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 									<f:selectItems value="#{fisicoFinanceiroMensalFormMBean.listRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
 									
-									<p:ajax  listener="#{fisicoFinanceiroMensalFormMBean.onChangeRegiao()}"   partialSubmit="true" update="regiaoTable"  onstart="carregando();" oncomplete="completo();" />
+									<p:ajax listener="#{fisicoFinanceiroMensalFormMBean.onChangeRegiao()}"   partialSubmit="true" update="regiaoTable"  onstart="carregando();" oncomplete="completo();" />
 									
 								</h:selectOneMenu>
 							</div>
@@ -101,7 +101,7 @@
 						</div>
 
 
-						<h:panelGroup  id="regiaoTable">
+						<p:outputPanel  id="regiaoTable">
 							<center>
 								<c:if test="${not empty fisicoFinanceiroMensalFormMBean.listRegiaoMunicipio}">
 								
@@ -160,16 +160,18 @@
 									  	<tr>
 											<td><h:outputText value="Valor" /></td>
 												<c:forEach items="${rm.fisicoFinanceiroMensal}" var="ff">
+												
 													<td style="padding: 4px;">
-														<h:inputText
-															class="linha valor form-control input-sm m-bot15"
-															value="${ff.valor}"
-															onkeypress='return somenteNumeroDecimal(this,event)'
-															style="padding: 2px 2px; font-size: 10px; text-align:right;"
-															onkeyup='return ValidaNumero(event)'>
+														<h:inputText value="${ff.valor}"
+																	 class="linha valor form-control input-sm m-bot15"
+																	 onkeypress='return somenteNumeroDecimal(this,event)'
+																	 onkeyup='return ValidaNumero(event)' style="padding: 2px 2px; font-size: 10px; text-align:right;">
+															
 															<f:convertNumber pattern="#,##0.00" />
+															
 														</h:inputText>
 													</td>
+													
 												</c:forEach>
 												<td style="padding: 4px;">
 													
@@ -188,7 +190,7 @@
 								
 								</c:if>
 							</center>
-						</h:panelGroup >
+						</p:outputPanel >
 
 						<div class="row-fluid" style="margin-top: 2%;">
 							<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{fisicoFinanceiroMensalFormMBean.inserePlanejamento()}" />
@@ -216,7 +218,7 @@
 					};
 						
 					$('.linha').blur(function(){
-
+ 
 						var elementosQuantidade = $(this).parents('tr').children().find('input.quantidade:enabled');
 						var elementosValor = $(this).parents('tr').children().find('input.valor:enabled');
 
@@ -225,15 +227,14 @@
 
 						var somaQuantidade = 0;
 						for(var i = 0; i &lt; elementosQuantidade.length; i++) {
-// 							somaQuantidade +=  parseInt(((elementosQuantidade[i].value == null) ? 0 : elementosQuantidade[i].value));
-// 							quantidadeFinal.val(somaQuantidade);
+
 							valor = (elementosQuantidade[i].value == null) ? 0 : elementosQuantidade[i].value;
 							valor = valor.replaceAll('.','');
 							valor = valor.replace(',','.');
 							somaQuantidade += parseFloat(valor);
 							quantidadeFinal.val(somaQuantidade.formatMoney(2,'.',','));
 						}
-
+ 
 						var somaValor = 0;
 						for(var i = 0; i &lt; elementosValor.length; i++) {
 							valor = (elementosValor[i].value == null) ? 0 : elementosValor[i].value;

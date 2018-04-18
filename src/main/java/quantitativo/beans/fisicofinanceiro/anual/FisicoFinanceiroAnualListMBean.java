@@ -16,7 +16,6 @@ import qualitativo.model.UnidadeOrcamentaria;
 import qualitativo.service.AcaoService;
 import qualitativo.service.ProgramaService;
 import qualitativo.service.UnidadeOrcamentariaService;
-import quantitativo.model.FisicoFinanceiro;
 
 @Named
 @ViewScoped
@@ -27,7 +26,6 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 5940179508090218836L;
 
- 
 	public static final String FAIL_SEARCH 	  = "Falha ao pesquisar Ações";
 	public static final String  NO_RECORDS	  = "Nenhuma Ação Retornada";
 	
@@ -42,7 +40,7 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 	private List<Acao>listAcoes;
  
     private AcaoService acaoService;
-	
+    
     private Boolean atualizar;
     private Boolean relatorio;
     
@@ -82,13 +80,8 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 		}
 	}
 
-	public String relatorio(FisicoFinanceiro fisicoFinanceiro) {
- 
-		return "";
 
-	}
-
-
+	
 	public String getDenominacao() {
 		return denominacao;
 	}
@@ -179,7 +172,6 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 	}
 
 	
-	 
 	 
 	
 }

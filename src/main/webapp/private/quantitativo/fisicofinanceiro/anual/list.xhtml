@@ -105,9 +105,9 @@
 								 	  <f:param name="id" value="#{ff.id}" /> 
 								</p:button>
 											
-											
-<!-- 								<p:commandButton action="#{fisicoFinanceiroMBean.relatorio(ff)}" rendered="#{fisicoFinanceiroAnualListMBean.relatorio}" -->
-<!-- 											icon="ui-icon-print" title="Gerar relatório financeiro anual por ação" />	 -->
+								<p:button title="Gerar relatório financeiro anual por ação"  outcome="fisicoFinanceiroAnualQuantitativoView" icon="ui-icon-print"  rendered="#{fisicoFinanceiroAnualListMBean.relatorio}">
+								 	  <f:param name="id" value="#{ff.id}" /> 
+								</p:button>	
 													
 							</center>							
 						</p:column>				

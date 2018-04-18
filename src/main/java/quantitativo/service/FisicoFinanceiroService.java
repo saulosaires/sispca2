@@ -1,5 +1,6 @@
 package quantitativo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -22,6 +23,12 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 		super(controller);
 	}
 
+	public List<FisicoFinanceiro> findByAcao(Long acaoId){
+		
+		return ((FisicoFinanceiroController)getController()).findByAcao(acaoId);
+	}
+	
+	
 	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
 		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);

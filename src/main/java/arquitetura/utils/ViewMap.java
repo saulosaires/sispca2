@@ -87,10 +87,11 @@ public class ViewMap  {
 		
 		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/anual/list.xhtml","planejamentoQuantitativoFisicoFinanceiroAnualListar");
 		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/anual/form.xhtml","planejamentoQuantitativoFisicoFinanceiroAnualAtualizar");
+		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/anual/view.xhtml","planejamentoQuantitativoFisicoFinanceiroAnualRelatorio");
 		
 		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/mensal/list.xhtml","planejamentoQuantitativoFisicoFinanceiroMensalListar");
 		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/mensal/form.xhtml","planejamentoQuantitativoFisicoFinanceiroMensalAtualizar");
-		
+		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/mensal/view.xhtml","planejamentoQuantitativoFisicoFinanceiroMensalRelatorio");
 		
 		
 		

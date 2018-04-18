@@ -1,5 +1,6 @@
 package quantitativo.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -21,6 +22,10 @@ public class FisicoFinanceiroController extends AbstractController<FisicoFinance
 
 	}
 
+	public List<FisicoFinanceiro> findByAcao(Long acaoId){
+		
+		return ((FisicoFinanceiroDAO)getDao()).findByAcao(acaoId);
+	}
 	
 	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		

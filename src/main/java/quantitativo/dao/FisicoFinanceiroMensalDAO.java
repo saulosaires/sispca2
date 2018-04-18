@@ -1,5 +1,7 @@
 package quantitativo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -65,6 +67,30 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 		
 		
 		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();	
+		
+	}
+
+
+	public List<FisicoFinanceiroMensal> findByAcao(Long acaoId) {
+
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiroMensal> query = cb.createQuery(FisicoFinanceiroMensal.class);
+		Root<FisicoFinanceiroMensal> m = query.from(FisicoFinanceiroMensal.class);
+
+		query.select(m);
+
+		if (Utils.invalidId((acaoId))  ) {
+
+			return new ArrayList<>();
+		}
+ 	
+		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
+
+		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+ 
+		
+		return entityManager.createQuery(query).getResultList();
 		
 	}
  
