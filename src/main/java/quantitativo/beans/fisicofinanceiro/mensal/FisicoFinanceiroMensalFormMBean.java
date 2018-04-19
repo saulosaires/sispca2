@@ -196,17 +196,11 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 	}
 	
 	private void saveFisicoFinanceiro(FisicoFinanceiroMensal fisicoFinanceiroMensal) throws JpaException {
-		
-		if(Utils.invalidId(fisicoFinanceiroMensal.getId())) {
-			
+ 			
 			if(fisicoFinanceiroMensal.getValor()>0 || fisicoFinanceiroMensal.getQuantidade()>0) {
 				fisicoFinanceiroMensalService.merge(fisicoFinanceiroMensal);	
 			}
-			
-		}else {
-			fisicoFinanceiroMensalService.merge(fisicoFinanceiroMensal);	
-		}
-		
+ 
 	}
 	
 	/**

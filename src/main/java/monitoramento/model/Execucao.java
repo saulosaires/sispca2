@@ -1,7 +1,9 @@
 package monitoramento.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,6 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import administrativo.model.Exercicio;
@@ -20,10 +23,7 @@ import quantitativo.model.Localizador;
 import quantitativo.model.RegiaoMunicipio;
  
 
-/**
- * The persistent class for the execucao database table.
- * 
- */
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "execucao", schema = "monitoramento")
@@ -52,23 +52,19 @@ public class Execucao extends Model implements  Auditable {
 	@JoinColumn(name = "id_regiao_municipio")
 	private RegiaoMunicipio regiaoMunicipio;
 
+	@Column(name = "valor")
 	private double valor;
 	
+	@Column(name = "quantidade")
 	private double quantidade;
 	
-	//bi-directional many-to-one association to Observacao
-	@ManyToOne
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="id_observacao")
-	private Observacao observacao;
+	private Observacao observacao = new Observacao();
 	
 	@ManyToOne
 	@JoinColumn(name="id_exercicio")
 	private Exercicio exercicio;
-
-
-	public Execucao() {
-		//empty constructor
-	}
 
 	public Long getId() {
 		return id;
@@ -78,7 +74,6 @@ public class Execucao extends Model implements  Auditable {
 		this.id = id;
 	}
  
-
 	public double getValor() {
 		return this.valor;
 	}

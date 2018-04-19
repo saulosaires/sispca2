@@ -93,6 +93,8 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/mensal/form.xhtml","planejamentoQuantitativoFisicoFinanceiroMensalAtualizar");
 		mapLinks.put("/sispca2/private/quantitativo/fisicofinanceiro/mensal/view.xhtml","planejamentoQuantitativoFisicoFinanceiroMensalRelatorio");
 		
+		mapLinks.put("/sispca2/private/monitoramento/fisicofinanceiro/mensal/list.xhtml","monitoramentoFisicoFinanceiroMensalListar");
+		mapLinks.put("/sispca2/private/monitoramento/fisicofinanceiro/mensal/form.xhtml","monitoramentoFisicoFinanceiroMensalAtualizar");
 		
 		
 	}

@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+			 <f:metadata>
+	    			<f:viewParam name="id" value="#{monitoramentoFisicoFinanceiroMensalFormMBean.id}"/>
+	    			<f:viewAction action="#{monitoramentoFisicoFinanceiroMensalFormMBean.init}" />
+			 </f:metadata>
+						
+			<div class="container-fluid">
+ 				<legend class="outBusc">Monitoramento Fisico Financeiro Mensal</legend>
+				<div class="alert alert-block"
+					style="background-color: #FFFFF0; color: #D2B48C;">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<h4 style="font-weight: bolder;">Informativo</h4>
+					
+					<p>O TOTAL MESES ANTERIORES - Descreve a soma das quantidades e dos valores de todos os meses até um mês antes do escolhido. O
+					     TOTAL GERAL - Descreve a soma das quantidades e dos valores de todos os meses</p>
+				</div>
+			</div>
+			
+			<h:form prependId="false" acceptcharset="UTF-8">
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-2">
+								<h:outputText value="ANO ATUAL: " styleClass="labelOutText" />
+								<h:outputText value="#{monitoramentoFisicoFinanceiroMensalFormMBean.exercicio.ano}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-2">
+								<h:outputText value="CÓDIGO: " styleClass="labelOutText" />
+								<h:outputText value="#{monitoramentoFisicoFinanceiroMensalFormMBean.acao.codigo}" styleClass="input-sm" />
+							</div>
+							<div class="col-lg-5">
+								<h:outputText value="AÇÃO SELECIONADA: " styleClass="labelOutText" />
+								<h:outputText value="#{fn:toUpperCase(monitoramentoFisicoFinanceiroMensalFormMBean.acao.denominacao)}" styleClass="input-sm" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-6">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText" />
+								<h:outputText value="#{fn:toUpperCase(monitoramentoFisicoFinanceiroMensalFormMBean.acao.unidadeOrcamentaria.descricao)}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-6">
+								<h:outputText value="PROGRAMA: " styleClass="labelOutText" />
+								<h:outputText value="#{fn:toUpperCase(monitoramentoFisicoFinanceiroMensalFormMBean.acao.programa.denominacao)}" styleClass="labelInputText" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-6">
+								<h:outputText value="UNIDADE: " styleClass="labelOutText" />
+								<h:outputText value="#{fn:toUpperCase(monitoramentoFisicoFinanceiroMensalFormMBean.acao.unidadeMedida.descricao)}" styleClass="input-sm" />
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-6">
+								<h:outputText value="PRODUTO: " styleClass="labelOutText" />
+								<h:outputText value="#{fn:toUpperCase(monitoramentoFisicoFinanceiroMensalFormMBean.acao.produto)}" styleClass="input-sm" />
+							</div>
+						</div>
+						
+									
+						<div class="row" style="margin-top: 1%">
+						
+							<div class="form-group col-lg-2">
+							
+								<h:outputText styleClass="labelOutText" value="TIPO DE REGIÃO" />
+								<h:selectOneMenu id="inputTipoRegiao" onchange="carregando();" value="#{monitoramentoFisicoFinanceiroMensalFormMBean.tipoRegiaoId}" styleClass="form-control input-sm">
+									
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalFormMBean.listTipoRegioes}" var="tr" itemValue="#{tr.id}" itemLabel="#{tr.descricao}" />
+										
+									<f:ajax event="change" render="@form" execute="@this" listener="#{monitoramentoFisicoFinanceiroMensalFormMBean.onChangeTipoRegiao()}" />
+									
+								</h:selectOneMenu>
+								
+							</div>
+							
+							<div class="form-group col-lg-4">
+								<h:outputText value="SELECIONE UMA REGIÃO: " styleClass="labelOutText" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.tipoRegiaoId eq 2 or monitoramentoFisicoFinanceiroMensalFormMBean.tipoRegiaoId eq 3}"/>
+								<h:outputText value="SELECIONE UMA BACIA: "  styleClass="labelOutText" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.tipoRegiaoId eq 5}"/>
+								<h:outputText value="SELECIONE UM TRECHO: "  styleClass="labelOutText" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.tipoRegiaoId eq 6}"/>
+								<h:outputText value="SELECIONE: "            styleClass="labelOutText" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.tipoRegiaoId eq null}"/>		
+									
+								<h:selectOneMenu id="inputRegiao" onchange="carregando();" value="#{monitoramentoFisicoFinanceiroMensalFormMBean.regiaoId}" styleClass="form-control input-sm">
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalFormMBean.listRegioes}" var="regiao" itemLabel="#{fn:toUpperCase(regiao.descricao)}" itemValue="#{regiao.id}" />
+										
+									<f:ajax listener="#{monitoramentoFisicoFinanceiroMensalFormMBean.onChangeRegiao()}" execute="@this" event="change" render="@form" />
+									
+								</h:selectOneMenu>
+							</div>
+
+							<div class="form-group col-lg-2">
+								<h:outputText styleClass="labelOutText" value="MÊS" />
+								<h:selectOneMenu id="inputMes" onchange="carregando();" value="#{monitoramentoFisicoFinanceiroMensalFormMBean.mesId}"  styleClass="form-control input-sm m-bot15">
+									
+									<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalFormMBean.listaMes}" var="mes" itemValue="#{mes.id}" itemLabel="#{mes.descricao}" />
+									
+									<f:ajax listener="#{monitoramentoFisicoFinanceiroMensalFormMBean.onChangeMes()}" execute="@this" event="change" render="@form" />
+									
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						<c:if test="${monitoramentoFisicoFinanceiroMensalFormMBean.listRegiaoMunicipio != null}">
+							<table class="table table-bordered" style="font-size: 12px;">
+								<tr>
+									<td rowspan="2"><b><h:outputText style="text-align:center" value="REGIAO/MUNICIPIO" /></b></td>
+									<td colspan="2"><b><h:outputText value="EXERCICIO #{monitoramentoFisicoFinanceiroMensalFormMBean.exercicio.ano}" /></b></td>
+									<td colspan="2"><b><h:outputText value="#{monitoramentoFisicoFinanceiroMensalFormMBean.mes.descricao}" /></b></td>
+									<td colspan="2"><b><h:outputText value="TOTAL MESES ANTERIORES" /></b></td>
+									<td colspan="2"><b><h:outputText value="TOTAL" /></b></td>
+									<td rowspan="2"><b><h:outputText value="COMENTÁRIO" /></b></td>									
+								</tr>
+								<tr>
+									<c:forEach var="j" begin="1" end="4">
+										<td><b><h:outputText value="Quantidade" /></b></td>
+										<td><b><h:outputText value="Valor (R$)" /></b></td>
+									</c:forEach>
+								</tr>
+								 
+								<c:forEach items="${monitoramentoFisicoFinanceiroMensalFormMBean.listRegiaoMunicipio}" var="rm" varStatus="status">
+									<tr>
+										<td>
+											<h:outputText value="${rm.label}" />
+										</td>
+										
+										<td style="padding: 4px;">
+											<h:inputText class="form-control input-sm m-bot15"  style="padding: 2px 2px; font-size: 10px; text-align:right;"
+														 disabled="true" value="#{rm.quantidadeVigente}">
+												<f:convertNumber pattern="#,##0.00" />
+											</h:inputText>													
+										</td>
+										
+										<td style="padding: 4px;">
+											<h:inputText class="form-control input-sm m-bot15" style="padding: 2px 2px; font-size: 10px; text-align:right;"
+														 disabled="true" value="#{rm.valorVigente}">
+												<f:convertNumber pattern="#,##0.00" />
+												
+											</h:inputText>
+										</td>
+									 
+									
+										<c:forEach items="${rm.execucoes}" var="ex" >
+										
+											<h:panelGroup rendered="#{ex.mes.id == monitoramentoFisicoFinanceiroMensalFormMBean.mes.id}">
+											
+												<td style="padding: 4px;">
+												
+													<h:inputText class="linha valor form-control input-sm m-bot15"
+																 value="#{ex.quantidade}"
+																 onkeypress='return somenteNumeroDecimal(this,event)'
+																 style="padding: 2px 2px; font-size: 10px; text-align:right;">
+																 
+														<f:convertNumber pattern="#,##0.00" />	
+																											
+														<f:ajax
+															listener="#{monitoramentoFisicoFinanceiroMensalFormMBean.soma(rm)}"
+															event="blur" execute="@this"
+															render="outQtd_${status.index} AntQtd_${status.index}" />
+															
+													</h:inputText>
+													
+												</td>
+												
+												<td style="padding: 4px;">
+												
+													<h:inputText class="linha valor form-control input-sm m-bot15"
+																 value="#{ex.valor}"
+																 onkeypress='return somenteNumeroDecimal(this,event)'
+																 style="padding: 2px 2px; font-size: 10px; text-align:right;"
+																 onkeyup='return ValidaNumero(event)'>
+														
+														<f:convertNumber pattern="#,##0.00" />
+														
+														<f:ajax listener="#{monitoramentoFisicoFinanceiroMensalFormMBean.soma(rm)}"
+																event="blur" execute="@this"
+																render="outValor_${status.index} AntValor_${status.index}" />
+															
+													</h:inputText>
+													
+												</td>
+												
+											</h:panelGroup>
+											
+										</c:forEach>
+									 										
+										<td style="padding: 4px;">
+											<h:panelGroup id="AntQtd_${status.index}">
+												<h:inputText class="linha valor form-control input-sm m-bot15"
+															 style="padding: 2px 2px; font-size: 10px; text-align:right;"
+														     disabled="true" value="#{rm.quantidadeAnterior}">
+														
+														<f:convertNumber pattern="#,##0.00" />	
+																											
+												</h:inputText>
+											</h:panelGroup>
+										</td>
+										
+										<td style="padding: 4px;">
+											<h:panelGroup id="AntValor_${status.index}">
+												<h:inputText class="linha valor form-control input-sm m-bot15" 
+															 style="padding: 2px 2px; font-size: 10px; text-align:right;"
+															 disabled="true" value="#{rm.valorAnterior}">
+													<f:convertNumber pattern="#,##0.00" />
+												</h:inputText>
+											</h:panelGroup>
+										</td>
+										
+										<td style="padding: 4px;">
+											<h:panelGroup id="outQtd_${status.index}">
+												<b><h:inputText class="linha valor form-control input-sm m-bot15"
+																style="padding: 2px 2px;font-size: 10px; text-align:right;"
+																disabled="true" value="#{rm.quantidadeTotal}">
+														<f:convertNumber pattern="#,##0.00" />														
+													</h:inputText></b>
+											</h:panelGroup>
+										</td>
+										
+										<td style="padding: 4px;">
+											<h:panelGroup id="outValor_${status.index}">
+												<b><h:inputText class="linha valor form-control input-sm m-bot15"
+																style="padding: 2px 2px;font-size: 10px; text-align:right;"
+																disabled="true" value="#{rm.valorTotal}">
+														<f:convertNumber pattern="#,##0.00" />
+													</h:inputText></b>
+											</h:panelGroup>
+										</td>
+									 
+										<td style="padding: 4px">
+										
+											<center>										
+ 													
+												<p:commandButton title="Observação" action="#{monitoramentoFisicoFinanceiroMensalFormMBean.adicionarObservacao(rm)}" 
+													icon="ui-icon-pencil"  oncomplete="PF('dlg').show();" update="@form"/>
+												
+											</center>
+																							
+										</td>
+									 
+									 
+									 
+									 
+									 
+									</tr>
+								</c:forEach>
+	 
+								 
+							</table>
+						</c:if>
+						
+						
+						
+						
+						
+						<div class="col-lg-12 text-center">
+							<ul class="pagination pagination-lg pager" id="myPager"></ul>
+						</div>
+						
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">
+								<h:commandButton action="#{monitoramentoFisicoFinanceiroMensalFormMBean.salvar()}" value="Salvar" styleClass="btnAction btn btn-primary" />
+								&nbsp;
+								<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="fisicoFinanceiroMensalMonitoramentoList" immediate="true" />
+							</div>
+						</div> 
+											
+					</div>
+				</div>
+				
+				<p:dialog id="dialogObs" header="Comentário" widgetVar="dlg" minHeight="150" width="800" closable="true" resizable="false">
+				
+    					<h:inputTextarea value="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao.descricao}" styleClass="form-control input-sm up" rows="3" />	
+						<br/><br/>	
+						
+						<h:commandButton value="Adicionar Comentário" onclick="PF('dlg').hide();" styleClass="btn btn-primary">
+						   
+						</h:commandButton>	
+						&nbsp;&nbsp;	
+						<h:commandButton value="Fechar"  onclick="PF('dlg').hide();" styleClass="btn btn-primary" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao.id eq null}"/>	
+						 
+						<h:commandButton icon="ui-icon-trash" styleClass="btn btn-primary" value="Deletar observação" action="#{monitoramentoFisicoFinanceiroMensalFormMBean.deletarObservacao()}"
+										 rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao.id ne null}" update="@form"/>		
+							
+				</p:dialog>
+				
+				
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head>
+
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			
+			<h:form acceptcharset="UTF-8">
+				<div class="container-fluid">			
+					<div class="row-fluid">
+						<div class="span12">
+							<fieldset>
+								
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="CÓDIGO: " />
+										</div>
+										<div class="span3">
+											<h:inputText id="inputCodigo" value="#{monitoramentoFisicoFinanceiroMensalListMBean.codigo}" styleClass="form-control input-sm m-bot15" />	
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:selectOneMenu id="inputMenuUO" value="#{monitoramentoFisicoFinanceiroMensalListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15">
+												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+												<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
+												 
+											</h:selectOneMenu>											
+										</div>
+									</div>
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="DENOMINAÇÃO: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:inputText id="inputDenominacao" value="#{monitoramentoFisicoFinanceiroMensalListMBean.denominacao}" styleClass="form-control input-sm m-bot15"  />		
+										</div>
+									</div>							
+									<div class="span12">
+										<div class="span3">
+											<h:outputText value="PROGRAMA: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:selectOneMenu id="inputPrograma" value="#{monitoramentoFisicoFinanceiroMensalListMBean.programaId}" styleClass="form-control input-sm">
+												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+												<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalListMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
+												 
+											</h:selectOneMenu>											
+										</div>
+									</div>
+									
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
+											<f:ajax
+												execute="@this inputCodigo inputMenuUO inputDenominacao inputPrograma"
+												event="click" listener="#{monitoramentoFisicoFinanceiroMensalListMBean.buscar()}"
+												render="tableUnid" />
+										</h:commandButton>
+
+									</div>
+									
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<div class="outBusc">RESULTADOS</div>
+				</div>
+				<center>
+					<p:dataTable value="#{monitoramentoFisicoFinanceiroMensalListMBean.listAcoes}" var="ff" name="gridff" paginator="true" rows="10" styleClass="tableDados"
+								 id="tableUnid" emptyMessage="Não há ações a serem mostradas">
+						
+						<p:column headerText="Código" style="width: 13%;"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(ff.codigo)}"/>	
+						</p:column>
+						<p:column headerText="Denominação"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(ff.denominacao)}"/>	
+						</p:column>
+						<p:column headerText="Unidade Orçamentária"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(ff.unidadeOrcamentaria.descricao)}"/>	
+						</p:column>
+						<p:column headerText="Programa"  styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(ff.programa.denominacao)}"/>	
+						</p:column>
+						<p:column headerText="OPERAÇÃO" style="width: 10%;"  styleClass="outTextTable" footerText="Quantidade Total: ${fn:length(monitoramentoFisicoFinanceiroMensalListMBean.listAcoes)}">
+							<center>
+							 
+											
+								<p:button title="Selecionar essa Ação"  outcome="fisicoFinanceiroMensalMonitoramentoEdit" icon="ui-icon-pencil"  rendered="#{monitoramentoFisicoFinanceiroMensalListMBean.atualizar}">
+								 	  <f:param name="id" value="#{ff.id}" /> 
+								</p:button>
+											
+								<p:button title="Gerar relatório financeiro anual por ação"  outcome="fisicoFinanceiroMensalMonitoramentoView" icon="ui-icon-print"  rendered="#{monitoramentoFisicoFinanceiroMensalListMBean.relatorio}">
+								 	  <f:param name="id" value="#{ff.id}" /> 
+								</p:button>
+				 													
+							</center>							
+						</p:column>				
+					</p:dataTable>				
+				</center>	
+    		</h:form>			
+		</ui:define>
+	</ui:composition>	
+</body>
+</html>

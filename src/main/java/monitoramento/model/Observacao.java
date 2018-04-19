@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,12 +41,11 @@ public class Observacao extends Model implements  Auditable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 
+	@Column(name="descricao")
 	private String descricao;
-	 
-
-	//bi-directional many-to-one association to Execucao
-	@OneToMany(mappedBy="observacao")
-	private List<Execucao> execucaos;
+	  
+	@OneToOne(mappedBy="observacao",fetch=FetchType.LAZY)
+	private Execucao execucao;
  
 
 	public Long getId() {
@@ -68,17 +70,26 @@ public class Observacao extends Model implements  Auditable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public List<Execucao> getExecucaos() {
-		return this.execucaos;
-	}
-
-	public void setExecucaos(List<Execucao> execucaos) {
-		this.execucaos = execucaos;
-	}
-
+	}	
  
+	public Execucao getExecucao() {
+		return execucao;
+	}
+
+	public void setExecucao(Execucao execucao) {
+		this.execucao = execucao;
+	}
+
+	@PrePersist
+    public void onPrePersist() {
+
+		data = new Date();
+	}
+       
+    @PreUpdate
+    public void onPreUpdate() { 
+    	data = new Date();
+    }
 
 	@Override
 	public String getLogDetail() {
