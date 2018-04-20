@@ -287,17 +287,17 @@
 				
 				<p:dialog id="dialogObs" header="Comentário" widgetVar="dlg" minHeight="150" width="800" closable="true" resizable="false">
 				
-    					<h:inputTextarea value="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao.descricao}" styleClass="form-control input-sm up" rows="3" />	
+    					<h:inputTextarea value="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao}" styleClass="form-control input-sm up" rows="3" />	
 						<br/><br/>	
 						
 						<h:commandButton value="Adicionar Comentário" onclick="PF('dlg').hide();" styleClass="btn btn-primary">
 						   
 						</h:commandButton>	
 						&nbsp;&nbsp;	
-						<h:commandButton value="Fechar"  onclick="PF('dlg').hide();" styleClass="btn btn-primary" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao.id eq null}"/>	
+						<h:commandButton value="Fechar"  onclick="PF('dlg').hide();" styleClass="btn btn-primary" rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao eq null}"/>	
 						 
 						<h:commandButton icon="ui-icon-trash" styleClass="btn btn-primary" value="Deletar observação" action="#{monitoramentoFisicoFinanceiroMensalFormMBean.deletarObservacao()}"
-										 rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao.id ne null}" update="@form"/>		
+										 rendered="#{monitoramentoFisicoFinanceiroMensalFormMBean.execucaoSelecionada.observacao ne null}" update="@form"/>		
 							
 				</p:dialog>
 				

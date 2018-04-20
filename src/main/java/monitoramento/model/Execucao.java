@@ -58,9 +58,8 @@ public class Execucao extends Model implements  Auditable {
 	@Column(name = "quantidade")
 	private double quantidade;
 	
-	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="id_observacao")
-	private Observacao observacao = new Observacao();
+	@Column(name = "observacao",length=1000)
+	private String observacao;
 	
 	@ManyToOne
 	@JoinColumn(name="id_exercicio")
@@ -122,11 +121,11 @@ public class Execucao extends Model implements  Auditable {
 		this.quantidade = quantidade;
 	}
 
-	public Observacao getObservacao() {
+	public String getObservacao() {
 		return observacao;
 	}
 
-	public void setObservacao(Observacao observacao) {
+	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
 
@@ -149,7 +148,7 @@ public class Execucao extends Model implements  Auditable {
 		sb.append(" Execucao Quantidade : ").append(quantidade);
 		sb.append(" Execucao Ativo : ").append(getAtivo());
 		sb.append(" Execucao Exercicio : ").append(exercicio.getId());
-		sb.append(" Execucao Observacao : ").append(observacao != null ? observacao.getId(): null);
+		sb.append(" Execucao Observacao : ").append(observacao);
 
 		return sb.toString();
 	}	

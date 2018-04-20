@@ -41,7 +41,6 @@
   
       
       <class>monitoramento.model.Execucao</class>
-      <class>monitoramento.model.Observacao</class>
       
       <class>qualitativo.model.Acao</class>
       <class>qualitativo.model.Diretriz</class>

@@ -107,6 +107,12 @@
 											
 								<p:button title="Gerar relatório financeiro anual por ação"  outcome="fisicoFinanceiroMensalMonitoramentoView" icon="ui-icon-print"  rendered="#{monitoramentoFisicoFinanceiroMensalListMBean.relatorio}">
 								 	  <f:param name="id" value="#{ff.id}" /> 
+								 	  <f:param name="obs" value="false" /> 
+								</p:button>
+								
+								<p:button  icon="	ui-icon-comment" title="Gerar relatório monitoramento mensal por ação com comentários"  outcome="fisicoFinanceiroMensalMonitoramentoView"    rendered="#{monitoramentoFisicoFinanceiroMensalListMBean.relatorio}">
+								 	  <f:param name="id" value="#{ff.id}" /> 
+								 	  <f:param name="obs" value="true" /> 
 								</p:button>
 				 													
 							</center>							

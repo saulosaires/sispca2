@@ -11,7 +11,6 @@ import javax.inject.Named;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
-import arquitetura.exception.JpaException;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -171,8 +170,8 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 						
 						for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
 							
-							if(fisicoFinanceiroMensal.getValor()>0 || fisicoFinanceiroMensal.getQuantidade()>0) {
-								saveFisicoFinanceiro(fisicoFinanceiroMensal);	
+							if(!Utils.invalidId(fisicoFinanceiroMensal.getId()) || fisicoFinanceiroMensal.getValor()>0 || fisicoFinanceiroMensal.getQuantidade()>0) {
+								fisicoFinanceiroMensalService.merge(fisicoFinanceiroMensal);
 							}
 							
 							
@@ -195,13 +194,7 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 		return "";
 	}
 	
-	private void saveFisicoFinanceiro(FisicoFinanceiroMensal fisicoFinanceiroMensal) throws JpaException {
- 			
-			if(fisicoFinanceiroMensal.getValor()>0 || fisicoFinanceiroMensal.getQuantidade()>0) {
-				fisicoFinanceiroMensalService.merge(fisicoFinanceiroMensal);	
-			}
- 
-	}
+	 
 	
 	/**
 	 * Metodo usado para, se foi feito alguma planejamento para aquela região/Municipio

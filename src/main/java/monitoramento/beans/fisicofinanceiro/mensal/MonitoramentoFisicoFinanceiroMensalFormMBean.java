@@ -10,7 +10,6 @@ import java.util.Optional;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.transaction.Transactional;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
@@ -19,9 +18,7 @@ import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
-import monitoramento.model.Observacao;
 import monitoramento.service.ExecucaoService;
-import monitoramento.service.ObservacaoService;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
 import qualitativo.service.AcaoService;
@@ -70,7 +67,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 	private RegiaoMunicipioService regiaoMunicipioService;
 	private MesService mesService;
 	private ExecucaoService execucaoService;
-	private ObservacaoService observacaoService;
+
 	private FisicoFinanceiroService fisicoFinanceiroService;
 
 	@Inject
@@ -78,14 +75,12 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 														RegiaoMunicipioService regiaoMunicipioService,
 														FisicoFinanceiroService fisicoFinanceiroService,
 														TipoRegiaoService tipoRegiaoService,
-														ObservacaoService observacaoService,
 														MesService mesService,
 														ExecucaoService execucaoService,
 														ExercicioService exercicioService ) {
 
 		this.acaoService = acaoService;
 		this.mesService=mesService;
-		this.observacaoService=observacaoService;
 		this.regiaoMunicipioService=regiaoMunicipioService;
 		this.fisicoFinanceiroService=fisicoFinanceiroService;
  		this.execucaoService=execucaoService;
@@ -287,12 +282,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
  			
 		for(Execucao ex :execucoes) {	
 			
-			if(ex.getValor()>0 || ex.getQuantidade()>0) {
-			
-				if(!Utils.emptyParam(ex.getObservacao().getDescricao())) {
-					observacaoService.merge(ex.getObservacao());
-				}
-				
+			if(!Utils.invalidId(ex.getId()) || ex.getValor()>0 || ex.getQuantidade()>0) {
 				execucaoService.merge(ex);
 			}
 			
@@ -307,29 +297,21 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 		
 		if(execucaoOptional.isPresent()) {
 			execucaoSelecionada = execucaoOptional.get();
- 			
-			 if(execucaoSelecionada.getObservacao()==null)
-			    execucaoSelecionada.setObservacao(new Observacao());
-			
+ 
 		}
 		
 		 
 	}
  
-	@Transactional
 	public String deletarObservacao() {
 		
 		try {
 			
-			Long obsId = execucaoSelecionada.getObservacao().getId();
-			execucaoSelecionada.setObservacao(null);
+			
+			execucaoSelecionada.setObservacao("");
 			
 			execucaoService.update(execucaoSelecionada);
-			 
-			execucaoSelecionada.setObservacao(new Observacao());
- 			
-			observacaoService.delete(observacaoService.findById(obsId));
-			
+			  
 			Messages.addMessageInfo(SUCCESS_DELETE_OBS);
 			
 		} catch (Exception e) {

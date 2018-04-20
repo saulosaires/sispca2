@@ -1,5 +1,6 @@
 package monitoramento.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -22,11 +23,19 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		super(controller);
 	}
 
+	public  List<Execucao>  findByAcaoAndExercicio(Long acaoId,Long exercicioId) {
+
+		return ((ExecucaoController) getController()).findByAcaoAndExercicio(acaoId,exercicioId);
+	}
+
+	
 	public  Optional<Execucao>  findByAcaoAndRegiaoAndExercicioAndMes(Long acaoId,Long regiaoMunicipioId,Long exercicioId,Long mesId) {
 
 		return ((ExecucaoController) getController()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
 	}
 
+	
+	
 	public Execucao merge(Execucao execucao) throws JpaException {
 		
 		if(execucao==null)return execucao;

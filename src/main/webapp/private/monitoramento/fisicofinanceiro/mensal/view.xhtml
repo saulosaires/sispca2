@@ -12,8 +12,9 @@
 		<ui:define name="conteudo">
 		
 		 <f:metadata>
-	    			<f:viewParam name="id" value="#{fisicoFinanceiroMensalReportMBean.id}"/>
-	    			<f:viewAction action="#{fisicoFinanceiroMensalReportMBean.init}" />
+	    			<f:viewParam name="id" value="#{monitoramentoFisicoFinanceiroMensalReportMBean.id}"/>
+	    			<f:viewParam name="obs" value="#{monitoramentoFisicoFinanceiroMensalReportMBean.obs}"/>
+	    			<f:viewAction action="#{monitoramentoFisicoFinanceiroMensalReportMBean.init}" />
 			 </f:metadata>
 		
 			<h:form>
@@ -21,7 +22,7 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 
-							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="fisicoFinanceiroMensalQuantitativoList" immediate="true" />
+							<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="fisicoFinanceiroMensalMonitoramentoList" immediate="true" />
 
 						</div>
 					</div>
@@ -31,7 +32,7 @@
 				<div class="spaceBtnAcao">
 					<div class="row-fluid" align="center">
 					
- 				 		<pe:documentViewer  value="#{fisicoFinanceiroMensalReportMBean.relatorio}" height="800" width="1000" />
+ 				 		<pe:documentViewer  value="#{monitoramentoFisicoFinanceiroMensalReportMBean.relatorio}" height="800" width="1000" />
 
 					</div>
 				</div>

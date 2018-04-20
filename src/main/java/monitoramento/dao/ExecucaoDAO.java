@@ -27,7 +27,34 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 
 	}
 
+	public List<Execucao> findByAcaoAndExercicio(Long acaoId,Long exercicioId) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Execucao> query = cb.createQuery(Execucao.class);
+		Root<Execucao> m = query.from(Execucao.class);
+
+		query.select(m);
+
+		if (Utils.invalidId((acaoId))      || Utils.invalidId((exercicioId))  ) {
+		   return new ArrayList<>();
+		}
+		
+		
+		List<Predicate> predicate = new ArrayList<>();
+
+		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
+		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+		 	
+		
+		Join<Object, Object> joinExercicio = m.join("exercicio", JoinType.INNER);
+		joinExercicio.on(cb.equal(joinExercicio.get("id"), exercicioId));
+
+		query.where(predicate.toArray(new Predicate[predicate.size()]));
  
+		
+		return entityManager.createQuery(query).getResultList();
+
+	}
 
 	public Optional<Execucao> findByAcaoAndRegiaoAndExercicioAndMes(Long acaoId,Long regiaoMunicipioId,Long exercicioId,Long mesId) {
 

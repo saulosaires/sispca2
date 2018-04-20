@@ -22,6 +22,12 @@ public class ExecucaoController extends AbstractController<Execucao> {
 
 	}
  
+	public  List<Execucao>  findByAcaoAndExercicio(Long acaoId,Long exercicioId) {
+
+		return ((ExecucaoDAO) getDao()).findByAcaoAndExercicio(acaoId,exercicioId);
+	}
+
+	
 	public  Optional<Execucao>  findByAcaoAndRegiaoAndExercicioAndMes(Long acaoId,Long regiaoMunicipioId,Long exercicioId,Long mesId) {
 
 		return ((ExecucaoDAO) getDao()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
