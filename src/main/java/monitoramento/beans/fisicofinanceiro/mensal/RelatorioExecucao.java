@@ -4,6 +4,8 @@ import monitoramento.model.Execucao;
 
 public class RelatorioExecucao {
 	
+	private Long regiaoId;
+	
 	private String codigo_orgao;
 	
 	private String orgao;
@@ -104,7 +106,10 @@ public class RelatorioExecucao {
 	
 	private String obsdez;
 	
-	
+	public RelatorioExecucao(Execucao e){
+		
+		setData(e);
+	}
 	
 	public void setData(Execucao e) {
 		
@@ -142,9 +147,10 @@ public class RelatorioExecucao {
 			
 			regiaoMunicipio =  e.getRegiaoMunicipio().getLabel();
 			
-			if(e.getRegiaoMunicipio().getRegiao()!=null)
+			if(e.getRegiaoMunicipio().getRegiao()!=null) {
 				regiao = e.getRegiaoMunicipio().getRegiao().getDescricao();
-			
+				regiaoId= e.getRegiaoMunicipio().getRegiao().getId();
+			}
 			if(e.getRegiaoMunicipio().getMunicipio()!=null)
 				municipio = e.getRegiaoMunicipio().getMunicipio().getDescricao();
 		
@@ -631,6 +637,17 @@ public class RelatorioExecucao {
 
 	public void setObsdez(String obsdez) {
 		this.obsdez = obsdez;
+	}
+
+	public Long getRegiaoId() {
+		return regiaoId;
+	}
+
+	public void setRegiaoId(Long regiaoId) {
+		this.regiaoId = regiaoId;
 	}		
 
+	
+	
+	
 }

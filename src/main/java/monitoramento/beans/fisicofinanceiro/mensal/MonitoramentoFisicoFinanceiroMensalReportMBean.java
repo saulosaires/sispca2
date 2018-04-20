@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,15 +160,27 @@ public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializa
 		
 		List<RelatorioExecucao> list = new ArrayList<>();
 
+		Map<Long,RelatorioExecucao> map = new HashMap<>();
+
 			
 		 List<Execucao> execucoes = execucaoService.findByAcaoAndExercicio(acao.getId(), exercicio.getId());
 		 
-		 for(Execucao e : execucoes) {
+		 for(Execucao e : execucoes) {	
 			 
-			 RelatorioExecucao re = new RelatorioExecucao();
-			 re.setData(e);
-			 list.add(re);
+			 if(map.containsKey(e.getRegiaoMunicipio().getId())) {
+				 map.get(e.getRegiaoMunicipio().getId()).setData(e);
+				 
+			 }else {
+				 map.put(e.getRegiaoMunicipio().getId(), new RelatorioExecucao(e));
+			 }
+ 
 		 }
+		 
+		 
+		 list.addAll(map.values());
+		 
+		 list.sort((RelatorioExecucao o1, RelatorioExecucao o2)-> o1.getRegiaoId().compareTo(o2.getRegiaoId()));
+		  
 		 
 		return list;
 		
