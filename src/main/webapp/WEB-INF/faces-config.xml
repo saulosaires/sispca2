@@ -205,6 +205,20 @@
 		
 	</navigation-rule> 
 
+
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>avaliacaoSetorialProgramaList</from-outcome>
+			<to-view-id>/private/avaliacao/setorialPrograma/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 
+
+
+
 	
 	<navigation-rule>
 		<from-view-id>/public/login.xhtml</from-view-id>
@@ -516,6 +530,18 @@
 			<to-view-id>/private/monitoramento/fisicofinanceiro/mensal/view.xhtml</to-view-id>
 		</navigation-case>
 
+
+	</navigation-rule>  
+
+
+ 	 <navigation-rule>
+		<from-view-id>/private/avaliacao/setorialPrograma/list.xhtml</from-view-id>
+
+		 <navigation-case>
+			<from-outcome>avaliacaoSetorialProgramaDiretrizAssociada</from-outcome>
+			<to-view-id>/private/avaliacao/setorialPrograma/diretrizAssociada.xhtml</to-view-id>
+		</navigation-case> 
+ 
 
 	</navigation-rule>  
 

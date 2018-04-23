@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://java.sun.com/jsf/composite"> 
+
+
+	 <composite:interface>
+			<composite:attribute name="programa" />
+			<composite:attribute name="dotacaoInicial" />
+			<composite:attribute name="dotAtual" />
+			<composite:attribute name="variacao" />
+	  </composite:interface>
+
+	<composite:implementation>
+		<h:form>
+		
+			<div class="row" style="margin-bottom: 2%">					
+				<b><h:outputText value="1. IDENTIFICAÇÃO DO PROGRAMA"/></b>
+		 	</div>		
+		 			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Programa: "/></b>
+				</div>	
+				<div class="col-lg-10">
+					<h:outputText value="(#{cc.attrs.programa.codigo}) - #{cc.attrs.programa.denominacao}"/>
+				</div>		    			
+			</div>	
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Órgão Responsável: "/></b>
+				</div>
+				<div class="col-lg-10">
+					<h:outputText value="(#{cc.attrs.programa.orgao.codigo}) - #{cc.attrs.programa.orgao.descricao}" />
+				</div>	
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Unidade Orçamentária Responsável: "/></b>
+				</div>
+				<div class="col-lg-10">
+					<h:outputText value="(#{cc.attrs.programa.unidadeOrcamentaria.codigo}) - #{cc.attrs.programa.unidadeOrcamentaria.descricao}" />
+				</div>
+			</div>	
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Problema: "/></b>
+				</div>
+				<div class="col-lg-10">
+					<h:outputText value="#{cc.attrs.programa.problema}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Objetivo"/></b>
+				</div>
+				<div class="col-lg-10">
+					<h:outputText value="#{cc.attrs.programa.objetivo}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Público Alvo: "/></b>
+				</div>
+				<div class="col-lg-10">
+					<h:outputText value="#{cc.attrs.programa.publicoAlvo}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<b><h:outputText value="Dotação Orçamentária (R$)"/></b>
+				</div>
+				<div class="col-lg-2">
+					<b><h:outputText value="Inicial: "/></b>
+					<h:outputText value="#{cc.attrs.dotacaoInicial}">
+						<f:convertNumber pattern="#,##0.00" />
+					</h:outputText>	
+				</div>
+				<div class="col-lg-2">
+					<b><h:outputText value="Atual: "/></b>
+					<h:outputText value="#{cc.attrs.dotAtual}">
+						<f:convertNumber pattern="#,##0.00" />
+					</h:outputText>	
+				</div>
+				<div class="col-lg-2">
+					<b><h:outputText value="Variação(%): "/></b>
+					<h:outputText value="#{cc.attrs.variacao}">
+						<f:convertNumber pattern="#,##0.00" />
+					</h:outputText>			    				
+				</div>
+			</div>
+		</h:form>
+	</composite:implementation>
+
+</html>

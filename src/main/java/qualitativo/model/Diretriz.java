@@ -1,7 +1,5 @@
 package qualitativo.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import arquitetura.model.Model;
@@ -34,32 +29,23 @@ public class Diretriz extends Model  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_diretriz")
-	private Integer id;
+	private Long id;
 
+	@Column(name="descricao")
 	private String descricao;
-
-	@ManyToMany
-	@JoinTable(
-		name="diretrizPrograma"
-		, joinColumns={
-			@JoinColumn(name="id_diretriz")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_programa")
-			}
-		)
-	private List<Programa> programas;
  
+	public Diretriz() {}
 	
-	public Diretriz() {
-		//empty constructor
+	public Diretriz(Long id) {
+		super();
+		this.id = id;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -69,14 +55,6 @@ public class Diretriz extends Model  {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public List<Programa> getProgramas() {
-		return this.programas;
-	}
-
-	public void setProgramas(List<Programa> programas) {
-		this.programas = programas;
 	}
  
 	

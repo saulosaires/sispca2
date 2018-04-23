@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+
+			<h:form>
+
+				<div class="container-fluid row-fluid">
+					<div class="span12">
+						<p:messages closable="true" />
+					</div>
+					<legend class="outBusc">Avaliação Setorial do Programa</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<p:dataTable var="prog" value="#{avaliacaoProgramaMBean.listPrograma}" paginator="true" sortBy="#{prog.orgao.codigo}"
+										 rows="10" style="margin-right: 2%; font-size: 12px;">
+								
+								<p:column headerText="Órgão">
+									<h:outputText value="(#{prog.orgao.codigo}) - #{prog.orgao.descricao}"/>
+								</p:column>	
+								
+								<p:column headerText="Programa">
+									<h:outputText value="(#{prog.codigo}) - #{prog.denominacao}"/>
+								</p:column>							
+														
+								<p:column headerText="Diretriz" width="6%">
+								
+									<h:button value="diretriz"    outcome="avaliacaoSetorialProgramaDiretrizAssociada" styleClass="btn btn-primary"  >
+								 	  <f:param name="id" value="#{prog.id}" /> 
+									</h:button>
+								
+								</p:column>		
+														
+								
+														
+														 
+								<p:column headerText="Acomp" width="4%">
+									<h:commandButton image="/resources/images/icone-pdf.gif" title="Acompanhamento da avaliação para o programa" 
+										action="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" 
+										style="margin-left: 2%; width: 20px; height: 20px;">
+									</h:commandButton>
+								</p:column>								
+							</p:dataTable>
+											
+		    			</div>					
+					</div>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

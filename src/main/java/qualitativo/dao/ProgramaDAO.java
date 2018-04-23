@@ -89,5 +89,34 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 		
 		return  entityManager.createQuery(query).getResultList();
 	}
+	
+	public List<Programa> buscarPorExercicio(Long exercicioId) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
+		Root<Programa> m = query.from(Programa.class);
+
+		query.select(m);
+		
+		List<Predicate> predicate = new ArrayList<>();
+ 
+		if (Utils.invalidId((exercicioId))) {
+
+			return new ArrayList<>();
+		
+		}
+
+		Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.INNER);
+		joinExercicio.on(cb.equal(joinExercicio.get("id"),exercicioId) );		
+ 
+		query.where(predicate.toArray(new Predicate[predicate.size()]));
+
+		query.orderBy(cb.asc(m.get("denominacao")));
+		
+		
+		return  entityManager.createQuery(query).getResultList();
+	}	
+	
+	
 
 }

@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import administrativo.model.Exercicio;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import arquitetura.utils.FormatoUtils;
@@ -159,6 +160,12 @@ public class Acao extends Model implements  Auditable {
 	@Column(name="observacao",length=2000)
 	private String observacao;
  
+	@ManyToOne
+	@JoinColumn(name="id_exercicio")
+	@NotNull(message="Exercício: campo é obrigatório")
+	private Exercicio exercicio;
+
+	
 	public Acao() {}
 	
 	public Acao(Long id) {
@@ -445,6 +452,17 @@ public class Acao extends Model implements  Auditable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	
+	
+	
+	public Exercicio getExercicio() {
+		return exercicio;
+	}
+
+	public void setExercicio(Exercicio exercicio) {
+		this.exercicio = exercicio;
 	}
 
 	@Override

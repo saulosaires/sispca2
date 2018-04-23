@@ -158,7 +158,6 @@ public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializa
 	
 	public List<RelatorioExecucao> buscarExecucao(){
 		
-		List<RelatorioExecucao> list = new ArrayList<>();
 
 		Map<Long,RelatorioExecucao> map = new HashMap<>();
 
@@ -170,13 +169,14 @@ public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializa
 			 if(map.containsKey(e.getRegiaoMunicipio().getId())) {
 				 map.get(e.getRegiaoMunicipio().getId()).setData(e);
 				 
-			 }else {
+			 }else {                                                                                    
 				 map.put(e.getRegiaoMunicipio().getId(), new RelatorioExecucao(e));
 			 }
  
 		 }
 		 
-		 
+		 List<RelatorioExecucao> list = new ArrayList<>(map.size());
+
 		 list.addAll(map.values());
 		 
 		 list.sort((RelatorioExecucao o1, RelatorioExecucao o2)-> o1.getRegiaoId().compareTo(o2.getRegiaoId()));

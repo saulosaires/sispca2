@@ -37,4 +37,11 @@ public class ProgramaService extends AbstractService<Programa>  {
 		
 	}
 
+	public List<Programa> buscarPorExercicio(Long exercicioId) {
+
+		 return((ProgramaController)getController()).buscarPorExercicio(exercicioId);	
+
+	}
+
+	
 }

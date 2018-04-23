@@ -51,7 +51,10 @@ public class ExercicioController  extends AbstractController<Exercicio>{
 		return ((ExercicioDAO)getDao()).exercicioVigente();
 	}
 	
- 
+	public Optional<Exercicio> exercicioPorAno(Integer ano){
+		return ((ExercicioDAO)getDao()).exercicioPorAno(ano);
+	}
+
 	
 	 
 	

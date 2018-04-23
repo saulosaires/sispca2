@@ -85,4 +85,18 @@ public class ExercicioDAO extends AbstractDAO< Exercicio >  {
 		
 	}
  
+	public Optional<Exercicio> exercicioPorAno(Integer ano) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Exercicio> query = cb.createQuery(Exercicio.class);
+		Root<Exercicio> m = query.from(Exercicio.class);
+		query.select(m);
+	 
+		query.where(cb.equal(m.get("ano"), ano));
+ 
+		
+		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();
+		
+	}	
+	
 }

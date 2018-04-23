@@ -22,6 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import administrativo.model.Exercicio;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 
@@ -98,11 +99,7 @@ public class Programa extends Model implements  Auditable {
 	@OneToMany(mappedBy = "programa")
 	private List<Acao> acoes;
 
- 
-	@ManyToMany(mappedBy="programas")
-	private List<Diretriz> diretrizes = new ArrayList<>();
- 
- 
+   
 	@OneToMany(mappedBy="programa")
 	private List<MacroObjetivo> macroObjetivos;
  
@@ -117,6 +114,12 @@ public class Programa extends Model implements  Auditable {
 	@NotNull(message="Tipo de Programa: campo é obrigatório")
 	private TipoPrograma tipoPrograma = new TipoPrograma();
 
+	@ManyToOne
+	@JoinColumn(name="id_exercicio")
+	@NotNull(message="Exercício: campo é obrigatório")
+	private Exercicio exercicio;
+
+	
 	public Programa() {}
 
 	public Programa(Long id) {this.id=id;}
@@ -252,14 +255,7 @@ public class Programa extends Model implements  Auditable {
 	public void setAcoes(List<Acao> acoes) {
 		this.acoes = acoes;
 	}
-
-	public List<Diretriz> getDiretrizes() {
-		return this.diretrizes;
-	}
-
-	public void setDiretrizes(List<Diretriz> diretrizes) {
-		this.diretrizes = diretrizes;
-	}
+ 
 
 	public List<MacroObjetivo> getMacroObjetivos() {
 		return this.macroObjetivos;
@@ -299,6 +295,16 @@ public class Programa extends Model implements  Auditable {
 
 	public void setUnidadeOrcamentaria(UnidadeOrcamentaria unidadeOrcamentaria) {
 		this.unidadeOrcamentaria = unidadeOrcamentaria;
+	}
+
+	
+	
+	public Exercicio getExercicio() {
+		return exercicio;
+	}
+
+	public void setExercicio(Exercicio exercicio) {
+		this.exercicio = exercicio;
 	}
 
 	@Override

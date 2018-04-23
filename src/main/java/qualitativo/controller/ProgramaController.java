@@ -31,6 +31,10 @@ public class ProgramaController extends AbstractController<Programa> {
 		return((ProgramaDAO)getDao()).buscar(codigo,denominacao,orgao,tipoPrograma);
 	}
  
+	public List<Programa> buscarPorExercicio(Long exercicioId) {
+
+		return((ProgramaDAO)getDao()).buscarPorExercicio(exercicioId);
+	}
 	
 
 }

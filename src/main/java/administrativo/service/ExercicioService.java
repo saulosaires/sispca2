@@ -42,6 +42,29 @@ public class ExercicioService extends AbstractService<Exercicio>  {
 		return ((ExercicioController)getController()).exercicioVigente();
 	}
  
+	public Optional<Exercicio> exercicioPorAno(Integer ano){
+		return ((ExercicioController)getController()).exercicioPorAno(ano);
+	}
+	
+	
+	public Optional<Exercicio> exercicioAnterior(){
+
+		Optional<Exercicio> exercicioVigente = exercicioVigente();
+		
+		if(exercicioVigente.isPresent()) {
+			
+			Exercicio exercicio = exercicioVigente.get();
+			
+			return exercicioPorAno(exercicio.getAno()-1);
+			
+		}else {
+			
+			return Optional.empty();
+		}
+		
+		
+	}
+	
 
 	public List<Exercicio> buscarPorPpa(Long ppaId) {
 

@@ -9,6 +9,9 @@
    
       <class>arquitetura.model.Model</class>
     
+    
+      <class>siafem.model.FisicoFinanceiroMensalSiafem</class>
+    
       <class>administrativo.model.Calendario</class>
       <class>administrativo.model.ActionCalendario</class>
       <class>administrativo.model.Exercicio</class>

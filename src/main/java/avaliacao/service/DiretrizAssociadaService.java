@@ -1,0 +1,31 @@
+package avaliacao.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import arquitetura.service.AbstractService;
+import avaliacao.controller.DiretrizAssociadaController;
+import avaliacao.model.DiretrizAssociada;
+
+public class DiretrizAssociadaService extends AbstractService<DiretrizAssociada> {
+
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -156314605441094680L;
+	
+ 
+	@Inject
+	public DiretrizAssociadaService(DiretrizAssociadaController controller) {
+		super(controller);
+	}
+ 
+
+	public List<DiretrizAssociada> findByProgramaAndExercicio(Long programaId, Long exercicioId){
+		return ((DiretrizAssociadaController) getController()).findByProgramaAndExercicio(programaId, exercicioId);
+	}
+	
+	
+}
