@@ -83,7 +83,7 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 			Messages.addMessageInfo(SUCCESS_SAVE_DIRETRIZ);
 		
 			diretrizAssociadaService.create(dir);
-		
+			diretrizId=null;
 			buscarDiretrizAssociada();
 			
 		} catch (Exception e) {

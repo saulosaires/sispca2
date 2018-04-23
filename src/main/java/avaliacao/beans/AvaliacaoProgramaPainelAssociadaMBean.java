@@ -84,7 +84,8 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 			Messages.addMessageInfo(SUCCESS_SAVE);
 		
 			painelAssociadoService.create(painelAssoc);
-		
+			indicadorId=null;
+			
 			buscarPainelAssociado();
 			
 		} catch (Exception e) {
