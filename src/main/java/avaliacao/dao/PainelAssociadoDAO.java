@@ -9,31 +9,30 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import arquitetura.dao.AbstractDAO;
-import avaliacao.model.DiretrizAssociada;
 import avaliacao.model.PainelAssociado;
  
 
-public class DiretrizAssociadaDAO extends AbstractDAO< DiretrizAssociada >  {
+public class PainelAssociadoDAO extends AbstractDAO< PainelAssociado >  {
+ 
 
-	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1358843609602731648L;
+	private static final long serialVersionUID = -1580652167507898456L;
 
 
-	public DiretrizAssociadaDAO() {
-		setClazz(DiretrizAssociada.class );
+	public PainelAssociadoDAO() {
+		setClazz(PainelAssociado.class );
 	 
 	}
  
- 
- 
-	public List<DiretrizAssociada> findByProgramaAndExercicio(Long programaId, Long exercicioId){
+	
+	
+	public List<PainelAssociado> findByProgramaAndExercicio(Long programaId, Long exercicioId){
  		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<DiretrizAssociada> query = cb.createQuery(DiretrizAssociada.class);
-		Root<DiretrizAssociada> m = query.from(DiretrizAssociada.class);
+		CriteriaQuery<PainelAssociado> query = cb.createQuery(PainelAssociado.class);
+		Root<PainelAssociado> m = query.from(PainelAssociado.class);
 		query.select(m);
  
 		

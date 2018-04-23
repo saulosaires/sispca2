@@ -33,6 +33,10 @@ public class IndicadorService extends AbstractService<Indicador>  {
 		 
 	}
 
- 
+	public List<Indicador> findAllOrderByIndicador() {
+
+		return ((IndicadorController) getController()).findAllOrderByIndicador();
+
+	}
 
 }

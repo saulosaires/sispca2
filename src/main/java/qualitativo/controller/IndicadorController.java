@@ -26,4 +26,10 @@ public class IndicadorController extends AbstractController<Indicador> {
 		return ((IndicadorDAO)getDao()).buscar(indicador);
 	}
 
+	public List<Indicador> findAllOrderByIndicador() {
+		 
+		return ((IndicadorDAO)getDao()).findAllOrderByIndicador();
+	}
+
+	
 }

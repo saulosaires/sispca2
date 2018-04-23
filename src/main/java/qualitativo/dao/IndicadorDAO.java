@@ -25,6 +25,22 @@ public class IndicadorDAO extends AbstractDAO<Indicador> {
 
 	}
 
+	
+	public List<Indicador> findAllOrderByIndicador() {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Indicador> q = cb.createQuery(Indicador.class);
+
+		Root<Indicador> c = q.from(Indicador.class);
+
+		q.select(c);
+		q.orderBy(cb.asc(c.get("indicador")));
+
+		return entityManager.createQuery(q).getResultList();
+
+	}
+	
 	public List<Indicador> buscar(String indicador) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

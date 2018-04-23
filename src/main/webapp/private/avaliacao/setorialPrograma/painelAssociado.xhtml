@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:sispca="http://java.sun.com/jsf/composite/componentes">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+
+	 		 <f:metadata>
+	    			<f:viewParam name="id" value="#{avaliacaoProgramaPainelAssociadaMBean.id}"/>
+	    			<f:viewAction action="#{avaliacaoProgramaPainelAssociadaMBean.init}" />
+			 </f:metadata>
+
+
+			<h:form>
+
+				<div class="container-fluid row-fluid">
+					<legend class="outBusc">Painel Associado</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						
+						<sispca:dadosIdentificacaoPrograma programa="#{avaliacaoProgramaPainelAssociadaMBean.programa}"
+														   dotacaoInicial="#{avaliacaoProgramaPainelAssociadaMBean.dotacaoInicial}"
+														   dotAtual="#{avaliacaoProgramaPainelAssociadaMBean.dotacaoAtual}"
+														   variacao="#{avaliacaoProgramaPainelAssociadaMBean.variacao}"	 />
+
+
+		    			<div class="row" style="margin-TOP: 2%">					
+							<b><h:outputText value="2. CADASTRO"/></b>
+ 						</div>
+ 		    			
+		    			
+		    			<div class="row" style="margin-top: 2%;">		    				    				
+							<h:outputText value="INDICADOR: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="comboIndAssoc" value="#{avaliacaoProgramaPainelAssociadaMBean.indicadorId}" styleClass="form-control input-sm" >
+								<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+								<f:selectItems value="#{avaliacaoProgramaPainelAssociadaMBean.listIndicador}" var="ind" itemValue="#{ind.id}" itemLabel="#{ind.indicador}"/>
+							</h:selectOneMenu>							
+						</div>	
+							
+						<div class="row" style="margin-top: 1%;">	
+							<h:commandButton value="CADASTRAR" styleClass="btn btn-primary">
+								<f:ajax event="click" execute="@this comboIndAssoc" listener="#{avaliacaoProgramaPainelAssociadaMBean.adicionaPainelAssociado()}"
+									render="msgIndAssoc tblIndAssoc comboIndAssoc"/>
+							</h:commandButton>
+						</div>
+						
+						<div class="row" style="margin-top: 2%">					
+							<b><h:outputText value="3. INDICADOR DO PPA"/></b>
+ 						</div>
+						
+						<div class="row" style="margin-top: 2%;">
+							<div class="col-lg-12">
+								<center>
+									<p:dataTable id="tblIndAssoc" rows="15" value="#{avaliacaoProgramaPainelAssociadaMBean.listPainelAssociado}"
+										var="painel" emptyMessage="Não há painéis associados para se mostrar">
+										<p:column headerText="INDICADOR" style="width: 60%;" styleClass="outTextTable">
+											<h:outputText value="#{painel.indicador.indicador}"/>
+										</p:column>
+										<p:column headerText="PROGRAMA" styleClass="outTextTable">
+											<h:outputText value="#{painel.programa.denominacao}"/>
+										</p:column>
+										<p:column headerText="EXERCÍCIO" styleClass="outTextTable" style="width: 7%;">
+											<h:outputText value="#{painel.exercicio.ano}"/>
+										</p:column>
+										<p:column headerText="OPERAÇÃO" styleClass="outTextTable" style="width: 6%;">
+											<p:commandButton title="Deletar" action="#{avaliacaoProgramaPainelAssociadaMBean.deletaPainelAssociado(painel)}" 
+												icon="ui-icon-trash" update="tblIndAssoc">
+												<p:confirm header="Confirmação" message="Você tem certeza que deseja deletar o indicador?" icon="ui-icon-alert" />
+											</p:commandButton>																		
+										</p:column>
+									</p:dataTable>
+								</center>
+							</div>						
+						</div>
+		    			
+		    			<div class="row" style="margin-top: 2%;">		    	
+		    				<h:button styleClass="btn btn-default" value="Voltar"  outcome="avaliacaoSetorialProgramaList" />
+		    			</div>
+					</div>					
+				</div>
+				
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    		</p:confirmDialog>			
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
