@@ -109,8 +109,7 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 	
 			Messages.addMessageError(FAIL_DELETE);
 		}
-		
-		
+			
 		
 	}
 
@@ -138,10 +137,4 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 		this.listPainelAssociado = listPainelAssociado;
 	}
 
-	 
-	
-	
- 
-	
-	
 }

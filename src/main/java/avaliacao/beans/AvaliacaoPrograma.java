@@ -6,9 +6,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Optional;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
 import arquitetura.utils.Utils;
@@ -16,9 +13,8 @@ import qualitativo.model.Programa;
 import qualitativo.service.ProgramaService;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
-@Named
-@ViewScoped
-public class AvaliacaoPrograma implements Serializable {
+ 
+public abstract class AvaliacaoPrograma implements Serializable {
 
 	/**
 	 * 

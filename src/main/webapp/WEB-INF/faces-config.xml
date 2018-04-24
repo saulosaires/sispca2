@@ -546,7 +546,11 @@
 			<from-outcome>avaliacaoSetorialProgramaPainelAssociado</from-outcome>
 			<to-view-id>/private/avaliacao/setorialPrograma/painelAssociado.xhtml</to-view-id>
 		</navigation-case> 
- 
+     
+		 <navigation-case>
+			<from-outcome>avaliacaoSetorialProgramaIntermediario</from-outcome>
+			<to-view-id>/private/avaliacao/setorialPrograma/indicadorIntermediario.xhtml</to-view-id>
+		</navigation-case> 
 
 	</navigation-rule>  
 

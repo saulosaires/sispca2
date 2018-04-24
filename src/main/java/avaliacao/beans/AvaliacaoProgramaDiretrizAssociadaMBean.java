@@ -135,11 +135,5 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 	public void setListDiretrizAssociada(List<DiretrizAssociada> listDiretrizAssociada) {
 		this.listDiretrizAssociada = listDiretrizAssociada;
 	}
-
-	 
-	
-	
  
-	
-	
 }

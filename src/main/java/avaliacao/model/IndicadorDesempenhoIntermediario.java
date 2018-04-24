@@ -46,7 +46,7 @@ public class IndicadorDesempenhoIntermediario extends Model implements Serializa
 
 	@ManyToOne
 	@JoinColumn(name = "id_unidade_medida")
-	private UnidadeMedida unidadeMedida;
+	private UnidadeMedida unidadeMedida= new UnidadeMedida();
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
