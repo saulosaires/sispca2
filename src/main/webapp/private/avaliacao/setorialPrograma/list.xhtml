@@ -35,8 +35,7 @@
 									<h:outputText value="(#{prog.codigo}) - #{prog.denominacao}"/>
 								</p:column>							
 														
-								<p:column headerText="Diretriz" width="6%">
-								
+								<p:column headerText="Diretriz" width="6%">		
 									<h:button value="diretriz"    outcome="avaliacaoSetorialProgramaDiretrizAssociada" styleClass="btn btn-primary"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
@@ -49,12 +48,16 @@
 								</p:column>		
 														
 								<p:column headerText="intermediário" width="6%">
-								
-									<h:button value="diretriz"    outcome="avaliacaoSetorialProgramaIntermediario" styleClass="btn btn-primary"  >
+									<h:button value="Interm."    outcome="avaliacaoSetorialProgramaIntermediario" styleClass="btn btn-primary"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
 								
+								<p:column headerText="Análise" width="6%">
+									<h:button value="Análise"    outcome="avaliacaoSetorialProgramaAnalise" styleClass="btn btn-default"  >
+								 	  <f:param name="id" value="#{prog.id}" /> 
+									</h:button>
+								</p:column>		
 								
 														
 														 
