@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"  
+	  xmlns:sispca="http://java.sun.com/jsf/composite/componentes"> 
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			
+	 		 <f:metadata>
+	    			<f:viewParam name="id" value="#{avaliacaoProgramaFisicoFinanceiroMBean.id}"/>
+	    			<f:viewAction action="#{avaliacaoProgramaFisicoFinanceiroMBean.init}" />
+			 </f:metadata>
+
+
+			<h:form acceptcharset="UTF-8">
+
+				<div class="container-fluid row-fluid">
+					<div class="span12">
+						<p:messages closable="true" />
+					</div>
+					<legend class="outBusc">Avaliação Físico Financeira</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+		
+						<sispca:dadosIdentificacaoPrograma programa="#{avaliacaoProgramaFisicoFinanceiroMBean.programa}"
+														   dotacaoInicial="#{avaliacaoProgramaFisicoFinanceiroMBean.dotacaoInicial}"
+														   dotAtual="#{avaliacaoProgramaFisicoFinanceiroMBean.dotacaoAtual}"
+														   variacao="#{avaliacaoProgramaFisicoFinanceiroMBean.variacao}"	 />
+		    			
+		    			<div class="row" style="margin-top: 2%;">
+		    				<b><h:outputText value="2. DADOS FINANCEIROS DO PROGRAMA"/></b>	    				
+		    			</div>
+		    			
+		    			<div class="row" style="margin-top: 1%; margin-right: 1.5% !important;">
+							<table class="table table-striped">
+								<tr style="background-color: #2c3e50 !important; color: white;">
+									<th>Unidade Orçamentária</th>
+									<th>Ação</th>
+									<th>Produto</th>
+									<th>Unidade de Medida</th>	
+									<th>Planejado (A)</th>		
+									<th>Executado (B)</th>	
+									<th>Eficácia (B/A) = C</th>		
+									<th>Dotação Inicial (D)</th>		
+									<th>Dotação Atual (E)</th>
+									<th>Empenhado (F)</th>
+									<th>Liquidado (G)</th>
+									<th>(G/E) = H</th>
+									<th>Eficiência (C/H)</th>
+								</tr>
+								<ui:repeat value="#{avaliacaoProgramaFisicoFinanceiroMBean.listAvalFisicoFinanceira}" var="aff">
+									<tr>
+										<td>
+											<h:outputText value="#{aff.unidadeOrcamentaria}"/>
+										</td>
+										<td>
+											<h:outputText value="#{aff.acao}"/> 
+										</td>
+										<td>
+											<h:outputText value="#{aff.produto}"/>
+										</td>
+										<td>
+											<h:outputText value="#{aff.unidadeMedida}"/>
+										</td>
+										<td>
+											<h:outputText value="#{aff.planejado}">
+												<f:convertNumber pattern="#,##0.00" />
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.executado}">
+												<f:convertNumber pattern="#,##0.00"/>											
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.eficacia}">
+												<f:convertNumber pattern="#,##0.00" />													
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.dotacaoInicial}">
+												<f:convertNumber pattern="#,##0.00"/>												
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.dotacaoAtual}">
+												<f:convertNumber pattern="#,##0.00"/>							
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.empenhado}">
+												<f:convertNumber pattern="#,##0.00"/>							
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.liquidado}">
+												<f:convertNumber pattern="#,##0.00"/>											
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.liquidadoSobreAtual}">
+												<f:convertNumber pattern="#,##0.00"/>											
+											</h:outputText>
+										</td>
+										<td>
+											<h:outputText value="#{aff.eficiencia}">
+												<f:convertNumber pattern="#,##0.00" />												
+											</h:outputText>
+										</td>
+									</tr>						
+								</ui:repeat>					
+							</table>
+		    			</div>	
+		    			
+		    			<div class="row" style="margin-bottom: 2%; margin-top: 2%;">
+		    				<div class="alert alert-block" style="background-color: #FFFFF0; color: #D2B48C;  margin-right: 1.5%;">
+								<div class="row">	
+		    						<div class="col-lg-6">
+				    					<b><h:outputText value="Média da Eficácia (B/A = C): "/></b>	
+				    					<h:outputText value="#{avaliacaoProgramaFisicoFinanceiroMBean.mediaEficaciaFisicoFinanceira}">
+				    						<f:convertNumber pattern="#,##0.00"/>
+				    					</h:outputText>
+			    					</div>
+				    				<div class="col-lg-6">
+				    					<b><h:outputText value="Média da Eficiência (C/H): "/></b>	
+				    					<h:outputText value="#{avaliacaoProgramaFisicoFinanceiroMBean.mediaEficienciaFisicoFinanceira}">
+				    						<f:convertNumber pattern="#,##0.00"/>
+				    					</h:outputText>
+				    				</div>
+		    					</div>
+		    					<div class="row" style="margin-top: 2%;">
+		    						<div class="col-lg-12">
+				    					<p><b>Escala de Valoração adotada para a Avaliação da Eficácia: Eficácia &#62;&#61; 1,0 e Não Eficácia &#60; 1,0</b></p>
+				    					<p><b>Escala de Valoração adotada para a Avaliação da Eficiência: Muito Eficiente &#62; 1,0; Eficiente &#61; 1,0; Media Eficiência &#61; 0,50 a 0,99 e Baixa Eficiência &#60; 0,50</b></p>
+		    							<p><b>Fonte: SISPCA/SIAFEM</b></p>
+		    						</div>		    					
+		    					</div>
+		    				</div>	
+		    			</div>		    			
+		    				    			
+		    			<div class="row" style="margin-bottom: 2%; margin-top: 2%;">
+		    				<b><h:outputText value="3. AVALIAÇÃO FÍSICO FINANCEIRA"/></b>	    				
+		    			</div>
+		    			
+		    			<ui:repeat value="#{avaliacaoProgramaFisicoFinanceiroMBean.listAvaliacaoFisicoFinanceira}" var="avalFisFinanc">
+		    				<div class="row" style="margin-top: 1%">
+		    					<b><h:outputText value="#{avalFisFinanc.exercicioTopicoAvaliacao.topicoAvaliacao.descricao}"/></b>
+		    				</div>
+		    			
+		    				<div class="row" style="margin-top: 1%; margin-right: 1.5%;">
+		    					<h:inputTextarea value="#{avalFisFinanc.resposta}" style="height: 300px; width: 100%;"/>  					
+		    				</div>		    			
+		    			</ui:repeat> 			
+		    			
+		    			
+		    			<div class="row" style="margin-top: 2%;">
+		    				<h:commandButton styleClass="btn btn-primary" value="Enviar" action="#{avaliacaoProgramaFisicoFinanceiroMBean.adicionaAvaliacaoFisicoFinanceira()}"/>
+		    				&nbsp;
+		    				<h:button styleClass="btn btn-default" value="Voltar"  outcome="avaliacaoSetorialProgramaList" />
+		    			</div>
+		    			
+					</div>					
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

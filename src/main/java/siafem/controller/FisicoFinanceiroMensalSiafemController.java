@@ -1,10 +1,13 @@
 package siafem.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import administrativo.model.Exercicio;
 import arquitetura.controller.AbstractController;
+import qualitativo.model.Programa;
 import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 
@@ -31,5 +34,11 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 		
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoAtualPorUoProg(programaId, anoVigente);
 	}
+
 	
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
+		
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
+	}
+
 }

@@ -58,19 +58,61 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	private String programa;	
 	
 	@Column(name="id_acao")
-	private Long acao=0l;	
+	private Long acao;	
 	
 	@Column(name="dotacao_inicial")
 	private BigDecimal dotacaoInicial;
 	
 	@Column(name="disponivel")
 	private BigDecimal disponivel;
-	
+
+	@Column(name="liquidado")
+	private BigDecimal liquidado;
+ 
 	@Column(name="empenhado")
 	private BigDecimal empenhado;
 
 	@Column(name="ano")
 	private Integer ano;
+
+	private transient String descricaoUnidadeOrcamentaria;
+	
+	private transient Long acaoId;
+	private transient String acaoDenominacao;
+	private transient String acaoProduto;
+	private transient Long tipoCalculoMetaId;
+	
+	public FisicoFinanceiroMensalSiafem() {}
+	
+	
+	public FisicoFinanceiroMensalSiafem(String programa,
+									    Long unidadeOrcamentaria,  
+									    String descricaoUnidadeOrcamentaria,
+									    Long acao, 
+									    Long acaoId,
+									    String acaoDenominacao,
+									    String acaoProduto,
+									    Long tipoCalculoMetaId,
+									    BigDecimal dotacaoInicial,
+										BigDecimal disponivel, 
+										BigDecimal liquidado, 
+										BigDecimal empenhado) {
+		super();
+		this.unidadeOrcamentaria = unidadeOrcamentaria;
+		this.descricaoUnidadeOrcamentaria=descricaoUnidadeOrcamentaria;
+		this.programa = programa;
+		this.acao = acao;
+		this.dotacaoInicial = dotacaoInicial;
+		this.disponivel = disponivel;
+		this.liquidado = liquidado;
+		this.empenhado = empenhado;
+		
+		this.acaoId=acaoId;
+		this.acaoDenominacao=acaoDenominacao;
+		this.acaoProduto=acaoProduto;
+		this.tipoCalculoMetaId=tipoCalculoMetaId;
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -111,15 +153,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	public void setPrograma(String programa) {
 		this.programa = programa;
 	}
-
-	public Long getAcao() {
-		return acao;
-	}
-
-	public void setAcao(Long acao) {
-		this.acao = acao;
-	}
-
+ 
 	public BigDecimal getDotacaoInicial() {
 		return dotacaoInicial;
 	}
@@ -150,6 +184,75 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setAno(Integer ano) {
 		this.ano = ano;
+	}
+
+	public BigDecimal getLiquidado() {
+		return liquidado;
+	}
+
+	public void setLiquidado(BigDecimal liquidado) {
+		this.liquidado = liquidado;
+	}
+
+
+	public String getDescricaoUnidadeOrcamentaria() {
+		return descricaoUnidadeOrcamentaria;
+	}
+
+
+	public void setDescricaoUnidadeOrcamentaria(String descricaoUnidadeOrcamentaria) {
+		this.descricaoUnidadeOrcamentaria = descricaoUnidadeOrcamentaria;
+	}
+
+ 
+
+	public Long getAcao() {
+		return acao;
+	}
+
+
+	public void setAcao(Long acao) {
+		this.acao = acao;
+	}
+
+
+	public Long getAcaoId() {
+		return acaoId;
+	}
+
+
+	public void setAcaoId(Long acaoId) {
+		this.acaoId = acaoId;
+	}
+
+
+	public String getAcaoDenominacao() {
+		return acaoDenominacao;
+	}
+
+
+	public void setAcaoDenominacao(String acaoDenominacao) {
+		this.acaoDenominacao = acaoDenominacao;
+	}
+
+
+	public String getAcaoProduto() {
+		return acaoProduto;
+	}
+
+
+	public void setAcaoProduto(String acaoProduto) {
+		this.acaoProduto = acaoProduto;
+	}
+
+
+	public Long getTipoCalculoMetaId() {
+		return tipoCalculoMetaId;
+	}
+
+
+	public void setTipoCalculoMetaId(Long tipoCalculoMetaId) {
+		this.tipoCalculoMetaId = tipoCalculoMetaId;
 	}
 	 
 	

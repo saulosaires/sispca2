@@ -102,6 +102,8 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/avaliacao/setorialPrograma/painelAssociado.xhtml",		"avaliacaoSetorialProgramaPainelAssociado");
 		mapLinks.put("/sispca2/private/avaliacao/setorialPrograma/indicadorIntermediario.xhtml","avaliacaoSetorialProgramaIntermediario");
 		mapLinks.put("/sispca2/private/avaliacao/setorialPrograma/analise.xhtml",			    "avaliacaoSetorialProgramaAnalise");
+		mapLinks.put("/sispca2/private/avaliacao/setorialPrograma/fisicoFinanceiro.xhtml",	    "avaliacaoSetorialProgramaFisicoFinanceiro");
+		
 		
 	}
 

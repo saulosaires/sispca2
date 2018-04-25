@@ -11,32 +11,28 @@ import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import avaliacao.model.Analise;
-import avaliacao.model.PainelAssociado;
 import avaliacao.service.AnaliseService;
-import qualitativo.model.Indicador;
 import qualitativo.service.ProgramaService;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
 @Named
 @ViewScoped
-public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
+public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final  String SUCCESS_SAVE="Análise Salvo com sucesso";
-	private static final  String FAIL_SAVE="Falha ao Salvar Painel";
+	private static final  String SUCCESS_SAVE="Avalição Físico Financeira Salva Salvo com sucesso";
+	private static final  String FAIL_SAVE="Falha ao Salvar Avalição Físico Financeira Salva";
 
 	private List<Analise> listAnalise;
 	
 	private AnaliseService analiseService;
 	
-	private  FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
-	
 	@Inject
-	public AvaliacaoProgramaAnaliseMBean(ProgramaService programaService,
+	public AvaliacaoProgramaFisicoFinanceiroMBean(ProgramaService programaService,
 									     ExercicioService exercicioService,
 									     FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
 									     AnaliseService analiseService
@@ -45,7 +41,7 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
 	 
 		this.analiseService = analiseService;
-		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
+		
 	}
 
 	@Override
@@ -57,22 +53,13 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarAnalise() {
-		
-		fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
-		
 		listAnalise = analiseService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
 	}
 	
-	public void adicionarAnalise() {
+	public void adicionaAvaliacaoFisicoFinanceira() {
 		
 		try {
-			
-			for(Analise analise:listAnalise) {
-				analise.setData(new Date());
-				analiseService.update(analise);
-			}
- 
- 			buscarAnalise();
+		 
  			Messages.addMessageInfo(SUCCESS_SAVE);
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getCause().getMessage());

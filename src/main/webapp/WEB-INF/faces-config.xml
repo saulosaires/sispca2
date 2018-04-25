@@ -557,6 +557,12 @@
 			<to-view-id>/private/avaliacao/setorialPrograma/analise.xhtml</to-view-id>
 		</navigation-case> 
 
+		 <navigation-case>
+			<from-outcome>avaliacaoSetorialProgramaFisicoFinanceiro</from-outcome>
+			<to-view-id>/private/avaliacao/setorialPrograma/fisicoFinanceiro.xhtml</to-view-id>
+		</navigation-case> 
+
+
 
 	</navigation-rule>  
 
