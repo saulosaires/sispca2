@@ -45,10 +45,7 @@ public class AvaliacaoFisicoFinanceira extends Model implements Serializable, Au
 	@ManyToOne
 	@JoinColumn(name="id_programa")
 	private Programa programa;
-
-	@ManyToOne
-	@JoinColumn(name="id_usuario")
-	private Usuario usuario;
+ 
 	
 	@ManyToOne
 	@JoinColumn(name="id_exercicio_topico_avaliacao")
@@ -86,15 +83,7 @@ public class AvaliacaoFisicoFinanceira extends Model implements Serializable, Au
 	public void setPrograma(Programa programa) {
 		this.programa = programa;
 	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}	
-
+ 
 	public String getResposta() {
 		return resposta;
 	}
@@ -120,7 +109,7 @@ public class AvaliacaoFisicoFinanceira extends Model implements Serializable, Au
 		sb.append("Data: "+data);
 		sb.append("Exercicio ID: "+exercicio.getId());
 		sb.append("Programa ID: "+programa.getId());
-		sb.append("Usuário ID: "+usuario.getId());
+		 
 		sb.append("Exercicio Tópico Avaliacação ID: "+exercicioTopicoAvaliacao.getId());
 		return sb.toString();
 	}

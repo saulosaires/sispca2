@@ -50,11 +50,7 @@ public class DiretrizAssociada extends Model implements Serializable, Auditable 
 	@ManyToOne
 	@JoinColumn(name="id_programa")
 	private Programa programa;
-
-	@ManyToOne
-	@JoinColumn(name="id_usuario")
-	private Usuario usuario;
-	 
+ 
 
 	public Long getId() {
 		return id;
@@ -96,13 +92,7 @@ public class DiretrizAssociada extends Model implements Serializable, Auditable 
 		this.programa = programa;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}	
+ 
  
 
 	@Override
@@ -112,7 +102,7 @@ public class DiretrizAssociada extends Model implements Serializable, Auditable 
 		sb.append(" Data: "+data);
 		sb.append(" Exercicio ID: "+exercicio.getId());
 		sb.append(" Programa ID: "+programa.getId());
-		sb.append(" Usuario ID: "+usuario.getId());
+		 
 		return sb.toString();
 	}	
 

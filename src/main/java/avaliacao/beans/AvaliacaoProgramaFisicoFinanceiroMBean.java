@@ -1,6 +1,5 @@
 package avaliacao.beans;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -10,9 +9,10 @@ import javax.inject.Named;
 import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
-import avaliacao.model.Analise;
+import avaliacao.model.AvaliacaoFisicoFinanceira;
 import avaliacao.service.AnaliseService;
 import qualitativo.service.ProgramaService;
+import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
 @Named
@@ -27,9 +27,14 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 	private static final  String SUCCESS_SAVE="Avalição Físico Financeira Salva Salvo com sucesso";
 	private static final  String FAIL_SAVE="Falha ao Salvar Avalição Físico Financeira Salva";
 
-	private List<Analise> listAnalise;
+	private List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem;
+	private List<AvaliacaoFisicoFinanceira> listAvaliacaoFisicoFinanceira;
 	
-	private AnaliseService analiseService;
+	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
+	
+	
+	private Double mediaEficaciaFisicoFinanceira;
+	private Double mediaEficienciaFisicoFinanceira;
 	
 	@Inject
 	public AvaliacaoProgramaFisicoFinanceiroMBean(ProgramaService programaService,
@@ -39,9 +44,8 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 									    ) {
 
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
-	 
-		this.analiseService = analiseService;
-		
+	  
+		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
 	}
 
 	@Override
@@ -53,10 +57,10 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarAnalise() {
-		listAnalise = analiseService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listFisicoFinanceiroMensalSiafem = fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
 	}
 	
-	public void adicionaAvaliacaoFisicoFinanceira() {
+	public String adicionarAvaliacaoFisicoFinanceira() {
 		
 		try {
 		 
@@ -67,15 +71,43 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 			Messages.addMessageError(FAIL_SAVE);
 		}
 		
+		return null;
+		
 	}
 
-	public List<Analise> getListAnalise() {
-		return listAnalise;
+	public List<FisicoFinanceiroMensalSiafem> getListFisicoFinanceiroMensalSiafem() {
+		return listFisicoFinanceiroMensalSiafem;
 	}
 
-	public void setListAnalise(List<Analise> listAnalise) {
-		this.listAnalise = listAnalise;
+	public void setListFisicoFinanceiroMensalSiafem(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
+		this.listFisicoFinanceiroMensalSiafem = listFisicoFinanceiroMensalSiafem;
 	}
+
+	public List<AvaliacaoFisicoFinanceira> getListAvaliacaoFisicoFinanceira() {
+		return listAvaliacaoFisicoFinanceira;
+	}
+
+	public void setListAvaliacaoFisicoFinanceira(List<AvaliacaoFisicoFinanceira> listAvaliacaoFisicoFinanceira) {
+		this.listAvaliacaoFisicoFinanceira = listAvaliacaoFisicoFinanceira;
+	}
+
+	public Double getMediaEficaciaFisicoFinanceira() {
+		return mediaEficaciaFisicoFinanceira;
+	}
+
+	public void setMediaEficaciaFisicoFinanceira(Double mediaEficaciaFisicoFinanceira) {
+		this.mediaEficaciaFisicoFinanceira = mediaEficaciaFisicoFinanceira;
+	}
+
+	public Double getMediaEficienciaFisicoFinanceira() {
+		return mediaEficienciaFisicoFinanceira;
+	}
+
+	public void setMediaEficienciaFisicoFinanceira(Double mediaEficienciaFisicoFinanceira) {
+		this.mediaEficienciaFisicoFinanceira = mediaEficienciaFisicoFinanceira;
+	}
+
+	 
 	
 	 
  

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import qualitativo.model.Acao;
 import qualitativo.model.Mes;
 
 @Entity
@@ -31,23 +32,26 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@JoinColumn(name="mes")
 	private Mes mes;
 
-// TODO depois que migrar os dados eu posso usar chave estrangeira, mas agora vou so mapear as colunas diretamente	
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="unidade_gestora")
-//	private UnidadeGestora unidadeGestora;
-//
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="unidade_orcamentaria")
-//	private UnidadeOrcamentaria unidadeOrcamentaria;
-//	
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="programa")
-//	private Programa programa;
-//	
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="id_acao")
-//	private Acao acao;
+	/*
+ TODO depois que migrar os dados eu posso usar chave estrangeira, mas agora vou so mapear as colunas diretamente	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="unidade_gestora")
+	private UnidadeGestora unidadeGestora;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="unidade_orcamentaria")
+	private UnidadeOrcamentaria unidadeOrcamentaria;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="programa")
+	private Programa programa;
+	*/
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_acao",nullable=true)
+	private Acao acao;
+
+	
+	
 	@Column(name="unidade_gestora")
 	private Long unidadeGestora=0l;	
 	
@@ -57,8 +61,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@Column(name="programa")
 	private String programa;	
 	
-	@Column(name="id_acao")
-	private Long acao;	
+	 
 	
 	@Column(name="dotacao_inicial")
 	private BigDecimal dotacaoInicial;
@@ -81,18 +84,30 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	private transient String acaoDenominacao;
 	private transient String acaoProduto;
 	private transient Long tipoCalculoMetaId;
+	private transient String unidadeMedida;
+	
+	private transient Double planejado;
+	private transient Double executado;
+	private transient Double eficacia;
+	
+	private transient BigDecimal dotacaoAtual;
+ 
+	private transient BigDecimal liquidadoSobreAtual;
+	
+	private transient BigDecimal eficiencia;
 	
 	public FisicoFinanceiroMensalSiafem() {}
 	
-	
+ 
 	public FisicoFinanceiroMensalSiafem(String programa,
 									    Long unidadeOrcamentaria,  
 									    String descricaoUnidadeOrcamentaria,
-									    Long acao, 
+									    
 									    Long acaoId,
 									    String acaoDenominacao,
 									    String acaoProduto,
-									    Long tipoCalculoMetaId,
+									    
+									    
 									    BigDecimal dotacaoInicial,
 										BigDecimal disponivel, 
 										BigDecimal liquidado, 
@@ -101,7 +116,13 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.unidadeOrcamentaria = unidadeOrcamentaria;
 		this.descricaoUnidadeOrcamentaria=descricaoUnidadeOrcamentaria;
 		this.programa = programa;
-		this.acao = acao;
+		
+		this.acao = new Acao();
+		this.acao.setId(acaoId);
+		this.acao.setDenominacao(acaoDenominacao);
+		this.acao.setProduto(acaoProduto);
+		this.acao.getTipoCalculoMeta().setId(tipoCalculoMetaId);
+		
 		this.dotacaoInicial = dotacaoInicial;
 		this.disponivel = disponivel;
 		this.liquidado = liquidado;
@@ -111,7 +132,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.acaoDenominacao=acaoDenominacao;
 		this.acaoProduto=acaoProduto;
 		this.tipoCalculoMetaId=tipoCalculoMetaId;
-		
+		this.unidadeMedida=unidadeMedida;
 	}
 
 	public Long getId() {
@@ -204,14 +225,14 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.descricaoUnidadeOrcamentaria = descricaoUnidadeOrcamentaria;
 	}
 
- 
+  
 
-	public Long getAcao() {
+	public Acao getAcao() {
 		return acao;
 	}
 
 
-	public void setAcao(Long acao) {
+	public void setAcao(Acao acao) {
 		this.acao = acao;
 	}
 
@@ -253,6 +274,76 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setTipoCalculoMetaId(Long tipoCalculoMetaId) {
 		this.tipoCalculoMetaId = tipoCalculoMetaId;
+	}
+
+
+	public Double getPlanejado() {
+		return planejado;
+	}
+
+
+	public void setPlanejado(Double planejado) {
+		this.planejado = planejado;
+	}
+
+
+	public Double getExecutado() {
+		return executado;
+	}
+
+
+	public void setExecutado(Double executado) {
+		this.executado = executado;
+	}
+
+
+	public String getUnidadeMedida() {
+		return unidadeMedida;
+	}
+
+
+	public void setUnidadeMedida(String unidadeMedida) {
+		this.unidadeMedida = unidadeMedida;
+	}
+
+
+	public Double getEficacia() {
+		return eficacia;
+	}
+
+
+	public void setEficacia(Double eficacia) {
+		this.eficacia = eficacia;
+	}
+
+
+	public BigDecimal getDotacaoAtual() {
+		return dotacaoAtual;
+	}
+
+
+	public void setDotacaoAtual(BigDecimal dotacaoAtual) {
+		this.dotacaoAtual = dotacaoAtual;
+	}
+
+
+	public BigDecimal getLiquidadoSobreAtual() {
+		return liquidadoSobreAtual;
+	}
+
+
+	public void setLiquidadoSobreAtual(BigDecimal liquidadoSobreAtual) {
+		this.liquidadoSobreAtual = liquidadoSobreAtual;
+	}
+
+
+	public BigDecimal getEficiencia() {
+		return eficiencia;
+	}
+
+
+	public void setEficiencia(BigDecimal eficiencia) {
+		this.eficiencia = eficiencia;
 	}
 	 
 	

@@ -31,8 +31,8 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_exercicio")
-	@NotNull(message="Exercicio: campo é obrigatório")
+	@JoinColumn(name = "id_exercicio",nullable=true)
+	 
 	private Exercicio exercicio = new Exercicio();
 	
 	@Column(name="quantidade")

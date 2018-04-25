@@ -57,9 +57,7 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarAnalise() {
-		
-		fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
-		
+	 	
 		listAnalise = analiseService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
 	}
 	

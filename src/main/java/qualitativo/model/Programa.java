@@ -115,8 +115,7 @@ public class Programa extends Model implements  Auditable {
 	private TipoPrograma tipoPrograma = new TipoPrograma();
 
 	@ManyToOne
-	@JoinColumn(name="id_exercicio")
-	@NotNull(message="Exercício: campo é obrigatório")
+	@JoinColumn(name="id_exercicio") 
 	private Exercicio exercicio;
 
 	

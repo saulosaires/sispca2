@@ -44,10 +44,7 @@ public class Recomendacao extends Model implements Serializable, Auditable {
 	@ManyToOne
 	@JoinColumn(name = "id_programa")
 	private Programa programa;
-
-	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+ 
 
 	public Long getId() {
 		return id;
@@ -81,13 +78,7 @@ public class Recomendacao extends Model implements Serializable, Auditable {
 		this.programa = programa;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+ 
 
 	@Override
 	public String getLogDetail() {
@@ -95,7 +86,7 @@ public class Recomendacao extends Model implements Serializable, Auditable {
 		sb.append("Recomendacao ID: " + id);
 		sb.append("Exercicio ID: " + exercicio.getId());
 		sb.append("Programa ID: " + programa.getId());
-		sb.append("Usuário ID: " + usuario.getId());
+		 
 		return sb.toString();
 	}
 

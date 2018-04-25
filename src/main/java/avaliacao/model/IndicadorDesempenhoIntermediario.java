@@ -47,10 +47,7 @@ public class IndicadorDesempenhoIntermediario extends Model implements Serializa
 	@ManyToOne
 	@JoinColumn(name = "id_unidade_medida")
 	private UnidadeMedida unidadeMedida= new UnidadeMedida();
-
-	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+ 
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ref_data_apuracao")
@@ -113,14 +110,7 @@ public class IndicadorDesempenhoIntermediario extends Model implements Serializa
 	public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
 		this.unidadeMedida = unidadeMedida;
 	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+ 
 
 	public Date getRefDataApuracao() {
 		return refDataApuracao;
@@ -178,7 +168,7 @@ public class IndicadorDesempenhoIntermediario extends Model implements Serializa
 		sb.append(" Indicador: " + indicador);
 		sb.append(" Unidade de Medida: " + (unidadeMedida != null ? unidadeMedida.getId().toString() : ""));
 		sb.append(" Exercicio ID: " + (exercicio != null ? exercicio.getId().toString() : ""));
-		sb.append(" Usuario ID: " + (usuario != null ? usuario.getId().toString() : ""));
+		 
 		sb.append(" Referência de Data de Apuração: " + refDataApuracao);
 		sb.append(" Referência de Valor: " + refValor);
 		sb.append(" Resultado Ano Apurado: " + resultadoAnoApurado);

@@ -46,9 +46,7 @@ public class Analise extends Model implements Serializable, Auditable {
 	@JoinColumn(name="id_programa")
 	private Programa programa;
 
-	@ManyToOne
-	@JoinColumn(name="id_usuario")
-	private Usuario usuario;
+	 
 	
 	@Column(name="resposta")
 	private String resposta;
@@ -123,19 +121,7 @@ public class Analise extends Model implements Serializable, Auditable {
 		this.programa = programa;
 	}
 
-
-
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+ 
 
 
 
@@ -161,7 +147,7 @@ public class Analise extends Model implements Serializable, Auditable {
 		sb.append(" Data: "+data);
 		sb.append(" Exercicio ID: "+exercicio.getId());
 		sb.append(" Programa ID: "+programa.getId());
-		sb.append(" Usuário ID: "+usuario.getId());
+	 
 		sb.append(" Exercício Tópico Análise: "+exercicioTopicoAnalise.getId());
 		return sb.toString();
 	}	

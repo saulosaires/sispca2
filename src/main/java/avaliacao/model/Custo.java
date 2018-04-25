@@ -46,11 +46,7 @@ public class Custo  extends Model implements Serializable, Auditable {
 	@ManyToOne
 	@JoinColumn(name="id_programa")
 	private Programa programa;
-
-	@ManyToOne
-	@JoinColumn(name="id_usuario")
-	private Usuario usuario;
-	
+ 	
 	@ManyToOne
 	@JoinColumn(name="id_exercicio_topico_custo")
 	private ExercicioTopicoCusto exercicioTopicoCusto;
@@ -80,13 +76,7 @@ public class Custo  extends Model implements Serializable, Auditable {
 		this.programa = programa;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}	
+ 
 
 	public Boolean getAtivo() {
 		return ativo;
@@ -126,7 +116,7 @@ public class Custo  extends Model implements Serializable, Auditable {
 		sb.append("Custo ID: "+id);
 		sb.append("Exercício ID: "+exercicio.getId());
 		sb.append("Programa ID: "+programa.getId());
-		sb.append("Usuário ID: "+usuario.getId());
+		 
 		sb.append("Resposta: "+resposta);
 		sb.append("Exercicio Tópico Custo ID: "+exercicioTopicoCusto.getId());
 		return sb.toString();

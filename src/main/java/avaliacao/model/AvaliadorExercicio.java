@@ -38,10 +38,7 @@ public class AvaliadorExercicio extends Model  implements Serializable, Auditabl
 	@NotNull
 	private Exercicio exercicio;
 
-	@ManyToOne
-	@JoinColumn(name="id_usuario")
-	@NotNull
-	private Usuario usuario;
+	 
 
 	
 	public Long getId() {
@@ -60,20 +57,14 @@ public class AvaliadorExercicio extends Model  implements Serializable, Auditabl
 		this.exercicio = exercicio;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+ 
 
 	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Avaliador Exercicio ID: "+id);
 		sb.append("Exercicio ID: "+exercicio.getId());
-		sb.append("Usuário ID: "+usuario.getId());
+	 
 		return null;
 	}
 

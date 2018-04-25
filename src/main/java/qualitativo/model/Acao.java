@@ -161,8 +161,7 @@ public class Acao extends Model implements  Auditable {
 	private String observacao;
  
 	@ManyToOne
-	@JoinColumn(name="id_exercicio")
-	@NotNull(message="Exercício: campo é obrigatório")
+	@JoinColumn(name="id_exercicio") 
 	private Exercicio exercicio;
 
 	

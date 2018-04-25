@@ -8,6 +8,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
@@ -67,42 +69,48 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		Root<TipoCalculoMeta> rootTipoCalculoMeta 		  	    = criteria.from(TipoCalculoMeta.class);
   		
 		
+		Join<Object, Object> joinAcao = root.join("acao", JoinType.LEFT);
+		
 	 	criteria.multiselect(
 							  root.get(PROGRAMA),
 							  root.get(UNIDADE_ORCAMENTARIA),
 							  rootUnidadeOrcamentaria.get(DESCRICAO),
-							  root.get(ACAO),
-							  rootAcao.get(ID),
-							  rootAcao.get(DENOMINACAO),
-							  rootAcao.get(PRODUTO),
-							  rootTipoCalculoMeta.get(ID), 
+							  
+							  joinAcao.get(ID),
+							  joinAcao.get(DENOMINACAO),
+							  joinAcao.get(PRODUTO),
+							 
+							  
 							  builder.sum(root.get(DOTACAO_INICIAL)),
 							  builder.sum(root.get(DISPONIVEL)),
 							  builder.sum(root.get(EMPENHADO)),
 							  builder.sum(root.get(LIQUIDADO))
 							 );
 
- 
-		criteria.where(
-						builder.equal(root.get(ACAO),				   rootAcao.get(ID)),
-						builder.equal(rootUnidadeMedida.get(ID),	   rootAcao.get(UNIDADE_MEDIDA).get(ID)),
-						builder.equal(rootPrograma.get(ID),	  		   rootAcao.get(PROGRAMA).get(ID)),
-						builder.equal(rootUnidadeOrcamentaria.get(ID), rootAcao.get(UNIDADE_ORCAMENTARIA).get(ID)),
-						builder.equal(rootTipoCalculoMeta.get(ID),	   rootAcao.get(TIPO_CALCULO_META).get(ID)),
-						 
-						builder.equal(root.get(PROGRAMA),			   programa.getId()),
-						builder.equal(root.get(ANO),				   exercicio.getAno())
-				   );
+
+	 	
+	 	
+	 	 
+	 	
+//		criteria.where(
+//						builder.equal(root.get(ACAO),				   rootAcao.get(ID)),
+//						builder.equal(rootUnidadeMedida.get(ID),	   rootAcao.get(UNIDADE_MEDIDA).get(ID)),
+//						builder.equal(rootPrograma.get(ID),	  		   rootAcao.get(PROGRAMA).get(ID)),
+//						builder.equal(rootUnidadeOrcamentaria.get(ID), rootAcao.get(UNIDADE_ORCAMENTARIA).get(ID)),
+//						builder.equal(rootTipoCalculoMeta.get(ID),	   rootAcao.get(TIPO_CALCULO_META).get(ID)),
+//						 
+//						builder.equal(root.get(PROGRAMA),			   "0317"),
+//						builder.equal(root.get(ANO),				   2016)
+//				   );
 		
 		criteria.groupBy(
 						  root.get(PROGRAMA),
 						  root.get(UNIDADE_ORCAMENTARIA),
 						  rootUnidadeOrcamentaria.get(DESCRICAO),
-						  root.get(ACAO),
-						  rootAcao.get(ID),
-						  rootAcao.get(DENOMINACAO),
-						  rootAcao.get(PRODUTO),
-						  rootTipoCalculoMeta.get(ID)
+						 
+						  joinAcao.get(ID),
+						  joinAcao.get(DENOMINACAO),
+						  joinAcao.get(PRODUTO) 
 						  );
  		
 		 return entityManager.createQuery(criteria).getResultList();

@@ -54,13 +54,8 @@ public class Localizador extends Model  {
 	@OneToOne(mappedBy="localizador1", fetch=FetchType.LAZY)
 	private Localizador localizador2;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_regiao")
-	private Regiao regiao;
-
-	public Localizador() {
-		// empty
-	}
+	 
+ 
 
 	public Integer getIdLocalizador() {
 		return this.idLocalizador;
@@ -124,13 +119,7 @@ public class Localizador extends Model  {
 		this.localizador2 = localizador2;
 	}
 
-	public Regiao getRegiao() {
-		return this.regiao;
-	}
-
-	public void setRegiao(Regiao regiao) {
-		this.regiao = regiao;
-	}
+	 
   
 	public Integer getId() {
 	 
