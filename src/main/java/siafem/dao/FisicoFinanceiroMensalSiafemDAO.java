@@ -16,11 +16,9 @@ import javax.persistence.criteria.Root;
 import administrativo.model.Exercicio;
 import arquitetura.dao.AbstractDAO;
 import arquitetura.utils.Utils;
-import qualitativo.model.Acao;
+import monitoramento.model.Execucao;
 import qualitativo.model.Programa;
-import qualitativo.model.TipoCalculoMeta;
-import qualitativo.model.UnidadeMedida;
-import qualitativo.model.UnidadeOrcamentaria;
+import quantitativo.model.FisicoFinanceiroMensal;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 
 public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceiroMensalSiafem> {
@@ -45,6 +43,8 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String DISPONIVEL="disponivel";
 	private static final  String EMPENHADO="empenhado";
 	private static final  String LIQUIDADO="liquidado";
+	private static final  String CODIGO="codigo";
+	private static final  String EXERCICIO="exercicio";
 	
 	public FisicoFinanceiroMensalSiafemDAO() {
 		setClazz(FisicoFinanceiroMensalSiafem.class);
@@ -62,25 +62,25 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
 		
-		Root<Acao> rootAcao 				  			  		= criteria.from(Acao.class);
-		Root<UnidadeMedida> rootUnidadeMedida 			  		= criteria.from(UnidadeMedida.class);
-		Root<Programa> rootPrograma			 			 	    = criteria.from(Programa.class);
-		Root<UnidadeOrcamentaria> rootUnidadeOrcamentaria 		= criteria.from(UnidadeOrcamentaria.class);
-		Root<TipoCalculoMeta> rootTipoCalculoMeta 		  	    = criteria.from(TipoCalculoMeta.class);
-  		
+ 		
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeMedida 		 = joinAcao.join(UNIDADE_MEDIDA, 	   JoinType.LEFT);
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
+		Join<Object, Object> joinTipoCalculoMeta 	 = joinAcao.join(TIPO_CALCULO_META,    JoinType.LEFT);
 		
-		Join<Object, Object> joinAcao = root.join("acao", JoinType.LEFT);
 		
-	 	criteria.multiselect(
-							  root.get(PROGRAMA),
-							  root.get(UNIDADE_ORCAMENTARIA),
-							  rootUnidadeOrcamentaria.get(DESCRICAO),
-							  
-							  joinAcao.get(ID),
-							  joinAcao.get(DENOMINACAO),
-							  joinAcao.get(PRODUTO),
-							 
-							  
+ 	 	criteria.multiselect(
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinUnidadeOrcamentaria.get(CODIGO),
+ 	 						  joinUnidadeOrcamentaria.get(DESCRICAO),
+ 	 						  joinAcao.get(CODIGO),
+ 	 						  joinAcao.get(ID),
+ 	 						  joinAcao.get(DENOMINACAO),
+ 	 						  joinAcao.get(PRODUTO),
+ 	 						  joinTipoCalculoMeta.get(ID),
+ 	 						  joinUnidadeMedida.get(DESCRICAO),
+ 	 						  
 							  builder.sum(root.get(DOTACAO_INICIAL)),
 							  builder.sum(root.get(DISPONIVEL)),
 							  builder.sum(root.get(EMPENHADO)),
@@ -88,39 +88,194 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 							 );
 
 
-	 	
-	 	
-	 	 
-	 	
-//		criteria.where(
-//						builder.equal(root.get(ACAO),				   rootAcao.get(ID)),
-//						builder.equal(rootUnidadeMedida.get(ID),	   rootAcao.get(UNIDADE_MEDIDA).get(ID)),
-//						builder.equal(rootPrograma.get(ID),	  		   rootAcao.get(PROGRAMA).get(ID)),
-//						builder.equal(rootUnidadeOrcamentaria.get(ID), rootAcao.get(UNIDADE_ORCAMENTARIA).get(ID)),
-//						builder.equal(rootTipoCalculoMeta.get(ID),	   rootAcao.get(TIPO_CALCULO_META).get(ID)),
-//						 
-//						builder.equal(root.get(PROGRAMA),			   "0317"),
-//						builder.equal(root.get(ANO),				   2016)
-//				   );
+		criteria.where(						 
+						builder.equal(root.get(PROGRAMA),programa.getCodigo()),
+						builder.equal(root.get(ANO),	 exercicio.getAno()) 
+				      );
 		
 		criteria.groupBy(
-						  root.get(PROGRAMA),
-						  root.get(UNIDADE_ORCAMENTARIA),
-						  rootUnidadeOrcamentaria.get(DESCRICAO),
-						 
+						  joinPrograma.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(DESCRICAO),
+						  joinAcao.get(CODIGO),
 						  joinAcao.get(ID),
 						  joinAcao.get(DENOMINACAO),
-						  joinAcao.get(PRODUTO) 
+						  joinAcao.get(PRODUTO),
+						  joinTipoCalculoMeta.get(ID),
+						  joinUnidadeMedida.get(DESCRICAO) 
 						  );
  		
+		criteria.orderBy(
+						 builder.asc( joinPrograma.get(CODIGO)),
+						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+						 builder.asc( joinUnidadeOrcamentaria.get(DESCRICAO)),
+						 builder.asc( joinAcao.get(CODIGO)),
+						 builder.asc( joinAcao.get(ID)),
+						 builder.asc( joinAcao.get(DENOMINACAO)),
+						 builder.asc( joinAcao.get(PRODUTO)),
+						 builder.asc( joinTipoCalculoMeta.get(ID)),
+						 builder.asc( joinUnidadeMedida.get(DESCRICAO) )
+						);
+		
 		 return entityManager.createQuery(criteria).getResultList();
 	}
  
-	
-	public BigDecimal calculaDotacaoInicialPorUoProg(Long programaId, Integer anoVigente){
+
+	public Double calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){
  
 		
-		if(Utils.invalidId(programaId) || anoVigente==null)return new BigDecimal(0);
+		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		
+		Root<FisicoFinanceiroMensal> root = criteria.from(FisicoFinanceiroMensal.class);
+		
+		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
+		
+		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
+		
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),1));
+		 
+		
+		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
+		Expression<Double> soma = builder.sum(dotacaoInicial);
+		criteria.select(soma);
+		 
+		
+		criteria.where(
+					   builder.equal(root.get(ACAO).get(ID),acaoId),
+					   builder.equal(root.get(EXERCICIO).get(ID),exercicioId )
+						);
+ 
+		
+		 Double value = entityManager.createQuery(criteria).getSingleResult();
+			
+			
+		 return value!=null?value:0d;
+
+		
+	}
+	 
+	public Double calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
+ 
+		
+		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		
+		Root<FisicoFinanceiroMensal> root = criteria.from(FisicoFinanceiroMensal.class);
+		
+		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
+		
+		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
+		
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),2));
+		 
+		
+		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
+		Expression<Double> soma = builder.sum(dotacaoInicial);
+		Expression<Long> count = builder.count(root);
+		
+		criteria.multiselect(builder.quot(soma, count));
+		
+		
+		criteria.where(
+					   builder.equal(root.get(ACAO).get(ID),acaoId),
+					   builder.equal(root.get(EXERCICIO).get(ID),exercicioId ),
+					   builder.notEqual(root.get(QUANTIDADE),0 )
+					  );
+ 
+		
+	 Double value = entityManager.createQuery(criteria).getSingleResult();
+		
+		
+	 return value!=null?value:0d;
+	 
+	}
+	 		
+	public Double calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
+		
+		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		
+		Root<Execucao> root = criteria.from(Execucao.class);
+		
+		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
+		
+		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
+		
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),1));
+		 
+		
+		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
+		Expression<Double> soma = builder.sum(dotacaoInicial);
+		criteria.select(soma);
+		 
+		
+		criteria.where(
+					   builder.equal(root.get(ACAO).get(ID),acaoId),
+					   builder.equal(root.get(EXERCICIO).get(ID),exercicioId )
+						);
+ 
+		
+		 Double value = entityManager.createQuery(criteria).getSingleResult();
+			
+			
+		 return value!=null?value:0d;
+
+		
+	}
+	
+	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
+ 
+		
+		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		
+		Root<Execucao> root = criteria.from(Execucao.class);
+		
+		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
+		
+		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
+		
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),2));
+		 
+		
+		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
+		Expression<Double> soma = builder.sum(dotacaoInicial);
+		Expression<Long> count = builder.count(root);
+		
+		criteria.multiselect(builder.quot(soma, count));
+		
+		
+		criteria.where(
+					   builder.equal(root.get(ACAO).get(ID),acaoId),
+					   builder.equal(root.get(EXERCICIO).get(ID),exercicioId ),
+					   builder.notEqual(root.get(QUANTIDADE),0 )
+					  );
+ 
+		
+	 Double value = entityManager.createQuery(criteria).getSingleResult();
+		
+		
+	 return value!=null?value:0d;
+	 
+	}
+ 	
+	public BigDecimal calculaDotacaoInicialPorUoProg(String programaCodigo, Integer anoVigente){
+ 
+		
+		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return new BigDecimal(0);
 		
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		
@@ -133,7 +288,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		criteria.select(soma);
 		
 		criteria.where(
-					 builder.equal(root.get(PROGRAMA),programaId.toString() ),
+					 builder.equal(root.get(PROGRAMA),programaCodigo ),
 					 builder.equal(root.get(ANO),anoVigente )
 			    );
 		
@@ -149,10 +304,10 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 	}
 	 
-	public BigDecimal calculaDotacaoAtualPorUoProg(Long programaId, Integer anoVigente){
+	public BigDecimal calculaDotacaoAtualPorUoProg(String programaCodigo, Integer anoVigente){
  
 		
-		if(Utils.invalidId(programaId) || anoVigente==null)return null;
+		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return null;
 		
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		
@@ -165,7 +320,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		criteria.select(soma);
 		
 		criteria.where(
-					 builder.equal(root.get(PROGRAMA),programaId.toString() ),
+					 builder.equal(root.get(PROGRAMA),programaCodigo.toString() ),
 					 builder.equal(root.get(ANO),anoVigente )
 			    );
 		

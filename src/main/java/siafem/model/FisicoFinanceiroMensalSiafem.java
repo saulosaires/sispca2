@@ -78,10 +78,12 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@Column(name="ano")
 	private Integer ano;
 
+	private transient String codigoUnidadeOrcamentaria;
 	private transient String descricaoUnidadeOrcamentaria;
 	
 	private transient Long acaoId;
 	private transient String acaoDenominacao;
+	private transient String acaoCodigo;
 	private transient String acaoProduto;
 	private transient Long tipoCalculoMetaId;
 	private transient String unidadeMedida;
@@ -98,22 +100,21 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	
 	public FisicoFinanceiroMensalSiafem() {}
 	
- 
-	public FisicoFinanceiroMensalSiafem(String programa,
-									    Long unidadeOrcamentaria,  
+ 	public FisicoFinanceiroMensalSiafem(String programa,
+										String codigoUnidadeOrcamentaria,  
 									    String descricaoUnidadeOrcamentaria,
-									    
+									    String acaoCodigo,
 									    Long acaoId,
 									    String acaoDenominacao,
 									    String acaoProduto,
-									    
-									    
+									    Long tipoCalculoMetaId,  
+									    String unidadeMedida,
 									    BigDecimal dotacaoInicial,
 										BigDecimal disponivel, 
 										BigDecimal liquidado, 
 										BigDecimal empenhado) {
 		super();
-		this.unidadeOrcamentaria = unidadeOrcamentaria;
+		this.codigoUnidadeOrcamentaria = codigoUnidadeOrcamentaria;
 		this.descricaoUnidadeOrcamentaria=descricaoUnidadeOrcamentaria;
 		this.programa = programa;
 		
@@ -129,6 +130,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.empenhado = empenhado;
 		
 		this.acaoId=acaoId;
+		this.acaoCodigo=acaoCodigo;
 		this.acaoDenominacao=acaoDenominacao;
 		this.acaoProduto=acaoProduto;
 		this.tipoCalculoMetaId=tipoCalculoMetaId;
@@ -344,6 +346,22 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setEficiencia(BigDecimal eficiencia) {
 		this.eficiencia = eficiencia;
+	}
+
+	public String getCodigoUnidadeOrcamentaria() {
+		return codigoUnidadeOrcamentaria;
+	}
+
+	public void setCodigoUnidadeOrcamentaria(String codigoUnidadeOrcamentaria) {
+		this.codigoUnidadeOrcamentaria = codigoUnidadeOrcamentaria;
+	}
+
+	public String getAcaoCodigo() {
+		return acaoCodigo;
+	}
+
+	public void setAcaoCodigo(String acaoCodigo) {
+		this.acaoCodigo = acaoCodigo;
 	}
 	 
 	

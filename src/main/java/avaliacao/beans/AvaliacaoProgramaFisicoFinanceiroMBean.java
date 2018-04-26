@@ -58,7 +58,7 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 	
 	private void buscarAnalise() {
 		listFisicoFinanceiroMensalSiafem = fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
-	}
+ 	}
 	
 	public String adicionarAvaliacaoFisicoFinanceira() {
 		

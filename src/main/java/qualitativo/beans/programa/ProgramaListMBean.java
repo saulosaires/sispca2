@@ -68,7 +68,7 @@ public class ProgramaListMBean implements Serializable {
 
 		try {
 			
-			listPrograma = programaService.buscar(codigo,denominacao,orgao,tipoPrograma);
+			listPrograma = programaService.buscar(codigo,denominacao,orgao,tipoPrograma,null);
 
 			if(listPrograma.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);

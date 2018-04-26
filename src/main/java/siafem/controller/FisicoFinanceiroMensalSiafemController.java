@@ -24,21 +24,32 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	}
 
-	public BigDecimal calculaDotacaoInicialPorUoProg(Long programaId, Integer anoVigente){
-		
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoInicialPorUoProg(programaId, anoVigente);
+	public BigDecimal calculaDotacaoInicialPorUoProg(String programaCodigo, Integer anoVigente){	
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoInicialPorUoProg(programaCodigo, anoVigente);
 	}
 	
-	
-	public BigDecimal calculaDotacaoAtualPorUoProg(Long programaId, Integer anoVigente){
-		
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoAtualPorUoProg(programaId, anoVigente);
+	public BigDecimal calculaDotacaoAtualPorUoProg(String programaCodigo, Integer anoVigente){	
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoAtualPorUoProg(programaCodigo, anoVigente);
 	}
 
-	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
-		
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
 	}
 
+	public Double calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){	
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeCumulativoPlanejada(acaoId,exercicioId);
+	}
+	
+	public Double calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoCumulativoPlanejada(acaoId,exercicioId);
+	}
+	
+	public Double calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeCumulativoExecutada(acaoId,exercicioId);
+	}
+	
+	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoCumulativoExecutada(acaoId,exercicioId);
+	}
+	
 }

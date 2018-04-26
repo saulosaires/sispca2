@@ -25,22 +25,35 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	private List<Programa> listPrograma;
 
 	private boolean editarAvaliacao = false;
+	
+	private String codigoPrograma;
+	private Exercicio exercicio ;
+	private ProgramaService programaService;
+	private ExercicioService exercicioService;
+	
 
 	@Inject
 	public AvaliacaoProgramaMBean(ProgramaService programaService, ExercicioService exercicioService) {
 
+		this.programaService=programaService;
+		this.exercicioService=exercicioService;
+		
 		Optional<Exercicio> exercicioAnterior = exercicioService.exercicioAnterior();
 		
 		if(exercicioAnterior.isPresent()) {
-		
-		   Exercicio exercicio = exercicioAnterior.get();
 			
-		   this.listPrograma = programaService.buscarPorExercicio(exercicio.getId());
+			   exercicio = exercicioAnterior.get();
 		}
 		
+		buscarProgramas();
 		
 	}
 
+	public void buscarProgramas() {
+		
+		this.listPrograma = programaService.buscar(codigoPrograma, null, null, null, exercicio.getId());
+ 	
+	}
 	
 	public String gerarRelatorio(Programa programa) {
 		
@@ -65,5 +78,16 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	public void setEditarAvaliacao(boolean editarAvaliacao) {
 		this.editarAvaliacao = editarAvaliacao;
 	}
+
+	public String getCodigoPrograma() {
+		return codigoPrograma;
+	}
+
+	public void setCodigoPrograma(String codigoPrograma) {
+		this.codigoPrograma = codigoPrograma;
+	}
+	
+	
+	
 
 }

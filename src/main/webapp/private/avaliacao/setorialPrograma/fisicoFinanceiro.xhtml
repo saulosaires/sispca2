@@ -60,10 +60,10 @@
 								<ui:repeat value="#{avaliacaoProgramaFisicoFinanceiroMBean.listFisicoFinanceiroMensalSiafem}" var="aff">
 									<tr>
 										<td>
-											<h:outputText value="#{aff.unidadeOrcamentaria}"/>
+											<h:outputText value="(#{aff.codigoUnidadeOrcamentaria}) - #{aff.descricaoUnidadeOrcamentaria}"/>
 										</td>
 										<td>
-											<h:outputText value="#{aff.acao}"/> 
+											<h:outputText value="(#{aff.acaoCodigo}) -#{aff.acaoDenominacao}"/> 
 										</td>
 										<td>
 											<h:outputText value="#{aff.acaoProduto}"/>

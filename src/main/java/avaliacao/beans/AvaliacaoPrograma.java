@@ -40,7 +40,7 @@ public abstract class AvaliacaoPrograma implements Serializable {
 		this.programaService = programaService;
 		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
  		
-		Optional<Exercicio> exercicioOptional = exercicioService.exercicioVigente();
+		Optional<Exercicio> exercicioOptional = exercicioService.exercicioAnterior();
 		if(exercicioOptional.isPresent()) {
 			exercicio = exercicioOptional.get();
 		}else {
@@ -70,14 +70,14 @@ public abstract class AvaliacaoPrograma implements Serializable {
 	
 	private void calculaDotacaoInicial() {
 		
-		dotacaoInicial = fisicoFinanceiroMensalSiafemService.calculaDotacaoInicialPorUoProg(programa.getId(), exercicio.getAno());
+		dotacaoInicial = fisicoFinanceiroMensalSiafemService.calculaDotacaoInicialPorUoProg(programa.getCodigo(), exercicio.getAno());
 		
 		if(dotacaoInicial==null)dotacaoInicial=new BigDecimal(0);
 		
 	}
 	
 	private void calculaDotacaoAtual() {
-		dotacaoAtual= fisicoFinanceiroMensalSiafemService.calculaDotacaoAtualPorUoProg(programa.getId(), exercicio.getAno());
+		dotacaoAtual= fisicoFinanceiroMensalSiafemService.calculaDotacaoAtualPorUoProg(programa.getCodigo(), exercicio.getAno());
 		
 		if(dotacaoAtual==null)dotacaoAtual=new BigDecimal(0);
 	}
