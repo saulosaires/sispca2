@@ -9,10 +9,10 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import arquitetura.dao.AbstractDAO;
-import avaliacao.model.ExercicioTopicoAvaliacao;
+import avaliacao.model.Resultado;
  
 
-public class ExercicioTopicoAvaliacaoDAO extends AbstractDAO< ExercicioTopicoAvaliacao >  {
+public class ResultadoDAO extends AbstractDAO< Resultado >  {
 
 	
 	/**
@@ -20,28 +20,35 @@ public class ExercicioTopicoAvaliacaoDAO extends AbstractDAO< ExercicioTopicoAva
 	 */
 	private static final long serialVersionUID = -1358843609602731648L;
 
-	private static final  String EXERCICIO="exercicio";
-	private static final  String ID="id";
+	private static final  String ID="id"; 
+	private static final  String EXERCICIO="exercicio"; 
+	private static final  String PROGRAMA="programa"; 
 
-	public ExercicioTopicoAvaliacaoDAO() {
-		setClazz(ExercicioTopicoAvaliacao.class );
+	public ResultadoDAO() {
+		setClazz(Resultado.class );
 	 
 	}
  
  
  
-	public List<ExercicioTopicoAvaliacao> findByExercicio( Long exercicioId){
+	public List<Resultado> findByProgramaAndExercicio(Long programaId, Long exercicioId){
  		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<ExercicioTopicoAvaliacao> query = cb.createQuery(ExercicioTopicoAvaliacao.class);
-		Root<ExercicioTopicoAvaliacao> m = query.from(ExercicioTopicoAvaliacao.class);
+		CriteriaQuery<Resultado> query = cb.createQuery(Resultado.class);
+		Root<Resultado> m = query.from(Resultado.class);
 		query.select(m);
  
 		
 		Join<Object, Object> joinExercicio = m.join(EXERCICIO, JoinType.INNER);
 		joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
-	 
 		
+		
+		
+		Join<Object, Object> joinPrograma = m.join(PROGRAMA, JoinType.INNER);
+		joinPrograma.on(cb.equal(joinPrograma.get(ID), programaId));
+		
+		query.orderBy( cb.asc( m.get(ID)));
+		 
 		return entityManager.createQuery(query).getResultList();	
 		
 		

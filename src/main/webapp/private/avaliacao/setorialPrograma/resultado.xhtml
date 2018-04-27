@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:sispca="http://java.sun.com/jsf/composite/componentes"> 
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			
+
+	 		 <f:metadata>
+	    			<f:viewParam name="id" value="#{avaliacaoProgramaResultadoMBean.id}"/>
+	    			<f:viewAction action="#{avaliacaoProgramaResultadoMBean.init}" />
+			 </f:metadata>
+
+
+
+
+			<h:form acceptcharset="UTF-8">
+
+				<div class="container-fluid row-fluid">
+					<div class="span12">
+						<p:messages closable="true" />
+					</div>
+					<legend class="outBusc">Resultado</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						
+		    			<sispca:dadosIdentificacaoPrograma programa="#{avaliacaoProgramaResultadoMBean.programa}"
+														   dotacaoInicial="#{avaliacaoProgramaResultadoMBean.dotacaoInicial}"
+														   dotAtual="#{avaliacaoProgramaResultadoMBean.dotacaoAtual}"
+														   variacao="#{avaliacaoProgramaResultadoMBean.variacao}"	 />
+
+		    			
+		    			
+		    			<div class="row" style="margin-bottom: 2%; margin-top: 2%;">
+		    				<b><h:outputText value="2. TÓPICOS REFERENTES AO RESULTADO"/></b>	    				
+		    			</div>
+		    			
+		    			<ui:repeat value="#{avaliacaoProgramaResultadoMBean.listResultado}" var="result" id="resultado">
+		    				<div class="row" style="margin-top: 1%">
+		    					<b><h:outputText value="#{result.exercicioTopicoResultado.topicoResultado.descricao}"/></b>
+		    				</div>
+		    			
+		    				<div class="row" style="margin-top: 1%; margin-right: 1.5%;">
+		    					<h:inputTextarea value="#{result.resposta}" style="height: 300px; width: 100%;"/>   					
+		    				</div>		    			
+		    			</ui:repeat> 			
+		    			
+		    			
+		    			<div class="row" style="margin-top: 2%;">
+		    				<h:commandButton styleClass="btn btn-primary" value="Enviar" >
+		    				 <f:ajax event="click" execute="@this resultado" listener="#{avaliacaoProgramaResultadoMBean.adicionaResultado()}" />
+		    				</h:commandButton>
+		    				&nbsp;
+		    				<h:button styleClass="btn btn-default" value="Voltar"  outcome="avaliacaoSetorialProgramaList" />
+		    			</div>
+					</div>					
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

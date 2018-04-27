@@ -100,6 +100,11 @@
 									</h:button>
 								</p:column>	
 														
+								<p:column headerText="Resultado" width="6%">
+									<h:button value="Resultado"    outcome="avaliacaoSetorialProgramaResultado" styleClass="btn btn-default"  >
+								 	  <f:param name="id" value="#{prog.id}" /> 
+									</h:button>
+								</p:column>	
 														 
 								<p:column headerText="Acomp" width="4%">
 									<h:commandButton image="/resources/images/icone-pdf.gif" title="Acompanhamento da avaliação para o programa" 

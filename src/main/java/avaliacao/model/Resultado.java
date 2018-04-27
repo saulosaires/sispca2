@@ -15,7 +15,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import administrativo.model.Exercicio;
-import administrativo.model.Usuario;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import qualitativo.model.Programa;
@@ -41,9 +40,7 @@ public class Resultado extends Model implements Serializable, Auditable {
 	@ManyToOne
 	@JoinColumn(name="id_programa")
 	private Programa programa;
-
  
-	
 	@Column(name="resposta")
 	private String resposta;
 	
