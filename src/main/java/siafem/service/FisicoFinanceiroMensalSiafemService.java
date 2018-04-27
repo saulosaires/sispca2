@@ -1,13 +1,14 @@
 package siafem.service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import administrativo.model.Exercicio;
+import arquitetura.enuns.TipoCalculoMeta;
 import arquitetura.service.AbstractService;
+import arquitetura.utils.MathUtils;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
 import siafem.model.FisicoFinanceiroMensalSiafem;
@@ -43,15 +44,15 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 
 			if(financeiroMensalSiafem.getTipoCalculoMetaId()==null)continue;
 			
-			if(financeiroMensalSiafem.getTipoCalculoMetaId().intValue()==1) {
+			if(TipoCalculoMeta.ACUMULATIVA.isAcumulativa(financeiroMensalSiafem.getTipoCalculoMetaId())) {
  
-				financeiroMensalSiafem.setPlanejado( calculaQuantidadeCumulativoPlanejada(financeiroMensalSiafem.getAcaoId(),exercicio.getId()));
-				financeiroMensalSiafem.setExecutado(calculaQuantidadeCumulativoExecutada(financeiroMensalSiafem.getAcaoId(),exercicio.getId()));
+				financeiroMensalSiafem.setPlanejado( BigDecimal.valueOf(calculaQuantidadeCumulativoPlanejada(financeiroMensalSiafem.getAcao().getId(),exercicio.getId())));
+				financeiroMensalSiafem.setExecutado( BigDecimal.valueOf(calculaQuantidadeCumulativoExecutada(financeiroMensalSiafem.getAcao().getId(),exercicio.getId())));
 
 			}else{
 				
-				financeiroMensalSiafem.setPlanejado( calculaQuantidadeNaoCumulativoPlanejada(financeiroMensalSiafem.getAcaoId(),exercicio.getId()));
-				financeiroMensalSiafem.setExecutado(calculaQuantidadeNaoCumulativoExecutada(financeiroMensalSiafem.getAcaoId(),exercicio.getId()));
+				financeiroMensalSiafem.setPlanejado( BigDecimal.valueOf(calculaQuantidadeNaoCumulativoPlanejada(financeiroMensalSiafem.getAcao().getId(),exercicio.getId())));
+				financeiroMensalSiafem.setExecutado( BigDecimal.valueOf(calculaQuantidadeNaoCumulativoExecutada(financeiroMensalSiafem.getAcao().getId(),exercicio.getId())));
 				
 			}
  			
@@ -82,40 +83,46 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 	private void calculaEficiencia(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
 		
-		Double eficacia 			   = financeiroMensalSiafem.getEficacia();
+		BigDecimal eficacia 		   = financeiroMensalSiafem.getEficacia();
 		BigDecimal liquidadoSobreAtual = financeiroMensalSiafem.getLiquidadoSobreAtual();
 		
-		if(eficacia!=null && eficacia.intValue()>0 && liquidadoSobreAtual!=null && liquidadoSobreAtual.intValue()>0) {
+		if(eficacia!=null && eficacia.doubleValue()>0 && liquidadoSobreAtual!=null && liquidadoSobreAtual.doubleValue()>0) {
+				
+			financeiroMensalSiafem.setEficiencia(MathUtils.divide(financeiroMensalSiafem.getEficacia(), financeiroMensalSiafem.getLiquidadoSobreAtual()));
 			
-			financeiroMensalSiafem.setEficiencia(BigDecimal.valueOf(financeiroMensalSiafem.getEficacia().doubleValue()).divide(financeiroMensalSiafem.getLiquidadoSobreAtual(),2, RoundingMode.HALF_UP));
 		}else{
-			financeiroMensalSiafem.setEficiencia(BigDecimal.valueOf(0.00).setScale(2));
+			
+			financeiroMensalSiafem.setEficiencia(MathUtils.getZeroBigDecimal());
 		}
 		
 	}
 	
 	private void calculaEficacia(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
 		
-		Double planejado = financeiroMensalSiafem.getPlanejado();
-		Double executado = financeiroMensalSiafem.getExecutado();
+		BigDecimal planejado = financeiroMensalSiafem.getPlanejado();
+		BigDecimal executado = financeiroMensalSiafem.getExecutado();
 		
-		if(planejado!=null && planejado>0 && executado!=null && executado>0) {
-			financeiroMensalSiafem.setEficacia(planejado/executado);
+		if(planejado!=null && planejado.doubleValue()>0 && executado!=null && executado.doubleValue()>0) {
+			
+			financeiroMensalSiafem.setEficacia(MathUtils.divide(executado,planejado));
+			
 		}else {
-			financeiroMensalSiafem.setEficacia(Double.valueOf(0.0));
+			
+			financeiroMensalSiafem.setEficacia(MathUtils.getZeroBigDecimal());
 		}
 		
 	}
 
 	private void calculaLiquidadoSobreAtual(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
 		
-		 BigDecimal dotacaoInicial = financeiroMensalSiafem.getDotacaoInicial();
-		 BigDecimal empenhado = financeiroMensalSiafem.getEmpenhado();
+		 BigDecimal liquidado = financeiroMensalSiafem.getLiquidado();
+		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
 		
-		if(empenhado!=null && empenhado.intValue()>0 && dotacaoInicial!=null && dotacaoInicial.intValue()>0) {
-			financeiroMensalSiafem.setLiquidadoSobreAtual(empenhado.divide(dotacaoInicial,RoundingMode.HALF_UP));
+		if(liquidado!=null && liquidado.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+			
+			financeiroMensalSiafem.setLiquidadoSobreAtual(MathUtils.divide(liquidado,disponivel));
 		}else {
-			financeiroMensalSiafem.setLiquidadoSobreAtual(BigDecimal.valueOf(0.0).setScale(2));
+			financeiroMensalSiafem.setLiquidadoSobreAtual(MathUtils.getZeroBigDecimal());
 		}
 		
 	}

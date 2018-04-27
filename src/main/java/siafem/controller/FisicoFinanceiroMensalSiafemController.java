@@ -37,19 +37,19 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 	}
 
 	public Double calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){	
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeCumulativoPlanejada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeAcumulativoPlanejada(acaoId,exercicioId);
 	}
 	
 	public Double calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoCumulativoPlanejada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoAcumulativoPlanejada(acaoId,exercicioId);
 	}
 	
 	public Double calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeCumulativoExecutada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeAcumulativoExecutada(acaoId,exercicioId);
 	}
 	
 	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoCumulativoExecutada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoAcumulativoExecutada(acaoId,exercicioId);
 	}
 	
 }

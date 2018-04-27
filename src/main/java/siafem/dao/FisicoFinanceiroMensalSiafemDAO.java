@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import administrativo.model.Exercicio;
 import arquitetura.dao.AbstractDAO;
+import arquitetura.enuns.TipoCalculoMeta;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 import qualitativo.model.Programa;
@@ -108,20 +109,14 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		criteria.orderBy(
 						 builder.asc( joinPrograma.get(CODIGO)),
 						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
-						 builder.asc( joinUnidadeOrcamentaria.get(DESCRICAO)),
-						 builder.asc( joinAcao.get(CODIGO)),
-						 builder.asc( joinAcao.get(ID)),
-						 builder.asc( joinAcao.get(DENOMINACAO)),
-						 builder.asc( joinAcao.get(PRODUTO)),
-						 builder.asc( joinTipoCalculoMeta.get(ID)),
-						 builder.asc( joinUnidadeMedida.get(DESCRICAO) )
+						 builder.asc( joinAcao.get(CODIGO)) 
 						);
 		
 		 return entityManager.createQuery(criteria).getResultList();
 	}
  
 
-	public Double calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){
+	public Double calculaQuantidadeAcumulativoPlanejada(Long acaoId, Long exercicioId){
  
 		
 		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
@@ -136,7 +131,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
 		
-		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),1));
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.ACUMULATIVA.getId()));
 		 
 		
 		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
@@ -158,7 +153,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 	}
 	 
-	public Double calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
+	public Double calculaQuantidadeNaoAcumulativoPlanejada(Long acaoId, Long exercicioId){
  
 		
 		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
@@ -173,7 +168,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
 		
-		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),2));
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.NAO_ACUMULATIVA.getId()));
 		 
 		
 		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
@@ -197,7 +192,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	 
 	}
 	 		
-	public Double calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
+	public Double calculaQuantidadeAcumulativoExecutada(Long acaoId, Long exercicioId){
 		
 		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
 		
@@ -211,7 +206,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
 		
-		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),1));
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.ACUMULATIVA.getId()));
 		 
 		
 		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
@@ -233,7 +228,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 	}
 	
-	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
+	public Double calculaQuantidadeNaoAcumulativoExecutada(Long acaoId, Long exercicioId){
  
 		
 		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
@@ -248,7 +243,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
 		
-		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),2));
+		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.NAO_ACUMULATIVA.getId()));
 		 
 		
 		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
@@ -320,7 +315,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		criteria.select(soma);
 		
 		criteria.where(
-					 builder.equal(root.get(PROGRAMA),programaCodigo.toString() ),
+					 builder.equal(root.get(PROGRAMA),programaCodigo ),
 					 builder.equal(root.get(ANO),anoVigente )
 			    );
 		

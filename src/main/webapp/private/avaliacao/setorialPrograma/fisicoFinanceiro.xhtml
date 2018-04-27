@@ -22,9 +22,7 @@
 			<h:form acceptcharset="UTF-8">
 
 				<div class="container-fluid row-fluid">
-					<div class="span12">
-						<p:messages closable="true" />
-					</div>
+
 					<legend class="outBusc">Avaliação Físico Financeira</legend>
 				</div>
 
@@ -63,10 +61,10 @@
 											<h:outputText value="(#{aff.codigoUnidadeOrcamentaria}) - #{aff.descricaoUnidadeOrcamentaria}"/>
 										</td>
 										<td>
-											<h:outputText value="(#{aff.acaoCodigo}) -#{aff.acaoDenominacao}"/> 
+											<h:outputText value="(#{aff.acao.codigo}) - #{aff.acao.denominacao}"/> 
 										</td>
 										<td>
-											<h:outputText value="#{aff.acaoProduto}"/>
+											<h:outputText value="#{aff.acao.produto}"/>
 										</td>
 										<td>
 											<h:outputText value="#{aff.unidadeMedida}"/>
@@ -92,7 +90,7 @@
 											</h:outputText>
 										</td>
 										<td>
-											<h:outputText value="#{aff.dotacaoAtual}">
+											<h:outputText value="#{aff.disponivel}">
 												<f:convertNumber pattern="#,##0.00"/>							
 											</h:outputText>
 										</td>
@@ -151,7 +149,7 @@
 		    				<b><h:outputText value="3. AVALIAÇÃO FÍSICO FINANCEIRA"/></b>	    				
 		    			</div>
 		    			
-		    			<ui:repeat value="#{avaliacaoProgramaFisicoFinanceiroMBean.listAvaliacaoFisicoFinanceira}" var="avalFisFinanc">
+		    			<ui:repeat value="#{avaliacaoProgramaFisicoFinanceiroMBean.listAvaliacaoFisicoFinanceira}" var="avalFisFinanc" id="avalFisFinanc">
 		    				<div class="row" style="margin-top: 1%">
 		    					<b><h:outputText value="#{avalFisFinanc.exercicioTopicoAvaliacao.topicoAvaliacao.descricao}"/></b>
 		    				</div>
@@ -162,7 +160,9 @@
 		    			</ui:repeat> 			
 		    			
 		    			<div class="row" style="margin-top: 2%;">
-		    				<h:commandButton styleClass="btn btn-primary" value="Enviar" action="#{avaliacaoProgramaFisicoFinanceiroMBean.adicionarAvaliacaoFisicoFinanceira()}"/>
+		    				<h:commandButton styleClass="btn btn-primary" value="Enviar" >
+		    				<f:ajax event="click" execute="@this avalFisFinanc" listener="#{avaliacaoProgramaFisicoFinanceiroMBean.adicionarAvaliacaoFisicoFinanceira()}" />
+		    				</h:commandButton>
 		    				&nbsp;
 		    				<h:button styleClass="btn btn-default" value="Voltar"  outcome="avaliacaoSetorialProgramaList" />
 		    			</div>
