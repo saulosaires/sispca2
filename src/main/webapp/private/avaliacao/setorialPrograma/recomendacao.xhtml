@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:sispca="http://java.sun.com/jsf/composite/componentes"> 
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+
+	 		 <f:metadata>
+	    			<f:viewParam name="id" value="#{avaliacaoProgramaRecomendacaoMBean.id}"/>
+	    			<f:viewAction action="#{avaliacaoProgramaRecomendacaoMBean.init}" />
+			 </f:metadata>
+
+
+
+			<h:form acceptcharset="UTF-8">
+
+				<div class="container-fluid row-fluid">
+					<legend class="outBusc">Recomendação</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+
+						
+		    			<sispca:dadosIdentificacaoPrograma programa="#{avaliacaoProgramaRecomendacaoMBean.programa}"
+														   dotacaoInicial="#{avaliacaoProgramaRecomendacaoMBean.dotacaoInicial}"
+														   dotAtual="#{avaliacaoProgramaRecomendacaoMBean.dotacaoAtual}"
+														   variacao="#{avaliacaoProgramaRecomendacaoMBean.variacao}"	 />
+
+
+		    			<div class="row" style="margin-TOP: 2%">					
+							<b><h:outputText value="2. CADASTRO"/></b>
+ 						</div>
+		    			
+	 		    			
+		    			<div class="row" style="margin-top: 2%; margin-right: 1.5%;" id="recomendacao">		    				    				
+							<h:outputText value="RECOMENDAÇÃO/CONSIDERAÇÕES: " styleClass="labelOutText"/>
+		    				<h:inputTextarea value="#{avaliacaoProgramaRecomendacaoMBean.recomendacao.descricao}" style="height: 300px; width: 100%;"/>		    				
+						</div>								
+													    			
+		    			<div class="row" style="margin-top: 2%;">		
+		    				<h:commandButton styleClass="btn btn-default" value="Cadastrar/Editar" actionListener="#{avaliacaoProgramaRecomendacaoMBean.adicionaRecomendacao()}">
+		    					 
+		    				</h:commandButton>    	
+		    				&nbsp;	
+		    				<h:button styleClass="btn btn-default" value="Voltar"  outcome="avaliacaoSetorialProgramaList" />
+		    			</div>
+					</div>					
+				</div>
+				
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    		</p:confirmDialog>			
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

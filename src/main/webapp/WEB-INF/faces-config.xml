@@ -567,6 +567,14 @@
 			<to-view-id>/private/avaliacao/setorialPrograma/resultado.xhtml</to-view-id>
 		</navigation-case> 
 
+		 <navigation-case>
+			<from-outcome>avaliacaoSetorialProgramaRecomendacao</from-outcome>
+			<to-view-id>/private/avaliacao/setorialPrograma/recomendacao.xhtml</to-view-id>
+		</navigation-case> 
+
+
+
+
 
 	</navigation-rule>  
 

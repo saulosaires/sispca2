@@ -12,29 +12,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import administrativo.model.Exercicio;
-import administrativo.model.Usuario;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import qualitativo.model.Programa;
 
-/**
- * The persistent class for the recomendacao database table.
- * 
- */
+ 
 @Entity
 @Table(name = "recomendacao", schema = "avaliacao")
 public class Recomendacao extends Model implements Serializable, Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	// @SequenceGenerator(name = "seq_recomendacao_id_recomendacao", sequenceName =
-	// "avaliacao.seq_recomendacao_id_recomendacao")
-	// @GeneratedValue(strategy = GenerationType.AUTO, generator =
-	// "seq_recomendacao_id_recomendacao")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_recomendacao")
 	private Long id;
 
+	@Column(name = "descricao")
 	private String descricao;
 
 	@ManyToOne
