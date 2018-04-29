@@ -15,11 +15,11 @@ import org.primefaces.model.StreamedContent;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
+import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.TipoArquivo;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 import monitoramento.service.ExecucaoService;

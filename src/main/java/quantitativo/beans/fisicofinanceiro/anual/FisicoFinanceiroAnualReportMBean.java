@@ -12,11 +12,11 @@ import javax.inject.Named;
 
 import org.primefaces.model.StreamedContent;
 
+import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.TipoArquivo;
 import arquitetura.utils.Utils;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
