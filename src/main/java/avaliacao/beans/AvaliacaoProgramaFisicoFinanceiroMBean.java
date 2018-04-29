@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import administrativo.service.ExercicioService;
-import arquitetura.enuns.ACAO;
+import arquitetura.enums.ACAO;
 import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;

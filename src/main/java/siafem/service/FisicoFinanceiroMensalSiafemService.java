@@ -6,7 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import administrativo.model.Exercicio;
-import arquitetura.enuns.TipoCalculoMeta;
+import arquitetura.enums.TipoCalculoMeta;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.MathUtils;
 import qualitativo.model.Programa;

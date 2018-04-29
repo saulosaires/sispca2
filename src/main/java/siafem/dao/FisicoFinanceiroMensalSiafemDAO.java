@@ -15,7 +15,7 @@ import javax.persistence.criteria.Root;
 
 import administrativo.model.Exercicio;
 import arquitetura.dao.AbstractDAO;
-import arquitetura.enuns.TipoCalculoMeta;
+import arquitetura.enums.TipoCalculoMeta;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 import qualitativo.model.Programa;
