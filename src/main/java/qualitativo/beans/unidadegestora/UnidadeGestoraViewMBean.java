@@ -8,10 +8,9 @@ import javax.inject.Named;
 
 import arquitetura.utils.Utils;
 import qualitativo.model.UnidadeGestora;
-import qualitativo.model.UnidadeOrcamentaria;
 import qualitativo.service.UnidadeGestoraService;
 import qualitativo.service.UnidadeOrcamentariaService;
-
+	
 @Named
 @ViewScoped
 public class UnidadeGestoraViewMBean implements Serializable {

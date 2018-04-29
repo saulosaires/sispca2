@@ -10,7 +10,6 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 
 import arquitetura.dao.AbstractDAO;
 import arquitetura.utils.Utils;

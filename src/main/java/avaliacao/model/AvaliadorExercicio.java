@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import administrativo.model.Exercicio;
-import administrativo.model.Usuario;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 

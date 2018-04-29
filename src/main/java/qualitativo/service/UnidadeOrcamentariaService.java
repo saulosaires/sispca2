@@ -3,7 +3,6 @@ package qualitativo.service;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
