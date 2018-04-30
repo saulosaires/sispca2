@@ -42,7 +42,7 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 
 	}
 
-	public List<Programa> buscar(String codigo, String denominacao, Long orgao, Long tipoPrograma,Long exercicioId) {
+	public List<Programa> buscar(String codigo, String denominacao, Long orgao, Long tipoPrograma,Long exercicioId,Long eixoId) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
@@ -85,6 +85,11 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.INNER);
 			joinExercicio.on(cb.equal(joinExercicio.get("id"),exercicioId) );	
 		
+		}
+		
+		if (!Utils.invalidId((eixoId))) {
+			Join<Object, Object> joinEixo = m.join("eixos",JoinType.INNER);
+			joinEixo.on(cb.equal(joinEixo.get("id"),exercicioId) );	
 		}
 		
 		

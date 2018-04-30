@@ -34,6 +34,21 @@
 									</div>
 									
 								</div>
+								
+								
+								<div class="span12">
+										<div class="span3">
+											<h:outputText value="EIXOS: " styleClass="labelOutText"/>
+										</div>
+										<div class="span3">
+											<h:selectOneMenu id="inputMenuUnid" value="#{avaliacaoProgramaMBean.eixoId}" styleClass="form-control input-sm">
+												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
+												<f:selectItems value="#{avaliacaoProgramaMBean.listEixos}" var="eixo" itemValue="#{eixo.id}" itemLabel="#{fn:toUpperCase(eixo.descricao)}"/>
+											</h:selectOneMenu>											
+										</div>
+								</div>
+								
+								
 							</div>
 							
 							<br />

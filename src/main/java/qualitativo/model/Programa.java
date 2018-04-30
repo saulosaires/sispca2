@@ -1,9 +1,11 @@
 package qualitativo.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -109,6 +112,10 @@ public class Programa extends Model implements  Auditable {
 	@NotNull(message="Tipo de Programa: campo é obrigatório")
 	private TipoPrograma tipoPrograma = new TipoPrograma();
 
+	@ManyToMany(mappedBy="programas",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private List<Eixo> eixos=new ArrayList<>();
+
+	
 	@ManyToOne
 	@JoinColumn(name="id_exercicio") 
 	private Exercicio exercicio;
@@ -299,6 +306,15 @@ public class Programa extends Model implements  Auditable {
 
 	public void setExercicio(Exercicio exercicio) {
 		this.exercicio = exercicio;
+	}
+ 
+	
+	public List<Eixo> getEixos() {
+		return eixos;
+	}
+
+	public void setEixos(List<Eixo> eixos) {
+		this.eixos = eixos;
 	}
 
 	@Override

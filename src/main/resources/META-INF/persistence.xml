@@ -65,6 +65,7 @@
       <class>qualitativo.model.UnidadeMedida</class>
       <class>qualitativo.model.UnidadeOrcamentaria</class>
       <class>qualitativo.model.Indicador</class>
+      <class>qualitativo.model.Eixo</class>
              
       <class>quantitativo.model.FisicoFinanceiro</class>
       <class>quantitativo.model.FisicoFinanceiroMensal</class>

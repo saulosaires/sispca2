@@ -10,7 +10,9 @@ import javax.inject.Named;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
+import qualitativo.model.Eixo;
 import qualitativo.model.Programa;
+import qualitativo.service.EixoService;
 import qualitativo.service.ProgramaService;
 
 @Named
@@ -23,7 +25,10 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Programa> listPrograma;
-
+	
+	private Long eixoId;
+	private List<Eixo> listEixos;
+	
 	private boolean editarAvaliacao = false;
 	
 	private String codigoPrograma;
@@ -32,9 +37,13 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	
 
 	@Inject
-	public AvaliacaoProgramaMBean(ProgramaService programaService, ExercicioService exercicioService) {
+	public AvaliacaoProgramaMBean(ProgramaService programaService, 
+								  ExercicioService exercicioService,
+								  EixoService eixoService) {
 
 		this.programaService=programaService; 
+		
+		listEixos = eixoService.findAllOrderByDecricao();
 		
 		Optional<Exercicio> exercicioAnterior = exercicioService.exercicioAnterior();
 		
@@ -49,7 +58,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 
 	public void buscarProgramas() {
 		
-		this.listPrograma = programaService.buscar(codigoPrograma, null, null, null, exercicio.getId());
+		this.listPrograma = programaService.buscar(codigoPrograma, null, null, null, exercicio.getId(),eixoId);
  	
 	}
  	
@@ -76,6 +85,30 @@ public class AvaliacaoProgramaMBean implements Serializable {
 
 	public void setCodigoPrograma(String codigoPrograma) {
 		this.codigoPrograma = codigoPrograma;
+	}
+
+	public Long getEixoId() {
+		return eixoId;
+	}
+
+	public void setEixoId(Long eixoId) {
+		this.eixoId = eixoId;
+	}
+
+	public Exercicio getExercicio() {
+		return exercicio;
+	}
+
+	public void setExercicio(Exercicio exercicio) {
+		this.exercicio = exercicio;
+	}
+
+	public List<Eixo> getListEixos() {
+		return listEixos;
+	}
+
+	public void setListEixos(List<Eixo> listEixos) {
+		this.listEixos = listEixos;
 	}
 	
 	
