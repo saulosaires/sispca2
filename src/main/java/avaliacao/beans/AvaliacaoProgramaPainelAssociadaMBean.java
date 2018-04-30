@@ -81,13 +81,13 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 			painelAssoc.setPrograma(getPrograma());
 			 
 			 
-			Messages.addMessageInfo(SUCCESS_SAVE);
+		
 		
 			painelAssociadoService.create(painelAssoc);
 			indicadorId=null;
 			
 			buscarPainelAssociado();
-			
+			Messages.addMessageInfo(SUCCESS_SAVE);
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getCause().getMessage());
 	

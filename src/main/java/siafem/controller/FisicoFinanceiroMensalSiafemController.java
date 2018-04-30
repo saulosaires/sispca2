@@ -24,14 +24,27 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	}
 
-	public BigDecimal calculaDotacaoInicialPorUoProg(String programaCodigo, Integer anoVigente){	
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoInicialPorUoProg(programaCodigo, anoVigente);
+	public BigDecimal calculaDotacaoInicialByProgAndAno(String programaCodigo, Integer anoVigente){	
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoInicialByProgAndAno(programaCodigo, anoVigente);
 	}
 	
-	public BigDecimal calculaDotacaoAtualPorUoProg(String programaCodigo, Integer anoVigente){	
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoAtualPorUoProg(programaCodigo, anoVigente);
+	public BigDecimal calculaDotacaoAtualByProgAndAno(String programaCodigo, Integer anoVigente){	
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoAtualByProgAndAno(programaCodigo, anoVigente);
 	}
 
+	public BigDecimal calculaEmpenhadoByProgAndAno(String programaCodigo, Integer anoVigente){	
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaEmpenhadoByProgAndAno(programaCodigo, anoVigente);
+	}
+	
+	public BigDecimal calculaLiquidadoByProgAndAno(String programaCodigo, Integer anoVigente) {
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaLiquidadoByProgAndAno(programaCodigo,anoVigente);
+	}
+	
+	public BigDecimal calculaPagoByProgAndAno(String programaCodigo, Integer anoVigente) {
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaPagoByProgAndAno(programaCodigo,anoVigente);
+	}	
+	
+	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
 	}
@@ -51,5 +64,6 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoAcumulativoExecutada(acaoId,exercicioId);
 	}
+
 	
 }

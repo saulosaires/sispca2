@@ -1,6 +1,5 @@
 package avaliacao.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,7 +26,7 @@ import qualitativo.model.UnidadeMedida;
  */
 @Entity
 @Table(name = "indicador_desempenho_intermediario", schema = "avaliacao")
-public class IndicadorDesempenhoIntermediario extends Model implements Serializable, Auditable {
+public class IndicadorDesempenhoIntermediario extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

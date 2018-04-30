@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -13,19 +14,20 @@ import javax.inject.Named;
 import org.primefaces.model.StreamedContent;
 
 import administrativo.service.ExercicioService;
+import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.TipoArquivo;
 import avaliacao.service.AvaliacaoFisicoFinanceiraService;
+import avaliacao.service.DiretrizAssociadaService;
+import avaliacao.service.PainelAssociadoService;
 import avaliacao.service.ResultadoService;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import qualitativo.service.ProgramaService;
-import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
 @Named
@@ -42,12 +44,15 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 
 	
 	private AvaliacaoFisicoFinanceiraService avaliacaoFisicoFinanceiraService; 
-	
+	private DiretrizAssociadaService diretrizAssociadaService;
+	private PainelAssociadoService painelAssociadoService;
 
 	@Inject
 	public AvaliacaoProgramaRelatorioMBean(ProgramaService programaService,
 										   ExercicioService exercicioService,
 										   AvaliacaoFisicoFinanceiraService avaliacaoFisicoFinanceiraService,
+										   DiretrizAssociadaService diretrizAssociadaService,
+										   PainelAssociadoService painelAssociadoService,
 										   FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
 										  	
 										   ResultadoService resultadoService) {
@@ -55,6 +60,8 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
  
 		this.avaliacaoFisicoFinanceiraService=avaliacaoFisicoFinanceiraService;
+		this.diretrizAssociadaService=diretrizAssociadaService;
+		this.painelAssociadoService=painelAssociadoService;
 		
 	}
 
@@ -63,13 +70,23 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 		
 		try {
 			
-			List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem = super.fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
+		//	List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem = super.fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
 
-			BigDecimal mediaEficaciaFisicoFinanceira   = fisicoFinanceiroMensalSiafemService.calculaMediaEficaciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
-			BigDecimal mediaEficienciaFisicoFinanceira = fisicoFinanceiroMensalSiafemService.calculaEficienciaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+	//		BigDecimal mediaEficaciaFisicoFinanceira   = fisicoFinanceiroMensalSiafemService.calculaMediaEficaciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+	//		BigDecimal mediaEficienciaFisicoFinanceira = fisicoFinanceiroMensalSiafemService.calculaEficienciaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
 
-		
+			BigDecimal empenhado = fisicoFinanceiroMensalSiafemService.calculaEmpenhadoByProgAndAno(getPrograma().getCodigo(), getExercicio().getAno());
+			BigDecimal liquidado = fisicoFinanceiroMensalSiafemService.calculaLiquidadoByProgAndAno(getPrograma().getCodigo(), getExercicio().getAno());
+			BigDecimal pago 	 = fisicoFinanceiroMensalSiafemService.calculaPagoByProgAndAno(getPrograma().getCodigo(), getExercicio().getAno());
+			
+			List<String> diretrizes = diretrizAssociadaService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId())
+																		   				    .stream().map(p -> p.getDiretriz().getDescricao()).collect(Collectors.toList());
 
+			
+			List<String> painelAssociado = painelAssociadoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId())
+																.stream().map(p -> p.getIndicador().getIndicador()).collect(Collectors.toList());
+			
+			
 			Map<String, Object> parameters = new HashMap<>();
 
 			String brasaoMa = FileUtil.getRealPath("/resources/images/logo-gov-ma.png");
@@ -92,17 +109,23 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 			parameters.put("param_dot_inicial", dotacaoInicial);
 			parameters.put("param_dot_atual", dotacaoAtual);
 			parameters.put("param_variacao", variacao);
-
-			parameters.put("listFisicoFinanceiroMensalSiafem", listFisicoFinanceiroMensalSiafem);
-			parameters.put("param_media_eficacia_financ", mediaEficaciaFisicoFinanceira);
-			parameters.put("param_media_eficiencia_financ", mediaEficienciaFisicoFinanceira);
+			parameters.put("param_dot_empenhado", empenhado);
+			parameters.put("param_dot_liquidado", liquidado);
+			parameters.put("param_dot_pago", pago);
+			
+			parameters.put("diretrizes", diretrizes);
+			
+			parameters.put("painelAssociado", painelAssociado);
+			
+//			parameters.put("listFisicoFinanceiroMensalSiafem", listFisicoFinanceiroMensalSiafem);
+//			parameters.put("param_media_eficacia_financ", mediaEficaciaFisicoFinanceira);
+//			parameters.put("param_media_eficiencia_financ", mediaEficienciaFisicoFinanceira);
 			
 			
 			String report = FileUtil.getRealPath("/relatorios/avaliacao/relatorio_avaliacao_programa.jasper");
-
+ 			
 			
-			
-			JasperPrint jasperRelatorio = JasperFillManager.fillReport(report, parameters,new JRBeanCollectionDataSource(listFisicoFinanceiroMensalSiafem));
+			JasperPrint jasperRelatorio = JasperFillManager.fillReport(report, parameters,new JREmptyDataSource());
 
 			if (jasperRelatorio.getPages().isEmpty()) {
 				Messages.addMessageWarn(REPORT_EMPTY);

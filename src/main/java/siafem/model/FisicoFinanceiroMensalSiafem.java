@@ -59,6 +59,9 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@Column(name="empenhado")
 	private BigDecimal empenhado;
 
+	@Column(name="pago")
+	private BigDecimal pago;
+	
 	@Column(name="ano")
 	private Integer ano;
 
@@ -293,6 +296,14 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setCodigoUnidadeOrcamentaria(String codigoUnidadeOrcamentaria) {
 		this.codigoUnidadeOrcamentaria = codigoUnidadeOrcamentaria;
+	}
+
+	public BigDecimal getPago() {
+		return pago;
+	}
+
+	public void setPago(BigDecimal pago) {
+		this.pago = pago;
 	}
 
  

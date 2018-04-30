@@ -70,14 +70,14 @@ public abstract class AvaliacaoPrograma implements Serializable {
 	
 	private void calculaDotacaoInicial() {
 		
-		dotacaoInicial = fisicoFinanceiroMensalSiafemService.calculaDotacaoInicialPorUoProg(programa.getCodigo(), exercicio.getAno());
+		dotacaoInicial = fisicoFinanceiroMensalSiafemService.calculaDotacaoInicialByProgAndAno(programa.getCodigo(), exercicio.getAno());
 		
 		if(dotacaoInicial==null)dotacaoInicial=new BigDecimal(0);
 		
 	}
 	
 	private void calculaDotacaoAtual() {
-		dotacaoAtual= fisicoFinanceiroMensalSiafemService.calculaDotacaoAtualPorUoProg(programa.getCodigo(), exercicio.getAno());
+		dotacaoAtual= fisicoFinanceiroMensalSiafemService.calculaDotacaoAtualByProgAndAno(programa.getCodigo(), exercicio.getAno());
 		
 		if(dotacaoAtual==null)dotacaoAtual=new BigDecimal(0);
 	}

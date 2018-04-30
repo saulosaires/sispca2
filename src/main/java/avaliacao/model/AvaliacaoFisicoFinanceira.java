@@ -1,6 +1,5 @@
 package avaliacao.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,7 +22,7 @@ import qualitativo.model.Programa;
  
 @Entity
 @Table(name="avaliacao_fisico_financeira", schema="avaliacao")
-public class AvaliacaoFisicoFinanceira extends Model implements Serializable, Auditable {
+public class AvaliacaoFisicoFinanceira extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

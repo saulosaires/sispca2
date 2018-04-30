@@ -1,7 +1,5 @@
 package avaliacao.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +21,7 @@ import arquitetura.model.Model;
  */
 @Entity
 @Table(name="avaliador_exercicio", schema="avaliacao")
-public class AvaliadorExercicio extends Model  implements Serializable, Auditable {
+public class AvaliadorExercicio extends Model  implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

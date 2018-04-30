@@ -1,65 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_fisico_financeiro" pageWidth="842" pageHeight="250" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" whenResourceMissingType="Empty" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<style name="Crosstab Data Text" hAlign="Center"/>
 	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false">
 		<parameterDescription><![CDATA[]]></parameterDescription>
-		<defaultValueExpression><![CDATA[new String ("14101")]]></defaultValueExpression>
 	</parameter>
-	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Integer (2016)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new String ("0522")]]></defaultValueExpression>
-	</parameter>
-	<queryString>
-		<![CDATA[SELECT 	ffm.programa, ffm.ano,
-
-	SUM(ffm.dotacao_inicial) as dotInicial,
-
-	SUM(ffm.disponivel) as dotAtual,
-
-	SUM(ffm.empenhado) as empenhado,
-
-	SUM(ffm.liquidado) as liquidado,
-
-	SUM(ffm.pago) as pago
-
-	FROM siafem.financeiro_mensal ffm
-
-	WHERE ffm.programa = $P{param_cod_prog}
-
-	 and ffm.ano = $P!{param_ano}
-
-
-	GROUP BY 1, 2]]>
-	</queryString>
-	<field name="programa" class="java.lang.String"/>
-	<field name="ano" class="java.lang.Integer"/>
-	<field name="dotinicial" class="java.math.BigDecimal"/>
-	<field name="dotatual" class="java.math.BigDecimal"/>
-	<field name="empenhado" class="java.math.BigDecimal"/>
-	<field name="liquidado" class="java.math.BigDecimal"/>
-	<field name="pago" class="java.math.BigDecimal"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="59" splitType="Stretch">
+	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_dot_inicial" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_atual" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_empenhado" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_liquidado" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_pago" class="java.math.BigDecimal"/>
+	<title>
+		<band height="224">
 			<staticText>
-				<reportElement uuid="32a75fc2-ad9d-4605-8653-b620016c72ca" mode="Opaque" x="0" y="20" width="154" height="13" backcolor="#C8C8C8"/>
+				<reportElement mode="Opaque" x="0" y="20" width="154" height="13" backcolor="#C8C8C8" uuid="32a75fc2-ad9d-4605-8653-b620016c72ca"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -73,7 +34,7 @@
 				<text><![CDATA[DOTAÇÃO INICIAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="32a75fc2-ad9d-4605-8653-b620016c72ca" mode="Opaque" x="154" y="20" width="139" height="13" backcolor="#C8C8C8"/>
+				<reportElement mode="Opaque" x="154" y="20" width="139" height="13" backcolor="#C8C8C8" uuid="32a75fc2-ad9d-4605-8653-b620016c72ca"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -87,7 +48,7 @@
 				<text><![CDATA[DOTAÇÃO ATUAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="32a75fc2-ad9d-4605-8653-b620016c72ca" mode="Opaque" x="293" y="20" width="188" height="13" backcolor="#C8C8C8"/>
+				<reportElement mode="Opaque" x="293" y="20" width="188" height="13" backcolor="#C8C8C8" uuid="32a75fc2-ad9d-4605-8653-b620016c72ca"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -101,7 +62,7 @@
 				<text><![CDATA[EMPENHADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="32a75fc2-ad9d-4605-8653-b620016c72ca" mode="Opaque" x="481" y="20" width="160" height="13" backcolor="#C8C8C8"/>
+				<reportElement mode="Opaque" x="481" y="20" width="160" height="13" backcolor="#C8C8C8" uuid="32a75fc2-ad9d-4605-8653-b620016c72ca"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -115,7 +76,7 @@
 				<text><![CDATA[LIQUIDADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="32a75fc2-ad9d-4605-8653-b620016c72ca" mode="Opaque" x="641" y="20" width="161" height="13" backcolor="#C8C8C8"/>
+				<reportElement mode="Opaque" x="641" y="20" width="161" height="13" backcolor="#C8C8C8" uuid="32a75fc2-ad9d-4605-8653-b620016c72ca"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -129,7 +90,7 @@
 				<text><![CDATA[PAGO]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="20540672-8d82-4c70-9364-35b3c2daf49c" x="0" y="33" width="154" height="13"/>
+				<reportElement x="0" y="33" width="154" height="13" uuid="20540672-8d82-4c70-9364-35b3c2daf49c"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -140,10 +101,10 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dotinicial}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{param_dot_inicial}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="20540672-8d82-4c70-9364-35b3c2daf49c" x="154" y="33" width="139" height="13"/>
+				<reportElement x="154" y="33" width="139" height="13" uuid="20540672-8d82-4c70-9364-35b3c2daf49c"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -154,10 +115,10 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{dotatual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{param_dot_atual}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="20540672-8d82-4c70-9364-35b3c2daf49c" x="293" y="33" width="188" height="13"/>
+				<reportElement x="293" y="33" width="188" height="13" uuid="20540672-8d82-4c70-9364-35b3c2daf49c"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -168,10 +129,10 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{empenhado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{param_dot_empenhado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="20540672-8d82-4c70-9364-35b3c2daf49c" x="481" y="33" width="160" height="13"/>
+				<reportElement x="481" y="33" width="160" height="13" uuid="20540672-8d82-4c70-9364-35b3c2daf49c"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -182,10 +143,10 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{liquidado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{param_dot_liquidado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement uuid="20540672-8d82-4c70-9364-35b3c2daf49c" x="641" y="33" width="161" height="13"/>
+				<reportElement x="641" y="33" width="161" height="13" uuid="20540672-8d82-4c70-9364-35b3c2daf49c"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -196,62 +157,61 @@
 					<font size="8"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pago}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{param_dot_pago}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="40e6af8e-6019-40b0-8043-2146f08df8de" mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FEFEFE" backcolor="#465A7F"/>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FEFEFE" backcolor="#465A7F" uuid="40e6af8e-6019-40b0-8043-2146f08df8de"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" pdfFontName="Helvetica-Bold"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<text><![CDATA[2. DOTAÇÃO ORÇAMENTÁRIA]]></text>
 			</staticText>
-		</band>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<summary>
-		<band height="171" splitType="Stretch">
 			<stackedBar3DChart>
-				<chart>
-					<reportElement uuid="5f7ae9bf-0221-4a50-87e5-ddbba23e697d" x="154" y="0" width="487" height="171"/>
+				<chart evaluationTime="Report">
+					<reportElement x="154" y="52" width="487" height="170" uuid="4e5afd30-fca3-4d27-8a50-60ab378645aa"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Dotação Inicial"]]></seriesExpression>
+						<seriesExpression><![CDATA["Dot Inicial"]]></seriesExpression>
 						<categoryExpression><![CDATA["Dot Inicial"]]></categoryExpression>
-						<valueExpression><![CDATA[$F{dotinicial}]]></valueExpression>
+						<valueExpression><![CDATA[$P{param_dot_inicial}]]></valueExpression>
 					</categorySeries>
 					<categorySeries>
-						<seriesExpression><![CDATA["Dotação Atual"]]></seriesExpression>
+						<seriesExpression><![CDATA["Dot Atual"]]></seriesExpression>
 						<categoryExpression><![CDATA["Dot Atual"]]></categoryExpression>
-						<valueExpression><![CDATA[$F{dotatual}]]></valueExpression>
+						<valueExpression><![CDATA[$P{param_dot_atual}]]></valueExpression>
 					</categorySeries>
 					<categorySeries>
 						<seriesExpression><![CDATA["Empenhado"]]></seriesExpression>
 						<categoryExpression><![CDATA["Empenhado"]]></categoryExpression>
-						<valueExpression><![CDATA[$F{empenhado}]]></valueExpression>
+						<valueExpression><![CDATA[$P{param_dot_empenhado}]]></valueExpression>
 					</categorySeries>
 					<categorySeries>
-						<seriesExpression><![CDATA["Liquidado" ]]></seriesExpression>
+						<seriesExpression><![CDATA["Liquidado"]]></seriesExpression>
 						<categoryExpression><![CDATA["Liquidado"]]></categoryExpression>
-						<valueExpression><![CDATA[$F{liquidado}]]></valueExpression>
+						<valueExpression><![CDATA[$P{param_dot_liquidado}]]></valueExpression>
 					</categorySeries>
 					<categorySeries>
 						<seriesExpression><![CDATA["Pago"]]></seriesExpression>
 						<categoryExpression><![CDATA["Pago"]]></categoryExpression>
-						<valueExpression><![CDATA[$F{pago}]]></valueExpression>
+						<valueExpression><![CDATA[$P{param_dot_pago}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<bar3DPlot>
 					<plot/>
 					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
 				</bar3DPlot>
 			</stackedBar3DChart>
 		</band>
-	</summary>
+	</title>
 </jasperReport>

@@ -1,7 +1,5 @@
 package avaliacao.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ import qualitativo.model.Programa;
  
 @Entity
 @Table(name = "recomendacao", schema = "avaliacao")
-public class Recomendacao extends Model implements Serializable, Auditable {
+public class Recomendacao extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

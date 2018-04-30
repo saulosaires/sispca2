@@ -1,6 +1,5 @@
 package avaliacao.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,7 +16,7 @@ import arquitetura.model.Model;
  
 @Entity
 @Table(name = "topico_avaliacao", schema = "avaliacao")
-public class TopicoAvaliacao extends Model implements Serializable, Auditable {
+public class TopicoAvaliacao extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -44,6 +44,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String DISPONIVEL="disponivel";
 	private static final  String EMPENHADO="empenhado";
 	private static final  String LIQUIDADO="liquidado";
+	private static final  String PAGO="pago";
 	private static final  String CODIGO="codigo";
 	private static final  String EXERCICIO="exercicio";
 	
@@ -267,7 +268,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	 
 	}
  	
-	public BigDecimal calculaDotacaoInicialPorUoProg(String programaCodigo, Integer anoVigente){
+	public BigDecimal calculaDotacaoInicialByProgAndAno(String programaCodigo, Integer anoVigente){
  
 		
 		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return new BigDecimal(0);
@@ -299,7 +300,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 	}
 	 
-	public BigDecimal calculaDotacaoAtualPorUoProg(String programaCodigo, Integer anoVigente){
+	public BigDecimal calculaDotacaoAtualByProgAndAno(String programaCodigo, Integer anoVigente){
  
 		
 		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return null;
@@ -327,5 +328,86 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 	}
  
+	
+	public BigDecimal calculaEmpenhadoByProgAndAno(String programaCodigo, Integer anoVigente){
+ 
+		
+		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return null;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+		Path<BigDecimal> disponivel = root.get(EMPENHADO);
+		Expression<BigDecimal> soma = builder.sum(disponivel);
+		criteria.select(soma);
+		
+		criteria.where(
+					 builder.equal(root.get(PROGRAMA),programaCodigo ),
+					 builder.equal(root.get(ANO),anoVigente )
+			    );
+		
+		TypedQuery<BigDecimal> query = entityManager.createQuery(criteria);
+ 
+		
+		return query.getSingleResult();
+		
+		
+	}
 
+	public BigDecimal calculaLiquidadoByProgAndAno(String programaCodigo, Integer anoVigente) {
+
+		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return null;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+		Path<BigDecimal> disponivel = root.get(LIQUIDADO);
+		Expression<BigDecimal> soma = builder.sum(disponivel);
+		criteria.select(soma);
+		
+		criteria.where(
+					 builder.equal(root.get(PROGRAMA),programaCodigo ),
+					 builder.equal(root.get(ANO),anoVigente )
+			    );
+		
+		TypedQuery<BigDecimal> query = entityManager.createQuery(criteria);
+ 
+		
+		return query.getSingleResult();
+		
+	}
+ 	
+	public BigDecimal calculaPagoByProgAndAno(String programaCodigo, Integer anoVigente) {
+
+		if(Utils.emptyParam(programaCodigo) || anoVigente==null)return null;
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+		Path<BigDecimal> disponivel = root.get(PAGO);
+		Expression<BigDecimal> soma = builder.sum(disponivel);
+		criteria.select(soma);
+		
+		criteria.where(
+					 builder.equal(root.get(PROGRAMA),programaCodigo ),
+					 builder.equal(root.get(ANO),anoVigente )
+			    );
+		
+		TypedQuery<BigDecimal> query = entityManager.createQuery(criteria);
+ 
+		
+		return query.getSingleResult();
+		
+	}	
+	
+	
 }
