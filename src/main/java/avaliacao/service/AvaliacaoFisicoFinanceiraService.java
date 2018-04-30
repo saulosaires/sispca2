@@ -28,8 +28,8 @@ public class AvaliacaoFisicoFinanceiraService extends AbstractService<AvaliacaoF
 	public List<AvaliacaoFisicoFinanceira> findByProgramaAndExercicio(Long programaId, Long exercicioId){
 		return ((AvaliacaoFisicoFinanceiraController) getController()).findByProgramaAndExercicio(programaId, exercicioId);
 	}
-
-
+ 
+	
 	public AvaliacaoFisicoFinanceira merge(AvaliacaoFisicoFinanceira avalFisFinanc) throws JpaException {
 
 		if(Utils.invalidId(avalFisFinanc.getId())) {

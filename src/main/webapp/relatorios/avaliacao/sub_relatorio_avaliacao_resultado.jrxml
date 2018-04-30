@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long(29)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long (86)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT topResult.descricao as pergunta, result.resposta
+
+	FROM avaliacao.resultado result
+	INNER JOIN avaliacao.exercicio_topico_resultado exercTopResult USING (id_exercicio_topico_resultado)
+	INNER JOIN avaliacao.topico_resultado topResult USING (id_topico_resultado)
+	INNER JOIN planejamento.exercicio exerc ON (exerc.id_exercicio = result.id_exercicio AND exerc.id_exercicio = exercTopResult.id_exercicio)
+	INNER JOIN controle_acesso.usuario usuar USING (id_usuario)
+	INNER JOIN planejamento.programa prog USING (id_programa)
+
+
+
+	WHERE prog.id_programa = $P!{param_id_prog} AND
+
+	exerc.id_exercicio = $P!{param_id_exerc}
+
+
+	ORDER BY topResult.id_topico_resultado]]>
+	</queryString>
+	<field name="pergunta" class="java.lang.String"/>
+	<field name="resposta" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="14">
+			<staticText>
+				<reportElement uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5" mode="Opaque" x="0" y="0" width="802" height="14" backcolor="#C8C8C8"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[6.3. Avaliação de Resultados (Princípio da Efetividade)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="69e1018b-cf87-4397-8d0f-55a3ee32ba3b" positionType="Float" mode="Opaque" x="0" y="0" width="802" height="12" backcolor="#F0F0F0"/>
+				<textElement markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>"+$F{pergunta}+"</b>"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="69e1018b-cf87-4397-8d0f-55a3ee32ba3b" positionType="Float" x="0" y="12" width="802" height="10" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{resposta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

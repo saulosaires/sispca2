@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_fisico_financeira" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long(29)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long(2)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long (2154)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("0546")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("13202")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Integer(2016)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT topAval.descricao as pergunta, avalFisFinanc.resposta
+
+	FROM avaliacao.avaliacao_fisico_financeira avalFisFinanc
+	INNER JOIN avaliacao.exercicio_topico_avaliacao exercTopAval USING (id_exercicio_topico_avaliacao)
+	INNER JOIN avaliacao.topico_avaliacao topAval USING (id_topico_avaliacao)
+	INNER JOIN planejamento.exercicio exerc ON (exerc.id_exercicio = avalFisFinanc.id_exercicio AND exerc.id_exercicio = exercTopAval.id_exercicio)
+	INNER JOIN controle_acesso.usuario usuar USING (id_usuario)
+	INNER JOIN planejamento.programa prog USING (id_programa)
+
+
+
+	WHERE prog.id_programa = $P{param_id_prog} AND
+
+	exerc.id_exercicio = $P{param_id_exerc}
+
+
+	ORDER BY topAval.id_topico_avaliacao]]>
+	</queryString>
+	<field name="pergunta" class="java.lang.String"/>
+	<field name="resposta" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="19" width="802" height="10" uuid="69e1018b-cf87-4397-8d0f-55a3ee32ba3b"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{resposta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="4" width="802" height="12" backcolor="#F0F0F0" uuid="69e1018b-cf87-4397-8d0f-55a3ee32ba3b"/>
+				<textElement markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>"+$F{pergunta}+"</b>"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

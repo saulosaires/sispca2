@@ -23,14 +23,14 @@ public abstract class AvaliacaoPrograma implements Serializable {
 
 	private Long id;
 	private Programa programa;
-	private BigDecimal dotacaoInicial; 
-	private BigDecimal dotacaoAtual;
-	private BigDecimal variacao;
+	protected BigDecimal dotacaoInicial; 
+	protected BigDecimal dotacaoAtual;
+	protected BigDecimal variacao;
 	
 	private Exercicio exercicio;
 	
-	private ProgramaService programaService;
-	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
+	protected ProgramaService programaService;
+	protected FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
 
  
 	public AvaliacaoPrograma(ProgramaService programaService,

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_unidade_executora" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_problema" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_objetivo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_publico_alvo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_dot_inicial" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_dot_atual" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_variacao" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="param_ppa" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="param_media_eficacia_financ" class="java.lang.Double" isForPrompting="false"/>
+	<parameter name="param_media_eficiencia_financ" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_med_cust_unit_c" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_med_cust_unit_f" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_med_cust_eficienc" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="listFisicoFinanceiroMensalSiafem" class="java.util.List"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="79" height="47" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
+				<imageExpression><![CDATA[new File($P{param_imagem})]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="47" width="802" height="1" uuid="bcd512e2-fafc-4121-908e-1c93b22d5d1f"/>
+			</line>
+			<staticText>
+				<reportElement x="80" y="2" width="712" height="14" uuid="a59fcf0a-0450-4a96-975c-f3e428fbf54f"/>
+				<textElement>
+					<font pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Governo do Estado do Maranhão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="16" width="712" height="14" uuid="b0f9b314-13d9-41a3-911c-bccb2b470f86"/>
+				<textElement>
+					<font pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Estado do Planejamento e Orçamento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="31" width="711" height="16" uuid="c8f0fcce-9ccf-40e2-b1c3-b330a37b1ab1"/>
+				<textElement markup="html">
+					<font pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>Relatório de Avaliação do "+$P{param_ppa}+" - Exercício "+$P{param_ano}+"</b>"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<summary>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="6" width="802" height="11" uuid="63d8e32b-e7d7-40a4-8015-203d503afa0d"/>
+				<subreportParameter name="param_dot_atual">
+					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_publico_alvo">
+					<subreportParameterExpression><![CDATA[$P{param_publico_alvo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_unidade_executora">
+					<subreportParameterExpression><![CDATA[$P{param_unidade_executora}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_inicial">
+					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_problema">
+					<subreportParameterExpression><![CDATA[$P{param_problema}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_prog">
+					<subreportParameterExpression><![CDATA[$P{param_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_variacao">
+					<subreportParameterExpression><![CDATA[$P{param_variacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_cod_prog">
+					<subreportParameterExpression><![CDATA[$P{param_cod_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_objetivo">
+					<subreportParameterExpression><![CDATA[$P{param_objetivo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_identificacao_programa.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

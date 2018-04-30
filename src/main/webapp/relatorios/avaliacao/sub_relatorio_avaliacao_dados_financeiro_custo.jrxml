@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="277"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="716"/>
+	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long(58)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Long (2154)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("0546")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("13202")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Integer(2017)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_med_cust_unit_c" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_med_cust_unit_f" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_med_cust_eficienc" class="java.math.BigDecimal" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new BigDecimal(0.0)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+
+	uo.codigo as cod_uo,
+
+	uo.descricao as unidade_orcamentaria,
+
+	acao.id_acao,
+
+	acao.codigo as cod_acao,
+
+	acao.denominacao as acao,
+
+	acao.produto as produto,
+
+	um.descricao as unidade_medida,
+
+
+	(
+		CASE
+		(
+		SELECT tcm.id_tipo_calculo_meta
+			FROM planejamento.acao ac
+			INNER JOIN planejamento.tipo_calculo_meta tcm USING (id_tipo_calculo_meta)
+			WHERE ac.id_acao = acao.id_acao AND ac.ativo is true
+		)
+
+	WHEN 1 THEN
+
+		(SELECT SUM(ffm.quantidade)
+			FROM planejamento.fisico_financeiro_mensal ffm
+			INNER JOIN planejamento.exercicio exerc on  exerc.id_exercicio=ffm.id_exercicio
+			WHERE ffm.id_acao = acao.id_acao AND exerc.id_exercicio = $P!{param_id_exerc}
+		)
+
+	WHEN 2 THEN
+
+		(SELECT SUM(ffm.quantidade)/COUNT(*)
+			FROM planejamento.fisico_financeiro_mensal ffm
+			INNER JOIN planejamento.acao ac USING (id_acao)
+			INNER JOIN planejamento.exercicio exerc on exerc.id_exercicio=ffm.id_exercicio
+			WHERE ac.id_acao = acao.id_acao AND ffm.quantidade <> 0.0 AND exerc.id_exercicio = $P!{param_id_exerc}
+			GROUP BY ac.id_acao
+		)
+
+		END
+
+	) AS fisico_planejado,
+
+
+	(	SELECT	SUM(fm.disponivel)
+			FROM siafem.financeiro_mensal fm
+			WHERE fm.acao = acao.codigo  AND fm.unidade_orcamentaria = $P{param_cod_uo}
+			AND fm.programa = $P{param_cod_prog}
+			AND fm.ano = $P!{param_ano}
+
+	) as orcamentario_planejado,
+
+
+	(	CASE
+		(
+		SELECT tcm.id_tipo_calculo_meta
+			FROM planejamento.acao ac
+			INNER JOIN planejamento.tipo_calculo_meta tcm USING (id_tipo_calculo_meta)
+			WHERE ac.id_acao = acao.id_acao and ac.ativo is TRUE
+		)
+
+		WHEN 1 THEN
+
+			(SELECT SUM(exec.quantidade)
+				FROM monitoramento.execucao exec
+			INNER JOIN planejamento.exercicio exerc on exerc.id_exercicio=exec.id_exercicio
+				WHERE exec.id_acao = acao.id_acao AND exerc.id_exercicio = $P!{param_id_exerc}
+			)
+
+	WHEN 2 THEN
+
+		(SELECT SUM(exec.quantidade)/COUNT(*)
+			FROM monitoramento.execucao exec
+			INNER JOIN planejamento.acao ac USING (id_acao)
+			INNER JOIN planejamento.exercicio exerc on exerc.id_exercicio=exec.id_exercicio
+			WHERE ac.id_acao = acao.id_acao AND exerc.id_exercicio = $P!{param_id_exerc}
+			GROUP BY ac.id_acao
+		)
+
+	END	) AS fisico_executado,
+
+
+	(
+	SELECT	SUM(fm.liquidado)
+		FROM siafem.financeiro_mensal fm
+		WHERE fm.acao = acao.codigo  AND fm.unidade_orcamentaria = $P{param_cod_uo}
+		AND fm.programa = $P{param_cod_prog}
+		AND fm.ano = $P!{param_ano}
+	) as orcamentario_executado
+
+	FROM planejamento.acao acao
+
+	INNER JOIN planejamento.programa prog ON (acao.id_programa = prog.id_programa)
+
+	INNER JOIN comum.unidade_orcamentaria uo ON (uo.id_unidade_orcamentaria = acao.id_unidade_orcamentaria)
+
+	INNER JOIN planejamento.unidade_medida um ON (acao.id_unidade_medida = um.id_unidade)
+
+	WHERE prog.id_programa =  $P!{param_id_prog} AND acao.ativo is TRUE
+
+	GROUP BY 1, 2, 3, 4, 5, 6, 7
+
+	ORDER BY 1, 4]]>
+	</queryString>
+	<field name="cod_uo" class="java.lang.String"/>
+	<field name="unidade_orcamentaria" class="java.lang.String"/>
+	<field name="id_acao" class="java.lang.Integer"/>
+	<field name="cod_acao" class="java.lang.String"/>
+	<field name="acao" class="java.lang.String"/>
+	<field name="produto" class="java.lang.String"/>
+	<field name="unidade_medida" class="java.lang.String"/>
+	<field name="fisico_planejado" class="java.lang.Double"/>
+	<field name="orcamentario_planejado" class="java.lang.Double"/>
+	<field name="fisico_executado" class="java.lang.Double"/>
+	<field name="orcamentario_executado" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="14" width="82" height="35" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Unidade Orçamentária]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="82" y="14" width="97" height="35" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Ação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="179" y="14" width="52" height="35" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="231" y="14" width="54" height="35" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Unid. Medida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="285" y="32" width="58" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Físico (A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="32" width="97" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Custo Unitário (B/A) = C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="511" y="32" width="56" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Físico (D)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="567" y="32" width="73" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Orçamentário (E)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="640" y="32" width="97" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Custo Unitário (E/D = F)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="737" y="32" width="65" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[F/C = Eficiência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="285" y="14" width="226" height="18" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Planejado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="511" y="14" width="291" height="18" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Executado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="343" y="32" width="71" height="17" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Orçamentário (B)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="14" backcolor="#C8C8C8" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[6.4. Avaliação de Custo (Valor em R$ 1,00) - Princípio da Eficiência]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="17" uuid="830e6dff-82c6-4cfa-8a7a-9c6a10692300"/>
+				<rectangle>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="17" forecolor="#FEFEFE" backcolor="#F0F0F0" uuid="fac2e687-6558-41ee-9ae3-06df41959dc6">
+						<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+					</reportElement>
+				</rectangle>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="343" y="0" width="71" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{orcamentario_planejado}==null ? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0)) : (new DecimalFormat("#,###,##0.00")).format($F{orcamentario_planejado})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="179" y="0" width="52" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{produto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="567" y="0" width="73" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{orcamentario_executado}==null ?
+
+(new DecimalFormat("#,###,##0.00")).format(new Double(0.0))
+
+:
+
+(new DecimalFormat("#,###,##0.00")).format($F{orcamentario_executado})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="231" y="0" width="54" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{unidade_medida}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="82" y="0" width="97" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA["("+$F{cod_acao}+") - "+$F{acao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="285" y="0" width="58" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fisico_planejado}==null ? (new DecimalFormat("#,###,##0")).format(new Double(0.0)) : (new DecimalFormat("#,###,##0.00")).format($F{fisico_planejado})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="511" y="0" width="56" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fisico_executado}==null ?
+
+(new DecimalFormat("#,###,##0")).format(new Double(0.0))
+
+:
+
+(new DecimalFormat("#,###,##0.00")).format($F{fisico_executado})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="82" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA["("+$F{cod_uo}+") - "+$F{unidade_orcamentaria}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="737" y="0" width="65" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{orcamentario_executado}==null || $F{fisico_executado}==null ||
+
+$F{orcamentario_planejado}==null || $F{fisico_planejado}==null ||
+
+$F{fisico_executado}.equals(new Double(0.0)) || $F{fisico_planejado}.equals(new Double(0.0))
+
+
+? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0))
+
+:
+
+(new DecimalFormat("#,###,##0.00")).format(($F{orcamentario_executado}/$F{fisico_executado})/($F{orcamentario_planejado}/$F{fisico_planejado}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="640" y="0" width="97" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{orcamentario_executado}==null ||
+$F{fisico_executado}==null ||
+$F{fisico_executado}.equals(new Double(0.0))
+
+?
+
+(new DecimalFormat("#,###,##0.00")).format(new Double(0.0))
+
+:
+
+(new DecimalFormat("#,###,##0.00")).format($F{orcamentario_executado}/$F{fisico_executado})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="414" y="0" width="97" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fisico_planejado}==null || $F{orcamentario_planejado}==null || $F{fisico_planejado}.equals(new Double(0.0)) ? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0)) :
+
+(new DecimalFormat("#,###,##0.00")).format($F{orcamentario_planejado}/$F{fisico_planejado})]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="57">
+			<staticText>
+				<reportElement x="0" y="29" width="786" height="14" uuid="1c9d1fd3-8fe1-4621-8992-1208b4bde75c"/>
+				<textElement>
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="3" spacingBefore="3" spacingAfter="3"/>
+				</textElement>
+				<text><![CDATA[Escala de Valoração adotada para a Avaliação de Custo do Produto: Muito Eficiente < 0,50; Média Eficiência = 0,51 a 0,99; Eficiente = 1,0 e Pouco Eficiente > 1,0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="786" height="14" uuid="1c9d1fd3-8fe1-4621-8992-1208b4bde75c"/>
+				<textElement>
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="3" spacingBefore="3" spacingAfter="3"/>
+				</textElement>
+				<text><![CDATA[Fonte: SISPCA/SIAFEM]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="29" width="802" height="28" uuid="b599f57f-0593-4837-8ff8-77914b2a7b4c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="22" width="802" height="1" uuid="3e0691c7-cc2f-4d7f-951d-34eebbd9a942"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="6" width="100" height="17" uuid="f523a08a-20d8-4d09-8ea5-daf5d771080b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph rightIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<text><![CDATA[Média:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="201" y="5" width="84" height="17" backcolor="#FEFEFE" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Custo Unitário (B/A) = C]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="284" y="5" width="97" height="17" uuid="db278035-89f8-4d16-adf7-7f3bda4f63fa"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($P{param_med_cust_unit_c})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="736" y="6" width="66" height="17" uuid="db278035-89f8-4d16-adf7-7f3bda4f63fa"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($P{param_med_cust_eficienc})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="5" width="802" height="1" uuid="3e0691c7-cc2f-4d7f-951d-34eebbd9a942"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="640" y="5" width="97" height="17" backcolor="#FEFEFE" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[F/C = Eficiência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="414" y="5" width="84" height="17" backcolor="#FEFEFE" uuid="4a04415e-122f-4e67-b8e8-0cd6f7eb2cd5"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Custo Unitário (E/D) = F]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="497" y="5" width="70" height="17" uuid="db278035-89f8-4d16-adf7-7f3bda4f63fa"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($P{param_med_cust_unit_f})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

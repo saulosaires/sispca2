@@ -10,8 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import administrativo.service.ExercicioService;
-import arquitetura.enuns.ACAO;
-import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -80,7 +78,7 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 		
 		listAvaliacaoFisicoFinanceira = avaliacaoFisicoFinanceiraService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
 
-		if (this.listAvaliacaoFisicoFinanceira .isEmpty()){
+		if (listAvaliacaoFisicoFinanceira .isEmpty()){
 			
 			List<ExercicioTopicoAvaliacao> listExercicioTopicoAvaliacao = exercicioTopicoAvaliacaoService.findByExercicio(getExercicio().getId());
 
@@ -103,47 +101,27 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarFisicoFinanceiro() {
+		
 		listFisicoFinanceiroMensalSiafem = fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
  	
-		calculaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+		calculaMediaEficaciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+		calculaMediaEficienciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+		
 	}
 	
-	private void calculaMediaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
+	private void calculaMediaEficaciaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
 		
-		mediaEficaciaFisicoFinanceira   = MathUtils.getZeroBigDecimal();
-		mediaEficienciaFisicoFinanceira = MathUtils.getZeroBigDecimal();
-		
-		int quantidadeGestaoPrograma = 0;
-		
-		for (FisicoFinanceiroMensalSiafem avalFisFinan: listFisicoFinanceiroMensalSiafem){
-			
-			if (avalFisFinan.getEficacia()!=null){
-				mediaEficaciaFisicoFinanceira  =mediaEficaciaFisicoFinanceira.add(avalFisFinan.getEficacia());
-			}
-			if(avalFisFinan.getEficiencia()!=null){
-				mediaEficienciaFisicoFinanceira = mediaEficienciaFisicoFinanceira.add(avalFisFinan.getEficiencia());
-			}
-			
-			if (avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
-				quantidadeGestaoPrograma++;
-			}
-			
-		}
-		
-		int divisor= (listFisicoFinanceiroMensalSiafem.size()-quantidadeGestaoPrograma);
-		
-		if (divisor>0){
-			mediaEficaciaFisicoFinanceira = MathUtils.divide(mediaEficaciaFisicoFinanceira,new BigDecimal(divisor));
-		}
-		if (divisor>0){
-			mediaEficienciaFisicoFinanceira =MathUtils.divide( mediaEficienciaFisicoFinanceira,new BigDecimal(divisor));
-		}		
-
-		
-		
-	}
+		mediaEficaciaFisicoFinanceira   = fisicoFinanceiroMensalSiafemService.calculaMediaEficaciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+ 		
  
-
+	}
+ 	
+	private void calculaMediaEficienciaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
+ 		mediaEficienciaFisicoFinanceira = fisicoFinanceiroMensalSiafemService.calculaEficienciaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+		
+ 
+	}
+ 	
 	
 	public void adicionarAvaliacaoFisicoFinanceira() {
 		

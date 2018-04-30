@@ -115,10 +115,9 @@
 								
 														 
 								<p:column headerText="Acomp" width="4%">
-									<h:commandButton image="/resources/images/icone-pdf.gif" title="Acompanhamento da avaliação para o programa" 
-										action="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" 
-										style="margin-left: 2%; width: 20px; height: 20px;">
-									</h:commandButton>
+									<h:button image="/resources/images/icone-pdf.gif" outcome="avaliacaoSetorialRelatorio" title="Acompanhamento da avaliação para o programa"  style="margin-left: 2%; width: 20px; height: 20px;">
+									     <f:param name="id" value="#{prog.id}" /> 
+									</h:button>
 								</p:column>								
 							</p:dataTable>
 											

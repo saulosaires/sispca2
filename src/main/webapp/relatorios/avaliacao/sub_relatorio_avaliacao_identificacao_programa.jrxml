@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("0582")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_prog" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new String("Gestão Legislativa")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_unidade_executora" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("01101 - Assembléia Legislativa (ASSEMBLEIA)")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_problema" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_objetivo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("Apreciar  proposições  em  geral,  apurar  fatos  determinados,  exercer  a  fiscalização  e  o  controle  externo  e  desempenhar  as  demais  prerrogativas  constitucionais  legais  e regimentais do órgão e dos seus membros.")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_publico_alvo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("Órgãos e entidades do parlamento estadual.")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_dot_inicial" class="java.math.BigDecimal" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new BigDecimal(71855666)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_dot_atual" class="java.math.BigDecimal" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new BigDecimal(51633768)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_variacao" class="java.math.BigDecimal" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new BigDecimal(-28.14)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FEFEFE" backcolor="#465A7F" uuid="40e6af8e-6019-40b0-8043-2146f08df8de"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[1. IDENTIFICAÇÃO DO PROGRAMA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="105">
+			<textField isStretchWithOverflow="true">
+				<reportElement key="" positionType="Float" mode="Opaque" x="0" y="1" width="802" height="14" backcolor="#C8C8C8" uuid="2bdd0228-a3c4-48d1-9c66-2c05f6ed05f4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5" spacingBefore="1" spacingAfter="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+$P{param_cod_prog}+") - "+$P{param_prog}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="15" width="802" height="18" backcolor="#ECECEC" uuid="c3c84789-9af2-4297-8e39-290abc64e76a"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>Unidade Executora:</b> "+$P{param_unidade_executora}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="33" width="802" height="18" backcolor="#FEFEFE" uuid="c3c84789-9af2-4297-8e39-290abc64e76a"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_problema}!=null ?  "<b>Problema:</b> "+$P{param_problema} : "<b>Problema:</b> "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="51" width="802" height="18" backcolor="#ECECEC" uuid="c3c84789-9af2-4297-8e39-290abc64e76a"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_objetivo}!=null ? "<b>Objetivo:</b> "+$P{param_objetivo} : "<b>Objetivo:</b> "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="69" width="802" height="18" backcolor="#FEFEFE" uuid="c3c84789-9af2-4297-8e39-290abc64e76a"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_publico_alvo}!=null ? "<b>Público-Alvo:</b> "+$P{param_publico_alvo} : "<b>Público-Alvo:</b> "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="87" width="802" height="18" backcolor="#ECECEC" uuid="c3c84789-9af2-4297-8e39-290abc64e76a"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>Dotação Orçamentária (R$ 1,00)       Inicial: </b> "+(new DecimalFormat("#,###,##0.00")).format($P{param_dot_inicial})+"       <b>Atual:</b> "+(new DecimalFormat("#,###,##0.00")).format($P{param_dot_atual})+"       <b>Variação(%):</b> "+(new DecimalFormat("#,###,##0.00")).format($P{param_variacao})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+</jasperReport>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import administrativo.model.Exercicio;
+import arquitetura.enuns.ACAO;
 import arquitetura.enuns.TipoCalculoMeta;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.MathUtils;
@@ -126,6 +127,64 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		}
 		
 	}
+	
+	public BigDecimal calculaMediaEficaciaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
+		
+		BigDecimal mediaEficaciaFisicoFinanceira   = MathUtils.getZeroBigDecimal();
+		 
+		
+		int quantidadeGestaoPrograma = 0;
+		
+		for (FisicoFinanceiroMensalSiafem avalFisFinan: listFisicoFinanceiroMensalSiafem){
+			
+			if (avalFisFinan.getEficacia()!=null){
+				mediaEficaciaFisicoFinanceira  =mediaEficaciaFisicoFinanceira.add(avalFisFinan.getEficacia());
+			}
+		 
+			
+			if (avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
+				quantidadeGestaoPrograma++;
+			}
+			
+		}
+		
+		int divisor= (listFisicoFinanceiroMensalSiafem.size()-quantidadeGestaoPrograma);
+		
+		if (divisor>0){
+			mediaEficaciaFisicoFinanceira = MathUtils.divide(mediaEficaciaFisicoFinanceira,new BigDecimal(divisor));
+		}
+		 
+		return mediaEficaciaFisicoFinanceira;
+	}
+	
+	public BigDecimal calculaEficienciaMediaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
+		
+		 
+		BigDecimal mediaEficienciaFisicoFinanceira = MathUtils.getZeroBigDecimal();
+		
+		int quantidadeGestaoPrograma = 0;
+		
+		for (FisicoFinanceiroMensalSiafem avalFisFinan: listFisicoFinanceiroMensalSiafem){
+			 
+			if(avalFisFinan.getEficiencia()!=null){
+				mediaEficienciaFisicoFinanceira = mediaEficienciaFisicoFinanceira.add(avalFisFinan.getEficiencia());
+			}
+			
+			if (avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
+				quantidadeGestaoPrograma++;
+			}
+			
+		}
+		
+		int divisor= (listFisicoFinanceiroMensalSiafem.size()-quantidadeGestaoPrograma);
+		 
+		if (divisor>0){
+			mediaEficienciaFisicoFinanceira =MathUtils.divide( mediaEficienciaFisicoFinanceira,new BigDecimal(divisor));
+		}		
+
+		return mediaEficienciaFisicoFinanceira;
+		
+	}		
 	
 	
 	

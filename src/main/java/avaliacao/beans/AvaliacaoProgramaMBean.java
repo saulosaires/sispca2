@@ -28,15 +28,13 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	
 	private String codigoPrograma;
 	private Exercicio exercicio ;
-	private ProgramaService programaService;
-	private ExercicioService exercicioService;
+	private ProgramaService programaService; 
 	
 
 	@Inject
 	public AvaliacaoProgramaMBean(ProgramaService programaService, ExercicioService exercicioService) {
 
-		this.programaService=programaService;
-		this.exercicioService=exercicioService;
+		this.programaService=programaService; 
 		
 		Optional<Exercicio> exercicioAnterior = exercicioService.exercicioAnterior();
 		
@@ -54,14 +52,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 		this.listPrograma = programaService.buscar(codigoPrograma, null, null, null, exercicio.getId());
  	
 	}
-	
-	public String gerarRelatorio(Programa programa) {
-		
-		
-		
-		return "";
-	}
-	
+ 	
 	
 	public List<Programa> getListPrograma() {
 		return listPrograma;
