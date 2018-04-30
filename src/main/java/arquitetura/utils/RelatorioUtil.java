@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+import arquitetura.enums.TipoArquivo;
+
  
 public class RelatorioUtil {
 	

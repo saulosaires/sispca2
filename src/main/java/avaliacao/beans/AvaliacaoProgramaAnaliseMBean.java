@@ -11,9 +11,7 @@ import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import avaliacao.model.Analise;
-import avaliacao.model.PainelAssociado;
 import avaliacao.service.AnaliseService;
-import qualitativo.model.Indicador;
 import qualitativo.service.ProgramaService;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
@@ -33,8 +31,6 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 	
 	private AnaliseService analiseService;
 	
-	private  FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
-	
 	@Inject
 	public AvaliacaoProgramaAnaliseMBean(ProgramaService programaService,
 									     ExercicioService exercicioService,
@@ -45,7 +41,6 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
 	 
 		this.analiseService = analiseService;
-		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
 	}
 
 	@Override

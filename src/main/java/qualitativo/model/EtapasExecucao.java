@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,14 +24,11 @@ import arquitetura.model.Model;
  * 
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="etapas_execucao", schema="monitoramento")
 public class EtapasExecucao extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@SequenceGenerator(name = "seq_etapas_execucao_id_etapa_execucao", sequenceName = "monitoramento.seq_etapas_execucao_id_etapa_execucao")
-//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_etapas_execucao_id_etapa_execucao")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_etapa_execucao")
 	private Long id;

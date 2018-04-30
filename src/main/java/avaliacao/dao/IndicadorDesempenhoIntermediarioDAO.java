@@ -9,7 +9,6 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import arquitetura.dao.AbstractDAO;
-import avaliacao.model.DiretrizAssociada;
 import avaliacao.model.IndicadorDesempenhoIntermediario;
  
 

@@ -41,8 +41,7 @@ public class ExercicioListMBean implements Serializable{
 	
 	private Exercicio exercicioSelecionado;
 	private ExercicioService exercicioService;
-	private PpaService ppaService;
-	
+ 	
 	private boolean mudarVigencia;
 	private boolean deletar;
 	private boolean salvar;
@@ -50,8 +49,7 @@ public class ExercicioListMBean implements Serializable{
 	@Inject
 	public ExercicioListMBean( PpaService ppaService,ExercicioService exercicioService){
 		 
-		 this.ppaService=ppaService;
-		 this.exercicioService=exercicioService;
+ 		 this.exercicioService=exercicioService;
 		 this.listPpa = ppaService.findAll();
 		 
 		 mudarVigencia = SessionUtils.containsKey("administrativoExercicioMudarVigencia"); 

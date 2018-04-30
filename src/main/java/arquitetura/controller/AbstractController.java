@@ -8,6 +8,10 @@ import arquitetura.exception.JpaException;
 
 public abstract class AbstractController<T extends Serializable> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private AbstractDAO<T> dao;
 
 	public AbstractController(AbstractDAO<T> dao) {

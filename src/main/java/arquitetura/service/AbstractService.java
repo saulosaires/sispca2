@@ -8,6 +8,10 @@ import arquitetura.exception.JpaException;
 
 public abstract class AbstractService<T extends Serializable> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private AbstractController<T> controller;
 
 	public AbstractService(AbstractController<T> controller) {

@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import administrativo.dao.ExercicioDAO;
 import administrativo.model.Exercicio;
-import administrativo.model.Ppa;
 import arquitetura.controller.AbstractController;
 import arquitetura.exception.JpaException;
 

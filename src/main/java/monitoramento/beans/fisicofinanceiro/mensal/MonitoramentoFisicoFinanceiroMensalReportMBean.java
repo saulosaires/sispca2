@@ -1,18 +1,13 @@
 package monitoramento.beans.fisicofinanceiro.mensal;
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,12 +15,11 @@ import org.primefaces.model.StreamedContent;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
-import arquitetura.exception.JpaException;
+import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
-import arquitetura.utils.TipoArquivo;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 import monitoramento.service.ExecucaoService;
@@ -34,22 +28,16 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import qualitativo.model.Acao;
-import qualitativo.model.Mes;
 import qualitativo.service.AcaoService;
-import qualitativo.service.MesService;
-import quantitativo.model.FisicoFinanceiro;
-import quantitativo.model.FisicoFinanceiroMensal;
-import quantitativo.model.Regiao;
-import quantitativo.model.RegiaoMunicipio;
-import quantitativo.model.TipoRegiao;
-import quantitativo.service.FisicoFinanceiroService;
-import quantitativo.service.RegiaoMunicipioService;
-import quantitativo.service.TipoRegiaoService;
 
 @Named
 @SessionScoped
 public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String FAIL_REPORT = "Falha inesperada ao tentar Imprimir Relatório";
 	public static final String REPORT_EMPTY = "Não há dados financeiros para a ação selecionada";
 

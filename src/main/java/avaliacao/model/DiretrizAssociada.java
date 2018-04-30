@@ -15,7 +15,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import administrativo.model.Exercicio;
-import administrativo.model.Usuario;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import qualitativo.model.Diretriz;

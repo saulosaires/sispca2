@@ -1,4 +1,4 @@
-package arquitetura.utils;
+package arquitetura.enums;
 
 public enum TipoArquivo {
 

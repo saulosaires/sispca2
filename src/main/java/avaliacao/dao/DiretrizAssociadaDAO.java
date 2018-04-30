@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 
 import arquitetura.dao.AbstractDAO;
 import avaliacao.model.DiretrizAssociada;
-import avaliacao.model.PainelAssociado;
  
 
 public class DiretrizAssociadaDAO extends AbstractDAO< DiretrizAssociada >  {
