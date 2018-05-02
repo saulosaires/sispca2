@@ -89,7 +89,7 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 		
 		if (!Utils.invalidId((eixoId))) {
 			Join<Object, Object> joinEixo = m.join("eixos",JoinType.INNER);
-			joinEixo.on(cb.equal(joinEixo.get("id"),exercicioId) );	
+			joinEixo.on(cb.equal(joinEixo.get("id"),eixoId) );	
 		}
 		
 		

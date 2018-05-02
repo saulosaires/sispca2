@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_fisico_financeiro" pageWidth="842" pageHeight="250" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" whenResourceMissingType="Empty" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" whenResourceMissingType="Empty" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -18,7 +19,7 @@
 	<parameter name="param_dot_liquidado" class="java.math.BigDecimal"/>
 	<parameter name="param_dot_pago" class="java.math.BigDecimal"/>
 	<title>
-		<band height="224">
+		<band height="268" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="20" width="154" height="13" backcolor="#C8C8C8" uuid="32a75fc2-ad9d-4605-8653-b620016c72ca"/>
 				<box>
@@ -167,41 +168,28 @@
 				</textElement>
 				<text><![CDATA[2. DOTAÇÃO ORÇAMENTÁRIA]]></text>
 			</staticText>
-			<stackedBar3DChart>
+			<barChart>
 				<chart evaluationTime="Report">
-					<reportElement x="154" y="52" width="487" height="170" uuid="4e5afd30-fca3-4d27-8a50-60ab378645aa"/>
+					<reportElement x="154" y="59" width="487" height="186" uuid="fb3b5c48-39c4-46ae-b179-4273e2b55135"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Dot Inicial"]]></seriesExpression>
-						<categoryExpression><![CDATA["Dot Inicial"]]></categoryExpression>
+						<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+						<categoryExpression><![CDATA[$P{param_dot_inicial}]]></categoryExpression>
 						<valueExpression><![CDATA[$P{param_dot_inicial}]]></valueExpression>
+						<labelExpression><![CDATA["Dummy Series"]]></labelExpression>
 					</categorySeries>
 					<categorySeries>
-						<seriesExpression><![CDATA["Dot Atual"]]></seriesExpression>
-						<categoryExpression><![CDATA["Dot Atual"]]></categoryExpression>
+						<seriesExpression><![CDATA["Dummy Series2"]]></seriesExpression>
+						<categoryExpression><![CDATA[$P{param_dot_atual}]]></categoryExpression>
 						<valueExpression><![CDATA[$P{param_dot_atual}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Empenhado"]]></seriesExpression>
-						<categoryExpression><![CDATA["Empenhado"]]></categoryExpression>
-						<valueExpression><![CDATA[$P{param_dot_empenhado}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Liquidado"]]></seriesExpression>
-						<categoryExpression><![CDATA["Liquidado"]]></categoryExpression>
-						<valueExpression><![CDATA[$P{param_dot_liquidado}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Pago"]]></seriesExpression>
-						<categoryExpression><![CDATA["Pago"]]></categoryExpression>
-						<valueExpression><![CDATA[$P{param_dot_pago}]]></valueExpression>
+						<labelExpression><![CDATA["Dummy Series2"]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
-				<bar3DPlot>
+				<barPlot>
 					<plot/>
 					<itemLabel/>
 					<categoryAxisFormat>
@@ -210,8 +198,8 @@
 					<valueAxisFormat>
 						<axisFormat/>
 					</valueAxisFormat>
-				</bar3DPlot>
-			</stackedBar3DChart>
+				</barPlot>
+			</barChart>
 		</band>
 	</title>
 </jasperReport>

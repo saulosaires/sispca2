@@ -27,6 +27,8 @@ import qualitativo.model.UnidadeMedida;
 @Entity
 @Table(name = "indicador_desempenho_intermediario", schema = "avaliacao")
 public class IndicadorDesempenhoIntermediario extends Model implements  Auditable {
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

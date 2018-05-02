@@ -1,48 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_indicador_desemp_intermed" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long(1)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long(1)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long (2154)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new String("0546")]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new String("13202")]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Integer(2016)]]></defaultValueExpression>
-	</parameter>
 	<queryString>
-		<![CDATA[SELECT  indDesempInterm.indicador, um.descricao as unidade_medida, indDesempInterm.fonte, indDesempInterm.ref_data_apuracao,
-	indDesempInterm.ref_valor, indDesempInterm.resultado_ano_esperado, indDesempInterm.resultado_ano_esperado,
-	indDesempInterm.resultado_ano_apurado
-
-	FROM avaliacao.indicador_desempenho_intermediario indDesempInterm
-
-	LEFT JOIN planejamento.unidade_medida um ON (indDesempInterm.id_unidade_medida = um.id_unidade)
-	INNER JOIN planejamento.exercicio exerc USING (id_exercicio)
-	INNER JOIN controle_acesso.usuario usuar USING (id_usuario)
-	INNER JOIN planejamento.programa prog USING (id_programa)
-
-	WHERE prog.id_programa = $P!{param_id_prog} AND exerc.id_exercicio = $P!{param_id_exerc}]]>
+		<![CDATA[]]>
 	</queryString>
 	<field name="indicador" class="java.lang.String"/>
-	<field name="unidade_medida" class="java.lang.String"/>
+	<field name="unidadeMedida" class="qualitativo.model.UnidadeMedida"/>
 	<field name="fonte" class="java.lang.String"/>
-	<field name="ref_data_apuracao" class="java.sql.Date"/>
-	<field name="ref_valor" class="java.lang.Double"/>
-	<field name="resultado_ano_esperado" class="java.lang.Double"/>
-	<field name="resultado_ano_apurado" class="java.lang.Double"/>
+	<field name="refDataApuracao" class="java.util.Date"/>
+	<field name="refValor" class="java.lang.Double"/>
+	<field name="resultadoAnoEsperado" class="java.lang.Double"/>
+	<field name="resultadoAnoApurado" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -180,11 +151,9 @@
 		</band>
 	</title>
 	<detail>
-		<band height="34" splitType="Stretch">
+		<band height="17" splitType="Stretch">
 			<frame>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="17" isRemoveLineWhenBlank="true" uuid="830e6dff-82c6-4cfa-8a7a-9c6a10692300">
-					<printWhenExpression><![CDATA[$F{fonte}!=null && !$F{fonte}.trim().equals("")]]></printWhenExpression>
-				</reportElement>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="17" isRemoveLineWhenBlank="true" uuid="830e6dff-82c6-4cfa-8a7a-9c6a10692300"/>
 				<rectangle>
 					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="17" forecolor="#FEFEFE" backcolor="#F0F0F0" uuid="fac2e687-6558-41ee-9ae3-06df41959dc6">
 						<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
@@ -202,7 +171,7 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{ref_data_apuracao}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{refDataApuracao}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="511" y="0" width="129" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -216,7 +185,7 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{resultado_ano_esperado}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{resultadoAnoEsperado}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="212" y="0" width="91" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -230,7 +199,7 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{unidade_medida}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{unidadeMedida}.getDescricao()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="115" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -258,7 +227,7 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{resultado_ano_apurado}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{resultadoAnoApurado}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="407" y="0" width="104" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -272,7 +241,7 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{ref_valor}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{refValor}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="115" y="0" width="97" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -289,22 +258,25 @@
 					<textFieldExpression><![CDATA[$F{fonte}]]></textFieldExpression>
 				</textField>
 			</frame>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" mode="Transparent" x="0" y="17" width="802" height="17" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f">
-					<printWhenExpression><![CDATA[$F{fonte}==null || $F{fonte}.trim().equals("")]]></printWhenExpression>
-				</reportElement>
-				<box>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="html">
-					<font size="8" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
-					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{indicador}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
+	<noData>
+		<band height="42">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FEFEFE" backcolor="#465A7F" uuid="6fb5bdf8-7310-4e1e-819a-f15ac3556596"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[5. INDICADOR (ES) INTERMEDIÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="20" width="798" height="20" uuid="b81dfd0a-3ac0-4e4d-a966-8a4274088ee7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nenhum indicador de desempenho intermediário associado ao programa]]></text>
+			</staticText>
+		</band>
+	</noData>
 </jasperReport>

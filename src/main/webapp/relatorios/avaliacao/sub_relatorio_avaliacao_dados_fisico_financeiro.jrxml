@@ -1,101 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_dados_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="2.1435888100000016"/>
 	<property name="ireport.x" value="395"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long(29)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long(2)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long (2154)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new String("0317")]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new String("11109")]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Integer(2017)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_media_eficacia_financ" class="java.lang.Double" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Double(0.0)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_media_eficiencia_financ" class="java.math.BigDecimal" isForPrompting="false">
+	<parameter name="mediaEficienciaFisicoFinanceira" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="mediaEficaciaFisicoFinanceira" class="java.math.BigDecimal" isForPrompting="false">
 		<parameterDescription><![CDATA[]]></parameterDescription>
-		<defaultValueExpression><![CDATA[new BigDecimal(0.0)]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT		fm.programa as cod_prog,
-fm.unidade_orcamentaria as cod_uo,
-(SELECT uo.descricao FROM comum.unidade_orcamentaria uo WHERE uo.codigo = fm.unidade_orcamentaria AND uo.ativo is TRUE LIMIT 1) as unidade_orcamentaria,
-fm.acao as cod_acao,
-(SELECT ac.denominacao FROM planejamento.acao ac WHERE ac.codigo = fm.acao limit 1) as acao,
-(SELECT ac.produto FROM planejamento.acao ac WHERE ac.codigo = fm.acao limit 1) as produto,
-(SELECT um.descricao FROM planejamento.acao ac inner join planejamento.unidade_medida um on (ac.id_unidade_medida = um.id_unidade) WHERE ac.codigo = fm.acao limit 1) as unidade_medida,
-(		CASE
-		ac.id_tipo_calculo_meta
-		WHEN 1 THEN
-			(SELECT SUM(ffm.quantidade)
-				FROM planejamento.fisico_financeiro_mensal ffm
-				WHERE ffm.id_acao = fm.id_acao
-				AND ffm.id_exercicio = 2)
-		WHEN 2 THEN
-			(SELECT SUM(ffm.quantidade)/COUNT(*)
-				FROM planejamento.fisico_financeiro_mensal ffm
-				WHERE ffm.id_acao = fm.id_acao
-				AND ffm.quantidade <> 0.0 AND ffm.id_exercicio = 2
-				GROUP BY ac.id_acao)
-		END 		) AS planejado,
-(		CASE
-		ac.id_tipo_calculo_meta
-		WHEN 1 THEN
-			(SELECT SUM(exec.quantidade)
-				FROM monitoramento.execucao exec
-				WHERE exec.id_acao = fm.id_acao
-				AND exec.id_exercicio = 2)
-		WHEN 2 THEN
-			(SELECT SUM(exec.quantidade)/COUNT(*)
-				FROM monitoramento.execucao exec
-				WHERE exec.id_acao = fm.id_acao
-				AND exec.quantidade <> 0.0 AND exec.id_exercicio = 2
-				GROUP BY ac.id_acao)
-END 		) AS executado,
-SUM(fm.dotacao_inicial) as dotInicial,
-SUM(fm.disponivel) as dotAtual,
-SUM(fm.empenhado) as empenhado,
-SUM(fm.liquidado) as liquidado
-FROM siafem.financeiro_mensal fm
-     left join planejamento.acao ac on (fm.id_acao = ac.id_acao)
-     left join planejamento.unidade_medida um ON (ac.id_unidade_medida = um.id_unidade)
-     left join planejamento.programa prog ON (ac.id_programa = prog.id_programa)
-     left join comum.unidade_orcamentaria uo ON (uo.id_unidade_orcamentaria = ac.id_unidade_orcamentaria)
-WHERE 1 = 1  AND
-fm.programa = $P{param_cod_prog} AND fm.ano = $P{param_ano}
-GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9
-ORDER BY 1, 2, 4]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="cod_prog" class="java.lang.String"/>
-	<field name="cod_uo" class="java.lang.String"/>
-	<field name="unidade_orcamentaria" class="java.lang.String"/>
-	<field name="cod_acao" class="java.lang.String"/>
-	<field name="acao" class="java.lang.String"/>
-	<field name="produto" class="java.lang.String"/>
-	<field name="unidade_medida" class="java.lang.String"/>
-	<field name="planejado" class="java.lang.Double"/>
-	<field name="executado" class="java.lang.Double"/>
-	<field name="dotinicial" class="java.lang.Double"/>
-	<field name="dotatual" class="java.lang.Double"/>
-	<field name="empenhado" class="java.lang.Double"/>
-	<field name="liquidado" class="java.lang.Double"/>
-	<variable name="qtd_exec_planejado" class="java.lang.Double" calculation="Count">
-		<variableExpression><![CDATA[$F{cod_acao}]]></variableExpression>
-	</variable>
+	<field name="programa" class="java.lang.String"/>
+	<field name="codigoUnidadeOrcamentaria" class="java.lang.String"/>
+	<field name="descricaoUnidadeOrcamentaria" class="java.lang.String"/>
+	<field name="acao" class="qualitativo.model.Acao"/>
+	<field name="unidadeMedida" class="java.lang.String"/>
+	<field name="planejado" class="java.math.BigDecimal"/>
+	<field name="executado" class="java.math.BigDecimal"/>
+	<field name="dotacaoInicial" class="java.math.BigDecimal"/>
+	<field name="disponivel" class="java.math.BigDecimal"/>
+	<field name="empenhado" class="java.math.BigDecimal"/>
+	<field name="liquidado" class="java.math.BigDecimal"/>
+	<field name="liquidadoSobreAtual" class="java.math.BigDecimal"/>
+	<field name="eficiencia" class="java.math.BigDecimal"/>
+	<field name="eficacia" class="java.math.BigDecimal"/>
 	<variable name="sum_executado" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{executado}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
@@ -343,7 +273,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{executado}==null ? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0)) : (new DecimalFormat("#,###,##0.00")).format($F{executado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{executado})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="173" y="0" width="49" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -357,7 +287,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{produto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{acao}.getProduto()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="580" y="0" width="55" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -371,7 +301,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($F{empenhado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{empenhado})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="222" y="0" width="54" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -385,7 +315,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{unidade_medida}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{unidadeMedida}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="82" y="0" width="91" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -399,7 +329,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA["("+$F{cod_acao}+") - "+$F{acao}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["("+$F{acao}.getCodigo() +") - "+$F{acao}.getDenominacao()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="276" y="0" width="54" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -413,7 +343,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{planejado}==null ? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0)) : (new DecimalFormat("#,###,##0.00")).format($F{planejado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{planejado})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="694" y="0" width="43" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -427,9 +357,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dotatual}==null || $F{dotatual}.doubleValue()== new Double(0.0).doubleValue() ? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0)) :
-
-(new DecimalFormat("#,###,##0.00")).format($F{liquidado}/$F{dotatual})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{liquidadoSobreAtual})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="462" y="0" width="59" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -443,7 +371,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($F{dotinicial})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{dotacaoInicial})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="521" y="0" width="59" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -457,7 +385,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($F{dotatual})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{disponivel})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="82" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -471,7 +399,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA["("+$F{cod_uo}+") - "+$F{unidade_orcamentaria}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["("+$F{codigoUnidadeOrcamentaria}+") - "+$F{descricaoUnidadeOrcamentaria}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="737" y="0" width="65" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -485,15 +413,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{liquidado}==null || $F{dotatual}==null || $F{dotatual}.equals(new Double(0.0))
-
-|| $F{executado}==null || $F{planejado}==null || $F{planejado}.equals(new Double(0.0))
-
-? (new DecimalFormat("#,###,##0.00")).format(new Double(0.0))
-
-:
-
-(new DecimalFormat("#,###,##0.00")).format(($F{executado}/$F{planejado})/($F{liquidado}/$F{dotatual}))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{eficiencia})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="635" y="0" width="59" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -507,7 +427,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($F{liquidado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{liquidado})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="391" y="0" width="71" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -521,10 +441,7 @@ ORDER BY 1, 2, 4]]>
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{planejado}==null || $F{planejado}.doubleValue()== new Double(0.0).doubleValue() ||
-$F{executado}==null || $F{executado}.doubleValue()== new Double(0.0).doubleValue() ?
-(new DecimalFormat("#,###,##0.00")).format(new Double(0.0)) :
-(new DecimalFormat("#,###,##0.00")).format($F{executado}/$F{planejado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{eficacia})]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -567,7 +484,7 @@ $F{executado}==null || $F{executado}.doubleValue()== new Double(0.0).doubleValue
 					<font size="6"/>
 					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($P{param_media_eficacia_financ})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format( $P{mediaEficaciaFisicoFinanceira})]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="7" width="802" height="1" uuid="3e0691c7-cc2f-4d7f-951d-34eebbd9a942"/>
@@ -615,8 +532,34 @@ $F{executado}==null || $F{executado}.doubleValue()== new Double(0.0).doubleValue
 					<font size="6"/>
 					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($P{param_media_eficiencia_financ})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($P{mediaEficienciaFisicoFinanceira})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
+	<noData>
+		<band height="32">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="14" backcolor="#C8C8C8" uuid="8dd41a59-755e-47ac-bf74-1c484d248271"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[6.2. Avaliação Física e Financeira (Princípio da Eficiência) e Avaliação do Produto (Meta Física)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="802" height="14" uuid="fab753f2-abee-449e-91e4-ecceeaecc772"/>
+				<textElement>
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="3" spacingBefore="3" spacingAfter="3"/>
+				</textElement>
+				<text><![CDATA[Não a dados de avaliação Física e Financeira para esse programa]]></text>
+			</staticText>
+		</band>
+	</noData>
 </jasperReport>

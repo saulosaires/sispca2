@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="150" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_identificacao_programa" pageWidth="842" pageHeight="150" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" isIgnorePagination="true" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
 		<defaultValueExpression><![CDATA[new Long(58)]]></defaultValueExpression>
 	</parameter>
@@ -16,9 +18,6 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="_THIS" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<title>
 		<band height="34">
 			<staticText>
@@ -60,7 +59,7 @@
 		</band>
 	</detail>
 	<noData>
-		<band height="53">
+		<band height="53" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="34" width="802" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="d1b68db6-24e2-4f7d-b320-d4aeb76fe664"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">

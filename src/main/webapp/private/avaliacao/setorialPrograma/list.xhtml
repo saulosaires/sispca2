@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
 
-<h:head></h:head>
+ 
 <body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
@@ -41,7 +41,7 @@
 											<h:outputText value="EIXOS: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenuUnid" value="#{avaliacaoProgramaMBean.eixoId}" styleClass="form-control input-sm">
+											<h:selectOneMenu id="inputEixo" value="#{avaliacaoProgramaMBean.eixoId}" styleClass="form-control input-sm">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
 												<f:selectItems value="#{avaliacaoProgramaMBean.listEixos}" var="eixo" itemValue="#{eixo.id}" itemLabel="#{fn:toUpperCase(eixo.descricao)}"/>
 											</h:selectOneMenu>											
@@ -56,9 +56,10 @@
 									<div class="col-sm-offset-7 col-sm-10">
 										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 											<f:ajax
-												execute="@this  inpCod"
+												execute="@this inpCod inputEixo"
 												event="click" listener="#{avaliacaoProgramaMBean.buscarProgramas()}"
 												render="tabelaprogramas" />
+												
 										</h:commandButton>
 									 
 									</div>
@@ -75,7 +76,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<p:dataTable var="prog" value="#{avaliacaoProgramaMBean.listPrograma}" paginator="true" sortBy="#{prog.orgao.codigo}" id="tabelaprogramas"
-										 rows="10" style="margin-right: 2%; font-size: 12px;">
+										 rows="15" style="margin-right: 2%; font-size: 12px;">
 								
 								<p:column headerText="Órgão" widthr="30%">
 									<h:outputText value="(#{prog.orgao.codigo}) - #{prog.orgao.descricao}"/>

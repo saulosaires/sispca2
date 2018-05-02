@@ -19,15 +19,24 @@ import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
+import avaliacao.model.Analise;
+import avaliacao.model.AvaliacaoFisicoFinanceira;
+import avaliacao.model.IndicadorDesempenhoIntermediario;
+import avaliacao.model.Recomendacao;
+import avaliacao.model.Resultado;
+import avaliacao.service.AnaliseService;
 import avaliacao.service.AvaliacaoFisicoFinanceiraService;
 import avaliacao.service.DiretrizAssociadaService;
+import avaliacao.service.IndicadorDesempenhoIntermediarioService;
 import avaliacao.service.PainelAssociadoService;
+import avaliacao.service.RecomendacaoService;
 import avaliacao.service.ResultadoService;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import qualitativo.service.ProgramaService;
+import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
 @Named
@@ -44,8 +53,12 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 
 	
 	private AvaliacaoFisicoFinanceiraService avaliacaoFisicoFinanceiraService; 
+	private IndicadorDesempenhoIntermediarioService indicadorDesempenhoIntermediarioService;
 	private DiretrizAssociadaService diretrizAssociadaService;
 	private PainelAssociadoService painelAssociadoService;
+	private AnaliseService analiseService; 
+	private ResultadoService resultadoService;
+	private RecomendacaoService recomendacaoService;
 
 	@Inject
 	public AvaliacaoProgramaRelatorioMBean(ProgramaService programaService,
@@ -53,15 +66,21 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 										   AvaliacaoFisicoFinanceiraService avaliacaoFisicoFinanceiraService,
 										   DiretrizAssociadaService diretrizAssociadaService,
 										   PainelAssociadoService painelAssociadoService,
+										   AnaliseService analiseService, 
+										   IndicadorDesempenhoIntermediarioService indicadorDesempenhoIntermediarioService,
 										   FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
-										  	
+										   RecomendacaoService recomendacaoService,
 										   ResultadoService resultadoService) {
 
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
  
-		this.avaliacaoFisicoFinanceiraService=avaliacaoFisicoFinanceiraService;
-		this.diretrizAssociadaService=diretrizAssociadaService;
-		this.painelAssociadoService=painelAssociadoService;
+		this.avaliacaoFisicoFinanceiraService		= avaliacaoFisicoFinanceiraService;
+		this.diretrizAssociadaService				= diretrizAssociadaService;
+		this.painelAssociadoService					= painelAssociadoService;
+		this.analiseService							= analiseService;
+		this.resultadoService					    = resultadoService;
+		this.recomendacaoService				    = recomendacaoService;
+		this.indicadorDesempenhoIntermediarioService= indicadorDesempenhoIntermediarioService;
 		
 	}
 
@@ -70,10 +89,12 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 		
 		try {
 			
-		//	List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem = super.fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
+			List<AvaliacaoFisicoFinanceira> listAvaliacaoFisicoFinanceira = avaliacaoFisicoFinanceiraService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+			
+			List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem = super.fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
 
-	//		BigDecimal mediaEficaciaFisicoFinanceira   = fisicoFinanceiroMensalSiafemService.calculaMediaEficaciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
-	//		BigDecimal mediaEficienciaFisicoFinanceira = fisicoFinanceiroMensalSiafemService.calculaEficienciaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+			BigDecimal mediaEficaciaFisicoFinanceira   = fisicoFinanceiroMensalSiafemService.calculaMediaEficaciaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
+			BigDecimal mediaEficienciaFisicoFinanceira = fisicoFinanceiroMensalSiafemService.calculaEficienciaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
 
 			BigDecimal empenhado = fisicoFinanceiroMensalSiafemService.calculaEmpenhadoByProgAndAno(getPrograma().getCodigo(), getExercicio().getAno());
 			BigDecimal liquidado = fisicoFinanceiroMensalSiafemService.calculaLiquidadoByProgAndAno(getPrograma().getCodigo(), getExercicio().getAno());
@@ -86,6 +107,14 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 			List<String> painelAssociado = painelAssociadoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId())
 																.stream().map(p -> p.getIndicador().getIndicador()).collect(Collectors.toList());
 			
+			
+			List<IndicadorDesempenhoIntermediario> listIntermediarioAssociado = indicadorDesempenhoIntermediarioService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+			
+			List<Analise> listAnalise = analiseService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+			
+			List<Resultado> listResultado = resultadoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+			
+			Recomendacao recomendacao = recomendacaoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
 			
 			Map<String, Object> parameters = new HashMap<>();
 
@@ -105,7 +134,7 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 			parameters.put("param_objetivo", 		  getPrograma().getObjetivo());
 			parameters.put("param_publico_alvo", 	  getPrograma().getPublicoAlvo());
 			parameters.put("param_cod_uo",			  getPrograma().getUnidadeOrcamentaria().getCodigo());
-  			
+
 			parameters.put("param_dot_inicial", dotacaoInicial);
 			parameters.put("param_dot_atual", dotacaoAtual);
 			parameters.put("param_variacao", variacao);
@@ -117,10 +146,19 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 			
 			parameters.put("painelAssociado", painelAssociado);
 			
-//			parameters.put("listFisicoFinanceiroMensalSiafem", listFisicoFinanceiroMensalSiafem);
-//			parameters.put("param_media_eficacia_financ", mediaEficaciaFisicoFinanceira);
-//			parameters.put("param_media_eficiencia_financ", mediaEficienciaFisicoFinanceira);
+			parameters.put("intermediarioAssociado", listIntermediarioAssociado);
 			
+			parameters.put("analise", listAnalise);
+			
+			parameters.put("listFisicoFinanceiroMensalSiafem", listFisicoFinanceiroMensalSiafem);
+			parameters.put("mediaEficaciaFisicoFinanceira", mediaEficaciaFisicoFinanceira);
+			parameters.put("mediaEficienciaFisicoFinanceira", mediaEficienciaFisicoFinanceira);
+			
+			parameters.put("avaliacaoFisicoFinanceira", listAvaliacaoFisicoFinanceira);
+			
+			parameters.put("resultado", listResultado);
+			
+			parameters.put("recomendacao", recomendacao.getDescricao());
 			
 			String report = FileUtil.getRealPath("/relatorios/avaliacao/relatorio_avaliacao_programa.jasper");
  			

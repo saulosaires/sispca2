@@ -15,7 +15,7 @@ public class PrimeFacesUtils {
 
 	
 	public static void execute(String cmd) {
-		
+		 
 		 PrimeFaces.current().executeScript(cmd);
 	}
 	
@@ -23,7 +23,7 @@ public class PrimeFacesUtils {
 		StreamedContent file = null;
 		InputStream inputStream = null; 
 		inputStream = new ByteArrayInputStream(bytes);
-		file = new DefaultStreamedContent(inputStream,contentType, titulo, "UTF-8"); 
+		file = new DefaultStreamedContent(inputStream,contentType, titulo); 
 		return file;
 	} 
 	

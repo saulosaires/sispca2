@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
@@ -30,17 +40,19 @@
 	<parameter name="param_ppa" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false"/>
-	<parameter name="param_media_eficacia_financ" class="java.lang.Double" isForPrompting="false"/>
-	<parameter name="param_media_eficiencia_financ" class="java.math.BigDecimal" isForPrompting="false"/>
-	<parameter name="param_med_cust_unit_c" class="java.math.BigDecimal" isForPrompting="false"/>
-	<parameter name="param_med_cust_unit_f" class="java.math.BigDecimal" isForPrompting="false"/>
-	<parameter name="param_med_cust_eficienc" class="java.math.BigDecimal" isForPrompting="false"/>
 	<parameter name="listFisicoFinanceiroMensalSiafem" class="java.util.List"/>
 	<parameter name="param_dot_empenhado" class="java.math.BigDecimal"/>
 	<parameter name="param_dot_liquidado" class="java.math.BigDecimal"/>
 	<parameter name="param_dot_pago" class="java.math.BigDecimal"/>
 	<parameter name="diretrizes" class="java.util.List"/>
 	<parameter name="painelAssociado" class="java.util.List"/>
+	<parameter name="intermediarioAssociado" class="java.util.List"/>
+	<parameter name="analise" class="java.util.List"/>
+	<parameter name="mediaEficaciaFisicoFinanceira" class="java.math.BigDecimal"/>
+	<parameter name="mediaEficienciaFisicoFinanceira" class="java.math.BigDecimal"/>
+	<parameter name="avaliacaoFisicoFinanceira" class="java.util.List"/>
+	<parameter name="resultado" class="java.util.List"/>
+	<parameter name="recomendacao" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -54,61 +66,30 @@
 				<reportElement x="0" y="47" width="802" height="1" uuid="bcd512e2-fafc-4121-908e-1c93b22d5d1f"/>
 			</line>
 			<staticText>
-				<reportElement x="80" y="2" width="712" height="14" uuid="a59fcf0a-0450-4a96-975c-f3e428fbf54f"/>
-				<textElement>
-					<font pdfFontName="Helvetica-Bold"/>
+				<reportElement x="80" y="2" width="722" height="14" uuid="a59fcf0a-0450-4a96-975c-f3e428fbf54f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[Governo do Estado do Maranhão]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="16" width="712" height="14" uuid="b0f9b314-13d9-41a3-911c-bccb2b470f86"/>
-				<textElement>
-					<font pdfFontName="Helvetica-Bold"/>
+				<reportElement x="80" y="16" width="723" height="14" uuid="b0f9b314-13d9-41a3-911c-bccb2b470f86"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[Secretaria de Estado do Planejamento e Orçamento]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="31" width="711" height="16" uuid="c8f0fcce-9ccf-40e2-b1c3-b330a37b1ab1"/>
-				<textElement markup="html">
-					<font pdfFontName="Helvetica-Bold"/>
+				<reportElement x="80" y="31" width="723" height="16" uuid="c8f0fcce-9ccf-40e2-b1c3-b330a37b1ab1"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<b>Relatório de Avaliação do "+$P{param_ppa}+" - Exercício "+$P{param_ano}+"</b>"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Relatório de Avaliação do "+$P{param_ppa}+" - Exercício "+$P{param_ano}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<summary>
-		<band height="76" splitType="Prevent">
-			<subreport>
-				<reportElement positionType="Float" x="0" y="2" width="802" height="11" uuid="63d8e32b-e7d7-40a4-8015-203d503afa0d"/>
-				<subreportParameter name="param_dot_atual">
-					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_publico_alvo">
-					<subreportParameterExpression><![CDATA[$P{param_publico_alvo}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_unidade_executora">
-					<subreportParameterExpression><![CDATA[$P{param_unidade_executora}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_dot_inicial">
-					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_problema">
-					<subreportParameterExpression><![CDATA[$P{param_problema}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_prog">
-					<subreportParameterExpression><![CDATA[$P{param_prog}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_variacao">
-					<subreportParameterExpression><![CDATA[$P{param_variacao}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_cod_prog">
-					<subreportParameterExpression><![CDATA[$P{param_cod_prog}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_objetivo">
-					<subreportParameterExpression><![CDATA[$P{param_objetivo}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportExpression><![CDATA["sub_relatorio_avaliacao_identificacao_programa.jasper"]]></subreportExpression>
-			</subreport>
+		<band height="150" splitType="Prevent">
 			<subreport runToBottom="true" overflowType="Stretch">
 				<reportElement positionType="Float" x="0" y="15" width="802" height="11" uuid="ac2c4d70-b85d-4d70-a7ae-0698f3ce29f8"/>
 				<subreportParameter name="param_dot_empenhado">
@@ -137,12 +118,93 @@
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_diretriz_associada.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="41" width="802" height="11" uuid="b68f34fb-3d70-470b-b1b1-3893dd0a03f4"/>
+				<reportElement positionType="Float" x="0" y="42" width="802" height="11" uuid="b68f34fb-3d70-470b-b1b1-3893dd0a03f4"/>
 				<subreportParameter name="diretrizes">
 					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{painelAssociado})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_painel_associado.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" x="0" y="57" width="802" height="11" uuid="740e97f5-c105-413b-94cf-8435567a9e5d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{intermediarioAssociado})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_indicador_desemp_intermed.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="1" width="801" height="11" uuid="24ef47b7-feb6-4155-b900-544d0041c020"/>
+				<subreportParameter name="param_cod_prog">
+					<subreportParameterExpression><![CDATA[$P{param_cod_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_prog">
+					<subreportParameterExpression><![CDATA[$P{param_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_unidade_executora">
+					<subreportParameterExpression><![CDATA[$P{param_unidade_executora}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_problema">
+					<subreportParameterExpression><![CDATA[$P{param_problema}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_objetivo">
+					<subreportParameterExpression><![CDATA[$P{param_objetivo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_publico_alvo">
+					<subreportParameterExpression><![CDATA[$P{param_publico_alvo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_inicial">
+					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_atual">
+					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_variacao">
+					<subreportParameterExpression><![CDATA[$P{param_variacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["avaliacao_identificacao_programa.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" x="0" y="71" width="802" height="11" uuid="02f8781e-a2c2-457c-b7c5-cea900d7d81c"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{analise})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_analise.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" x="0" y="85" width="802" height="11" uuid="be89784c-51d8-4591-9b30-37064d6f19bc"/>
+				<subreportParameter name="mediaEficaciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediaEficienciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficienciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{listFisicoFinanceiroMensalSiafem})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_dados_fisico_financeiro.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" x="1" y="99" width="802" height="11" uuid="3eaef0a2-8454-4455-8c32-6e5673ed6655"/>
+				<subreportParameter name="mediaEficaciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediaEficienciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficienciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{avaliacaoFisicoFinanceira})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_fisico_financeira.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" x="0" y="115" width="802" height="11" uuid="0c3b920d-ce4d-438d-9592-c8f4b87de272"/>
+				<subreportParameter name="mediaEficaciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediaEficienciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficienciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{resultado})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_resultado.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" x="1" y="130" width="802" height="11" uuid="3fb5bedb-ea37-4150-9a59-10f7d94b9de7"/>
+				<subreportParameter name="recomendacao">
+					<subreportParameterExpression><![CDATA[$P{recomendacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_recomendacao.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</summary>
