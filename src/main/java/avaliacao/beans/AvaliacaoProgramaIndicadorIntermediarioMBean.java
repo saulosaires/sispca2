@@ -90,7 +90,7 @@ public class AvaliacaoProgramaIndicadorIntermediarioMBean extends AvaliacaoProgr
 				intermediarioAssociado.setUnidadeMedida(null);
 			}
 			 
-			Messages.addMessageInfo(SUCCESS_SAVE);
+			
 		
 			indicadorDesempenhoIntermediarioService.create(intermediarioAssociado);
 		 
@@ -98,7 +98,7 @@ public class AvaliacaoProgramaIndicadorIntermediarioMBean extends AvaliacaoProgr
 			
 			buscarPainelAssociado();
 			
-			
+			Messages.addMessageInfo(SUCCESS_SAVE);
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getCause().getMessage());
 	
