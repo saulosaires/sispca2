@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_resultado" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_resultado" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -13,6 +13,36 @@
 	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
 		<defaultValueExpression><![CDATA[new Long (86)]]></defaultValueExpression>
 	</parameter>
+	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_unidade_executora" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_problema" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_objetivo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_publico_alvo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_dot_inicial" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_dot_atual" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_variacao" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="param_ppa" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="listFisicoFinanceiroMensalSiafem" class="java.util.List"/>
+	<parameter name="param_dot_empenhado" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_liquidado" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_pago" class="java.math.BigDecimal"/>
+	<parameter name="diretrizes" class="java.util.List"/>
+	<parameter name="painelAssociado" class="java.util.List"/>
+	<parameter name="intermediarioAssociado" class="java.util.List"/>
+	<parameter name="analise" class="java.util.List"/>
+	<parameter name="mediaEficaciaFisicoFinanceira" class="java.math.BigDecimal"/>
+	<parameter name="mediaEficienciaFisicoFinanceira" class="java.math.BigDecimal"/>
+	<parameter name="avaliacaoFisicoFinanceira" class="java.util.List"/>
+	<parameter name="resultado" class="java.util.List"/>
+	<parameter name="recomendacao" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -58,4 +88,47 @@
 			</textField>
 		</band>
 	</detail>
+	<summary>
+		<band height="29">
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="2" width="802" height="22" isRemoveLineWhenBlank="true" uuid="b60d0455-0a9b-4b15-8949-f57af53bbec4"/>
+				<subreportParameter name="recomendacao">
+					<subreportParameterExpression><![CDATA[$P{recomendacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_recomendacao.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+	<noData>
+		<band height="65">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="14" backcolor="#C8C8C8" uuid="ac861bc3-55bc-4ed4-b937-2caee6acf976"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[6.3. Avaliação de Resultados (Princípio da Efetividade)]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="15" width="802" height="18" isPrintWhenDetailOverflows="true" uuid="a822ddae-6f02-434a-a311-bc09d1bb3b31"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Não há dados a serem exibidos"]]></textFieldExpression>
+			</textField>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="40" width="802" height="22" isRemoveLineWhenBlank="true" uuid="0758fa8f-e09f-4a13-a193-3172692666f2"/>
+				<subreportParameter name="recomendacao">
+					<subreportParameterExpression><![CDATA[$P{recomendacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_recomendacao.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</noData>
 </jasperReport>

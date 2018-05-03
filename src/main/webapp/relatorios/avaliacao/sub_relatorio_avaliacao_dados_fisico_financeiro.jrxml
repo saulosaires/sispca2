@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_dados_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_dados_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="2.1435888100000016"/>
 	<property name="ireport.x" value="395"/>
 	<property name="ireport.y" value="0"/>
@@ -9,6 +9,44 @@
 	<parameter name="mediaEficaciaFisicoFinanceira" class="java.math.BigDecimal" isForPrompting="false">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
+	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_id_exerc" class="java.lang.Long" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_prog" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_cod_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_prog" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_unidade_executora" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_problema" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_objetivo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_publico_alvo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_dot_inicial" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_dot_atual" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_variacao" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="param_id_user" class="java.lang.Long" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="param_ppa" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_cod_uo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_ano" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="listFisicoFinanceiroMensalSiafem" class="java.util.List"/>
+	<parameter name="param_dot_empenhado" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_liquidado" class="java.math.BigDecimal"/>
+	<parameter name="param_dot_pago" class="java.math.BigDecimal"/>
+	<parameter name="diretrizes" class="java.util.List"/>
+	<parameter name="painelAssociado" class="java.util.List"/>
+	<parameter name="intermediarioAssociado" class="java.util.List"/>
+	<parameter name="analise" class="java.util.List"/>
+	<parameter name="avaliacaoFisicoFinanceira" class="java.util.List"/>
+	<parameter name="resultado" class="java.util.List"/>
+	<parameter name="recomendacao" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -447,7 +485,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="72">
+		<band height="104">
 			<staticText>
 				<reportElement x="0" y="30" width="802" height="14" uuid="1c9d1fd3-8fe1-4621-8992-1208b4bde75c"/>
 				<textElement>
@@ -534,10 +572,108 @@
 				</textElement>
 				<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($P{mediaEficienciaFisicoFinanceira})]]></textFieldExpression>
 			</textField>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="80" width="802" height="22" isRemoveLineWhenBlank="true" uuid="1284144b-31c8-4a6a-9cd3-d093bda3f094"/>
+				<subreportParameter name="mediaEficienciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficienciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediaEficaciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_imagem">
+					<subreportParameterExpression><![CDATA[$P{param_imagem}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_id_exerc">
+					<subreportParameterExpression><![CDATA[$P{param_id_exerc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_id_prog">
+					<subreportParameterExpression><![CDATA[$P{param_id_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_cod_prog">
+					<subreportParameterExpression><![CDATA[$P{param_cod_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_prog">
+					<subreportParameterExpression><![CDATA[$P{param_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_unidade_executora">
+					<subreportParameterExpression><![CDATA[$P{param_unidade_executora}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_problema">
+					<subreportParameterExpression><![CDATA[$P{param_problema}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_objetivo">
+					<subreportParameterExpression><![CDATA[$P{param_objetivo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_publico_alvo">
+					<subreportParameterExpression><![CDATA[$P{param_publico_alvo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_inicial">
+					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_atual">
+					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_variacao">
+					<subreportParameterExpression><![CDATA[$P{param_variacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_id_user">
+					<subreportParameterExpression><![CDATA[$P{param_id_user}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_exercicio">
+					<subreportParameterExpression><![CDATA[$P{param_exercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_ppa">
+					<subreportParameterExpression><![CDATA[$P{param_ppa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_cod_uo">
+					<subreportParameterExpression><![CDATA[$P{param_cod_uo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_ano">
+					<subreportParameterExpression><![CDATA[$P{param_ano}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="listFisicoFinanceiroMensalSiafem">
+					<subreportParameterExpression><![CDATA[$P{listFisicoFinanceiroMensalSiafem}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_empenhado">
+					<subreportParameterExpression><![CDATA[$P{param_dot_empenhado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_liquidado">
+					<subreportParameterExpression><![CDATA[$P{param_dot_liquidado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_pago">
+					<subreportParameterExpression><![CDATA[$P{param_dot_pago}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diretrizes">
+					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="painelAssociado">
+					<subreportParameterExpression><![CDATA[$P{painelAssociado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intermediarioAssociado">
+					<subreportParameterExpression><![CDATA[$P{intermediarioAssociado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="analise">
+					<subreportParameterExpression><![CDATA[$P{analise}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="avaliacaoFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{avaliacaoFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="resultado">
+					<subreportParameterExpression><![CDATA[$P{resultado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="recomendacao">
+					<subreportParameterExpression><![CDATA[$P{recomendacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{avaliacaoFisicoFinanceira})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_fisico_financeira.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</summary>
 	<noData>
-		<band height="32">
+		<band height="66">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="802" height="14" backcolor="#C8C8C8" uuid="8dd41a59-755e-47ac-bf74-1c484d248271"/>
 				<box>
@@ -560,6 +696,104 @@
 				</textElement>
 				<text><![CDATA[Não a dados de avaliação Física e Financeira para esse programa]]></text>
 			</staticText>
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="40" width="802" height="22" isRemoveLineWhenBlank="true" uuid="7072f023-619f-4fba-978e-425865898d48"/>
+				<subreportParameter name="mediaEficienciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficienciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediaEficaciaFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_imagem">
+					<subreportParameterExpression><![CDATA[$P{param_imagem}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_id_exerc">
+					<subreportParameterExpression><![CDATA[$P{param_id_exerc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_id_prog">
+					<subreportParameterExpression><![CDATA[$P{param_id_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_cod_prog">
+					<subreportParameterExpression><![CDATA[$P{param_cod_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_prog">
+					<subreportParameterExpression><![CDATA[$P{param_prog}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_unidade_executora">
+					<subreportParameterExpression><![CDATA[$P{param_unidade_executora}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_problema">
+					<subreportParameterExpression><![CDATA[$P{param_problema}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_objetivo">
+					<subreportParameterExpression><![CDATA[$P{param_objetivo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_publico_alvo">
+					<subreportParameterExpression><![CDATA[$P{param_publico_alvo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_inicial">
+					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_atual">
+					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_variacao">
+					<subreportParameterExpression><![CDATA[$P{param_variacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_id_user">
+					<subreportParameterExpression><![CDATA[$P{param_id_user}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_exercicio">
+					<subreportParameterExpression><![CDATA[$P{param_exercicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_ppa">
+					<subreportParameterExpression><![CDATA[$P{param_ppa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_cod_uo">
+					<subreportParameterExpression><![CDATA[$P{param_cod_uo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_ano">
+					<subreportParameterExpression><![CDATA[$P{param_ano}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="listFisicoFinanceiroMensalSiafem">
+					<subreportParameterExpression><![CDATA[$P{listFisicoFinanceiroMensalSiafem}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_empenhado">
+					<subreportParameterExpression><![CDATA[$P{param_dot_empenhado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_liquidado">
+					<subreportParameterExpression><![CDATA[$P{param_dot_liquidado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_pago">
+					<subreportParameterExpression><![CDATA[$P{param_dot_pago}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="diretrizes">
+					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="painelAssociado">
+					<subreportParameterExpression><![CDATA[$P{painelAssociado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intermediarioAssociado">
+					<subreportParameterExpression><![CDATA[$P{intermediarioAssociado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="analise">
+					<subreportParameterExpression><![CDATA[$P{analise}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="avaliacaoFisicoFinanceira">
+					<subreportParameterExpression><![CDATA[$P{avaliacaoFisicoFinanceira}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="resultado">
+					<subreportParameterExpression><![CDATA[$P{resultado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="recomendacao">
+					<subreportParameterExpression><![CDATA[$P{recomendacao}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{avaliacaoFisicoFinanceira})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_fisico_financeira.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</noData>
 </jasperReport>

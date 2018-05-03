@@ -1,7 +1,10 @@
 package avaliacao.beans;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +14,13 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.primefaces.model.StreamedContent;
 
 import administrativo.service.ExercicioService;
@@ -116,10 +126,13 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 			
 			Recomendacao recomendacao = recomendacaoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
 			
+			     
+			 BufferedImage chart=createChart(dotacaoInicial,dotacaoAtual,empenhado,liquidado,pago);
+			
 			Map<String, Object> parameters = new HashMap<>();
 
 			String brasaoMa = FileUtil.getRealPath("/resources/images/logo-gov-ma.png");
- 
+			parameters.put("chart", chart);
 			parameters.put("param_imagem", brasaoMa);
 			parameters.put("param_ano", getExercicio().getAno());
 			 
@@ -160,7 +173,7 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 			
 			parameters.put("recomendacao", recomendacao.getDescricao());
 			
-			String report = FileUtil.getRealPath("/relatorios/avaliacao/relatorio_avaliacao_programa.jasper");
+			String report = FileUtil.getRealPath("/relatorios/avaliacao/relatorio_avaliacao_programa2.jasper");
  			
 			
 			JasperPrint jasperRelatorio = JasperFillManager.fillReport(report, parameters,new JREmptyDataSource());
@@ -187,7 +200,44 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 	}
   
 
-	 
+	public BufferedImage createChart(BigDecimal dotacaoInicial, BigDecimal dotacaoAtual, BigDecimal empenhado, BigDecimal liquidado, BigDecimal pago) {
+		 
+		  final String dotInicialLabel  = "Dotação Inicial";  
+		  final String catDotInicialLabel  = "Dot.Inicial";   
+		  
+	      final String dotAtualLabel  = "Dotação Atual";    
+	      final String catDotAtualLabel  = "Dot.Atual";    
+	      final String empenhadoLabel = "Empenhado";        
+	      final String liquidadoLabel = "Liquidado";        
+	      final String pagoLabel = "Pago";        
+	      
+	      final DefaultCategoryDataset dataset =  new DefaultCategoryDataset( );  
+
+	      dataset.addValue(dotacaoInicial,dotInicialLabel ,catDotInicialLabel );        
+	      dataset.addValue(dotacaoAtual , dotAtualLabel ,  catDotAtualLabel );        
+	      dataset.addValue(empenhado, 	  empenhadoLabel , empenhadoLabel ); 
+	      dataset.addValue(liquidado, 	  liquidadoLabel , liquidadoLabel );           
+	      dataset.addValue(pago, 		  pagoLabel, 	   pagoLabel );  
+	      
+	      StandardChartTheme theme = new StandardChartTheme("sispca", false);
+	      Color color = Color.WHITE;
+	      theme.setPlotBackgroundPaint(color); 
+	      
+	      
+	      ChartFactory.setChartTheme(theme);
+	      JFreeChart chart = ChartFactory.createBarChart("","","", dataset, PlotOrientation.VERTICAL, false, false, false);
+
+	    
+	     
+	       CategoryPlot plot = chart.getCategoryPlot();
+	      
+	       NumberAxis e = (NumberAxis) plot.getRangeAxis();
+	       e.setNumberFormatOverride(new DecimalFormat("#,###,##0.00"));
+	      
+	      return chart.createBufferedImage(490, 150);
+	      
+	     
+	} 
 	
 	
 	

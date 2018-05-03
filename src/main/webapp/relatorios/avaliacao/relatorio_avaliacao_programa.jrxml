@@ -88,50 +88,10 @@
 			</textField>
 		</band>
 	</title>
-	<summary>
-		<band height="150" splitType="Prevent">
-			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="15" width="802" height="11" uuid="ac2c4d70-b85d-4d70-a7ae-0698f3ce29f8"/>
-				<subreportParameter name="param_dot_empenhado">
-					<subreportParameterExpression><![CDATA[$P{param_dot_empenhado}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_dot_pago">
-					<subreportParameterExpression><![CDATA[$P{param_dot_pago}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_dot_atual">
-					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_dot_liquidado">
-					<subreportParameterExpression><![CDATA[$P{param_dot_liquidado}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="param_dot_inicial">
-					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportExpression><![CDATA["sub_relatorio_grafico_fisico_financeiro.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="28" width="802" height="11" uuid="519aefc9-1ef7-403b-a00b-82fb3cb78abb"/>
-				<subreportParameter name="diretrizes">
-					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
-				</subreportParameter>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{diretrizes})]]></dataSourceExpression>
-				<subreportExpression><![CDATA["sub_relatorio_avaliacao_diretriz_associada.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="42" width="802" height="11" uuid="b68f34fb-3d70-470b-b1b1-3893dd0a03f4"/>
-				<subreportParameter name="diretrizes">
-					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
-				</subreportParameter>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{painelAssociado})]]></dataSourceExpression>
-				<subreportExpression><![CDATA["sub_relatorio_avaliacao_painel_associado.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="57" width="802" height="11" uuid="740e97f5-c105-413b-94cf-8435567a9e5d"/>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{intermediarioAssociado})]]></dataSourceExpression>
-				<subreportExpression><![CDATA["sub_relatorio_avaliacao_indicador_desemp_intermed.jasper"]]></subreportExpression>
-			</subreport>
+	<detail>
+		<band height="31" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="1" width="801" height="11" uuid="24ef47b7-feb6-4155-b900-544d0041c020"/>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="802" height="31" isRemoveLineWhenBlank="true" uuid="24ef47b7-feb6-4155-b900-544d0041c020"/>
 				<subreportParameter name="param_cod_prog">
 					<subreportParameterExpression><![CDATA[$P{param_cod_prog}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -161,13 +121,65 @@
 				</subreportParameter>
 				<subreportExpression><![CDATA["avaliacao_identificacao_programa.jasper"]]></subreportExpression>
 			</subreport>
+		</band>
+		<band height="27" splitType="Stretch">
 			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="71" width="802" height="11" uuid="02f8781e-a2c2-457c-b7c5-cea900d7d81c"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="1" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="ac2c4d70-b85d-4d70-a7ae-0698f3ce29f8"/>
+				<subreportParameter name="param_dot_empenhado">
+					<subreportParameterExpression><![CDATA[$P{param_dot_empenhado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_pago">
+					<subreportParameterExpression><![CDATA[$P{param_dot_pago}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_atual">
+					<subreportParameterExpression><![CDATA[$P{param_dot_atual}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_liquidado">
+					<subreportParameterExpression><![CDATA[$P{param_dot_liquidado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="param_dot_inicial">
+					<subreportParameterExpression><![CDATA[$P{param_dot_inicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_grafico_fisico_financeiro.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="25" splitType="Stretch">
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="1" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="519aefc9-1ef7-403b-a00b-82fb3cb78abb"/>
+				<subreportParameter name="diretrizes">
+					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{diretrizes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_diretriz_associada.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="25" splitType="Stretch">
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="b68f34fb-3d70-470b-b1b1-3893dd0a03f4"/>
+				<subreportParameter name="diretrizes">
+					<subreportParameterExpression><![CDATA[$P{diretrizes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{painelAssociado})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_painel_associado.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="27" splitType="Stretch">
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="740e97f5-c105-413b-94cf-8435567a9e5d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{intermediarioAssociado})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["sub_relatorio_avaliacao_indicador_desemp_intermed.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="30" splitType="Stretch">
+			<subreport runToBottom="true" overflowType="Stretch">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="02f8781e-a2c2-457c-b7c5-cea900d7d81c"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{analise})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_analise.jasper"]]></subreportExpression>
 			</subreport>
+		</band>
+		<band height="33" splitType="Stretch">
 			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="85" width="802" height="11" uuid="be89784c-51d8-4591-9b30-37064d6f19bc"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="be89784c-51d8-4591-9b30-37064d6f19bc"/>
 				<subreportParameter name="mediaEficaciaFisicoFinanceira">
 					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -177,8 +189,10 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{listFisicoFinanceiroMensalSiafem})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_dados_fisico_financeiro.jasper"]]></subreportExpression>
 			</subreport>
+		</band>
+		<band height="27" splitType="Stretch">
 			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="1" y="99" width="802" height="11" uuid="3eaef0a2-8454-4455-8c32-6e5673ed6655"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="1" y="2" width="802" height="22" isRemoveLineWhenBlank="true" uuid="3eaef0a2-8454-4455-8c32-6e5673ed6655"/>
 				<subreportParameter name="mediaEficaciaFisicoFinanceira">
 					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -188,8 +202,10 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{avaliacaoFisicoFinanceira})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_fisico_financeira.jasper"]]></subreportExpression>
 			</subreport>
+		</band>
+		<band height="26" splitType="Stretch">
 			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="0" y="115" width="802" height="11" uuid="0c3b920d-ce4d-438d-9592-c8f4b87de272"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="1" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="0c3b920d-ce4d-438d-9592-c8f4b87de272"/>
 				<subreportParameter name="mediaEficaciaFisicoFinanceira">
 					<subreportParameterExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -199,13 +215,15 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{resultado})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_resultado.jasper"]]></subreportExpression>
 			</subreport>
+		</band>
+		<band height="25" splitType="Stretch">
 			<subreport runToBottom="true" overflowType="Stretch">
-				<reportElement positionType="Float" x="1" y="130" width="802" height="11" uuid="3fb5bedb-ea37-4150-9a59-10f7d94b9de7"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="802" height="22" isRemoveLineWhenBlank="true" uuid="3fb5bedb-ea37-4150-9a59-10f7d94b9de7"/>
 				<subreportParameter name="recomendacao">
 					<subreportParameterExpression><![CDATA[$P{recomendacao}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_recomendacao.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-	</summary>
+	</detail>
 </jasperReport>
