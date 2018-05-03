@@ -80,12 +80,12 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 			dir.setExercicio(getExercicio());
 			dir.setPrograma(getPrograma());
 			 
-			Messages.addMessageInfo(SUCCESS_SAVE_DIRETRIZ);
+			
 		
 			diretrizAssociadaService.create(dir);
 			diretrizId=null;
 			buscarDiretrizAssociada();
-			
+			Messages.addMessageInfo(SUCCESS_SAVE_DIRETRIZ);
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getCause().getMessage());
 	
