@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Utils;
 import qualitativo.model.Programa;
 import qualitativo.service.ProgramaService;
@@ -84,7 +85,7 @@ public abstract class AvaliacaoPrograma implements Serializable {
 	
 	private void calculaVariacao() {
 		
-		try{
+		try{  
 			this.variacao = this.dotacaoAtual.divide(dotacaoInicial, 2, RoundingMode.HALF_UP).
 				subtract(new BigDecimal(1).setScale(2)).multiply(new BigDecimal(100).setScale(2), MathContext.UNLIMITED);
 			

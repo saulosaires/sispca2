@@ -74,6 +74,8 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 				
 			}
  			
+ 	 
+			
 			calculaEficacia(financeiroMensalSiafem);
 			calculaLiquidadoSobreAtual(financeiroMensalSiafem);
 			calculaEficiencia(financeiroMensalSiafem);
@@ -158,7 +160,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 				mediaEficaciaFisicoFinanceira  =mediaEficaciaFisicoFinanceira.add(avalFisFinan.getEficacia());
 			}
  			
-			if (avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
+			if (avalFisFinan.getAcao()!=null && avalFisFinan.getAcao().getCodigo()!=null && avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
 				quantidadeGestaoPrograma++;
 			}
 			
@@ -186,7 +188,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 				mediaEficienciaFisicoFinanceira = mediaEficienciaFisicoFinanceira.add(avalFisFinan.getEficiencia());
 			}
 			
-			if (avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
+			if (avalFisFinan.getAcao()!=null && avalFisFinan.getAcao().getCodigo()!=null && avalFisFinan.getAcao().getCodigo().contains(ACAO.GESTAO_PROGRAMA.codigo())) {
 				quantidadeGestaoPrograma++;
 			}
 			

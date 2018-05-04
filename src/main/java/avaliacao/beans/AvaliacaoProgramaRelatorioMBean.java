@@ -1,9 +1,11 @@
 package avaliacao.beans;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -17,15 +19,20 @@ import javax.inject.Named;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarPainter;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.primefaces.model.StreamedContent;
 
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
@@ -202,10 +209,10 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 
 	public BufferedImage createChart(BigDecimal dotacaoInicial, BigDecimal dotacaoAtual, BigDecimal empenhado, BigDecimal liquidado, BigDecimal pago) {
 		 
-		  final String dotInicialLabel  = "Dotação Inicial";  
+		  final String dotInicialLabel  = "DotaÃ§Ã£o Inicial";  
 		  final String catDotInicialLabel  = "Dot.Inicial";   
 		  
-	      final String dotAtualLabel  = "Dotação Atual";    
+	      final String dotAtualLabel  = "DotaÃ§Ã£o Atual";    
 	      final String catDotAtualLabel  = "Dot.Atual";    
 	      final String empenhadoLabel = "Empenhado";        
 	      final String liquidadoLabel = "Liquidado";        
@@ -219,22 +226,31 @@ public class AvaliacaoProgramaRelatorioMBean extends AvaliacaoPrograma implement
 	      dataset.addValue(liquidado, 	  liquidadoLabel , liquidadoLabel );           
 	      dataset.addValue(pago, 		  pagoLabel, 	   pagoLabel );  
 	      
+	      
 	      StandardChartTheme theme = new StandardChartTheme("sispca", false);
-	      Color color = Color.WHITE;
-	      theme.setPlotBackgroundPaint(color); 
+	      					 theme.setPlotBackgroundPaint(Color.WHITE); 
 	      
 	      
 	      ChartFactory.setChartTheme(theme);
-	      JFreeChart chart = ChartFactory.createBarChart("","","", dataset, PlotOrientation.VERTICAL, false, false, false);
+	      JFreeChart chart = ChartFactory.createBarChart3D("","","", dataset, PlotOrientation.VERTICAL, false, false, false);
 
-	    
-	     
-	       CategoryPlot plot = chart.getCategoryPlot();
 	      
-	       NumberAxis e = (NumberAxis) plot.getRangeAxis();
-	       e.setNumberFormatOverride(new DecimalFormat("#,###,##0.00"));
+	      BarRenderer.setDefaultBarPainter(new StandardBarPainter());
+	      CategoryPlot plot = chart.getCategoryPlot();
+	      plot.setBackgroundAlpha(0);
+	       
+	      Font font = new Font("", Font.TRUETYPE_FONT, 10); 
+	      CategoryAxis axis = plot.getDomainAxis();
+	      axis.setTickLabelFont(font);
+	       
+	      NumberAxis e = (NumberAxis) plot.getRangeAxis();
+	      e.setNumberFormatOverride(new DecimalFormat("#,###,##0.00"));
 	      
-	      return chart.createBufferedImage(490, 150);
+	       BarRenderer br = (BarRenderer) plot.getRenderer();
+	       br.setItemMargin(-2.5);
+	   
+	       
+	       return chart.createBufferedImage(490, 150);
 	      
 	     
 	} 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_painel_associado" pageWidth="842" pageHeight="150" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" whenResourceMissingType="Error" isIgnorePagination="true" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_painel_associado" pageWidth="842" pageHeight="150" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" whenResourceMissingType="Error" isIgnorePagination="true" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -220,14 +220,6 @@
 				</textElement>
 				<text><![CDATA[Indicadores]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="34" width="802" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="23bec8ec-ffc8-4e59-818a-cf717454f62d"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8"/>
-					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Nenhum indicador associada ao programa"]]></textFieldExpression>
-			</textField>
 			<subreport runToBottom="true" overflowType="Stretch">
 				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="60" width="802" height="22" isRemoveLineWhenBlank="true" uuid="8ecd8681-6c1b-4825-addd-1adb81428d66"/>
 				<subreportParameter name="param_id_prog">
@@ -326,6 +318,14 @@
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource( $P{intermediarioAssociado})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["sub_relatorio_avaliacao_indicador_desemp_intermed.jasper"]]></subreportExpression>
 			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="34" width="802" height="14" backcolor="#FFFFFF" uuid="1a8b8edb-2f54-4ad8-b554-95f8dc6611ab"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Nenhum indicador associada ao programa]]></text>
+			</staticText>
 		</band>
 	</noData>
 </jasperReport>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_dados_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_relatorio_avaliacao_dados_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="baf1ee89-4621-4c84-bbf4-d17d210a3b48">
 	<property name="ireport.zoom" value="2.1435888100000016"/>
 	<property name="ireport.x" value="395"/>
 	<property name="ireport.y" value="0"/>
@@ -311,7 +311,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{executado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{executado}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="173" y="0" width="49" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -339,7 +340,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{empenhado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{empenhado}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="222" y="0" width="54" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -381,7 +383,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{planejado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{planejado}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="694" y="0" width="43" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -395,7 +398,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{liquidadoSobreAtual})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{liquidadoSobreAtual}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="462" y="0" width="59" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -409,7 +413,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{dotacaoInicial})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{dotacaoInicial}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="521" y="0" width="59" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -423,7 +428,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{disponivel})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{disponivel}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="82" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -451,7 +457,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{eficiencia})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{eficiencia}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="635" y="0" width="59" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -465,7 +472,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{liquidado})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{liquidado}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="391" y="0" width="71" height="17" forecolor="#000000" backcolor="#FEFEFE" uuid="9707c09c-1514-4365-a584-d45cd776747f"/>
@@ -479,7 +487,8 @@
 						<font size="6" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($F{eficacia})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{eficacia}]]></textFieldExpression>
+					<patternExpression><![CDATA["#,###,##0.00"]]></patternExpression>
 				</textField>
 			</frame>
 		</band>
@@ -522,7 +531,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format( $P{mediaEficaciaFisicoFinanceira})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{mediaEficaciaFisicoFinanceira}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="7" width="802" height="1" uuid="3e0691c7-cc2f-4d7f-951d-34eebbd9a942"/>
@@ -570,7 +579,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new DecimalFormat("#,###,##0.00").format($P{mediaEficienciaFisicoFinanceira})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{mediaEficienciaFisicoFinanceira}]]></textFieldExpression>
 			</textField>
 			<subreport runToBottom="true" overflowType="Stretch">
 				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="80" width="802" height="22" isRemoveLineWhenBlank="true" uuid="1284144b-31c8-4a6a-9cd3-d093bda3f094"/>

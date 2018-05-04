@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" whenResourceMissingType="Empty" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_fisico_financeiro" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="822" leftMargin="0" rightMargin="20" topMargin="5" bottomMargin="5" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -204,7 +204,7 @@
 				<text><![CDATA[2. DOTAÇÃO ORÇAMENTÁRIA]]></text>
 			</staticText>
 			<image>
-				<reportElement x="154" y="50" width="487" height="149" uuid="9fe35b21-69c9-4101-a4e4-b79792abbdf5"/>
+				<reportElement x="154" y="50" width="487" height="152" uuid="9fe35b21-69c9-4101-a4e4-b79792abbdf5"/>
 				<imageExpression><![CDATA[$P{chart}]]></imageExpression>
 			</image>
 		</band>

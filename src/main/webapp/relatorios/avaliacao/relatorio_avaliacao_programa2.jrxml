@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoPages" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="1"/>
@@ -54,6 +54,7 @@
 	<parameter name="resultado" class="java.util.List"/>
 	<parameter name="recomendacao" class="java.lang.String"/>
 	<parameter name="chart" class="java.awt.image.BufferedImage"/>
+	<parameter name="pageInit" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -91,7 +92,7 @@
 	</title>
 	<detail>
 		<band height="31" splitType="Stretch">
-			<subreport>
+			<subreport runToBottom="false" overflowType="Stretch">
 				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="802" height="31" isRemoveLineWhenBlank="true" uuid="24ef47b7-feb6-4155-b900-544d0041c020"/>
 				<subreportParameter name="param_imagem">
 					<subreportParameterExpression><![CDATA[$P{param_imagem}]]></subreportParameterExpression>
@@ -193,4 +194,13 @@
 			</subreport>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="29">
+			<textField>
+				<reportElement x="700" y="0" width="100" height="20" uuid="76fd7aad-4eb2-497f-88c2-386190c5a9cf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pageInit}+$V{PAGE_NUMBER}-1]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 </jasperReport>

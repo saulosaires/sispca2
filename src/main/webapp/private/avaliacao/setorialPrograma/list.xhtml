@@ -24,6 +24,24 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<fieldset>
+						
+							 <p:panel id="panelDot">
+								 <div class="span12 spaceParamBusca">
+								 	<div class="span3">
+										<h:outputText styleClass="labelOutText" value="PÁGINA INICIAL DO RELATÓRIO " />
+									</div>
+								 	<div class="span3">
+										<p:inputNumber id="pages" value="#{avaliacaoProgramaMBean.pages}" />
+									</div>
+									<br/>
+									<div class="span3">	 
+										<h:commandButton value="Imprimir" styleClass="btn btn-primary btnAction" 
+														 actionListener="#{avaliacaoProgramaMBean.imprimirTodos()}" onclick="this.form.target='_blank'" />
+										 
+									</div>	
+								</div>
+							</p:panel>
+						
 							<div class="span12 spaceParamBusca">
 								<div class="span12">
 									<div class="span3">
@@ -64,6 +82,9 @@
 									 
 									</div>
 								</div>
+							
+
+							
 							
 						</fieldset>
 					</div>
@@ -127,13 +148,12 @@
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
-								
-								
+ 
 														 
 								<p:column headerText="Acomp" width="4%">
-									<h:button image="/resources/images/icone-pdf.gif" outcome="avaliacaoSetorialRelatorio" title="Acompanhamento da avaliação para o programa"  style="margin-left: 2%; width: 20px; height: 20px;">
+									<h:commandButton image="/resources/images/icone-pdf.gif"  actionListener="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" title="Acompanhamento da avaliação para o programa" onclick="this.form.target='_blank'"  style="margin-left: 2%; width: 20px; height: 20px;">
 									     <f:param name="id" value="#{prog.id}" /> 
-									</h:button>
+									</h:commandButton>
 								</p:column>								
 							</p:dataTable>
 											

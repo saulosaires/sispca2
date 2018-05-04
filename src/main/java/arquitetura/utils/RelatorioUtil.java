@@ -55,18 +55,15 @@ public class RelatorioUtil {
 		return  now.format(formatter);
 	}
 	
-	public static void mostraNaPagina(byte[] bytes,String titulo,TipoArquivo tipoArquivo) throws IOException {
+	public static void mostraNaPagina(byte[] bytes,String titulo,String tipoArquivo) throws IOException {
 
 		HttpServletResponse response = (HttpServletResponse) FacesContext
 				.getCurrentInstance().getExternalContext().getResponse();
 
 		if (bytes != null && bytes.length > 0) {
 
-			if(tipoArquivo.equals(TipoArquivo.PDF))
-				response.setContentType(FILE_TYPE_PDF);
-			if(tipoArquivo.equals(TipoArquivo.XLS))
-				response.setContentType(FILE_TYPE_XLS);
-
+			response.setContentType(tipoArquivo);
+			 
 			response.setHeader("Content-Disposition","inline; filename=\"" + titulo + "\"");
 
 			response.setContentLength(bytes.length);
