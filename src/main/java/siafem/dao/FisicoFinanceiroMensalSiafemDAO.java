@@ -327,8 +327,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		
 	}
- 
-	
+ 	
 	public BigDecimal calculaEmpenhadoByProgAndAno(String programaCodigo, Integer anoVigente){
  
 		

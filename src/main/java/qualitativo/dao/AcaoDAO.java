@@ -79,4 +79,46 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		return entityManager.createQuery(query).getResultList();
 	}
 
+	public List<Acao> buscarByExercicio(Long exercicioId){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> m = query.from(Acao.class);
+		
+		query.select(m);
+ 
+ 			
+		if (!Utils.invalidId((exercicioId))) {
+
+			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.INNER);
+			joinExercicio.on(cb.equal(joinExercicio.get("id"),exercicioId) );	
+		
+		}
+		  
+		query.orderBy(cb.asc(m.get("denominacao")));
+		
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	public List<Acao> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> m = query.from(Acao.class);
+		
+		query.select(m);
+ 
+ 			
+		if (!Utils.invalidId((unidadeOrcamentariaId))) {
+
+			Join<Object, Object> joinExercicio = m.join("unidadeOrcamentaria",JoinType.INNER);
+			joinExercicio.on(cb.equal(joinExercicio.get("id"),unidadeOrcamentariaId) );	
+		
+		}
+		  
+		query.orderBy(cb.asc(m.get("denominacao")));
+		
+		return entityManager.createQuery(query).getResultList();
+	}
+	
 }

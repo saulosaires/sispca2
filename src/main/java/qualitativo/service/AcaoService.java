@@ -1,5 +1,6 @@
 package qualitativo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,5 +33,24 @@ public class AcaoService  extends AbstractService<Acao> {
 
 	}
 
-	 
+	public List<Acao> buscarByExercicio(Long exercicioId) {
+
+		if (Utils.invalidId(exercicioId)) {
+			return new ArrayList<>();
+		} else {
+			return ((AcaoController) getController()).buscarByExercicio( exercicioId);
+		}
+
+	}
+
+	public List<Acao> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
+
+		if (Utils.invalidId(unidadeOrcamentariaId)) {
+			return new ArrayList<>();
+		} else {
+			return ((AcaoController) getController()).buscarByUnidadeOrcamentaria( unidadeOrcamentariaId);
+		}
+
+	}	
+	
 }

@@ -28,5 +28,16 @@ public class AcaoController  extends AbstractController<Acao>{
 		return ((AcaoDAO) getDao()).buscar(codigo, denominacao, unidadeOrcamentariaId, programaId);
 	}
 	
+	public List<Acao> buscarByExercicio(Long exercicioId){
+		
+		return ((AcaoDAO) getDao()).buscarByExercicio(exercicioId);
+	}
 
+	public List<Acao> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId){
+		
+		return ((AcaoDAO) getDao()).buscarByUnidadeOrcamentaria(unidadeOrcamentariaId);
+	}
+
+	
+	
 }
