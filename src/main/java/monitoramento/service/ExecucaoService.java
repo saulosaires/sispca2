@@ -1,5 +1,6 @@
 package monitoramento.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,10 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		return ((ExecucaoController) getController()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
 	}
 
-	
+	public  Double  findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+
+		return ((ExecucaoController) getController()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
+	}
 	
 	public Execucao merge(Execucao execucao) throws JpaException {
 		

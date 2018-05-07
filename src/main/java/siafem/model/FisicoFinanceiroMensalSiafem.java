@@ -39,10 +39,10 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	private Acao acao;
  
 	@Column(name="unidade_gestora")
-	private Long unidadeGestora=0l;	
+	private String unidadeGestora;	
 	
 	@Column(name="unidade_orcamentaria")
-	private Long unidadeOrcamentaria=0l;	
+	private String unidadeOrcamentaria;	
 	
 	@Column(name="programa")
 	private String programa;	
@@ -117,6 +117,22 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.unidadeMedida=unidadeMedida;
 	}
 
+ 	public FisicoFinanceiroMensalSiafem(
+									    BigDecimal dotacaoInicial,
+										BigDecimal disponivel, 
+										BigDecimal empenhado,
+										BigDecimal liquidado
+													) {
+			super();
+			      
+			this.dotacaoInicial = dotacaoInicial;
+			this.disponivel = disponivel;
+			this.liquidado = liquidado;
+			this.empenhado = empenhado;
+		 
+}
+ 	
+ 	
 	public Long getId() {
 		return id;
 	}
@@ -133,19 +149,19 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.mes = mes;
 	}
 
-	public Long getUnidadeGestora() {
+	public String getUnidadeGestora() {
 		return unidadeGestora;
 	}
 
-	public void setUnidadeGestora(Long unidadeGestora) {
+	public void setUnidadeGestora(String unidadeGestora) {
 		this.unidadeGestora = unidadeGestora;
 	}
 
-	public Long getUnidadeOrcamentaria() {
+	public String getUnidadeOrcamentaria() {
 		return unidadeOrcamentaria;
 	}
 
-	public void setUnidadeOrcamentaria(Long unidadeOrcamentaria) {
+	public void setUnidadeOrcamentaria(String unidadeOrcamentaria) {
 		this.unidadeOrcamentaria = unidadeOrcamentaria;
 	}
 

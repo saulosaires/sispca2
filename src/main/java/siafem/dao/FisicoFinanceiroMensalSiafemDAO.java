@@ -11,6 +11,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import administrativo.model.Exercicio;
@@ -18,7 +19,10 @@ import arquitetura.dao.AbstractDAO;
 import arquitetura.enums.TipoCalculoMeta;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
+import qualitativo.model.Acao;
 import qualitativo.model.Programa;
+import qualitativo.model.UnidadeGestora;
+import qualitativo.model.UnidadeOrcamentaria;
 import quantitativo.model.FisicoFinanceiroMensal;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 
@@ -39,6 +43,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String PROGRAMA="programa"; 
 	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria"; 
 	private static final  String UNIDADE_MEDIDA="unidadeMedida"; 
+	private static final  String UNIDADE_GESTORA="unidadeGestora";
 	private static final  String TIPO_CALCULO_META="tipoCalculoMeta"; 
 	private static final  String DOTACAO_INICIAL="dotacaoInicial"; 
 	private static final  String DISPONIVEL="disponivel";
@@ -116,7 +121,66 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		 return entityManager.createQuery(criteria).getResultList();
 	}
  
+	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
+		
+		if(Utils.invalidYear(exercicio) )return new ArrayList<>();
+		
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+ 		
+ 	 	criteria.multiselect(
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO))
+							 );
 
+ 		List<Predicate> predicate = new ArrayList<>();
+ 		
+ 		if(!Utils.emptyParam(unidadeGestora)) {
+ 			
+ 			predicate.add(builder.like(root.get(UNIDADE_GESTORA),unidadeGestora));
+ 			
+ 		}
+ 		
+ 		if(!Utils.emptyParam(unidadeOrcamentaria)) {
+ 			
+ 			predicate.add(builder.like(root.get(UNIDADE_ORCAMENTARIA),unidadeOrcamentaria));
+ 			
+ 		}
+ 		
+ 		if(!Utils.invalidId(acao)) {
+ 			
+ 			Join<Object, Object> joinAcao  = root.join(ACAO, JoinType.LEFT);	
+ 			
+ 			joinAcao.on(builder.equal(joinAcao.get(CODIGO), acao.toString()));
+ 			
+ 		}
+
+ 		predicate.add(builder.equal(root.get(ANO),exercicio));
+ 		
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+		
+		
+		if(!Utils.emptyParam(unidadeOrcamentaria) && !Utils.emptyParam(unidadeGestora)) {
+			
+			criteria.groupBy(
+							root.get(UNIDADE_GESTORA),
+							root.get(UNIDADE_ORCAMENTARIA)
+						    );
+ 
+		}
+		
+		 return entityManager.createQuery(criteria).getResultList();		
+		
+		
+	}
+	
 	public Double calculaQuantidadeAcumulativoPlanejada(Long acaoId, Long exercicioId){
  
 		

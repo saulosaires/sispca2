@@ -53,6 +53,12 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaPagoByProgAndAno(programaCodigo, anoVigente);
 	}	
 	
+	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
+		
+		return ((FisicoFinanceiroMensalSiafemController)getController()).valorFisicoFinanceiro(unidadeGestora,unidadeOrcamentaria,acao,exercicio);
+		
+	}
+		
 	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
 		

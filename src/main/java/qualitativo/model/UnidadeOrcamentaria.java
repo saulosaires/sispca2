@@ -2,6 +2,7 @@ package qualitativo.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,7 +53,7 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	private String sigla;
 
 	@OneToMany(mappedBy="unidadeOrcamentaria")
-	private List<UnidadeGestora> unidadeGestoras;
+	private Set<UnidadeGestora> unidadeGestoras;
 	
 	@OneToMany(mappedBy="unidadeOrcamentaria")
 	private List<Programa> programas;
@@ -107,11 +108,11 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 		this.sigla = sigla;
 	}
 
-	public List<UnidadeGestora> getUnidadeGestoras() {
+	public Set<UnidadeGestora> getUnidadeGestoras() {
 		return this.unidadeGestoras;
 	}
 
-	public void setUnidadeGestoras(List<UnidadeGestora> unidadeGestoras) {
+	public void setUnidadeGestoras(Set<UnidadeGestora> unidadeGestoras) {
 		this.unidadeGestoras = unidadeGestoras;
 	}	
 

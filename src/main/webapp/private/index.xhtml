@@ -31,7 +31,7 @@
 											style="background-color: #337AB7; color: #FFF;">
 											<div class="row">
 												<div class="col-xs-3">
-													<i class="fa fa-tasks fa-5x" />
+													<em class="fa fa-tasks fa-5x" />
 												</div>
 												<div class="col-xs-9 text-right">
 													<div class="huge" style="font-weight: bolder">#{homeMBean.qtdAcao}</div>
@@ -49,7 +49,7 @@
 											style="background-color: #5CB85C; color: #FFF;">
 											<div class="row">
 												<div class="col-xs-3">
-													<i class="fa fa-tasks fa-5x"></i>
+													<em class="fa fa-tasks fa-5x"></em>
 												</div>
 												<div class="col-xs-9 text-right">
 													<div class="huge" style="font-weight: bolder">#{homeMBean.qtdPrograma}</div>
@@ -67,7 +67,7 @@
 											style="background-color: #EE3B3B; color: #FFF;">
 											<div class="row">
 												<div class="col-xs-3">
-													<i class="fa fa-tasks fa-5x"></i>
+													<em class="fa fa-tasks fa-5x"></em>
 												</div>
 												<div class="col-xs-9 text-right">
 													<div class="huge" style="font-weight: bolder">#{homeMBean.exercicioVigente}</div>
@@ -96,9 +96,9 @@
 											itemLabel="#{fn:toUpperCase(ug.codigo)} | #{fn:toUpperCase(ug.descricao)}"
 											itemValue="#{ug.id}" />
 											
-										<p:ajax  
-											render="panelChart panelDot"
-											listener="#{homeMBean.changeUnidadeGestora()}" />
+										<f:ajax event="change" 		process="@this"
+												render="panelChart panelDot"   onevent="desenhaCirculo"
+												listener="#{homeMBean.changeUnidadeGestora()}" />
 											
 									</h:selectOneMenu>
 								</div>
@@ -111,9 +111,9 @@
 										<f:selectItems var="u" value="#{homeMBean.listUnidadeOrcamentaria}" itemLabel="#{fn:toUpperCase(u.codigo)} | #{fn:toUpperCase(u.descricao)}"
 																itemValue="#{u.id}" />
 											
-										<p:ajax event="valueChange" process="@this"
-											update=" idComboAcao"
-											listener="#{homeMBean.changeUnidadeOrcamentaria()}"
+										<f:ajax event="change" 		  		  process="@this"
+												render="panelChart panelDot idComboAcao" onevent="desenhaCirculo"
+												listener="#{homeMBean.changeUnidadeOrcamentaria()}"
 											 />
 											
 									</h:selectOneMenu>
@@ -128,9 +128,10 @@
 										<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
 										<f:selectItems var="acao" value="#{homeMBean.listAcao}" itemLabel="#{fn:toUpperCase(acao.codigo)} | #{fn:toUpperCase(acao.denominacao)}" itemValue="#{acao.id}" />
 											
-										<f:ajax event="change" execute="@this"
-											listener="#{homeMBean.changeAcao()}"
-											render="panelChart panelDot" onevent="desenhaCirculo" />
+										<f:ajax event="change" 		process="@this"
+												render="panelDot panelChart" 	onevent="desenhaCirculo"
+												listener="#{homeMBean.changeAcao()}" />
+											
 									</h:selectOneMenu>
 									
 								</div>	
@@ -139,94 +140,100 @@
 							<br />
 							<br />
 
+
 							<p:panel id="panelDot">
-							
 								<div class="row">
 									<div class="col-lg-12">
 										<p>
-											<i class="glyphicon glyphicon-usd" style="font-weight: bold; color: #696969;">DOTAÇÕES</i>
+											<em class="glyphicon glyphicon-usd"
+												style="font-weight: bold; color: #696969;">DOTAÇÕES</em>
 										</p>
 										<br />
 									</div>
 								</div>
-								
 								<div class="row">
-								
 									<div class="col-lg-3">
-										<div style="font-weight: bolder; color: #696969;text-align: center;" >INICIAL(%)</div>
-										<br/>
-										
-										<div class="demo" data-value="100"></div>
-										<br/>
-										<div style="text-align: center;">
-											<strong><h:outputText value="R$ " rendered="#{graficoMBean.valorInicial != null}" /></strong> 
-											
+										<div  style="text-align:center;font-weight: bolder; color: #696969">INICIAL (%)</div>
+										<br />
+										<div class="demo" data-value="${homeMBean.percentualInicial}"></div>
+										<br />
+										<div style="text-align:center;">
+											<strong><h:outputText value="R$ " /></strong> 
 											<strong>
-													<h:outputText value="100">
+												<h:outputText value="#{homeMBean.valorInicial}">
 														<f:convertNumber pattern="#,##0.00" />
-													</h:outputText>
+												</h:outputText>
 											</strong>
-										 </div>
-									  </div>
-									
-									<div class="col-lg-3">
-										<div style="font-weight: bolder; color: #696969;text-align: center;" >ATUAL(%)</div>
-										<br/>
-										
-										<div class="demo" data-value="66"></div>
-										<br/>
-										<div style="text-align: center;">
-											<strong><h:outputText value="R$ " rendered="#{graficoMBean.valorInicial != null}" /></strong> 
-											
-											<strong>
-													<h:outputText value="88">
-														<f:convertNumber pattern="#,##0.00" />
-													</h:outputText>
-											</strong>
-										 </div>
-									  </div>
-									
-									<div class="col-lg-3">
-										<div style="font-weight: bolder; color: #696969;text-align: center;" >EMPENHADO(%)</div>
-										<br/>
-										
-										<div class="demo" data-value="80"></div>
-										<br/>
-										<div style="text-align: center;">
-											<strong><h:outputText value="R$ " rendered="#{graficoMBean.valorInicial != null}" /></strong> 
-											
-											<strong>
-													<h:outputText value="45">
-														<f:convertNumber pattern="#,##0.00" />
-													</h:outputText>
-											</strong>
-										 </div>
-									  </div>
-									
-									<div class="col-lg-3">
-										<div style="font-weight: bolder; color: #696969;text-align: center;" >LIQUIDADO(%)</div>
-										<br/>
-										
-										<div class="demo" data-value="65"></div>
-										<br/>
-										<div style="text-align: center;">
-											<strong><h:outputText value="R$ " rendered="#{graficoMBean.valorInicial != null}" /></strong> 
-											
-											<strong>
-													<h:outputText value="73">
-														<f:convertNumber pattern="#,##0.00" />
-													</h:outputText>
-											</strong>
-										 </div>
-									  </div>									
-									
+										</div>
 									</div>
-								</p:panel>
-												
-					
-						
-						
-						
+									<div class="col-lg-3">
+										<div style="text-align:center;font-weight: bolder; color: #696969">ATUAL (%)</div>
+										<br />
+										<div class="demo" data-value="${homeMBean.percentualAtual}"></div>
+										<br />
+										<div style="text-align:center;" >
+											<strong><h:outputText value="R$ " /></strong> 
+											<strong>
+												<h:outputText value="#{homeMBean.valorAtual}">
+													<f:convertNumber pattern="#,##0.00" />
+											</h:outputText>
+											</strong>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div style="text-align:center;font-weight: bolder; color: #696969">EMPENHADO (%)</div>
+										<br />
+										<div class="demo" data-value="${homeMBean.percentualEmpenhado}" style="font-size: 20px !important;"></div>
+										<br />
+										<div style="text-align:center;">
+											<strong><h:outputText value="R$ " /></strong> 
+											<strong>
+											  <h:outputText value="#{homeMBean.valorEmpenhado}">
+													<f:convertNumber pattern="#,##0.00" />
+											  </h:outputText>
+											</strong>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div style="text-align:center;font-weight: bolder; color: #696969">LIQUIDADO (%)</div>
+										<br />
+										<div class="demo" data-value="${homeMBean.percentualLiquidado}"></div>
+										<br />
+										<div style="text-align:center;">
+											<strong>
+												<h:outputText value="R$ " rendered="#{homeMBean.valorLiquidado != null}" />
+											</strong> 
+											<strong>
+												 <h:outputText value="#{homeMBean.valorLiquidado}">
+														<f:convertNumber pattern="#,##0.00" />
+												 </h:outputText>
+											</strong>
+										</div>
+									</div>
+								</div>
+							</p:panel>
+ 							<br/>
+ 							
+ 							<div class="row" style="height: auto; margin-left: 3px; margin-right: 3px; border: 01px solid #DDD;">
+ 							
+								<div class="col-lg-12 col-md-6" style="padding-top: 2%;">
+									<h:panelGrid id="panelChart" style="width: 100%">
+										<c:if test="#{homeMBean.exercicioVigente == null}">
+											<div class="alert alert-block"
+												style="background-color: #FFFFF0; color: #D2B48C;">
+												<button type="button" class="close" data-dismiss="alert">×</button>
+												<h5 style="font-weight: bolder;">
+													<i>Gráfico não pôde ser apresentado, sem exercício vigente!</i>
+												</h5>
+											</div>
+										</c:if>
+										<p:chart id="idChart" type="line"
+											model="#{homeMBean.lineChartModel}" />
+									</h:panelGrid>
+								</div>
+							</div>
+ 	
+ 	
 					</div>
 					
 				</div>

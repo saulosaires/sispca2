@@ -24,6 +24,14 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	}
 
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
+	}
+
+	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).valorFisicoFinanceiro(unidadeGestora,unidadeOrcamentaria,acao,exercicio);
+	}
+
 	public BigDecimal calculaDotacaoInicialByProgAndAno(String programaCodigo, Integer anoVigente){	
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoInicialByProgAndAno(programaCodigo, anoVigente);
 	}
@@ -45,10 +53,6 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 	}	
 	
 	
-	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
-		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
-	}
-
 	public Double calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){	
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeAcumulativoPlanejada(acaoId,exercicioId);
 	}
