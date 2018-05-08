@@ -232,7 +232,38 @@
 									</h:panelGrid>
 								</div>
 							</div>
- 	
+							<br/>
+						 	<div class="row">
+						 	
+								<div class="col-lg-3 col-md-6">
+									<p:panel class="panel-overflow-auto">
+										<div class="ui-grid-row" style="background-color: #F5F5F5;">
+											<div class="col-lg-4 col-md-6">
+												<div style="text-align:center">
+													<img src="../resources/images/icone_arquivo.png"
+														 style="width: 40px; height: 40px; padding-top: 08px; padding-bottom: 08px;" />
+												</div>
+											</div>
+											<div class="col-lg-8 col-md-6">
+												<h4 style="margin-top: 6%; font-weight: bolder;">ARQUIVOS</h4>
+											</div>
+										</div>
+										<br />
+										<br />
+										<c:forEach var="arquiv" items="#{homeMBean.listLinks}" varStatus="id_arq">
+										
+											 
+												 <img src="../resources/images/icone-pdf.gif" />							 
+												 <a href="${arquiv.url}" target="_blank"
+													style="margin-left: 5%;">${arquiv.titulo}</a>
+												 <br />
+												 
+											
+										</c:forEach>
+									</p:panel>
+								</div>						 	
+						 	
+						 	</div>
  	
 					</div>
 					

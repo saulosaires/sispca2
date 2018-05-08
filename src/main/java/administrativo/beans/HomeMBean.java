@@ -16,8 +16,10 @@ import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 
 import administrativo.model.Exercicio;
+import administrativo.model.Link;
 import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
+import administrativo.service.LinkService;
 import arquitetura.utils.MathUtils;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.Utils;
@@ -60,6 +62,8 @@ public class HomeMBean implements Serializable{
 	private Long acaoId;
 	private List<Acao> listAcao;
 	
+	private List<Link> listLinks;
+	
 	private LineChartModel lineChartModel;
 	
 	private BigDecimal percentualInicial   = MathUtils.getZeroBigDecimal();
@@ -77,7 +81,7 @@ public class HomeMBean implements Serializable{
 	private UnidadeOrcamentariaService unidadeOrcamentariaService;
 	private ExecucaoService execucaoService;
 	private MesService mesService;
-	 FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
+	private FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
 	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
 	
 	@Inject
@@ -89,6 +93,7 @@ public class HomeMBean implements Serializable{
 					 FisicoFinanceiroMensalService fisicoFinanceiroMensalService,
 					 ExecucaoService execucaoService,
 					 MesService mesService,
+					 LinkService linkService,
 					 ExercicioService exercicioService) {
 		 
  
@@ -121,6 +126,8 @@ public class HomeMBean implements Serializable{
 			unidadeOrcamentariaId = user.getUnidadeOrcamentaria().getId();
 			montarGrafico();
 		}
+		
+		listLinks = linkService.findAll();
 		
 	}
 
@@ -395,6 +402,14 @@ public class HomeMBean implements Serializable{
 
 	public void setLineChartModel(LineChartModel lineChartModel) {
 		this.lineChartModel = lineChartModel;
+	}
+
+	public List<Link> getListLinks() {
+		return listLinks;
+	}
+
+	public void setListLinks(List<Link> listLinks) {
+		this.listLinks = listLinks;
 	}
 	
 	

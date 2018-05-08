@@ -33,9 +33,7 @@ public class LinkDAO extends AbstractDAO<Link> {
 		CriteriaQuery<Link> query = cb.createQuery(Link.class);
 		Root<Link> m = query.from(Link.class);
 		
-		query.multiselect(m.get("titulo"),
-						  m.get("url"),
-						  m.get("tipoLink"));
+		query.select(m);
 		
 		List<Predicate> predicate = new ArrayList<>();
 		
