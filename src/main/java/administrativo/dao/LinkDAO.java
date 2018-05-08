@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import administrativo.model.Link;
 import arquitetura.dao.AbstractDAO;
@@ -25,13 +26,16 @@ public class LinkDAO extends AbstractDAO<Link> {
 
 	}
 
+	@Transactional
 	public List<Link> queryLinkByDescricaoAndURL(String titulo, String url){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Link> query = cb.createQuery(Link.class);
 		Root<Link> m = query.from(Link.class);
 		
-		query.select(m);
+		query.multiselect(m.get("titulo"),
+						  m.get("url"),
+						  m.get("tipoLink"));
 		
 		List<Predicate> predicate = new ArrayList<>();
 		

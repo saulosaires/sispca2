@@ -104,7 +104,7 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 
 	}
 
-	public Double findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+	public Double findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 		
 		if(Utils.invalidId(mesId) || exercicioVigenteId==null)return 0d;
 		

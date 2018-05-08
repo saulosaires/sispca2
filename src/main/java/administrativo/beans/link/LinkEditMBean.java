@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -39,7 +40,7 @@ public class LinkEditMBean implements Serializable {
 
 	private List<TipoLink> listTipoLink;
 
-	private transient UploadedFile arquivo;
+ 
 
 	private LinkService linkService;
 	private LinkValidate linkEditValidate;
@@ -66,7 +67,10 @@ public class LinkEditMBean implements Serializable {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-		arquivo = event.getFile();
+		link.setContent(event.getFile().getContents());
+		link.setMime(event.getFile().getContentType());
+		link.setFilename(FilenameUtils.getBaseName(event.getFile().getFileName()));
+		link.setExtension(FilenameUtils.getExtension(event.getFile().getFileName()));
 	}
 
  
@@ -78,7 +82,7 @@ public class LinkEditMBean implements Serializable {
 				return "";
 			}
 
-			linkEditValidate.beforeMerge(link,arquivo);
+			linkEditValidate.beforeMerge(link);
 
 			link=linkService.update(link);
 
@@ -124,12 +128,6 @@ public class LinkEditMBean implements Serializable {
 		this.listTipoLink = listTipoLink;
 	}
 
-	public UploadedFile getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(UploadedFile arquivo) {
-		this.arquivo = arquivo;
-	}
+	 
 
 }

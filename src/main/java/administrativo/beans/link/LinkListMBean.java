@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import administrativo.model.Link;
 import administrativo.service.LinkService;
@@ -50,7 +51,7 @@ public class LinkListMBean implements Serializable {
 		try {
 			listLinks = linkService.queryLinkByDescricaoAndURL(titulo, url);
 
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_SEARCH);

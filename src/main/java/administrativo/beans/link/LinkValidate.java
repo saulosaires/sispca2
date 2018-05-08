@@ -17,6 +17,7 @@ public class LinkValidate implements Validate<Link>,Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6174506586329370046L;
+	public static final String FILE_REQUIRED_MSG 	   = "Arquivo é um campo obrigatório";
 	public static final String URL_REQUIRED_MSG 	   = "Url é um campo obrigatório";
 	public static final String TITULO_REQUIRED_MSG 	   = "Título é um campo obrigatório";
 
@@ -31,8 +32,13 @@ public class LinkValidate implements Validate<Link>,Serializable{
 			Messages.addMessageError(URL_REQUIRED_MSG);
 			return false;
 
-		}
+		}else if (TIPO_LINK_ARQUIVO.equals(link.getTipoLink().getDescricao()) && link.getContent()==null) {
 
+			Messages.addMessageError(FILE_REQUIRED_MSG);
+			return false;
+
+		}
+ 
 		if (Utils.emptyParam(link.getTitulo())) {
 			Messages.addMessageError(TITULO_REQUIRED_MSG);
 			return false;
@@ -42,13 +48,18 @@ public class LinkValidate implements Validate<Link>,Serializable{
 	}
 	
 	
-	public void beforeMerge(Link link,UploadedFile arquivo) throws IOException {
+	public void beforeMerge(Link link) throws IOException {
 
-		if (TIPO_LINK_ARQUIVO.equals(link.getTipoLink().getDescricao())) {
-
-			String url = FileUtil.uploadArquivo(arquivo);
-
-			link.setUrl(url);
+		  if (TIPO_LINK_ARQUIVO.equals(link.getTipoLink().getDescricao()) ) {
+			
+			  String url = FileUtil.uploadArquivo(link.getContent(), link.getMime(), link.getFilename(), link.getExtension());
+			  
+			  link.setUrl(url);
+	
+		}else {
+			link.setContent(null);
+			link.setMime(null);
+			link.setFilename(null);
 		}
 
 	}

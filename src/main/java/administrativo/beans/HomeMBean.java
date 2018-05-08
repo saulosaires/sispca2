@@ -31,6 +31,7 @@ import qualitativo.service.MesService;
 import qualitativo.service.ProgramaService;
 import qualitativo.service.UnidadeGestoraService;
 import qualitativo.service.UnidadeOrcamentariaService;
+import quantitativo.service.FisicoFinanceiroMensalService;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
@@ -76,6 +77,7 @@ public class HomeMBean implements Serializable{
 	private UnidadeOrcamentariaService unidadeOrcamentariaService;
 	private ExecucaoService execucaoService;
 	private MesService mesService;
+	 FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
 	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
 	
 	@Inject
@@ -84,6 +86,7 @@ public class HomeMBean implements Serializable{
 					 UnidadeGestoraService unidadeGestoraService,
 					 UnidadeOrcamentariaService unidadeOrcamentariaService,
 					 FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
+					 FisicoFinanceiroMensalService fisicoFinanceiroMensalService,
 					 ExecucaoService execucaoService,
 					 MesService mesService,
 					 ExercicioService exercicioService) {
@@ -94,6 +97,7 @@ public class HomeMBean implements Serializable{
 		this.execucaoService=execucaoService;
 		this.unidadeGestoraService=unidadeGestoraService;
 		this.unidadeOrcamentariaService=unidadeOrcamentariaService;
+		this.fisicoFinanceiroMensalService=fisicoFinanceiroMensalService;
 		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
 		
 		Optional<Exercicio> exercicio = exercicioService.exercicioVigente();
@@ -178,14 +182,18 @@ public class HomeMBean implements Serializable{
 		
 		for(Mes mes : listMes) {
 			
-			Double valorPlanejado = execucaoService.findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mes.getId());
+			Double valorExecutado = execucaoService.findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mes.getId());
 			
-			series1.set(mes.getDescricao(),valorPlanejado);
+			series1.set(mes.getDescricao(),valorExecutado);
+			
+			Double valorPlanejado = fisicoFinanceiroMensalService.findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mes.getId());
+			
+			series2.set(mes.getDescricao(),valorPlanejado);
 			
 		}
 
 		model.addSeries(series1);
-       // model.addSeries(series2);   
+        model.addSeries(series2);   
         
         return model;
 		

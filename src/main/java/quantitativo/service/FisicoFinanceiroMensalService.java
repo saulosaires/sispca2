@@ -46,4 +46,9 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		return ((FisicoFinanceiroMensalController)getController()).findByAcao(acaoId);
 	}
 	
+	public Double findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+		
+		return ((FisicoFinanceiroMensalController)getController()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
+	}	
+	
 }

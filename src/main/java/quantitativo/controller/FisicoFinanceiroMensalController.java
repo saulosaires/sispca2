@@ -33,5 +33,9 @@ public class FisicoFinanceiroMensalController extends AbstractController<FisicoF
 		return ((FisicoFinanceiroMensalDAO)getDao()).findByAcao(acaoId);
 	}
 	
+	public Double findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+		return ((FisicoFinanceiroMensalDAO)getDao()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
+	}
+
 	
 }

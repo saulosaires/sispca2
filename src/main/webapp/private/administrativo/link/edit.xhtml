@@ -36,14 +36,15 @@
 							</div>
 							<div class="col-lg-4" >
 								<p:outputPanel id="tipoLinkInput">
-								<c:if test="#{linkEditMBean.link.tipoLink.descricao == 'ARQUIVO'}">
-									<h:outputText value="ARQUIVO: #{linkEditMBean.arquivo.fileName}" styleClass="labelOutText"/>						
-									<p:fileUpload fileUploadListener="#{linkEditMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true" required="true" requiredMessage="Arquivo: Campo é obrigatório" 
+								 
+									<h:outputText value="ARQUIVO: #{linkEditMBean.link.filename}" styleClass="labelOutText" rendered="#{linkEditMBean.link.tipoLink.descricao == 'ARQUIVO'}"/>						
+									<p:fileUpload fileUploadListener="#{linkEditMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true"  auto="true"
+												  required="true" requiredMessage="Arquivo: Campo é obrigatório" rendered="#{linkEditMBean.link.tipoLink.descricao == 'ARQUIVO'}"
 												  allowTypes="/(\.|\/)(pdf)$/" update="tipoLinkInput">
 											   
 									</p:fileUpload>
 									  
-								</c:if>
+								 
 								<c:if test="#{linkEditMBean.link.tipoLink.descricao == 'EXTERNO'}">
 									<h:outputText value="URL:  " styleClass="labelOutText"/>
 									<h:inputText value="#{linkEditMBean.link.url}" required="true" requiredMessage="URL: Campo é obrigatório" styleClass="form-control input-sm"/>

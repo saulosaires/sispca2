@@ -6,7 +6,9 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -14,6 +16,7 @@ import administrativo.controller.TipoLinkController;
 import administrativo.model.Link;
 import administrativo.model.TipoLink;
 import administrativo.service.LinkService;
+import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 
@@ -33,13 +36,11 @@ public class LinkFormMBean implements Serializable {
 	private Link link = new Link();
 
 	private List<TipoLink> listTipoLink;
-
-	private transient UploadedFile arquivo;
-
+ 
 	private LinkService linkService;
 	private LinkValidate linkEditValidate;
-
-
+ 
+	
 	@Inject
 	public LinkFormMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkValidate linkEditValidate) {
 		this.linkService = linkService;
@@ -53,19 +54,25 @@ public class LinkFormMBean implements Serializable {
 	 
 
 	public void handleFileUpload(FileUploadEvent event) {
-		arquivo = event.getFile();
+		 
+		link.setContent(event.getFile().getContents());
+		link.setMime(event.getFile().getContentType());
+		link.setFilename(FilenameUtils.getBaseName(event.getFile().getFileName()));
+		link.setExtension(FilenameUtils.getExtension(event.getFile().getFileName()));
+	
 	}
 
 	public String salvar() {
 
 		try {
-
+ 			
+			
 			if (!linkEditValidate.validar(link)) {
 				return "";
 			}
-
-			linkEditValidate.beforeMerge(link,arquivo);
-
+ 
+			linkEditValidate.beforeMerge(link);
+			
 			linkService.create(link);
 
 			Messages.addMessageInfo(SUCCESS_SAVE_LINK_MSG);
@@ -99,13 +106,6 @@ public class LinkFormMBean implements Serializable {
 	public void setListTipoLink(List<TipoLink> listTipoLink) {
 		this.listTipoLink = listTipoLink;
 	}
-
-	public UploadedFile getArquivo() {
-		return arquivo;
-	}
-
-	public void setArquivo(UploadedFile arquivo) {
-		this.arquivo = arquivo;
-	}
+ 
 
 }

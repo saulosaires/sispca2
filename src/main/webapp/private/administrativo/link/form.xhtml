@@ -7,14 +7,12 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
 
-<h:head>
-
-</h:head> 
+ 
 <body> 
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
  		
-			<h:form enctype="multipart/form-data" acceptcharset="UTF-8" prependId="false" id="form">
+			<h:form enctype="multipart/form-data" prependId="false" id="form">
 				<div class="container-fluid row-fluid">
 					 
 					<div class="outBusc">CADASTRO</div>
@@ -32,14 +30,15 @@
 							</div>
 							<div class="col-lg-4" >
 								<p:outputPanel id="tipoLinkInput">
-								<c:if test="#{linkFormMBean.link.tipoLink.descricao == 'ARQUIVO'}">
-									<h:outputText value="ARQUIVO: #{linkFormMBean.arquivo.fileName}" styleClass="labelOutText"/>						
-									<p:fileUpload fileUploadListener="#{linkFormMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true" required="true" requiredMessage="Arquivo: Campo é obrigatório" 
-												  allowTypes="/(\.|\/)(pdf)$/" update="tipoLinkInput">
+								 
+								 
+									<h:outputText value="ARQUIVO: #{linkFormMBean.link.filename}" styleClass="labelOutText" rendered="#{linkFormMBean.link.tipoLink.descricao == 'ARQUIVO'}"/>						
+									<p:fileUpload fileUploadListener="#{linkFormMBean.handleFileUpload}"  mode="advanced" fileLimit="1" skinSimple="true" required="true" auto="true"
+												  requiredMessage="Arquivo: Campo é obrigatório" 		  allowTypes="/(\.|\/)(pdf)$/"  update="tipoLinkInput" rendered="#{linkFormMBean.link.tipoLink.descricao == 'ARQUIVO'}">
 											   
 									</p:fileUpload>
-									  
-								</c:if>
+								    
+								 
 								<c:if test="#{linkFormMBean.link.tipoLink.descricao == 'EXTERNO'}">
 									<h:outputText value="URL:  " styleClass="labelOutText"/>
 									<h:inputText value="#{linkFormMBean.link.url}" required="true" requiredMessage="URL: Campo é obrigatório" styleClass="form-control input-sm"/>
@@ -57,7 +56,7 @@
 						</div>						
 						<div class="row-fluid" style="margin-top: 2%;">
 							<div class="spaceBtnAcao">
-								<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{linkFormMBean.salvar()}" rendered="#{linkFormMBean.link.id ==null}" />
+								<h:commandButton styleClass=" btnAction btn btn-primary" value="Salvar" action="#{linkFormMBean.salvar()}"  />
 							 
 								&nbsp;
 									
