@@ -107,51 +107,51 @@
 									<h:outputText value="(#{prog.codigo}) - #{prog.denominacao}"/>
 								</p:column>							
 														
-								<p:column headerText="Diretriz" width="6%">		
+								<p:column headerText="Diretriz" width="6%" rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaDiretrizAssociada}">		
 									<h:button value="diretriz"    outcome="avaliacaoSetorialProgramaDiretrizAssociada" styleClass="btn btn-primary"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
 								
-								<p:column headerText="Painel" width="6%">
-									<h:button value="Painel"    outcome="avaliacaoSetorialProgramaPainelAssociado" styleClass="btn btn-default"  >
+								<p:column headerText="Painel" width="6%"  rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaPainelAssociado}">
+									<h:button value="Painel"    outcome="avaliacaoSetorialProgramaPainelAssociado" styleClass="btn btn-default" >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>		
 														
-								<p:column headerText="intermediário" width="6%">
+								<p:column headerText="intermediário" width="6%" rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaIntermediario}">
 									<h:button value="Interm."    outcome="avaliacaoSetorialProgramaIntermediario" styleClass="btn btn-primary"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
 								
-								<p:column headerText="Análise" width="6%">
+								<p:column headerText="Análise" width="6%" rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaAnalise}">
 									<h:button value="Análise"    outcome="avaliacaoSetorialProgramaAnalise" styleClass="btn btn-default"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>		
 								
-								<p:column headerText="Físico/Finac." width="9%">
+								<p:column headerText="Físico/Finac." width="9%" rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaFisicoFinanceiro}">
 									<h:button value="Físico/Finac."    outcome="avaliacaoSetorialProgramaFisicoFinanceiro" styleClass="btn btn-primary"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
 														
-								<p:column headerText="Resultado" width="9%">
-									<h:button value="Resultado"    outcome="avaliacaoSetorialProgramaResultado" styleClass="btn btn-default"  >
+								<p:column headerText="Resultado" width="9%"  rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaResultado}">
+									<h:button value="Resultado"    outcome="avaliacaoSetorialProgramaResultado" styleClass="btn btn-default" >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
 								
-								<p:column headerText="Recomendação" width="9%">
+								<p:column headerText="Recomendação" width="9%" rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialProgramaRecomendacao}">
 									<h:button value="Recomendação"    outcome="avaliacaoSetorialProgramaRecomendacao" styleClass="btn btn-primary"  >
 								 	  <f:param name="id" value="#{prog.id}" /> 
 									</h:button>
 								</p:column>	
  
 														 
-								<p:column headerText="Acomp" width="4%">
-									<h:commandButton image="/resources/images/icone-pdf.gif"  actionListener="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" title="Acompanhamento da avaliação para o programa" onclick="this.form.target='_blank'"  style="margin-left: 2%; width: 20px; height: 20px;">
+								<p:column headerText="Acomp" width="4%"  rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialRelatorio}">
+									<h:commandButton image="/resources/images/icone-pdf.gif"  actionListener="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" title="Acompanhamento da avaliação para o programa"  onclick="this.form.target='_blank'"  style="margin-left: 2%; width: 20px; height: 20px;">
 									     <f:param name="id" value="#{prog.id}" /> 
 									</h:commandButton>
 								</p:column>								

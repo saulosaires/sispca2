@@ -36,6 +36,7 @@ import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import avaliacao.model.Analise;
 import avaliacao.model.AvaliacaoFisicoFinanceira;
@@ -99,6 +100,15 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	private RecomendacaoService recomendacaoService;
 	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
 
+	private boolean avaliacaoSetorialProgramaAnalise;
+	private boolean avaliacaoSetorialProgramaDiretrizAssociada;
+	private boolean avaliacaoSetorialProgramaFisicoFinanceiro;
+	private boolean avaliacaoSetorialProgramaIntermediario;
+	private boolean avaliacaoSetorialProgramaPainelAssociado;
+	private boolean avaliacaoSetorialProgramaRecomendacao;
+	private boolean avaliacaoSetorialProgramaResultado;
+	private boolean avaliacaoSetorialRelatorio;
+
 	@Inject
 	public AvaliacaoProgramaMBean( ProgramaService programaService,
 								   ExercicioService exercicioService,
@@ -132,6 +142,17 @@ public class AvaliacaoProgramaMBean implements Serializable {
 		}
 		
 		buscarProgramas();
+		
+		
+		avaliacaoSetorialProgramaDiretrizAssociada = SessionUtils.containsKey("avaliacaoSetorialProgramaDiretrizAssociada");
+		avaliacaoSetorialProgramaPainelAssociado   = SessionUtils.containsKey("avaliacaoSetorialProgramaPainelAssociado");
+		avaliacaoSetorialProgramaIntermediario     = SessionUtils.containsKey("avaliacaoSetorialProgramaIntermediario");
+		avaliacaoSetorialProgramaAnalise 		   = SessionUtils.containsKey("avaliacaoSetorialProgramaAnalise");
+		avaliacaoSetorialProgramaFisicoFinanceiro  = SessionUtils.containsKey("avaliacaoSetorialProgramaFisicoFinanceiro");
+		avaliacaoSetorialProgramaRecomendacao      = SessionUtils.containsKey("avaliacaoSetorialProgramaRecomendacao");
+		avaliacaoSetorialProgramaResultado         = SessionUtils.containsKey("avaliacaoSetorialProgramaResultado");
+		avaliacaoSetorialRelatorio                 = SessionUtils.containsKey("avaliacaoSetorialRelatorio");
+			
 		
 	}
 
@@ -413,6 +434,70 @@ public class AvaliacaoProgramaMBean implements Serializable {
 
 	public void setPages(Integer pages) {
 		this.pages = pages;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaAnalise() {
+		return avaliacaoSetorialProgramaAnalise;
+	}
+
+	public void setAvaliacaoSetorialProgramaAnalise(boolean avaliacaoSetorialProgramaAnalise) {
+		this.avaliacaoSetorialProgramaAnalise = avaliacaoSetorialProgramaAnalise;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaDiretrizAssociada() {
+		return avaliacaoSetorialProgramaDiretrizAssociada;
+	}
+
+	public void setAvaliacaoSetorialProgramaDiretrizAssociada(boolean avaliacaoSetorialProgramaDiretrizAssociada) {
+		this.avaliacaoSetorialProgramaDiretrizAssociada = avaliacaoSetorialProgramaDiretrizAssociada;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaFisicoFinanceiro() {
+		return avaliacaoSetorialProgramaFisicoFinanceiro;
+	}
+
+	public void setAvaliacaoSetorialProgramaFisicoFinanceiro(boolean avaliacaoSetorialProgramaFisicoFinanceiro) {
+		this.avaliacaoSetorialProgramaFisicoFinanceiro = avaliacaoSetorialProgramaFisicoFinanceiro;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaIntermediario() {
+		return avaliacaoSetorialProgramaIntermediario;
+	}
+
+	public void setAvaliacaoSetorialProgramaIntermediario(boolean avaliacaoSetorialProgramaIntermediario) {
+		this.avaliacaoSetorialProgramaIntermediario = avaliacaoSetorialProgramaIntermediario;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaPainelAssociado() {
+		return avaliacaoSetorialProgramaPainelAssociado;
+	}
+
+	public void setAvaliacaoSetorialProgramaPainelAssociado(boolean avaliacaoSetorialProgramaPainelAssociado) {
+		this.avaliacaoSetorialProgramaPainelAssociado = avaliacaoSetorialProgramaPainelAssociado;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaRecomendacao() {
+		return avaliacaoSetorialProgramaRecomendacao;
+	}
+
+	public void setAvaliacaoSetorialProgramaRecomendacao(boolean avaliacaoSetorialProgramaRecomendacao) {
+		this.avaliacaoSetorialProgramaRecomendacao = avaliacaoSetorialProgramaRecomendacao;
+	}
+
+	public boolean isAvaliacaoSetorialProgramaResultado() {
+		return avaliacaoSetorialProgramaResultado;
+	}
+
+	public void setAvaliacaoSetorialProgramaResultado(boolean avaliacaoSetorialProgramaResultado) {
+		this.avaliacaoSetorialProgramaResultado = avaliacaoSetorialProgramaResultado;
+	}
+
+	public boolean isAvaliacaoSetorialRelatorio() {
+		return avaliacaoSetorialRelatorio;
+	}
+
+	public void setAvaliacaoSetorialRelatorio(boolean avaliacaoSetorialRelatorio) {
+		this.avaliacaoSetorialRelatorio = avaliacaoSetorialRelatorio;
 	}
 	
 	

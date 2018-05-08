@@ -223,12 +223,11 @@
 												style="background-color: #FFFFF0; color: #D2B48C;">
 												<button type="button" class="close" data-dismiss="alert">×</button>
 												<h5 style="font-weight: bolder;">
-													<i>Gráfico não pôde ser apresentado, sem exercício vigente!</i>
+													<em>Gráfico não pôde ser apresentado, sem exercício vigente!</em>
 												</h5>
 											</div>
 										</c:if>
-										<p:chart id="idChart" type="line"
-											model="#{homeMBean.lineChartModel}" />
+										<p:chart id="idChart" type="line" model="#{homeMBean.lineChartModel}" style="width:100%"/>
 									</h:panelGrid>
 								</div>
 							</div>
@@ -240,7 +239,7 @@
 										<div class="ui-grid-row" style="background-color: #F5F5F5;">
 											<div class="col-lg-4 col-md-6">
 												<div style="text-align:center">
-													<img src="../resources/images/icone_arquivo.png"
+													<img src="../resources/images/icone_arquivo.png" alt="icone"
 														 style="width: 40px; height: 40px; padding-top: 08px; padding-bottom: 08px;" />
 												</div>
 											</div>
@@ -253,7 +252,7 @@
 										<c:forEach var="arquiv" items="#{homeMBean.listLinks}" varStatus="id_arq">
 										
 											 
-												 <img src="../resources/images/icone-pdf.gif" />							 
+												 <img src="../resources/images/icone-pdf.gif" alt="pdf"/>							 
 												 <a href="${arquiv.url}" target="_blank"
 													style="margin-left: 5%;">${arquiv.titulo}</a>
 												 <br />
