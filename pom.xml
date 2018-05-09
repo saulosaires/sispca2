@@ -108,6 +108,7 @@
 		    <version>6.5.1</version>
 		</dependency>
 
+
 		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports-fonts</artifactId>
@@ -119,6 +120,8 @@
 		    <artifactId>jfreechart</artifactId>
 		    <version>1.0.19</version>
 		</dependency>
+
+
 
 
 		<dependency>

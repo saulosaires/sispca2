@@ -102,6 +102,26 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 	}
 	
 	 
+	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentaria) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
+		Root<Programa> m = query.from(Programa.class);
+
+		query.select(m);
+		
+ 
+		if (!Utils.emptyParam((unidadeOrcamentaria))) {
+			Join<Object, Object> joinUnidade = m.join("unidadeOrcamentaria",JoinType.INNER);
+			joinUnidade.on(cb.equal(joinUnidade.get("codigo"),unidadeOrcamentaria) );	
+		}
+		
+		 
+		query.orderBy(cb.asc(m.get("denominacao")));
+		
+		
+		return  entityManager.createQuery(query).getResultList();
+	}
 	
 	 
 

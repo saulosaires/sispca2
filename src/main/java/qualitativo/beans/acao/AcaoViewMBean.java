@@ -189,7 +189,7 @@ public class AcaoViewMBean implements Serializable {
 		
 			byte[] bytes = JasperExportManager.exportReportToPdf(relatorio);
 			
-			FileUtil.sendFileOnResponse(bytes, "relatorio_visualizacao_acao.pdf", TipoArquivo.PDF.getId());
+			FileUtil.sendFileOnResponseAttached(bytes, "relatorio_visualizacao_acao.pdf", TipoArquivo.PDF.getId());
 			
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getCause().getMessage());

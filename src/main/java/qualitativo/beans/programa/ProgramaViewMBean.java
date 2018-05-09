@@ -132,7 +132,7 @@ public class ProgramaViewMBean implements Serializable {
 		
 			byte[] bytes = JasperExportManager.exportReportToPdf(relatorio);
 			
-			FileUtil.sendFileOnResponse(bytes, "visualizacao_programa.pdf", TipoArquivo.PDF.getId());
+			FileUtil.sendFileOnResponseAttached(bytes, "visualizacao_programa.pdf", TipoArquivo.PDF.getId());
 			
 		} catch (Exception e) {
 			SispcaLogger.logError(e.getCause().getMessage());

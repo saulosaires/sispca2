@@ -19,10 +19,7 @@ import arquitetura.dao.AbstractDAO;
 import arquitetura.enums.TipoCalculoMeta;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
-import qualitativo.model.Acao;
 import qualitativo.model.Programa;
-import qualitativo.model.UnidadeGestora;
-import qualitativo.model.UnidadeOrcamentaria;
 import quantitativo.model.FisicoFinanceiroMensal;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 
@@ -52,6 +49,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String PAGO="pago";
 	private static final  String CODIGO="codigo";
 	private static final  String EXERCICIO="exercicio";
+	private static final  String MES="mes";
 	
 	public FisicoFinanceiroMensalSiafemDAO() {
 		setClazz(FisicoFinanceiroMensalSiafem.class);
@@ -121,6 +119,147 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		 return entityManager.createQuery(criteria).getResultList();
 	}
  
+	
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(String unidadeOrcamentaria,String programa, Integer exercicio){
+		
+		if(unidadeOrcamentaria==null || programa==null || Utils.invalidYear(exercicio))return new ArrayList<>();
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+ 		
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.LEFT);		
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
+		
+		
+ 	 	criteria.multiselect(
+ 	 						  joinUnidadeOrcamentaria.get(CODIGO),
+ 	 						  joinUnidadeOrcamentaria.get(DESCRICAO),
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinPrograma.get(DENOMINACAO),
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							 );
+
+
+		criteria.where(	
+						builder.like(root.get(UNIDADE_ORCAMENTARIA),unidadeOrcamentaria),
+						builder.like(root.get(PROGRAMA),programa),
+						builder.equal(root.get(ANO),	 exercicio) 
+				      );
+		
+		criteria.groupBy(
+						  joinUnidadeOrcamentaria.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(DESCRICAO),
+						  joinPrograma.get(CODIGO),
+						  joinPrograma.get(DENOMINACAO)
+						  );
+ 		
+		criteria.orderBy(
+						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+						 builder.asc( joinPrograma.get(CODIGO))
+						);
+		
+		 return entityManager.createQuery(criteria).getResultList();
+	}
+	
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiroPorMes(String unidadeOrcamentaria,String programa, Integer exercicio){
+		
+		if(unidadeOrcamentaria==null || programa==null || Utils.invalidYear(exercicio))return new ArrayList<>();
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+ 		
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.LEFT);		
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
+		
+		
+ 	 	criteria.multiselect(
+ 	 						  joinUnidadeOrcamentaria.get(CODIGO),
+ 	 						  joinUnidadeOrcamentaria.get(DESCRICAO),
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinPrograma.get(DENOMINACAO),
+ 	 						  root.get(MES),
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							 );
+
+
+		criteria.where(	
+						builder.like(root.get(UNIDADE_ORCAMENTARIA),unidadeOrcamentaria),
+						builder.like(root.get(PROGRAMA),programa),
+						builder.equal(root.get(ANO),	 exercicio) 
+				      );
+		
+		criteria.groupBy(
+						  joinUnidadeOrcamentaria.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(DESCRICAO),
+						  joinPrograma.get(CODIGO),
+						  joinPrograma.get(DENOMINACAO),
+						  root.get(MES)
+						  );
+ 		
+		criteria.orderBy(
+						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+						 builder.asc( joinPrograma.get(CODIGO)),
+						 builder.asc( root.get(MES))
+						);
+		
+		 return entityManager.createQuery(criteria).getResultList();
+	}	
+	
+	
+	public BigDecimal calculaLiquidadoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, Integer mes, Integer ano){
+ 
+		
+		if(Utils.emptyParam(unidadeOrcamentaria) || Utils.emptyParam(programa) || mes==null || ano==null)return new BigDecimal(0);
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+		
+		Path<BigDecimal> liquidado = root.get(LIQUIDADO);
+		Expression<BigDecimal> soma = builder.sum(liquidado);
+		criteria.select(soma);
+		
+		criteria.where(
+						 builder.equal(root.get(UNIDADE_ORCAMENTARIA),unidadeOrcamentaria ),
+						 builder.equal(root.get(PROGRAMA),programa ),
+						 builder.equal(root.get(MES),mes ),
+						 builder.equal(root.get(ANO),ano )
+			    	  );
+		
+		
+		
+		TypedQuery<BigDecimal> query = entityManager.createQuery(criteria);
+ 
+		
+		
+		
+	 return query.getSingleResult();
+		
+		
+	}
+	
+	
+	
 	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
 		
 		if(Utils.invalidYear(exercicio) )return new ArrayList<>();

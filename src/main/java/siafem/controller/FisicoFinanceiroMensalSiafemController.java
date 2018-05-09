@@ -28,10 +28,19 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
 	}
 
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(String unidadeOrcamentaria,String programa, Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(unidadeOrcamentaria, programa, exercicio);
+	}
+
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiroPorMes(String unidadeOrcamentaria,String programa, Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiroPorMes(unidadeOrcamentaria, programa, exercicio);
+	}
+	
+	
 	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).valorFisicoFinanceiro(unidadeGestora,unidadeOrcamentaria,acao,exercicio);
 	}
-
+	
 	public BigDecimal calculaDotacaoInicialByProgAndAno(String programaCodigo, Integer anoVigente){	
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDotacaoInicialByProgAndAno(programaCodigo, anoVigente);
 	}
@@ -68,6 +77,10 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoAcumulativoExecutada(acaoId,exercicioId);
 	}
+
+	public BigDecimal calculaLiquidadoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, Integer mes, Integer ano) {
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaLiquidadoByUnidadeAndProgAndMesAndAno(unidadeOrcamentaria,programa, mes, ano);
+	}	
 
 	
 }

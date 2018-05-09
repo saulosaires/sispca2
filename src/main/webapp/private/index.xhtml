@@ -88,7 +88,7 @@
 								<div class="col-lg-3">
 									<h:outputText value="UNIDADE GESTORA: " styleClass="labelOutText" />
 									
-									<h:selectOneMenu id="idComboUnidGestora"
+									<h:selectOneMenu id="idComboUnidGestora" onchange="carregando();"
 										value="#{homeMBean.unidadeGestoraId}"  styleClass="form-control input-sm">
 										<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
 										<f:selectItems var="ug"
@@ -106,7 +106,7 @@
 								<div class="col-lg-3">
 									<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText" />
 									
-									<h:selectOneMenu id="idComboUnidOrcamentaria"  value="#{homeMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm">
+									<h:selectOneMenu id="idComboUnidOrcamentaria"  value="#{homeMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm" onchange="carregando();">
 										<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
 										<f:selectItems var="u" value="#{homeMBean.listUnidadeOrcamentaria}" itemLabel="#{fn:toUpperCase(u.codigo)} | #{fn:toUpperCase(u.descricao)}"
 																itemValue="#{u.id}" />
@@ -123,8 +123,8 @@
 								
 									<h:outputText value="AÇÃO: " styleClass="labelOutText" />
 									
-									<h:selectOneMenu id="idComboAcao"
-										value="#{homeMBean.acaoId}" styleClass="form-control input-sm">
+									<h:selectOneMenu id="idComboAcao" onchange="carregando();"
+													 value="#{homeMBean.acaoId}" styleClass="form-control input-sm">
 										<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
 										<f:selectItems var="acao" value="#{homeMBean.listAcao}" itemLabel="#{fn:toUpperCase(acao.codigo)} | #{fn:toUpperCase(acao.denominacao)}" itemValue="#{acao.id}" />
 											

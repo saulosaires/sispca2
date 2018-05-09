@@ -11,6 +11,8 @@ import arquitetura.enums.ACAO;
 import arquitetura.enums.TipoCalculoMeta;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.MathUtils;
+import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
+import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
 import siafem.model.FisicoFinanceiroMensalSiafem;
@@ -153,7 +155,6 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 	}
 
-
 	public BigDecimal calculaMediaEficaciaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
 		
 		BigDecimal mediaEficaciaFisicoFinanceira   = MathUtils.getZeroBigDecimal();
@@ -181,7 +182,6 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 		return mediaEficaciaFisicoFinanceira;
 	}
-
 
 	public BigDecimal calculaEficienciaMediaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
 	
@@ -212,7 +212,37 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		return mediaEficienciaFisicoFinanceira;
 	}
 	
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(String unidadeOrcamentaria,String programa, Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemController)getController()).analiseFisicoFinanceiro(unidadeOrcamentaria, programa, exercicio);
+	}
 	
+	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiroPorMes(String unidadeOrcamentaria,String programa, Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemController)getController()).analiseFisicoFinanceiroPorMes(unidadeOrcamentaria, programa, exercicio);
+	}
+	
+	public RelatorioLiquidadoAcumuladoFisicoFinanceiro calculaLiquidadoAcumuladoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, List<Mes> meses, Integer ano) {
+		
+		RelatorioLiquidadoAcumuladoFisicoFinanceiro relatorioLiquidadoAcumuladoFisicoFinanceiro = new RelatorioLiquidadoAcumuladoFisicoFinanceiro();
+		
+		for(Mes mes : meses) {
+			
+			BigDecimal liquidado = controller().calculaLiquidadoByUnidadeAndProgAndMesAndAno(unidadeOrcamentaria,programa, mes.getNumeroMes(), ano);
+			
+			relatorioLiquidadoAcumuladoFisicoFinanceiro.setLiquidado(liquidado, mes.getNumeroMes());
+		}
+		
+		
+		relatorioLiquidadoAcumuladoFisicoFinanceiro.calculaAcumulado();
+		
+		
+		return relatorioLiquidadoAcumuladoFisicoFinanceiro;
+	}	
+	
+	
+	private FisicoFinanceiroMensalSiafemController controller() {
+		
+		return (FisicoFinanceiroMensalSiafemController)getController();
+	}
 	
 }
  

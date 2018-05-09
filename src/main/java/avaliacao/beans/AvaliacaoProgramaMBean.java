@@ -349,7 +349,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	      dataset.addValue(pago, 		  pagoLabel, 	   pagoLabel );  
 	      
 	      
-	      StandardChartTheme theme = new StandardChartTheme("sispca", false);
+	      StandardChartTheme theme = new StandardChartTheme("sispca");
 	      					 theme.setPlotBackgroundPaint(Color.WHITE); 
 	      
 	      

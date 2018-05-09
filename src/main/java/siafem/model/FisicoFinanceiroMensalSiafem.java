@@ -65,6 +65,8 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@Column(name="ano")
 	private Integer ano;
 
+	private  transient String programaDenominacao;
+	
 	private transient String codigoUnidadeOrcamentaria;
 	private transient String descricaoUnidadeOrcamentaria;
 	 
@@ -122,7 +124,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 										BigDecimal disponivel, 
 										BigDecimal empenhado,
 										BigDecimal liquidado
-													) {
+										) {
 			super();
 			      
 			this.dotacaoInicial = dotacaoInicial;
@@ -130,7 +132,61 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 			this.liquidado = liquidado;
 			this.empenhado = empenhado;
 		 
-}
+ 	}
+
+ 	public FisicoFinanceiroMensalSiafem(
+										String codigoUnidadeOrcamentaria,  
+									    String descricaoUnidadeOrcamentaria,
+							 			String programa,
+							 			String programaDenominacao,
+									    BigDecimal dotacaoInicial,
+										BigDecimal disponivel, 
+										BigDecimal empenhado,
+										BigDecimal liquidado,
+										BigDecimal pago
+										) {
+			super();
+			
+			this.codigoUnidadeOrcamentaria = codigoUnidadeOrcamentaria;
+			this.descricaoUnidadeOrcamentaria = descricaoUnidadeOrcamentaria;
+			this.programa = programa;
+			this.programaDenominacao = programaDenominacao;
+			
+			this.dotacaoInicial = dotacaoInicial;
+			this.disponivel = disponivel;
+			this.liquidado = liquidado;
+			this.empenhado = empenhado;
+			this.pago = pago;				
+  }
+ 	
+
+ 	public FisicoFinanceiroMensalSiafem(
+										String codigoUnidadeOrcamentaria,  
+									    String descricaoUnidadeOrcamentaria,
+							 			String programa,
+							 			String programaDenominacao,
+							 			Mes mes,
+									    BigDecimal dotacaoInicial,
+										BigDecimal disponivel, 
+										BigDecimal empenhado,
+										BigDecimal liquidado,
+										BigDecimal pago
+										) {
+			super();
+			      
+			this.codigoUnidadeOrcamentaria = codigoUnidadeOrcamentaria;
+			this.descricaoUnidadeOrcamentaria = descricaoUnidadeOrcamentaria;
+			this.programa = programa;
+			this.programaDenominacao = programaDenominacao;
+			this.mes = mes;
+			this.dotacaoInicial = dotacaoInicial;
+			this.disponivel = disponivel;
+			this.liquidado = liquidado;
+			this.empenhado = empenhado;
+		    this.pago = pago;
+ 	}
+ 	
+
  	
  	
 	public Long getId() {
@@ -320,6 +376,14 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setPago(BigDecimal pago) {
 		this.pago = pago;
+	}
+
+	public String getProgramaDenominacao() {
+		return programaDenominacao;
+	}
+
+	public void setProgramaDenominacao(String programaDenominacao) {
+		this.programaDenominacao = programaDenominacao;
 	}
 
  
