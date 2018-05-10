@@ -42,6 +42,9 @@ public class UserService  extends AbstractService<Usuario> {
 		return ((UserController) getController()).queryByUserName(login);
 	}
  
+	public Optional<Usuario> queryByCPF(String cpf) {
+		return ((UserController) getController()).queryByCPF(cpf);
+	}
  
 	
 	public boolean enviarEmailUsuarioCriado(Usuario usuario, String scheme,String serveName,int port,String path) {

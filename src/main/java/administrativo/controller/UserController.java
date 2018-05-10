@@ -37,7 +37,11 @@ public class UserController extends AbstractController<Usuario>{
 		return ((UsuarioDAO) getDao()).queryUser(name, email, perfil,unidadeOrcamentaria);
 	}
 
-	 
+	public Optional<Usuario> queryByCPF(String cpf) {
+		return ((UsuarioDAO) getDao()).queryByCPF(cpf);
+		
+	}
+	
 	public Optional<Usuario> queryByUserName(String login) {
 		return ((UsuarioDAO) getDao()).queryByUserName(login);
 		

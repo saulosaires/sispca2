@@ -32,10 +32,25 @@ public class UsuarioDAO extends AbstractDAO< Usuario >{
 	private static final String NAME  = "name";
 	private static final String SIGLA = "sigla";
 	private static final String ATIVO = "ativo";
+	private static final String CPF = "cpf";
 	
 	public UsuarioDAO() {
 		setClazz(Usuario.class );
 	 
+	}
+	
+	public Optional<Usuario> queryByCPF(String cpf){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Usuario> query = cb.createQuery(Usuario.class);
+		Root<Usuario> m = query.from(Usuario.class);
+		query.select(m);
+		
+		query.where(cb.like(m.get(CPF),cpf ));
+ 
+		List<Usuario> list = entityManager.createQuery(query).setMaxResults(1).getResultList();
+		
+		return list.stream().findFirst();
 	}
 	
 	public Optional<Usuario> queryByUserName(String login){

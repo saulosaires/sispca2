@@ -4,19 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
-import java.util.TreeMap;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.mail.EmailException;
-import org.hibernate.Session;
 
 import administrativo.model.Usuario;
-import arquitetura.utils.EmailUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -138,58 +134,20 @@ public class MetasEditMBean implements Serializable{
 	
 	private void enviarEmail() throws EmailException {
  
-			if(atividadeRealizadoAnterior.equals(atividade.getRealizado()) && atividadeComentarioAnterior.equals(atividade.getComentario()))
-				return;
+		List<String> destinatarios = new ArrayList<>();
 		
-			String assunto = "Alteração em dados do sistema de Metas";
-			
-			String espaco = "&nbsp;";
-
-			StringBuilder builder = new StringBuilder();
-
-			builder.append("<html>");
-			builder.append("<meta charset=\"utf-8\"/>");
-			builder.append("<body bgcolor=white>");
-			
-			builder.append("<p><b>Unidade Orçamentária:</b>" + espaco + atividade.getUnidadeOrcamentaria().getDescricao() +"</p>");
-			builder.append("<p><b>Atividade:</b>" + espaco + atividade.getNome()+"</p>");
-			builder.append("<p><b>Compromisso:</b>" + espaco + atividade.getCodigosCompromissos() + "</p>");
-			builder.append("<p><b>Previsto:</b>" + espaco + "<label>"+ atividade.getPrevisto() +"</label></p>");
-			
-			builder.append("<p><b>Anterior</p>");
-			builder.append("<p><b>Realizado:</b>" + espaco + "<label style=\"color:#FF0000\">"+ atividadeRealizadoAnterior +"</label></p>");
-			builder.append("<p><b>Comentário:</b>" + espaco + "<label style=\"color:#FF0000\">"+ atividadeComentarioAnterior +"</label></p>");
-			
-			builder.append("<p><b>Atual</p>");
-			builder.append("<p><b>Realizado:</b>" + espaco + "<label style=\"color:blue\">"+ atividade.getRealizado() +"</label></p>");
-			builder.append("<p><b>Comentário:</b>" + espaco + "<label style=\"color:blue\">"+ atividade.getComentario() +"</label></p>");
-			
-			builder.append("</body>");
-			builder.append("</html>");
-			
-			String mensagem = builder.toString();
-			
-			List<String> destinatarios = new ArrayList<String>();
-			
-			destinatarios.add("promunicipios@segov.ma.gov.br");
+		destinatarios.add("promunicipios@segov.ma.gov.br");
 		
-			//destinatarios.add("ricardo.meirino@seati.ma.gov.br");
-						
-			boolean emailSent = false;
-			 
-				emailSent = EmailUtil.enviaEmail(assunto, mensagem, destinatarios, null);
-			 
+		boolean emailSent = atividadeService.enviarEmailAlteracaoMetas(atividadeRealizadoAnterior, atividadeComentarioAnterior, atividade,destinatarios);
+  
+		if ( emailSent )
+			Messages.addMessageInfo("Email enviado para: " + destinatarios);
+		else
+			Messages.addMessageError("Falha ao tentar enviar email para os seguintes destinatarios: " + destinatarios);
 
- 
-			if ( emailSent )
-				Messages.addMessageInfo("Email enviado para: " + destinatarios);
-			else
-				Messages.addMessageError("Falha ao tentar enviar email para os seguintes destinatarios: " + destinatarios);
-		}
+	}
 		
-	 
-	
-	
+
 	public Atividade getAtividade() {
 		return atividade;
 	}
