@@ -227,6 +227,15 @@
 		
 	</navigation-rule> 
 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>metasAtividadeList</from-outcome>
+			<to-view-id>/private/metas/atividade/list.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule> 
 
 	
 	<navigation-rule>
@@ -591,6 +600,21 @@
 
 	</navigation-rule>  
 
+	 <navigation-rule>
+		<from-view-id>/private/metas/atividade/list.xhtml</from-view-id>
 
- 
+		 <navigation-case>
+			<from-outcome>metasAtividadeView</from-outcome>
+			<to-view-id>/private/metas/atividade/view.xhtml</to-view-id>
+		</navigation-case> 
+
+		 <navigation-case>
+			<from-outcome>metasAtividadeEdit</from-outcome>
+			<to-view-id>/private/metas/atividade/form.xhtml</to-view-id>
+		</navigation-case>
+
+
+	</navigation-rule>  
+
+
 </faces-config>

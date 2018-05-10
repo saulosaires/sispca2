@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+		
+			<f:metadata>
+    			<f:viewParam name="id" value="#{metasViewMBean.id}"/>
+    			<f:viewAction action="#{metasViewMBean.init}" />
+			</f:metadata>
+		
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<legend class="outBusc">VISUALIZAÇÃO</legend>
+				</div>
+			</div>
+			<div class="spaceContainerForm">			
+				<div class="container-fluid" style="margin-top: 3%;">
+					<div class="row">
+						<div class="col-lg-12">
+							<h:outputText value="NOME:  " styleClass="labelOutText" />
+							<h:outputText value="#{metasViewMBean.atividade.nome}" styleClass="labelInputText"/>									
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<h:outputText value="PREVISTO  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasViewMBean.atividade.previsto)}" styleClass="labelInputText"/>									
+						</div>	
+						<div class="col-lg-3">
+							<h:outputText value="REALIZADO  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasViewMBean.atividade.realizado)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-6">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<h:outputText value="COMPROMISSOS:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasViewMBean.atividade.codigosCompromissos)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-6">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<h:outputText value="UNIDADE ORÇAMENTÁRIA:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasViewMBean.atividade.unidadeOrcamentaria.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-6">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>						
+					<div class="row">
+						<div class="col-lg-5">
+							<h:outputText value="UNIDADE: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasViewMBean.atividade.unidade)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-7">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>	
+					<div class="row">
+						<div class="col-lg-4">
+							<h:outputText value="STATUS:  " styleClass="labelOutText"/>
+							<h:outputText value="#{metasViewMBean.atividade.status.nome}">
+							</h:outputText>
+						</div>
+						<div class="col-lg-8">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>		
+					<div class="row">
+						<div class="col-lg-12">
+							<h:outputText value="COMENTÁRIO: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasViewMBean.atividade.comentario)}" styleClass="labelInputText"/>								
+						</div>						
+					</div>	
+					
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">		
+							<h:form>		
+								 
+								&nbsp;
+								<h:button styleClass="btn btn-primary" outcome="metasAtividadeList" value="Voltar" />
+							</h:form>	
+						</div>
+					</div>	
+				</div>
+			</div>
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

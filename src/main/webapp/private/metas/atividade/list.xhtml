@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+	  
+<h:head>
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+			 
+			<h:form>
+				<div class="container-fluid">
+					 
+					<div class="row-fluid">
+						<ui:include src="/template/tutorial_form.xhtml"/>
+					</div>
+					<div class="row-fluid">
+						<div class="span12">
+							<fieldset>
+								<div class="span12 spaceParamBusca">
+									<div class="span12">
+										<div class="span3">
+											<h:outputText styleClass="labelOutText" value="ATIVIDADE: " />
+										</div>
+										<div class="span3">
+											<h:inputText id="inpDen" value="#{metasListMBean.nome}" styleClass="form-control input-sm up" />
+												 			 
+										</div>
+									</div>
+									 
+								 
+									
+								</div>
+								<br />
+								<div class="form-group">
+									<div class="col-sm-offset-7 col-sm-10">
+										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
+											<f:ajax
+												execute="@this inpDen inputMenUnidOrc"
+												event="click" listener="#{metasListMBean.buscar()}"
+												render="tableAtividade" />
+										</h:commandButton>
+										&nbsp;
+										<h:button rendered="false" value="Adicionar" styleClass="btnAction btn btn-primary" outcome="metasEdit" />
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<legend class="outBusc">RESULTADOS</legend>
+				</div>			
+				
+				<center>
+					<p:dataTable id="tableAtividade" value="#{metasListMBean.listAtividade}" var="atividade" paginator="true"
+						rows="10" style="width: 90%; margin-top: 2%;" emptyMessage="Não há ações a serem mostradas">
+						<p:column headerText="NOME" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(atividade.nome)}" />
+						</p:column>
+						<p:column headerText="COMPROMISSOS" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(atividade.codigosCompromissos)}" />
+						</p:column>
+						<p:column headerText="UNIDADE GESTORA" styleClass="outTextTable">
+							<h:outputText value="#{fn:toUpperCase(atividade.unidadeOrcamentaria.descricao)}" />
+						</p:column>	
+						<p:column headerText="PREVISTO" styleClass="outTextTable" width="10%">
+							<h:outputText value="#{fn:toUpperCase(atividade.previsto)}"/>
+						</p:column>
+						<p:column headerText="REALIZADO" styleClass="outTextTable" width="10%">
+							<h:outputText value="#{fn:toUpperCase(atividade.realizado)}"/>
+						</p:column>
+						<p:column headerText="STATUS" styleClass="outTextTable" width="10%">
+							<h:outputText value="#{fn:toUpperCase(atividade.status.nome)}"/>
+						</p:column>
+						
+						<p:column headerText="Operação" style="width: 14%;" footerText="Quantidade Total: ${fn:length(atividadeMBean.listAtividade)}">
+							<center>
+								<p:button title="Visualizar" outcome="metasAtividadeView" icon="ui-icon-search">
+								   <f:param name="id" value="#{atividade.id}" />
+								</p:button>
+								<p:button title="Editar"  outcome="metasAtividadeEdit" icon="ui-icon-pencil">
+								   <f:param name="id" value="#{atividade.id}" />
+								</p:button>
+								
+							</center>
+						</p:column>						
+					</p:dataTable>
+				</center>	
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closable="true">
+	        		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        		<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    		</p:confirmDialog>	
+    		</h:form>
+		</ui:define>
+	</ui:composition>	
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+
+</h:head> 
+<body> 
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+		
+			<f:metadata>
+    			<f:viewParam name="id" value="#{metasEditMBean.id}"/>
+    			<f:viewAction action="#{metasEditMBean.init}" />
+			</f:metadata>
+		<h:form>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<legend class="outBusc">EDIÇÃO</legend>
+				</div>
+			</div>
+			<div class="spaceContainerForm">			
+				<div class="container-fluid" style="margin-top: 3%;">
+					<div class="row">
+						<div class="col-lg-12">
+							<h:outputText value="NOME:  " styleClass="labelOutText" />
+							<h:outputText value="#{metasEditMBean.atividade.nome}" styleClass="labelInputText"/>									
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<h:outputText value="PREVISTO  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasEditMBean.atividade.previsto)}" styleClass="labelInputText"/>									
+						</div>	
+						<div class="col-lg-3">
+							<h:outputText value="REALIZADO  " styleClass="labelOutText"/>
+							<h:inputText value="#{metasEditMBean.atividade.realizado}" styleClass="labelInputText" onkeypress='return ValidaNumero(event)'>
+							 					
+							</h:inputText>
+						</div>
+						<div class="col-lg-6">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<h:outputText value="COMPROMISSOS:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasEditMBean.atividade.codigosCompromissos)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-6">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<h:outputText value="UNIDADE ORÇAMENTÁRIA:  " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasEditMBean.atividade.unidadeOrcamentaria.descricao)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-6">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>						
+					<div class="row">
+						<div class="col-lg-5">
+							<h:outputText value="UNIDADE: " styleClass="labelOutText"/>
+							<h:outputText value="#{fn:toUpperCase(metasEditMBean.atividade.unidade)}" styleClass="labelInputText"/>
+						</div>
+						<div class="col-lg-7">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>	
+					<div class="row">
+						<div class="col-lg-4">
+							<h:outputText value="STATUS:  " styleClass="labelOutText"/>
+							<h:outputText value="#{metasEditMBean.atividade.status.nome}">
+							</h:outputText>
+						</div>
+						<div class="col-lg-8">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+						<hr class="linhaTransversal"></hr>						
+					</div>		
+					<div class="row">
+						<div class="col-lg-12">
+							<h:outputText value="COMENTÁRIO: " styleClass="labelOutText"/>
+							<h:inputTextarea value="#{metasEditMBean.atividade.comentario}" rows="5" styleClass="form-control up"/>								
+						</div>						
+					</div>	
+					
+					<div class="row-fluid" style="margin-top: 2%;">
+						<div class="spaceBtnAcao">		
+							<h:form>		
+								 <h:commandButton styleClass="btn btn-primary" value="Editar" action="#{metasEditMBean.editar()}" />
+								&nbsp;
+								<h:button styleClass="btn btn-primary" outcome="metasAtividadeList" value="Voltar" />
+							</h:form>	
+						</div>
+					</div>	
+				</div>
+			</div>
+		</h:form>
+			
+		</ui:define>	
+	</ui:composition>
+</body> 
+</html>

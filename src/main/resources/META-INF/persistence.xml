@@ -76,6 +76,10 @@
       <class>quantitativo.model.TipoRegiao</class>
       <class>quantitativo.model.UnidadeFederativa</class>
       
+      <class>metas.model.Atividade</class>
+      <class>metas.model.Compromisso</class>
+      <class>metas.model.EixoTematico</class>
+      <class>metas.model.Status</class>
       
       <properties>
  

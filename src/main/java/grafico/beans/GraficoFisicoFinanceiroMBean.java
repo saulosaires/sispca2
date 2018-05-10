@@ -54,7 +54,7 @@ import siafem.service.FisicoFinanceiroMensalSiafemService;
  
 @Named
 @ViewScoped
-public class GraficoFisicoFinanceiro implements Serializable{
+public class GraficoFisicoFinanceiroMBean implements Serializable{
 	
 	public static final String FAIL_REPORT = "Falha inesperada ao tentar Imprimir Relatório";
 	public static final String REPORT_EMPTY = "Não há dados para o programa Selecionado";
@@ -75,7 +75,7 @@ public class GraficoFisicoFinanceiro implements Serializable{
 	
 	
 	@Inject
-	public GraficoFisicoFinanceiro(ExercicioService exercicioService,
+	public GraficoFisicoFinanceiroMBean(ExercicioService exercicioService,
 								   ProgramaService programaService,
 								   MesService mesService,
 								   FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,

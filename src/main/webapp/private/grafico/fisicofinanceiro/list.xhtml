@@ -28,7 +28,7 @@
 								<p:outputPanel id="customPanel" style="margin-bottom:10px">
 								
 									<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
-							        <p:selectOneRadio id="customRadio" value="#{graficoFisicoFinanceiro.tipoArquivo}" layout="custom">
+							        <p:selectOneRadio id="customRadio" value="#{graficoFisicoFinanceiroMBean.tipoArquivo}" layout="custom">
       										<f:selectItem itemLabel="PDF" itemValue="PDF" />
            								    <f:selectItem itemLabel="XLS" itemValue="XLS" />
 							        </p:selectOneRadio>
@@ -53,8 +53,8 @@
 		    			<div class="row" style="margin-top: 1%">
 							<div class="col-lg-3">
 								<h:outputText value="EXERCÍCIO: " styleClass="labelOutText"/>
-								<h:selectOneMenu value="#{graficoFisicoFinanceiro.exercicio}" styleClass="input-sm form-control">
-									<f:selectItems var="exerc" value="#{graficoFisicoFinanceiro.listExercicio}" itemLabel="#{exerc.ano}" itemValue="#{exerc.ano}" />
+								<h:selectOneMenu value="#{graficoFisicoFinanceiroMBean.exercicio}" styleClass="input-sm form-control">
+									<f:selectItems var="exerc" value="#{graficoFisicoFinanceiroMBean.listExercicio}" itemLabel="#{exerc.ano}" itemValue="#{exerc.ano}" />
 									
 								</h:selectOneMenu>
 							</div>
@@ -64,14 +64,14 @@
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-3">
 								<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
-								<h:selectOneMenu value="#{graficoFisicoFinanceiro.unidade}" required="true" requiredMessage="Unidade Orçamentária: campo é obrigatório"
+								<h:selectOneMenu value="#{graficoFisicoFinanceiroMBean.unidade}" required="true" requiredMessage="Unidade Orçamentária: campo é obrigatório"
 									styleClass="input-sm form-control">
 									<f:selectItem itemLabel="-SELECIONE-" itemValue="#{null}"/>		
 																
-									<f:selectItems var="unid" value="#{graficoFisicoFinanceiro.listUnidade}" itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.codigo}" />
+									<f:selectItems var="unid" value="#{graficoFisicoFinanceiroMBean.listUnidade}" itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.codigo}" />
 										
 									<f:ajax event="change" execute="@this"
-										listener="#{graficoFisicoFinanceiro.buscaProgramaPorUnidadeOrcamentaria()}"
+										listener="#{graficoFisicoFinanceiroMBean.buscaProgramaPorUnidadeOrcamentaria()}"
 										render="idComboMetaFisicoProg" />
 								</h:selectOneMenu>
 							</div>
@@ -81,12 +81,12 @@
 							<div class="col-lg-3">
 								<h:outputText value="PROGRAMA:  " styleClass="labelOutText"/>
 								<h:selectOneMenu id="idComboMetaFisicoProg"
-												 value="#{graficoFisicoFinanceiro.programa}"
+												 value="#{graficoFisicoFinanceiroMBean.programa}"
 												 styleClass="input-sm form-control" required="true"
 												 requiredMessage="Programa: campo é obrigatório" >
 									
 									<f:selectItem itemLabel="-SELECIONE-" itemValue="#{null}"/> 
-									<f:selectItems value="#{graficoFisicoFinanceiro.listPrograma}"
+									<f:selectItems value="#{graficoFisicoFinanceiroMBean.listPrograma}"
 										var="prog" itemValue="#{prog.codigo}" itemLabel="#{fn:toUpperCase(prog.denominacao)}" />
 								</h:selectOneMenu>
 							</div>
@@ -97,7 +97,7 @@
 							<div class="spaceBtnAcao">
 								<h:commandLink styleClass="btnAction btn btn-primary"  
 							 		value="Gerar Relatório" 
-							 		action="#{graficoFisicoFinanceiro.gerarRelatorio()}" />
+							 		action="#{graficoFisicoFinanceiroMBean.gerarRelatorio()}" />
 							</div>
 						</div>	
 						

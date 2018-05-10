@@ -109,7 +109,10 @@ public class ViewMap  {
 		
 		mapLinks.put("/sispca2/private/grafico/fisicofinanceiro/list.xhtml","graficoAcompanhamentoFinanceiroOrcamento");
 			
-		
+		mapLinks.put("/sispca2/private/metas/atividade/list.xhtml","metasAtividadeList");
+		mapLinks.put("/sispca2/private/metas/atividade/view.xhtml","metasAtividadeView");
+		mapLinks.put("/sispca2/private/metas/atividade/form.xhtml","metasAtividadeEdit");
+
 		
 	}
 
