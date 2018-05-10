@@ -90,7 +90,7 @@ public class UsuarioEditMBean implements Serializable {
 	public String atualizar() {
 
 		try {
-
+			usuario.setValidarSameCpf(false);
 			if (!userValidate.validar(usuario)) {
 				return "";
 			}

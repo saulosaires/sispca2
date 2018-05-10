@@ -104,6 +104,8 @@ public class Usuario  extends Model implements  Auditable {
 
 	private transient String loginSegundaSugestao;
 	
+	private transient boolean validarSameCpf;
+	
 	public Usuario() { 
 	
 	}
@@ -283,6 +285,16 @@ public class Usuario  extends Model implements  Auditable {
 
 	public void setLoginSegundaSugestao(String loginSegundaSugestao) {
 		this.loginSegundaSugestao = loginSegundaSugestao;
+	}
+
+	
+	
+	public boolean isValidarSameCpf() {
+		return validarSameCpf;
+	}
+
+	public void setValidarSameCpf(boolean validarSameCpf) {
+		this.validarSameCpf = validarSameCpf;
 	}
 
 	public String getPerfilLabel() {

@@ -63,7 +63,7 @@ public class UsuarioFormMBean implements Serializable {
 	public String salvar() {
 
 		try {
-
+			usuario.setValidarSameCpf(true);
 			if (!userValidate.validar(usuario)) {
 				return "";
 			}

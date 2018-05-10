@@ -66,11 +66,14 @@ public class UserValidate implements Validate<Usuario>,Serializable{
 			return false;
 		}
 
-		Optional<Usuario> userOptinal = userService.queryByCPF(usuario.getCpf()); 
-		
-		if(userOptinal.isPresent()) {
-			Messages.addMessageError(DUPLICATED_CPF_REQUIRED_MSG);
-			return false;
+		if(usuario.isValidarSameCpf()) {
+			
+			Optional<Usuario> userOptinal = userService.queryByCPF(usuario.getCpf()); 
+			
+			if(userOptinal.isPresent()) {
+				Messages.addMessageError(DUPLICATED_CPF_REQUIRED_MSG);
+				return false;
+			}
 		}
 		
 		return true;
