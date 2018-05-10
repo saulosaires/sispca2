@@ -31,6 +31,7 @@ public class UsuarioDAO extends AbstractDAO< Usuario >{
 	private static final String PWORD = "password";
 	private static final String NAME  = "name";
 	private static final String SIGLA = "sigla";
+	private static final String ATIVO = "ativo";
 	
 	public UsuarioDAO() {
 		setClazz(Usuario.class );
@@ -61,7 +62,8 @@ public class UsuarioDAO extends AbstractDAO< Usuario >{
 		
 		query.where(
 			    cb.equal(m.get(LOGIN),login ),
-			    cb.equal(m.get(PWORD),password )
+			    cb.equal(m.get(PWORD),password ),
+			    cb.equal(m.get(ATIVO),true )
 			    );
  
 		List<Usuario> list = entityManager.createQuery(query).setMaxResults(1).getResultList();

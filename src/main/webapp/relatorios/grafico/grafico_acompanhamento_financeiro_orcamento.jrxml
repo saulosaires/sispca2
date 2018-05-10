@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 5.5.2  -->
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico_acompanhamento_financeiro_orcamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
 	<property name="ireport.zoom" value="1.7715610000000044"/>
 	<property name="ireport.x" value="0"/>
@@ -27,6 +27,8 @@
 	<parameter name="empenhadoPorDisponivel" class="java.math.BigDecimal"/>
 	<parameter name="liquidadoPorDisponivel" class="java.math.BigDecimal"/>
 	<parameter name="pagoPorDisponivel" class="java.math.BigDecimal"/>
+	<parameter name="pie" class="java.awt.image.BufferedImage"/>
+	<parameter name="bar" class="java.awt.image.BufferedImage"/>
 	<group name="grupo_unidade_orcamentaria" keepTogether="true">
 		<groupExpression><![CDATA[$P{codigoUnidadeOrcamentaria}]]></groupExpression>
 		<groupHeader>
@@ -291,7 +293,9 @@
 	<detail>
 		<band height="19" splitType="Stretch">
 			<frame>
-				<reportElement positionType="Float" mode="Transparent" x="1" y="0" width="554" height="19" backcolor="#E4E4E4" uuid="4ed676fa-a72c-47f2-8444-2e5b32aa49ad"/>
+				<reportElement positionType="Float" mode="Transparent" x="1" y="0" width="554" height="19" backcolor="#E4E4E4" uuid="4ed676fa-a72c-47f2-8444-2e5b32aa49ad">
+					<property name="com.jaspersoft.studio.layout"/>
+				</reportElement>
 				<textField pattern="#,###,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" x="61" y="0" width="63" height="19" isPrintWhenDetailOverflows="true" printWhenGroupChanges="grupo_programa" backcolor="#E4E4E4" uuid="e4cac775-b408-40ad-a836-bdf23d2da436"/>
 					<box rightPadding="2">
@@ -397,7 +401,7 @@
 					<textFieldExpression><![CDATA[$P{pagoPorDisponivel}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,###,##0.00" isBlankWhenNull="true">
-					<reportElement positionType="Float" x="0" y="0" width="61" height="19" isPrintWhenDetailOverflows="true" printWhenGroupChanges="grupo_programa" backcolor="#E4E4E4" uuid="e4cac775-b408-40ad-a836-bdf23d2da436"/>
+					<reportElement positionType="Float" x="-1" y="0" width="62" height="19" isPrintWhenDetailOverflows="true" printWhenGroupChanges="grupo_programa" backcolor="#E4E4E4" uuid="e4cac775-b408-40ad-a836-bdf23d2da436"/>
 					<box rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -454,6 +458,9 @@
 			</staticText>
 			<subreport isUsingCache="false">
 				<reportElement positionType="Float" x="0" y="94" width="554" height="17" uuid="996fa123-2836-4b11-8598-5329163048a9"/>
+				<subreportParameter name="bar">
+					<subreportParameterExpression><![CDATA[$P{bar}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportExpression><![CDATA["sub_acompanhamento_financeiro_orcamento.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport isUsingCache="false">
@@ -484,6 +491,9 @@
 				</subreportParameter>
 				<subreportParameter name="saldo">
 					<subreportParameterExpression><![CDATA[$P{saldo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pie">
+					<subreportParameterExpression><![CDATA[$P{pie}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportExpression><![CDATA["sub_percentual_liquidado.jasper"]]></subreportExpression>
 			</subreport>

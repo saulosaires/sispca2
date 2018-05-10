@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_percentual_liquidado" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="35dfb519-ee67-44cb-8dd8-113b118e98d1">
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_percentual_liquidado" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="35dfb519-ee67-44cb-8dd8-113b118e98d1">
 	<property name="ireport.zoom" value="1.610510000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -10,6 +11,7 @@
 	<parameter name="liquidado" class="java.math.BigDecimal">
 		<defaultValueExpression><![CDATA[90]]></defaultValueExpression>
 	</parameter>
+	<parameter name="pie" class="java.awt.image.BufferedImage"/>
 	<field name="cod_uo_siafem" class="java.lang.String"/>
 	<field name="uo_siafem" class="java.lang.String"/>
 	<field name="cod_programa_siafem" class="java.lang.String"/>
@@ -25,30 +27,10 @@
 	</background>
 	<summary>
 		<band height="153" splitType="Stretch">
-			<pie3DChart>
-				<chart evaluationTime="Report" theme="default">
-					<reportElement x="0" y="0" width="537" height="153" uuid="04c16c16-5624-48da-800f-747e4a7329e4"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<pieDataset>
-					<pieSeries>
-						<keyExpression><![CDATA["SALDO"]]></keyExpression>
-						<valueExpression><![CDATA[$P{saldo}]]></valueExpression>
-						<labelExpression><![CDATA["SALDO"]]></labelExpression>
-					</pieSeries>
-					<pieSeries>
-						<keyExpression><![CDATA["LIQUIDADO"]]></keyExpression>
-						<valueExpression><![CDATA[$F{liquidado}]]></valueExpression>
-						<labelExpression><![CDATA["LIQUIDADO"]]></labelExpression>
-					</pieSeries>
-				</pieDataset>
-				<pie3DPlot>
-					<plot/>
-					<itemLabel/>
-				</pie3DPlot>
-			</pie3DChart>
+			<image>
+				<reportElement x="-19" y="0" width="569" height="153" uuid="acbc6de7-a03e-4051-b25e-e4a1d48a2ad5"/>
+				<imageExpression><![CDATA[$P{pie}]]></imageExpression>
+			</image>
 		</band>
 	</summary>
 </jasperReport>

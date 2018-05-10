@@ -1,7 +1,12 @@
 package grafico.beans;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +14,18 @@ import java.util.Map;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
@@ -22,6 +39,10 @@ import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -87,13 +108,12 @@ public class GraficoFisicoFinanceiro implements Serializable{
 				Messages.addMessageWarn(NO_DATA);
 				return "";
 			}
+	
+			RelatorioLiquidadoAcumuladoFisicoFinanceiro liquidadoAcumuladoFisicoFinanceiro = fisicoFinanceiroMensalSiafemService.calculaLiquidadoAcumuladoByUnidadeAndProgAndMesAndAno(unidade, programa, meses, exercicio);
+			
 			
 			List<FisicoFinanceiroMensalSiafem> listAnaliseFisicoFinanceiroPorMes = fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiroPorMes(unidade, programa, exercicio);
 
-			
-			
-			RelatorioLiquidadoAcumuladoFisicoFinanceiro liquidadoAcumuladoFisicoFinanceiro = fisicoFinanceiroMensalSiafemService.calculaLiquidadoAcumuladoByUnidadeAndProgAndMesAndAno(unidade, programa, meses, exercicio);
-			
 			
 			FisicoFinanceiroMensalSiafem financeiroMensalSiafem = listAnaliseFisicoFinanceiro.get(0);
 			
@@ -121,6 +141,10 @@ public class GraficoFisicoFinanceiro implements Serializable{
 			BigDecimal liquidadoPorDisponivel = MathUtils.multiply(MathUtils.divide(liquidado, disponivel),number100);
 			BigDecimal pagoPorDisponivel 	  = MathUtils.multiply(MathUtils.divide(pago, disponivel),number100);
 			
+			
+			BufferedImage pie = createPieChart(saldo, liquidado);
+			BufferedImage bar = createBarChart(listAnaliseFisicoFinanceiroPorMes);
+			
 			Map<String, Object> parameters = new HashMap<>();
 	
 			String brasaoMa = FileUtil.getRealPath("/resources/images/logo-gov-ma.png");
@@ -146,6 +170,8 @@ public class GraficoFisicoFinanceiro implements Serializable{
 			
 			parameters.put("liquidadoAcumuladoFisicoFinanceiro", liquidadoAcumuladoFisicoFinanceiro);
 			
+			parameters.put("pie", pie);
+			parameters.put("bar", bar);
 			
 			String report = FileUtil.getRealPath("/relatorios/grafico/grafico_acompanhamento_financeiro_orcamento.jasper");
 		 	 
@@ -156,25 +182,121 @@ public class GraficoFisicoFinanceiro implements Serializable{
 					return "";
 				}
 
-				byte[] bytes = JasperExportManager.exportReportToPdf(jasperRelatorio);
+			 byte[] bytes =null;
+			 String fileName=null;
+			 String contentType=null;
+			 
+			 if("PDF".equals(tipoArquivo)) {
+				 
+					bytes = JasperExportManager.exportReportToPdf(jasperRelatorio);
+					fileName="Acompanhamento Financeiro do Orçamento.pdf";
+					contentType = TipoArquivo.PDF.getId();
+	
+					
+			 }else {
+ 
+				 ByteArrayOutputStream output = new ByteArrayOutputStream();  
+	             JRXlsExporter exporterXLS = new JRXlsExporter(); 
+			
+	             exporterXLS.setExporterInput(new SimpleExporterInput(jasperRelatorio));            
+	             exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
+	             
+	             SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+	             configuration.setRemoveEmptySpaceBetweenRows(true);
+	             configuration.setDetectCellType(true);
+	             configuration.setWhitePageBackground(false);
+	             exporterXLS.setConfiguration(configuration);
+	             exporterXLS.exportReport();    
+	             bytes = output.toByteArray();
+	             output.close();
+	             
+	             fileName="Acompanhamento Financeiro do Orçamento.xls";
+				 contentType = TipoArquivo.XLS.getId();
+             
+			 }	
+			
+			 
+ 				
+			  FileUtil.sendFileOnResponseAttached(bytes,fileName,contentType);
 
 			 
-				
-				FileUtil.sendFileOnResponseAttached(bytes,"  Acompanhamento Financeiro do Orçamento.pdf", TipoArquivo.PDF.getId());
-				
-			
 			
 		} catch (Exception e) {
-
 			SispcaLogger.logError(e.getCause().getMessage());
 
 			Messages.addMessageError(FAIL_REPORT);
 		}
 		
 		
-		return null;
+		return "";
 	}
 
+	private  BufferedImage createPieChart(BigDecimal saldo, BigDecimal liquidado) {
+		
+		BigDecimal number100= new BigDecimal(100);
+		BigDecimal total = saldo.add(liquidado);
+		
+		BigDecimal percentSaldo     = MathUtils.multiply(MathUtils.divide(saldo, total), number100);
+		BigDecimal percentLiquidado = MathUtils.multiply(MathUtils.divide(liquidado, total), number100);
+		
+		DefaultPieDataset dataset = new DefaultPieDataset( );
+					      dataset.setValue( "SALDO:("+percentSaldo+" %)" , saldo );  
+					      dataset.setValue( "LIQUIDADO: ("+percentLiquidado+" %)" ,liquidado);   
+		
+					      
+		StandardChartTheme theme = new StandardChartTheme("sispca");
+	      				   theme.setPlotBackgroundPaint(Color.WHITE); 
+	      
+	      
+	    ChartFactory.setChartTheme(theme);     
+					      
+		JFreeChart chart = ChartFactory.createPieChart3D( "", dataset, true, true, false);
+		
+				   chart.getPlot().setOutlineVisible(false); //Remove a borda
+		
+		return chart.createBufferedImage(1080, 300);	      
+	}
+	
+	private BufferedImage createBarChart(List<FisicoFinanceiroMensalSiafem> listAnaliseFisicoFinanceiroPorMes) {
+		
+	    DefaultCategoryDataset dataset =  new DefaultCategoryDataset( );  
+		
+	    for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem :listAnaliseFisicoFinanceiroPorMes ) {
+	    	
+	    	dataset.addValue(
+	    					 fisicoFinanceiroMensalSiafem.getLiquidado(),
+			    			 fisicoFinanceiroMensalSiafem.getMes().getDescricao() ,
+			    			 fisicoFinanceiroMensalSiafem.getMes().getDescricao() 
+			    			);    
+	    }
+	    
+	      StandardChartTheme theme = new StandardChartTheme("sispca");
+			 theme.setPlotBackgroundPaint(Color.WHITE); 
+    
+	    
+	      ChartFactory.setChartTheme(theme);
+	      JFreeChart chart = ChartFactory.createBarChart3D("","","", dataset, PlotOrientation.VERTICAL, false, false, false);
+
+	      
+	      BarRenderer.setDefaultBarPainter(new StandardBarPainter());
+	      CategoryPlot plot = chart.getCategoryPlot();
+	      plot.setBackgroundAlpha(0);
+	       
+	      Font font = new Font("", Font.TRUETYPE_FONT, 10); 
+	      CategoryAxis axis = plot.getDomainAxis();
+	      axis.setTickLabelFont(font);
+	       
+	      NumberAxis e = (NumberAxis) plot.getRangeAxis();
+	      e.setNumberFormatOverride(new DecimalFormat("#,###,##0.00"));
+	      
+	       BarRenderer br = (BarRenderer) plot.getRenderer();
+	       br.setItemMargin(-2.5);
+	   
+	       
+	       return chart.createBufferedImage(1050, 300);
+	 
+	}
+	
 	public String getTipoArquivo() {
 		return tipoArquivo;
 	}

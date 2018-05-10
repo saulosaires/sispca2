@@ -12,7 +12,7 @@ public class MathUtils {
 
 	public static BigDecimal divide(BigDecimal divider,BigDecimal divisor ) {
 
-		return divider.divide(divisor ,2, RoundingMode.HALF_UP);
+		return divider.divide(divisor ,2);
 		 
 	}
 
@@ -24,7 +24,7 @@ public class MathUtils {
 	 
 	 public static BigDecimal multiply(BigDecimal divider,BigDecimal divisor ) {
 		 
-		 return divider.multiply(divisor, new MathContext(16,RoundingMode.HALF_EVEN));
+		 return divider.multiply(divisor, new MathContext(2));
 		 
 	 }
 	 

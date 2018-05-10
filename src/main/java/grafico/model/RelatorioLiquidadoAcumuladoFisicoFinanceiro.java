@@ -3,45 +3,46 @@ package grafico.model;
 import java.math.BigDecimal;
 
 import arquitetura.enums.Meses;
+import arquitetura.utils.MathUtils;
 
 public class RelatorioLiquidadoAcumuladoFisicoFinanceiro {
 
 	
-	private BigDecimal liquidadoJaneiro;
-	private BigDecimal acumuladoJaneiro;
+	private BigDecimal liquidadoJaneiro = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoJaneiro = MathUtils.getZeroBigDecimal();
 	
-	private BigDecimal liquidadoFevereiro;
-	private BigDecimal acumuladoFevereiro;
+	private BigDecimal liquidadoFevereiro = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoFevereiro = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoMarco;
-	private BigDecimal acumuladoMarco;
+	private BigDecimal liquidadoMarco = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoMarco = MathUtils.getZeroBigDecimal();
 	
-	private BigDecimal liquidadoAbril;
-	private BigDecimal acumuladoAbril;
+	private BigDecimal liquidadoAbril = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoAbril = MathUtils.getZeroBigDecimal();
 	
-	private BigDecimal liquidadoMaio;
-	private BigDecimal acumuladoMaio;
+	private BigDecimal liquidadoMaio = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoMaio = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoJunho;
-	private BigDecimal acumuladoJunho;
+	private BigDecimal liquidadoJunho = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoJunho = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoJulho;
-	private BigDecimal acumuladoJulho;
+	private BigDecimal liquidadoJulho = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoJulho = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoAgosto;
-	private BigDecimal acumuladoAgosto;
+	private BigDecimal liquidadoAgosto = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoAgosto = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoSetembro;
-	private BigDecimal acumuladoSetembro;
+	private BigDecimal liquidadoSetembro = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoSetembro = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoOutubro;
-	private BigDecimal acumuladoOutubro;
+	private BigDecimal liquidadoOutubro = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoOutubro = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoNovembro;
-	private BigDecimal acumuladoNovembro;
+	private BigDecimal liquidadoNovembro = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoNovembro = MathUtils.getZeroBigDecimal();
 
-	private BigDecimal liquidadoDezembro;
-	private BigDecimal acumuladoDezembro;
+	private BigDecimal liquidadoDezembro = MathUtils.getZeroBigDecimal();
+	private BigDecimal acumuladoDezembro = MathUtils.getZeroBigDecimal();
 	
 	
 	public void setLiquidado(BigDecimal liquidado, int id) {

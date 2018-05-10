@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_acompanhamento_financeiro_orcamento" pageWidth="595" pageHeight="842" columnWidth="585" leftMargin="0" rightMargin="10" topMargin="20" bottomMargin="20" uuid="2fd707ac-c762-45ec-8b69-daf7e5b048f3">
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_acompanhamento_financeiro_orcamento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="585" leftMargin="0" rightMargin="10" topMargin="20" bottomMargin="20" uuid="2fd707ac-c762-45ec-8b69-daf7e5b048f3">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="bar" class="java.awt.image.BufferedImage"/>
 	<field name="cod_uo_siafem" class="java.lang.String"/>
 	<field name="uo_siafem" class="java.lang.String"/>
 	<field name="cod_programa_siafem" class="java.lang.String"/>
@@ -30,42 +33,10 @@
 	</pageFooter>
 	<summary>
 		<band height="157" splitType="Stretch">
-			<bar3DChart>
-				<chart>
-					<reportElement x="0" y="0" width="563" height="157" uuid="7f4f2bc5-0162-4d07-b97c-120c9efe4213"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["Liquidado"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{mes}.equals(new Integer(1))  ? "JAN" :
-$F{mes}.equals(new Integer(2))  ? "FEV" :
-$F{mes}.equals(new Integer(3))  ? "MAR" :
-$F{mes}.equals(new Integer(4))  ? "ABR" :
-$F{mes}.equals(new Integer(5))  ? "MAI" :
-$F{mes}.equals(new Integer(6))  ? "JUN" :
-$F{mes}.equals(new Integer(7))  ? "JUL" :
-$F{mes}.equals(new Integer(8))  ? "AGO" :
-$F{mes}.equals(new Integer(9))  ? "SET" :
-$F{mes}.equals(new Integer(10)) ? "OUT" :
-$F{mes}.equals(new Integer(11)) ? "NOV" :
-$F{mes}.equals(new Integer(12)) ? "DEZ" : "--"]]></categoryExpression>
-						<valueExpression><![CDATA[$F{liquidado}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<bar3DPlot>
-					<plot/>
-					<itemLabel/>
-					<categoryAxisFormat>
-						<axisFormat/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat/>
-					</valueAxisFormat>
-				</bar3DPlot>
-			</bar3DChart>
+			<image>
+				<reportElement x="0" y="0" width="580" height="157" uuid="e9314811-1d5a-4a5c-9326-6a278fa477fc"/>
+				<imageExpression><![CDATA[$P{bar}]]></imageExpression>
+			</image>
 		</band>
 	</summary>
 </jasperReport>
