@@ -24,6 +24,10 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	}
 
+	public int deleteByYear(Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).deleteByYear(exercicio);
+	}
+	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).analiseFisicoFinanceiro(programa,exercicio);
 	}

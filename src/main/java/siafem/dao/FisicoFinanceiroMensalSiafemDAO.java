@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -57,6 +58,16 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 
 	}
   
+	public int deleteByYear(Integer exercicio){
+	
+		if(Utils.invalidYear(exercicio)) return -1;
+		
+		Query query = entityManager.createQuery("DELETE FROM FisicoFinanceiroMensalSiafem f WHERE f.ano=:ano");
+			  query.setParameter("ano", exercicio);
+		
+		return query.executeUpdate();
+	}
+	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
 		
 		if(programa==null  || Utils.invalidId(programa.getId()) || 
@@ -120,7 +131,6 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		 return entityManager.createQuery(criteria).getResultList();
 	}
  
-	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(String unidadeOrcamentaria,String programa, Integer exercicio){
 		
 		if(unidadeOrcamentaria==null || programa==null || Utils.invalidYear(exercicio))return new ArrayList<>();
@@ -224,7 +234,6 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		 return entityManager.createQuery(criteria).getResultList();
 	}	
 	
-	
 	public BigDecimal calculaLiquidadoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, Integer mes, Integer ano){
  
 		
@@ -258,9 +267,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		
 	}
-	
-	
-	
+		
 	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
 		
 		if(Utils.invalidYear(exercicio) )return new ArrayList<>();

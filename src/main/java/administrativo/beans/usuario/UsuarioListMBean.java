@@ -48,7 +48,7 @@ public class UsuarioListMBean implements Serializable {
 		salvar    = SessionUtils.containsKey("usuarioSalvar");
 		atualizar = SessionUtils.containsKey("usuarioAtualizar");
 		relatorio = SessionUtils.containsKey("usuarioRelatorio");
-		
+ 
 	} 
  	
 	public String pesquisar() {

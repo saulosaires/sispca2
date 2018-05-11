@@ -29,6 +29,9 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		super(controller);
 	}
 
+	public int deleteByYear(Integer exercicio){
+		return ((FisicoFinanceiroMensalSiafemController)getController()).deleteByYear(exercicio);
+	}
 
 	public BigDecimal calculaDotacaoInicialByProgAndAno(String programaCodigo, Integer anoVigente){
 		

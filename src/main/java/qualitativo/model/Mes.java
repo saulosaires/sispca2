@@ -30,6 +30,10 @@ public class Mes  extends Model  {
 	@Column(name="numero_mes")
 	private Integer numeroMes;
   
+	public Mes() {}
+	
+	public Mes(Long id) {this.id = id;}
+	
 	public Long getId() {
 		return id;
 	}
