@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import administrativo.model.Exercicio;
 import arquitetura.controller.AbstractController;
+import arquitetura.exception.JpaException;
 import qualitativo.model.Programa;
 import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
 import siafem.model.FisicoFinanceiroMensalSiafem;
@@ -24,7 +25,12 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	}
 
-	public int deleteByYear(Integer exercicio){
+	public void create(List<FisicoFinanceiroMensalSiafem> listSiafem) throws JpaException {
+
+		((FisicoFinanceiroMensalSiafemDAO)getDao()).create(listSiafem);
+	}	
+	
+	public int deleteByYear(Integer exercicio) throws JpaException{
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).deleteByYear(exercicio);
 	}
 	
@@ -84,7 +90,7 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	public BigDecimal calculaLiquidadoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, Integer mes, Integer ano) {
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaLiquidadoByUnidadeAndProgAndMesAndAno(unidadeOrcamentaria,programa, mes, ano);
-	}	
-
+	}
+ 
 	
 }

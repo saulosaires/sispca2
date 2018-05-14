@@ -109,7 +109,7 @@ public class Acao extends Model implements  Auditable {
 	@NotNull(message="Função: campo é obrigatório")
 	private Funcao funcao = new Funcao();
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_programa",nullable=false)
 	private Programa programa = new Programa();
 

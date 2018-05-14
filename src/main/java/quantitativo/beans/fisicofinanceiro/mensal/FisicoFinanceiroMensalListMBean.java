@@ -68,7 +68,7 @@ public class FisicoFinanceiroMensalListMBean implements Serializable {
 
 		try {
 			
-			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId);
+			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,null);
 
 			if(listUnidadeOrcamentaria.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);

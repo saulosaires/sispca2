@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,6 +19,7 @@ import javax.persistence.criteria.Root;
 import administrativo.model.Exercicio;
 import arquitetura.dao.AbstractDAO;
 import arquitetura.enums.TipoCalculoMeta;
+import arquitetura.exception.JpaException;
 import arquitetura.utils.MathUtils;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
@@ -57,15 +59,67 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		setClazz(FisicoFinanceiroMensalSiafem.class);
 
 	}
-  
-	public int deleteByYear(Integer exercicio){
+
+	public void create(List<FisicoFinanceiroMensalSiafem> listSiafem) throws JpaException {
+
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		try {
+			
+			 entityTransaction.begin();
+
+			 int batchSize = 100;
+			 int count=0;
+			 for(FisicoFinanceiroMensalSiafem siafem: listSiafem) {
+				 
+				 if(count>=batchSize) {
+					 count=0;
+					 
+					 entityTransaction.commit();
+			         entityTransaction.begin();
+			         entityManager.clear();
+				 }
+				 
+				 entityManager.persist(siafem);
+				 count++;
+			 }
+			
+			 entityTransaction.commit();
+		 
+		} catch (Exception e) {
+
+			entityTransaction.rollback();
+
+			throw new JpaException("Erro ao Salvar FisicoFinanceiroMensalSiafem em lote", e);
+			 
+		}
+
+	
+	}
+	
+	public int deleteByYear(Integer exercicio) throws JpaException{
 	
 		if(Utils.invalidYear(exercicio)) return -1;
 		
+		
+		try{
+			
+			entityManager.getTransaction().begin();
+		 
 		Query query = entityManager.createQuery("DELETE FROM FisicoFinanceiroMensalSiafem f WHERE f.ano=:ano");
 			  query.setParameter("ano", exercicio);
 		
-		return query.executeUpdate();
+		int i= query.executeUpdate();
+		entityManager.getTransaction().commit();
+		
+		return i;
+		} catch (Exception e) {
+
+			if (entityManager.getTransaction()!= null)
+				entityManager.getTransaction().rollback();
+
+			throw new JpaException("Erro ao deletar FisicoFinanceiroMensalSiafem ",e);
+		}
+		
 	}
 	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
@@ -617,7 +671,8 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		return query.getSingleResult();
 		
-	}	
+	}
+	
 	
 	
 }

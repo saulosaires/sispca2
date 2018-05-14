@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import administrativo.model.Exercicio;
 import arquitetura.enums.ACAO;
 import arquitetura.enums.TipoCalculoMeta;
+import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.MathUtils;
 import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
@@ -29,7 +30,13 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		super(controller);
 	}
 
-	public int deleteByYear(Integer exercicio){
+	public void create(List<FisicoFinanceiroMensalSiafem> listSiafem) throws JpaException {
+		
+		((FisicoFinanceiroMensalSiafemController)getController()).create(listSiafem);
+	}
+	
+	
+	public int deleteByYear(Integer exercicio) throws JpaException{
 		return ((FisicoFinanceiroMensalSiafemController)getController()).deleteByYear(exercicio);
 	}
 

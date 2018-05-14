@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Job", schema = "agendador_tarefa")
-public class SispcaJob implements Serializable {
+public class SispcaJob extends Model   {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,9 +21,12 @@ public class SispcaJob implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
+	@Column(name = "nome")
 	private String nome;
+	
+	@Column(name = "periodo")
 	private String periodo;
-	private boolean ativo;
+ 
 	
  
 	public Long getId() {
@@ -46,14 +49,7 @@ public class SispcaJob implements Serializable {
 		this.periodo = periodo;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-	
+ 
 	
 	
 }

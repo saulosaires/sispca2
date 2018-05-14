@@ -81,13 +81,15 @@
       <class>metas.model.EixoTematico</class>
       <class>metas.model.Status</class>
       
+      <class>arquitetura.model.SispcaJob</class>
+      
       <properties>
  
  		 <property  name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
 		 <property name="hibernate.show_sql"   value="true"/>
 		 <property name="hibernate.format_sql" value="true"/>
 		
-<!-- 		 <property name="hibernate.hbm2ddl.auto" value="update"/> -->
+		 <property name="hibernate.hbm2ddl.auto" value="update"/>
 		
       </properties>
    </persistence-unit>

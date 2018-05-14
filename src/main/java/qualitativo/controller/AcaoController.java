@@ -21,11 +21,15 @@ public class AcaoController  extends AbstractController<Acao>{
 		super(acaoDAO);
 	}
 
- 
 	
-	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId){
+	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId){
 		
-		return ((AcaoDAO) getDao()).buscar(codigo, denominacao, unidadeOrcamentariaId, programaId);
+		return ((AcaoDAO) getDao()).buscar(codigo,codigoUnidadeOrcamentaria,codigoPrograma,exercicioId);
+	} 
+	
+	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+		
+		return ((AcaoDAO) getDao()).buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,exercicioId);
 	}
 	
 	public List<Acao> buscarByExercicio(Long exercicioId){

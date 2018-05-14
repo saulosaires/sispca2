@@ -21,9 +21,9 @@ public class ErrorHttpServlet extends HttpServlet {
         
 		try {
 			
-	        String code    = (String) req.getAttribute("javax.servlet.error.status_code");
-	        String message = (String) req.getAttribute("javax.servlet.error.message");
-	        String type    = (String) req.getAttribute("javax.servlet.error.exception_type");
+	        Object code    =  req.getAttribute("javax.servlet.error.status_code");
+	        Object message =  req.getAttribute("javax.servlet.error.message");
+	        Object type    =  req.getAttribute("javax.servlet.error.exception_type");
 	
 	  
 	        req.setAttribute("code", code);

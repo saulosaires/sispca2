@@ -61,7 +61,7 @@ public class AcaoListMBean implements Serializable {
 	public void buscar() {
 
 		try {
-			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId);
+			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,null);
 
 			if(listAcoes.isEmpty()) {
 				Messages.addMessageWarn(ACAO_NO_RECORDS);

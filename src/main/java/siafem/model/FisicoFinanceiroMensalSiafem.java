@@ -34,6 +34,28 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@JoinColumn(name="mes")
 	private Mes mes;
  
+	@Column(name="acao_codigo")
+	private String acaoCodigo;	
+	
+	@Column(name="acao_descricao")
+	private String acaDescricao;	
+	
+	@Column(name="plano_interno")
+	private String planoInterno;		
+
+	@Column(name="plano_interno_descricao")
+	private String planoInternoDescricao;	
+	
+	@Column(name="fonte")
+	private String fonte;	
+	
+	@Column(name="natureza")
+	private String natureza;
+	
+	@Column(name="regiao")
+	private Integer regiao;
+		
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_acao",nullable=true)
 	private Acao acao;
@@ -89,10 +111,18 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 									     String unidadeGestora,
 									     String codigoUnidadeOrcamentaria, 
 									     String programa,
+									     String acaoCodigo,
+									     String acaDescricao,
+									     String planoInterno,
+									     String planoInternoDescricao,
+									     String fonte,
+									     String natureza,
+									     Integer regiao,
 									     Acao acao,
 									     BigDecimal dotacaoInicial,
 									     BigDecimal disponivel,
 									     BigDecimal empenhado,
+									     BigDecimal liquidado,
 									     BigDecimal pago,
 									     Integer ano
 										) {
@@ -100,12 +130,22 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		
 		 this.mes=mes;
 		 this.unidadeGestora = unidadeGestora;
-		 this.codigoUnidadeOrcamentaria = codigoUnidadeOrcamentaria;
+		 this.unidadeOrcamentaria = codigoUnidadeOrcamentaria;
 		 this.programa = programa;
+		 
+		 this.acaoCodigo = acaoCodigo;
+		 this.acaDescricao = acaDescricao;
+		 this.planoInterno = planoInterno;
+		 this.planoInternoDescricao = planoInternoDescricao;
+		 this.fonte = fonte;
+		 this.natureza = natureza;
+		 this.regiao = regiao;
+		 
 		 this.acao = acao;
 		 this.dotacaoInicial = dotacaoInicial;
 		 this.disponivel = disponivel;
 		 this.empenhado = empenhado;
+		 this.liquidado = liquidado;
 		 this.pago = pago;
 		 this.ano = ano;
 		
@@ -417,6 +457,76 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setProgramaDenominacao(String programaDenominacao) {
 		this.programaDenominacao = programaDenominacao;
+	}
+
+
+	public String getAcaoCodigo() {
+		return acaoCodigo;
+	}
+
+
+	public void setAcaoCodigo(String acaoCodigo) {
+		this.acaoCodigo = acaoCodigo;
+	}
+
+
+	public String getAcaDescricao() {
+		return acaDescricao;
+	}
+
+
+	public void setAcaDescricao(String acaDescricao) {
+		this.acaDescricao = acaDescricao;
+	}
+
+
+	public String getPlanoInterno() {
+		return planoInterno;
+	}
+
+
+	public void setPlanoInterno(String planoInterno) {
+		this.planoInterno = planoInterno;
+	}
+
+
+	public String getPlanoInternoDescricao() {
+		return planoInternoDescricao;
+	}
+
+
+	public void setPlanoInternoDescricao(String planoInternoDescricao) {
+		this.planoInternoDescricao = planoInternoDescricao;
+	}
+
+
+	public String getFonte() {
+		return fonte;
+	}
+
+
+	public void setFonte(String fonte) {
+		this.fonte = fonte;
+	}
+
+
+	public String getNatureza() {
+		return natureza;
+	}
+
+
+	public void setNatureza(String natureza) {
+		this.natureza = natureza;
+	}
+
+
+	public Integer getRegiao() {
+		return regiao;
+	}
+
+
+	public void setRegiao(Integer regiao) {
+		this.regiao = regiao;
 	}
 
  

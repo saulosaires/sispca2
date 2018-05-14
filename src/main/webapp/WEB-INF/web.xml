@@ -35,7 +35,11 @@
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>server</param-value>
 	</context-param>
-
+	
+ <listener>
+  <listener-class>arquitetura.cron.IniciaAgenda</listener-class>
+ </listener>
+ 
 	<filter>
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
 		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>

@@ -23,12 +23,25 @@ public class AcaoService  extends AbstractService<Acao> {
 		super(acaoController);
 	}
 
-	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId) {
+	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId) {
 
-		if (Utils.emptyParam(codigo) && Utils.emptyParam(denominacao) &&Utils.invalidId(unidadeOrcamentariaId) && Utils.invalidId(programaId)) {
+		if (Utils.emptyParam(codigo) 		 && Utils.emptyParam(codigoUnidadeOrcamentaria) && 
+			Utils.emptyParam(codigoPrograma)  && Utils.invalidId(exercicioId)) {
 			return findAll();
 		} else {
-			return ((AcaoController) getController()).buscar(codigo, denominacao, unidadeOrcamentariaId, programaId);
+			return ((AcaoController) getController()).buscar(codigo, codigoUnidadeOrcamentaria, codigoPrograma, exercicioId);
+		}
+
+	}
+
+	
+	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId,Long exercicioId) {
+
+		if (Utils.emptyParam(codigo) && Utils.emptyParam(denominacao) && 
+			Utils.invalidId(unidadeOrcamentariaId) && Utils.invalidId(programaId) && Utils.invalidId(exercicioId)) {
+			return findAll();
+		} else {
+			return ((AcaoController) getController()).buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,exercicioId);
 		}
 
 	}

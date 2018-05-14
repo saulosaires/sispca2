@@ -28,4 +28,14 @@ public class MathUtils {
 		 
 	 }
 	 
+	 public static Integer parseInt(String str) {
+		 
+		 try {
+			 return Integer.parseInt(str);
+		 }catch(Exception e){
+			 return null;
+		 }
+		 
+	 }
+	 
 }

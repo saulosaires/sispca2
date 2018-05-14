@@ -29,7 +29,63 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 
 	}
 
-	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId){
+	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> m = query.from(Acao.class);
+		
+		query.select(m);
+		
+		List<Predicate> predicate = new ArrayList<>();
+		
+		if(!Utils.emptyParam(codigo)) {
+			
+			Expression<String> upperCodigo = cb.upper(m.get("codigo"));
+			
+			predicate.add(cb.like(upperCodigo,codigo.toUpperCase()));
+			
+		}
+		
+		
+		if(!Utils.emptyParam(codigoUnidadeOrcamentaria)) {
+ 			
+			Join<Object, Object> joinUO = m.join("unidadeOrcamentaria",JoinType.LEFT);
+	 
+			Expression<String> upperCodigo = cb.upper(joinUO.get("codigo"));
+			
+			predicate.add(cb.like(upperCodigo,codigoUnidadeOrcamentaria.toUpperCase()));
+			
+		}
+		
+		if(!Utils.emptyParam(codigoPrograma)) {
+ 			
+			Join<Object, Object> join = m.join("programa",JoinType.LEFT);
+			
+			Expression<String> upperCodigo = cb.upper(join.get("codigo"));
+			
+			predicate.add(cb.like(upperCodigo,codigoPrograma.toUpperCase()));
+
+		}
+		
+		if(!Utils.invalidId(exercicioId)) {
+ 			
+			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.LEFT);
+						
+			predicate.add(cb.equal(joinExercicio.get("id") ,exercicioId));
+		}
+
+		
+		query.where(  predicate.toArray(new Predicate[predicate.size()]));
+  
+		query.orderBy(cb.asc(m.get("denominacao")));
+		
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	
+	
+	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
@@ -71,10 +127,17 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			predicate.add(cb.equal(uoId,programaId));
 		}
 		
+		if(!Utils.invalidId(exercicioId)) {
+ 			
+			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.LEFT);
+						
+			predicate.add(cb.equal(joinExercicio.get("id") ,exercicioId));
+		}
+
 		
-			query.where(  predicate.toArray(new Predicate[predicate.size()]));
+		query.where(  predicate.toArray(new Predicate[predicate.size()]));
   
-			query.orderBy(cb.asc(m.get("denominacao")));
+		query.orderBy(cb.asc(m.get("denominacao")));
 		
 		return entityManager.createQuery(query).getResultList();
 	}
