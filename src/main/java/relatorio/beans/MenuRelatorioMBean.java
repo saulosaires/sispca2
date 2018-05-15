@@ -28,7 +28,7 @@ public class MenuRelatorioMBean implements Serializable{
 	private Long ppaId;
 	private List<Ppa> listPpa;
 	
-	private Long exercicioId;
+	private Long exercicioId=-1l;
 	private List<Exercicio> listExercicio;
 	
 	private PpaService ppaService;

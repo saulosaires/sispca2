@@ -49,7 +49,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		Join<Object, Object> joinPrograma 			 = root.join(PROGRAMA, 			   JoinType.LEFT);		
 		Join<Object, Object> joinUnidadeOrcamentaria = root.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
-		Join<Object, Object> joinExercicio 			 = root.join(EXERCICIO, JoinType.LEFT);
+		Join<Object, Object> joinAcaoExercicio 		 = root.join(EXERCICIO, JoinType.LEFT);
+		Join<Object, Object> joinProgExercicio 		 = joinPrograma.join(EXERCICIO, JoinType.LEFT);
 		Join<Object, Object> joinOrgao			     = joinUnidadeOrcamentaria.join(ORGAO, JoinType.LEFT);
 		
 		
@@ -86,7 +87,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		}
 
 		if(!Utils.invalidId(exercicioId)) {
-			predicate.add(cb.equal(joinExercicio.get(ID),exercicioId));
+			predicate.add(cb.equal(joinAcaoExercicio.get(ID),exercicioId));
+			predicate.add(cb.equal(joinProgExercicio.get(ID),exercicioId));
 		}
 
 		query.where( predicate.toArray(new Predicate[predicate.size()]));

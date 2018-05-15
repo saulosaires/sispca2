@@ -10,7 +10,7 @@
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">	
 			
-			<h:form>
+			<h:form prependId="false" >
 				
 				<div class="container-fluid row-fluid">
 					
@@ -36,16 +36,16 @@
 						<h:outputText value="SELECIONE UM EXERCICIO  " styleClass="labelOutText"/>					
 						<h:selectOneMenu value="#{menuRelatorioMBean.exercicioId}" styleClass="input-sm form-control" id="select_exercicio">
 						<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
-							<f:selectItems var="exerc" value="#{menuRelatorioMBean.listExercicio}"
-								itemValue="#{exerc.id}" itemLabel="#{exerc.ano}"/>
-							 
+							<f:selectItems var="exerc" value="#{menuRelatorioMBean.listExercicio}" itemValue="#{exerc.id}" itemLabel="#{exerc.ano}"/>
+							 <p:ajax  event="change" update="rels"/>	
 						</h:selectOneMenu>
 					</div>				
 				</div>
 			
-				<div class="spaceContainerForm">
+			<p:outputPanel id="rels"> 
+				<div class="spaceContainerForm" >
 							 
-					<c:forEach items="${menuRelatorioMBean.relatorios}" var="relatorio" varStatus="tipo">
+					<c:forEach items="${menuRelatorioMBean.relatorios}" var="relatorio" varStatus="tipo" >
 					
 						​<div class="panel-group col-lg-4" style="width: 33%; padding-left: 0px;">
 						
@@ -68,7 +68,10 @@
 												<c:forEach items="#{categoria.subRelatorio}" var="subRelatorio">
 												
 													<li class="list-group-item" style="border: 0px solid #ddd; margin-left: 10px; ">
-														<span class="glyphicon glyphicon-file"></span>&nbsp;<h:link  outcome="#{subRelatorio.link}">#{subRelatorio.label}</h:link>
+														<span class="glyphicon glyphicon-file"></span>&nbsp;
+														<h:link  outcome="#{subRelatorio.link}" value="#{subRelatorio.label}">
+														    <f:param name="id" value="#{menuRelatorioMBean.exercicioId}" />
+														</h:link>
 													</li>
 
 												</c:forEach>
@@ -81,8 +84,8 @@
 							</div>
 						</div>
 					</c:forEach>
-				</div>		
-
+				  </div>		
+			    </p:outputPanel>
 			 
 
 			</h:form>
