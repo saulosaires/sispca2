@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
@@ -91,27 +92,24 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	
 	public int deleteByYear(Integer exercicio) throws JpaException{
 	
-		if(Utils.invalidYear(exercicio)) return -1;
+		if(Utils.invalidYear(exercicio)) { 
+			return -1;
+		}else {
 		
-		
-		try{
-			
 			entityManager.getTransaction().begin();
-		 
-		Query query = entityManager.createQuery("DELETE FROM FisicoFinanceiroMensalSiafem f WHERE f.ano=:ano");
-			  query.setParameter("ano", exercicio);
+			
+			CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+			CriteriaDelete<FisicoFinanceiroMensalSiafem> delete = builder.createCriteriaDelete(FisicoFinanceiroMensalSiafem.class);
+			Root<FisicoFinanceiroMensalSiafem> root = delete.from(FisicoFinanceiroMensalSiafem.class);
+			
+			delete.where(builder.equal(root.get(ANO), exercicio));
+			
+			int i=  entityManager.createQuery(delete).executeUpdate();
+ 
+			entityManager.getTransaction().commit();
 		
-		int i= query.executeUpdate();
-		entityManager.getTransaction().commit();
-		
-		return i;
-		} catch (Exception e) {
-
-			if (entityManager.getTransaction()!= null)
-				entityManager.getTransaction().rollback();
-
-			throw new JpaException("Erro ao deletar FisicoFinanceiroMensalSiafem ",e);
-		}
+			return i;
+		} 
 		
 	}
 	
