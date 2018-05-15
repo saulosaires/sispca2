@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import qualitativo.controller.AcaoController;
+import qualitativo.dao.AcaoDAO;
 import qualitativo.model.Acao;
 
 public class AcaoService  extends AbstractService<Acao> {
@@ -23,6 +24,12 @@ public class AcaoService  extends AbstractService<Acao> {
 		super(acaoController);
 	}
 
+	public List<Acao> relatorio(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+		
+		return ((AcaoController) getController()).relatorio(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
+	} 
+
+	
 	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId) {
 
 		if (Utils.emptyParam(codigo) 		 && Utils.emptyParam(codigoUnidadeOrcamentaria) && 

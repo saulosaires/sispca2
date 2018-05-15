@@ -36,6 +36,12 @@ public class ProgramaController extends AbstractController<Programa> {
 		return((ProgramaDAO)getDao()).buscarPorUnidadeOrcamentaria(unidadeOrcamentaria);
 	}
  
+	public List<Programa> buscarPorUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
+
+		return((ProgramaDAO)getDao()).buscarPorUnidadeOrcamentaria(unidadeOrcamentariaId);
+	}
+	
+	
 	
  
 }

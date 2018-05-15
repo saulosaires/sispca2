@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_monitoramento_execucao_geral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="810" leftMargin="16" rightMargin="16" topMargin="20" bottomMargin="20" uuid="6f334d84-cb0f-4354-a6f2-5cdf57481284">
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="ireport.zoom" value="1.7715610000000044"/>
+	<property name="ireport.x" value="512"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Crosstab Data Text" hTextAlign="Center" hImageAlign="Center"/>
+	<parameter name="param_imagem" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="unidadeOrcamentaria" class="qualitativo.model.UnidadeOrcamentaria"/>
+	<field name="programa" class="qualitativo.model.Programa"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="denominacao" class="java.lang.String"/>
+	<field name="finalidade" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<group name="orgao_grupo" keepTogether="true">
+		<groupExpression><![CDATA[$F{unidadeOrcamentaria}.getOrgao().getCodigo()]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="810" height="20" backcolor="#8A8A8A" uuid="5292c354-02da-4507-b256-ee79e9f5619f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ÓRGÃO: ("+$F{unidadeOrcamentaria}.getOrgao().getCodigo()+") - "+$F{unidadeOrcamentaria}.getOrgao().getDescricao().toUpperCase()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="unidade_orcamentaria" keepTogether="true">
+		<groupExpression><![CDATA[$F{unidadeOrcamentaria}.getCodigo()]]></groupExpression>
+		<groupHeader>
+			<band height="32">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="810" height="20" backcolor="#A7A2A2" uuid="06080b98-91bb-4d53-8036-31a8fbf501e0"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["UNIDADE ORÇAMENTÁRIA: ("+$F{unidadeOrcamentaria}.getCodigo()+") - "+$F{unidadeOrcamentaria}.getDescricao().toUpperCase()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="20" width="182" height="12" uuid="e9d273aa-6ccb-44b0-8e35-0df82471a03a"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<text><![CDATA[PROGRAMA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="182" y="20" width="197" height="12" uuid="e9d273aa-6ccb-44b0-8e35-0df82471a03a"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<text><![CDATA[AÇÃO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="379" y="20" width="206" height="12" uuid="e9d273aa-6ccb-44b0-8e35-0df82471a03a"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<text><![CDATA[FINALIDADE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="585" y="20" width="225" height="12" uuid="e9d273aa-6ccb-44b0-8e35-0df82471a03a"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<text><![CDATA[DESCRIÇÃO]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="142" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="43" width="810" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO MARANHÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="63" width="810" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Planejamento e Orçamento (SEPLAN)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="810" height="16" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE FINALIDADE E DESCRIÇÃO DE AÇÃO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="369" y="0" width="105" height="43" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
+				<imageExpression><![CDATA[$P{param_imagem}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Immediate">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="810" height="13" forecolor="#FEFEFE" backcolor="#EEEEEE" uuid="d5f00468-2a69-421e-a6a5-c0d81f515de1">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="182" y="0" width="197" height="13" uuid="247587c6-a866-4761-b21b-1d0e9bd83224"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+$F{codigo}+") - "+$F{denominacao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="182" height="13" uuid="247587c6-a866-4761-b21b-1d0e9bd83224"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+$F{programa}.getCodigo()+") - "+$F{programa}.getDenominacao()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="379" y="0" width="206" height="13" uuid="247587c6-a866-4761-b21b-1d0e9bd83224"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{finalidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="585" y="0" width="225" height="13" uuid="247587c6-a866-4761-b21b-1d0e9bd83224"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="9" splitType="Stretch">
+			<textField>
+				<reportElement x="688" y="3" width="113" height="6" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+String.valueOf($V{PAGE_NUMBER})+" de "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="131" height="6" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="800" y="3" width="10" height="6" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

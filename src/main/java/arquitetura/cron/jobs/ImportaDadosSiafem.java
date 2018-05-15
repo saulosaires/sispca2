@@ -34,8 +34,8 @@ import siafem.service.FisicoFinanceiroMensalSiafemService;
 @Named
 public class ImportaDadosSiafem implements Job {
 
-	private String ARQUIVO_ORIGEM  = "siafANO.txt";
-	private String ARQUIVO_DESTINO = "siafANO.txt";
+	private String ARQUIVO_ORIGEM  = "E:/siafANO.txt";
+	private String ARQUIVO_DESTINO = "tem_siafANO.txt";
 	
 	private LayoutSiafemTxt MES;
 	private LayoutSiafemTxt UNIDADE_GESTORA;
@@ -256,7 +256,8 @@ public class ImportaDadosSiafem implements Job {
 							 listAcao = acaoService.buscar(acaoCodigo, null,null,exercicio.getId());
 							 if(!listAcao.isEmpty()) {
 								 acao = listAcao.get(0);
-							  }
+							  }//Se mesmo assim nao encontrar a acao, deixa nulo mesmo
+							 
 							 
 						 }
 				 

@@ -53,9 +53,11 @@ public class Agendador implements Serializable{
 
 				Trigger trigger = TriggerBuilder.newTrigger()
 											    .withIdentity(classe.getNome(), "grupo")
+											    .startNow()
 											    .withSchedule(CronScheduleBuilder.cronSchedule(classe.getPeriodo()))
+											    //.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(40))
 											    .build();
-
+				 
 				scheduler.scheduleJob(job, trigger);
 
 			}

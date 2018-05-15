@@ -109,7 +109,7 @@ public class Acao extends Model implements  Auditable {
 	@NotNull(message="Função: campo é obrigatório")
 	private Funcao funcao = new Funcao();
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_programa",nullable=false)
 	private Programa programa = new Programa();
 
@@ -167,6 +167,39 @@ public class Acao extends Model implements  Auditable {
 	public Acao(Long id) {
 		this.id=id;
 	}
+	
+	public Acao(String orgaoCodigo,
+			    String orgaoDescricao,
+			    String unidadeOrcamentariaCodigo,
+			    String unidadeOrcamentariaDescricao,
+			    String programaCodigo,
+			    String programaDenominacao,
+			    String codigo,
+			    String denominacao,
+			    String finalidade,
+			    String descricao){
+		
+		this.codigo = codigo;
+		this.denominacao = denominacao;
+		this.finalidade = finalidade;
+		this.descricao = descricao;
+		
+		programa = new Programa();
+		programa.setCodigo(programaCodigo);
+		programa.setDenominacao(programaDenominacao);
+		
+		unidadeOrcamentaria = new UnidadeOrcamentaria();
+		unidadeOrcamentaria.setCodigo(unidadeOrcamentariaCodigo);
+		unidadeOrcamentaria.setDescricao(unidadeOrcamentariaDescricao);
+		
+		unidadeOrcamentaria.setOrgao(new Orgao());
+		
+		unidadeOrcamentaria.getOrgao().setCodigo(orgaoCodigo);
+		unidadeOrcamentaria.getOrgao().setDescricao(orgaoDescricao);
+		
+ 
+	}
+	
 	
 	public Long getId() {
 		return id;

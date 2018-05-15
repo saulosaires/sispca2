@@ -44,6 +44,11 @@ public class ProgramaService extends AbstractService<Programa>  {
 
 	}
  
+	public List<Programa> buscarPorUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
+
+		return ((ProgramaController) getController()).buscarPorUnidadeOrcamentaria(unidadeOrcamentariaId);
+
+	}
 
 	 
 

@@ -134,7 +134,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 		
 		listEixos = eixoService.findAllOrderByDecricao();
 		
-		Optional<Exercicio> exercicioAnterior = exercicioService.exercicioAnterior();
+		Optional<Exercicio> exercicioAnterior = exercicioService.exercicioVigente();
 		
 		if(exercicioAnterior.isPresent()) {
 			

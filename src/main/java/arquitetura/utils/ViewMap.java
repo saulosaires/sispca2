@@ -113,6 +113,12 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/metas/atividade/view.xhtml","metasAtividadeView");
 		mapLinks.put("/sispca2/private/metas/atividade/form.xhtml","metasAtividadeEdit");
 
+		mapLinks.put("/sispca2/private/relatorio/menu.xhtml","relatorioCategoria");
+		mapLinks.put("/sispca2/private/relatorio/finalidadeacao/list.xhtml","relatorioQuantitativoFinalidadeAcao");
+		
+		
+		
+		
 		
 	}
 

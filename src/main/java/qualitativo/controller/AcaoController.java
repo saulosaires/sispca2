@@ -22,6 +22,12 @@ public class AcaoController  extends AbstractController<Acao>{
 	}
 
 	
+	public List<Acao> relatorio(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+		
+		return ((AcaoDAO) getDao()).relatorio(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
+	} 
+
+	
 	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId){
 		
 		return ((AcaoDAO) getDao()).buscar(codigo,codigoUnidadeOrcamentaria,codigoPrograma,exercicioId);

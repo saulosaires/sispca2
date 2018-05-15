@@ -67,20 +67,13 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 			
 			 entityTransaction.begin();
 
-			 int batchSize = 100;
-			 int count=0;
+		 
 			 for(FisicoFinanceiroMensalSiafem siafem: listSiafem) {
 				 
-				 if(count>=batchSize) {
-					 count=0;
-					 
-					 entityTransaction.commit();
-			         entityTransaction.begin();
-			         entityManager.clear();
-				 }
+				 
 				 
 				 entityManager.persist(siafem);
-				 count++;
+				 
 			 }
 			
 			 entityTransaction.commit();

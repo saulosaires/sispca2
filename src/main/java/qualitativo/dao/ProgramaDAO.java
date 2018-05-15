@@ -102,7 +102,7 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 	}
 	
 	 
-	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentaria) {
+	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentariaCodigo) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
@@ -111,9 +111,30 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 		query.select(m);
 		
  
-		if (!Utils.emptyParam((unidadeOrcamentaria))) {
+		if (!Utils.emptyParam((unidadeOrcamentariaCodigo))) {
 			Join<Object, Object> joinUnidade = m.join("unidadeOrcamentaria",JoinType.INNER);
-			joinUnidade.on(cb.equal(joinUnidade.get("codigo"),unidadeOrcamentaria) );	
+			joinUnidade.on(cb.equal(joinUnidade.get("codigo"),unidadeOrcamentariaCodigo) );	
+		}
+		
+		 
+		query.orderBy(cb.asc(m.get("denominacao")));
+		
+		
+		return  entityManager.createQuery(query).getResultList();
+	}
+	
+	public List<Programa> buscarPorUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
+		Root<Programa> m = query.from(Programa.class);
+
+		query.select(m);
+		
+ 
+		if (!Utils.invalidId((unidadeOrcamentariaId))) {
+			Join<Object, Object> joinUnidade = m.join("unidadeOrcamentaria",JoinType.INNER);
+			joinUnidade.on(cb.equal(joinUnidade.get("id"),unidadeOrcamentariaId) );	
 		}
 		
 		 
@@ -124,5 +145,7 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 	}
 	
 	 
+	
+	
 
 }
