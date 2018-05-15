@@ -38,7 +38,6 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 	
 	public AcaoDAO() {
 		setClazz(Acao.class);
-
 	}
 
 	public List<Acao> relatorio(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
@@ -47,10 +46,10 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
 		Root<Acao> root = query.from(Acao.class);
 		
-		Join<Object, Object> joinPrograma 			 = root.join(PROGRAMA, 			   JoinType.LEFT);		
-		Join<Object, Object> joinUnidadeOrcamentaria = root.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
-		Join<Object, Object> joinAcaoExercicio 		 = root.join(EXERCICIO, JoinType.LEFT);
-		Join<Object, Object> joinProgExercicio 		 = joinPrograma.join(EXERCICIO, JoinType.LEFT);
+		Join<Object, Object> joinPrograma 			 = root.join(PROGRAMA, 			   	   JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeOrcamentaria = root.join(UNIDADE_ORCAMENTARIA,     JoinType.LEFT);
+		Join<Object, Object> joinAcaoExercicio 		 = root.join(EXERCICIO, 			   JoinType.LEFT);
+		Join<Object, Object> joinProgExercicio 		 = joinPrograma.join(EXERCICIO, 	   JoinType.LEFT);
 		Join<Object, Object> joinOrgao			     = joinUnidadeOrcamentaria.join(ORGAO, JoinType.LEFT);
 		
 		
@@ -94,24 +93,24 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		query.where( predicate.toArray(new Predicate[predicate.size()]));
   
 		query.groupBy(
-		 	 			joinOrgao.get(CODIGO),
-		 	 			joinOrgao.get(DESCRICAO),
-		 	 			joinUnidadeOrcamentaria.get(CODIGO),
-		 	 			joinUnidadeOrcamentaria.get(DESCRICAO),
-		 	 			joinPrograma.get(CODIGO),
-		 	 			joinPrograma.get(DENOMINACAO),
-		 	 			root.get(CODIGO),
-		 	 			root.get(DENOMINACAO),
-		 	 			root.get(FINALIDADE),
-		 	 			root.get(DESCRICAO)
+		 	 		  joinOrgao.get(CODIGO),
+		 	 		  joinOrgao.get(DESCRICAO),
+		 	 		  joinUnidadeOrcamentaria.get(CODIGO),
+		 	 		  joinUnidadeOrcamentaria.get(DESCRICAO),
+		 	 		  joinPrograma.get(CODIGO),
+		 	 		  joinPrograma.get(DENOMINACAO),
+		 	 		  root.get(CODIGO),
+		 	 		  root.get(DENOMINACAO),
+		 	 		  root.get(FINALIDADE),
+		 	 		  root.get(DESCRICAO)
 				  );
 
 		query.orderBy(
-				 cb.asc( joinOrgao.get(CODIGO)),
-				 cb.asc( joinUnidadeOrcamentaria.get(CODIGO)),
-				 cb.asc( joinPrograma.get(CODIGO)),
-				 cb.asc( root.get(CODIGO))
-				);
+				       cb.asc(joinOrgao.get(CODIGO)),
+				       cb.asc(joinUnidadeOrcamentaria.get(CODIGO)),
+				       cb.asc(joinPrograma.get(CODIGO)),
+				       cb.asc(root.get(CODIGO))
+				     );
 
 		return entityManager.createQuery(query).getResultList();
 		
@@ -130,7 +129,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		if(!Utils.emptyParam(codigo)) {
 			
-			Expression<String> upperCodigo = cb.upper(m.get("codigo"));
+			Expression<String> upperCodigo = cb.upper(m.get(CODIGO));
 			
 			predicate.add(cb.like(upperCodigo,codigo.toUpperCase()));
 			
@@ -139,9 +138,9 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		if(!Utils.emptyParam(codigoUnidadeOrcamentaria)) {
  			
-			Join<Object, Object> joinUO = m.join("unidadeOrcamentaria",JoinType.LEFT);
+			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.LEFT);
 	 
-			Expression<String> upperCodigo = cb.upper(joinUO.get("codigo"));
+			Expression<String> upperCodigo = cb.upper(joinUO.get(CODIGO));
 			
 			predicate.add(cb.like(upperCodigo,codigoUnidadeOrcamentaria.toUpperCase()));
 			
@@ -149,9 +148,9 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		if(!Utils.emptyParam(codigoPrograma)) {
  			
-			Join<Object, Object> join = m.join("programa",JoinType.LEFT);
+			Join<Object, Object> join = m.join(PROGRAMA,JoinType.LEFT);
 			
-			Expression<String> upperCodigo = cb.upper(join.get("codigo"));
+			Expression<String> upperCodigo = cb.upper(join.get(CODIGO));
 			
 			predicate.add(cb.like(upperCodigo,codigoPrograma.toUpperCase()));
 
@@ -159,15 +158,15 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		if(!Utils.invalidId(exercicioId)) {
  			
-			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.LEFT);
+			Join<Object, Object> joinExercicio = m.join(EXERCICIO,JoinType.LEFT);
 						
-			predicate.add(cb.equal(joinExercicio.get("id") ,exercicioId));
+			predicate.add(cb.equal(joinExercicio.get(ID) ,exercicioId));
 		}
 
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
   
-		query.orderBy(cb.asc(m.get("denominacao")));
+		query.orderBy(cb.asc(m.get(DENOMINACAO)));
 		
 		return entityManager.createQuery(query).getResultList();
 	}
@@ -186,47 +185,47 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		if(!Utils.emptyParam(codigo)) {
 			
-			Expression<String> upperCodigo = cb.upper(m.get("codigo"));
+			Expression<String> upperCodigo = cb.upper(m.get(CODIGO));
 			
 			predicate.add(cb.like(upperCodigo,"%"+codigo.toUpperCase()+"%"));
 		}
 		
 		if(!Utils.emptyParam(denominacao)) {
 			
-			Expression<String> upperDenominacao = cb.upper(m.get("denominacao"));
+			Expression<String> upperDenominacao = cb.upper(m.get(DENOMINACAO));
 			
 			predicate.add(cb.like(upperDenominacao,"%"+denominacao.toUpperCase()+"%" ));		
 		}
 		
 		if(!Utils.invalidId(unidadeOrcamentariaId)) {
  			
-			Join<Object, Object> joinUO = m.join("unidadeOrcamentaria",JoinType.LEFT);
+			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.LEFT);
 			
-			Expression<String> uoId = joinUO.get("id");
+			Expression<String> uoId = joinUO.get(ID);
 			
 			predicate.add(cb.equal(uoId,unidadeOrcamentariaId));
 		}
 		
 		if(!Utils.invalidId(programaId)) {
  			
-			Join<Object, Object> joinUO = m.join("programa",JoinType.LEFT);
+			Join<Object, Object> joinUO = m.join(PROGRAMA,JoinType.LEFT);
 			
-			Expression<String> uoId = joinUO.get("id");
+			Expression<String> uoId = joinUO.get(ID);
 			
 			predicate.add(cb.equal(uoId,programaId));
 		}
 		
 		if(!Utils.invalidId(exercicioId)) {
  			
-			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.LEFT);
+			Join<Object, Object> joinExercicio = m.join(EXERCICIO,JoinType.LEFT);
 						
-			predicate.add(cb.equal(joinExercicio.get("id") ,exercicioId));
+			predicate.add(cb.equal(joinExercicio.get(ID) ,exercicioId));
 		}
 
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
   
-		query.orderBy(cb.asc(m.get("denominacao")));
+		query.orderBy(cb.asc(m.get(DENOMINACAO)));
 		
 		return entityManager.createQuery(query).getResultList();
 	}
@@ -242,12 +241,12 @@ public class AcaoDAO extends AbstractDAO<Acao> {
  			
 		if (!Utils.invalidId((exercicioId))) {
 
-			Join<Object, Object> joinExercicio = m.join("exercicio",JoinType.INNER);
-			joinExercicio.on(cb.equal(joinExercicio.get("id"),exercicioId) );	
+			Join<Object, Object> joinExercicio = m.join(EXERCICIO,JoinType.INNER);
+			joinExercicio.on(cb.equal(joinExercicio.get(ID),exercicioId) );	
 		
 		}
 		  
-		query.orderBy(cb.asc(m.get("denominacao")));
+		query.orderBy(cb.asc(m.get(DENOMINACAO)));
 		
 		return entityManager.createQuery(query).getResultList();
 	}
@@ -263,12 +262,12 @@ public class AcaoDAO extends AbstractDAO<Acao> {
  			
 		if (!Utils.invalidId((unidadeOrcamentariaId))) {
 
-			Join<Object, Object> joinExercicio = m.join("unidadeOrcamentaria",JoinType.INNER);
-			joinExercicio.on(cb.equal(joinExercicio.get("id"),unidadeOrcamentariaId) );	
+			Join<Object, Object> joinExercicio = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
+			joinExercicio.on(cb.equal(joinExercicio.get(ID),unidadeOrcamentariaId) );	
 		
 		}
 		  
-		query.orderBy(cb.asc(m.get("denominacao")));
+		query.orderBy(cb.asc(m.get(DENOMINACAO)));
 		
 		return entityManager.createQuery(query).getResultList();
 	}
