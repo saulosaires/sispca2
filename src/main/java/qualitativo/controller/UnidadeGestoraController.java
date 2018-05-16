@@ -26,4 +26,10 @@ public class UnidadeGestoraController extends AbstractController<UnidadeGestora>
 		return ((UnidadeGestoraDAO)getDao()).buscar(codigo, descricao, sigla, unidadeOrcamentariaId);
 	}
 
+	public List<UnidadeGestora> findAllOrderDescricao() {
+		 
+		return ((UnidadeGestoraDAO)getDao()).findAllOrderDescricao();
+	}	
+	
+	
 }

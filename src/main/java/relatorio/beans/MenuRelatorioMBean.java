@@ -10,7 +10,6 @@ import javax.inject.Named;
 
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
-import administrativo.service.ExercicioService;
 import administrativo.service.PpaService;
 import relatorio.model.Relatorio;
 

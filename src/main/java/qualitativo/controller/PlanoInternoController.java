@@ -21,6 +21,13 @@ public class PlanoInternoController extends AbstractController<PlanoInterno> {
 
 	}
 
+	public List<PlanoInterno> relatorio(Long unidadeGestoraId,Long unidadeOrcamentariaId,Long acaoId,Long exercicioId) {
+		 
+		return ((PlanoInternoDAO)getDao()).relatorio(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioId);
+	}
+	
+	
+	
 	public List<PlanoInterno> buscar(String codigo) {
 		 
 		return ((PlanoInternoDAO)getDao()).buscar(codigo);

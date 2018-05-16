@@ -22,6 +22,12 @@ public class PlanoInternoService extends AbstractService<PlanoInterno>  {
 		super(controller);
 	}
 
+	public List<PlanoInterno> relatorio(Long unidadeGestoraId,Long unidadeOrcamentariaId,Long acaoId,Long exercicioId) {
+		 
+		return ((PlanoInternoController)getController()).relatorio(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioId);
+	}
+
+	
 	public List<PlanoInterno> buscar(String codigo) {
 
 		if(Utils.emptyParam(codigo)) {

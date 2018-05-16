@@ -22,6 +22,12 @@ public class UnidadeGestoraService extends AbstractService<UnidadeGestora>  {
 		super(controller);
 	}
 
+	public List<UnidadeGestora> findAllOrderDescricao() {
+		 
+		return ((UnidadeGestoraController)getController()).findAllOrderDescricao();
+	}	
+
+	
 	public List<UnidadeGestora> buscar(String codigo,String descricao,String sigla,Long unidadeOrcamentariaId) {
 
 		if(Utils.emptyParam(codigo) && Utils.emptyParam(descricao) && 

@@ -1,48 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_plano_objetivo" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6a32ed1-4000-4c36-8b26-229145f638f1">
 	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
 	<property name="ireport.zoom" value="1.771561000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="45"/>
 	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_sql" class="java.lang.String" isForPrompting="false">
-		<parameterDescription><![CDATA[]]></parameterDescription>
-		<defaultValueExpression><![CDATA[" SELECT  ug.codigo as codigo_ug, ug.sigla as sigla_ug, ug.descricao as descricao_ug,"+
-" 	uo.codigo as codigo_uo, uo.descricao as unidade_orcamentaria,"+
-" 	prog.codigo as codigo_prog, prog.denominacao as programa,"+
-" 	ac.codigo as codigo_acao, ac.denominacao as acao, "+
-" 	pi.cod as cod_pi, pi.titulo as titulo_pi, pi.objetivo as objetivo_pi"+
-
-" 	FROM planejamento.plano_interno pi"+
-" 	LEFT JOIN planejamento.acao ac ON (pi.id_acao = ac.id_acao)"+
-" 	LEFT JOIN comum.unidade_orcamentaria uo ON (ac.id_unidade_orcamentaria = uo.id_unidade_orcamentaria)"+
-" 	LEFT JOIN planejamento.programa prog ON (prog.id_programa = ac.id_programa)"+
-" 	LEFT JOIN comum.unidade_gestora ug ON (ug.id_unidade_orcamentaria = uo.id_unidade_orcamentaria)"+
-
-
-" 	ORDER BY 1, 4, 6, 8, 10"]]></defaultValueExpression>
-	</parameter>
 	<queryString>
-		<![CDATA[$P!{param_sql}]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="codigo_ug" class="java.lang.String"/>
-	<field name="sigla_ug" class="java.lang.String"/>
-	<field name="descricao_ug" class="java.lang.String"/>
-	<field name="codigo_uo" class="java.lang.String"/>
-	<field name="unidade_orcamentaria" class="java.lang.String"/>
-	<field name="codigo_prog" class="java.lang.String"/>
-	<field name="programa" class="java.lang.String"/>
-	<field name="codigo_acao" class="java.lang.String"/>
-	<field name="acao" class="java.lang.String"/>
-	<field name="cod_pi" class="java.lang.String"/>
-	<field name="titulo_pi" class="java.lang.String"/>
-	<field name="objetivo_pi" class="java.lang.String"/>
+	<field name="acao" class="qualitativo.model.Acao"/>
+	<field name="sigla" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="objetivo" class="java.lang.String"/>
 	<group name="unidade_gestora_grupo" keepTogether="true">
-		<groupExpression><![CDATA[$F{codigo_ug}]]></groupExpression>
+		<groupExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria().getUnidadeGestoraCodigo()]]></groupExpression>
 		<groupHeader>
 			<band height="41">
 				<textField>
-					<reportElement uuid="1cb98450-4da0-4135-a12b-442a814cb922" mode="Opaque" x="0" y="26" width="752" height="15" backcolor="#888888"/>
+					<reportElement mode="Opaque" x="0" y="26" width="752" height="15" backcolor="#888888" uuid="1cb98450-4da0-4135-a12b-442a814cb922"/>
 					<box>
 						<topPen lineWidth="0.0"/>
 						<leftPen lineWidth="0.5"/>
@@ -52,10 +28,10 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{descricao_ug}!=null ? $F{descricao_ug}.toUpperCase() : "Descrição não encontrada"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria().getUnidadeGestoraDescricao()!=null ? $F{acao}.getUnidadeOrcamentaria().getUnidadeGestoraDescricao().toUpperCase() : "Descrição não encontrada"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="1cb98450-4da0-4135-a12b-442a814cb922" mode="Opaque" x="0" y="0" width="752" height="27" backcolor="#888888"/>
+					<reportElement mode="Opaque" x="0" y="0" width="752" height="27" backcolor="#888888" uuid="1cb98450-4da0-4135-a12b-442a814cb922"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -65,7 +41,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{sigla_ug}!=null ? "UNIDADE GESTORA: ("+$F{codigo_ug}+") - "+$F{sigla_ug}.toUpperCase() : "UNIDADE ORÇAMENTÁRIA: ("+$F{codigo_ug}+") - Unidade Gestora não encontrada"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria().getUnidadeGestoraSigla()!=null ? "UNIDADE GESTORA: ("+$F{acao}.getUnidadeOrcamentaria().getUnidadeGestoraCodigo()+") - "+$F{acao}.getUnidadeOrcamentaria().getUnidadeGestoraSigla().toUpperCase() : "UNIDADE ORÇAMENTÁRIA:  Unidade Gestora não encontrada"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -74,11 +50,11 @@
 		</groupFooter>
 	</group>
 	<group name="unidade_orcamentaria" keepTogether="true">
-		<groupExpression><![CDATA[$F{codigo_uo}]]></groupExpression>
+		<groupExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria().getCodigo()]]></groupExpression>
 		<groupHeader>
 			<band height="29">
 				<textField>
-					<reportElement uuid="1cb98450-4da0-4135-a12b-442a814cb922" mode="Opaque" x="0" y="0" width="752" height="29" backcolor="#A4A4A4"/>
+					<reportElement mode="Opaque" x="0" y="0" width="752" height="29" backcolor="#A4A4A4" uuid="1cb98450-4da0-4135-a12b-442a814cb922"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -88,7 +64,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{unidade_orcamentaria}!=null ? "UNIDADE ORÇAMENTÁRIA: ("+$F{codigo_uo}+") - "+$F{unidade_orcamentaria}.toUpperCase() : "UNIDADE ORÇAMENTÁRIA: ("+$F{codigo_uo}+") - Unidade Orçamentária não encontrada"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria()!=null ? "UNIDADE ORÇAMENTÁRIA: ("+$F{acao}.getUnidadeOrcamentaria().getCodigo()+") - "+$F{acao}.getUnidadeOrcamentaria().getDescricao().toUpperCase() : "UNIDADE ORÇAMENTÁRIA:  Unidade Orçamentária não encontrada"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -97,11 +73,11 @@
 		</groupFooter>
 	</group>
 	<group name="programa_grupo" keepTogether="true">
-		<groupExpression><![CDATA[$F{codigo_prog}]]></groupExpression>
+		<groupExpression><![CDATA[$F{acao}.getPrograma().getCodigo()]]></groupExpression>
 		<groupHeader>
 			<band height="21">
 				<textField>
-					<reportElement uuid="1cb98450-4da0-4135-a12b-442a814cb922" mode="Opaque" x="0" y="0" width="752" height="21" backcolor="#C3C3C3"/>
+					<reportElement mode="Opaque" x="0" y="0" width="752" height="21" backcolor="#C3C3C3" uuid="1cb98450-4da0-4135-a12b-442a814cb922"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -111,7 +87,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="9" pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{programa}!=null ? "PROGRAMA: ("+$F{codigo_prog}+") - "+$F{programa}.toUpperCase() : "PROGRAMA: ("+$F{codigo_prog}+") - Programa não encontrado"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{acao}.getPrograma()!=null ? "PROGRAMA: ("+$F{acao}.getPrograma().getCodigo()+") - "+$F{acao}.getPrograma().getDenominacao().toUpperCase(): "PROGRAMA:  Programa não encontrado"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -120,11 +96,11 @@
 		</groupFooter>
 	</group>
 	<group name="acao_grupo" keepTogether="true">
-		<groupExpression><![CDATA[$F{codigo_acao}]]></groupExpression>
+		<groupExpression><![CDATA[$F{acao}.getCodigo()]]></groupExpression>
 		<groupHeader>
 			<band height="36">
 				<textField>
-					<reportElement uuid="1cb98450-4da0-4135-a12b-442a814cb922" mode="Opaque" x="0" y="0" width="752" height="21" backcolor="#DCDCDC"/>
+					<reportElement mode="Opaque" x="0" y="0" width="752" height="21" backcolor="#DCDCDC" uuid="1cb98450-4da0-4135-a12b-442a814cb922"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -134,10 +110,10 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="9" pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA["AÇÃO: ("+$F{codigo_acao}+") - "+$F{acao}.toUpperCase()]]></textFieldExpression>
+					<textFieldExpression><![CDATA["AÇÃO: ("+$F{acao}.getCodigo()+") - "+ $F{acao}.getDenominacao().toUpperCase()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="aaf9dfec-9a60-4990-b8fc-684fb8310d18" x="0" y="21" width="100" height="15"/>
+					<reportElement x="0" y="21" width="100" height="15" uuid="aaf9dfec-9a60-4990-b8fc-684fb8310d18"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -151,7 +127,7 @@
 					<text><![CDATA[SIGLA ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="aaf9dfec-9a60-4990-b8fc-684fb8310d18" x="100" y="21" width="100" height="15"/>
+					<reportElement x="100" y="21" width="100" height="15" uuid="aaf9dfec-9a60-4990-b8fc-684fb8310d18"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -165,7 +141,7 @@
 					<text><![CDATA[PLANO INTERNO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="aaf9dfec-9a60-4990-b8fc-684fb8310d18" x="200" y="21" width="552" height="15"/>
+					<reportElement x="200" y="21" width="552" height="15" uuid="aaf9dfec-9a60-4990-b8fc-684fb8310d18"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -190,28 +166,28 @@
 	<title>
 		<band height="157" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="978b0189-e0fe-4348-a117-63d04e32e327" x="0" y="73" width="752" height="20"/>
+				<reportElement x="0" y="73" width="752" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
 				<textElement textAlignment="Center">
 					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[Secretaria de Planejamento e Orçamento (SEPLAN)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="978b0189-e0fe-4348-a117-63d04e32e327" x="0" y="54" width="752" height="20"/>
+				<reportElement x="0" y="54" width="752" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[GOVERNO DO ESTADO DO MARANHÃO]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="1f406f3d-7bba-46fb-84d0-eacfe210a1ac" x="0" y="114" width="752" height="20"/>
+				<reportElement x="0" y="114" width="752" height="20" uuid="1f406f3d-7bba-46fb-84d0-eacfe210a1ac"/>
 				<textElement textAlignment="Center">
 					<font isBold="false" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<textFieldExpression><![CDATA["RELATÓRIO DE OBJETIVOS DE PLANOS INTERNOS"]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb" x="335" y="0" width="105" height="43"/>
+				<reportElement x="335" y="0" width="105" height="43" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
 				<imageExpression><![CDATA[$P{param_imagem}]]></imageExpression>
 			</image>
 		</band>
@@ -225,12 +201,12 @@
 	<detail>
 		<band height="18" splitType="Stretch">
 			<rectangle>
-				<reportElement uuid="d78a91f2-84e0-42c0-8fba-29a64e76095c" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="752" height="18" forecolor="#FEFEFE" backcolor="#F0F0F0">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="752" height="18" forecolor="#FEFEFE" backcolor="#F0F0F0" uuid="d78a91f2-84e0-42c0-8fba-29a64e76095c">
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="bc6bedda-1d19-4a21-a97e-a3f19cf8145f" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="18"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="18" uuid="bc6bedda-1d19-4a21-a97e-a3f19cf8145f"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -241,10 +217,10 @@
 					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5" spacingBefore="3" spacingAfter="3"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cod_pi}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="bc6bedda-1d19-4a21-a97e-a3f19cf8145f" positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="100" height="18"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="100" height="18" uuid="bc6bedda-1d19-4a21-a97e-a3f19cf8145f"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -255,10 +231,10 @@
 					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5" spacingBefore="3" spacingAfter="3"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{titulo_pi}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="bc6bedda-1d19-4a21-a97e-a3f19cf8145f" positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="552" height="18"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="200" y="0" width="552" height="18" uuid="bc6bedda-1d19-4a21-a97e-a3f19cf8145f"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -269,7 +245,7 @@
 					<font size="8"/>
 					<paragraph leftIndent="5" rightIndent="5" spacingBefore="3" spacingAfter="3"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{objetivo_pi}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{objetivo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -279,21 +255,21 @@
 	<pageFooter>
 		<band height="19" splitType="Stretch">
 			<textField evaluationTime="Report">
-				<reportElement uuid="470465da-4003-490f-9541-60374e812bb5" x="733" y="3" width="19" height="16"/>
+				<reportElement x="733" y="3" width="19" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="470465da-4003-490f-9541-60374e812bb5" x="665" y="3" width="74" height="16"/>
+				<reportElement x="665" y="3" width="74" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página "+String.valueOf($V{PAGE_NUMBER})+" de "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="470465da-4003-490f-9541-60374e812bb5" x="0" y="3" width="132" height="16"/>
+				<reportElement x="0" y="3" width="132" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="6" isBold="false"/>
 				</textElement>

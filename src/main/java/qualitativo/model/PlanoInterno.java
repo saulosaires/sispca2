@@ -43,6 +43,46 @@ public class PlanoInterno extends Model implements Auditable {
 	@OneToMany(mappedBy = "planoInterno")
 	private List<EtapasExecucao> etapasExecucaos;
 
+	public PlanoInterno(){}
+	
+	public PlanoInterno(
+						String unidadeGestoraCodigo,
+						String unidadeGestoraSigla,
+						String unidadeGestoraDescricao,
+						String unidadeOrcamentariaCodigo,
+						String unidadeOrcamentariaDescricao,
+						String programaCodigo,
+						String programaDenominacao,
+						String acaoCodigo,
+						String acaoDenominacao,
+						String sigla,
+						String titulo,
+						String objetivo
+						){
+		
+		this.sigla = sigla;
+		this.titulo = titulo;
+		this.objetivo = objetivo;
+		
+		acao=new Acao();
+		
+		acao.setCodigo(acaoCodigo);
+		acao.setDenominacao(acaoDenominacao);
+		
+		acao.setPrograma(new Programa());
+		acao.getPrograma().setCodigo(programaCodigo);
+		acao.getPrograma().setDenominacao(programaDenominacao);
+		
+		acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+		acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+		
+		acao.getUnidadeOrcamentaria().setUnidadeGestoraCodigo(unidadeGestoraCodigo);
+		acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);
+		acao.getUnidadeOrcamentaria().setUnidadeGestoraDescricao(unidadeGestoraDescricao);
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}

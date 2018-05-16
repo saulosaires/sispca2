@@ -1,6 +1,7 @@
 package arquitetura.utils;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
@@ -14,6 +15,13 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import arquitetura.enums.TipoArquivo;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
  
 public class RelatorioUtil {
@@ -26,6 +34,32 @@ public class RelatorioUtil {
 	    throw new IllegalStateException("Utility class");
 	}
 
+	
+	public static byte[] exportReportToPdf(JasperPrint jasperRelatorio) throws JRException {
+		
+		return JasperExportManager.exportReportToPdf(jasperRelatorio);
+		
+	}
+	
+	public static byte[] exportReportToXLS(JasperPrint jasperRelatorio) throws JRException, IOException {
+		
+		 ByteArrayOutputStream output = new ByteArrayOutputStream();  
+         JRXlsExporter exporterXLS = new JRXlsExporter(); 
+	
+         exporterXLS.setExporterInput(new SimpleExporterInput(jasperRelatorio));            
+         exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
+         
+         SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+         configuration.setRemoveEmptySpaceBetweenRows(true);
+         configuration.setDetectCellType(true);
+         configuration.setWhitePageBackground(false);
+         exporterXLS.setConfiguration(configuration);
+         exporterXLS.exportReport();    
+         byte[]  bytes = output.toByteArray();
+         output.close();
+		
+		return bytes;
+	}
 	
 	public static StreamedContent converBytesToStreamedContent(byte[] bytes,String titulo) { 
 		StreamedContent file = null;	

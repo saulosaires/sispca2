@@ -14,7 +14,7 @@
 			<h:form>
 			
 			    <f:metadata>
-	    			<f:viewParam name="id" value="#{relatorioFinalidadeAcaoMBean.id}"/>
+	    			<f:viewParam name="id" value="#{relatorioFinalidadeAcaoMBean.exercicioId}"/>
 	    			<f:viewAction action="#{relatorioFinalidadeAcaoMBean.init}" />
 			     </f:metadata>
 			
@@ -29,7 +29,7 @@
 							<p:outputPanel id="customPanel" style="margin-bottom:10px">
 								<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
 						        <p:selectOneRadio id="customRadio" value="#{relatorioFinalidadeAcaoMBean.tipoArquivo}" layout="custom">
-									<f:selectItem itemLabel="PDF" itemValue="PDF" />
+									 <f:selectItem itemLabel="PDF" itemValue="PDF" />
            							 <f:selectItem itemLabel="XLS" itemValue="XLS" />
 						        </p:selectOneRadio>
 	 

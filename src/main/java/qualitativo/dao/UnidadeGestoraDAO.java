@@ -75,5 +75,20 @@ public class UnidadeGestoraDAO extends AbstractDAO<UnidadeGestora> {
 
 		return entityManager.createQuery(query).getResultList();
 	}
+	
+	public List<UnidadeGestora> findAllOrderDescricao() {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<UnidadeGestora> query = cb.createQuery(UnidadeGestora.class);
+		Root<UnidadeGestora> m = query.from(UnidadeGestora.class);
+
+		query.select(m);
+
+		query.orderBy(cb.asc(m.get(DESCRICAO)));
+
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	
 
 }

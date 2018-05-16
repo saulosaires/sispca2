@@ -61,10 +61,18 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	@OneToMany(mappedBy="unidadeOrcamentaria")
 	private List<Acao> acaos;
 
+	//Isto é usado apenos no relaorio
+	private transient String unidadeGestoraCodigo;
+	private transient String unidadeGestoraSigla;
+	private transient String unidadeGestoraDescricao;
+	
 	public UnidadeOrcamentaria() {}
 	
 	public UnidadeOrcamentaria(Long id) {
 		this.id=id;
+		this.codigo="";
+		this.descricao="";
+		this.sigla="";
 	}
 	
 
@@ -130,6 +138,30 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 
 	public void setAcaos(List<Acao> acaos) {
 		this.acaos = acaos;
+	}
+ 	
+	public String getUnidadeGestoraCodigo() {
+		return unidadeGestoraCodigo;
+	}
+
+	public void setUnidadeGestoraCodigo(String unidadeGestoraCodigo) {
+		this.unidadeGestoraCodigo = unidadeGestoraCodigo;
+	}
+
+	public String getUnidadeGestoraSigla() {
+		return unidadeGestoraSigla;
+	}
+
+	public void setUnidadeGestoraSigla(String unidadeGestoraSigla) {
+		this.unidadeGestoraSigla = unidadeGestoraSigla;
+	}
+
+	public String getUnidadeGestoraDescricao() {
+		return unidadeGestoraDescricao;
+	}
+
+	public void setUnidadeGestoraDescricao(String unidadeGestoraDescricao) {
+		this.unidadeGestoraDescricao = unidadeGestoraDescricao;
 	}
 
 	@Override
