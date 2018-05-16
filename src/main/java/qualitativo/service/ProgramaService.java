@@ -38,9 +38,9 @@ public class ProgramaService extends AbstractService<Programa>  {
 		
 	}
 
-	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentaria) {
+	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentariaCodigo) {
 
-		return ((ProgramaController) getController()).buscarPorUnidadeOrcamentaria(unidadeOrcamentaria);
+		return ((ProgramaController) getController()).buscarPorUnidadeOrcamentaria(unidadeOrcamentariaCodigo);
 
 	}
  

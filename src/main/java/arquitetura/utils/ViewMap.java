@@ -116,6 +116,7 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/relatorio/menu.xhtml","relatorioCategoria");
 		mapLinks.put("/sispca2/private/relatorio/finalidadeacao/list.xhtml","relatorioQuantitativoFinalidadeAcao");
 		mapLinks.put("/sispca2/private/relatorio/planoobjetivo/list.xhtml", "relatorioPlanejamentoQualitativoObjetivoPlanoInterno");
+		mapLinks.put("/sispca2/private/relatorio/planotrabalho/list.xhtml", "relatorioPlanejamentoQualitativoObjetivoPlanoTrabalho");
 		
 		
 		

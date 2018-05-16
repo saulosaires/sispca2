@@ -28,6 +28,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria"; 
 	private static final  String ORGAO="orgao";
 	private static final  String EXERCICIO="exercicio";
+	private static final  String FUNCAO="funcao";
+	private static final  String SUBFUNCAO="subfuncao";
 	
 	private static final  String CODIGO="codigo";
 	private static final  String DESCRICAO="descricao";
@@ -40,7 +42,104 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		setClazz(Acao.class);
 	}
 
-	public List<Acao> relatorio(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+	
+	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId,String orderBy){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> root = query.from(Acao.class);
+		
+		Join<Object, Object> joinPrograma 			 = root.join(PROGRAMA, 			   	   JoinType.LEFT);
+		Join<Object, Object> joinFuncao 			 = root.join(FUNCAO, 			   	   JoinType.LEFT);
+		Join<Object, Object> joinSubFuncao 			 = root.join(SUBFUNCAO, 			   JoinType.LEFT);
+		Join<Object, Object> joinUnidadeOrcamentaria = root.join(UNIDADE_ORCAMENTARIA,     JoinType.LEFT);
+		Join<Object, Object> joinAcaoExercicio 		 = root.join(EXERCICIO, 			   JoinType.LEFT);
+		Join<Object, Object> joinProgExercicio 		 = joinPrograma.join(EXERCICIO, 	   JoinType.LEFT);
+		Join<Object, Object> joinOrgao			     = joinUnidadeOrcamentaria.join(ORGAO, JoinType.LEFT);
+		
+		
+		query.multiselect(
+			 	 			joinOrgao.get(CODIGO),
+			 	 			joinOrgao.get(DESCRICAO),
+			 	 			
+			 	 			joinUnidadeOrcamentaria.get(CODIGO),
+			 	 			joinUnidadeOrcamentaria.get(DESCRICAO),
+			 	 			
+			 	 			joinPrograma.get(CODIGO),
+			 	 			joinPrograma.get(DENOMINACAO),
+			 	 			
+			 	 			joinFuncao.get(CODIGO),
+			 	 			joinFuncao.get(DESCRICAO),
+			 	 			
+			 	 			joinSubFuncao.get(CODIGO),
+			 	 			joinSubFuncao.get(DESCRICAO),
+			 	 			
+			 	 			root.get(CODIGO),
+			 	 			root.get(DENOMINACAO),
+			 	 			root.get(FINALIDADE),
+			 	 			root.get(DESCRICAO)
+			 	 			
+			 	 			
+				 		  );
+		
+		List<Predicate> predicate = new ArrayList<>();
+		
+		predicate.add(cb.equal(root.get(ATIVO),					  true));
+		predicate.add(cb.equal(joinPrograma.get(ATIVO),			  true));
+		predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ATIVO),true));
+		predicate.add(cb.equal(joinOrgao.get(ATIVO),			  true));
+		
+		if(!Utils.invalidId(orgaoId)) {
+			predicate.add(cb.equal(joinOrgao.get(ID),orgaoId));
+		}
+		
+		if(!Utils.invalidId(unidadeOrcamentariaId)) {
+			predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID),unidadeOrcamentariaId));
+		}
+
+		if(!Utils.invalidId(programaId)) {
+			predicate.add(cb.equal(joinPrograma.get(ID),programaId));
+		}
+
+		if(!Utils.invalidId(exercicioId)) {
+			predicate.add(cb.equal(joinAcaoExercicio.get(ID),exercicioId));
+			predicate.add(cb.equal(joinProgExercicio.get(ID),exercicioId));
+		}
+
+		query.where( predicate.toArray(new Predicate[predicate.size()]));
+ 
+		if("A".equals(orderBy)) {
+			
+			query.orderBy(
+					       cb.asc(joinOrgao.get(CODIGO)),
+					       cb.asc(joinUnidadeOrcamentaria.get(CODIGO)),
+					       cb.asc(joinPrograma.get(CODIGO)),
+					       cb.asc(joinFuncao.get(CODIGO)),
+					       cb.asc(joinSubFuncao.get(CODIGO)),
+					       cb.asc(root.get(CODIGO))
+					     );
+			
+		}else {
+			
+			query.orderBy(
+				       cb.asc(joinPrograma.get(CODIGO)),
+				       cb.asc(joinUnidadeOrcamentaria.get(CODIGO)),
+				       cb.asc(joinOrgao.get(CODIGO)),
+				       cb.asc(joinFuncao.get(CODIGO)),
+				       cb.asc(joinSubFuncao.get(CODIGO)),
+				       cb.asc(root.get(CODIGO))
+				     );
+
+		}
+		
+		
+		
+		return entityManager.createQuery(query).getResultList();
+		
+	}	
+	
+	
+	public List<Acao> relatorioFinalidade(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);

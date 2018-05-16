@@ -100,8 +100,7 @@ public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializa
 	        parameters.put("param_imagem", brasaoMa);
 	        parameters.put("param_cod_acao", acao.getCodigo());
 	        parameters.put("param_acao", acao.getDenominacao());
-	        parameters.put("param_cod_orgao", acao.getOrgao() != null ? acao.getOrgao().getCodigo() : "");
-	        parameters.put("param_orgao", acao.getOrgao() != null ?  acao.getOrgao().getDescricao() : "");
+	        
 	        parameters.put("param_cod_unid_orc", acao.getUnidadeOrcamentaria().getCodigo());
 	        parameters.put("param_unid_orc", acao.getUnidadeOrcamentaria().getDescricao());
 	        parameters.put("param_cod_programa", acao.getPrograma().getCodigo());

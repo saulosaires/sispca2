@@ -66,9 +66,6 @@ public class Acao extends Model implements  Auditable {
 	@Column(name="horizonte_temporal",length=4)
 	private String horizonteTemporal;
 
-	@ManyToOne
-	@JoinColumn(name="id_orgao")
-	private Orgao orgao = null;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_unidade_orcamentaria")
@@ -166,7 +163,55 @@ public class Acao extends Model implements  Auditable {
 	
 	public Acao(Long id) {
 		this.id=id;
+		this.codigo = "";
+		this.denominacao = "";
+		this.descricao = "";
 	}
+	
+	public Acao(String orgaoCodigo,
+			    String orgaoDescricao,
+			    String unidadeOrcamentariaCodigo,
+			    String unidadeOrcamentariaDescricao,
+			    String programaCodigo,
+			    String programaDenominacao,
+			    String funcaoCodigo,
+			    String funcaoDescricao,
+			    String subFuncaoCodigo,
+			    String subFuncaoDescricao,
+			    String codigo,
+			    String denominacao,
+			    String finalidade,
+			    String descricao){
+		
+		this.codigo = codigo;
+		this.denominacao = denominacao;
+		this.finalidade = finalidade;
+		this.descricao = descricao;
+		
+		programa = new Programa();
+		programa.setCodigo(programaCodigo);
+		programa.setDenominacao(programaDenominacao);
+		
+		funcao = new Funcao();
+		funcao.setCodigo(funcaoCodigo);
+		funcao.setDescricao(funcaoDescricao);
+		
+		subfuncao = new SubFuncao();
+		subfuncao.setCodigo(subFuncaoCodigo);
+		subfuncao.setDescricao(subFuncaoDescricao);
+		
+		unidadeOrcamentaria = new UnidadeOrcamentaria();
+		unidadeOrcamentaria.setCodigo(unidadeOrcamentariaCodigo);
+		unidadeOrcamentaria.setDescricao(unidadeOrcamentariaDescricao);
+		
+		unidadeOrcamentaria.setOrgao(new Orgao());
+		
+		unidadeOrcamentaria.getOrgao().setCodigo(orgaoCodigo);
+		unidadeOrcamentaria.getOrgao().setDescricao(orgaoDescricao);
+	
+
+}
+	
 	
 	public Acao(String orgaoCodigo,
 			    String orgaoDescricao,
@@ -290,13 +335,7 @@ public class Acao extends Model implements  Auditable {
 		this.horizonteTemporal = horizonteTemporal;
 	}
 
-	public Orgao getOrgao() {
-		return orgao;
-	}
 
-	public void setOrgao(Orgao orgao) {
-		this.orgao = orgao;
-	}
 
 	public UnidadeOrcamentaria getUnidadeOrcamentaria() {
 		return unidadeOrcamentaria;
@@ -520,7 +559,7 @@ public class Acao extends Model implements  Auditable {
 		sb.append(" Ação Finalidade").append(finalidade);
 		sb.append(" Ação Descrição: ").append(descricao);
 		sb.append(" Ação Repercussão: ").append(repercussao);
-		sb.append(" Ação Orgao").append(orgao != null ? orgao.getId() : "");
+	
 		sb.append(" Ação Cálculo Meta: ").append(calculoMeta);
 		sb.append(" Acao Ativo : ").append(getAtivo());
 		sb.append(" Ação Data da Operação: ").append(FormatoUtils.formataData(new Date()));

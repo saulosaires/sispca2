@@ -21,10 +21,15 @@ public class AcaoController  extends AbstractController<Acao>{
 		super(acaoDAO);
 	}
 
-	
-	public List<Acao> relatorio(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId,String orderBy){
 		
-		return ((AcaoDAO) getDao()).relatorio(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
+		return ((AcaoDAO) getDao()).relatorioPlanoTrabalho(orgaoId, unidadeOrcamentariaId, programaId, exercicioId,orderBy);
+	} 
+	
+	
+	public List<Acao> relatorioFinalidade(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+		
+		return ((AcaoDAO) getDao()).relatorioFinalidade(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
 	} 
 
 	

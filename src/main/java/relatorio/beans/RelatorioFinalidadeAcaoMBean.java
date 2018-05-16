@@ -88,7 +88,7 @@ public class RelatorioFinalidadeAcaoMBean extends RelatorioMBean {
 		
 		try {
 			
-			List<Acao> listAcao = acaoService.relatorio(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
+			List<Acao> listAcao = acaoService.relatorioFinalidade(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
 			
 			if(listAcao==null || listAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

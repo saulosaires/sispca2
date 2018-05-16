@@ -31,9 +31,9 @@ public class ProgramaController extends AbstractController<Programa> {
 		return((ProgramaDAO)getDao()).buscar(codigo,denominacao,orgao,tipoPrograma,exercicioId,eixoId);
 	}
  
-	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentaria) {
+	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentariaCodigo) {
 
-		return((ProgramaDAO)getDao()).buscarPorUnidadeOrcamentaria(unidadeOrcamentaria);
+		return((ProgramaDAO)getDao()).buscarPorUnidadeOrcamentaria(unidadeOrcamentariaCodigo);
 	}
  
 	public List<Programa> buscarPorUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
