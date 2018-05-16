@@ -60,7 +60,7 @@ public class UnidadeOrcamentariaFormMBean implements Serializable {
 			return "unidadeOrcamentarioQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL);
 		}

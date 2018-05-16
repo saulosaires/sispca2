@@ -270,7 +270,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 				return "fisicoFinanceiroMensalMonitoramentoList";
 				
 			} catch (Exception e) {
-				SispcaLogger.logError(e.getCause().getMessage());
+				SispcaLogger.logError(e);
 		
 				Messages.addMessageError(FAIL_SAVE);
 			}
@@ -315,7 +315,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 			Messages.addMessageInfo(SUCCESS_DELETE_OBS);
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 	
 			Messages.addMessageError(FAIL_DELETE_OBS);
 		}

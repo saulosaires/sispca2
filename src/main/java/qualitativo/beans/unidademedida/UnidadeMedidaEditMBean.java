@@ -69,7 +69,7 @@ public class UnidadeMedidaEditMBean implements Serializable {
 			return "unidadeMedidaQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL);
 		}

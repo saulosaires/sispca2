@@ -135,7 +135,7 @@ public class ProgramaViewMBean implements Serializable {
 			FileUtil.sendFileOnResponseAttached(bytes, "visualizacao_programa.pdf", TipoArquivo.PDF.getId());
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL);
 		}	  

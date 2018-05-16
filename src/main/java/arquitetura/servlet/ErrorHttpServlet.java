@@ -35,7 +35,7 @@ public class ErrorHttpServlet extends HttpServlet {
 	        requestDispatcher.forward(req, res);
 	        
 		}catch(Exception e) {
-	 		SispcaLogger.logError(e.getCause().getMessage());
+	 		SispcaLogger.logError(e);
 		}
     }
  
@@ -47,7 +47,7 @@ public class ErrorHttpServlet extends HttpServlet {
 			doPost(req, res);
         
 		}catch(Exception e) {
-	 		SispcaLogger.logError(e.getCause().getMessage());
+	 		SispcaLogger.logError(e);
 		}
 
         

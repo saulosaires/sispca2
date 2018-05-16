@@ -66,7 +66,7 @@ public class LoginMBean implements Serializable{
 			}
 
 		}catch(Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 			
 			Messages.addMessageError("Falha inesperada ao tentar efetuar login");
 		}
@@ -102,7 +102,7 @@ public class LoginMBean implements Serializable{
 			return "";
 				
 		}catch(Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 			
 			Messages.addMessageError("Falha inesperada ao tentar efetuar login");
 		}

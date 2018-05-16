@@ -22,7 +22,7 @@ public class Cryptography {
             return sen; 
             
         } catch (NoSuchAlgorithmException e) {  
-          SispcaLogger.logError(e.getCause().getMessage());
+          SispcaLogger.logError(e);
         }  
         
         return "";

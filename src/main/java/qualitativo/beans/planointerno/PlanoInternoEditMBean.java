@@ -76,7 +76,7 @@ public class PlanoInternoEditMBean implements Serializable {
 			return "planoInternoQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SAVE);
 		}

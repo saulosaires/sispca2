@@ -122,7 +122,7 @@ public class RelatorioPlanoInternoObjetivoMBean  extends RelatorioMBean {
 			 
 			 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 	
 			Messages.addMessageError(FAIL_REPORT);
 		}

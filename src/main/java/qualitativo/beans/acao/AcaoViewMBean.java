@@ -192,7 +192,7 @@ public class AcaoViewMBean implements Serializable {
 			FileUtil.sendFileOnResponseAttached(bytes, "relatorio_visualizacao_acao.pdf", TipoArquivo.PDF.getId());
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL);
 		}	  

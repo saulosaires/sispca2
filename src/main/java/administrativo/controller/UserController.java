@@ -73,7 +73,7 @@ public class UserController extends AbstractController<Usuario>{
 			return EmailUtil.enviaEmail(assunto, mensagem, destinatarios, null);
 		
 		}catch(Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		
        }
     	
@@ -175,7 +175,7 @@ public class UserController extends AbstractController<Usuario>{
 			return EmailUtil.enviaEmail(assunto, mensagem, destinatarios, null);
 		
     	}catch(Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		
        }
     	

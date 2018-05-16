@@ -123,7 +123,7 @@ public class AcaoEditMBean implements Serializable {
 			return "acaoQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL);
 		}

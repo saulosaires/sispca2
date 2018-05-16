@@ -105,7 +105,7 @@ public class MetasEditMBean implements Serializable{
 		return "metasAtividadeList";
 		
 	} catch (Exception e) {
-		SispcaLogger.logError(e.getCause().getMessage());
+		SispcaLogger.logError(e);
 
 		Messages.addMessageError(FAIL_UPDATE);
 	}

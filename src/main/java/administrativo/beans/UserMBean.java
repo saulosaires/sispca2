@@ -52,7 +52,7 @@ public class UserMBean implements Serializable {
 				content = new DefaultStreamedContent(new ByteArrayInputStream(usuario.getFoto()), "image/jpeg");
 			}
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		}
 		return content;
 	}

@@ -63,7 +63,7 @@ public class EmailUtil {
 			email.send();
 			return true;
 		} catch (EmailException e) {
-			SispcaLogger.logError(e.getCause().getMessage()); 
+			SispcaLogger.logError(e); 
 			 
 		}
 		

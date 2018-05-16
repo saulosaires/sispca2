@@ -69,7 +69,7 @@ public class UnidadeOrcamentariaListMBean implements Serializable {
 			}
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -85,7 +85,7 @@ public class UnidadeOrcamentariaListMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_DELETE);
 

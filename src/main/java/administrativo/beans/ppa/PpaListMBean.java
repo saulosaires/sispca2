@@ -57,7 +57,7 @@ public class PpaListMBean implements Serializable {
 			listPpas = ppaService.queryPpa(sigla, descricao, anoInicio,anoFim);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -75,7 +75,7 @@ public class PpaListMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_DELETE);
 
@@ -107,7 +107,7 @@ public class PpaListMBean implements Serializable {
 			pesquisar();
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_DELETE);
 

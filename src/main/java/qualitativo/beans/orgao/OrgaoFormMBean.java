@@ -56,7 +56,7 @@ public class OrgaoFormMBean implements Serializable {
 			return "orgaoQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SAVE);
 		}

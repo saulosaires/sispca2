@@ -58,7 +58,7 @@ public class IndicadorFormMBean implements Serializable {
 			return "indicadorQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SAVE);
 		}

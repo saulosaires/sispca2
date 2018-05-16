@@ -88,7 +88,7 @@ public class ExercicioListMBean implements Serializable{
 			}
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -114,7 +114,7 @@ public class ExercicioListMBean implements Serializable{
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_DELETE);
 
@@ -133,7 +133,7 @@ public class ExercicioListMBean implements Serializable{
 		
 			Messages.addMessageInfo("Processo de atualização de vigência realizado com sucesso!");
 		}catch(Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 			
 			Messages.addMessageError("Erro ao realizar o processo de ativação/desativação para o exercício selecionado!");
 		}

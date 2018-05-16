@@ -29,7 +29,7 @@ public class IniciaAgenda implements ServletContextListener {
 		try {
 			Agendador.finaliza();
 		} catch (SchedulerException e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		}
 	}
 
@@ -40,7 +40,7 @@ public class IniciaAgenda implements ServletContextListener {
 
 			Agendador.inicia(jobDAO);
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		}
 	}
  

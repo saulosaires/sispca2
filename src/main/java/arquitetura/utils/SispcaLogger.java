@@ -9,7 +9,14 @@ public class SispcaLogger {
 	}
 	
 	private static final  Logger logger = Logger.getLogger(SispcaLogger.class.getName());
-	
+ 	
+	public static void logError(Exception e) {
+		
+		if(e.getCause()!=null)
+			logger.error(e.getCause().getMessage());
+		else	
+			logger.error(e.getMessage());
+	}
 	
 	public static void logError(String msg) {
 		logger.error(msg);		

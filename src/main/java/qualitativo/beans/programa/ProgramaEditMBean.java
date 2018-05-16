@@ -109,7 +109,7 @@ public class ProgramaEditMBean implements Serializable {
 			return "programaQualitativoList";
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL);
 		}

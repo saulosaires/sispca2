@@ -72,7 +72,7 @@ public class ExportaDadosSispca implements Job {
 //			ftpClient.disconnect();
 //		} catch (IOException e) {
 //			SispcaLogger.logError("Erro ao exportar arquivos sispca para ftp");
-//			SispcaLogger.logError(e.getCause().getMessage());
+//			SispcaLogger.logError(e);
 //		}
 		
 		
@@ -95,7 +95,7 @@ public class ExportaDadosSispca implements Job {
 			SispcaLogger.logWarn("Arquivo "+ arquivo.getName()+ " transferido para ftp");
 			fis.close();
 		} catch (IOException e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		}
     }
 	
@@ -117,10 +117,10 @@ public class ExportaDadosSispca implements Job {
                 try {
                     ftpClient.disconnect();
                 } catch (IOException exception) {
-                	SispcaLogger.logError(exception.getCause().getMessage());
+                	SispcaLogger.logError(exception);
                 }
             }
-            SispcaLogger.logError(e.getCause().getMessage());
+            SispcaLogger.logError(e);
         }
         return ftpClient;
 	}
@@ -138,7 +138,7 @@ public class ExportaDadosSispca implements Job {
 			SispcaLogger.logWarn("arquivo" + execucao + " deletado.");
 		} catch (IOException e) {
 			 SispcaLogger.logError("Erro ao deletar arquivos");
-			 SispcaLogger.logError(e.getCause().getMessage());
+			 SispcaLogger.logError(e);
 		}
 	}
 	

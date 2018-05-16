@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_programa" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6b051fe-a0bb-4155-8a90-96814dc10717">
+	<property name="ireport.zoom" value="0.7513148009015779"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ORGAO" class="java.lang.String"/>
+	<parameter name="ID_UNIDADE_ORCAMENTARIA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_PROGRAMA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[--QUERY SELECIONA TODOS OS PROGRAMA ATIVOS DE UMA UNIDADE ORCAMENTARIA SELECIONADA
+
+SELECT DISTINCT P.ID_PROGRAMA,
+       P.CODIGO ,P.DENOMINACAO,
+       O.CODIGO ||  ' - ' || O.DESCRICAO AS ORGAO_RESPONSAVEL,
+       U.CODIGO ||  ' - ' || U.DESCRICAO AS UNIDADE_RESPONSAVEL,
+       P.PROBLEMA,
+       P.OBJETIVO,
+       P.PUBLICO_ALVO,
+       P.JUSTIFICATIVA,
+       --TIPO_PROGRAMA,
+       (SELECT  CASE TIPO_PROGRAMA
+		WHEN 'A' THEN 'Apoio Administrativo'
+		WHEN 'F' THEN 'Finalístico'
+		WHEN 'G' THEN 'Gestão de Políticas Públicas'
+		WHEN 'S' THEN 'Serviço ao Estado'
+       END) AS TIPO_PROGRAMA,
+       TIPO_POLITICA,
+       --P.HORIZONTE_TEMPORAL,
+      (SELECT  CASE P.HORIZONTE_TEMPORAL
+		WHEN 'C' THEN 'Contínuo'
+		WHEN 'T' THEN 'Temporário'
+       END) AS HORIZONTE_TEMPORAL,
+       ESTRATEGIA,
+       RESPONSAVEL
+FROM   PLANEJAMENTO.PROGRAMA P, COMUM.ORGAO O, COMUM.UNIDADE_ORCAMENTARIA U,PLANEJAMENTO.ACAO A
+WHERE  1=1
+ AND   P.ID_ORGAO = O.ID_ORGAO
+ AND   P.ID_UNIDADE_ORCAMENTARIA = U.ID_UNIDADE_ORCAMENTARIA
+ AND   P.ID_PROGRAMA = A.ID_PROGRAMA
+ AND   A.ID_UNIDADE_ORCAMENTARIA = $P{ID_UNIDADE_ORCAMENTARIA}
+ AND   P.ID_PROGRAMA = $P{ID_PROGRAMA}
+ --AND   P.ATIVO = 'T'
+ AND   A.ATIVO = 'T']]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="denominacao" class="java.lang.String"/>
+	<field name="orgao_responsavel" class="java.lang.String"/>
+	<field name="unidade_responsavel" class="java.lang.String"/>
+	<field name="problema" class="java.lang.String"/>
+	<field name="objetivo" class="java.lang.String"/>
+	<field name="publico_alvo" class="java.lang.String"/>
+	<field name="justificativa" class="java.lang.String"/>
+	<field name="tipo_programa" class="java.lang.String">
+		<fieldDescription><![CDATA[[DEPRECIADA] Coluna não utilizada. Deve ser excluida após a implantação da nova versão]]></fieldDescription>
+	</field>
+	<field name="tipo_politica" class="java.lang.String"/>
+	<field name="horizonte_temporal" class="java.lang.String">
+		<fieldDescription><![CDATA[[DEPRECIADA] Coluna não utilizada. Deve ser excluida após a implantação da nova versão]]></fieldDescription>
+	</field>
+	<field name="estrategia" class="java.lang.String"/>
+	<field name="responsavel" class="java.lang.String"/>
+	<detail>
+		<band height="262" splitType="Stretch">
+			<frame>
+				<reportElement uuid="f1f678b3-4d3c-436d-931c-553768c1fbd4" positionType="Float" mode="Opaque" x="5" y="10" width="792" height="12" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="2769b9b9-182d-4ae5-8448-c60ae1b2f2d3" x="98" y="0" width="600" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[ÓRGÃO]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="f1f678b3-4d3c-436d-931c-553768c1fbd4" positionType="Float" mode="Opaque" x="5" y="55" width="792" height="12" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="36e07abf-d315-4232-8cc6-af246e4d8899" x="98" y="0" width="600" height="12"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[PROGRAMA]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="0542fa3a-d9c1-4c16-84f2-7d2d5dac1897" positionType="Float" mode="Transparent" x="5" y="67" width="792" height="30"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="3" y="2" width="49" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[CODIGO:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="9fea0c65-3c6a-45e6-9188-b1df6775531d" x="3" y="16" width="100" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="268" y="2" width="100" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[DENOMINAÇÃO:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="dc187ba5-b5a3-4f52-bd48-8b37176d8b05" x="268" y="16" width="519" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{denominacao}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb" positionType="Float" x="5" y="97" width="792" height="30"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="3" y="2" width="126" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[ÓRGÃO RESPONSÁVEL:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="3a709020-30c6-4cd5-9929-e7d6296d1462" x="3" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{orgao_responsavel}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="268" y="2" width="135" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[UNIDADE RESPONSÁVEL:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="cab00d6e-3863-4e7b-a603-5be2936ffc0f" x="268" y="16" width="519" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{unidade_responsavel}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb" positionType="Float" x="5" y="127" width="792" height="30"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="3" y="2" width="161" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[OBJETIVO DO PROGRAMA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="6ed0385f-b43c-48ca-b64a-2892aee895b4" x="3" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{objetivo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="268" y="2" width="83" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[PÚBLICO ALVO:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="1f56ae12-77b4-4f93-9c1a-0b14a14ec2a0" x="268" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{publico_alvo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="531" y="2" width="68" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[PROBLEMA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="bae85b51-d210-4420-b669-cbd7c9606064" x="531" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{problema}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30"/>
+				</line>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="528" y="0" width="1" height="30"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb" positionType="Float" x="5" y="157" width="792" height="30"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="3" y="2" width="83" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[JUSTIFICATIVA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="3937ca9c-9012-4830-a686-eb4588284aa7" x="3" y="16" width="387" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{justificativa}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="399" y="2" width="71" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[ESTRATÉGIA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="b88b43d7-cb00-4378-afba-5010ca44ac99" x="399" y="16" width="387" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{estrategia}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="396" y="0" width="1" height="30"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb" positionType="Float" x="5" y="187" width="792" height="30"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="3" y="2" width="71" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[POLÍTICA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="9879d208-691d-48db-9221-80e09081ae7f" x="3" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo_politica}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="268" y="2" width="113" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[TIPO DE PROGRAMA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="28e8e502-6992-457e-aa51-4276749d1486" x="268" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo_programa}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="533" y="2" width="165" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[HORIZONTE TEMPORAL:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="54dcb8bb-b0e5-4788-8124-8864f058cc87" x="533" y="16" width="255" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{horizonte_temporal}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30"/>
+				</line>
+				<line>
+					<reportElement uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7" key="line-1" stretchType="RelativeToBandHeight" x="528" y="0" width="1" height="30"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb" positionType="Float" x="5" y="217" width="792" height="30"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement uuid="161c381d-f253-40ac-abee-a890873e8497" x="3" y="2" width="180" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[RESPONSÁVEL PELO PROGRAMA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="fbd9394e-f7c1-4861-b922-4f0cc2a772c6" x="3" y="16" width="783" height="12"/>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{responsavel}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb" positionType="Float" x="5" y="22" width="792" height="16"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="c394d03a-8051-40f0-8b19-78dc59b61852" x="3" y="2" width="783" height="12"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ORGAO}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

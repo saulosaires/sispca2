@@ -95,7 +95,7 @@ public class ImportaDadosSiafem implements Job {
  			
 		} catch (Exception e) {
 			SispcaLogger.logError("Erro ao realizar importação SIAFEM");
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		}
 
 	}
@@ -180,7 +180,7 @@ public class ImportaDadosSiafem implements Job {
 			ftp.retrieveFile(arquivoOrigem, fos);
 		} catch (Exception e) {
 			SispcaLogger.logError("Erro ao baixar arquivo via FTP");
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 			
 		}
 
@@ -287,7 +287,7 @@ public class ImportaDadosSiafem implements Job {
 						 
 					 
 					} catch (Exception e) {
-						SispcaLogger.logError(e.getCause().getMessage());
+						SispcaLogger.logError(e);
 					} 
 					
 				});
@@ -298,7 +298,7 @@ public class ImportaDadosSiafem implements Job {
 			SispcaLogger.logWarn("Importação SIAFEM realizada com sucesso");
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 		} finally {
 			removeArq(nomeArquivo);
 			 

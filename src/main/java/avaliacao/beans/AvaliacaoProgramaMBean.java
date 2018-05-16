@@ -199,7 +199,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 			FileUtil.sendFileOnResponse(bytes,"Relatorio_Financeiro_Detalhamento.pdf", TipoArquivo.PDF.getId(),"");
 		} catch (Exception e) {
 			
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 			 
 			
 			Messages.addMessageError(FAIL_REPORT);
@@ -228,7 +228,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 			 
 		} catch (Exception e) {
 
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_REPORT);
 		}

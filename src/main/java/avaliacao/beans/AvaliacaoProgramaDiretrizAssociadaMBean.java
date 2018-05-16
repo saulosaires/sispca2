@@ -87,7 +87,7 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 			buscarDiretrizAssociada();
 			Messages.addMessageInfo(SUCCESS_SAVE_DIRETRIZ);
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 	
 			Messages.addMessageError(FAIL_SAVE_DIRETRIZ);
 		}
@@ -103,7 +103,7 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 			Messages.addMessageInfo(SUCCESS_DELETE_DIRETRIZ);
 		
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 	
 			Messages.addMessageError(FAIL_DELETE_DIRETRIZ);
 		}

@@ -55,7 +55,7 @@ public class ObjetoListMBean implements Serializable {
 
 			Collections.sort(listPermissao, (p1, p2) -> p1.getAcao().compareTo(p2.getAcao()));
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -73,7 +73,7 @@ public class ObjetoListMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_DELETE);
 

@@ -57,7 +57,7 @@ public class UsuarioListMBean implements Serializable {
 			listaUsuarios = service.queryUser(name, email, perfil, unidadeOrcamentaria);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SEARCH);
 
@@ -79,7 +79,7 @@ public class UsuarioListMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_DELETE);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_DELETE);
 

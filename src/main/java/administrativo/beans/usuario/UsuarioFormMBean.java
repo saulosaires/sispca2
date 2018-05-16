@@ -86,7 +86,7 @@ public class UsuarioFormMBean implements Serializable {
 			return "usuarioList";
 			
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SAVE);
 		}

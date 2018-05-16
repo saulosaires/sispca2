@@ -56,7 +56,7 @@ public class PpaFormMBean implements Serializable {
 			Messages.addMessageInfo(SUCCESS_SAVE_MESSAGE_MSG);
 
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 
 			Messages.addMessageError(FAIL_SAVE_MESSAGE_MSG);
 		}

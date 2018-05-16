@@ -89,7 +89,7 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 			buscarPainelAssociado();
 			Messages.addMessageInfo(SUCCESS_SAVE);
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 	
 			Messages.addMessageError(FAIL_SAVE);
 		}
@@ -105,7 +105,7 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 			Messages.addMessageInfo(SUCCESS_DELETE);
 		
 		} catch (Exception e) {
-			SispcaLogger.logError(e.getCause().getMessage());
+			SispcaLogger.logError(e);
 	
 			Messages.addMessageError(FAIL_DELETE);
 		}
