@@ -165,6 +165,12 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	}
 
 	@Override
+	public String toString() {
+	
+		return getCodigo()+" - "+ getDescricao();
+	}
+	
+	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Unidade Orçamentária Id : ").append(id).append("Unidade Codigo: ")

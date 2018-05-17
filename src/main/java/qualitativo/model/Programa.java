@@ -318,6 +318,13 @@ public class Programa extends Model implements  Auditable {
 	}
 
 	@Override
+	public String toString() {
+
+		return getCodigo()+" - "+ getDenominacao();
+ 
+	}
+	
+	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" Programa Id: ").append(id).append(" Programa Denominação: ")

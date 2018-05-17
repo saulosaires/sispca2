@@ -114,10 +114,10 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/metas/atividade/form.xhtml","metasAtividadeEdit");
 
 		mapLinks.put("/sispca2/private/relatorio/menu.xhtml","relatorioCategoria");
-		mapLinks.put("/sispca2/private/relatorio/finalidadeacao/list.xhtml","relatorioQuantitativoFinalidadeAcao");
-		mapLinks.put("/sispca2/private/relatorio/planoobjetivo/list.xhtml", "relatorioPlanejamentoQualitativoObjetivoPlanoInterno");
-		mapLinks.put("/sispca2/private/relatorio/planotrabalho/list.xhtml", "relatorioPlanejamentoQualitativoObjetivoPlanoTrabalho");
-		
+		mapLinks.put("/sispca2/private/relatorio/finalidadeacao/list.xhtml",       "relatorioQuantitativoFinalidadeAcao");
+		mapLinks.put("/sispca2/private/relatorio/planoobjetivo/list.xhtml",        "relatorioPlanejamentoQualitativoObjetivoPlanoInterno");
+		mapLinks.put("/sispca2/private/relatorio/planotrabalho/list.xhtml", 	   "relatorioPlanejamentoQualitativoObjetivoPlanoTrabalho");
+		mapLinks.put("/sispca2/private/relatorio/relatorioqualitativo/list.xhtml", "relatorioPlanejamentoQualitativoProgramasAcoes");
 		
 		
 		

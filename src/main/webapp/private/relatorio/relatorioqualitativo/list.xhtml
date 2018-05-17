@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+ 
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+
+
+			    <f:metadata>
+	    			<f:viewParam name="id" value="#{relatorioQualitativoMBean.exercicioId}"/>
+	    			<f:viewAction action="#{relatorioQualitativoMBean.init}" />
+			     </f:metadata>
+				
+			<h:form>
+
+				<div class="container-fluid row-fluid">
+					
+					<legend class="outBusc">Relatório Qualitativo</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="ORGÃO:  " styleClass="labelOutText" />
+								
+								<h:selectOneMenu value="#{relatorioQualitativoMBean.orgao}"
+									styleClass="input-sm form-control" >
+									<f:selectItem itemValue="#{null}" itemLabel="--TODOS--" />
+									<f:selectItems value="#{relatorioQualitativoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org.descricao)}" />
+									
+									<f:ajax event="change" render="programa acao unidadeOrcamentaria" listener="#{relatorioQualitativoMBean.changeOrgao()}" />
+								</h:selectOneMenu>	
+							</div>
+						</div>
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA:  "
+									styleClass="labelOutText" />
+								<h:selectOneMenu id="unidadeOrcamentaria" value="#{relatorioQualitativoMBean.unidadeOrcamentaria}" styleClass="input-sm form-control">
+								
+									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
+									<f:selectItems value="#{relatorioQualitativoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid.descricao)}" />
+									
+									<p:ajax event="change" update="programa acao checkAcao" listener="#{relatorioQualitativoMBean.changeUnidadeOrcamentaria()}" />
+									
+								</h:selectOneMenu>	
+							</div>
+						</div>				
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="PROGRAMA:  " styleClass="labelOutText" />
+								<h:selectOneMenu id="programa" value="#{relatorioQualitativoMBean.programa}" styleClass="input-sm form-control">
+									<f:selectItem itemValue="#{null}" itemLabel="--TODOS--" />
+									<f:selectItems value="#{relatorioQualitativoMBean.listPrograma}" var="prog" itemLabel="#{fn:toUpperCase(prog.denominacao)}" itemValue="#{prog.id}" />
+									<f:ajax event="change" render="acao" listener="#{relatorioQualitativoMBean.changePrograma()}" />
+								</h:selectOneMenu>
+							</div>	
+						</div>
+						
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="AÇÕES:  " styleClass="labelOutText" />
+								<h:selectOneMenu id="acao" value="#{relatorioQualitativoMBean.acao}" styleClass="input-sm form-control"  requiredMessage="Selecione a ação">
+									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+									<f:selectItems value="#{relatorioQualitativoMBean.listAcoes}" var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao.denominacao)}" />
+								</h:selectOneMenu>
+							</div>
+						</div>	
+						<div class="row" style="margin-top: 2%">
+							<div class="col-lg-6">
+							 
+								<p:outputPanel id="checkAcao"  >
+								
+									<p:selectBooleanCheckbox value="#{relatorioQualitativoMBean.acoesUnidadeResponsavel}" >
+										<p:ajax update="programa acao" listener="#{relatorioQualitativoMBean.todasAcoes()}"></p:ajax>
+									</p:selectBooleanCheckbox>
+									<h:outputText style="margin-left: 5px;" value="INCLUIR AÇÃO EM QUE ESTA UNIDADE É RESPONSAVEL? "  styleClass="labelOutText"/>
+									 									
+								</p:outputPanel>
+								
+							</div>
+						</div>
+						
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">
+								<h:commandLink styleClass="btnAction btn btn-primary"  value="Gerar Relatório"  action="#{relatorioQualitativoMBean.gerarRelatorio()}" />
+							</div> 
+						</div> 					
+						
+					</div>
+				</div>				
+			</h:form>
+			 
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

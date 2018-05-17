@@ -78,8 +78,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			 	 			root.get(DENOMINACAO),
 			 	 			root.get(FINALIDADE),
 			 	 			root.get(DESCRICAO)
-			 	 			
-			 	 			
+	
 				 		  );
 		
 		List<Predicate> predicate = new ArrayList<>();
@@ -122,22 +121,19 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		}else {
 			
 			query.orderBy(
-				       cb.asc(joinPrograma.get(CODIGO)),
-				       cb.asc(joinUnidadeOrcamentaria.get(CODIGO)),
-				       cb.asc(joinOrgao.get(CODIGO)),
-				       cb.asc(joinFuncao.get(CODIGO)),
-				       cb.asc(joinSubFuncao.get(CODIGO)),
-				       cb.asc(root.get(CODIGO))
+				          cb.asc(joinPrograma.get(CODIGO)),
+				          cb.asc(joinUnidadeOrcamentaria.get(CODIGO)),
+				          cb.asc(joinOrgao.get(CODIGO)),
+				          cb.asc(joinFuncao.get(CODIGO)),
+				          cb.asc(joinSubFuncao.get(CODIGO)),
+				          cb.asc(root.get(CODIGO))
 				     );
 
 		}
-		
-		
-		
+
 		return entityManager.createQuery(query).getResultList();
 		
 	}	
-	
 	
 	public List<Acao> relatorioFinalidade(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
 		 
@@ -214,8 +210,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		return entityManager.createQuery(query).getResultList();
 		
 	}	
-	
-	
+		
 	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -269,9 +264,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		return entityManager.createQuery(query).getResultList();
 	}
-	
-	
-	
+		
 	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

@@ -23,6 +23,26 @@ public class AcaoService  extends AbstractService<Acao> {
 		super(acaoController);
 	}
 
+	public List<Acao> relatorioQualitativoProgramasAcoes(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long acaoId,Long exercicioId){
+		
+		
+		if(!Utils.invalidId(acaoId)) {
+			
+			List<Acao> list =new ArrayList<>();
+			list.add(findById(acaoId));
+			return list;
+			
+		}else {
+			return ((AcaoController) getController()).buscar(null, null, unidadeOrcamentariaId, programaId, exercicioId);
+		}
+		
+		
+		
+		
+		 
+	} 
+
+	
 	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId,String orderBy){
 		
 		return ((AcaoController) getController()).relatorioPlanoTrabalho(orgaoId, unidadeOrcamentariaId, programaId, exercicioId,orderBy);

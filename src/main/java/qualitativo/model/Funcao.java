@@ -80,4 +80,9 @@ public class Funcao extends Model  {
 		this.subfuncaos = subfuncaos;
 	}
 
+	@Override
+	public String toString() { 
+		return getCodigo()+" - "+getDescricao();
+	}
+	
 }

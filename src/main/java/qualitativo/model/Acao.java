@@ -533,6 +533,8 @@ public class Acao extends Model implements  Auditable {
 		this.exercicio = exercicio;
 	}
 
+	
+	
 	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();

@@ -92,6 +92,12 @@ public class UnidadeMedida extends Model implements  Auditable {
 	}
 
 	@Override
+	public String toString() {
+		 
+		return getDescricao();
+	}
+	
+	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Unidade de Medida id: ").append(this.id)
