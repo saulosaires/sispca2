@@ -35,6 +35,9 @@ public class RegiaoDAO extends AbstractDAO<Regiao> {
 		Root<Regiao> c = q.from(Regiao.class);
 
 		q.select(c);
+		
+		q.where(cb.equal(c.get("ativo"), true));
+		
 		q.orderBy(cb.asc(c.get("descricao")));
 
 		return entityManager.createQuery(q).getResultList();

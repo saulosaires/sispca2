@@ -30,6 +30,8 @@ public class Municipio implements Serializable{
 	@JoinColumn(name="id_unidade_federativa")
 	private UnidadeFederativa unidadeFederativa;
 	
+	
+	@Column(name="descricao")
 	private String descricao;
 	
 	 

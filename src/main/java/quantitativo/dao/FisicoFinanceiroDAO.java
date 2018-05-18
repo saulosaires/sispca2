@@ -21,6 +21,20 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final String ID = "id";
+	private static final String ACAO = "acao";
+	private static final String ANO = "ano";
+	private static final String DESCRICAO = "descricao";
+	private static final String EXERCICIO = "exercicio";
+	private static final String QUANTIDADE = "quantidade";
+	private static final String VALOR = "valor";
+	private static final String REGIAO_MUNICIPIO = "regiaoMunicipio";
+	private static final String REGIAO = "regiao";
+	private static final String MUNICIPIO = "municipio";
+	private static final String DENOMINACAO = "denominacao";
+	private static final String UNIDADE_ORCAMENTARIA = "unidadeOrcamentaria";
+	
+	
 	public FisicoFinanceiroDAO() {
 		setClazz(FisicoFinanceiro.class);
 
@@ -41,9 +55,9 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 		}
 
 		
-		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
+		Join<Object, Object> joinAcao = m.join(ACAO, JoinType.INNER);
 
-		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+		joinAcao.on(cb.equal(joinAcao.get(ID), acaoId));
 		
 		
 		return entityManager.createQuery(query).getResultList();
@@ -65,26 +79,84 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 			return Optional.ofNullable(null);
 		}
 
-		Join<Object, Object> joinRegiao = m.join("regiaoMunicipio", JoinType.INNER);
+		Join<Object, Object> joinRegiao = m.join(REGIAO_MUNICIPIO, JoinType.INNER);
 
-		joinRegiao.on(cb.equal(joinRegiao.get("id"), regiaoMunicipioId));
+		joinRegiao.on(cb.equal(joinRegiao.get(ID), regiaoMunicipioId));
 
 		
 		
-		Join<Object, Object> joinExercicio = m.join("exercicio", JoinType.INNER);
+		Join<Object, Object> joinExercicio = m.join(EXERCICIO, JoinType.INNER);
 
-		joinExercicio.on(cb.equal(joinExercicio.get("id"), exercicioId));
+		joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
 		
 		
 		
-		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
+		Join<Object, Object> joinAcao = m.join(ACAO, JoinType.INNER);
 
-		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+		joinAcao.on(cb.equal(joinAcao.get(ID), acaoId));
 		
 		
 		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();	
 		
 	}
  
+	public List<FisicoFinanceiro>  relatorioPlanejadoPorAno(Long regiaoId,Long municipioId,Long unidadeOrcamentariaId,Long exercicioId){
+		
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiro> query = cb.createQuery(FisicoFinanceiro.class);
+		
+		Root<FisicoFinanceiro> m = query.from(FisicoFinanceiro.class);
+		
+		Join<Object, Object> joinExercicio 			 = m.join(EXERCICIO, 				   JoinType.INNER);
+		Join<Object, Object> joinAcao 				 = m.join(ACAO, 					   JoinType.INNER);
+    	Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+    	Join<Object, Object> joinRegiaoMunicipio 	 = m.join(REGIAO_MUNICIPIO, 		   JoinType.INNER);
+    	Join<Object, Object>joinRegiao 				 = joinRegiaoMunicipio.join(REGIAO,    JoinType.LEFT);
+    	Join<Object, Object>joinMunicipio 			 = joinRegiaoMunicipio.join(MUNICIPIO, JoinType.LEFT);
+		query.select(m);
 
+		
+		if(!Utils.invalidId(exercicioId)) {
+			
+			joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
+		}
+		
+	    if(!Utils.invalidId(unidadeOrcamentariaId)) {
+	    	
+	    	joinUnidadeOrcamentaria.on(cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId));
+	    }
+	
+	   if(!Utils.invalidId(regiaoId)) {
+		  
+		  joinRegiao.on(cb.equal(joinRegiao.get(ID), regiaoId));
+	   }
+	
+	   if(!Utils.invalidId(municipioId)) {
+		 
+		  joinMunicipio.on(cb.equal(joinMunicipio.get(ID), municipioId));
+	   }
+
+	
+	   query.orderBy(
+					cb.asc( joinExercicio.get(ANO)),
+					cb.asc( joinUnidadeOrcamentaria.get(DESCRICAO)),
+					cb.asc( joinRegiao.get(DESCRICAO)),
+					cb.asc( joinMunicipio.get(DESCRICAO)),
+					cb.asc( joinAcao.get(DENOMINACAO)),
+					cb.asc( m.get(QUANTIDADE)),
+					cb.asc( m.get(VALOR))
+				);
+ 		
+		
+		return entityManager.createQuery(query).getResultList();	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }

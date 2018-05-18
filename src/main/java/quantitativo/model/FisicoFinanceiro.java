@@ -29,7 +29,6 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_exercicio",nullable=true)
-	 
 	private Exercicio exercicio = new Exercicio();
 	
 	@Column(name="quantidade")

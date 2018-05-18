@@ -33,7 +33,13 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 		
 		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
 	}
-	 
+	
+	public List<FisicoFinanceiro>  relatorioPlanejadoPorAno(Long regiaoId,Long municipioId,Long unidadeOrcamentariaId,Long exercicioId){
+		
+		return ((FisicoFinanceiroController)getController()).relatorioPlanejadoPorAno(regiaoId,municipioId,unidadeOrcamentariaId,exercicioId);
+	
+	}
+	
 	
 	public FisicoFinanceiro merge(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
 		

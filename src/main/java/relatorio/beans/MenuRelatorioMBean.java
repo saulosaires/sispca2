@@ -66,15 +66,15 @@ public class MenuRelatorioMBean implements Serializable{
     
     private void initCategoriaPlanejamento(Relatorio relatorioPlanejamento){
     	
-    	
-    	
     	relatorioPlanejamento.getSubRelatorio().add(initCategoriaPlanejamentoQualitativo());
+    	
+    	relatorioPlanejamento.getSubRelatorio().add(initCategoriaPlanejamentoQuantitativo());
     	
     }
 	
     private Relatorio initCategoriaPlanejamentoQualitativo() {
     	
-    	Relatorio relatorio = new Relatorio("Relatório Quantitativo","#","relatorioPlanejamentoQuantitativo");
+    	Relatorio relatorio = new Relatorio("Relatório Qualitativo","#","relatorioPlanejamentoQualitativo");
     	
     	
     	relatorio.getSubRelatorio().add(new Relatorio(" Finalidade e Descrição das Ações","relatorioPlanejamentoQualitativoFinalidadeAcoes",	  "relatorioPlanejamentoQualitativoFinalidadeAcoes"));
@@ -82,6 +82,23 @@ public class MenuRelatorioMBean implements Serializable{
        	relatorio.getSubRelatorio().add(new Relatorio(" Plano de Trabalho",		  		  "relatorioPlanejamentoQualitativoObjetivoPlanoTrabalho","relatorioPlanejamentoQualitativoObjetivoPlanoTrabalho"));
        	relatorio.getSubRelatorio().add(new Relatorio(" Qualitativo de Programas e Ações","relatorioPlanejamentoQualitativoProgramasAcoes",		  "relatorioPlanejamentoQualitativoProgramasAcoes"));
             	
+    	
+    	return relatorio;
+
+    	
+    }
+    
+    private Relatorio initCategoriaPlanejamentoQuantitativo() {
+    	
+    	Relatorio relatorio = new Relatorio("Relatório Quantitativo","#","relatorioPlanejamentoQuantitativo");
+    	
+    	relatorio.getSubRelatorio().add(new Relatorio(" Planejado por Ano",		    "relatorioPlanejamentoQuantitativoPlanejadoPorAno",   "relatorioPlanejamentoQuantitativoPlanejadoPorAno"));
+//    	relatorio.getSubRelatorio().add(new Relatorio(" Planejado por Região",	    "relatorioPlanejamentoQuantitativoPlanejadoPorRegiao","relatorioPlanejamentoQuantitativoPlanejadoPorRegiao"));
+//    	relatorio.getSubRelatorio().add(new Relatorio(" Planejamento Mensal",	    "relatorioPlanejamentoQuantitativoPlanejamentoMensal","relatorioPlanejamentoQuantitativoPlanejamentoMensal"));
+//    	relatorio.getSubRelatorio().add(new Relatorio(" Quantitativo Anual",	    "relatorioPlanejamentoQuantitativoAnual",	  	      "relatorioPlanejamentoQuantitativoAnual"));
+//    	relatorio.getSubRelatorio().add(new Relatorio(" Quantitativo Anual por UO ","relatorioPlanejamentoQuantitativoAnualPor Uo",		  "relatorioPlanejamentoQuantitativoAnualPor"));
+    	
+   
     	
     	return relatorio;
     }

@@ -30,6 +30,7 @@ public class PpaListMBean implements Serializable {
 	public static final String FAIL_ANO_INICIO = "Ano inicio Inválido";
 	public static final String FAIL_ANO_FIM = "Ano Fim Inválido";
 	
+	public static final String FAIL_VIGENCIA="Falha ao mudar vigencia";
 	
 	private String sigla;
 	private String descricao;
@@ -109,7 +110,7 @@ public class PpaListMBean implements Serializable {
 		} catch (Exception e) {
 			SispcaLogger.logError(e);
 
-			Messages.addMessageError(FAIL_DELETE);
+			Messages.addMessageError(FAIL_VIGENCIA);
 
 		}
 		
