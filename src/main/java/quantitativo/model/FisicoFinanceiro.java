@@ -15,6 +15,7 @@ import administrativo.model.Exercicio;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import qualitativo.model.Acao;
+import qualitativo.model.UnidadeOrcamentaria;
  
 
 @Entity
@@ -51,6 +52,37 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	@JoinColumn(name="id_regiao_municipio")
 	private RegiaoMunicipio regiaoMunicipio;
 	 
+	public FisicoFinanceiro() { }
+	
+	public FisicoFinanceiro(String regiaoDescricao,
+							String unidadeOrcamentariaDescricao,
+							String acaoCodigo,
+							String acaoDenominacao,
+							Integer exercicioAno,
+							double quantidade,
+							double valor
+						   ) { 
+ 
+		regiaoMunicipio = new RegiaoMunicipio();
+		regiaoMunicipio.setRegiao(new Regiao());
+		
+		regiaoMunicipio.getRegiao().setDescricao(regiaoDescricao);
+		
+		acao = new Acao();
+		
+		acao.setCodigo(acaoCodigo);
+		acao.setDenominacao(acaoDenominacao);
+		
+		acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+		
+		exercicio = new Exercicio();
+		exercicio.setAno(exercicioAno);
+		
+		this.quantidade=quantidade;
+		this.valor=valor;
+		
+	}
 
 	public Long getId() {
 		return this.id;

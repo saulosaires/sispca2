@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">			
+			<h:form>
+			
+			
+			    <f:metadata>
+	    			<f:viewParam name="id" value="#{relatorioFisicoFinanceiroPlanejadoMBean.exercicioId}"/>
+	    			<f:viewAction action="#{relatorioFisicoFinanceiroPlanejadoMBean.init}" />
+			     </f:metadata>
+				
+				
+				<div class="spaceContainerForm">	
+									
+					<div class="row">
+						<legend class="outBusc">Relatório Físico Financeiro Planejado</legend>
+					</div>	
+					<div class="row" style="margin-left: 0; margin-top: 1%;">
+						<div class="col-lg-4">
+							<p:outputPanel id="customPanel" style="margin-bottom:10px">
+								<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
+						        <p:selectOneRadio id="customRadio" value="#{relatorioFisicoFinanceiroPlanejadoMBean.tipoArquivo}" layout="custom">
+						            <f:selectItem itemLabel="PDF" itemValue="PDF" />
+           							<f:selectItem itemLabel="XLS" itemValue="XLS" />
+						        </p:selectOneRadio>
+	 
+						        <h:panelGrid columns="4" cellpadding="5">
+						            <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+						            <h:graphicImage value="/resources/images/icone-pdf.gif" style="widht: 25px; height: 25px;"/>
+						            &nbsp;
+						            <h:outputLabel for="opt1" value="PDF" styleClass="labelOutText"/>
+						           
+						            <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+						            <h:graphicImage value="/resources/images/icone-xls.png" style="widht: 25px; height: 25px;"/>
+						            &nbsp;
+						            <h:outputLabel for="opt2" value="XLS" styleClass="labelOutText"/>
+						           
+						 		</h:panelGrid>
+						        
+	    					</p:outputPanel>
+						</div>
+					</div>	
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="EXERCÍCIO: " styleClass="labelOutText"/>
+							<h:outputText value="#{relatorioFisicoFinanceiroPlanejadoMBean.exercicio.ano}" styleClass="labelInputText"/>
+						</div>					
+					</div>
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="REGIÃO: " styleClass="labelOutText"/>
+							<h:selectOneMenu value="#{relatorioFisicoFinanceiroPlanejadoMBean.regiao}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioFisicoFinanceiroPlanejadoMBean.listRegiao}" var="reg" itemValue="#{reg.id}" itemLabel="#{fn:toUpperCase(reg.descricao)}"/>
+							</h:selectOneMenu>
+						</div>
+					</div>							
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
+							<h:selectOneMenu value="#{relatorioFisicoFinanceiroPlanejadoMBean.unidadeOrcamentaria}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioFisicoFinanceiroPlanejadoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid.descricao)}"/>
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					<div class="row" style="margin-top: 2%;">						
+						<h:commandButton value="Gerar Relatório" action="#{relatorioFisicoFinanceiroPlanejadoMBean.gerarRelatorio()}" style="margin-left: 2%;" styleClass="btn btn-primary"/>
+					</div>
+				</div>	
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

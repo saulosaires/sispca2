@@ -654,6 +654,11 @@
 			<from-outcome>relatorioPlanejamentoQuantitativoPlanejadoPorAno</from-outcome>
 			<to-view-id>/private/relatorio/fisicofinanceiroplanejadoano/list.xhtml</to-view-id>
 		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>relatorioPlanejamentoQuantitativoPlanejadoPorRegiao</from-outcome>
+			<to-view-id>/private/relatorio/fisicofinanceiroplanejado/list.xhtml</to-view-id>
+		</navigation-case>
 		
 				
 	</navigation-rule> 	

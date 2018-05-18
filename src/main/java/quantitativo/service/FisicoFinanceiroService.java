@@ -40,6 +40,13 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 	
 	}
 	
+	public List<FisicoFinanceiro>  relatorioPlanejadoPorRegiao(Long regiaoId,Long unidadeOrcamentariaId,Long exercicioId){
+		
+		return ((FisicoFinanceiroController)getController()).relatorioPlanejadoPorRegiao(regiaoId,unidadeOrcamentariaId,exercicioId);
+	
+	}
+
+	
 	
 	public FisicoFinanceiro merge(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
 		

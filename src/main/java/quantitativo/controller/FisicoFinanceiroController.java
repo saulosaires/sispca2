@@ -39,4 +39,12 @@ public class FisicoFinanceiroController extends AbstractController<FisicoFinance
 	
 	}
 	
+	public List<FisicoFinanceiro>  relatorioPlanejadoPorRegiao(Long regiaoId,Long unidadeOrcamentariaId,Long exercicioId){
+		
+		return ((FisicoFinanceiroDAO)getDao()).relatorioPlanejadoPorRegiao(regiaoId,unidadeOrcamentariaId,exercicioId);
+	
+	}
+
+	
+	
 }

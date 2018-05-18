@@ -25,6 +25,7 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 	private static final String ID = "id";
 	private static final String ACAO = "acao";
 	private static final String ANO = "ano";
+	private static final String CODIGO = "codigo";
 	private static final String DESCRICAO = "descricao";
 	private static final String EXERCICIO = "exercicio";
 	private static final String QUANTIDADE = "quantidade";
@@ -64,8 +65,7 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 		return entityManager.createQuery(query).getResultList();
 		
 	}
-	
-	
+		
 	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
 		
@@ -157,6 +157,73 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 	}
 	
 	
+	public List<FisicoFinanceiro>  relatorioPlanejadoPorRegiao(Long regiaoId,Long unidadeOrcamentariaId,Long exercicioId){
+		
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiro> query = cb.createQuery(FisicoFinanceiro.class);
+		
+		Root<FisicoFinanceiro> m = query.from(FisicoFinanceiro.class);
+		
+		Join<Object, Object> joinExercicio 			 = m.join(EXERCICIO, 				   JoinType.INNER);
+		Join<Object, Object> joinAcao 				 = m.join(ACAO, 					   JoinType.INNER);
+    	Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+    	Join<Object, Object> joinRegiaoMunicipio 	 = m.join(REGIAO_MUNICIPIO, 		   JoinType.INNER);
+    	Join<Object, Object>joinRegiao 				 = joinRegiaoMunicipio.join(REGIAO,    JoinType.LEFT);
+   	
+		query.multiselect(
+						joinRegiao.get(DESCRICAO),
+						joinUnidadeOrcamentaria.get(DESCRICAO),
+						joinAcao.get(CODIGO),
+						joinAcao.get(DENOMINACAO),
+						joinExercicio.get(ANO),
+						m.get(QUANTIDADE),
+						m.get(VALOR)
+					  );
+
+		
+		List<Predicate> predicate = new ArrayList<>();
+		if(!Utils.invalidId(exercicioId)) {
+			
+			predicate.add(cb.equal(joinExercicio.get(ID), exercicioId));
+		}
+		
+	    if(!Utils.invalidId(unidadeOrcamentariaId)) {
+	    	
+	    	predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId));
+	    }
+	
+	   if(!Utils.invalidId(regiaoId)) {
+		  
+			predicate.add(cb.equal(joinRegiao.get(ID), regiaoId));
+	   }
+	
+	   query.where(predicate.toArray(new Predicate[predicate.size()]));
+		
+	  
+	   query.groupBy(
+			   		  joinRegiao.get(DESCRICAO),
+			   		  joinUnidadeOrcamentaria.get(DESCRICAO),
+	   				  joinExercicio.get(ANO),
+					  joinAcao.get(CODIGO),
+					  joinAcao.get(DENOMINACAO),
+					  m.get(QUANTIDADE),
+					  m.get(VALOR)
+				  );
+
+	   query.orderBy(
+					 cb.asc(joinRegiao.get(DESCRICAO)), 
+					 cb.asc(joinUnidadeOrcamentaria.get(DESCRICAO)),
+					 cb.asc(joinExercicio.get(ANO)), 
+					 cb.asc(joinAcao.get(DENOMINACAO)), 
+					 cb.asc(m.get(QUANTIDADE)),
+					 cb.asc(m.get(VALOR))
+				  );
+ 		
+		
+		return entityManager.createQuery(query).getResultList();	
+		
+	}
 	
 	
 	

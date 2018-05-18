@@ -121,6 +121,7 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/relatorio/relatorioqualitativo/list.xhtml", "relatorioPlanejamentoQualitativoProgramasAcoes");
 		
 		mapLinks.put("/sispca2/private/relatorio/fisicofinanceiroplanejadoano/list.xhtml", "relatorioPlanejamentoQuantitativoPlanejadoPorAno");
+		mapLinks.put("/sispca2/private/relatorio/fisicofinanceiroplanejado/list.xhtml",    "relatorioPlanejamentoQuantitativoPlanejadoPorRegiao");
 		
 		
 	}
