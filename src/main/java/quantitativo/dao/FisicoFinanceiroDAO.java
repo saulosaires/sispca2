@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import arquitetura.dao.AbstractDAO;
@@ -117,27 +118,29 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 		query.select(m);
 
 		
+		List<Predicate> predicate = new ArrayList<>();
 		if(!Utils.invalidId(exercicioId)) {
 			
-			joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
+			predicate.add(cb.equal(joinExercicio.get(ID), exercicioId));
 		}
 		
 	    if(!Utils.invalidId(unidadeOrcamentariaId)) {
 	    	
-	    	joinUnidadeOrcamentaria.on(cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId));
+	    	predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId));
 	    }
 	
 	   if(!Utils.invalidId(regiaoId)) {
 		  
-		  joinRegiao.on(cb.equal(joinRegiao.get(ID), regiaoId));
+			predicate.add(cb.equal(joinRegiao.get(ID), regiaoId));
 	   }
 	
 	   if(!Utils.invalidId(municipioId)) {
 		 
-		  joinMunicipio.on(cb.equal(joinMunicipio.get(ID), municipioId));
+			predicate.add(cb.equal(joinMunicipio.get(ID), municipioId));
 	   }
 
-	
+		query.where(predicate.toArray(new Predicate[predicate.size()]));
+		
 	   query.orderBy(
 					cb.asc( joinExercicio.get(ANO)),
 					cb.asc( joinUnidadeOrcamentaria.get(DESCRICAO)),
