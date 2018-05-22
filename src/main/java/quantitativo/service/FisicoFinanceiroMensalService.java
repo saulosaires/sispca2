@@ -31,16 +31,27 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		
 		List<FisicoFinanceiroMensal> listFisicoFinanceiro = ((FisicoFinanceiroMensalController)getController()).relatorioPlanejamentoMensal(orgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
 
-		Map<Long,RelatorioFisicoFinanceiro> map = new HashMap<>();
+		Map<String,RelatorioFisicoFinanceiro> map = new HashMap<>();
 	
 	
 		for(FisicoFinanceiroMensal financeiroMensal: listFisicoFinanceiro) {
 			
-			 if(map.containsKey(financeiroMensal.getRegiaoMunicipio().getId())) {
-				 map.get(financeiroMensal.getRegiaoMunicipio().getId()).setData(financeiroMensal);
+			 
+			StringBuilder str = new StringBuilder("");
+			
+			str.append(financeiroMensal.getAcao().getUnidadeOrcamentaria().getOrgao().getCodigo())
+			.append(financeiroMensal.getAcao().getUnidadeOrcamentaria().getCodigo())
+			.append(financeiroMensal.getAcao().getPrograma().getCodigo())
+			.append(financeiroMensal.getAcao().getCodigo())
+			.append(financeiroMensal.getRegiaoMunicipio().getId());
+			
+			String id =str.toString();
+			
+			 if(map.containsKey(id)) {
+				 map.get(id).setData(financeiroMensal);
 				 
 			 }else {                                                                                    
-				 map.put(financeiroMensal.getRegiaoMunicipio().getId(), new RelatorioFisicoFinanceiro(financeiroMensal));
+				 map.put(id, new RelatorioFisicoFinanceiro(financeiroMensal));
 			 }
 			
 		}		

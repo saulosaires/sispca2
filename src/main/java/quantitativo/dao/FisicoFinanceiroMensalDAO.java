@@ -42,7 +42,7 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 	private static final  String NUMERO_MES = "numeroMes";
 	private static final  String QUANTIDADE="quantidade";
 	private static final  String PROGRAMA="programa";
-	
+	private static final  String DENOMINACAO="denominacao";
 	
 	public FisicoFinanceiroMensalDAO() {
 		setClazz(FisicoFinanceiroMensal.class);
@@ -113,10 +113,10 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 			    );
 		
 		  query.orderBy(
-					cb.asc( joinOrgao.get(CODIGO)),
-					cb.asc( joinUnidadeOrcamentaria.get(CODIGO)),
-					cb.asc( joinPrograma.get(CODIGO)),
-					cb.asc( joinAcao.get(CODIGO)) 
+					cb.asc( joinOrgao.get(DESCRICAO)),
+					cb.asc( joinUnidadeOrcamentaria.get(DESCRICAO)),
+					cb.asc( joinPrograma.get(DENOMINACAO)),
+					cb.asc( joinAcao.get(DENOMINACAO)) 
 					
 				);
 		 
