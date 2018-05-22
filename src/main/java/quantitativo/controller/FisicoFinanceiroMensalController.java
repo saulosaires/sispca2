@@ -21,6 +21,11 @@ public class FisicoFinanceiroMensalController extends AbstractController<FisicoF
 		super(dao);
 
 	}
+	
+	public List<FisicoFinanceiroMensal> relatorioPlanejamentoMensal(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long acaoId, Long tipoRegiaoId, Long regiaoId,Long regiaoMunicipioId,Long exercicioId){
+		
+		return ((FisicoFinanceiroMensalDAO)getDao()).relatorioPlanejamentoMensal(orgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
+	}
 
 	
 	public Optional<FisicoFinanceiroMensal> findByRegiaoMunicipioAndExercicioAndAcaoAndMes(Long regiaoMunicipioId,Long exercicioId,Long acaoId,Long mesId){

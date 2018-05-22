@@ -44,7 +44,7 @@ public abstract class AbstractService<T extends Serializable> implements Seriali
 		return controller.delete(t);
 	}
 
-	public AbstractController<T> getController() {
+	protected AbstractController<T> getController() {
 		return controller;
 	}
 

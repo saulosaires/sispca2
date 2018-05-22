@@ -235,5 +235,25 @@ public class RegiaoMunicipio extends Model{
 	public void setComitado(boolean comitado) {
 		this.comitado = comitado;
 	}
+	
+	@Override
+	public String toString() {
+
+		if(regiao!=null && municipio!=null) {
+			return regiao.getDescricao()+" - "+municipio.getDescricao();
+		}
+
+		if(regiao!=null && municipio==null) {
+			return  regiao.getDescricao();
+		}
+
+		if(regiao==null && municipio!=null) {
+			return  municipio.getDescricao();
+		}
+
+		return getId().toString();
+		
+	}
+	
 
 }

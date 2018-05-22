@@ -15,7 +15,7 @@ import javax.persistence.criteria.SetJoin;
 
 import arquitetura.dao.AbstractDAO;
 import arquitetura.utils.Utils;
-import monitoramento.model.Execucao;
+
 import quantitativo.model.FisicoFinanceiroMensal;
 
 public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensal> {
@@ -27,18 +27,103 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 
 	private static final  String ACAO="acao"; 
 	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria"; 
+	private static final  String ORGAO="orgao"; 
 	private static final  String UNIDADE_GESTORA="unidadeGestoras";
+	private static final  String REGIAO_MUNICIPIO="regiaoMunicipio";
+	private static final  String REGIAO="regiao";
+	private static final  String TIPO_REGIAO="tipoRegiao";
+	private static final  String ATIVO="ativo";
+	private static final  String CODIGO="codigo";
 	private static final  String VALOR="valor";
 	private static final  String MES="mes";
 	private static final  String EXERCICIO="exercicio";
 	private static final  String ID="id";
+	private static final  String DESCRICAO="descricao";
 	private static final  String NUMERO_MES = "numeroMes";
+	private static final  String QUANTIDADE="quantidade";
+	private static final  String PROGRAMA="programa";
+	
 	
 	public FisicoFinanceiroMensalDAO() {
 		setClazz(FisicoFinanceiroMensal.class);
 
 	}
   
+	public List<FisicoFinanceiroMensal> relatorioPlanejamentoMensal(Long orgaoId, 
+																	Long unidadeOrcamentariaId,
+																	Long programaId, 
+																	Long acaoId, 
+																	Long tipoRegiaoId, 
+																	Long regiaoId,
+																	Long regiaoMunicipioId,
+																	Long exercicioId){
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiroMensal> query = cb.createQuery(FisicoFinanceiroMensal.class);
+		Root<FisicoFinanceiroMensal> m = query.from(FisicoFinanceiroMensal.class);
+
+		query.select(m);
+		
+		Join<Object, Object> joinExercicio			 = m.join(EXERCICIO, JoinType.INNER);	
+		Join<Object, Object> joinAcao 				 = m.join(ACAO, JoinType.INNER);
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+		Join<Object, Object> joinOrgao 				 = joinUnidadeOrcamentaria.join(ORGAO, JoinType.INNER);
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, JoinType.INNER);
+		
+		Join<Object, Object> joinRegiaoMunicipio 	 = m.join(REGIAO_MUNICIPIO, JoinType.INNER);	
+		Join<Object, Object> joinRegiao 			 = joinRegiaoMunicipio.join(REGIAO, JoinType.INNER);
+		Join<Object, Object> joinTipoRegiao 		 = joinRegiao.join(TIPO_REGIAO, JoinType.INNER);
+		
+		
+		if(!Utils.invalidId(exercicioId)) {
+			joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
+		}	
+		
+		if(!Utils.invalidId(orgaoId)) {
+			joinOrgao.on(cb.equal(joinOrgao.get(ID), orgaoId));		
+		}
+		
+		if(!Utils.invalidId(unidadeOrcamentariaId)) {
+			joinUnidadeOrcamentaria.on(cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId));		
+		}
+		
+		if(!Utils.invalidId(programaId)) {
+			joinPrograma.on(cb.equal(joinPrograma.get(ID), programaId));		
+		}
+		
+		if(!Utils.invalidId(acaoId)) {
+			joinAcao.on(cb.equal(joinAcao.get(ID), acaoId));		
+		}
+		
+		if(!Utils.invalidId(tipoRegiaoId)) {
+			joinTipoRegiao.on(cb.equal(joinTipoRegiao.get(ID), tipoRegiaoId));		
+		}
+	 
+		if(!Utils.invalidId(regiaoId)) {
+			joinRegiao.on(cb.equal(joinRegiao.get(ID), regiaoId));		
+		}
+		
+		if(!Utils.invalidId(regiaoMunicipioId)) {
+			joinRegiaoMunicipio.on(cb.equal(joinRegiaoMunicipio.get(ID), regiaoMunicipioId));		
+		}
+
+		query.where(
+			    	cb.equal(m.get(ATIVO),true ),
+			    	cb.or(cb.notEqual(m.get(VALOR),0 ),cb.notEqual(m.get(QUANTIDADE),0 ))
+			    );
+		
+		  query.orderBy(
+					cb.asc( joinOrgao.get(CODIGO)),
+					cb.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+					cb.asc( joinPrograma.get(CODIGO)),
+					cb.asc( joinAcao.get(CODIGO)) 
+					
+				);
+		 
+		
+		return entityManager.createQuery(query).getResultList();	
+				
+	}
 
 	public Optional<FisicoFinanceiroMensal> findByRegiaoMunicipioAndExercicioAndAcaoAndMes(Long regiaoMunicipioId,Long exercicioId,Long acaoId,Long mesId){
 		
@@ -55,34 +140,26 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 			return Optional.ofNullable(null);
 		}
 
-		Join<Object, Object> joinRegiao = m.join("regiaoMunicipio", JoinType.INNER);
+		Join<Object, Object> joinRegiao = m.join(REGIAO_MUNICIPIO, JoinType.INNER);
+		joinRegiao.on(cb.equal(joinRegiao.get(ID), regiaoMunicipioId));
 
-		joinRegiao.on(cb.equal(joinRegiao.get("id"), regiaoMunicipioId));
-
+				
+		Join<Object, Object> joinExercicio = m.join(EXERCICIO, JoinType.INNER);
+		joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
 		
+			
+		Join<Object, Object> joinAcao = m.join(ACAO, JoinType.INNER);
+		joinAcao.on(cb.equal(joinAcao.get(ID), acaoId));
 		
-		Join<Object, Object> joinExercicio = m.join("exercicio", JoinType.INNER);
-
-		joinExercicio.on(cb.equal(joinExercicio.get("id"), exercicioId));
-		
-		
-		
-		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
-
-		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
-		
-		
-		
-		Join<Object, Object> joinMes= m.join("mes", JoinType.INNER);
-
-		joinMes.on(cb.equal(joinMes.get("id"), mesId));
+			
+		Join<Object, Object> joinMes= m.join(MES, JoinType.INNER);
+		joinMes.on(cb.equal(joinMes.get(ID), mesId));
 
 		
 		
 		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();	
 		
 	}
-
 
 	public List<FisicoFinanceiroMensal> findByAcao(Long acaoId) {
 

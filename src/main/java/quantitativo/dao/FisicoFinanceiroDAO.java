@@ -155,8 +155,7 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 		return entityManager.createQuery(query).getResultList();	
 		
 	}
-	
-	
+		
 	public List<FisicoFinanceiro>  relatorioPlanejadoPorRegiao(Long regiaoId,Long unidadeOrcamentariaId,Long exercicioId){
 		
 		

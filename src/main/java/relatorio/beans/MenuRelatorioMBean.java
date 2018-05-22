@@ -94,7 +94,7 @@ public class MenuRelatorioMBean implements Serializable{
     	
     	relatorio.getSubRelatorio().add(new Relatorio(" Planejado por Ano",		    "relatorioPlanejamentoQuantitativoPlanejadoPorAno",   "relatorioPlanejamentoQuantitativoPlanejadoPorAno"));
     	relatorio.getSubRelatorio().add(new Relatorio(" Planejado por Região",	    "relatorioPlanejamentoQuantitativoPlanejadoPorRegiao","relatorioPlanejamentoQuantitativoPlanejadoPorRegiao"));
-    	relatorio.getSubRelatorio().add(new Relatorio(" Planejamento Mensal",	    "relatorioPlanejamentoQuantitativoPlanejamentoMensal","relatorioPlanejamentoQuantitativoPlanejamentoMensal"));
+    	relatorio.getSubRelatorio().add(new Relatorio(" Planejamento Mensal",	    "relatorioPlanejamentoQuantitativoFisicoFinanceiro",  "relatorioPlanejamentoQuantitativoFisicoFinanceiro"));
     	relatorio.getSubRelatorio().add(new Relatorio(" Quantitativo Anual",	    "relatorioPlanejamentoQuantitativoAnual",	  	      "relatorioPlanejamentoQuantitativoAnual"));
     	relatorio.getSubRelatorio().add(new Relatorio(" Quantitativo Anual por UO ","relatorioPlanejamentoQuantitativoAnualPor Uo",		  "relatorioPlanejamentoQuantitativoAnualPor"));
     	

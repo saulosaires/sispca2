@@ -37,14 +37,9 @@ public class RegiaoMunicipioDAO extends AbstractDAO<RegiaoMunicipio> {
 			Join<Object, Object> joinRegiao = m.join("regiao", JoinType.INNER);
 	 
 			joinRegiao.on(cb.equal(joinRegiao.get("id"), regiaoId));
- 
+			query.orderBy(cb.asc(joinRegiao.get("descricao")));
 		}
- 
- 
-		Join<Object, Object> joinMunicipio = m.join("municipio", JoinType.INNER);
-		
-		query.orderBy(cb.asc(joinMunicipio.get("descricao")));
-		
+  
 		
 		return entityManager.createQuery(query).getResultList();
 
