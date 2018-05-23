@@ -156,6 +156,7 @@ public class Acao extends Model implements  Auditable {
  
 	@ManyToOne
 	@JoinColumn(name="id_exercicio") 
+	@NotNull(message="exercicio: campo é obrigatório")
 	private Exercicio exercicio;
 
 	

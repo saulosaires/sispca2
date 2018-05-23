@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_valor_final" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="81083705-335f-463d-ba9e-b0adc8af73dc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hTextAlign="Center" hImageAlign="Center"/>
+	<parameter name="unidadeOrcamentaria" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="quantidade" class="java.lang.Double"/>
+	<field name="valor" class="java.lang.Double"/>
+	<field name="acao" class="qualitativo.model.Acao"/>
+	<group name="ano">
+		<groupExpression><![CDATA[$F{acao}]]></groupExpression>
+	</group>
+	<columnHeader>
+		<band height="45">
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="802" height="15" backcolor="#ECE7E7" uuid="f1f678b3-4d3c-436d-931c-553768c1fbd4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="112" y="1" width="600" height="14" uuid="36e07abf-d315-4232-8cc6-af246e4d8899"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[VALORES FINAIS]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="15" width="802" height="30" uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="3" y="2" width="135" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[UNIDADE RESPONSÁVEL:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="3" y="16" width="697" height="12" isPrintWhenDetailOverflows="true" uuid="0645f48f-c2c3-44eb-9e7c-0327532a40c1"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{unidadeOrcamentaria}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="62" splitType="Stretch">
+			<crosstab>
+				<reportElement x="0" y="0" width="802" height="42" uuid="e1babf1d-ca02-43a8-b305-3d5ee89a287b"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="154" height="30" forecolor="#FFFFFF" backcolor="#808080" uuid="546c6ff6-150f-4208-9012-7dae43076bc1"/>
+							<box>
+								<pen lineWidth="0.5" lineColor="#000000"/>
+								<topPen lineWidth="0.5" lineColor="#000000"/>
+								<leftPen lineWidth="0.5" lineColor="#000000"/>
+								<bottomPen lineWidth="0.5" lineColor="#000000"/>
+								<rightPen lineWidth="0.5" lineColor="#000000"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" isBold="true"/>
+							</textElement>
+							<text><![CDATA[ANO]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="UNIDADE" width="154">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{acao}.getExercicio().getAno()]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#808080" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="4" y="0" width="150" height="27" forecolor="#FFFFFF" uuid="09bbfeb1-365f-4bf4-9795-bcf03552a389"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[VALOR TOTAL]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="ano" height="30" totalPosition="End">
+					<bucket class="java.lang.Integer">
+						<bucketExpression><![CDATA[$F{acao}.getExercicio().getAno()]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#808080" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="126" height="16" forecolor="#FFFFFF" uuid="59ea8cf3-322b-4913-a8e4-7ae6f71c33dc"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{ano}]]></textFieldExpression>
+							</textField>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="0" y="16" width="48" height="14" forecolor="#FFFFFF" uuid="00283f21-7412-4c6e-b863-2506b97d7dc0"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<text><![CDATA[QUANT.]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="49" y="16" width="77" height="14" forecolor="#FFFFFF" uuid="00283f21-7412-4c6e-b863-2506b97d7dc0"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" size="10"/>
+								</textElement>
+								<text><![CDATA[VALOR]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#ECE7E7" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="144" height="30" uuid="5be37562-db75-4fb6-9990-de92b9c4435f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="valor" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{valor}]]></measureExpression>
+				</measure>
+				<measure name="qtd" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{quantidade}]]></measureExpression>
+				</measure>
+				<crosstabCell width="126" height="28">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00">
+							<reportElement style="Crosstab Data Text" x="49" y="0" width="77" height="26" uuid="36af0685-6f87-4985-a5ee-8528e7792755"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{valor}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="49" height="26" uuid="91b8f198-749d-4a7d-85f9-b117bdc561cd"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{qtd}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="144" height="28" columnTotalGroup="ano">
+					<cellContents backcolor="#ECE7E7" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00">
+							<reportElement style="Crosstab Data Text" x="53" y="0" width="91" height="26" uuid="867d62c5-c220-4b43-8a6b-8066e0f4ef19"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{valor}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="53" height="26" uuid="98e7c2bf-32c5-40e0-a038-65d79743e609"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{qtd}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="60" height="20" rowTotalGroup="UNIDADE" columnTotalGroup="ano">
+					<cellContents/>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

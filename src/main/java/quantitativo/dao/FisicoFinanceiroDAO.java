@@ -35,13 +35,90 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 	private static final String MUNICIPIO = "municipio";
 	private static final String DENOMINACAO = "denominacao";
 	private static final String UNIDADE_ORCAMENTARIA = "unidadeOrcamentaria";
-	
+	private static final String PPA="ppa";
 	
 	public FisicoFinanceiroDAO() {
 		setClazz(FisicoFinanceiro.class);
 
 	}
-  
+ 
+	public List<FisicoFinanceiro> totalPorUnidadeOrcamentaria(Long unidadeOrcamentariaId, Long ppaId){
+		
+		if (Utils.invalidId((unidadeOrcamentariaId)) || Utils.invalidId(ppaId)) {
+
+			return new ArrayList<>();
+		  	
+		}
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiro> query = cb.createQuery(FisicoFinanceiro.class);
+		Root<FisicoFinanceiro> m = query.from(FisicoFinanceiro.class);
+
+		Join<Object, Object> joinAcao 				 = m.join(ACAO, JoinType.INNER);
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+		Join<Object, Object> joinExercicio 			 = joinAcao.join(EXERCICIO, JoinType.INNER);
+		Join<Object, Object> joinPpa 				 = joinExercicio.join(PPA, JoinType.INNER);
+		
+		query.multiselect(
+						   cb.sum(m.get(QUANTIDADE)),	
+						   cb.sum(m.get(VALOR)),
+						   joinExercicio.get(ANO)
+					      );
+		
+		query.where(						 
+				     cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId),
+				     cb.equal(joinPpa.get(ID), ppaId)
+		            );
+
+		query.groupBy(
+					  joinExercicio.get(ANO) 
+				      );
+	
+		query.orderBy(
+						cb.asc( joinExercicio.get(ANO))
+					  );
+
+		
+		return entityManager.createQuery(query).getResultList();
+	
+	}
+	
+	public List<FisicoFinanceiro> findByAcaoAndPpa(String acaoCodigo, Long ppaId){
+		
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiro> query = cb.createQuery(FisicoFinanceiro.class);
+		Root<FisicoFinanceiro> m = query.from(FisicoFinanceiro.class);
+
+		query.select(m);
+
+		Join<Object, Object> joinAcao = m.join(ACAO, JoinType.INNER);
+		
+		if (!Utils.emptyParam((acaoCodigo))) {
+
+			joinAcao.on(cb.equal(joinAcao.get(CODIGO), acaoCodigo));
+		}
+		
+		if(!Utils.invalidId(ppaId)) {
+			
+			Join<Object, Object> joinExercicio = joinAcao.join(EXERCICIO, JoinType.INNER);
+			Join<Object, Object> joinPpa =    joinExercicio.join(PPA,       JoinType.INNER);
+			 
+			
+			joinPpa.on(cb.equal(joinPpa.get(ID), ppaId));
+			
+			query.orderBy(
+							cb.asc( joinExercicio.get(ANO))
+						  );
+			
+		}
+		
+		  
+		
+		return entityManager.createQuery(query).getResultList();
+		
+	}
+	
 	public List<FisicoFinanceiro> findByAcao(Long acaoId){
 		
 		

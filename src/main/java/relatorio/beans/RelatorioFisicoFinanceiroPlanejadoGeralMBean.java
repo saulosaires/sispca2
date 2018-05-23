@@ -148,8 +148,7 @@ public class RelatorioFisicoFinanceiroPlanejadoGeralMBean  extends RelatorioMBea
 				parameters.put("exercicio", getExercicio().getAno().toString());
 			
 			String report = FileUtil.getRealPath("/relatorios/financeiro/relatorio_planejado_mensal_geral.jasper");
-			 
-			
+				
 			JasperPrint jasperRelatorio = JasperFillManager.fillReport(report, parameters,new JRBeanCollectionDataSource(relatorio));
 	
 			if (jasperRelatorio == null || jasperRelatorio.getPages().isEmpty()) {

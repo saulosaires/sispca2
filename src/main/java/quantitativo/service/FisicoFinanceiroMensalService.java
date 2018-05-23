@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.StringJoiner;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,7 @@ import arquitetura.utils.Utils;
 import quantitativo.controller.FisicoFinanceiroMensalController;
 import quantitativo.model.FisicoFinanceiroMensal;
 import quantitativo.model.RelatorioFisicoFinanceiro;
+
 
 public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinanceiroMensal> {
 
@@ -31,21 +33,24 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		
 		List<FisicoFinanceiroMensal> listFisicoFinanceiro = ((FisicoFinanceiroMensalController)getController()).relatorioPlanejamentoMensal(orgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
 
-		Map<String,RelatorioFisicoFinanceiro> map = new HashMap<>();
+ 		Map<String,RelatorioFisicoFinanceiro> map = new HashMap<>();
 	
 	
 		for(FisicoFinanceiroMensal financeiroMensal: listFisicoFinanceiro) {
 			
 			 
-			StringBuilder str = new StringBuilder("");
+			StringJoiner joiner = new StringJoiner("");
 			
-			str.append(financeiroMensal.getAcao().getUnidadeOrcamentaria().getOrgao().getCodigo())
-			.append(financeiroMensal.getAcao().getUnidadeOrcamentaria().getCodigo())
-			.append(financeiroMensal.getAcao().getPrograma().getCodigo())
-			.append(financeiroMensal.getAcao().getCodigo())
-			.append(financeiroMensal.getRegiaoMunicipio().getId());
+			//Como nao estou fazendo o group by no sql, vou fazer aqui, poderia fazer o group by no sql, 
+			//porem teria que ir consultar para cada mes o valor/qtd, o que iria gerar mais consultas da ordem de N*12*2
 			
-			String id =str.toString();
+			joiner.add((financeiroMensal.getAcao().getUnidadeOrcamentaria().getOrgao().getCodigo()))
+				  .add((financeiroMensal.getAcao().getUnidadeOrcamentaria().getCodigo()))
+				  .add(financeiroMensal.getAcao().getPrograma().getCodigo())
+				  .add(financeiroMensal.getAcao().getCodigo())
+				  .add(financeiroMensal.getRegiaoMunicipio().getId().toString());
+			
+			String id =joiner.toString();
 			
 			 if(map.containsKey(id)) {
 				 map.get(id).setData(financeiroMensal);

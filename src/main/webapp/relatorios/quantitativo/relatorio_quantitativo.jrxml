@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_quantitativo" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="e1724008-1791-442b-a1ae-17b852255522">
+	<property name="ireport.zoom" value="0.8250000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MARANHAO_BRASAO" class="java.lang.String"/>
+	<parameter name="totalUnidadeOrcamentaria" class="java.util.List"/>
+	<parameter name="unidadeOrcamentaria" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="acao" class="qualitativo.model.Acao"/>
+	<field name="listFisicoFinanceiro" class="java.util.List"/>
+	<group name="ACAO" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{acao}.getId()]]></groupExpression>
+		<groupHeader>
+			<band height="156">
+				<subreport>
+					<reportElement positionType="Float" x="0" y="100" width="802" height="47" isPrintInFirstWholeBand="true" printWhenGroupChanges="ACAO" uuid="110101e9-c4df-4948-b6e6-6ec5e593bd85"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listFisicoFinanceiro})]]></dataSourceExpression>
+					<subreportExpression><![CDATA["subreport_details.jasper"]]></subreportExpression>
+				</subreport>
+				<frame>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="7" width="802" height="15" backcolor="#ECE7E7" uuid="4002ec41-9b43-4cf7-a80c-68eaf7f9d593"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<staticText>
+						<reportElement x="98" y="0" width="600" height="14" uuid="21bdc7f9-a029-4687-8e7f-327b6b236c94"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<text><![CDATA[AÇÃO]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="52" width="802" height="30" uuid="3bd8c1e7-d6a3-48a4-bd12-9d91c213fc02"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<staticText>
+						<reportElement x="3" y="2" width="252" height="12" uuid="aa13423a-01be-4ddf-b158-237aa4ca2348"/>
+						<textElement textAlignment="Justified" verticalAlignment="Middle">
+							<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<text><![CDATA[DENOMINAÇÃO:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="3" y="16" width="252" height="12" isPrintWhenDetailOverflows="true" uuid="6030aaa2-a00f-4e55-ba30-be3198c841fb"/>
+						<textElement textAlignment="Justified">
+							<font fontName="Arial"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}.getDenominacao()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="267" y="2" width="113" height="12" uuid="1f4420d0-528d-4cf1-97c2-eddfb3f1f7f1"/>
+						<textElement textAlignment="Justified" verticalAlignment="Middle">
+							<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<text><![CDATA[PRODUTO:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="267" y="16" width="255" height="12" isPrintWhenDetailOverflows="true" uuid="3d60cb24-52e4-43a6-8d75-8d0d7da1534c"/>
+						<textElement textAlignment="Justified">
+							<font fontName="Arial"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}.getProduto()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="531" y="2" width="165" height="12" uuid="65550d6d-7ea0-4d5c-9f67-9bbe98200a5a"/>
+						<textElement textAlignment="Justified" verticalAlignment="Middle">
+							<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<text><![CDATA[UNIDADE DE MEDIDA:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="531" y="16" width="255" height="12" isPrintWhenDetailOverflows="true" uuid="8ef24706-9761-4ffc-a6e2-6bf2184e2762"/>
+						<textElement textAlignment="Justified">
+							<font fontName="Arial"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}.getUnidadeMedida().getDescricao()]]></textFieldExpression>
+					</textField>
+					<line>
+						<reportElement key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30" uuid="31d3a2bb-bf80-4c97-80d9-011fadcaa251"/>
+						<graphicElement>
+							<pen lineWidth="0.5"/>
+						</graphicElement>
+					</line>
+					<line>
+						<reportElement key="line-1" stretchType="RelativeToBandHeight" x="528" y="0" width="1" height="30" uuid="406de88d-a121-4b7e-af2b-8f3b77a26053"/>
+						<graphicElement>
+							<pen lineWidth="0.5"/>
+						</graphicElement>
+					</line>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="22" width="802" height="30" uuid="24cfcaca-4d9b-4d7f-96ac-69de6adfe74b"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<staticText>
+						<reportElement x="3" y="2" width="252" height="12" uuid="75f59361-0b5e-4f0b-bf3d-46d34613111b"/>
+						<textElement textAlignment="Justified" verticalAlignment="Middle">
+							<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<text><![CDATA[ÓRGÃO RESPONSÁVEL:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="3" y="16" width="252" height="12" isPrintWhenDetailOverflows="true" uuid="e6e0bf36-70ea-4c34-b517-aa8221bc17a2"/>
+						<textElement textAlignment="Justified">
+							<font fontName="Arial"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria().getOrgao().getDescricao()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="267" y="2" width="135" height="12" uuid="96abea21-a28a-4fb6-9d50-6d475f174e46"/>
+						<textElement textAlignment="Justified" verticalAlignment="Middle">
+							<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<text><![CDATA[UNIDADE RESPONSÁVEL:]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="267" y="16" width="519" height="12" isPrintWhenDetailOverflows="true" uuid="989fa57d-71b7-4e64-80b3-e6f7fe977810"/>
+						<textElement textAlignment="Justified">
+							<font fontName="Arial"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}.getUnidadeOrcamentaria().getDescricao()]]></textFieldExpression>
+					</textField>
+					<line>
+						<reportElement key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30" uuid="298af348-289c-4b77-805e-9120814dc258"/>
+						<graphicElement>
+							<pen lineWidth="0.5"/>
+						</graphicElement>
+					</line>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<printWhenExpression><![CDATA[( $V{REPORT_COUNT}.intValue() > 0 ? false : true )]]></printWhenExpression>
+				<staticText>
+					<reportElement x="0" y="0" width="802" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[NÃO HÁ DADOS FISICO-FINANCEIRO PARA ESTA ACÃO.]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="145" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement key="MARANHAO_BRASAO" x="374" y="0" width="55" height="53" uuid="851bd040-e519-42f7-9217-fe4d4bd74945"/>
+				<imageExpression><![CDATA[new File( $P{MARANHAO_BRASAO})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="53" width="802" height="14" isRemoveLineWhenBlank="true" uuid="63a992db-0577-4300-b116-e6a9cec69076"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ESTADO DO MARANHÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="67" width="802" height="14" isRemoveLineWhenBlank="true" uuid="7aea27d6-0ff9-4ce9-bda8-e4ba1675be82"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE ESTADO DO PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="116" width="802" height="14" uuid="fb3b10b5-e38f-4a20-8fe1-e3a5c970994f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE CONFERÊNCIA CASA CIVIL]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="12">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="213" height="10" uuid="7787bbdc-0ae8-4894-aa1e-dd063a067fa8"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="607" y="0" width="181" height="12" uuid="8c282f18-fef6-4d89-b7b7-5409c60147ad"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="788" y="0" width="15" height="12" uuid="e0d69b33-b81e-4bbd-b213-849424e7c321"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="430">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="362" width="213" height="12" uuid="7787bbdc-0ae8-4894-aa1e-dd063a067fa8"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="607" y="362" width="181" height="12" uuid="8c282f18-fef6-4d89-b7b7-5409c60147ad"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="788" y="362" width="15" height="12" uuid="e0d69b33-b81e-4bbd-b213-849424e7c321"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="47" printWhenGroupChanges="ACAO" uuid="2c9006cc-8cd2-4312-a9f1-ba7fa21c89bb"/>
+				<subreportParameter name="unidadeOrcamentaria">
+					<subreportParameterExpression><![CDATA[$P{unidadeOrcamentaria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{totalUnidadeOrcamentaria})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["subreport_valor_final.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -84,6 +84,21 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 		
 	}
 
+	public FisicoFinanceiro(double quantidade, double valor, int exercicioAno) {
+
+		exercicio = new Exercicio();
+		exercicio.setAno(exercicioAno);
+
+		acao = new Acao();
+		acao.setExercicio(exercicio);
+		 
+		
+		this.quantidade = quantidade;
+		this.valor = valor;
+
+	}
+	
+	
 	public Long getId() {
 		return this.id;
 	}

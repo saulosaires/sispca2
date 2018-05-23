@@ -22,6 +22,16 @@ public class FisicoFinanceiroController extends AbstractController<FisicoFinance
 
 	}
 
+	public List<FisicoFinanceiro> totalPorUnidadeOrcamentaria(Long unidadeOrcamentariaId, Long ppaId){
+		return ((FisicoFinanceiroDAO)getDao()).totalPorUnidadeOrcamentaria(unidadeOrcamentariaId, ppaId);
+	}
+
+	
+	public List<FisicoFinanceiro> findByAcaoAndPpa(String acaoCodigo, Long ppaId){
+		return ((FisicoFinanceiroDAO)getDao()).findByAcaoAndPpa(acaoCodigo,ppaId);
+	}
+
+	
 	public List<FisicoFinanceiro> findByAcao(Long acaoId){
 		
 		return ((FisicoFinanceiroDAO)getDao()).findByAcao(acaoId);

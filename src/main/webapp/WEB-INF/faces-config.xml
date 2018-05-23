@@ -665,6 +665,10 @@
 			<to-view-id>/private/relatorio/fisicofinanceiroplanejadogeral/list.xhtml</to-view-id>
 		</navigation-case>
 
+		<navigation-case>
+			<from-outcome>relatorioPlanejamentoQuantitativoAnual</from-outcome>
+			<to-view-id>/private/relatorio/relatorioquantitativo/list.xhtml</to-view-id>
+		</navigation-case>
 				
 	</navigation-rule> 	
 

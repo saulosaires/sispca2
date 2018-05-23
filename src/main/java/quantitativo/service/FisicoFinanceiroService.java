@@ -1,5 +1,6 @@
 package quantitativo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,8 +9,10 @@ import javax.inject.Inject;
 import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
+import qualitativo.model.Acao;
 import quantitativo.controller.FisicoFinanceiroController;
 import quantitativo.model.FisicoFinanceiro;
+import relatorio.model.RelatorioQuantitativoAnual;
 
 public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 
@@ -23,12 +26,20 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 		super(controller);
 	}
 
+	public List<FisicoFinanceiro> totalPorUnidadeOrcamentaria(Long unidadeOrcamentariaId, Long ppaId){
+		return  ((FisicoFinanceiroController)getController()).totalPorUnidadeOrcamentaria(unidadeOrcamentariaId, ppaId);
+	}
+
+	
+	public List<FisicoFinanceiro> findByAcaoAndPpa(String acaoCodigo, Long ppaId){
+		return ((FisicoFinanceiroController)getController()).findByAcaoAndPpa(acaoCodigo,ppaId);
+	}
+	
 	public List<FisicoFinanceiro> findByAcao(Long acaoId){
 		
 		return ((FisicoFinanceiroController)getController()).findByAcao(acaoId);
 	}
-	
-	
+		
 	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
 		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
@@ -46,7 +57,21 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 	
 	}
 
-	
+	public List<RelatorioQuantitativoAnual>  relatorioQuantitativoAnual(List<Acao> listAcoes,Long ppaId) {
+	 
+		List<RelatorioQuantitativoAnual> listRel = new ArrayList<>();
+		
+		for(Acao acao: listAcoes) {
+			
+			List<FisicoFinanceiro> listFisicoFinanceiro = findByAcaoAndPpa(acao.getCodigo(), ppaId);
+			
+			listRel.add(new RelatorioQuantitativoAnual(acao, listFisicoFinanceiro));
+			
+		}
+		
+		
+		return listRel;
+	}
 	
 	public FisicoFinanceiro merge(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
 		

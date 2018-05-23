@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+		
+			    <f:metadata>
+	    			<f:viewParam name="id" value="#{relatorioQuantitativoMBean.exercicioId}"/>
+	    			<f:viewAction action="#{relatorioQuantitativoMBean.init}" />
+			     </f:metadata>
+		
+			
+			<h:form>
+
+				<div class="container-fluid row-fluid">
+				 
+					<legend class="outBusc">Relatório Quantitativo</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+
+						<div class="row">
+							<div class="col-lg-4">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA:  "
+									styleClass="labelOutText" />
+								<h:selectOneMenu value="#{relatorioQuantitativoMBean.unidadeOrcamentaria}" required="true" requiredMessage="Selecione a unidade orçamentária" styleClass="input-sm form-control">
+									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
+									<f:selectItems value="#{relatorioQuantitativoMBean.listUnidadeOrcamentaria}" var="unid" itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.id}" />
+									
+									<f:ajax event="change" render="acoes" listener="#{relatorioQuantitativoMBean.changeUnidade()}"></f:ajax>
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">
+								<h:outputText value="AÇÕES:  " styleClass="labelOutText" />
+								
+								<h:selectOneMenu id="acoes" value="#{relatorioQuantitativoMBean.acao}" styleClass="input-sm form-control" requiredMessage="Selecione a ação" >
+									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
+									<f:selectItems value="#{relatorioQuantitativoMBean.listAcoes}" var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao.denominacao)}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
+						
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">
+								<h:commandLink styleClass="btnAction btn btn-primary"  
+							 		value="Gerar Relatório" 
+							 		action="#{relatorioQuantitativoMBean.gerarRelatorio()}" />
+							</div>
+						</div>	
+					</div>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

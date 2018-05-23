@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_acao" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d6b051fe-a0bb-4155-8a90-96814dc10717">
+	<property name="ireport.zoom" value="0.7513148009015779"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="acao" class="qualitativo.model.Acao">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<detail>
+		<band height="90" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="7" width="802" height="15" backcolor="#ECE7E7" uuid="f1f678b3-4d3c-436d-931c-553768c1fbd4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="98" y="0" width="600" height="14" uuid="36e07abf-d315-4232-8cc6-af246e4d8899"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[AÇÃO]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="52" width="802" height="30" uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="3" y="2" width="71" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[DESCRIÇÃO:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="16" width="252" height="12" isPrintWhenDetailOverflows="true" uuid="9879d208-691d-48db-9221-80e09081ae7f"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{acao}.getDescricao()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="267" y="2" width="113" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[PRODUTO:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="267" y="16" width="255" height="12" isPrintWhenDetailOverflows="true" uuid="28e8e502-6992-457e-aa51-4276749d1486"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{acao}.getProduto()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="531" y="2" width="165" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[UNIDADE DE MEDIDA:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="531" y="16" width="255" height="12" isPrintWhenDetailOverflows="true" uuid="54dcb8bb-b0e5-4788-8124-8864f058cc87"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{acao}.getUnidadeMedida().getDescricao()]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30" uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement key="line-1" stretchType="RelativeToBandHeight" x="528" y="0" width="1" height="30" uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="22" width="802" height="30" uuid="aa6270b8-08ff-420e-b6cb-568761f3bfcb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="3" y="2" width="126" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[ÓRGÃO RESPONSÁVEL:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="16" width="252" height="12" isPrintWhenDetailOverflows="true" uuid="3a709020-30c6-4cd5-9929-e7d6296d1462"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{acao}.getUnidadeOrcamentaria().getOrgao().getDescricao()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="267" y="2" width="135" height="12" uuid="161c381d-f253-40ac-abee-a890873e8497"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[UNIDADE RESPONSÁVEL:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="267" y="16" width="519" height="12" isPrintWhenDetailOverflows="true" uuid="cab00d6e-3863-4e7b-a603-5be2936ffc0f"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{acao}.getUnidadeOrcamentaria().getDescricao()]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-1" stretchType="RelativeToBandHeight" x="264" y="0" width="1" height="30" uuid="6ee4235e-2f6c-46dd-829f-8782a3f88ea7"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>
