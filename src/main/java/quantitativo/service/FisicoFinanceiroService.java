@@ -73,6 +73,12 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 		return listRel;
 	}
 	
+	public List<FisicoFinanceiro> relatorioFisicoFinanceiro(Long unidadeOrcamentariaId, Long ppaId){
+		return ((FisicoFinanceiroController)getController()).relatorioFisicoFinanceiro(unidadeOrcamentariaId,ppaId);
+	}
+
+	
+	
 	public FisicoFinanceiro merge(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
 		
 		if(fisicoFinanceiro==null)return fisicoFinanceiro;

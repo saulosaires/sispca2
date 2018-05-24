@@ -301,7 +301,64 @@ public class FisicoFinanceiroDAO extends AbstractDAO<FisicoFinanceiro> {
 		
 	}
 	
+	public List<FisicoFinanceiro> relatorioFisicoFinanceiro(Long unidadeOrcamentariaId, Long ppaId){
+		
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<FisicoFinanceiro> query = cb.createQuery(FisicoFinanceiro.class);
+		Root<FisicoFinanceiro> m = query.from(FisicoFinanceiro.class);
+
+		Join<Object, Object> joinAcao 				 = m.join(ACAO, JoinType.INNER);
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+		Join<Object, Object> joinExercicio 			 = joinAcao.join(EXERCICIO, JoinType.INNER);
+		Join<Object, Object> joinPpa 				 = joinExercicio.join(PPA, JoinType.INNER);
+		
+		query.multiselect(
+						   joinUnidadeOrcamentaria.get(CODIGO),
+						   joinUnidadeOrcamentaria.get(DESCRICAO),
+						   joinAcao.get(CODIGO),
+						   joinAcao.get(DENOMINACAO),
+						   joinExercicio.get(ANO),
+						   cb.sum(m.get(VALOR))
+						   
+					      );
+		
+		List<Predicate> predicate = new ArrayList<>();
+		
+		if (!Utils.invalidId((unidadeOrcamentariaId))) {
+			predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentariaId));
+		}
+		
+		if (!Utils.invalidId(ppaId)) {
+			predicate.add(cb.equal(joinPpa.get(ID), ppaId));
+		}
+		
+		query.where(predicate.toArray(new Predicate[predicate.size()]));
+
+		 
+		
+		query.groupBy(
+					    joinUnidadeOrcamentaria.get(CODIGO),
+					    joinUnidadeOrcamentaria.get(DESCRICAO),
+					    joinAcao.get(CODIGO),
+					    joinAcao.get(DENOMINACAO),
+					    joinExercicio.get(ANO)
+				      );
 	
+		query.orderBy(
+						cb.asc(joinUnidadeOrcamentaria.get(CODIGO)), 
+						cb.asc(joinUnidadeOrcamentaria.get(DESCRICAO)),
+						cb.asc(joinAcao.get(CODIGO)), 
+						cb.asc(joinAcao.get(DENOMINACAO)), 
+						cb.asc(joinExercicio.get(ANO))
+						
+					  );
+
+		
+		return entityManager.createQuery(query).getResultList();
+	
+	}
+		
 	
 	
 	

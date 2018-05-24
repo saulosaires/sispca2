@@ -98,6 +98,29 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 
 	}
 	
+	public FisicoFinanceiro(
+			   			    String unidadeOrcamentariaCodigo,
+			   			    String unidadeOrcamentariaDescricao,
+			   			    String acaoCodigo,
+						    String acaoDenominacao,
+						    Integer ano,
+						    Double valor
+			   			   ) {
+		
+		this.acao = new Acao();
+		this.acao.setCodigo(acaoCodigo);
+		this.acao.setDenominacao(acaoDenominacao);
+		
+		this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+		this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+		 
+		this.acao.setExercicio(new Exercicio()); 
+		this.acao.getExercicio().setAno(ano);
+ 
+	    this.valor=valor;
+	}
+	
 	
 	public Long getId() {
 		return this.id;

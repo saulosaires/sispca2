@@ -55,6 +55,9 @@ public class FisicoFinanceiroController extends AbstractController<FisicoFinance
 	
 	}
 
+	public List<FisicoFinanceiro> relatorioFisicoFinanceiro(Long unidadeOrcamentariaId, Long ppaId){
+		return ((FisicoFinanceiroDAO)getDao()).relatorioFisicoFinanceiro(unidadeOrcamentariaId,ppaId);
+	}
 	
 	
 }
