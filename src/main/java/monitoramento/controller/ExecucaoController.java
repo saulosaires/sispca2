@@ -39,4 +39,10 @@ public class ExecucaoController extends AbstractController<Execucao> {
 		return ((ExecucaoDAO) getDao()).findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
 	}
 
+	public Double calculaExecutadoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
+
+		return ((ExecucaoDAO) getDao()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes, exercicio, acao);
+		
+	}
+	
 }

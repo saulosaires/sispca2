@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_financeiro_detalhamento_acao" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7091f0a-ffd3-437f-9832-e894b8881c6b">
+	<property name="ireport.zoom" value="2.143588810000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="293"/>
+	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/jrwalteram/WorkspaceSEATI/sisppa/SIspca/WebContent/images/brasao_ma.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="exercicio" class="java.lang.String"/>
+	<parameter name="acao" class="qualitativo.model.Acao"/>
+	<parameter name="dotacalInicial" class="siafem.model.RelatorioDetalhamentoAcaoValue"/>
+	<parameter name="empenhado" class="siafem.model.RelatorioDetalhamentoAcaoValue"/>
+	<parameter name="liquidado" class="siafem.model.RelatorioDetalhamentoAcaoValue"/>
+	<parameter name="disponivel" class="siafem.model.RelatorioDetalhamentoAcaoValue"/>
+	<parameter name="planejado" class="quantitativo.model.RelatorioDetalhamentoAcaoFinanceiroMensal"/>
+	<parameter name="executado" class="monitoramento.model.RelatorioDetalhamentoAcaoExecucaoMensal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="246" splitType="Stretch">
+			<rectangle>
+				<reportElement x="300" y="75" width="100" height="31" uuid="5b57019b-2e58-4c01-b320-5f2a215dc7dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="300" y="25" width="100" height="31" uuid="5b57019b-2e58-4c01-b320-5f2a215dc7dd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="75" width="100" height="14" uuid="c1779381-d8b6-4993-aaa0-9bc416f180c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EMISSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="300" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO MARANHÃO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="105" height="43" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
+				<imageExpression><![CDATA[new File($P{param_imagem})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="299" y="39" width="101" height="18" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{exercicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="87" width="300" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA ADJUNTA DE PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="300" y="88" width="100" height="18" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="416" y="25" width="139" height="82" uuid="4f4a87e6-9794-40cc-935c-c3eb2c42cdf8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="25" width="100" height="14" uuid="c1779381-d8b6-4993-aaa0-9bc416f180c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EXERCÍCIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="123" width="555" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DETALHAMENTO DA AÇÃO - Valores Mensais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="300" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="161" width="555" height="14" uuid="c7dae574-bb15-453f-84ec-4f001dc6d80c"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>UNIDADE ORÇAMENTÁRIA: </b> ("+$P{acao}.getUnidadeOrcamentaria().getCodigo()+") - "+$P{acao}.getUnidadeOrcamentaria().getDescricao().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="174" width="555" height="14" uuid="c7dae574-bb15-453f-84ec-4f001dc6d80c"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>AÇÃO: </b> ("+$P{acao}.getCodigo()+") - "+$P{acao}.getDenominacao().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="187" width="555" height="14" uuid="c7dae574-bb15-453f-84ec-4f001dc6d80c"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>PRODUTO: </b> "+$P{acao}.getProduto().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="200" width="555" height="14" uuid="c7dae574-bb15-453f-84ec-4f001dc6d80c"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>UNIDADE DE MEDIDA: </b> "+$P{acao}.getUnidadeMedida().getDescricao().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="230" width="555" height="14" uuid="0aae3ab2-e665-4a45-9dac-65c65ba4e4e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EXECUÇÃO ORÇAMENTÁRIA E FINANCEIRA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="144" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="60" width="555" height="11" uuid="ca3d75e4-9c0d-4619-ba45-99ea742b9929"/>
+				<subreportParameter name="empenhado">
+					<subreportParameterExpression><![CDATA[$P{empenhado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_financeiro_valor_empenhado.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="74" width="555" height="11" uuid="9d15cead-c934-48c0-8d66-a3edcb2e5cf5"/>
+				<subreportParameter name="liquidado">
+					<subreportParameterExpression><![CDATA[$P{liquidado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_financeiro_valor_liquidado.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="91" width="555" height="14" uuid="0aae3ab2-e665-4a45-9dac-65c65ba4e4e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[METAFÍSICA]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="105" width="555" height="9" uuid="48e23e82-25a0-4d36-9d6d-fbef9cebec9b"/>
+				<subreportParameter name="planejado">
+					<subreportParameterExpression><![CDATA[$P{planejado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_financeiro_quantidade_planejado.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="116" width="555" height="9" uuid="114bd91d-0034-438e-8e3f-52bfd5af64d4"/>
+				<subreportParameter name="executado">
+					<subreportParameterExpression><![CDATA[$P{executado}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_financeiro_quantidade_executado.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="47" width="555" height="11" uuid="63d8e32b-e7d7-40a4-8015-203d503afa0d"/>
+				<subreportParameter name="disponivel">
+					<subreportParameterExpression><![CDATA[$P{disponivel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["sub_relatorio_financeiro_valor_atual.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="12" backcolor="#D9D9D9" uuid="a2b16c3b-1a89-47cf-a1db-33b31180efa2"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DOTAÇÃO INICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[JAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FEV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="14" width="44" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[MAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ABR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[MAI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[JUN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[JUL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="14" width="44" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[AGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="14" width="43" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[SET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[OUT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NOV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="467" y="14" width="42" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[DEZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="509" y="14" width="46" height="12" uuid="fdf98fa8-72d1-40db-a16a-f41d75842284"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="0" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorJaneiro()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="42" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorFevereiro()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="84" y="26" width="44" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorMarco()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="128" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorAbril()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="170" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorMaio()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="212" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorJunho()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="254" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorJulho()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="296" y="26" width="44" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorAgosto()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="340" y="26" width="43" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorSetembro()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="383" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorOutubro()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="425" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorNovembro()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="467" y="26" width="42" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorDezembro()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="509" y="26" width="46" height="12" uuid="28c658dc-6e90-43c4-8c7f-817f78684e88"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dotacalInicial}.getValorJaneiro()
+.add($P{dotacalInicial}.getValorFevereiro())
+.add($P{dotacalInicial}.getValorFevereiro())
+.add($P{dotacalInicial}.getValorMarco())
+.add($P{dotacalInicial}.getValorAbril())
+.add($P{dotacalInicial}.getValorMaio())
+.add($P{dotacalInicial}.getValorJunho())
+.add($P{dotacalInicial}.getValorJulho())
+.add($P{dotacalInicial}.getValorAgosto())
+.add($P{dotacalInicial}.getValorSetembro())
+.add($P{dotacalInicial}.getValorOutubro())
+.add($P{dotacalInicial}.getValorNovembro())
+.add($P{dotacalInicial}.getValorDezembro())]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

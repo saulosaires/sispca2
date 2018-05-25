@@ -65,6 +65,7 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	private transient String unidadeGestoraCodigo;
 	private transient String unidadeGestoraSigla;
 	private transient String unidadeGestoraDescricao;
+	private transient String programaDescricao;
 	
 	public UnidadeOrcamentaria() {}
 	
@@ -162,6 +163,16 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 
 	public void setUnidadeGestoraDescricao(String unidadeGestoraDescricao) {
 		this.unidadeGestoraDescricao = unidadeGestoraDescricao;
+	}
+
+	
+	
+	public String getProgramaDescricao() {
+		return programaDescricao;
+	}
+
+	public void setProgramaDescricao(String programaDescricao) {
+		this.programaDescricao = programaDescricao;
 	}
 
 	@Override

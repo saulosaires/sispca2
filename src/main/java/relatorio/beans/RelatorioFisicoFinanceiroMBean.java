@@ -52,8 +52,8 @@ public class RelatorioFisicoFinanceiroMBean extends RelatorioMBean {
 
 	public String gerarRelatorio() {
 				
-		try {
-			 List<FisicoFinanceiro> listFisicoFinanceiro = fisicoFinanceiroService.relatorioFisicoFinanceiro(unidadeOrcamentaria, getExercicio().getPpa().getId());
+		   try {
+			    List<FisicoFinanceiro> listFisicoFinanceiro = fisicoFinanceiroService.relatorioFisicoFinanceiro(unidadeOrcamentaria, getExercicio().getPpa().getId());
 		
 				if (listFisicoFinanceiro == null || listFisicoFinanceiro.isEmpty()) {
 					Messages.addMessageWarn(NO_DATA);

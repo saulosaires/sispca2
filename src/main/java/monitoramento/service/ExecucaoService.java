@@ -11,6 +11,8 @@ import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import monitoramento.controller.ExecucaoController;
 import monitoramento.model.Execucao;
+import monitoramento.model.RelatorioDetalhamentoAcaoExecucaoMensal;
+import qualitativo.model.Mes;
 
 public class ExecucaoService extends AbstractService<Execucao> {
 
@@ -39,6 +41,22 @@ public class ExecucaoService extends AbstractService<Execucao> {
 
 		return ((ExecucaoController) getController()).findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
 	}
+	
+	public RelatorioDetalhamentoAcaoExecucaoMensal calculaPlanejamentoMensalByMesAndExercicioAndAcao(List<Mes> meses, Long exercicio,Long acao){
+		
+		RelatorioDetalhamentoAcaoExecucaoMensal detalhamentoAcaoExecucaoMensal = new RelatorioDetalhamentoAcaoExecucaoMensal();
+		for(Mes mes: meses) {
+			
+			Double valor = ((ExecucaoController) getController()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
+			
+			detalhamentoAcaoExecucaoMensal.setValor(mes.getNumeroMes(), valor);
+		}
+		
+		
+		return detalhamentoAcaoExecucaoMensal;
+	}
+
+	
 	
 	public Execucao merge(Execucao execucao) throws JpaException {
 		

@@ -1,5 +1,6 @@
 package quantitativo.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,6 @@ import javax.persistence.criteria.SetJoin;
 
 import arquitetura.dao.AbstractDAO;
 import arquitetura.utils.Utils;
-
 import quantitativo.model.FisicoFinanceiroMensal;
 
 public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensal> {
@@ -240,5 +240,34 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 
 	}
 	
+	
+	public Double calculaPlanejamentoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
+
+
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		
+		Root<FisicoFinanceiroMensal> root = criteria.from(FisicoFinanceiroMensal.class);
+		
+		Join<Object, Object> joinMes= root.join(MES,JoinType.INNER);
+		Join<Object, Object> joinExercicio= root.join(EXERCICIO,JoinType.INNER);
+		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.INNER);
+		
+		Path<Double> quantidade = root.get(QUANTIDADE);
+		 
+		criteria.select(builder.sum(quantidade));
+		
+		criteria.where(
+					   builder.equal(joinMes.get(ID),mes ),
+					   builder.equal(joinExercicio.get(ID),exercicio ),
+					   builder.equal(joinAcao.get(ID),acao )
+					   );
+  
+ 
+	    return  entityManager.createQuery(criteria).getSingleResult();
+		
+		
+	}
 	
 }

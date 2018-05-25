@@ -47,10 +47,10 @@ public class Execucao extends Model implements  Auditable {
 	private RegiaoMunicipio regiaoMunicipio;
 
 	@Column(name = "valor")
-	private double valor;
+	private Double valor;
 	
 	@Column(name = "quantidade")
-	private double quantidade;
+	private Double quantidade;
 	
 	@Column(name = "observacao",length=1000)
 	private String observacao;

@@ -30,7 +30,7 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 		((FisicoFinanceiroMensalSiafemDAO)getDao()).create(listSiafem);
 	}	
 	
-	public int deleteByYear(Integer exercicio) throws JpaException{
+	public int deleteByYear(Integer exercicio) {
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).deleteByYear(exercicio);
 	}
 	
@@ -90,6 +90,14 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 
 	public BigDecimal calculaLiquidadoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, Integer mes, Integer ano) {
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaLiquidadoByUnidadeAndProgAndMesAndAno(unidadeOrcamentaria,programa, mes, ano);
+	}
+ 
+	public FisicoFinanceiroMensalSiafem  calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(Long mes, Integer ano,String programaCodigo,String unidadeOrcamentariaCodigo,String acaoCodigo){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(mes, ano,programaCodigo,unidadeOrcamentariaCodigo,acaoCodigo);
+	}
+	
+	public List<FisicoFinanceiroMensalSiafem>  relatorioDetalhamentoAcao(String unidadeOrcamentaria, Long acao, Integer ano){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioDetalhamentoAcao(unidadeOrcamentaria, acao, ano);
 	}
  
 	

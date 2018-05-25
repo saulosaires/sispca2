@@ -1,5 +1,6 @@
 package quantitativo.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +13,10 @@ import javax.inject.Inject;
 import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
+import qualitativo.model.Mes;
 import quantitativo.controller.FisicoFinanceiroMensalController;
 import quantitativo.model.FisicoFinanceiroMensal;
+import quantitativo.model.RelatorioDetalhamentoAcaoFinanceiroMensal;
 import quantitativo.model.RelatorioFisicoFinanceiro;
 
 
@@ -99,5 +102,20 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		
 		return ((FisicoFinanceiroMensalController)getController()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
 	}	
+	
+	public RelatorioDetalhamentoAcaoFinanceiroMensal calculaPlanejamentoMensalByMesAndExercicioAndAcao(List<Mes> meses, Long exercicio,Long acao){
+		
+		RelatorioDetalhamentoAcaoFinanceiroMensal detalhamentoAcaoFinanceiroMensal = new RelatorioDetalhamentoAcaoFinanceiroMensal();
+		for(Mes mes: meses) {
+			
+			Double valor = ((FisicoFinanceiroMensalController)getController()).calculaPlanejamentoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
+			
+			detalhamentoAcaoFinanceiroMensal.setValor(mes.getNumeroMes(), valor);
+		}
+		
+		
+		return detalhamentoAcaoFinanceiroMensal;
+	}
+	
 	
 }

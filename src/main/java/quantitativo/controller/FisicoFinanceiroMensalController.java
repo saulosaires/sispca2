@@ -1,5 +1,6 @@
 package quantitativo.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +43,8 @@ public class FisicoFinanceiroMensalController extends AbstractController<FisicoF
 		return ((FisicoFinanceiroMensalDAO)getDao()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
 	}
 
+	public Double calculaPlanejamentoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
+		return ((FisicoFinanceiroMensalDAO)getDao()).calculaPlanejamentoMensalByMesAndExercicioAndAcao(mes, exercicio,acao);
+	}	
 	
 }

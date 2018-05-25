@@ -56,7 +56,7 @@ public class MenuRelatorioMBean implements Serializable{
     
     private Relatorio initRelatorioPlanejamento() {
     	
-    	Relatorio relatorioPlanejamento = new Relatorio("Planejamento","#","relatorioPlanejamento");
+    	Relatorio relatorioPlanejamento = new Relatorio("PLANEJAMENTO","#","relatorioPlanejamento");
     	
     	 initCategoriaPlanejamento(relatorioPlanejamento);
     	
@@ -105,28 +105,41 @@ public class MenuRelatorioMBean implements Serializable{
     
     private Relatorio initRelatorioMonitoramento() {
     	
-    	Relatorio relatorioPlanejamento = new Relatorio("Monitoramento","#","relatorioMonitoramento");
+    	Relatorio relatorioPlanejamento = new Relatorio("MONITORAMENTO","#","relatorioMonitoramento");
     	
     	return relatorioPlanejamento;
     }
     
     private Relatorio initRelatorioFisicoFinanceiro() {
     	
-    	Relatorio relatorioPlanejamento = new Relatorio("Físico Financeiro","#","relatorioFisicoFinanceiro");
+    	Relatorio relatorio = new Relatorio("EXECUÇÃO FÍSICA E FINANCEIRA","#","relatorioFisicoFinanceiro");
     	
-    	return relatorioPlanejamento;
+    
+    	relatorio.getSubRelatorio().add(initCategoriaFisicoFinanceiro());
+    	
+    	
+    	return relatorio;
     }
+    
+    private Relatorio initCategoriaFisicoFinanceiro() {
+    	
+    	Relatorio relatorio = new Relatorio(null,null,  null);
+    	relatorio.getSubRelatorio().add(new Relatorio(" Detalhamento da Ação",  "relatorioFisicoFinanceiroDetalhamentoAcao",   "relatorioFisicoFinanceiroDetalhamentoAcao"));
+    	
+    	return relatorio;
+    }
+    
     
     private Relatorio initRelatorioGerencial() {
     	
-    	Relatorio relatorioPlanejamento = new Relatorio("Gerencial","#","relatorioGerencial");
+    	Relatorio relatorioPlanejamento = new Relatorio("GERENCIAL","#","relatorioGerencial");
     	
     	return relatorioPlanejamento;
     }
    
     private Relatorio initRelatorioOutros() {
     	
-    	Relatorio relatorioPlanejamento = new Relatorio("Outros","#","relatorioOutros");
+    	Relatorio relatorioPlanejamento = new Relatorio("OUTROS","#","relatorioOutros");
     	
     	return relatorioPlanejamento;
     }

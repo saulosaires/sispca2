@@ -17,6 +17,8 @@ import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
 import siafem.model.FisicoFinanceiroMensalSiafem;
+import siafem.model.RelatorioDetalhamentoAcaoSiafem;
+import siafem.model.RelatorioDetalhamentoAcaoValue;
 
 public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoFinanceiroMensalSiafem> {
 
@@ -248,6 +250,47 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		return relatorioLiquidadoAcumuladoFisicoFinanceiro;
 	}	
 	
+	public RelatorioDetalhamentoAcaoSiafem  relatorioDetalhamentoAcao(List<Mes> meses, String unidadeOrcamentaria, Long acao, Integer ano){
+		
+		List<FisicoFinanceiroMensalSiafem> listDetalhamentoAcao = controller().relatorioDetalhamentoAcao(unidadeOrcamentaria, acao, ano);
+		
+		
+		RelatorioDetalhamentoAcaoValue dotacalInicial = new RelatorioDetalhamentoAcaoValue();
+		RelatorioDetalhamentoAcaoValue empenhado = new RelatorioDetalhamentoAcaoValue();
+		RelatorioDetalhamentoAcaoValue liquidado = new RelatorioDetalhamentoAcaoValue();
+		RelatorioDetalhamentoAcaoValue disponivel = new RelatorioDetalhamentoAcaoValue();
+		
+		for(FisicoFinanceiroMensalSiafem fSiafem : listDetalhamentoAcao) {
+			
+			  for(Mes mes: meses) {
+				  
+				  FisicoFinanceiroMensalSiafem fisicoFinanceiroSiafem = calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(
+																																		 mes.getId(), 
+																												    			    	 ano,
+																												    			    	 fSiafem.getAcao().getUnidadeOrcamentaria().getProgramaDescricao(),
+																												    			    	 fSiafem.getAcao().getUnidadeOrcamentaria().getCodigo(),
+																												    			    	 fSiafem.getAcao().getCodigo()
+																												    			    	 );
+				  
+				  
+				  dotacalInicial.setValor(mes.getNumeroMes(),fisicoFinanceiroSiafem.getDotacaoInicial());
+				  	   empenhado.setValor(mes.getNumeroMes(),fisicoFinanceiroSiafem.getEmpenhado());
+				  	   liquidado.setValor(mes.getNumeroMes(),fisicoFinanceiroSiafem.getLiquidado());
+				      disponivel.setValor(mes.getNumeroMes(),fisicoFinanceiroSiafem.getDisponivel());
+				  
+				  
+			  }
+ 			
+			 
+		}
+ 		
+		
+		return new RelatorioDetalhamentoAcaoSiafem(dotacalInicial,empenhado,liquidado,disponivel);
+	}
+	
+	public FisicoFinanceiroMensalSiafem  calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(Long mes, Integer ano,String programaCodigo,String unidadeOrcamentariaCodigo,String acaocodigo){
+		return controller().calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(mes, ano,programaCodigo,unidadeOrcamentariaCodigo,acaocodigo);
+	}
 	
 	private FisicoFinanceiroMensalSiafemController controller() {
 		

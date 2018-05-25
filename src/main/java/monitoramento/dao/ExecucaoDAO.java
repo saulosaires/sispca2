@@ -1,5 +1,6 @@
 package monitoramento.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,8 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 	private static final  String EXERCICIO="exercicio";
 	private static final  String ID="id";
 	private static final  String NUMERO_MES = "numeroMes";
+	private static final  String REGIAO_MUNICIPIO= "regiaoMunicipio";
+	private static final  String QUANTIDADE="quantidade";
 	
 	public ExecucaoDAO() {
 		setClazz(Execucao.class);
@@ -54,12 +57,12 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		
 		List<Predicate> predicate = new ArrayList<>();
 
-		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
-		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+		Join<Object, Object> joinAcao = m.join(ACAO, JoinType.INNER);
+		joinAcao.on(cb.equal(joinAcao.get(ID), acaoId));
 		 	
 		
-		Join<Object, Object> joinExercicio = m.join("exercicio", JoinType.INNER);
-		joinExercicio.on(cb.equal(joinExercicio.get("id"), exercicioId));
+		Join<Object, Object> joinExercicio = m.join(EXERCICIO, JoinType.INNER);
+		joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
 
 		query.where(predicate.toArray(new Predicate[predicate.size()]));
  
@@ -85,17 +88,17 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		List<Predicate> predicate = new ArrayList<>();
 
 		 
-		Join<Object, Object> joinRegiao = m.join("regiaoMunicipio", JoinType.INNER);
-		joinRegiao.on(cb.equal(joinRegiao.get("id"), regiaoMunicipioId));
+		Join<Object, Object> joinRegiao = m.join(REGIAO_MUNICIPIO, JoinType.INNER);
+		joinRegiao.on(cb.equal(joinRegiao.get(ID), regiaoMunicipioId));
 
-		Join<Object, Object> joinAcao = m.join("acao", JoinType.INNER);
-		joinAcao.on(cb.equal(joinAcao.get("id"), acaoId));
+		Join<Object, Object> joinAcao = m.join(ACAO, JoinType.INNER);
+		joinAcao.on(cb.equal(joinAcao.get(ID), acaoId));
 		 	
-		Join<Object, Object> joinMes = m.join("mes", JoinType.INNER);
-		joinMes.on(cb.equal(joinMes.get("id"), mesId));
+		Join<Object, Object> joinMes = m.join(MES, JoinType.INNER);
+		joinMes.on(cb.equal(joinMes.get(ID), mesId));
 
-		Join<Object, Object> joinExercicio = m.join("exercicio", JoinType.INNER);
-		joinExercicio.on(cb.equal(joinExercicio.get("id"), exercicioId));
+		Join<Object, Object> joinExercicio = m.join(EXERCICIO, JoinType.INNER);
+		joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
 
 		query.where(predicate.toArray(new Predicate[predicate.size()]));
  
@@ -158,6 +161,35 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		 return value!=null?value:0d;		
 		
 		 
+	}
+	
+	public Double calculaExecutadoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
+
+
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		
+		Root<Execucao> root = criteria.from(Execucao.class);
+		
+		Join<Object, Object> joinMes= root.join(MES,JoinType.INNER);
+		Join<Object, Object> joinExercicio= root.join(EXERCICIO,JoinType.INNER);
+		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.INNER);
+		
+		Path<Double> quantidade = root.get(QUANTIDADE);
+		 
+		criteria.select(builder.sum(quantidade));
+		
+		criteria.where(
+					   builder.equal(joinMes.get(ID),mes ),
+					   builder.equal(joinExercicio.get(ID),exercicio ),
+					   builder.equal(joinAcao.get(ID),acao )
+					   );
+  
+ 
+	    return  entityManager.createQuery(criteria).getSingleResult();
+		
+		
 	}
 	
 	

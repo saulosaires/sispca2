@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
+import qualitativo.model.UnidadeMedida;
+import qualitativo.model.UnidadeOrcamentaria;
 
 @Entity
 @Table(name="financeiro_mensal", schema="siafem")
@@ -152,7 +154,32 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		
 	}
 	
-	
+	public FisicoFinanceiroMensalSiafem(
+										 String unidadeOrcamentariaCodigo,
+										 String unidadeOrcamentariaDescricao,
+										 String programa,	
+										 String acaoCodigo,
+										 String acaoDenominacao,
+										 String acaoProduto,
+										 String unidadeMedidaDescricao
+										) {
+		
+		this.acao = new Acao();
+		this.acao.setCodigo(acaoCodigo);
+		this.acao.setDenominacao(acaoDenominacao);
+		this.acao.setProduto(acaoProduto);
+		
+		this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+		this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+		this.acao.getUnidadeOrcamentaria().setProgramaDescricao(programa);
+		
+		this.acao.setUnidadeMedida(new UnidadeMedida());
+		this.acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+		
+	 
+		
+	}
 	
 	
 	
