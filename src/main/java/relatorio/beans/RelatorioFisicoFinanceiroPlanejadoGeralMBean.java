@@ -163,13 +163,13 @@ public class RelatorioFisicoFinanceiroPlanejadoGeralMBean  extends RelatorioMBea
 			if ("PDF".equals(tipoArquivo)) {
 	
 				bytes = RelatorioUtil.exportReportToPdf(jasperRelatorio);
-				fileName = "RelatorioFisicoFinanceiroPlanejadoGeral.pdf";
+				fileName = "RelatorioFinanceiroNaturezaDespesa.pdf";
 				contentType = TipoArquivo.PDF.getId();
 	
 			} else {
 	
 				bytes = RelatorioUtil.exportReportToXLS(jasperRelatorio);
-				fileName = "RelatorioFisicoFinanceiroPlanejadoGeral.xls";
+				fileName = "RelatorioFinanceiroNaturezaDespesa.xls";
 				contentType = TipoArquivo.XLS.getId();
 	
 			}

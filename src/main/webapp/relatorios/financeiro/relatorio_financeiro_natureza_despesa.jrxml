@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fisico_financeiro_por_programa" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="10" uuid="e1724008-1791-442b-a1ae-17b852255522">
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="param_imagem" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_sql_2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="exercicio" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="totalNatureza" class="java.util.List"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="acao" class="qualitativo.model.Acao"/>
+	<field name="natureza" class="java.lang.String"/>
+	<field name="dotacaoInicial" class="java.math.BigDecimal"/>
+	<field name="disponivel" class="java.math.BigDecimal"/>
+	<field name="empenhado" class="java.math.BigDecimal"/>
+	<field name="liquidado" class="java.math.BigDecimal"/>
+	<field name="pago" class="java.math.BigDecimal"/>
+	<field name="saldo" class="java.math.BigDecimal"/>
+	<field name="empenhadoSobreDisponivel" class="java.math.BigDecimal"/>
+	<field name="liquidadoSobreAtual" class="java.math.BigDecimal"/>
+	<field name="pagoSobreDisponivel" class="java.math.BigDecimal"/>
+	<variable name="var_total_dot_inicial_acao" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+		<variableExpression><![CDATA[$F{dotacaoInicial}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_disponivel_acao" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+		<variableExpression><![CDATA[$F{disponivel}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_liquidado_acao" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+		<variableExpression><![CDATA[$F{liquidado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_dot_inicial_prog" class="java.lang.Double" resetType="Group" resetGroup="programa" calculation="Sum">
+		<variableExpression><![CDATA[$F{dotacaoInicial}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_disponivel_prog" class="java.lang.Double" resetType="Group" resetGroup="programa" calculation="Sum">
+		<variableExpression><![CDATA[$F{disponivel}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_liquidado_prog" class="java.lang.Double" resetType="Group" resetGroup="programa" calculation="Sum">
+		<variableExpression><![CDATA[$F{liquidado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_dot_inicial_uo" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{dotacaoInicial}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_disponivel_uo" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{disponivel}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_liquidado_uo" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{liquidado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_empenhado_acao" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+		<variableExpression><![CDATA[$F{empenhado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_empenhado_prog" class="java.lang.Double" resetType="Group" resetGroup="programa" calculation="Sum">
+		<variableExpression><![CDATA[$F{empenhado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_empenhado_uo" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{empenhado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_pago_acao" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+		<variableExpression><![CDATA[$F{pago}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_pago_prog" class="java.lang.Double" resetType="Group" resetGroup="programa" calculation="Sum">
+		<variableExpression><![CDATA[$F{pago}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_pago_uo" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{pago}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_geral_dot_inicial" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dotacaoInicial}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_geral_disponivel" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{disponivel}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_geral_liquidado" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{liquidado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_geral_empenhado" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{empenhado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_geral_pago" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{pago}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_dot_inicial_ug" class="java.lang.Double" resetType="Group" resetGroup="unidade_gestora_grupo" calculation="Sum">
+		<variableExpression><![CDATA[$F{dotacaoInicial}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_disponivel_ug" class="java.lang.Double" resetType="Group" resetGroup="unidade_gestora_grupo" calculation="Sum">
+		<variableExpression><![CDATA[$F{disponivel}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_empenhado_ug" class="java.lang.Double" resetType="Group" resetGroup="unidade_gestora_grupo" calculation="Sum">
+		<variableExpression><![CDATA[$F{empenhado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_liquidado_ug" class="java.lang.Double" resetType="Group" resetGroup="unidade_gestora_grupo" calculation="Sum">
+		<variableExpression><![CDATA[$F{liquidado}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_pago_ug" class="java.lang.Double" resetType="Group" resetGroup="unidade_gestora_grupo" calculation="Sum">
+		<variableExpression><![CDATA[$F{pago}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="var_total_dot_inicial" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{dotacaoInicial}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0.0)]]></initialValueExpression>
+	</variable>
+	<group name="unidade_gestora_grupo">
+		<groupExpression><![CDATA[$F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraCodigo()]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="0" width="803" height="40" backcolor="#DCDCDC" uuid="23e62715-f574-40ed-a1dc-8265f12a22cf"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement mode="Opaque" x="0" y="0" width="802" height="20" backcolor="#8E8E8E" uuid="e7f523c7-62d1-4e10-b791-cbf1188c56cd"/>
+						<box>
+							<topPen lineWidth="0.5"/>
+							<leftPen lineWidth="0.5"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraSigla()!=null?
+ "UNIDADE GESTORA: ("+$F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraCodigo()+") - "+$F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraSigla().toUpperCase() :
+  "UNIDADE GESTORA: ("+$F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraCodigo()+")"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="0" y="20" width="802" height="20" backcolor="#8E8E8E" uuid="40d2935e-86c5-4a4b-b5da-3ada73762b3e"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.5"/>
+							<bottomPen lineWidth="0.5"/>
+							<rightPen lineWidth="0.5"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font pdfFontName="Helvetica-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraDescricao()!=null ? $F{acao}. getUnidadeOrcamentaria().getUnidadeGestoraDescricao().toUpperCase() : ""
+
+]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="176" height="15" backcolor="#FFFFFF" uuid="f01c9595-c71b-4370-bd93-afcc8d23c13d"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph rightIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL POR UNID. GEST.:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="176" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="79c71478-0a8f-4694-8d0d-8545b2cdf399"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_dot_inicial_ug}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="252" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="e5b3d9e5-9834-4326-b2db-efb36209e3b4"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_ug}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="404" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="be29ee63-ef47-40e1-8718-02804e8db0bb"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_liquidado_ug}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="328" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="d2e4f2ab-ead0-45ee-aff3-a4e3c1db697c"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_empenhado_ug}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="480" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="e43c7c74-df16-4462-a13b-d1f7dc8c57cb"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_pago_ug}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="556" y="0" width="79" height="15" backcolor="#FFFFFF" uuid="9ac160ec-3e0a-44ca-8b52-5d703d1820f1"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_ug}-$V{var_total_empenhado_ug}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="635" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="d644934e-0a18-40aa-bc6c-0ad4829765a5"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_ug}.compareTo(new Double(0.0)) == 0 ?  new Double(0.0): ($V{var_total_empenhado_ug}/$V{var_total_disponivel_ug})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="691" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="6deb5254-b9fe-47eb-9ff4-7cc6b9d4c3c0"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_ug}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_liquidado_ug}/$V{var_total_disponivel_ug})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="747" y="0" width="55" height="15" backcolor="#FFFFFF" uuid="4037ab45-c431-4e7a-b7ae-4e15571bf998"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_ug}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_pago_ug}/$V{var_total_disponivel_ug})*100]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="unidade_orcamentaria">
+		<groupExpression><![CDATA[$F{acao}. getUnidadeOrcamentaria().getCodigo()]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<textField isStretchWithOverflow="true">
+					<reportElement mode="Opaque" x="0" y="0" width="802" height="29" backcolor="#AAAAAA" uuid="6406aa31-a4c7-4f94-8066-f290f1f7c681"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{acao}. getUnidadeOrcamentaria().getCodigo()!=null ? 
+"UNIDADE ORÇAMENTÁRIA: ("+$F{acao}. getUnidadeOrcamentaria().getCodigo()+") - "+$F{acao}. getUnidadeOrcamentaria().getDescricao().toUpperCase() : 
+"UNIDADE ORÇAMENTÁRIA: ("+$F{acao}. getUnidadeOrcamentaria().getCodigo()+")"
+
+
+]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="176" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="1a33e3c6-4e8f-48f9-91ee-164808e33090"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_dot_inicial_uo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="176" height="15" backcolor="#FFFFFF" uuid="1389b12b-6c3d-4597-9d67-e86b730f953f"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph rightIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL POR UNID. ORC.:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="252" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="ebede1e6-d1a4-46fe-8e77-ca22de6b2365"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_uo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="404" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="0ff2a138-230a-4ac4-9154-255eadc76520"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_liquidado_uo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="328" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="f93bbb43-e726-49b8-a49c-86c64a39f35d"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_empenhado_uo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="480" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="3217a812-8574-4ba1-aa01-92315e8d3be9"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_pago_uo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="556" y="0" width="79" height="15" backcolor="#FFFFFF" uuid="6163bc26-2f16-4329-acb5-cdd8866fc1de"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_uo}-$V{var_total_empenhado_uo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="635" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="f380ca0b-df2d-4888-bd3e-3dc99f27c99d"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_uo}.compareTo(new Double(0.0)) == 0 ?  new Double(0.0): ($V{var_total_empenhado_uo}/$V{var_total_disponivel_uo})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="691" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="e52a80d3-b45c-4c39-b107-260df2f6a0dc"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_uo}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_liquidado_uo}/$V{var_total_disponivel_uo})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="747" y="0" width="55" height="15" backcolor="#FFFFFF" uuid="7fbb0ab2-41a2-4e69-ad2c-9b4648f4c975"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_uo}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_pago_uo}/$V{var_total_disponivel_uo})*100]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="programa">
+		<groupExpression><![CDATA[$F{acao}.getPrograma().getCodigo()]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isStretchWithOverflow="true">
+					<reportElement mode="Opaque" x="0" y="0" width="802" height="20" backcolor="#C1C1C1" uuid="d87cb232-1917-45cf-bba7-440761c7dde9"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[ $F{acao}.getPrograma().getCodigo()!=null?
+"PROGRAMA: ("+$F{acao}.getPrograma().getCodigo()+") - "+$F{acao}.getPrograma().getDenominacao().toUpperCase() :
+"PROGRAMA: ("+$F{acao}.getPrograma().getCodigo()+") - Programa não encontrado"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="176" height="15" backcolor="#FFFFFF" uuid="15637a6a-138a-43cc-9464-78d884707f20"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph rightIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL POR PROGRAMA:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="176" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="1d698c6d-8bda-4e18-8768-08c8fa623755"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_dot_inicial_prog}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="252" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="eab1a922-4b8d-473e-96c8-4b5214e17434"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_prog}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="404" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="f87c2c3f-79b8-4961-9e1e-51613c8fe34b"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_liquidado_prog}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="328" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="6701db17-a620-4aff-9809-1315d2d723b7"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_empenhado_prog}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="480" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="1c04df9c-4f4c-4352-a749-442006932974"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_pago_prog}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="556" y="0" width="79" height="15" backcolor="#FFFFFF" uuid="42e731b3-04c7-40d4-974a-665af188339c"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_prog}-$V{var_total_empenhado_prog}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="635" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="1d7127fe-4e90-4b02-98ea-1a6e4f6c065d"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_prog}.compareTo(new Double(0.0)) == 0 ?  new Double(0.0): ($V{var_total_empenhado_prog}/$V{var_total_disponivel_prog})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="691" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="31943ff8-4528-4f7f-a6b5-28afb72da6b9"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_prog}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_liquidado_prog}/$V{var_total_disponivel_prog})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="747" y="0" width="55" height="15" backcolor="#FFFFFF" uuid="35249aaa-76c7-4f2a-b5bc-49196e4f91b0"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_prog}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_pago_prog}/$V{var_total_disponivel_prog})*100]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="acao">
+		<groupExpression><![CDATA[$F{acao}.getCodigo()]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="802" height="21" backcolor="#DCDCDC" uuid="176b267f-a29b-48c6-837e-50c4530075f0"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["AÇÃO: ("+$F{acao}.getCodigo()+") - "+$F{acao}.getDenominacao().toUpperCase()
+
+]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="21" width="176" height="20" uuid="ad1209b2-d9c8-4656-aaa6-2bec4d6127af"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[GRUPO DE DESPESA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="176" y="21" width="76" height="20" uuid="78083bd4-54ed-404d-907b-1f8746411ff8"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[DOTAÇÃO INICIAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="252" y="21" width="76" height="20" uuid="257f5bea-e2bd-4309-9e25-08cd22a8d0f0"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[ATUAL (A)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="328" y="21" width="76" height="20" uuid="61f0509f-587d-47ac-96f4-ad8262f0a49e"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[EMPENHADO (B)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="404" y="21" width="76" height="20" uuid="1a8f7a41-d946-4b92-af6c-64fc32d9e963"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[LIQUIDADO (C)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="480" y="21" width="76" height="20" uuid="7402323b-5590-44a6-9a44-29987c44f04b"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[PAGO (D)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="556" y="21" width="79" height="20" uuid="4987f784-9d2e-4be5-b377-7d0a5a06e17a"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[SALDO (A - B)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="635" y="21" width="56" height="20" uuid="0faec087-53b3-4099-92b0-2a2e9e79a391"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[%(B/A)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="747" y="21" width="55" height="20" uuid="53e1f456-c972-4d4d-b331-67506fada61a"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[%(D/A)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="691" y="21" width="56" height="20" uuid="b30c677f-3d3e-4dc2-b6b2-19622eaf3112"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<text><![CDATA[%(C/A)]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="176" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="656d69d5-f2b9-4b6d-bfd0-8707ce8057b8"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_dot_inicial_acao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="252" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="74d8ccaf-bb18-40c5-bdec-4cbb8a8387e8"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_acao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="404" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="8f0703b5-0041-449c-be1f-33a2ac159ee8"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_liquidado_acao}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="176" height="15" backcolor="#FFFFFF" uuid="c9e15c36-fd4c-47ec-82d0-7de6a65102de"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph rightIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL POR AÇÃO:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="328" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="39a9d31b-45ad-403a-a0d9-3ad7b0fc7744"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_empenhado_acao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="480" y="0" width="76" height="15" backcolor="#FFFFFF" uuid="d71c7e9d-f6d8-4783-9e42-c57b6017c939"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_pago_acao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="556" y="0" width="79" height="15" backcolor="#FFFFFF" uuid="1fddb3cd-96c0-4167-89f4-2225f31d7583"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_acao}-$V{var_total_empenhado_acao}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="635" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="5e59297c-55bf-48b1-91cb-2d55319ca2ba"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_acao}.compareTo(new Double(0.0)) == 0 ?  new Double(0.0): ($V{var_total_empenhado_acao}/$V{var_total_disponivel_acao})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="691" y="0" width="56" height="15" backcolor="#FFFFFF" uuid="47f17ec0-89eb-4737-bde1-6d297ccb5b37"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_acao}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_liquidado_acao}/$V{var_total_disponivel_acao})*100]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement mode="Transparent" x="747" y="0" width="55" height="15" backcolor="#FFFFFF" uuid="bd3625e1-413f-4dbf-90fe-cf89981fd058"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="7" pdfFontName="Helvetica-Bold"/>
+						<paragraph leftIndent="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{var_total_disponivel_acao}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_pago_acao}/$V{var_total_disponivel_acao})*100]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138">
+			<rectangle>
+				<reportElement x="547" y="75" width="100" height="31" uuid="5b57019b-2e58-4c01-b320-5f2a215dc7dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="547" y="26" width="100" height="31" uuid="5b57019b-2e58-4c01-b320-5f2a215dc7dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="663" y="25" width="139" height="82" uuid="4f4a87e6-9794-40cc-935c-c3eb2c42cdf8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="87" width="547" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA ADJUNTA DE PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="547" y="27" width="100" height="15" uuid="c1779381-d8b6-4993-aaa0-9bc416f180c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EXERCÍCIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="547" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[GOVERNO DO ESTADO DO MARANHÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="547" y="75" width="100" height="15" uuid="c1779381-d8b6-4993-aaa0-9bc416f180c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[EMISSÃO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="546" y="41" width="101" height="16" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{exercicio}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="105" height="43" uuid="e8352ace-3b4e-4323-88ff-a9ee324187cb"/>
+				<imageExpression><![CDATA[new File($P{param_imagem})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="547" y="89" width="100" height="17" uuid="470465da-4003-490f-9541-60374e812bb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="68" width="547" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE PLANEJAMENTO E ORÇAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="118" width="802" height="20" uuid="978b0189-e0fe-4348-a117-63d04e32e327"/>
+				<textElement>
+					<font size="10" isBold="false" isItalic="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO FINANCEIRO POR NATUREZA DE DESPESA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="176" height="20" uuid="5caab273-d2d7-4f93-9af1-308cf7be7c2d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{natureza}.equals("31") ? "31 - PESSOAL E ENCARGOS" :
+$F{natureza}.equals("32") ? "32 - JUROS E AMORTIZAÇÃO" :
+$F{natureza}.equals("33") ? "33 - CUSTEIO" :
+$F{natureza}.equals("44") ? "44 - INVESTIMENTO" :
+$F{natureza}.equals("45") ? "45 - INVERSÃO FINANCEIRA" : $F{natureza}+" - SEM DESCRIÇÃO"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="176" y="0" width="76" height="20" uuid="d0fb068d-f5c9-4ffd-8e17-d687755d32f7"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dotacaoInicial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="252" y="0" width="76" height="20" uuid="a2fe0917-e2e8-4f96-a11b-9a983b88e508"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{disponivel}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="404" y="0" width="76" height="20" uuid="c6d12ab0-fe22-4f1b-b883-df7c9851e244"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{liquidado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="328" y="0" width="76" height="20" uuid="59915deb-c0f2-4b7f-8416-2a4024158f99"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenhado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="480" y="0" width="76" height="20" uuid="3de3229d-5987-4ac4-b224-bc275004dfdd"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="556" y="0" width="79" height="20" uuid="addefc68-6a97-414f-abe3-6789d9c0478e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="635" y="0" width="56" height="20" uuid="733dd8ab-e283-4bde-8ddf-5739aecdca80"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empenhadoSobreDisponivel}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="691" y="0" width="56" height="20" uuid="134b7a6e-c4e3-48c2-8548-5b59492e04ab"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{liquidadoSobreAtual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="747" y="0" width="55" height="20" uuid="9377a43a-62f0-4678-8558-068740fdd386"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagoSobreDisponivel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="12">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="213" height="10" uuid="7787bbdc-0ae8-4894-aa1e-dd063a067fa8"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="607" y="0" width="181" height="12" uuid="8c282f18-fef6-4d89-b7b7-5409c60147ad"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="788" y="0" width="15" height="12" uuid="e0d69b33-b81e-4bbd-b213-849424e7c321"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="51">
+			<textField>
+				<reportElement mode="Transparent" x="0" y="0" width="176" height="35" backcolor="#929292" uuid="d9ac4e3b-3e7e-4d6c-a90d-cc1de2d9315a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph rightIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL GERAL:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="176" y="20" width="76" height="15" backcolor="#929292" uuid="9b29701e-ae8f-4a85-85df-3765d16746a8"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_dot_inicial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="252" y="20" width="76" height="15" backcolor="#929292" uuid="02945d77-a72b-46ef-863e-973c4d7c5a86"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_disponivel}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="404" y="20" width="76" height="15" backcolor="#929292" uuid="f344ae04-a0aa-46f1-9261-c5af48175a5b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_liquidado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="328" y="20" width="76" height="15" backcolor="#929292" uuid="c1449e09-b872-4996-b4cf-226290586a46"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_empenhado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="480" y="20" width="76" height="15" backcolor="#929292" uuid="f19b5a49-6821-4c3f-b3d8-8067e2bed20b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_pago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="176" y="0" width="76" height="20" uuid="1c231192-2c41-4764-898b-e2a7f9e4d3d8"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[DOTAÇÃO INICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="252" y="0" width="76" height="20" uuid="fcaf8168-efdd-44ad-a45e-45088ee75334"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[ATUAL (A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="404" y="0" width="76" height="20" uuid="c145fc5d-dbb9-424d-bc0e-5d426b16b390"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[LIQUIDADO (C)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="328" y="0" width="76" height="20" uuid="141ce4d5-2407-4ccd-a8ce-8745240fd233"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[EMPENHADO (B)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="480" y="0" width="76" height="20" uuid="ffea891d-b89d-404b-9116-363b6bd445ab"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[PAGO (D)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="556" y="0" width="79" height="20" uuid="23d95b0e-2a4d-4fa1-b7d3-4f23e2d78885"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[SALDO (A - B)]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="556" y="20" width="79" height="15" backcolor="#929292" uuid="0fc66f10-d297-42c7-998b-bbd25aaddd33"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_disponivel} - $V{var_total_geral_empenhado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="635" y="0" width="56" height="20" uuid="e523098c-f965-4da2-bb53-4d0cfc28c40d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[%(B/A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="691" y="0" width="56" height="20" uuid="5505c64d-3d7c-4151-b4c7-be6eaa88a307"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[%(C/A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="747" y="0" width="55" height="20" uuid="5b449de9-f392-4396-a1b6-1b1a5c561119"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[%(D/A)]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="635" y="20" width="56" height="15" backcolor="#929292" uuid="5d86b4b2-f793-44b4-85a5-4620d5ed323b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_disponivel}.compareTo(new Double(0.0)) == 0 ?  new Double(0.0): ($V{var_total_geral_empenhado}/$V{var_total_geral_disponivel})*100]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="691" y="20" width="56" height="15" backcolor="#929292" uuid="0c6cb1bb-1c06-4ce5-af4b-9265715db176"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_disponivel}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_geral_liquidado}/$V{var_total_geral_disponivel})*100]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="747" y="20" width="55" height="15" backcolor="#929292" uuid="d4d9b258-e740-44de-a617-2de16ee23f12"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7" pdfFontName="Helvetica-Bold"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_total_geral_disponivel}.compareTo(new Double(0.0)) == 0 ?  new Double (0.0) : ($V{var_total_geral_pago}/$V{var_total_geral_disponivel})*100]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="39" width="213" height="10" uuid="39c9ddb1-d2d9-4606-857d-d63f372fc3aa"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="607" y="39" width="181" height="12" uuid="4230bfe8-7d23-4d0b-a708-2ec6f0d31dba"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="788" y="39" width="15" height="12" uuid="6608f9ea-b351-40d3-bce5-7547024c5080"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="113">
+			<subreport>
+				<reportElement x="0" y="14" width="802" height="85" uuid="2a1d48f0-1f27-48ef-abb7-854460c8d6b7"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{totalNatureza})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["relatorio_resumido_fisico_financeiro_por_natureza.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

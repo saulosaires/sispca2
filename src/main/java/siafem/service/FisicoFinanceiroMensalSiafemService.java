@@ -16,6 +16,7 @@ import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
+import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.model.RelatorioDetalhamentoAcaoSiafem;
 import siafem.model.RelatorioDetalhamentoAcaoValue;
@@ -167,6 +168,49 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 	}
 
+	private void calculaPagoSobreDisponivel(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
+		
+		 BigDecimal pago = financeiroMensalSiafem.getPago();
+		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
+		
+		if(pago!=null && pago.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+			
+			financeiroMensalSiafem.setPagoSobreDisponivel(MathUtils.divide(pago,disponivel));
+		}else {
+			financeiroMensalSiafem.setPagoSobreDisponivel(MathUtils.getZeroBigDecimal());
+		}
+		
+	}
+
+	
+	private void calculaEmpenhadoSobreDisponivel(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
+		
+		 BigDecimal empenhado = financeiroMensalSiafem.getEmpenhado();
+		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
+		
+		if(empenhado!=null && empenhado.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+			
+			financeiroMensalSiafem.setEmpenhadoSobreDisponivel(MathUtils.divide(empenhado,disponivel));
+		}else {
+			financeiroMensalSiafem.setEmpenhadoSobreDisponivel(MathUtils.getZeroBigDecimal());
+		}
+		
+	}
+	
+	private void calculaSaldo(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
+				
+		 BigDecimal empenhado = financeiroMensalSiafem.getEmpenhado();
+		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
+		
+		if(empenhado!=null && empenhado.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+			
+			financeiroMensalSiafem.setSaldo(disponivel.subtract(empenhado));
+		}else {
+			financeiroMensalSiafem.setSaldo(MathUtils.getZeroBigDecimal());
+		}
+		
+	}
+	
 	public BigDecimal calculaMediaEficaciaAvaliacaoFisicoFinanceira(List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem) {
 		
 		BigDecimal mediaEficaciaFisicoFinanceira   = MathUtils.getZeroBigDecimal();
@@ -223,6 +267,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 		return mediaEficienciaFisicoFinanceira;
 	}
+	
 	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(String unidadeOrcamentaria,String programa, Integer exercicio){
 		return ((FisicoFinanceiroMensalSiafemController)getController()).analiseFisicoFinanceiro(unidadeOrcamentaria, programa, exercicio);
@@ -291,6 +336,43 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	public FisicoFinanceiroMensalSiafem  calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(Long mes, Integer ano,String programaCodigo,String unidadeOrcamentariaCodigo,String acaocodigo){
 		return controller().calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(mes, ano,programaCodigo,unidadeOrcamentariaCodigo,acaocodigo);
 	}
+	
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
+		
+		 List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioFinanceiroNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
+		 
+		 
+		 for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem: listFisicoFinanceiro) {
+			 
+			 calculaSaldo(fisicoFinanceiroMensalSiafem);
+			 calculaEmpenhadoSobreDisponivel(fisicoFinanceiroMensalSiafem);
+			 calculaLiquidadoSobreAtual(fisicoFinanceiroMensalSiafem);
+			 calculaPagoSobreDisponivel(fisicoFinanceiroMensalSiafem);
+		 }
+		 
+		 		 
+		 return listFisicoFinanceiro;
+	}
+	
+	public List<FisicoFinanceiroMensalSiafem> totalPorNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
+		
+		 List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().totalPorNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
+		 
+		 
+		 for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem: listFisicoFinanceiro) {
+			 
+			 calculaSaldo(fisicoFinanceiroMensalSiafem);
+			 calculaEmpenhadoSobreDisponivel(fisicoFinanceiroMensalSiafem);
+			 calculaLiquidadoSobreAtual(fisicoFinanceiroMensalSiafem);
+			 calculaPagoSobreDisponivel(fisicoFinanceiroMensalSiafem);
+		 }
+		 
+		 		 
+		 return listFisicoFinanceiro;
+	}
+
+	
+	
 	
 	private FisicoFinanceiroMensalSiafemController controller() {
 		

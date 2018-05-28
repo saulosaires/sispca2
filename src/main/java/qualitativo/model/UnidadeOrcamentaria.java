@@ -61,7 +61,7 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	@OneToMany(mappedBy="unidadeOrcamentaria")
 	private List<Acao> acaos;
 
-	//Isto é usado apenos no relaorio
+	//Isto é usado apenos no relatorio
 	private transient String unidadeGestoraCodigo;
 	private transient String unidadeGestoraSigla;
 	private transient String unidadeGestoraDescricao;

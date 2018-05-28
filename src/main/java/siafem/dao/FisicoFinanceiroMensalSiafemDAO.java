@@ -25,6 +25,7 @@ import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 import qualitativo.model.Programa;
 import quantitativo.model.FisicoFinanceiroMensal;
+import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 
 public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceiroMensalSiafem> {
@@ -45,6 +46,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria"; 
 	private static final  String UNIDADE_MEDIDA="unidadeMedida"; 
 	private static final  String UNIDADE_GESTORA="unidadeGestora";
+	private static final  String UNIDADE_GESTORAS="unidadeGestoras";
 	private static final  String TIPO_CALCULO_META="tipoCalculoMeta"; 
 	private static final  String DOTACAO_INICIAL="dotacaoInicial"; 
 	private static final  String DISPONIVEL="disponivel";
@@ -54,6 +56,8 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String CODIGO="codigo";
 	private static final  String EXERCICIO="exercicio";
 	private static final  String MES="mes";
+	private static final  String SIGLA = "sigla";
+	private static final  String NATUREZA="natureza";
 	
 	public FisicoFinanceiroMensalSiafemDAO() {
 		setClazz(FisicoFinanceiroMensalSiafem.class);
@@ -754,4 +758,170 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		 return entityManager.createQuery(criteria).getResultList();		
 		
 		
-	} }
+	} 
+
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
+		
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+				
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.LEFT);		
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
+		Join<Object, Object> joinUnidadeGestora		 = joinUnidadeOrcamentaria.joinSet(UNIDADE_GESTORAS, JoinType.LEFT);
+ 		
+		
+ 	 	criteria.multiselect(
+				 	 		  joinUnidadeGestora.get(CODIGO),
+				 	 		  joinUnidadeGestora.get(SIGLA),
+				 	 		  joinUnidadeGestora.get(DESCRICAO),
+ 	 			
+							  joinUnidadeOrcamentaria.get(CODIGO),
+							  joinUnidadeOrcamentaria.get(DESCRICAO),
+				  
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinPrograma.get(DENOMINACAO),
+ 	 						
+ 	 						  joinAcao.get(CODIGO),
+ 	 						  joinAcao.get(ID),
+ 	 						  joinAcao.get(DENOMINACAO),
+ 	 						 
+ 	 						  root.get(NATUREZA),
+ 	 						  
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							  
+							 );
+
+
+ 	 	List<Predicate> predicate = new ArrayList<>();
+
+		if (!Utils.invalidId(unidadeGestora)) {
+ 
+			predicate.add(builder.equal(joinUnidadeGestora.get(ID), unidadeGestora));
+		}
+				
+		if (!Utils.invalidId(unidadeOrcamentaria)) {
+			 
+			predicate.add(builder.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentaria));
+		}
+		
+		if (!Utils.invalidId(acao)) {
+			 
+			predicate.add(builder.equal(joinAcao.get(ID), acao));
+		}
+		
+		if (natureza!=null) {
+			 
+			predicate.add(builder.equal(root.get(NATUREZA), natureza.getId().toString()));
+		}
+		
+		
+		if (!Utils.invalidYear(ano)) {
+			 
+			predicate.add(builder.equal(root.get(ANO), ano));
+		}
+			
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+ 	 			 
+		criteria.groupBy(
+						  joinUnidadeGestora.get(CODIGO),
+			 	 		  joinUnidadeGestora.get(SIGLA),
+			 	 		  joinUnidadeGestora.get(DESCRICAO),
+			
+						  joinUnidadeOrcamentaria.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(DESCRICAO),
+			  
+						  joinPrograma.get(CODIGO),
+						  joinPrograma.get(DENOMINACAO),
+						
+						  joinAcao.get(CODIGO),
+						  joinAcao.get(ID),
+						  joinAcao.get(DENOMINACAO),
+						 
+						  root.get(NATUREZA) 
+						  );
+ 		
+		criteria.orderBy(
+						 builder.asc( joinUnidadeGestora.get(CODIGO)),
+						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+						 builder.asc( joinPrograma.get(CODIGO)) ,
+						 builder.asc( joinAcao.get(CODIGO)) ,
+						 builder.asc( root.get(NATUREZA))
+						);
+		
+		 return entityManager.createQuery(criteria).getResultList();
+	}
+
+	public List<FisicoFinanceiroMensalSiafem> totalPorNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
+		
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+				
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.LEFT);			
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
+		Join<Object, Object> joinUnidadeGestora		 = joinUnidadeOrcamentaria.joinSet(UNIDADE_GESTORAS, JoinType.LEFT);
+ 		
+		
+ 	 	criteria.multiselect(
+ 	 						  root.get(NATUREZA),
+ 	 						  
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							  
+							 );
+
+
+ 	 	List<Predicate> predicate = new ArrayList<>();
+
+		if (!Utils.invalidId(unidadeGestora)) {
+ 
+			predicate.add(builder.equal(joinUnidadeGestora.get(ID), unidadeGestora));
+		}
+				
+		if (!Utils.invalidId(unidadeOrcamentaria)) {
+			 
+			predicate.add(builder.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentaria));
+		}
+		
+		if (!Utils.invalidId(acao)) {
+			 
+			predicate.add(builder.equal(joinAcao.get(ID), acao));
+		}
+		
+		if (natureza!=null) {
+			 
+			predicate.add(builder.equal(root.get(NATUREZA), natureza.getId().toString()));
+		}
+		
+		
+		if (!Utils.invalidYear(ano)) {
+			 
+			predicate.add(builder.equal(root.get(ANO), ano));
+		}
+			
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+ 	 			 
+		criteria.groupBy(root.get(NATUREZA));
+ 		
+		criteria.orderBy(builder.asc( root.get(NATUREZA)));
+		
+		return entityManager.createQuery(criteria).getResultList();
+	}
+
+
+}

@@ -10,6 +10,7 @@ import arquitetura.controller.AbstractController;
 import arquitetura.exception.JpaException;
 import qualitativo.model.Programa;
 import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
+import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 
 public class FisicoFinanceiroMensalSiafemController extends AbstractController<FisicoFinanceiroMensalSiafem> {
@@ -100,5 +101,14 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioDetalhamentoAcao(unidadeOrcamentaria, acao, ano);
 	}
  
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioFinanceiroNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
+	}
+
+	public List<FisicoFinanceiroMensalSiafem> totalPorNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).totalPorNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
+	}
+	
+	
 	
 }

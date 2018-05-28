@@ -34,8 +34,8 @@ import siafem.service.FisicoFinanceiroMensalSiafemService;
 @Named
 public class ImportaDadosSiafem implements Job {
 
-	private String ARQUIVO_ORIGEM  = "siafANO.txt";
-	private String ARQUIVO_DESTINO = "tem_siafANO.txt";
+	private String ARQUIVO_ORIGEM  = "E:/siafANO.txt";
+	private String ARQUIVO_DESTINO = "E:/tem_siafANO.txt";
 	
 	private LayoutSiafemTxt MES;
 	private LayoutSiafemTxt UNIDADE_GESTORA;
@@ -261,6 +261,11 @@ public class ImportaDadosSiafem implements Job {
 							 
 						 }
 				 
+						 if(!Utils.emptyParam(natureza) && natureza.length()>2) {
+							 natureza = natureza.substring(0, 2);
+						 }
+						 
+						 
 						 Integer reg = MathUtils.parseInt(regiao);
 						 
 						 

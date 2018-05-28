@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
+import qualitativo.model.Programa;
 import qualitativo.model.UnidadeMedida;
 import qualitativo.model.UnidadeOrcamentaria;
 
@@ -100,12 +101,93 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	private transient BigDecimal planejado;
 	private transient BigDecimal executado;
 	private transient BigDecimal eficacia; 
- 
+	
+	private transient BigDecimal pagoSobreDisponivel;
+	private transient BigDecimal empenhadoSobreDisponivel;
 	private transient BigDecimal liquidadoSobreAtual;
 	
 	private transient BigDecimal eficiencia;
+	private transient BigDecimal saldo;
 	
 	public FisicoFinanceiroMensalSiafem() {}
+	
+	public FisicoFinanceiroMensalSiafem(
+									      String natureza,
+									  
+									      BigDecimal dotacaoInicial,
+									      BigDecimal disponivel,
+									      BigDecimal empenhado,
+									      BigDecimal liquidado,
+									      BigDecimal pago
+										) {
+			
+			
+			
+		this.natureza = natureza;
+		
+		this.dotacaoInicial = dotacaoInicial;
+		this.disponivel = disponivel;
+		this.empenhado = empenhado;
+		this.liquidado = liquidado;
+		this.pago	= pago;	
+	
+	}
+	
+	
+	public FisicoFinanceiroMensalSiafem(
+			
+										  String unidadeGestoraCodigo,
+								 		  String unidadeGestoraSigla,
+								 		  String unidadeGestoraDescricao,
+								
+										  String unidadeOrcamentariaCodigo,
+										  String unidadeOrcamentariaDescricao,
+							 
+										  String programaCodigo,
+										  String programaDenominacao,
+											
+										  String acaoCodigo,
+										  Long acaoId,
+										  String acaoDenominacao,
+									 
+									      String natureza,
+									  
+									      BigDecimal dotacaoInicial,
+									      BigDecimal disponivel,
+									      BigDecimal empenhado,
+									      BigDecimal liquidado,
+									      BigDecimal pago
+										) {
+		
+ 		
+		  this.acao = new Acao();
+		  this.acao.setId(acaoId);
+		  this.acao.setCodigo(acaoCodigo);
+		  this.acao.setDenominacao(acaoDenominacao);
+		  
+		  this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		  this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+		  this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+		  
+		  this.acao.setPrograma(new Programa());
+		  this.acao.getPrograma().setCodigo(programaCodigo);
+		  this.acao.getPrograma().setDenominacao(programaDenominacao);
+		  
+		  this.acao.getUnidadeOrcamentaria().setUnidadeGestoraCodigo(unidadeGestoraCodigo);
+		  this.acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);
+		  this.acao.getUnidadeOrcamentaria().setUnidadeGestoraDescricao(unidadeGestoraDescricao);
+		  
+		  this.natureza = natureza;
+	  
+		  this.dotacaoInicial = dotacaoInicial;
+		  this.disponivel = disponivel;
+		  this.empenhado = empenhado;
+		  this.liquidado = liquidado;
+		  this.pago	= pago;	
+ 
+		
+		
+	}
 	
 	
 	public FisicoFinanceiroMensalSiafem(
@@ -554,6 +636,30 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setRegiao(Integer regiao) {
 		this.regiao = regiao;
+	}
+
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+	}
+
+	public BigDecimal getEmpenhadoSobreDisponivel() {
+		return empenhadoSobreDisponivel;
+	}
+
+	public void setEmpenhadoSobreDisponivel(BigDecimal empenhadoSobreDisponivel) {
+		this.empenhadoSobreDisponivel = empenhadoSobreDisponivel;
+	}
+
+	public BigDecimal getPagoSobreDisponivel() {
+		return pagoSobreDisponivel;
+	}
+
+	public void setPagoSobreDisponivel(BigDecimal pagoSobreDisponivel) {
+		this.pagoSobreDisponivel = pagoSobreDisponivel;
 	}
 
  
