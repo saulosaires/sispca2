@@ -3,20 +3,20 @@ package siafem.enums;
 public enum NaturezaDespeza {
 
 	
-	PESSOAL_E_ENCARGOS(31),
-	JUROS_E_AMORTIZACAO(32),
-	CUSTEIO(33),
-	INVESTIMENTO(44),
-	INVERSAO_FINANCEIRA(45),
-	SEM_DESCRICAO(99);
+	PESSOAL_E_ENCARGOS("31"),
+	JUROS_E_AMORTIZACAO("32"),
+	CUSTEIO("33"),
+	INVESTIMENTO("44"),
+	INVERSAO_FINANCEIRA("45"),
+	SEM_DESCRICAO("99");
 	
-	private final Integer id;
+	private final String id;
 	
-	private NaturezaDespeza(Integer id) {
+	private NaturezaDespeza(String id) {
 		this.id = id;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
  
@@ -24,16 +24,35 @@ public enum NaturezaDespeza {
 		
 		switch(id) {
 		
-		case 31: return "PESSOAL E ENCARGOS";
-		case 32: return "JUROS E AMORTIZAÇÃO";
-		case 33: return "CUSTEIO";
-		case 44: return "INVESTIMENTO";
-		case 45: return "INVERSÃO FINANCEIRA";
-		case 99: return "SEM DESCRIÇÃO";
+		case "31": return "PESSOAL E ENCARGOS";
+		case "32": return "JUROS E AMORTIZAÇÃO";
+		case "33": return "CUSTEIO";
+		case "44": return "INVESTIMENTO";
+		case "45": return "INVERSÃO FINANCEIRA";
+		case "99": return "SEM DESCRIÇÃO";
 		default: return ""; 
 		
 		
 		}
 		
 	}
+	
+	public static String getLabel(String id) {
+		
+		switch(id) {
+		
+		case "31": return "PESSOAL E ENCARGOS";
+		case "32": return "JUROS E AMORTIZAÇÃO";
+		case "33": return "CUSTEIO";
+		case "44": return "INVESTIMENTO";
+		case "45": return "INVERSÃO FINANCEIRA";
+		case "99": return "SEM DESCRIÇÃO";
+		default: return ""; 
+		
+		
+		}
+		
+	}
+	
+	
 }

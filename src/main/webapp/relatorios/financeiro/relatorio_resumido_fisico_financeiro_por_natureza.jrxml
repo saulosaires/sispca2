@@ -20,7 +20,7 @@
 	<queryString>
 		<![CDATA[$P!{param_sql_2}]]>
 	</queryString>
-	<field name="natureza" class="java.lang.String"/>
+	<field name="naturezaDescricao" class="java.lang.String"/>
 	<field name="dotacaoInicial" class="java.math.BigDecimal"/>
 	<field name="disponivel" class="java.math.BigDecimal"/>
 	<field name="empenhado" class="java.math.BigDecimal"/>
@@ -209,11 +209,7 @@
 					<font size="7"/>
 					<paragraph leftIndent="6"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{natureza}.equals("31") ? "31 - PESSOAL E ENCARGOS" :
-$F{natureza}.equals("32") ? "32 - JUROS E AMORTIZAÇÃO" :
-$F{natureza}.equals("33") ? "33 - CUSTEIO" :
-$F{natureza}.equals("44") ? "44 - INVESTIMENTO" :
-$F{natureza}.equals("45") ? "45 - INVERSÃO FINANCEIRA" : $F{natureza}+" - SEM DESCRIÇÃO"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{naturezaDescricao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="176" y="0" width="76" height="20" uuid="24770205-f53f-464b-ac7e-ae772e167781"/>

@@ -58,6 +58,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String MES="mes";
 	private static final  String SIGLA = "sigla";
 	private static final  String NATUREZA="natureza";
+	private static final  String NATUREZA_DESCRICAO="naturezaDescricao";
 	
 	public FisicoFinanceiroMensalSiafemDAO() {
 		setClazz(FisicoFinanceiroMensalSiafem.class);
@@ -790,7 +791,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
  	 						  joinAcao.get(ID),
  	 						  joinAcao.get(DENOMINACAO),
  	 						 
- 	 						  root.get(NATUREZA),
+ 	 						  root.get(NATUREZA_DESCRICAO),
  	 						  
 							  builder.sum(root.get(DOTACAO_INICIAL)),
 							  builder.sum(root.get(DISPONIVEL)),
@@ -846,7 +847,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 						  joinAcao.get(ID),
 						  joinAcao.get(DENOMINACAO),
 						 
-						  root.get(NATUREZA) 
+						  root.get(NATUREZA_DESCRICAO) 
 						  );
  		
 		criteria.orderBy(
@@ -854,7 +855,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
 						 builder.asc( joinPrograma.get(CODIGO)) ,
 						 builder.asc( joinAcao.get(CODIGO)) ,
-						 builder.asc( root.get(NATUREZA))
+						 builder.asc( root.get(NATUREZA_DESCRICAO))
 						);
 		
 		 return entityManager.createQuery(criteria).getResultList();
@@ -875,7 +876,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
  		
 		
  	 	criteria.multiselect(
- 	 						  root.get(NATUREZA),
+ 	 						  root.get(NATUREZA_DESCRICAO),
  	 						  
 							  builder.sum(root.get(DOTACAO_INICIAL)),
 							  builder.sum(root.get(DISPONIVEL)),
@@ -916,9 +917,9 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 			
 		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
  	 			 
-		criteria.groupBy(root.get(NATUREZA));
+		criteria.groupBy(root.get(NATUREZA_DESCRICAO));
  		
-		criteria.orderBy(builder.asc( root.get(NATUREZA)));
+		criteria.orderBy(builder.asc( root.get(NATUREZA_DESCRICAO)));
 		
 		return entityManager.createQuery(criteria).getResultList();
 	}

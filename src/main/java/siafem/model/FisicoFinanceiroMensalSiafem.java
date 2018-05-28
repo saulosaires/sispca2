@@ -55,6 +55,9 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@Column(name="natureza")
 	private String natureza;
 	
+	@Column(name="natureza_descricao")
+	private String naturezaDescricao;
+	
 	@Column(name="regiao")
 	private Integer regiao;
 		
@@ -112,7 +115,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	public FisicoFinanceiroMensalSiafem() {}
 	
 	public FisicoFinanceiroMensalSiafem(
-									      String natureza,
+									      String naturezaDescricao,
 									  
 									      BigDecimal dotacaoInicial,
 									      BigDecimal disponivel,
@@ -123,7 +126,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 			
 			
 			
-		this.natureza = natureza;
+		this.naturezaDescricao = naturezaDescricao;
 		
 		this.dotacaoInicial = dotacaoInicial;
 		this.disponivel = disponivel;
@@ -150,7 +153,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 										  Long acaoId,
 										  String acaoDenominacao,
 									 
-									      String natureza,
+									      String naturezaDescricao,
 									  
 									      BigDecimal dotacaoInicial,
 									      BigDecimal disponivel,
@@ -177,7 +180,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		  this.acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);
 		  this.acao.getUnidadeOrcamentaria().setUnidadeGestoraDescricao(unidadeGestoraDescricao);
 		  
-		  this.natureza = natureza;
+		  this.naturezaDescricao = naturezaDescricao;
 	  
 		  this.dotacaoInicial = dotacaoInicial;
 		  this.disponivel = disponivel;
@@ -201,6 +204,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 									     String planoInternoDescricao,
 									     String fonte,
 									     String natureza,
+									     String naturezaDescricao,
 									     Integer regiao,
 									     Acao acao,
 									     BigDecimal dotacaoInicial,
@@ -223,6 +227,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		 this.planoInternoDescricao = planoInternoDescricao;
 		 this.fonte = fonte;
 		 this.natureza = natureza;
+		 this.naturezaDescricao = naturezaDescricao;
 		 this.regiao = regiao;
 		 
 		 this.acao = acao;
@@ -660,6 +665,14 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 
 	public void setPagoSobreDisponivel(BigDecimal pagoSobreDisponivel) {
 		this.pagoSobreDisponivel = pagoSobreDisponivel;
+	}
+
+	public String getNaturezaDescricao() {
+		return naturezaDescricao;
+	}
+
+	public void setNaturezaDescricao(String naturezaDescricao) {
+		this.naturezaDescricao = naturezaDescricao;
 	}
 
  
