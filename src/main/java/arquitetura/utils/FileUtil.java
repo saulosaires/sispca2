@@ -99,6 +99,8 @@ public class FileUtil {
 
 	}
 
+	
+	
 	public static void sendFileOnResponseAttached(byte[] bytes, String name, String contentType) throws IOException {
 		
 		if (bytes != null && bytes.length>0){

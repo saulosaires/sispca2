@@ -821,7 +821,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		if (natureza!=null) {
 			 
-			predicate.add(builder.equal(root.get(NATUREZA), natureza.getId().toString()));
+			predicate.add(builder.like(root.get(NATUREZA), natureza.getId().toString()+"%"));
 		}
 		
 		

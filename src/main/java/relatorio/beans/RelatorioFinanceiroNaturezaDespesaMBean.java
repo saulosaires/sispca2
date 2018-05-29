@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.model.StreamedContent;
 
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
@@ -51,7 +54,7 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 	
 	private AcaoService acaoService; 
 	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
-	
+	 
 	@Inject
 	public RelatorioFinanceiroNaturezaDespesaMBean(ExercicioService exercicioService,
 												   AcaoService acaoService,
@@ -78,10 +81,10 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 		
 	}
 
-	public String gerarRelatorio() {
+	public void gerarRelatorio() {
 		
 		try {
-			
+		 
 		
 			   List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = fisicoFinanceiroMensalSiafemService.relatorioFinanceiroNaturezaDespesa(
 																																				 unidadeGestora, 
@@ -103,7 +106,8 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 			   
 				if (listFisicoFinanceiro == null || listFisicoFinanceiro.isEmpty()) {
 					Messages.addMessageWarn(NO_DATA);
-					return "";
+					 
+					return ;
 				}
 		
 				Map<String, Object> parameters = new HashMap<>();
@@ -122,7 +126,7 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 		
 				if (jasperRelatorio == null || jasperRelatorio.getPages().isEmpty()) {
 					Messages.addMessageWarn(REPORT_EMPTY);
-					return "";
+					return ;
 				}
 		
 				byte[] bytes = null;
@@ -151,7 +155,6 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 				Messages.addMessageError(FAIL_REPORT);
 			}
 		
-			return "";
 	
 	}
 	
@@ -251,7 +254,10 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 	public void setNaturezaDespezaValues(NaturezaDespeza[] naturezaDespezaValues) {
 		this.naturezaDespezaValues = naturezaDespezaValues;
 	}
- 
+
+
+
+	 
 
 	
 	
