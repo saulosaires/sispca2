@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.primefaces.model.StreamedContent;
 
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;

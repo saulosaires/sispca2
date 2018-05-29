@@ -114,6 +114,74 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	
 	public FisicoFinanceiroMensalSiafem() {}
 	
+	
+	public FisicoFinanceiroMensalSiafem(
+			
+										  String unidadeGestoraCodigo,
+								 		  String unidadeGestoraSigla,
+								 		  String unidadeGestoraDescricao,
+								
+										  String unidadeOrcamentariaCodigo,
+										  String unidadeOrcamentariaDescricao,
+							
+										  String programaCodigo,
+										  String programaDenominacao,
+											
+										  String acaoCodigo,
+										  Long acaoId,
+										  String acaoDenominacao,
+									 
+										  String planoInternoCodigo,
+										  String planoInternoTitulo,
+			 	 						  
+										  String fonte,
+										  String natureza,
+									  
+									      BigDecimal dotacaoInicial,
+									      BigDecimal disponivel,
+									      BigDecimal empenhado,
+									      BigDecimal liquidado,
+									      BigDecimal pago
+										) {
+							
+							
+							this.acao = new Acao();
+							this.acao.setId(acaoId);
+							this.acao.setCodigo(acaoCodigo);
+							this.acao.setDenominacao(acaoDenominacao);
+							
+							this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+							this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+							this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+							
+							this.acao.setPrograma(new Programa());
+							this.acao.getPrograma().setCodigo(programaCodigo);
+							this.acao.getPrograma().setDenominacao(programaDenominacao);
+							
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraCodigo(unidadeGestoraCodigo);
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);
+							
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraDescricao(unidadeGestoraDescricao);
+ 							
+							this.planoInterno = planoInternoCodigo;	
+							this.planoInternoDescricao = planoInternoTitulo;
+							
+							this.fonte    = fonte;
+							this.natureza = natureza;
+							
+							
+							this.dotacaoInicial = dotacaoInicial;
+							this.disponivel = disponivel;
+							this.empenhado = empenhado;
+							this.liquidado = liquidado;
+							this.pago	= pago;	
+							
+							
+							
+							}
+
+	
+	
 	public FisicoFinanceiroMensalSiafem(
 									      String naturezaDescricao,
 									  

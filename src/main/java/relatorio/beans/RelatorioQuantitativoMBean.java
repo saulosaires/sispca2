@@ -9,7 +9,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;

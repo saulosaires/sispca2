@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -58,8 +59,14 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String MES="mes";
 	private static final  String SIGLA = "sigla";
 	private static final  String NATUREZA="natureza";
+	private static final  String FONTE="fonte";
 	private static final  String NATUREZA_DESCRICAO="naturezaDescricao";
+ 	private static final  String TITULO="titulo";
 	
+ 	private static final  String PLANO_INTERNO="planoInterno";		
+ 	private static final  String PLANO_INTERNO_DESCRICAO = "planoInternoDescricao";
+	
+ 	
 	public FisicoFinanceiroMensalSiafemDAO() {
 		setClazz(FisicoFinanceiroMensalSiafem.class);
 
@@ -925,4 +932,111 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	}
 
 
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPlanoInterno(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, Integer ano){
+		
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+				
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.LEFT);	
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.LEFT);		
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.LEFT);
+		Join<Object, Object> joinUnidadeGestora		 = joinUnidadeOrcamentaria.joinSet(UNIDADE_GESTORAS, JoinType.LEFT);
+		
+ 	 	criteria.multiselect(
+				 	 		  joinUnidadeGestora.get(CODIGO),
+				 	 		  joinUnidadeGestora.get(SIGLA),
+				 	 		  joinUnidadeGestora.get(DESCRICAO),
+ 	 			
+							  joinUnidadeOrcamentaria.get(CODIGO),
+							  joinUnidadeOrcamentaria.get(DESCRICAO),
+				  
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinPrograma.get(DENOMINACAO),
+ 	 						
+ 	 						  joinAcao.get(CODIGO),
+ 	 						  joinAcao.get(ID),
+ 	 						  joinAcao.get(DENOMINACAO),
+ 	 						 
+ 	 						  root.get(PLANO_INTERNO),
+ 	 						  root.get(PLANO_INTERNO_DESCRICAO),
+ 	 						  
+ 	 						  root.get(FONTE),
+ 	 						  root.get(NATUREZA),
+ 	 						  
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							  
+							 );
+
+
+ 	 	List<Predicate> predicate = new ArrayList<>();
+
+		if (!Utils.invalidId(unidadeGestora)) {
+ 
+			predicate.add(builder.equal(joinUnidadeGestora.get(ID), unidadeGestora));
+		}
+				
+		if (!Utils.invalidId(unidadeOrcamentaria)) {
+			 
+			predicate.add(builder.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentaria));
+		}
+		
+		if (!Utils.invalidId(acao)) {
+			 
+			predicate.add(builder.equal(joinAcao.get(ID), acao));
+		}	
+		
+		if (!Utils.invalidYear(ano)) {
+			 
+			predicate.add(builder.equal(root.get(ANO), ano));
+		}
+			
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+ 	 			 
+		criteria.groupBy(
+			 	 		  joinUnidadeGestora.get(CODIGO),
+			 	 		  joinUnidadeGestora.get(SIGLA),
+			 	 		  joinUnidadeGestora.get(DESCRICAO),
+			
+						  joinUnidadeOrcamentaria.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(DESCRICAO),
+			  
+						  joinPrograma.get(CODIGO),
+						  joinPrograma.get(DENOMINACAO),
+						
+						  joinAcao.get(CODIGO),
+						  joinAcao.get(ID),
+						  joinAcao.get(DENOMINACAO),
+						 
+						  root.get(PLANO_INTERNO),
+						  root.get(PLANO_INTERNO_DESCRICAO),
+						  
+						  root.get(FONTE),
+						  root.get(NATUREZA)
+						  );
+ 		
+		criteria.orderBy(
+						 builder.asc( joinUnidadeGestora.get(CODIGO)),
+						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+						 builder.asc( joinPrograma.get(CODIGO)) ,
+						 builder.asc( joinAcao.get(CODIGO)) ,
+						 
+						 builder.asc( root.get(PLANO_INTERNO)),
+						 builder.asc( root.get(PLANO_INTERNO_DESCRICAO)),
+						 builder.asc( root.get(FONTE)),
+						 builder.asc( root.get(NATUREZA))
+						);
+		
+		 return entityManager.createQuery(criteria).getResultList();
+	}
+	
+	
+	
 }

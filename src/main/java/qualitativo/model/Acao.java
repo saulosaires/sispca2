@@ -2,6 +2,7 @@ package qualitativo.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -149,7 +150,7 @@ public class Acao extends Model implements  Auditable {
 	private List<FisicoFinanceiro> fisicoFinanceiros;
 	
 	@OneToMany(mappedBy="acao")
-	private List<PlanoInterno> planoInternos;
+	private Set<PlanoInterno> planoInternos;
 	
 	@Column(name="observacao",length=2000)
 	private String observacao;
@@ -158,8 +159,7 @@ public class Acao extends Model implements  Auditable {
 	@JoinColumn(name="id_exercicio") 
 	@NotNull(message="exercicio: campo é obrigatório")
 	private Exercicio exercicio;
-
-	
+ 	
 	public Acao() {}
 	
 	public Acao(Long id) {
@@ -507,11 +507,11 @@ public class Acao extends Model implements  Auditable {
 		this.fisicoFinanceiros = fisicoFinanceiros;
 	}	
 
- 	public List<PlanoInterno> getPlanoInternos() {
+ 	public Set<PlanoInterno> getPlanoInternos() {
 		return planoInternos;
 	}
 
-	public void setPlanoInternos(List<PlanoInterno> planoInternos) {
+	public void setPlanoInternos(Set<PlanoInterno> planoInternos) {
 		this.planoInternos = planoInternos;
 	}
 
@@ -524,8 +524,6 @@ public class Acao extends Model implements  Auditable {
 	}
 
 	
-	
-	
 	public Exercicio getExercicio() {
 		return exercicio;
 	}
@@ -534,8 +532,7 @@ public class Acao extends Model implements  Auditable {
 		this.exercicio = exercicio;
 	}
 
-	
-	
+ 
 	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();

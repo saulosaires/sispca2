@@ -2,9 +2,6 @@ package relatorio.beans;
 
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;

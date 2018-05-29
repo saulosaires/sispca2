@@ -16,6 +16,7 @@ import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
+import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
 import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.model.RelatorioDetalhamentoAcaoSiafem;
@@ -159,7 +160,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		 BigDecimal liquidado = financeiroMensalSiafem.getLiquidado();
 		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
 		
-		if(liquidado!=null && liquidado.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+		if(liquidado!=null  && disponivel!=null && disponivel.intValue()>0) {
 			
 			financeiroMensalSiafem.setLiquidadoSobreAtual(MathUtils.divide(liquidado,disponivel));
 		}else {
@@ -173,7 +174,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		 BigDecimal pago = financeiroMensalSiafem.getPago();
 		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
 		
-		if(pago!=null && pago.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+		if(pago!=null  && disponivel!=null && disponivel.intValue()>0) {
 			
 			financeiroMensalSiafem.setPagoSobreDisponivel(MathUtils.divide(pago,disponivel));
 		}else {
@@ -188,7 +189,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		 BigDecimal empenhado = financeiroMensalSiafem.getEmpenhado();
 		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
 		
-		if(empenhado!=null && empenhado.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+		if(empenhado!=null  && disponivel!=null && disponivel.intValue()>0) {
 			
 			financeiroMensalSiafem.setEmpenhadoSobreDisponivel(MathUtils.divide(empenhado,disponivel));
 		}else {
@@ -202,7 +203,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		 BigDecimal empenhado = financeiroMensalSiafem.getEmpenhado();
 		 BigDecimal disponivel = financeiroMensalSiafem.getDisponivel();
 		
-		if(empenhado!=null && empenhado.intValue()>0 && disponivel!=null && disponivel.intValue()>0) {
+		if(empenhado!=null && disponivel!=null) {
 			
 			financeiroMensalSiafem.setSaldo(disponivel.subtract(empenhado));
 		}else {
@@ -372,7 +373,25 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	}
 
 	
-	
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPlanoInterno(Long unidadeGestora, Long unidadeOrcamentaria, Long acao,  Integer ano){
+		
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioFinanceiroPlanoInterno(unidadeGestora, unidadeOrcamentaria, acao, ano);
+		
+		 for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem: listFisicoFinanceiro) {
+			 
+			 calculaSaldo(fisicoFinanceiroMensalSiafem);
+			 calculaEmpenhadoSobreDisponivel(fisicoFinanceiroMensalSiafem);
+			 calculaLiquidadoSobreAtual(fisicoFinanceiroMensalSiafem);
+			 calculaPagoSobreDisponivel(fisicoFinanceiroMensalSiafem);
+		 }
+		 
+		 		 
+		 return listFisicoFinanceiro;
+		
+		
+		
+	}
+
 	
 	private FisicoFinanceiroMensalSiafemController controller() {
 		

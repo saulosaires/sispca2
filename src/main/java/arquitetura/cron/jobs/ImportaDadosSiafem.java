@@ -67,6 +67,8 @@ public class ImportaDadosSiafem implements Job {
 	
 	 private  Exercicio exercicio ;
 	 
+	 BigDecimal num100 = new BigDecimal(100);
+	 
 	public  ImportaDadosSiafem(){
 		
 		fisicoFinanceiroMensalSiafemService = CDI.current().select(FisicoFinanceiroMensalSiafemService.class).get();
@@ -205,7 +207,7 @@ public class ImportaDadosSiafem implements Job {
 			
 			list = br.lines().collect(Collectors.toList());
 	 
-			 
+
 			list.forEach(linha -> {
 					 
 					try {
@@ -245,6 +247,12 @@ public class ImportaDadosSiafem implements Job {
 						liq 	   = verificarSinal(liq,negLiquidado);
 						pag 	   = verificarSinal(pag,negPago);
  	  
+						dotInicial = MathUtils.divide(dotInicial, num100);
+						disp 	   = MathUtils.divide(disp, num100);
+						emp		   = MathUtils.divide(emp, num100);
+						liq 	   = MathUtils.divide(liq, num100);
+						pag 	   = MathUtils.divide(pag, num100);
+						
 						Mes m = new Mes(Long.parseLong(mes));
 						 
 						 Acao acao =null; 
