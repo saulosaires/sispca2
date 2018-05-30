@@ -1,6 +1,7 @@
 package quantitativo.beans.fisicofinanceiro.anual;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
 import administrativo.service.PpaService;
 import arquitetura.exception.JpaException;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -170,7 +172,7 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 						
 						for(FisicoFinanceiro fisicoFinanceiro : regiaoMunicipio.getFisicoFinanceiro()) {
 							
-							if(fisicoFinanceiro.getValor()>0 || fisicoFinanceiro.getQuantidade()>0) {
+							if(fisicoFinanceiro.getValor().doubleValue()>0 || fisicoFinanceiro.getQuantidade().doubleValue()>0) {
 								saveFisicoFinanceiro(fisicoFinanceiro);	
 							}
 							
@@ -197,7 +199,7 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 	private void saveFisicoFinanceiro(FisicoFinanceiro fisicoFinanceiro) throws JpaException {
 		
  			
-			if(fisicoFinanceiro.getValor()>0 || fisicoFinanceiro.getQuantidade()>0) {
+			if(fisicoFinanceiro.getValor().doubleValue()>0 || fisicoFinanceiro.getQuantidade().doubleValue()>0) {
 				fisicoFinanceiroService.merge(fisicoFinanceiro);	
 			}
 			
@@ -211,16 +213,16 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 	 * **/
 	public boolean temPlanejamento(RegiaoMunicipio regiaoMunicipio){
 		
-		Double valorTotal = Double.valueOf(0.0);
-		Double quantidadeTotal = Double.valueOf(0.0);
+		BigDecimal valorTotal = MathUtils.getZeroBigDecimal();
+		BigDecimal quantidadeTotal = MathUtils.getZeroBigDecimal();
 		
 		for(FisicoFinanceiro ff: regiaoMunicipio.getFisicoFinanceiro()){
 			
-			valorTotal += ff.getValor();
-			quantidadeTotal += ff.getQuantidade();
+			valorTotal.add(ff.getValor());
+			quantidadeTotal.add(ff.getQuantidade());
 		
 		
-			if(valorTotal >0 || quantidadeTotal>0) {return true;}
+			if(valorTotal.doubleValue() >0 || quantidadeTotal.doubleValue()>0) {return true;}
 		}
 		
 		return false;

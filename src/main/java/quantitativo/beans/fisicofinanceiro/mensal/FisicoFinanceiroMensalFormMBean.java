@@ -1,6 +1,7 @@
 package quantitativo.beans.fisicofinanceiro.mensal;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import javax.inject.Named;
 
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -170,7 +172,7 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 						
 						for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
 							
-							if(!Utils.invalidId(fisicoFinanceiroMensal.getId()) || fisicoFinanceiroMensal.getValor()>0 || fisicoFinanceiroMensal.getQuantidade()>0) {
+							if(!Utils.invalidId(fisicoFinanceiroMensal.getId()) || fisicoFinanceiroMensal.getValor().doubleValue()>0 || fisicoFinanceiroMensal.getQuantidade().doubleValue()>0) {
 								fisicoFinanceiroMensalService.merge(fisicoFinanceiroMensal);
 							}
 							
@@ -202,16 +204,16 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 	 * **/
 	public boolean temPlanejamento(RegiaoMunicipio regiaoMunicipio){
 		
-		Double valorTotal = Double.valueOf(0.0);
-		Double quantidadeTotal = Double.valueOf(0.0);
+		BigDecimal valorTotal 	   = MathUtils.getZeroBigDecimal();
+		BigDecimal quantidadeTotal = MathUtils.getZeroBigDecimal();
 		
 		for(FisicoFinanceiroMensal ff: regiaoMunicipio.getFisicoFinanceiroMensal()){
 			
-			valorTotal += ff.getValor();
-			quantidadeTotal += ff.getQuantidade();
+			valorTotal.add(ff.getValor());
+			quantidadeTotal.add(ff.getQuantidade());
 		
 		
-			if(valorTotal >0 || quantidadeTotal>0) {return true;}
+			if(valorTotal.doubleValue() >0 || quantidadeTotal.doubleValue() >0) {return true;}
 		}
 		
 		return false;

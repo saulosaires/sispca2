@@ -1,6 +1,7 @@
 package monitoramento.beans.fisicofinanceiro.mensal;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.inject.Named;
 import administrativo.model.Exercicio;
 import administrativo.service.ExercicioService;
 import arquitetura.exception.JpaException;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -178,8 +180,8 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 					regiaoMunicipio.setValorVigente(fisicoFinanceiro.getValor());
 				}else {
 					
-					regiaoMunicipio.setQuantidadeVigente(0.0);
-					regiaoMunicipio.setValorVigente(0.0);
+					regiaoMunicipio.setQuantidadeVigente(MathUtils.getZeroBigDecimal());
+					regiaoMunicipio.setValorVigente(MathUtils.getZeroBigDecimal());
 				}
 			 
 			
@@ -191,22 +193,22 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 	
 	public String soma(RegiaoMunicipio rm){
 		
-		Double valorTotal = Double.valueOf(0.0);
-		Double quantidadeTotal = Double.valueOf(0);
-		Double valorAnterior = Double.valueOf(0.0);
-		Double quantidadeAnterior = Double.valueOf(0);
+		BigDecimal valorTotal 		  = MathUtils.getZeroBigDecimal();
+		BigDecimal quantidadeTotal 	  = MathUtils.getZeroBigDecimal();
+		BigDecimal valorAnterior 	  = MathUtils.getZeroBigDecimal();
+		BigDecimal quantidadeAnterior = MathUtils.getZeroBigDecimal();
 
 		for(Execucao ex: rm.getExecucoes()){
-			valorTotal += ex.getValor();
-			quantidadeTotal +=ex.getQuantidade();
+			valorTotal.add(ex.getValor());
+			quantidadeTotal.add(ex.getQuantidade());
 			
 			if(ex.getMes().getNumeroMes() < mes.getNumeroMes()){
-				valorAnterior += ex.getValor();
-				quantidadeAnterior += Double.valueOf(ex.getQuantidade());
+				valorAnterior.add(ex.getValor());
+				quantidadeAnterior.add(ex.getQuantidade());
 			}
 			
 			if(ex.getMes().equals(mes)){
-				rm.setQuantidadeAtual(Double.valueOf(ex.getQuantidade()));
+				rm.setQuantidadeAtual(ex.getQuantidade());
 				rm.setValorAtual(ex.getValor());			
 			}
 
@@ -234,8 +236,8 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 
 			Execucao execucaoMensal = new Execucao();
 			execucaoMensal.setMes(mes);
-			execucaoMensal.setQuantidade(BigInteger.ZERO.intValue());
-			execucaoMensal.setValor(0.0);
+			execucaoMensal.setQuantidade(MathUtils.getZeroBigDecimal());
+			execucaoMensal.setValor(MathUtils.getZeroBigDecimal());
 
 			execucaoMensal.setRegiaoMunicipio(regiaoMunicipio);
 			execucaoMensal.setAcao(acao);
@@ -256,7 +258,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 						
 					for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
 						
-						if(fisicoFinanceiroMensal.getValor()>0 || fisicoFinanceiroMensal.getQuantidade()>0) {
+						if(fisicoFinanceiroMensal.getValor().intValue()>0 || fisicoFinanceiroMensal.getQuantidade().intValue()>0) {
 							salvarExecucoes(regiaoMunicipio.getExecucoes());	
 						}
 						
@@ -282,7 +284,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
  			
 		for(Execucao ex :execucoes) {	
 			
-			if(!Utils.invalidId(ex.getId()) || ex.getValor()>0 || ex.getQuantidade()>0) {
+			if(!Utils.invalidId(ex.getId()) || ex.getValor().intValue()>0 || ex.getQuantidade().intValue()>0) {
 				execucaoService.merge(ex);
 			}
 			

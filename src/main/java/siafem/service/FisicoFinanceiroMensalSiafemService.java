@@ -16,7 +16,6 @@ import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
-import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
 import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.model.RelatorioDetalhamentoAcaoSiafem;
@@ -430,6 +429,9 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	}
 	
 	
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPorPrograma(Integer ano){
+		return controller().relatorioFinanceiroPorPrograma(ano);
+	}
 	
 	private FisicoFinanceiroMensalSiafemController controller() {
 		

@@ -1,6 +1,7 @@
 package quantitativo.beans.fisicofinanceiro.mensal;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -155,10 +156,10 @@ public class FisicoFinanceiroMensalReportMBean implements Serializable {
 		
 		private String regiaoMunicipio;
 		private Integer mes;
-		private Double quantidade;
-		private Double valor;
+		private BigDecimal quantidade;
+		private BigDecimal valor;
 		
-		public RelatorioFisicoFinanceiroMensalReport(String regiaoMunicipio, Integer mes, Double quantidade,Double valor) {
+		public RelatorioFisicoFinanceiroMensalReport(String regiaoMunicipio, Integer mes, BigDecimal quantidade,BigDecimal valor) {
 			super();
 			this.regiaoMunicipio = regiaoMunicipio;
 			this.mes = mes;
@@ -182,19 +183,19 @@ public class FisicoFinanceiroMensalReportMBean implements Serializable {
 			this.mes = mes;
 		}
 
-		public Double getQuantidade() {
+		public BigDecimal getQuantidade() {
 			return quantidade;
 		}
 
-		public void setQuantidade(Double quantidade) {
+		public void setQuantidade(BigDecimal quantidade) {
 			this.quantidade = quantidade;
 		}
 
-		public Double getValor() {
+		public BigDecimal getValor() {
 			return valor;
 		}
 
-		public void setValor(Double valor) {
+		public void setValor(BigDecimal valor) {
 			this.valor = valor;
 		}
 	

@@ -694,6 +694,12 @@
 			<from-outcome>relatorioFisicoFinanceiroMetaFinanceiro</from-outcome>
 			<to-view-id>/private/relatorio/metafisicofinanceiro/list.xhtml</to-view-id>
 		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>relatorioFisicoFinanceiroMetaFinanceiroPrograma</from-outcome>
+			<to-view-id>/private/relatorio/financeiroprograma/list.xhtml</to-view-id>
+		</navigation-case>
+
 				
 	</navigation-rule> 	
 

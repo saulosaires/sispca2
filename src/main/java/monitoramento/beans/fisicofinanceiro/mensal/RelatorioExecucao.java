@@ -1,5 +1,8 @@
 package monitoramento.beans.fisicofinanceiro.mensal;
 
+import java.math.BigDecimal;
+
+import arquitetura.utils.MathUtils;
 import monitoramento.model.Execucao;
 
 public class RelatorioExecucao {
@@ -34,53 +37,53 @@ public class RelatorioExecucao {
 	
 	
 	
-	private Double qtdjan=0d;
+	private BigDecimal qtdjan=MathUtils.getZeroBigDecimal();
 	
-	private Double valorjan=0d;
+	private BigDecimal valorjan=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdfev=0d;
+	private BigDecimal qtdfev=MathUtils.getZeroBigDecimal();
 	
-	private Double valorfev=0d;
+	private BigDecimal valorfev=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdmar=0d;
+	private BigDecimal qtdmar=MathUtils.getZeroBigDecimal();
 	
-	private Double valormar=0d;
+	private BigDecimal valormar=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdabr=0d;
+	private BigDecimal qtdabr=MathUtils.getZeroBigDecimal();
 	
-	private Double valorabr=0d;
+	private BigDecimal valorabr=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdmai=0d;
+	private BigDecimal qtdmai=MathUtils.getZeroBigDecimal();
 	
-	private Double valormai=0d;
+	private BigDecimal valormai=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdjun=0d;
+	private BigDecimal qtdjun=MathUtils.getZeroBigDecimal();
 	
-	private Double valorjun=0d;
+	private BigDecimal valorjun=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdjul=0d;
+	private BigDecimal qtdjul=MathUtils.getZeroBigDecimal();
 	
-	private Double valorjul=0d;
+	private BigDecimal valorjul=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdago=0d;
+	private BigDecimal qtdago=MathUtils.getZeroBigDecimal();
 	
-	private Double valorago=0d;
+	private BigDecimal valorago=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdset=0d;
+	private BigDecimal qtdset=MathUtils.getZeroBigDecimal();
 	
-	private Double valorset=0d;
+	private BigDecimal valorset=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdout=0d;
+	private BigDecimal qtdout=MathUtils.getZeroBigDecimal();
 	
-	private Double valorout=0d;
+	private BigDecimal valorout=MathUtils.getZeroBigDecimal();
 	
-	private Double qtdnov=0d;
+	private BigDecimal qtdnov=MathUtils.getZeroBigDecimal();
 	
-	private Double valornov=0d;
+	private BigDecimal valornov=MathUtils.getZeroBigDecimal();
 	
-	private Double qtddez=0d;
+	private BigDecimal qtddez=MathUtils.getZeroBigDecimal();
 	
-	private Double valordez=0d;
+	private BigDecimal valordez=MathUtils.getZeroBigDecimal();
 	
 	private String obsjan;
 	
@@ -159,8 +162,8 @@ public class RelatorioExecucao {
 
 		int mesId  = e.getMes().getId().intValue();
 		
-		double qtd   = e.getQuantidade();
-		double valor = e.getValor();
+		BigDecimal qtd   = e.getQuantidade();
+		BigDecimal valor = e.getValor();
 		
 		switch(mesId) {
 		
@@ -351,195 +354,195 @@ public class RelatorioExecucao {
 		this.codigo_acao = codigo_acao;
 	}
 
-	public Double getQtdjan() {
+	public BigDecimal getQtdjan() {
 		return qtdjan;
 	}
 
-	public void setQtdjan(Double qtdjan) {
+	public void setQtdjan(BigDecimal qtdjan) {
 		this.qtdjan = qtdjan;
 	}
 
-	public Double getValorjan() {
+	public BigDecimal getValorjan() {
 		return valorjan;
 	}
 
-	public void setValorjan(Double valorjan) {
+	public void setValorjan(BigDecimal valorjan) {
 		this.valorjan = valorjan;
 	}
 
-	public Double getQtdfev() {
+	public BigDecimal getQtdfev() {
 		return qtdfev;
 	}
 
-	public void setQtdfev(Double qtdfev) {
+	public void setQtdfev(BigDecimal qtdfev) {
 		this.qtdfev = qtdfev;
 	}
 
-	public Double getValorfev() {
+	public BigDecimal getValorfev() {
 		return valorfev;
 	}
 
-	public void setValorfev(Double valorfev) {
+	public void setValorfev(BigDecimal valorfev) {
 		this.valorfev = valorfev;
 	}
 
-	public Double getQtdmar() {
+	public BigDecimal getQtdmar() {
 		return qtdmar;
 	}
 
-	public void setQtdmar(Double qtdmar) {
+	public void setQtdmar(BigDecimal qtdmar) {
 		this.qtdmar = qtdmar;
 	}
 
-	public Double getValormar() {
+	public BigDecimal getValormar() {
 		return valormar;
 	}
 
-	public void setValormar(Double valormar) {
+	public void setValormar(BigDecimal valormar) {
 		this.valormar = valormar;
 	}
 
-	public Double getQtdabr() {
+	public BigDecimal getQtdabr() {
 		return qtdabr;
 	}
 
-	public void setQtdabr(Double qtdabr) {
+	public void setQtdabr(BigDecimal qtdabr) {
 		this.qtdabr = qtdabr;
 	}
 
-	public Double getValorabr() {
+	public BigDecimal getValorabr() {
 		return valorabr;
 	}
 
-	public void setValorabr(Double valorabr) {
+	public void setValorabr(BigDecimal valorabr) {
 		this.valorabr = valorabr;
 	}
 
-	public Double getQtdmai() {
+	public BigDecimal getQtdmai() {
 		return qtdmai;
 	}
 
-	public void setQtdmai(Double qtdmai) {
+	public void setQtdmai(BigDecimal qtdmai) {
 		this.qtdmai = qtdmai;
 	}
 
-	public Double getValormai() {
+	public BigDecimal getValormai() {
 		return valormai;
 	}
 
-	public void setValormai(Double valormai) {
+	public void setValormai(BigDecimal valormai) {
 		this.valormai = valormai;
 	}
 
-	public Double getQtdjun() {
+	public BigDecimal getQtdjun() {
 		return qtdjun;
 	}
 
-	public void setQtdjun(Double qtdjun) {
+	public void setQtdjun(BigDecimal qtdjun) {
 		this.qtdjun = qtdjun;
 	}
 
-	public Double getValorjun() {
+	public BigDecimal getValorjun() {
 		return valorjun;
 	}
 
-	public void setValorjun(Double valorjun) {
+	public void setValorjun(BigDecimal valorjun) {
 		this.valorjun = valorjun;
 	}
 
-	public Double getQtdjul() {
+	public BigDecimal getQtdjul() {
 		return qtdjul;
 	}
 
-	public void setQtdjul(Double qtdjul) {
+	public void setQtdjul(BigDecimal qtdjul) {
 		this.qtdjul = qtdjul;
 	}
 
-	public Double getValorjul() {
+	public BigDecimal getValorjul() {
 		return valorjul;
 	}
 
-	public void setValorjul(Double valorjul) {
+	public void setValorjul(BigDecimal valorjul) {
 		this.valorjul = valorjul;
 	}
 
-	public Double getQtdago() {
+	public BigDecimal getQtdago() {
 		return qtdago;
 	}
 
-	public void setQtdago(Double qtdago) {
+	public void setQtdago(BigDecimal qtdago) {
 		this.qtdago = qtdago;
 	}
 
-	public Double getValorago() {
+	public BigDecimal getValorago() {
 		return valorago;
 	}
 
-	public void setValorago(Double valorago) {
+	public void setValorago(BigDecimal valorago) {
 		this.valorago = valorago;
 	}
 
-	public Double getQtdset() {
+	public BigDecimal getQtdset() {
 		return qtdset;
 	}
 
-	public void setQtdset(Double qtdset) {
+	public void setQtdset(BigDecimal qtdset) {
 		this.qtdset = qtdset;
 	}
 
-	public Double getValorset() {
+	public BigDecimal getValorset() {
 		return valorset;
 	}
 
-	public void setValorset(Double valorset) {
+	public void setValorset(BigDecimal valorset) {
 		this.valorset = valorset;
 	}
 
-	public Double getQtdout() {
+	public BigDecimal getQtdout() {
 		return qtdout;
 	}
 
-	public void setQtdout(Double qtdout) {
+	public void setQtdout(BigDecimal qtdout) {
 		this.qtdout = qtdout;
 	}
 
-	public Double getValorout() {
+	public BigDecimal getValorout() {
 		return valorout;
 	}
 
-	public void setValorout(Double valorout) {
+	public void setValorout(BigDecimal valorout) {
 		this.valorout = valorout;
 	}
 
-	public Double getQtdnov() {
+	public BigDecimal getQtdnov() {
 		return qtdnov;
 	}
 
-	public void setQtdnov(Double qtdnov) {
+	public void setQtdnov(BigDecimal qtdnov) {
 		this.qtdnov = qtdnov;
 	}
 
-	public Double getValornov() {
+	public BigDecimal getValornov() {
 		return valornov;
 	}
 
-	public void setValornov(Double valornov) {
+	public void setValornov(BigDecimal valornov) {
 		this.valornov = valornov;
 	}
 
-	public Double getQtddez() {
+	public BigDecimal getQtddez() {
 		return qtddez;
 	}
 
-	public void setQtddez(Double qtddez) {
+	public void setQtddez(BigDecimal qtddez) {
 		this.qtddez = qtddez;
 	}
 
-	public Double getValordez() {
+	public BigDecimal getValordez() {
 		return valordez;
 	}
 
-	public void setValordez(Double valordez) {
+	public void setValordez(BigDecimal valordez) {
 		this.valordez = valordez;
 	}
 

@@ -115,6 +115,33 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	
 	public FisicoFinanceiroMensalSiafem() {}
 	
+	public FisicoFinanceiroMensalSiafem(
+										  String programaCodigo,
+										  String programaDenominacao,
+										  
+									      BigDecimal dotacaoInicial,
+									      BigDecimal disponivel,
+									      BigDecimal empenhado,
+									      BigDecimal liquidado,
+									      BigDecimal pago) {
+							
+							
+			this.acao = new Acao();
+
+			this.acao.setPrograma(new Programa());
+			this.acao.getPrograma().setCodigo(programaCodigo);
+			this.acao.getPrograma().setDenominacao(programaDenominacao);
+			
+			this.dotacaoInicial = dotacaoInicial;
+			this.disponivel = disponivel;
+			this.empenhado = empenhado;
+			this.liquidado = liquidado;
+			this.pago	= pago;	
+							
+							
+							
+	}	
+	
 	
 	public FisicoFinanceiroMensalSiafem(
 			

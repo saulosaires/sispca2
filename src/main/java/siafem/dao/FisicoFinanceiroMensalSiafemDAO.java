@@ -1152,6 +1152,51 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		 return entityManager.createQuery(criteria).getResultList();
 	}
 	
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPorPrograma(Integer ano){
+		
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+				
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.INNER);	
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.INNER);		
+		
+ 	 	criteria.multiselect(
+				  
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinPrograma.get(DENOMINACAO),
+ 	 						  
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							  
+							 );
+
+
+ 	 	List<Predicate> predicate = new ArrayList<>();
+
+		
+		if (!Utils.invalidYear(ano)) {
+			 
+			predicate.add(builder.equal(root.get(ANO), ano));
+		}
+			
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+ 	 			 
+		criteria.groupBy(
+						 joinPrograma.get(CODIGO),
+						 joinPrograma.get(DENOMINACAO)
+						);
+ 		
+		criteria.orderBy(builder.asc( joinPrograma.get(DENOMINACAO)));
+		
+		 return entityManager.createQuery(criteria).getResultList();
+	}
 
 	
 	

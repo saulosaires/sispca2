@@ -1,6 +1,7 @@
 package quantitativo.model;
 
 import java.beans.Transient;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -52,21 +53,21 @@ public class RegiaoMunicipio extends Model{
 	
 	private transient Double[] quantidade;
 	
-	private transient Double valorAnterior;
+	private transient BigDecimal valorAnterior;
 	
-	private transient Double quantidadeAnterior;
+	private transient BigDecimal quantidadeAnterior;
 	
-	private transient Double valorAtual;
+	private transient BigDecimal valorAtual;
 	
-	private transient Double quantidadeAtual;
+	private transient BigDecimal quantidadeAtual;
 	
-	private transient Double valorVigente;
+	private transient BigDecimal valorVigente;
 	
-	private transient Double quantidadeVigente;
+	private transient BigDecimal quantidadeVigente;
 	
-	private transient Double valorTotal;
+	private transient BigDecimal valorTotal;
 	
-	private transient Double quantidadeTotal;
+	private transient BigDecimal quantidadeTotal;
 	
 	private transient boolean comitado;
 	
@@ -164,67 +165,67 @@ public class RegiaoMunicipio extends Model{
 		this.quantidade = quantidade;
 	}
 	@Transient
-	public Double getValorAtual() {
+	public BigDecimal getValorAtual() {
 		return valorAtual;
 	}
 	@Transient
-	public void setValorAtual(Double valorAtual) {
+	public void setValorAtual(BigDecimal valorAtual) {
 		this.valorAtual = valorAtual;
 	}
 	@Transient
-	public Double getQuantidadeAtual() {
+	public BigDecimal getQuantidadeAtual() {
 		return quantidadeAtual;
 	}
 	@Transient
-	public void setQuantidadeAtual(Double quantidadeAtual) {
+	public void setQuantidadeAtual(BigDecimal quantidadeAtual) {
 		this.quantidadeAtual = quantidadeAtual;
 	}
 	@Transient
-	public Double getValorVigente() {
+	public BigDecimal getValorVigente() {
 		return valorVigente;
 	}
 	@Transient
-	public void setValorVigente(Double valorVigente) {
+	public void setValorVigente(BigDecimal valorVigente) {
 		this.valorVigente = valorVigente;
 	}
 	@Transient
-	public Double getQuantidadeVigente() {
+	public BigDecimal getQuantidadeVigente() {
 		return quantidadeVigente;
 	}
 	@Transient
-	public void setQuantidadeVigente(Double quantidadeVigente) {
+	public void setQuantidadeVigente(BigDecimal quantidadeVigente) {
 		this.quantidadeVigente = quantidadeVigente;
 	}
 	@Transient
-	public Double getValorTotal() {
+	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
 	@Transient
-	public void setValorTotal(Double valorTotal) {
+	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	@Transient
-	public Double getQuantidadeTotal() {
+	public BigDecimal getQuantidadeTotal() {
 		return quantidadeTotal;
 	}
 	@Transient
-	public void setQuantidadeTotal(Double quantidadeTotal) {
+	public void setQuantidadeTotal(BigDecimal quantidadeTotal) {
 		this.quantidadeTotal = quantidadeTotal;
 	}
 	@Transient
-	public Double getValorAnterior() {
+	public BigDecimal getValorAnterior() {
 		return valorAnterior;
 	}
 	@Transient
-	public void setValorAnterior(Double valorAnterior) {
+	public void setValorAnterior(BigDecimal valorAnterior) {
 		this.valorAnterior = valorAnterior;
 	}
 	@Transient
-	public Double getQuantidadeAnterior() {
+	public BigDecimal getQuantidadeAnterior() {
 		return quantidadeAnterior;
 	}
 	@Transient
-	public void setQuantidadeAnterior(Double quantidadeAnterior) {
+	public void setQuantidadeAnterior(BigDecimal quantidadeAnterior) {
 		this.quantidadeAnterior = quantidadeAnterior;
 	}
 	@Transient

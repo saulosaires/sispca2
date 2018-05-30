@@ -1,5 +1,7 @@
 package quantitativo.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,10 +35,10 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	private Exercicio exercicio = new Exercicio();
 	
 	@Column(name="quantidade")
-	private double quantidade;
+	private BigDecimal quantidade;
 
 	@Column(name="valor")
-	private double valor;
+	private BigDecimal valor;
  
  
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -59,8 +61,8 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 							String acaoCodigo,
 							String acaoDenominacao,
 							Integer exercicioAno,
-							double quantidade,
-							double valor
+							BigDecimal quantidade,
+							BigDecimal valor
 						   ) { 
  
 		regiaoMunicipio = new RegiaoMunicipio();
@@ -84,7 +86,7 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 		
 	}
 
-	public FisicoFinanceiro(double quantidade, double valor, int exercicioAno) {
+	public FisicoFinanceiro(BigDecimal quantidade, BigDecimal valor, int exercicioAno) {
 
 		exercicio = new Exercicio();
 		exercicio.setAno(exercicioAno);
@@ -104,7 +106,7 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 			   			    String acaoCodigo,
 						    String acaoDenominacao,
 						    Integer ano,
-						    Double valor
+						    BigDecimal valor
 			   			   ) {
 		
 		this.acao = new Acao();
@@ -140,20 +142,20 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 		this.exercicio = exercicio;
 	}
 
-	public double getQuantidade() {
+	public BigDecimal getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(double quantidade) {
+	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
 	}
 
-	public double getValor() {
+	public BigDecimal getValor() {
 		return this.valor;
 	}
 
 	
-	public void setValor(double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
  

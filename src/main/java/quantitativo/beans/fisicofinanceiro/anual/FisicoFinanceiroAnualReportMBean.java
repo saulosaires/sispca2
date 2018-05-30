@@ -2,6 +2,7 @@
 package quantitativo.beans.fisicofinanceiro.anual;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -157,11 +158,10 @@ public class FisicoFinanceiroAnualReportMBean implements Serializable {
 
 		private String regiaoMunicipioDescricao;
 		private Integer ano;
-		private Double quantidade;
-		private Double valor;
+		private BigDecimal quantidade;
+		private BigDecimal valor;
 
-		public RelatorioFisicoFinanceiroAnualReport(String regiaoMunicipioDescricao, Integer ano, Double quantidade,
-				Double valor) {
+		public RelatorioFisicoFinanceiroAnualReport(String regiaoMunicipioDescricao, Integer ano, BigDecimal quantidade, BigDecimal valor) {
 			super();
 			this.regiaoMunicipioDescricao = regiaoMunicipioDescricao;
 			this.ano = ano;
@@ -185,19 +185,19 @@ public class FisicoFinanceiroAnualReportMBean implements Serializable {
 			this.ano = ano;
 		}
 
-		public Double getQuantidade() {
+		public BigDecimal getQuantidade() {
 			return quantidade;
 		}
 
-		public void setQuantidade(Double quantidade) {
+		public void setQuantidade(BigDecimal quantidade) {
 			this.quantidade = quantidade;
 		}
 
-		public Double getValor() {
+		public BigDecimal getValor() {
 			return valor;
 		}
 
-		public void setValor(Double valor) {
+		public void setValor(BigDecimal valor) {
 			this.valor = valor;
 		}
 
