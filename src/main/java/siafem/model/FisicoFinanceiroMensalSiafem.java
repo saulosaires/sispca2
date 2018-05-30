@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import arquitetura.utils.MathUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
@@ -101,18 +102,84 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	private transient Long tipoCalculoMetaId;
 	private transient String unidadeMedida;
 	
-	private transient BigDecimal planejado;
-	private transient BigDecimal executado;
-	private transient BigDecimal eficacia; 
+	private transient BigDecimal planejado = MathUtils.getZeroBigDecimal();
+	private transient BigDecimal executado = MathUtils.getZeroBigDecimal();
+	private transient BigDecimal eficacia  = MathUtils.getZeroBigDecimal(); 
 	
-	private transient BigDecimal pagoSobreDisponivel;
-	private transient BigDecimal empenhadoSobreDisponivel;
-	private transient BigDecimal liquidadoSobreAtual;
+	private transient BigDecimal pagoSobreDisponivel = MathUtils.getZeroBigDecimal();
+	private transient BigDecimal empenhadoSobreDisponivel = MathUtils.getZeroBigDecimal();
+	private transient BigDecimal liquidadoSobreAtual = MathUtils.getZeroBigDecimal();
 	
-	private transient BigDecimal eficiencia;
-	private transient BigDecimal saldo;
+	private transient BigDecimal eficiencia = MathUtils.getZeroBigDecimal();
+	private transient BigDecimal saldo = MathUtils.getZeroBigDecimal();
 	
 	public FisicoFinanceiroMensalSiafem() {}
+	
+	
+	public FisicoFinanceiroMensalSiafem(
+			
+										  String unidadeGestoraCodigo,
+								 		  String unidadeGestoraSigla,
+								 		  String unidadeGestoraDescricao,
+								
+										  String unidadeOrcamentariaCodigo,
+										  String unidadeOrcamentariaDescricao,
+							
+										  String programaCodigo,
+										  String programaDenominacao,
+											
+										  Long acaoId,
+										  String acaoCodigo,
+										  String acaoProduto,
+										  String acaoDenominacao,
+										  String acaoObservacao,
+									 
+										  String unidadeMedidaDescricao,
+									  
+										  Long tipoCalculoMetaId,
+										  
+									      BigDecimal dotacaoInicial,
+									      BigDecimal disponivel,
+									      BigDecimal empenhado,
+									      BigDecimal liquidado,
+									      BigDecimal pago
+										) {
+							
+							
+							this.acao = new Acao(acaoId);
+							this.acao.setCodigo(acaoCodigo);
+							this.acao.setProduto(acaoProduto);
+							this.acao.setDenominacao(acaoDenominacao);
+							this.acao.setObservacao(acaoObservacao);
+							
+							this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+							this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+							this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+							
+							this.acao.setPrograma(new Programa());
+							this.acao.getPrograma().setCodigo(programaCodigo);
+							this.acao.getPrograma().setDenominacao(programaDenominacao);
+							
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraCodigo(unidadeGestoraCodigo);
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);	
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraDescricao(unidadeGestoraDescricao);
+							
+							this.acao.setUnidadeMedida(new UnidadeMedida());
+							this.acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+							
+							this.tipoCalculoMetaId = tipoCalculoMetaId;
+							
+							this.dotacaoInicial = dotacaoInicial;
+							this.disponivel = disponivel;
+							this.empenhado = empenhado;
+							this.liquidado = liquidado;
+							this.pago	= pago;	
+							
+							
+							
+							}
+
+
 	
 	
 	public FisicoFinanceiroMensalSiafem(

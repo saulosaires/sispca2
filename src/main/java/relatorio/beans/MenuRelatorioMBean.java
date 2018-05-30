@@ -127,7 +127,8 @@ public class MenuRelatorioMBean implements Serializable{
     	relatorio.getSubRelatorio().add(new Relatorio("Detalhamento da Ação", 			    "relatorioFisicoFinanceiroDetalhamentoAcao","relatorioFisicoFinanceiroDetalhamentoAcao"));
     	relatorio.getSubRelatorio().add(new Relatorio("Financeiro por Natureza de Despesa", "relatorioFisicoFinanceiroNaturezaDespesa", "relatorioFisicoFinanceiroNaturezaDespesa"));
     	relatorio.getSubRelatorio().add(new Relatorio(" Financeiro por Plano Interno",      "relatorioFisicoFinanceiroPlanoInterno",    "relatorioFisicoFinanceiroPlanoInterno"));
-    	
+    	relatorio.getSubRelatorio().add(new Relatorio(" Físico e Financeiro",      		    "relatorioFisicoFinanceiroMetaFinanceiro",  "relatorioFisicoFinanceiroMetaFinanceiro"));
+   	
     	
     	
     	return relatorio;

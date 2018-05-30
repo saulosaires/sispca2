@@ -1,5 +1,7 @@
 package quantitativo.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 import administrativo.model.Exercicio;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
+import arquitetura.utils.MathUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
  
@@ -28,10 +31,10 @@ public class FisicoFinanceiroMensal extends Model implements  Auditable{
 	private Long id;
 	
 	@Column(name="quantidade")
-	private Double quantidade=0D;
+	private BigDecimal quantidade=MathUtils.getZeroBigDecimal();
 	
 	@Column(name="valor")
-	private Double valor=0D;
+	private BigDecimal valor=MathUtils.getZeroBigDecimal();
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_regiao_municipio")
@@ -58,19 +61,19 @@ public class FisicoFinanceiroMensal extends Model implements  Auditable{
 		this.id = id;
 	}	
 
-	public Double getQuantidade() {
+	public BigDecimal getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 

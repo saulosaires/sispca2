@@ -73,19 +73,19 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 	}	
 	
 	
-	public Double calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){	
+	public BigDecimal calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){	
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeAcumulativoPlanejada(acaoId,exercicioId);
 	}
 	
-	public Double calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoAcumulativoPlanejada(acaoId,exercicioId);
 	}
 	
-	public Double calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeAcumulativoExecutada(acaoId,exercicioId);
 	}
 	
-	public Double calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).calculaQuantidadeNaoAcumulativoExecutada(acaoId,exercicioId);
 	}
 
@@ -113,5 +113,8 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioFinanceiroPlanoInterno(unidadeGestora, unidadeOrcamentaria, acao, ano);
 	}
 	
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroMetaFisico(Long unidadeGestora, Long unidadeOrcamentaria, Long acao,  Integer ano){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioFinanceiroMetaFisico(unidadeGestora, unidadeOrcamentaria, acao, ano);
+	}
 	
 }

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,6 +21,7 @@ import arquitetura.dao.AbstractDAO;
 import arquitetura.enums.TipoCalculoMeta;
 import arquitetura.exception.JpaException;
 import arquitetura.utils.MathUtils;
+import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 import qualitativo.model.Programa;
@@ -61,7 +61,7 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 	private static final  String NATUREZA="natureza";
 	private static final  String FONTE="fonte";
 	private static final  String NATUREZA_DESCRICAO="naturezaDescricao";
- 	private static final  String TITULO="titulo";
+ 	private static final  String OBSERVACAO="observacao";
 	
  	private static final  String PLANO_INTERNO="planoInterno";		
  	private static final  String PLANO_INTERNO_DESCRICAO = "planoInternoDescricao";
@@ -384,14 +384,14 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 	}
 	
-	public Double calculaQuantidadeAcumulativoPlanejada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeAcumulativoPlanejada(Long acaoId, Long exercicioId){
  
 		
-		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
+		if(Utils.invalidId(acaoId) || exercicioId==null)return MathUtils.getZeroBigDecimal();
 		
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		
-		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
 		
 		Root<FisicoFinanceiroMensal> root = criteria.from(FisicoFinanceiroMensal.class);
 		
@@ -402,8 +402,8 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.ACUMULATIVA.getId()));
 		 
 		
-		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
-		Expression<Double> soma = builder.sum(dotacaoInicial);
+		Path<BigDecimal> dotacaoInicial = root.get(QUANTIDADE);
+		Expression<BigDecimal> soma = builder.sum(dotacaoInicial);
 		criteria.select(soma);
 		 
 		
@@ -413,60 +413,66 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 						);
  
 		
-		 Double value = entityManager.createQuery(criteria).getSingleResult();
+		BigDecimal value = entityManager.createQuery(criteria).getSingleResult();
 			
 			
-		 return value!=null?value:0d;
+		 return value!=null?value: MathUtils.getZeroBigDecimal();
 
 		
 	}
 	 
-	public Double calculaQuantidadeNaoAcumulativoPlanejada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeNaoAcumulativoPlanejada(Long acaoId, Long exercicioId){
  
-		
-		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
-		
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		
-		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
-		
-		Root<FisicoFinanceiroMensal> root = criteria.from(FisicoFinanceiroMensal.class);
-		
-		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
-		
-		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
-		
-		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.NAO_ACUMULATIVA.getId()));
-		 
-		
-		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
-		Expression<Double> soma = builder.sum(dotacaoInicial);
-		Expression<Long> count = builder.count(root);
-		
-		criteria.multiselect(builder.quot(soma, count));
-		
-		
-		criteria.where(
-					   builder.equal(root.get(ACAO).get(ID),acaoId),
-					   builder.equal(root.get(EXERCICIO).get(ID),exercicioId ),
-					   builder.notEqual(root.get(QUANTIDADE),0 )
-					  );
- 
-		
-	 Double value = entityManager.createQuery(criteria).getSingleResult();
-		
-		
-	 return value!=null?value:0d;
+		try {
+			
+			if(Utils.invalidId(acaoId) || exercicioId==null)return MathUtils.getZeroBigDecimal();
+			
+			CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+			
+			CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+			
+			Root<FisicoFinanceiroMensal> root = criteria.from(FisicoFinanceiroMensal.class);
+			
+			Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
+			
+			Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
+			
+			joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.NAO_ACUMULATIVA.getId()));
+			 
+			
+			Path<BigDecimal> dotacaoInicial = root.get(QUANTIDADE);
+			Expression<BigDecimal> soma = builder.sum(dotacaoInicial);
+			Expression<Long> count = builder.count(root);
+			
+			criteria.multiselect(builder.quot(soma, count));
+			
+			
+			criteria.where(
+						   builder.equal(root.get(ACAO).get(ID),acaoId),
+						   builder.equal(root.get(EXERCICIO).get(ID),exercicioId ),
+						   builder.notEqual(root.get(QUANTIDADE),0 )
+						  );
+	 
+			
+			BigDecimal value = entityManager.createQuery(criteria).getSingleResult();
+			
+			
+		    return value!=null?value:MathUtils.getZeroBigDecimal();
+		    
+		}catch(Exception e) {
+			SispcaLogger.logError(e);
+			return MathUtils.getZeroBigDecimal();
+		}
 	 
 	}
 	 		
-	public Double calculaQuantidadeAcumulativoExecutada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeAcumulativoExecutada(Long acaoId, Long exercicioId){
 		
-		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
+		if(Utils.invalidId(acaoId) || exercicioId==null)return MathUtils.getZeroBigDecimal();
 		
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		
-		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
 		
 		Root<Execucao> root = criteria.from(Execucao.class);
 		
@@ -477,8 +483,8 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.ACUMULATIVA.getId()));
 		 
 		
-		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
-		Expression<Double> soma = builder.sum(dotacaoInicial);
+		Path<BigDecimal> dotacaoInicial = root.get(QUANTIDADE);
+		Expression<BigDecimal> soma = builder.sum(dotacaoInicial);
 		criteria.select(soma);
 		 
 		
@@ -488,50 +494,56 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 						);
  
 		
-		 Double value = entityManager.createQuery(criteria).getSingleResult();
+		BigDecimal value = entityManager.createQuery(criteria).getSingleResult();
 			
 			
-		 return value!=null?value:0d;
+		 return value!=null?value:MathUtils.getZeroBigDecimal();
 
 		
 	}
 	
-	public Double calculaQuantidadeNaoAcumulativoExecutada(Long acaoId, Long exercicioId){
+	public BigDecimal calculaQuantidadeNaoAcumulativoExecutada(Long acaoId, Long exercicioId){
  
-		
-		if(Utils.invalidId(acaoId) || exercicioId==null)return 0d;
-		
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		
-		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
-		
-		Root<Execucao> root = criteria.from(Execucao.class);
-		
-		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
-		
-		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
-		
-		joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.NAO_ACUMULATIVA.getId()));
-		 
-		
-		Path<Double> dotacaoInicial = root.get(QUANTIDADE);
-		Expression<Double> soma = builder.sum(dotacaoInicial);
-		Expression<Long> count = builder.count(root);
-		
-		criteria.multiselect(builder.quot(soma, count));
-		
-		
-		criteria.where(
-					   builder.equal(root.get(ACAO).get(ID),acaoId),
-					   builder.equal(root.get(EXERCICIO).get(ID),exercicioId ),
-					   builder.notEqual(root.get(QUANTIDADE),0 )
-					  );
- 
-		
-	 Double value = entityManager.createQuery(criteria).getSingleResult();
-		
-		
-	 return value!=null?value:0d;
+		try {
+			
+			if(Utils.invalidId(acaoId) || exercicioId==null)return MathUtils.getZeroBigDecimal();
+			
+			CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+			
+			CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
+			
+			Root<Execucao> root = criteria.from(Execucao.class);
+			
+			Join<Object, Object> joinAcao = root.join(ACAO,JoinType.LEFT);		
+			
+			Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.LEFT);
+			
+			joinTipoCalculoMeta.on( builder.equal(joinTipoCalculoMeta.get(ID),TipoCalculoMeta.NAO_ACUMULATIVA.getId()));
+			 
+			
+			Path<BigDecimal> dotacaoInicial = root.get(QUANTIDADE);
+			Expression<BigDecimal> soma = builder.sum(dotacaoInicial);
+			Expression<Long> count = builder.count(root);
+			
+			criteria.multiselect(builder.quot(soma, count));
+			
+			
+			criteria.where(
+						   builder.equal(root.get(ACAO).get(ID),acaoId),
+						   builder.equal(root.get(EXERCICIO).get(ID),exercicioId ),
+						   builder.notEqual(root.get(QUANTIDADE),0 )
+						  );
+	 
+			
+			BigDecimal value = entityManager.createQuery(criteria).getSingleResult();
+			 
+			
+		    return value!=null?value:MathUtils.getZeroBigDecimal();
+		    
+		}catch (Exception e) {
+			SispcaLogger.logError(e);
+			return MathUtils.getZeroBigDecimal();
+		}
 	 
 	}
  	
@@ -1036,6 +1048,111 @@ public class FisicoFinanceiroMensalSiafemDAO extends AbstractDAO<FisicoFinanceir
 		
 		 return entityManager.createQuery(criteria).getResultList();
 	}
+	
+	
+	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroMetaFisico(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, Integer ano){
+		
+		
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<FisicoFinanceiroMensalSiafem> criteria = builder.createQuery(FisicoFinanceiroMensalSiafem.class);
+		
+		Root<FisicoFinanceiroMensalSiafem> root = criteria.from(FisicoFinanceiroMensalSiafem.class);
+				
+		Join<Object, Object> joinAcao		 		 = root.join(ACAO, 				       JoinType.INNER);	
+		Join<Object, Object> joinPrograma 			 = joinAcao.join(PROGRAMA, 			   JoinType.INNER);		
+		Join<Object, Object> joinUnidadeOrcamentaria = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+		Join<Object, Object> joinUnidadeMedida 		 = joinAcao.join(UNIDADE_MEDIDA, JoinType.INNER);
+		Join<Object, Object> joinUnidadeGestora		 = joinUnidadeOrcamentaria.joinSet(UNIDADE_GESTORAS, JoinType.LEFT);
+		Join<Object, Object> joinTipoCalculoMeta 	 = joinAcao.join(TIPO_CALCULO_META,    JoinType.LEFT);
+		
+ 	 	criteria.multiselect(
+				 	 		  joinUnidadeGestora.get(CODIGO),
+				 	 		  joinUnidadeGestora.get(SIGLA),
+				 	 		  joinUnidadeGestora.get(DESCRICAO),
+ 	 			
+							  joinUnidadeOrcamentaria.get(CODIGO),
+							  joinUnidadeOrcamentaria.get(DESCRICAO),
+				  
+ 	 						  joinPrograma.get(CODIGO),
+ 	 						  joinPrograma.get(DENOMINACAO),
+ 	 						  
+ 	 						  joinAcao.get(ID),
+ 	 						  joinAcao.get(CODIGO),
+ 	 						  joinAcao.get(PRODUTO),
+ 	 						  joinAcao.get(DENOMINACAO),
+ 	 						  joinAcao.get(OBSERVACAO),
+ 	 						  
+ 	 						  joinUnidadeMedida.get(DESCRICAO),
+ 	 						  
+ 	 						  joinTipoCalculoMeta.get(ID),
+ 	 						  
+							  builder.sum(root.get(DOTACAO_INICIAL)),
+							  builder.sum(root.get(DISPONIVEL)),
+							  builder.sum(root.get(EMPENHADO)),
+							  builder.sum(root.get(LIQUIDADO)),
+							  builder.sum(root.get(PAGO))
+							  
+							 );
+
+
+ 	 	List<Predicate> predicate = new ArrayList<>();
+
+		if (!Utils.invalidId(unidadeGestora)) {
+ 
+			predicate.add(builder.equal(joinUnidadeGestora.get(ID), unidadeGestora));
+		}
+				
+		if (!Utils.invalidId(unidadeOrcamentaria)) {
+			 
+			predicate.add(builder.equal(joinUnidadeOrcamentaria.get(ID), unidadeOrcamentaria));
+		}
+		
+		if (!Utils.invalidId(acao)) {
+			 
+			predicate.add(builder.equal(joinAcao.get(ID), acao));
+		}	
+		
+		if (!Utils.invalidYear(ano)) {
+			 
+			predicate.add(builder.equal(root.get(ANO), ano));
+		}
+			
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+ 	 			 
+		criteria.groupBy(
+			 	 		  joinUnidadeGestora.get(CODIGO),
+			 	 		  joinUnidadeGestora.get(SIGLA),
+			 	 		  joinUnidadeGestora.get(DESCRICAO),
+			
+						  joinUnidadeOrcamentaria.get(CODIGO),
+						  joinUnidadeOrcamentaria.get(DESCRICAO),
+			  
+						  joinPrograma.get(CODIGO),
+						  joinPrograma.get(DENOMINACAO),
+						  
+						  joinAcao.get(ID),
+						  joinAcao.get(CODIGO),
+						  joinAcao.get(PRODUTO),
+						  joinAcao.get(DENOMINACAO),
+						  joinAcao.get(OBSERVACAO),
+						  
+						  joinUnidadeMedida.get(DESCRICAO),
+						  
+						  joinTipoCalculoMeta.get(ID)
+						  );
+ 		
+		criteria.orderBy(
+						 builder.asc( joinUnidadeGestora.get(CODIGO)),
+						 builder.asc( joinUnidadeOrcamentaria.get(CODIGO)),
+						 builder.asc( joinPrograma.get(CODIGO)) ,
+						 builder.asc( joinAcao.get(CODIGO)) 
+						);
+		
+		 return entityManager.createQuery(criteria).getResultList();
+	}
+	
+
 	
 	
 	

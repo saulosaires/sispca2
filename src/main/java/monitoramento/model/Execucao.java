@@ -1,5 +1,7 @@
 package monitoramento.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,10 +49,10 @@ public class Execucao extends Model implements  Auditable {
 	private RegiaoMunicipio regiaoMunicipio;
 
 	@Column(name = "valor")
-	private Double valor;
+	private BigDecimal valor;
 	
 	@Column(name = "quantidade")
-	private Double quantidade;
+	private BigDecimal quantidade;
 	
 	@Column(name = "observacao",length=1000)
 	private String observacao;
@@ -67,11 +69,11 @@ public class Execucao extends Model implements  Auditable {
 		this.id = id;
 	}
  
-	public double getValor() {
+	public BigDecimal getValor() {
 		return this.valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
@@ -107,11 +109,11 @@ public class Execucao extends Model implements  Auditable {
 		this.regiaoMunicipio = regiaoMunicipio;
 	}	
 
-	public double getQuantidade() {
+	public BigDecimal getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(double quantidade) {
+	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
 	}
 
