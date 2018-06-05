@@ -16,7 +16,13 @@ import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
+import qualitativo.model.Orgao;
+import qualitativo.model.Programa;
+import qualitativo.model.UnidadeMedida;
+import qualitativo.model.UnidadeOrcamentaria;
 import quantitativo.model.Localizador;
+import quantitativo.model.Municipio;
+import quantitativo.model.Regiao;
 import quantitativo.model.RegiaoMunicipio;
  
 
@@ -61,6 +67,73 @@ public class Execucao extends Model implements  Auditable {
 	@JoinColumn(name="id_exercicio")
 	private Exercicio exercicio;
 
+	public Execucao(){ }
+	
+	public Execucao(	
+					Long regiaoMunicipioId,
+					String regiaoDescricao,
+					String municipioDescricao,
+					Long mesId,
+			
+					BigDecimal quantidade,
+					BigDecimal valor,
+					String observacao,
+		    
+					String orgaoCodigo,
+					String orgaoDescricao,
+			
+					String unidadeOrcamentariaCodigo,
+					String unidadeOrcamentariaDescricao,
+			
+					String programaCodigo,
+					String programaDenominacao,
+			 
+					String acaoCodigo,
+					String acaoDenominacao,
+					String acaoProduto,
+			
+					String unidadeMedidaDescricao
+					){
+		
+		this.regiaoMunicipio = new RegiaoMunicipio(regiaoMunicipioId);
+		
+		if(regiaoDescricao!=null) {
+			this.regiaoMunicipio.setRegiao(new Regiao());
+			this.regiaoMunicipio.getRegiao().setDescricao(regiaoDescricao);
+		}
+		
+		if(municipioDescricao!=null) {
+			this.regiaoMunicipio.setMunicipio(new Municipio());
+			this.regiaoMunicipio.getMunicipio().setDescricao(municipioDescricao);
+		}
+		
+		this.mes = new Mes(mesId);
+		
+		this.quantidade= quantidade;
+		this.valor=valor;
+		this.observacao=observacao;
+		
+		this.acao = new Acao();
+		this.acao.setCodigo(acaoCodigo);
+		this.acao.setDenominacao(acaoDenominacao); 
+		this.acao.setProduto(acaoProduto);
+		this.acao.setUnidadeMedida(new UnidadeMedida());
+		this.acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+		
+		this.acao.setPrograma(new Programa());
+		this.acao.getPrograma().setCodigo(programaCodigo);
+		this.acao.getPrograma().setDenominacao(programaDenominacao);
+		
+		this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+		this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+		
+		this.acao.getUnidadeOrcamentaria().setOrgao(new Orgao());
+		this.acao.getUnidadeOrcamentaria().getOrgao().setCodigo(orgaoCodigo);
+		this.acao.getUnidadeOrcamentaria().getOrgao().setDescricao(orgaoDescricao);
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}

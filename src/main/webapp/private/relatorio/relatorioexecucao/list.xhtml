@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">			
+			<h:form>
+			
+			
+				    <f:metadata>
+	    			<f:viewParam name="id" value="#{relatorioExecucaoMBean.exercicioId}"/>
+	    			<f:viewAction action="#{relatorioExecucaoMBean.init}" />
+			     </f:metadata>
+				
+				<div class="spaceContainerForm">	
+									
+					<div class="row">
+						<legend class="outBusc">Relatório de Acompanhamento por Órgão, Unidade Orçamentária, Programa e Ação</legend>
+					</div>	
+					<div class="row" style="margin-left: 0; margin-top: 1%;">
+						<div class="col-lg-4">
+							<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
+					        <p:selectOneRadio id="customRadio" value="#{relatorioExecucaoMBean.tipoArquivo}"   >
+					            <f:selectItem itemLabel="PDF" itemValue="PDF" />
+         							    <f:selectItem itemLabel="XLS" itemValue="XLS" />
+					        </p:selectOneRadio>
+
+						</div>
+					</div>					
+						
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="EXERCÍCIO: " styleClass="labelOutText"/>
+							<h:outputText value="#{relatorioExecucaoMBean.exercicio.ano}" styleClass="labelInputText"/>
+						</div>					
+					</div>						
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="ÓRGÃO: " styleClass="labelOutText"/>
+							<h:selectOneMenu value="#{relatorioExecucaoMBean.orgao}" styleClass="form-control input-sm">
+							
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org.descricao)}"/>
+								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changeOrgao()}" render="combo_unid_orc"/>	
+							</h:selectOneMenu>
+						</div>
+					</div>		
+					
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="combo_unid_orc" value="#{relatorioExecucaoMBean.unidadeOrcamentaria}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid.descricao)}"/>
+								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changeUnidade()}" render="combo_prog"/>										
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="PROGRAMA: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="combo_prog" value="#{relatorioExecucaoMBean.programa}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
+									
+								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changePrograma()}" render="combo_acao"/>											
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="AÇÃO: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="combo_acao" value="#{relatorioExecucaoMBean.acao}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listAcao}" var="ac" itemValue="#{ac.id}" itemLabel="#{fn:toUpperCase(ac.denominacao)}"/>
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="TIPO DE REGIÃO: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="combo_tipo_reg" value="#{relatorioExecucaoMBean.tipoRegiao}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems  value="#{relatorioExecucaoMBean.listTipoRegiao}" var="tr" itemValue="#{tr.id}" itemLabel="#{fn:toUpperCase(tr.descricao)}"/>
+								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changeTipoRegiao()}" render="combo_reg"/>
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="REGIÃO: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="combo_reg" value="#{relatorioExecucaoMBean.regiao}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listRegiao}" var="reg" itemValue="#{reg.id}" itemLabel="#{fn:toUpperCase(reg.descricao)}"/>
+								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changeRegiao()}" render="combo_reg_mun"/>
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="REGIÃO/MUNICÍPIO: " styleClass="labelOutText"/>
+							<h:selectOneMenu id="combo_reg_mun" value="#{relatorioExecucaoMBean.regiaoMunicipio}" styleClass="form-control input-sm">
+								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listRegiaoMunicipio}" var="rm" itemValue="#{rm.id}" itemLabel="#{fn:toUpperCase(rm)}"/>
+
+							</h:selectOneMenu>
+						</div>
+					</div>	
+					
+					<div class="row" style="margin-top: 1%; margin-left: 0;">
+						<div class="col-lg-3">
+							<h:outputText value="COMENTÁRIO: " styleClass="labelOutText"/>
+							<h:selectBooleanCheckbox style="vertical-align: middle;" value="#{relatorioExecucaoMBean.comentario}"/>								
+						</div>
+					</div>	
+							
+								
+					<div class="row" style="margin-top: 2%;">
+						
+							<h:commandButton value="Gerar Relatório" 
+								action="#{relatorioExecucaoMBean.gerarRelatorio()}"
+								style="margin-left: 2%;" styleClass="btn btn-primary"/>
+					</div>
+				</div>	
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

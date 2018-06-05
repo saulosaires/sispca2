@@ -47,125 +47,125 @@
 	<field name="produto_acao" class="java.lang.String"/>
 	<field name="unidade_medida" class="java.lang.String"/>
 	<field name="regiaoMunicipio" class="java.lang.String"/>
-	<field name="qtdjan" class="java.lang.Double"/>
-	<field name="valorjan" class="java.lang.Double"/>
-	<field name="qtdfev" class="java.lang.Double"/>
-	<field name="valorfev" class="java.lang.Double"/>
-	<field name="qtdmar" class="java.lang.Double"/>
-	<field name="valormar" class="java.lang.Double"/>
-	<field name="qtdabr" class="java.lang.Double"/>
-	<field name="valorabr" class="java.lang.Double"/>
-	<field name="qtdmai" class="java.lang.Double"/>
-	<field name="valormai" class="java.lang.Double"/>
-	<field name="qtdjun" class="java.lang.Double"/>
-	<field name="valorjun" class="java.lang.Double"/>
-	<field name="qtdjul" class="java.lang.Double"/>
-	<field name="valorjul" class="java.lang.Double"/>
-	<field name="qtdago" class="java.lang.Double"/>
-	<field name="valorago" class="java.lang.Double"/>
-	<field name="qtdset" class="java.lang.Double"/>
-	<field name="valorset" class="java.lang.Double"/>
-	<field name="qtdout" class="java.lang.Double"/>
-	<field name="valorout" class="java.lang.Double"/>
-	<field name="qtdnov" class="java.lang.Double"/>
-	<field name="valornov" class="java.lang.Double"/>
-	<field name="qtddez" class="java.lang.Double"/>
-	<field name="valordez" class="java.lang.Double"/>
-	<variable name="sum_qtdjan" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<field name="qtdjan" class="java.math.BigDecimal"/>
+	<field name="valorjan" class="java.math.BigDecimal"/>
+	<field name="qtdfev" class="java.math.BigDecimal"/>
+	<field name="valorfev" class="java.math.BigDecimal"/>
+	<field name="qtdmar" class="java.math.BigDecimal"/>
+	<field name="valormar" class="java.math.BigDecimal"/>
+	<field name="qtdabr" class="java.math.BigDecimal"/>
+	<field name="valorabr" class="java.math.BigDecimal"/>
+	<field name="qtdmai" class="java.math.BigDecimal"/>
+	<field name="valormai" class="java.math.BigDecimal"/>
+	<field name="qtdjun" class="java.math.BigDecimal"/>
+	<field name="valorjun" class="java.math.BigDecimal"/>
+	<field name="qtdjul" class="java.math.BigDecimal"/>
+	<field name="valorjul" class="java.math.BigDecimal"/>
+	<field name="qtdago" class="java.math.BigDecimal"/>
+	<field name="valorago" class="java.math.BigDecimal"/>
+	<field name="qtdset" class="java.math.BigDecimal"/>
+	<field name="valorset" class="java.math.BigDecimal"/>
+	<field name="qtdout" class="java.math.BigDecimal"/>
+	<field name="valorout" class="java.math.BigDecimal"/>
+	<field name="qtdnov" class="java.math.BigDecimal"/>
+	<field name="valornov" class="java.math.BigDecimal"/>
+	<field name="qtddez" class="java.math.BigDecimal"/>
+	<field name="valordez" class="java.math.BigDecimal"/>
+	<variable name="sum_qtdjan" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjan" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorjan" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdfev" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdfev" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorfev" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorfev" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmar" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdmar" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormar" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valormar" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdabr" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdabr" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorabr" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorabr" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmai" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdmai" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormai" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valormai" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjun" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdjun" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjun" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorjun" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjul" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdjul" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjul" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorjul" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdago" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdago" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorago" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorago" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdset" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdset" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorset" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorset" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdout" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdout" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorout" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorout" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdnov" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdnov" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdnov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valornov" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valornov" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valornov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtddez" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtddez" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtddez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valordez" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valordez" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valordez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
 	<group name="orgao_grupo">
 		<groupExpression><![CDATA[$F{orgao}]]></groupExpression>
@@ -249,7 +249,7 @@
 		</groupHeader>
 		<groupFooter>
 			<band height="12">
-				<textField isStretchWithOverflow="true" pattern="">
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="0" width="20" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -261,7 +261,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdjan}.intValue() == $V{sum_qtdjan} ? (new DecimalFormat("#,##0")).format($V{sum_qtdjan}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdjan})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdjan}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="87" y="0" width="26" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -277,7 +277,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorjan}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="">
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="113" y="0" width="20" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -289,7 +289,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdfev}.intValue() == $V{sum_qtdfev} ? (new DecimalFormat("#,##0")).format($V{sum_qtdfev}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdfev})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdfev}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="133" y="0" width="31" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -305,7 +305,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorfev}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="">
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="164" y="0" width="20" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -317,7 +317,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdmar}.intValue() == $V{sum_qtdmar} ? (new DecimalFormat("#,##0")).format($V{sum_qtdmar}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdmar})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdmar}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="184" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -345,7 +345,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdabr}.intValue() == $V{sum_qtdabr} ? (new DecimalFormat("#,##0")).format($V{sum_qtdabr}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdabr})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdabr}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="241" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -373,7 +373,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdmai}.intValue() == $V{sum_qtdmai} ? (new DecimalFormat("#,##0")).format($V{sum_qtdmai}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdmai})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdmai}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="298" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -401,7 +401,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdjun}.intValue() == $V{sum_qtdjun} ? (new DecimalFormat("#,##0")).format($V{sum_qtdjun}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdjun})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdjun}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="355" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -429,7 +429,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdjul}.intValue() == $V{sum_qtdjul} ? (new DecimalFormat("#,##0")).format($V{sum_qtdjul}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdjul})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdjul}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="412" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -457,7 +457,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdago}.intValue() == $V{sum_qtdago} ? (new DecimalFormat("#,##0")).format($V{sum_qtdago}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdago})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdago}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="469" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -485,7 +485,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdset}.intValue() == $V{sum_qtdset} ? (new DecimalFormat("#,##0")).format($V{sum_qtdset}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdset})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdset}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="526" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -513,7 +513,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdout}.intValue() == $V{sum_qtdout} ? (new DecimalFormat("#,##0")).format($V{sum_qtdout}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdout})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdout}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="620" y="0" width="20" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -527,7 +527,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdnov}.intValue() == $V{sum_qtdnov} ? (new DecimalFormat("#,##0")).format($V{sum_qtdnov}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtdnov})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdnov}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="640" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -555,7 +555,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtddez}.intValue() == $V{sum_qtddez} ? (new DecimalFormat("#,##0")).format($V{sum_qtddez}) : (new DecimalFormat("#,##0.00")).format($V{sum_qtddez})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtddez}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="697" y="0" width="43" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -597,13 +597,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[(new Double($V{sum_qtdjan}+$V{sum_qtdfev}+$V{sum_qtdmar}+$V{sum_qtdabr}+$V{sum_qtdmai}+$V{sum_qtdjun}+$V{sum_qtdjul}+$V{sum_qtdago}+$V{sum_qtdset}+$V{sum_qtdout}+$V{sum_qtdnov}+$V{sum_qtddez})).intValue() ==
-
-(new Double($V{sum_qtdjan}+$V{sum_qtdfev}+$V{sum_qtdmar}+$V{sum_qtdabr}+$V{sum_qtdmai}+$V{sum_qtdjun}+$V{sum_qtdjul}+$V{sum_qtdago}+$V{sum_qtdset}+$V{sum_qtdout}+$V{sum_qtdnov}+$V{sum_qtddez})) ?
-
-(new DecimalFormat("#,##0")).format((new Double($V{sum_qtdjan}+$V{sum_qtdfev}+$V{sum_qtdmar}+$V{sum_qtdabr}+$V{sum_qtdmai}+$V{sum_qtdjun}+$V{sum_qtdjul}+$V{sum_qtdago}+$V{sum_qtdset}+$V{sum_qtdout}+$V{sum_qtdnov}+$V{sum_qtddez}))) :
-
-(new DecimalFormat("#,##0.00")).format((new Double($V{sum_qtdjan}+$V{sum_qtdfev}+$V{sum_qtdmar}+$V{sum_qtdabr}+$V{sum_qtdmai}+$V{sum_qtdjun}+$V{sum_qtdjul}+$V{sum_qtdago}+$V{sum_qtdset}+$V{sum_qtdout}+$V{sum_qtdnov}+$V{sum_qtddez})))]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdjan}.add($V{sum_qtdfev}).add($V{sum_qtdmar}).add($V{sum_qtdabr}).add($V{sum_qtdmai}).add($V{sum_qtdjun}).add($V{sum_qtdjul}).add($V{sum_qtdago}).add($V{sum_qtdset}).add($V{sum_qtdout}).add($V{sum_qtdnov}).add($V{sum_qtddez})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="763" y="0" width="47" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -617,7 +611,7 @@
 						<font size="6"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_valorjan}+$V{sum_valorfev}+$V{sum_valormar}+$V{sum_valorabr}+$V{sum_valormai}+$V{sum_valorjun}+$V{sum_valorjul}+$V{sum_valorago}+$V{sum_valorset}+$V{sum_valorout}+$V{sum_valornov}+$V{sum_valordez}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_valorjan}.add($V{sum_valorfev}).add($V{sum_valormar}).add($V{sum_valorabr}).add($V{sum_valormai}).add($V{sum_valorjun}).add($V{sum_valorjul}).add($V{sum_valorago}).add($V{sum_valorset}).add($V{sum_valorout}).add($V{sum_valornov}).add($V{sum_valordez})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="583" y="0" width="37" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -1212,7 +1206,7 @@
 						<font size="6" isBold="false" pdfFontName="Helvetica-Bold"/>
 						<paragraph leftIndent="4"/>
 					</textElement>
-					<textFieldExpression><![CDATA["UNIDADE DE MEDIDA: "+$F{unidade_medida}.toUpperCase()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{unidade_medida}!=null?"UNIDADE DE MEDIDA: "+$F{unidade_medida}.toUpperCase():""]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -1320,7 +1314,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{regiaoMunicipio}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1332,7 +1326,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdjan}.intValue() == $F{qtdjan} ? (new DecimalFormat("#,##0")).format($F{qtdjan}) : (new DecimalFormat("#,##0.00")).format($F{qtdjan})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdjan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="87" y="0" width="26" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1348,7 +1342,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorjan}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="113" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1360,7 +1354,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdfev}.intValue() == $F{qtdfev} ? (new DecimalFormat("#,##0")).format($F{qtdfev}) : (new DecimalFormat("#,##0.00")).format($F{qtdfev})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdfev}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="133" y="0" width="31" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1376,7 +1370,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorfev}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="164" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1388,7 +1382,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdmar}.intValue() == $F{qtdmar} ? (new DecimalFormat("#,##0")).format($F{qtdmar}) : (new DecimalFormat("#,##0.00")).format($F{qtdmar})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdmar}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="184" y="0" width="37" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1404,7 +1398,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valormar}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="221" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1416,7 +1410,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdabr}.intValue() == $F{qtdabr} ? (new DecimalFormat("#,##0")).format($F{qtdabr}) : (new DecimalFormat("#,##0.00")).format($F{qtdabr})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdabr}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="241" y="0" width="37" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1432,7 +1426,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorabr}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="278" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1444,7 +1438,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdmai}.intValue() == $F{qtdmai} ? (new DecimalFormat("#,##0")).format($F{qtdmai}) : (new DecimalFormat("#,##0.00")).format($F{qtdmai})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdmai}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="298" y="0" width="37" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1460,7 +1454,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valormai}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="335" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1472,7 +1466,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdjun}.intValue() == $F{qtdjun} ? (new DecimalFormat("#,##0")).format($F{qtdjun}) : (new DecimalFormat("#,##0.00")).format($F{qtdjun})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdjun}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="355" y="0" width="37" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1488,7 +1482,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorjun}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="392" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1500,9 +1494,9 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdjul}.intValue() == $F{qtdjul} ? (new DecimalFormat("#,##0")).format($F{qtdjul}) : (new DecimalFormat("#,##0.00")).format($F{qtdjul})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdjul}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="449" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1514,7 +1508,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdago}.intValue() == $F{qtdago} ? (new DecimalFormat("#,##0")).format($F{qtdago}) : (new DecimalFormat("#,##0.00")).format($F{qtdago})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdago}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="412" y="0" width="37" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1586,7 +1580,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valornov}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="506" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1598,9 +1592,9 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdset}.intValue() == $F{qtdset} ? (new DecimalFormat("#,##0")).format($F{qtdset}) : (new DecimalFormat("#,##0.00")).format($F{qtdset})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdset}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="563" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1612,9 +1606,9 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdout}.intValue() == $F{qtdout} ? (new DecimalFormat("#,##0")).format($F{qtdout}) : (new DecimalFormat("#,##0.00")).format($F{qtdout})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdout}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="620" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1626,9 +1620,9 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdnov}.intValue() == $F{qtdnov} ? (new DecimalFormat("#,##0")).format($F{qtdnov}) : (new DecimalFormat("#,##0.00")).format($F{qtdnov})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdnov}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="677" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -1640,7 +1634,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtddez}.intValue() == $F{qtddez} ? (new DecimalFormat("#,##0")).format($F{qtddez}) : (new DecimalFormat("#,##0.00")).format($F{qtddez})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtddez}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="697" y="0" width="43" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1668,11 +1662,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[(new Double($F{qtdjan}+$F{qtdfev}+$F{qtdmar}+$F{qtdabr}+$F{qtdmai}+$F{qtdjun}+$F{qtdjul}+$F{qtdago}+$F{qtdset}+$F{qtdout}+$F{qtdnov}+$F{qtddez})).intValue() == (new Double($F{qtdjan}+$F{qtdfev}+$F{qtdmar}+$F{qtdabr}+$F{qtdmai}+$F{qtdjun}+$F{qtdjul}+$F{qtdago}+$F{qtdset}+$F{qtdout}+$F{qtdnov}+$F{qtddez})) ?
-
-(new DecimalFormat("#,##0")).format((new Double($F{qtdjan}+$F{qtdfev}+$F{qtdmar}+$F{qtdabr}+$F{qtdmai}+$F{qtdjun}+$F{qtdjul}+$F{qtdago}+$F{qtdset}+$F{qtdout}+$F{qtdnov}+$F{qtddez}))) :
-
-(new DecimalFormat("#,##0.00")).format((new Double($F{qtdjan}+$F{qtdfev}+$F{qtdmar}+$F{qtdabr}+$F{qtdmai}+$F{qtdjun}+$F{qtdjul}+$F{qtdago}+$F{qtdset}+$F{qtdout}+$F{qtdnov}+$F{qtddez})))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdjan}.add($F{qtdfev}).add($F{qtdmar}).add($F{qtdabr}).add($F{qtdmai}).add($F{qtdjun}).add($F{qtdjul}).add($F{qtdago}).add($F{qtdset}).add($F{qtdout}).add($F{qtdnov}).add($F{qtddez})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="763" y="0" width="47" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -1686,7 +1676,7 @@
 					<font size="6"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valorjan}+$F{valorfev}+$F{valormar}+$F{valorabr}+$F{valormai}+$F{valorjun}+$F{valorjul}+$F{valorago}+$F{valorset}+$F{valorout}+$F{valornov}+$F{valordez}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorjan}.add($F{valorfev}).add($F{valormar}).add($F{valorabr}).add($F{valormai}).add($F{valorjun}).add($F{valorjul}).add($F{valorago}).add($F{valorset}).add($F{valorout}).add($F{valornov}).add($F{valordez})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

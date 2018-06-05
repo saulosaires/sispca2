@@ -199,12 +199,12 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 		BigDecimal quantidadeAnterior = MathUtils.getZeroBigDecimal();
 
 		for(Execucao ex: rm.getExecucoes()){
-			valorTotal.add(ex.getValor());
-			quantidadeTotal.add(ex.getQuantidade());
+			valorTotal= valorTotal.add(ex.getValor());
+			quantidadeTotal= quantidadeTotal.add(ex.getQuantidade());
 			
 			if(ex.getMes().getNumeroMes() < mes.getNumeroMes()){
-				valorAnterior.add(ex.getValor());
-				quantidadeAnterior.add(ex.getQuantidade());
+				valorAnterior = valorAnterior.add(ex.getValor());
+				quantidadeAnterior = quantidadeAnterior.add(ex.getQuantidade());
 			}
 			
 			if(ex.getMes().equals(mes)){
@@ -258,7 +258,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 						
 					for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
 						
-						if(fisicoFinanceiroMensal.getValor().intValue()>0 || fisicoFinanceiroMensal.getQuantidade().intValue()>0) {
+						if(fisicoFinanceiroMensal.getValor().doubleValue()>0 || fisicoFinanceiroMensal.getQuantidade().doubleValue()>0) {
 							salvarExecucoes(regiaoMunicipio.getExecucoes());	
 						}
 						

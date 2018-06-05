@@ -7,6 +7,7 @@ import monitoramento.model.Execucao;
 
 public class RelatorioExecucao {
 	
+	private Long regiaoMunicipioId;
 	private Long regiaoId;
 	
 	private String codigo_orgao;
@@ -149,7 +150,7 @@ public class RelatorioExecucao {
 		if(e.getRegiaoMunicipio()!=null) {
 			
 			regiaoMunicipio =  e.getRegiaoMunicipio().getLabel();
-			
+			regiaoMunicipioId =  e.getRegiaoMunicipio().getId();
 			if(e.getRegiaoMunicipio().getRegiao()!=null) {
 				regiao = e.getRegiaoMunicipio().getRegiao().getDescricao();
 				regiaoId= e.getRegiaoMunicipio().getRegiao().getId();
@@ -648,6 +649,14 @@ public class RelatorioExecucao {
 
 	public void setRegiaoId(Long regiaoId) {
 		this.regiaoId = regiaoId;
+	}
+
+	public Long getRegiaoMunicipioId() {
+		return regiaoMunicipioId;
+	}
+
+	public void setRegiaoMunicipioId(Long regiaoMunicipioId) {
+		this.regiaoMunicipioId = regiaoMunicipioId;
 	}		
 
 	

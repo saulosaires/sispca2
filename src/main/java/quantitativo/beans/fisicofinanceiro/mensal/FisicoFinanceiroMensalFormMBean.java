@@ -172,7 +172,7 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 						
 						for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
 							
-							if(!Utils.invalidId(fisicoFinanceiroMensal.getId()) || fisicoFinanceiroMensal.getValor().doubleValue()>0 || fisicoFinanceiroMensal.getQuantidade().doubleValue()>0) {
+							if(fisicoFinanceiroMensal.getValor().doubleValue()>0 || fisicoFinanceiroMensal.getQuantidade().doubleValue()>0) {
 								fisicoFinanceiroMensalService.merge(fisicoFinanceiroMensal);
 							}
 							
@@ -209,8 +209,8 @@ public class FisicoFinanceiroMensalFormMBean implements Serializable {
 		
 		for(FisicoFinanceiroMensal ff: regiaoMunicipio.getFisicoFinanceiroMensal()){
 			
-			valorTotal.add(ff.getValor());
-			quantidadeTotal.add(ff.getQuantidade());
+			valorTotal = valorTotal.add(ff.getValor());
+			quantidadeTotal = quantidadeTotal.add(ff.getQuantidade());
 		
 		
 			if(valorTotal.doubleValue() >0 || quantidadeTotal.doubleValue() >0) {return true;}

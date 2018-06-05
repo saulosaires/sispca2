@@ -1,7 +1,6 @@
 package monitoramento.beans.fisicofinanceiro.mensal;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import arquitetura.utils.Messages;
 import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
-import monitoramento.model.Execucao;
 import monitoramento.service.ExecucaoService;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -96,18 +94,10 @@ public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializa
 
 			String brasaoMa = FileUtil.getRealPath("/resources/images/brasao_ma.png");
 
-	        parameters.put("param_id_acao",acao.getId());
+	       
 	        parameters.put("param_imagem", brasaoMa);
-	        parameters.put("param_cod_acao", acao.getCodigo());
-	        parameters.put("param_acao", acao.getDenominacao());
 	        
-	        parameters.put("param_cod_unid_orc", acao.getUnidadeOrcamentaria().getCodigo());
-	        parameters.put("param_unid_orc", acao.getUnidadeOrcamentaria().getDescricao());
-	        parameters.put("param_cod_programa", acao.getPrograma().getCodigo());
-	        parameters.put("param_programa", acao.getPrograma().getDenominacao());
-	        parameters.put("param_unid_medida", acao.getUnidadeMedida().getDescricao());
-	        parameters.put("param_prod_acao", acao.getProduto());
-			parameters.put("param_id_exercicio", exercicio.getId());
+			parameters.put("param_exercicio", exercicio.getAno());
 			
 			String report="";
 			 
@@ -145,32 +135,8 @@ public class MonitoramentoFisicoFinanceiroMensalReportMBean implements Serializa
 	
 	public List<RelatorioExecucao> buscarExecucao(){
 		
-
-		Map<Long,RelatorioExecucao> map = new HashMap<>();
-
-			
-		 List<Execucao> execucoes = execucaoService.findByAcaoAndExercicio(acao.getId(), exercicio.getId());
-		 
-		 for(Execucao e : execucoes) {	
-			 
-			 if(map.containsKey(e.getRegiaoMunicipio().getId())) {
-				 map.get(e.getRegiaoMunicipio().getId()).setData(e);
-				 
-			 }else {                                                                                    
-				 map.put(e.getRegiaoMunicipio().getId(), new RelatorioExecucao(e));
-			 }
+		return execucaoService.findByAcaoAndExercicio(acao.getId(), exercicio.getId());
  
-		 }
-		 
-		 List<RelatorioExecucao> list = new ArrayList<>(map.size());
-
-		 list.addAll(map.values());
-		 
-		 list.sort((RelatorioExecucao o1, RelatorioExecucao o2)-> o1.getRegiaoId().compareTo(o2.getRegiaoId()));
-		  
-		 
-		return list;
-		
 	}
 	
 	public Long getId() {

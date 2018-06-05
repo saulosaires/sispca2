@@ -107,6 +107,8 @@ public class MenuRelatorioMBean implements Serializable{
     	
     	Relatorio relatorioPlanejamento = new Relatorio("MONITORAMENTO","#","relatorioMonitoramento");
     	
+    	relatorioPlanejamento.getSubRelatorio().add(initCategoriaMonitoramento());
+    	
     	return relatorioPlanejamento;
     }
     
@@ -118,6 +120,14 @@ public class MenuRelatorioMBean implements Serializable{
     	relatorio.getSubRelatorio().add(initCategoriaFisicoFinanceiro());
     	
     	
+    	return relatorio;
+    }
+    
+    private Relatorio initCategoriaMonitoramento() {
+    	
+       	Relatorio relatorio = new Relatorio(null,null,  null);
+    	relatorio.getSubRelatorio().add(new Relatorio("Acompanhamento Mensal", "relatorioMonitoramentoAcompanhamentoMensal","relatorioMonitoramentoAcompanhamentoMensal"));
+
     	return relatorio;
     }
     

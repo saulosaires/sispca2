@@ -218,8 +218,8 @@ public class FisicoFinanceiroAnualFormMBean implements Serializable {
 		
 		for(FisicoFinanceiro ff: regiaoMunicipio.getFisicoFinanceiro()){
 			
-			valorTotal.add(ff.getValor());
-			quantidadeTotal.add(ff.getQuantidade());
+			valorTotal = valorTotal.add(ff.getValor());
+			quantidadeTotal  =quantidadeTotal.add(ff.getQuantidade());
 		
 		
 			if(valorTotal.doubleValue() >0 || quantidadeTotal.doubleValue()>0) {return true;}

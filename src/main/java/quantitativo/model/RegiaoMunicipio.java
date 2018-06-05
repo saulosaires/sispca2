@@ -73,6 +73,14 @@ public class RegiaoMunicipio extends Model{
 	
 	private transient String label;
  
+	public RegiaoMunicipio(){
+		
+	}
+	
+	public RegiaoMunicipio(Long id){
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return id;
 	}

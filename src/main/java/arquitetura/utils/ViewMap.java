@@ -132,7 +132,7 @@ public class ViewMap  {
 		mapLinks.put("/sispca2/private/relatorio/metafisicofinanceiro/list.xhtml",  	 "relatorioFisicoFinanceiroMetaFinanceiro");
 		mapLinks.put("/sispca2/private/relatorio/financeiroprograma/list.xhtml",  		 "relatorioFisicoFinanceiroMetaFinanceiroPrograma");
 
-		
+		mapLinks.put("/sispca2/private/relatorio/relatorioexecucao/list.xhtml",  		 "relatorioMonitoramentoAcompanhamentoMensal");
 		
 		
 	}
