@@ -11,6 +11,7 @@ import javax.inject.Named;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SispcaLogger;
@@ -138,7 +139,7 @@ public class RelatorioExecucaoMBean  extends RelatorioMBean {
 				 
 				return ;
 			}
-	
+	 
 			Map<String, Object> parameters = new HashMap<>();
 	
 			String brasaoMa = FileUtil.getRealPath("/resources/images/brasao_ma.png");

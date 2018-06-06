@@ -30,6 +30,10 @@ public class TipoAcao extends Model  {
 	@Column(name="descricao")
 	private String descricao;
 
+	@Column(name="sigla")
+	private String sigla;
+
+	
 	@OneToMany(mappedBy="tipoAcao")
 	private List<Acao> acaos;
  
@@ -53,6 +57,14 @@ public class TipoAcao extends Model  {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	public List<Acao> getAcaos() {

@@ -27,7 +27,9 @@ import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
+import qualitativo.model.UnidadeGestora;
 import qualitativo.service.AcaoService;
+import qualitativo.service.UnidadeGestoraService;
 import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
@@ -63,6 +65,7 @@ public class ImportaDadosSiafem implements Job {
 
 	 private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
 	 private AcaoService acaoService;
+	 private UnidadeGestoraService unidadeGestoraService;
 	 private ExercicioService exercicioService;
 	
 	 private  Exercicio exercicio ;
@@ -74,6 +77,7 @@ public class ImportaDadosSiafem implements Job {
 		fisicoFinanceiroMensalSiafemService = CDI.current().select(FisicoFinanceiroMensalSiafemService.class).get();
 		acaoService 						= CDI.current().select(AcaoService.class).get();
 		exercicioService 				    = CDI.current().select(ExercicioService.class).get();
+		unidadeGestoraService  			    = CDI.current().select(UnidadeGestoraService.class).get();
 		
 		Optional<Exercicio> exerc = exercicioService.exercicioVigente();
 		
@@ -213,7 +217,7 @@ public class ImportaDadosSiafem implements Job {
 					try {
 					
 						String mes                   = linha.substring(MES.getPosicaoInicial(),					   MES.getPosicaoFinal()).trim();
-						String unidadeGestora 		 = linha.substring(UNIDADE_GESTORA.getPosicaoInicial(),		   UNIDADE_GESTORA.getPosicaoFinal()).trim();
+						String unidadeGestoraCodigo  = linha.substring(UNIDADE_GESTORA.getPosicaoInicial(),		   UNIDADE_GESTORA.getPosicaoFinal()).trim();
 						String unidadeOrcamentaria	 = linha.substring(UNIDADE_ORCAMENTARIA.getPosicaoInicial(),   UNIDADE_ORCAMENTARIA.getPosicaoFinal()).trim();
 						String programa				 = linha.substring(PROGRAMA.getPosicaoInicial(),			   PROGRAMA.getPosicaoFinal()).trim();
 						String acaoCodigo		     = linha.substring(ACAO.getPosicaoInicial(),				   ACAO.getPosicaoFinal()).trim();	
@@ -269,6 +273,12 @@ public class ImportaDadosSiafem implements Job {
 							 
 							 
 						 }
+						 
+						 UnidadeGestora gestora =null;
+						 List<UnidadeGestora> listUnidadeGestora = unidadeGestoraService.buscar(unidadeGestoraCodigo, null, null, null);
+						 if(!listUnidadeGestora.isEmpty()) {
+							 gestora = listUnidadeGestora.get(0);
+						 }
 				 
 						 String naturezaDescricao= "";
 						 if(!Utils.emptyParam(natureza) && natureza.length()>2) {
@@ -281,8 +291,10 @@ public class ImportaDadosSiafem implements Job {
 						 Integer reg = MathUtils.parseInt(regiao);
 						 
 						 
+						 
 						 listSiafem.add(new FisicoFinanceiroMensalSiafem( m,
-								  										  unidadeGestora,
+								 										  unidadeGestoraCodigo,
+								 										  gestora,
 								  										  unidadeOrcamentaria,
 								  										  programa,
 								  										  acaoCodigo,

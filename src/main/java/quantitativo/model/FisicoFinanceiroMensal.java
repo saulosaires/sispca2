@@ -18,40 +18,38 @@ import arquitetura.model.Model;
 import arquitetura.utils.MathUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
- 
 
 @Entity
-@Table(name="fisico_financeiro_mensal", schema="planejamento")
-public class FisicoFinanceiroMensal extends Model implements  Auditable{
+@Table(name = "fisico_financeiro_mensal", schema = "planejamento")
+public class FisicoFinanceiroMensal extends Model implements Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_fisico_financeiro_mensal")
+	@Column(name = "id_fisico_financeiro_mensal")
 	private Long id;
-	
-	@Column(name="quantidade")
-	private BigDecimal quantidade=MathUtils.getZeroBigDecimal();
-	
-	@Column(name="valor")
-	private BigDecimal valor=MathUtils.getZeroBigDecimal();
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_regiao_municipio")
+
+	@Column(name = "quantidade")
+	private BigDecimal quantidade = MathUtils.getZeroBigDecimal();
+
+	@Column(name = "valor")
+	private BigDecimal valor = MathUtils.getZeroBigDecimal();
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_regiao_municipio")
 	private RegiaoMunicipio regiaoMunicipio;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_mes")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_mes")
 	private Mes mes;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_acao")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_acao")
 	private Acao acao;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_exercicio")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_exercicio")
 	private Exercicio exercicio;
- 
 
 	public Long getId() {
 		return id;
@@ -59,7 +57,7 @@ public class FisicoFinanceiroMensal extends Model implements  Auditable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}	
+	}
 
 	public BigDecimal getQuantidade() {
 		return quantidade;
@@ -120,8 +118,8 @@ public class FisicoFinanceiroMensal extends Model implements  Auditable{
 		sb.append(" regiaoMunicipio : ").append(regiaoMunicipio.getId());
 		sb.append(" exercicio : ").append(exercicio.getId());
 		sb.append(" ativo : ").append(getAtivo());
-		
+
 		return sb.toString();
 	}
-	
+
 }

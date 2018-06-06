@@ -17,6 +17,9 @@ import arquitetura.utils.MathUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
+import qualitativo.model.TipoAcao;
+import qualitativo.model.TipoCalculoMeta;
+import qualitativo.model.UnidadeGestora;
 import qualitativo.model.UnidadeMedida;
 import qualitativo.model.UnidadeOrcamentaria;
 
@@ -67,8 +70,12 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	@JoinColumn(name="id_acao",nullable=true)
 	private Acao acao;
  
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_unidade_gestora",nullable=true)
+	private UnidadeGestora unidadeGestora;
+	
 	@Column(name="unidade_gestora")
-	private String unidadeGestora;	
+	private String unidadeGestoraCodigo;	
 	
 	@Column(name="unidade_orcamentaria")
 	private String unidadeOrcamentaria;	
@@ -115,6 +122,60 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	
 	public FisicoFinanceiroMensalSiafem() {}
 	
+	
+	//relatorio Despesas Executadas Acao
+	public FisicoFinanceiroMensalSiafem(
+			 							 Long acaoId,
+										 String acaoCodigo,
+										 String acaoProduto,
+										 String acaoDenominacao,
+										  
+										 Long tipoCalculoMetaId,
+										 String tipoAcaoSigla,
+										  
+										 String unidadeGestoraSigla,
+										  
+										 String unidadeMedidaDescricao,
+										  
+									     BigDecimal dotacaoInicial,
+									     BigDecimal disponivel,
+									     BigDecimal empenhado,
+									     BigDecimal liquidado,
+									     BigDecimal pago
+										) {
+							
+							this.acao = new Acao(acaoId);
+							this.acao.setCodigo(acaoCodigo);
+							this.acao.setProduto(acaoProduto);
+							this.acao.setDenominacao(acaoDenominacao);
+							
+							this.tipoCalculoMetaId = tipoCalculoMetaId;
+							
+							this.acao.setTipoAcao(new TipoAcao());
+							this.acao.getTipoAcao().setSigla(tipoAcaoSigla);
+							
+							this.acao.setPrograma(new Programa());
+							this.acao.getPrograma().setDenominacao(programaDenominacao);
+							
+							this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraCodigo(unidadeGestoraCodigo);
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);	
+							
+							this.acao.setUnidadeMedida(new UnidadeMedida());
+							this.acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+							
+							this.dotacaoInicial = dotacaoInicial;
+							this.disponivel = disponivel;
+							this.empenhado = empenhado;
+							this.liquidado = liquidado;
+							this.pago	= pago;	
+
+
+
+}
+	
+	
+	
 	public FisicoFinanceiroMensalSiafem(
 										  String programaCodigo,
 										  String programaDenominacao,
@@ -146,6 +207,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	public FisicoFinanceiroMensalSiafem(
 			
 										  String unidadeGestoraCodigo,
+										  
 								 		  String unidadeGestoraSigla,
 								 		  String unidadeGestoraDescricao,
 								
@@ -204,7 +266,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 							
 							
 							
-							}
+	}
 
 
 	
@@ -357,7 +419,9 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	
 	public FisicoFinanceiroMensalSiafem(
 									     Mes mes,
-									     String unidadeGestora,
+									     String unidadeGestoraCodigo,
+									    
+									     UnidadeGestora unidadeGestora,
 									     String codigoUnidadeOrcamentaria, 
 									     String programa,
 									     String acaoCodigo,
@@ -379,7 +443,8 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		
 		
 		 this.mes=mes;
-		 this.unidadeGestora = unidadeGestora;
+		 this.unidadeGestoraCodigo = unidadeGestoraCodigo;
+		 this.unidadeGestora= unidadeGestora;
 		 this.unidadeOrcamentaria = codigoUnidadeOrcamentaria;
 		 this.programa = programa;
 		 
@@ -554,12 +619,22 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.mes = mes;
 	}
 
-	public String getUnidadeGestora() {
+	 
+
+	public UnidadeGestora getUnidadeGestora() {
 		return unidadeGestora;
 	}
 
-	public void setUnidadeGestora(String unidadeGestora) {
+	public void setUnidadeGestora(UnidadeGestora unidadeGestora) {
 		this.unidadeGestora = unidadeGestora;
+	}
+
+	public String getUnidadeGestoraCodigo() {
+		return unidadeGestoraCodigo;
+	}
+
+	public void setUnidadeGestoraCodigo(String unidadeGestoraCodigo) {
+		this.unidadeGestoraCodigo = unidadeGestoraCodigo;
 	}
 
 	public String getUnidadeOrcamentaria() {
