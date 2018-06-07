@@ -18,7 +18,6 @@ import qualitativo.model.Acao;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import qualitativo.model.TipoAcao;
-import qualitativo.model.TipoCalculoMeta;
 import qualitativo.model.UnidadeGestora;
 import qualitativo.model.UnidadeMedida;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -121,6 +120,67 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	private transient BigDecimal saldo = MathUtils.getZeroBigDecimal();
 	
 	public FisicoFinanceiroMensalSiafem() {}
+
+	//relatorio Despesas Executadas POR Unidade Unidade
+	public FisicoFinanceiroMensalSiafem(
+			 							 Long acaoId,
+										 String acaoCodigo,
+										 String acaoProduto,
+										 String acaoDenominacao,
+										  
+										 Long tipoCalculoMetaId,
+										 
+										 String unidadeGestoraCodigo, 
+										 String unidadeGestoraSigla,
+										 String unidadeGestoraDescricao, 
+										 
+										 String unidadeOrcamentariaCodigo, 
+										 String unidadeOrcamentariaDescricao, 
+										 
+										 String programaCodigo,
+										 String programaDenominacao,
+										 
+										 String unidadeMedidaDescricao,
+										  
+									     BigDecimal dotacaoInicial,
+									     BigDecimal disponivel,
+									     BigDecimal empenhado,
+									     BigDecimal liquidado,
+									     BigDecimal pago
+										) {
+							
+							this.acao = new Acao(acaoId);
+							this.acao.setCodigo(acaoCodigo);
+							this.acao.setProduto(acaoProduto);
+							this.acao.setDenominacao(acaoDenominacao);
+							
+							this.tipoCalculoMetaId = tipoCalculoMetaId;
+ 							
+							this.acao.setPrograma(new Programa());
+							this.acao.getPrograma().setCodigo(programaCodigo);
+							this.acao.getPrograma().setDenominacao(programaDenominacao);
+							
+							this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+							
+							this.acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+							this.acao.getUnidadeOrcamentaria().setDescricao(unidadeOrcamentariaDescricao);
+							
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraCodigo(unidadeGestoraCodigo);
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraSigla(unidadeGestoraSigla);	
+							this.acao.getUnidadeOrcamentaria().setUnidadeGestoraDescricao(unidadeGestoraDescricao);
+							
+							this.acao.setUnidadeMedida(new UnidadeMedida());
+							this.acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+							
+							this.dotacaoInicial = dotacaoInicial;
+							this.disponivel = disponivel;
+							this.empenhado = empenhado;
+							this.liquidado = liquidado;
+							this.pago	= pago;	
+
+
+
+}	
 	
 	//relatorio Despesas Executadas Acao
 	public FisicoFinanceiroMensalSiafem(

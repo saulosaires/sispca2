@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"> 
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">
+		
+		
+				 <f:metadata>
+	    			<f:viewParam name="id" value="#{relatorioFinanceiroUgProgAcaoMBean.exercicioId}"/>
+	    			<f:viewAction action="#{relatorioFinanceiroUgProgAcaoMBean.init}" />
+			     </f:metadata>
+			
+			
+			<h:form>
+
+				<div class="container-fluid row-fluid">
+ 
+					<legend class="outBusc">Execução Física e Financeira por Programas e Ações</legend>
+				</div>
+
+				<div class="spaceContainerForm">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-4">	
+												
+								<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
+						        <p:selectOneRadio id="customRadio" value="#{relatorioFinanceiroUgProgAcaoMBean.tipoArquivo}"   >
+						            <f:selectItem itemLabel="PDF" itemValue="PDF" />
+	         						<f:selectItem itemLabel="XLS" itemValue="XLS" />
+						        </p:selectOneRadio>
+						        
+		    				</div>
+		    			</div>	   			
+		    			
+		    			
+						<div class="row" style="margin-top: 1%;">
+							<div class="col-lg-3">
+								<h:outputText value="EXERCÍCIO: " styleClass="labelOutText"/>
+								<h:outputText value="#{relatorioFinanceiroUgProgAcaoMBean.exercicio.ano}" styleClass="labelInputText"/>
+							</div>					
+						</div>
+		    			
+		    			<div class="row" style="margin-top: 1%">
+							<div class="col-lg-3">
+								<h:outputText value="UNIDADE GESTORA: " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{relatorioFinanceiroUgProgAcaoMBean.unidadeGestora}" styleClass="input-sm form-control">
+									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>	
+									<f:selectItems var="ug" value="#{relatorioFinanceiroUgProgAcaoMBean.listUnidadeGestora}"
+												   itemLabel="#{fn:toUpperCase(ug.descricao)}" itemValue="#{ug.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>	
+
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-3">
+								<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
+								<h:selectOneMenu value="#{relatorioFinanceiroUgProgAcaoMBean.unidadeOrcamentaria}" styleClass="input-sm form-control">
+									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>	
+									<f:selectItems var="unid" value="#{relatorioFinanceiroUgProgAcaoMBean.listUnidadeOrcamentaria}"
+												   itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.id}" />
+												   
+									<f:ajax event="change" execute="@this"
+										listener="#{relatorioFinanceiroUgProgAcaoMBean.onChangeUnidade()}"
+										render="idComboMetaFisicoProg" />
+										
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-3">
+								<h:outputText value="PROGRAMA:  " styleClass="labelOutText"/>
+								<h:selectOneMenu id="idComboMetaFisicoProg" value="#{relatorioFinanceiroUgProgAcaoMBean.programa}"
+												 styleClass="input-sm form-control" requiredMessage="Selecione o programa">
+												 
+									<f:selectItem itemValue="#{null}" itemLabel="--TODOS--" />
+									
+									<f:selectItems value="#{relatorioFinanceiroUgProgAcaoMBean.listPrograma}"
+												   var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						
+						<div class="row-fluid" style="margin-top: 2%;">
+							<div class="spaceBtnAcao">
+								<h:commandLink styleClass="btnAction btn btn-primary"  
+							 		value="Gerar Relatório" 
+							 		action="#{relatorioFinanceiroUgProgAcaoMBean.gerarRelatorio()}" />
+							</div>
+						</div>	
+					</div>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
