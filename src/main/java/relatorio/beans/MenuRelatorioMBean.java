@@ -160,7 +160,9 @@ public class MenuRelatorioMBean implements Serializable{
     	
     	Relatorio relatorio = new Relatorio("TCE","#","relatorioGerencialTCE");
     	
-    	relatorio.getSubRelatorio().add(new Relatorio(" Despesa Executada por Ação",		    "relatorioGerencialTCEDespesaAcao",   "relatorioGerencialTCEDespesaAcao"));
+    	relatorio.getSubRelatorio().add(new Relatorio("Despesa Executada por Ação",		   				   "relatorioGerencialTCEDespesaAcao","relatorioGerencialTCEDespesaAcao"));
+    	relatorio.getSubRelatorio().add(new Relatorio("Execução Física e Financeira por Programas e Ações","relatorioGerencialTCEDespesaPrograma","relatorioGerencialTCEDespesaPrograma"));
+    	relatorio.getSubRelatorio().add(new Relatorio("Execução Física e Financeira por Unidade Executora","relatorioGerencialTCEDespesaUnidade","relatorioGerencialTCEDespesaUnidade"));
 
 
     	return relatorio;

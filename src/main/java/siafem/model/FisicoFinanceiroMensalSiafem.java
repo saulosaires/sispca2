@@ -122,7 +122,6 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	
 	public FisicoFinanceiroMensalSiafem() {}
 	
-	
 	//relatorio Despesas Executadas Acao
 	public FisicoFinanceiroMensalSiafem(
 			 							 Long acaoId,
@@ -175,7 +174,60 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 }
 	
 	
-	
+	//relatorio Execução Financeira por Programas e Ações
+	public FisicoFinanceiroMensalSiafem(
+			 							 Long acaoId,
+										 String acaoCodigo,
+										 String acaoProduto,
+										 String acaoDenominacao,
+										  
+										 Long tipoCalculoMetaId,
+										
+										 String programaObjetivo,
+										 String programaCodigo,
+										 String programaDenominacao, 
+										 
+										 String unidadeorcamentariaCodigo,
+										 String unidadeorcamentariaDescricao, 
+										  
+										 String unidadeMedidaDescricao,
+										  
+									     BigDecimal dotacaoInicial,
+									     BigDecimal disponivel,
+									     BigDecimal empenhado,
+									     BigDecimal liquidado,
+									     BigDecimal pago
+										) {
+							
+							this.acao = new Acao(acaoId);
+							this.acao.setCodigo(acaoCodigo);
+							this.acao.setProduto(acaoProduto);
+							this.acao.setDenominacao(acaoDenominacao);
+							
+							this.tipoCalculoMetaId = tipoCalculoMetaId;
+							
+							this.acao.setPrograma(new Programa());
+							this.acao.getPrograma().setObjetivo(programaObjetivo);
+							this.acao.getPrograma().setCodigo(programaCodigo);
+							this.acao.getPrograma().setDenominacao(programaDenominacao);
+							
+							this.acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+							this.acao.getUnidadeOrcamentaria().setCodigo(unidadeorcamentariaCodigo);
+							this.acao.getUnidadeOrcamentaria().setDescricao(unidadeorcamentariaDescricao);
+							
+							this.acao.setUnidadeMedida(new UnidadeMedida());
+							this.acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+							
+							this.dotacaoInicial = dotacaoInicial;
+							this.disponivel = disponivel;
+							this.empenhado = empenhado;
+							this.liquidado = liquidado;
+							this.pago	= pago;	
+
+
+
+}
+			
 	public FisicoFinanceiroMensalSiafem(
 										  String programaCodigo,
 										  String programaDenominacao,
@@ -202,8 +254,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 							
 							
 	}	
-	
-	
+		
 	public FisicoFinanceiroMensalSiafem(
 			
 										  String unidadeGestoraCodigo,
@@ -267,9 +318,6 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 							
 							
 	}
-
-
-	
 	
 	public FisicoFinanceiroMensalSiafem(
 			
@@ -335,9 +383,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 							
 							
 							}
-
-	
-	
+		
 	public FisicoFinanceiroMensalSiafem(
 									      String naturezaDescricao,
 									  
@@ -359,8 +405,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		this.pago	= pago;	
 	
 	}
-	
-	
+		
 	public FisicoFinanceiroMensalSiafem(
 			
 										  String unidadeGestoraCodigo,
@@ -415,8 +460,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 		
 		
 	}
-	
-	
+		
 	public FisicoFinanceiroMensalSiafem(
 									     Mes mes,
 									     String unidadeGestoraCodigo,
@@ -494,9 +538,7 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 	 
 		
 	}
-	
-	
-	
+		
  	public FisicoFinanceiroMensalSiafem(String programa,
 										String codigoUnidadeOrcamentaria,  
 									    String descricaoUnidadeOrcamentaria,
@@ -573,7 +615,6 @@ public class FisicoFinanceiroMensalSiafem implements Serializable{
 			this.pago = pago;				
   }
  	
-
  	public FisicoFinanceiroMensalSiafem(
 										String codigoUnidadeOrcamentaria,  
 									    String descricaoUnidadeOrcamentaria,

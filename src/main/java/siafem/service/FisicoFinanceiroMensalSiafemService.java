@@ -16,7 +16,6 @@ import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
 import siafem.controller.FisicoFinanceiroMensalSiafemController;
-import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
 import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.model.RelatorioDetalhamentoAcaoSiafem;
@@ -450,6 +449,27 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 	}
 
+	public List<FisicoFinanceiroMensalSiafem> relatorioExecucaoProgramaAcao(Long programa, Long unidadeOrcamentaria, Long acao,Exercicio exercicio){
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioExecucaoProgramaAcao(programa, unidadeOrcamentaria, acao, exercicio.getAno());
+		
+		
+		for(FisicoFinanceiroMensalSiafem financeiroMensalSiafem: listFisicoFinanceiro) {
+
+			 calculaMeta(financeiroMensalSiafem,exercicio);
+			
+			 calculaSaldo(financeiroMensalSiafem);
+			 calculaEmpenhadoSobreDisponivel(financeiroMensalSiafem);
+			 calculaLiquidadoSobreAtual(financeiroMensalSiafem);
+			 calculaPagoSobreDisponivel(financeiroMensalSiafem);
+		}
+		
+		
+		return listFisicoFinanceiro;
+		
+		
+	}
+
+	
 	
 	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPorPrograma(Integer ano){
 		return controller().relatorioFinanceiroPorPrograma(ano);

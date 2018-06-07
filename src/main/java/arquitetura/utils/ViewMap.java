@@ -134,7 +134,8 @@ public class ViewMap  {
 
 		mapLinks.put("/sispca2/private/relatorio/relatorioexecucao/list.xhtml",  		 "relatorioMonitoramentoAcompanhamentoMensal");
 		
-		mapLinks.put("/sispca2/private/relatorio/relatoriofinanceiroacao/list.xhtml",  "relatorioGerencialTCEDespesaAcao");
+		mapLinks.put("/sispca2/private/relatorio/relatoriofinanceiroacao/list.xhtml",      "relatorioGerencialTCEDespesaAcao");
+		mapLinks.put("/sispca2/private/relatorio/relatoriofinanceiroprogacao/list.xhtml",  "relatorioGerencialTCEDespesaPrograma");
 		
 	}
 

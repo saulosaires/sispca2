@@ -125,5 +125,8 @@ public class FisicoFinanceiroMensalSiafemController extends AbstractController<F
 		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioDespesasExecutadasAcao(unidadeGestora, unidadeOrcamentaria, acao, ano);
 	}
 	
+	public List<FisicoFinanceiroMensalSiafem> relatorioExecucaoProgramaAcao(Long programa, Long unidadeOrcamentaria, Long acao, Integer ano){
+		return ((FisicoFinanceiroMensalSiafemDAO)getDao()).relatorioExecucaoProgramaAcao(programa, unidadeOrcamentaria, acao, ano);
+	}
 	
 }

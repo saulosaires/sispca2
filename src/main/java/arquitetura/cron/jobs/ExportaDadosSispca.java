@@ -19,7 +19,7 @@ import qualitativo.model.Programa;
 
  
 
-public class ExportaDadosSispca implements Job {
+public class ExportaDadosSispca    implements Job{
 	
 	public static final String ftpServer = "ftp.ma.gov.br";
 	public static final String user = "sisppa";
@@ -37,7 +37,7 @@ public class ExportaDadosSispca implements Job {
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-	
+
 //		List<Acao> listAcao = new AcaoDao().retornaAcaoPorAno(2017);
 //		List<Programa> listPrograma = new ProgramaDao().retornaProgramas();
 //		List<ElaboracaoMetaFisica> listMeta = new AcaoDao().retornaMetaByAcao(2017);
