@@ -57,7 +57,7 @@ public class ProgramaFormMBean implements Serializable {
   
 		listTipoPrograma	      = tipoProgramaService.findAll();
 		listOrgoes				  = orgaoService.findAllOrderByDescricao(); 
-		listUnidadeOrcamentaria   = unidadeOrcamentariaService.findAll();
+		listUnidadeOrcamentaria   = unidadeOrcamentariaService.findAllOrderByDescricao();
 		listTipoHorizonteTemporal = tipoHorizonteTemporalService.findAll();
 		
 		

@@ -7,6 +7,8 @@ import java.util.StringJoiner;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import arquitetura.enums.TipoUsuario;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
 import arquitetura.utils.FormatoUtils;
@@ -55,6 +58,10 @@ public class Usuario  extends Model implements  Auditable {
 	@Column(name="password",length=200,nullable=false)
 	private String password;
 
+	@Column(name="tipo_usuario",length=1,nullable=false)
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario = TipoUsuario.P;
+	
  
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -295,6 +302,14 @@ public class Usuario  extends Model implements  Auditable {
 
 	public void setValidarSameCpf(boolean validarSameCpf) {
 		this.validarSameCpf = validarSameCpf;
+	}	
+	
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	public String getPerfilLabel() {

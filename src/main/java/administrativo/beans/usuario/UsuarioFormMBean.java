@@ -1,6 +1,7 @@
 package administrativo.beans.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import administrativo.model.Perfil;
 import administrativo.model.Usuario;
 import administrativo.service.PerfilService;
 import administrativo.service.UserService;
+import arquitetura.enums.TipoUsuario;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -38,25 +40,28 @@ public class UsuarioFormMBean implements Serializable {
  
 	private Usuario usuario = new Usuario();
 	private Long perfilSelecionado;
-	private Long uoSelecionada;
 	private List<Perfil>listPerfil;
 	private List<UnidadeOrcamentaria>listUnidadeOrcamentaria;
+	
+	private TipoUsuario[] tipoUsuarios;
 	
 	private UserValidate userValidate;
 	private UserService userService;
 	private PerfilService perfilService;
-	private UnidadeOrcamentariaService unidadeOrcamentariaService;
+	private Long[] perfilsSelecionados;
 
 	@Inject
 	public UsuarioFormMBean(UserService userService,PerfilService perfilService,UnidadeOrcamentariaService unidadeOrcamentariaService,UserValidate userValidate) {
 		
 		this.userService 				= userService;
 		this.perfilService			    = perfilService;
-		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
+
 		this.userValidate			    =userValidate;
 		
 		listPerfil 				= perfilService.findAll();
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAll();
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		
+		tipoUsuarios = TipoUsuario.values();
 	}
 
  
@@ -68,7 +73,9 @@ public class UsuarioFormMBean implements Serializable {
 				return "";
 			}
 			
-			setDependency();
+			usuario.setPerfis(setPerfilSelecionado());
+			
+			 
 			createPassword();
 			
 			usuario=userService.create(usuario);
@@ -96,26 +103,23 @@ public class UsuarioFormMBean implements Serializable {
 
  
 
-	 
-
-	private void setDependency() {
-		
-		setPerfil();
-		setUO();
-		
-	}
-	
-	private void setPerfil() {
-		
-		usuario.getPerfis().clear();
-		
-		usuario.getPerfis().add(perfilService.findById(perfilSelecionado));
-	}
-	
-	private void setUO() {
  
-		usuario.setUnidadeOrcamentaria(unidadeOrcamentariaService.findById(uoSelecionada));
+	
+	private List<Perfil> setPerfilSelecionado() {
+		
+		if(perfilsSelecionados==null )return null;
+		
+		List<Perfil> perfis = new ArrayList<>();
+		
+		for(Long id: perfilsSelecionados) {
+			
+			perfis.add(perfilService.findById(id));
+		}
+		
+
+		return perfis;
 	}
+	
 	
 	private void createPassword() {
 		
@@ -187,13 +191,6 @@ public class UsuarioFormMBean implements Serializable {
 		this.perfilSelecionado = perfilSelecionado;
 	}
 
-	public Long getUoSelecionada() {
-		return uoSelecionada;
-	}
-
-	public void setUoSelecionada(Long uoSelecionada) {
-		this.uoSelecionada = uoSelecionada;
-	}
 
 	public List<Perfil> getListPerfil() {
 		return listPerfil;
@@ -209,6 +206,26 @@ public class UsuarioFormMBean implements Serializable {
 
 	public void setListUnidadeOrcamentaria(List<UnidadeOrcamentaria> listUnidadeOrcamentaria) {
 		this.listUnidadeOrcamentaria = listUnidadeOrcamentaria;
+	}
+
+
+	public TipoUsuario[] getTipoUsuarios() {
+		return tipoUsuarios;
+	}
+
+
+	public void setTipoUsuarios(TipoUsuario[] tipoUsuario) {
+		this.tipoUsuarios = tipoUsuario;
+	}
+
+
+	public Long[] getPerfilsSelecionados() {
+		return perfilsSelecionados;
+	}
+
+
+	public void setPerfilsSelecionados(Long[] perfilsSelecionados) {
+		this.perfilsSelecionados = perfilsSelecionados;
 	}
 	
 	

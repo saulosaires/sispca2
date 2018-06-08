@@ -54,7 +54,7 @@ public class UsuarioEditMBean implements Serializable {
 		this.userValidate			    = userValidate;
 		
 		listPerfil 				= perfilService.findAll();
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAll();
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
 	}
 
 	public void init() {

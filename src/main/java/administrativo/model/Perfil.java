@@ -34,8 +34,8 @@ public class Perfil extends Model implements  Auditable {
 	@Size(min = 1, max = 30)
 	@Column(unique=true)
 	private String name;
-
  
+	
 	@ManyToMany(mappedBy="perfil",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private List<Permissao> permissoes=new ArrayList<>();
 

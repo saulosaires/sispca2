@@ -21,6 +21,8 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 		super(controller);
 	}
 
+	 
+	
 	public List<UnidadeOrcamentaria> findAllOrderByDescricao() {
 
 		return ((UnidadeOrcamentariaController) getController()).findAllOrderByDescricao();
