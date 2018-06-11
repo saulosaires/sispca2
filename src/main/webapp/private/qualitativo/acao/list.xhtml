@@ -47,7 +47,7 @@
 											<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenUnidOrc" value="#{acaoListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm" required="true" requiredMessage="Unidade de Orcamentaria: campo é obrigatório">
+											<h:selectOneMenu id="inputMenUnidOrc" value="#{acaoListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm" >
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
 												<f:selectItems value="#{acaoListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
 											</h:selectOneMenu>											

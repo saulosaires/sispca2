@@ -66,7 +66,7 @@ public class ProgramaEditMBean implements Serializable {
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		listTipoPrograma	      = tipoProgramaService.findAll();
-		listOrgoes				  = orgaoService.findAllOrderByDescricao(); 
+		listOrgoes				  = orgaoService.findAllOrderByDescricao(user.getId()); 
 		listUnidadeOrcamentaria   = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		listTipoHorizonteTemporal = tipoHorizonteTemporalService.findAll();
 		

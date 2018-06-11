@@ -16,6 +16,7 @@ import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import monitoramento.model.RelatorioDetalhamentoAcaoExecucaoMensal;
 import monitoramento.service.ExecucaoService;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -42,7 +43,7 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String unidadeOrcamentaria;
+	private Long unidadeOrcamentaria;
 	private List<UnidadeOrcamentaria> listUnidadeOrcamentaria;
 	
 	private Long acao;
@@ -50,8 +51,9 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
 	
 	private List<Mes> meses;
 	
+	private UnidadeOrcamentariaService unidadeOrcamentariaService;
 	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
-	FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
+	private FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
 	private  AcaoService acaoService;
 	private ExecucaoService execucaoService;
 	
@@ -73,6 +75,7 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
 		
 		this.fisicoFinanceiroMensalSiafemService = fisicoFinanceiroMensalSiafemService;
 		this.fisicoFinanceiroMensalService = fisicoFinanceiroMensalService;
+		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
 		this.acaoService = acaoService;
 		this.execucaoService = execucaoService;
 		
@@ -81,7 +84,9 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
 	
 	public void buscaAcoesByUnidade() {
 		
-		listAcao = acaoService.buscar(null, unidadeOrcamentaria, null, null);
+		List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+		
+		listAcao = acaoService.buscar(null, null,listUO, null, exercicioId);
 		
 	}
 
@@ -89,10 +94,17 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
     	
 
     	try {
+    		String codigounidadeOrcamentaria=null;
+    		if(unidadeOrcamentaria!=null) {
+    			UnidadeOrcamentaria uo = unidadeOrcamentariaService.findById(unidadeOrcamentaria);
+    			
+    			if(uo!=null)
+    				codigounidadeOrcamentaria = uo.getCodigo();
+    		}
     		
     		Acao ac = acaoService.findById(acao);
     		
-        	RelatorioDetalhamentoAcaoSiafem relatorioDetalhamentoAcaoSiafem = fisicoFinanceiroMensalSiafemService.relatorioDetalhamentoAcao(meses,unidadeOrcamentaria, acao, getExercicio().getAno());
+        	RelatorioDetalhamentoAcaoSiafem relatorioDetalhamentoAcaoSiafem = fisicoFinanceiroMensalSiafemService.relatorioDetalhamentoAcao(meses,codigounidadeOrcamentaria, acao, getExercicio().getAno());
 				
         	RelatorioDetalhamentoAcaoFinanceiroMensal planejado  = fisicoFinanceiroMensalService.calculaPlanejamentoMensalByMesAndExercicioAndAcao(meses, exercicio.getId(), acao);
         	
@@ -156,12 +168,12 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
     }
 	
 	
-	public String getUnidadeOrcamentaria() {
+	public Long getUnidadeOrcamentaria() {
 		return unidadeOrcamentaria;
 	}
 
 
-	public void setUnidadeOrcamentaria(String unidadeOrcamentaria) {
+	public void setUnidadeOrcamentaria(Long unidadeOrcamentaria) {
 		this.unidadeOrcamentaria = unidadeOrcamentaria;
 	}
 

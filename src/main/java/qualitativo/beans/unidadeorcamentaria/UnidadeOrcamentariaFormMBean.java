@@ -7,7 +7,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import qualitativo.model.Orgao;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -40,8 +42,9 @@ public class UnidadeOrcamentariaFormMBean implements Serializable {
 		this.service = service;
 		this.validate = validate;
 		
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
-		this.listOrgao = orgaoService.findAllOrderByDescricao();
+		this.listOrgao = orgaoService.findAllOrderByDescricao(user.getId());
 
 	}
 

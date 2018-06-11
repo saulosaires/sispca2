@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import administrativo.controller.UserController;
 import administrativo.model.Usuario;
 import administrativo.service.UserService;
 import arquitetura.enums.TipoUsuario;
@@ -22,15 +21,13 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 	 */
 	private static final long serialVersionUID = -3288174422611664897L;
 
-	UserService userService;
-	OrgaoService orgaoService;
+	private UserService userService;
 	
 	@Inject
-	public UnidadeOrcamentariaService(UnidadeOrcamentariaController controller,UserService userService,OrgaoService orgaoService) {
+	public UnidadeOrcamentariaService(UnidadeOrcamentariaController controller,UserService userService) {
 		super(controller);
 		
 		this.userService  = userService;
-		this.orgaoService = orgaoService;
 	}
 
 	 
@@ -50,22 +47,19 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 			break;
 
 			case G:{
-				  UnidadeOrcamentaria uo = findById(user.getUnidadeOrcamentaria().getId());
+				 UnidadeOrcamentaria uo = findById(user.getUnidadeOrcamentaria().getId());
 
- 				  list.addAll( buscar(usuarioId,null,null,uo.getOrgao().getId()));
+ 				 list.addAll( buscar(null,null,null,uo.getOrgao().getId()));
 				
 			}break;
 		
 			case A:
-			  list =  orderByDescricao(findAll());
+			  list = findAll();
 			break;
-			
-			
-			
-			
+ 
 		}
 		
-		return list;
+		return orderByDescricao(list);
 		
 		
 		

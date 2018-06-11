@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import arquitetura.utils.Utils;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -70,7 +72,7 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		userId = user.getId();
-		listOrgao = orgaoService.findAllOrderByDescricao();
+		listOrgao = orgaoService.findAllOrderByDescricao(userId);
 		
 		this.acaoService = acaoService;
 		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
@@ -99,16 +101,23 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 		if(!Utils.invalidId(programa))
 			listAcoes.addAll(acaoService.buscar(null, null, null, programa, null));
 		
-		if(!Utils.invalidId(unidadeOrcamentaria))
-			listAcoes.addAll(acaoService.buscar(null, null, unidadeOrcamentaria, null, null));
+		if(!Utils.invalidId(unidadeOrcamentaria)) {
+			
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+			
+			listAcoes.addAll(acaoService.buscar(null, null, listUO, null, null));
+		}
 	}
 	
+ 
+
 	
 	public String gerarRelatorio(){
 		
 		try {
-
-			List<Acao> listaAcao = acaoService.relatorioQualitativoProgramasAcoes(orgao, unidadeOrcamentaria, programa, acao, exercicioId);
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+			
+			List<Acao> listaAcao = acaoService.relatorioQualitativoProgramasAcoes(orgao, listUO, programa, acao, exercicioId);
 			
 			if (listaAcao == null || listaAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

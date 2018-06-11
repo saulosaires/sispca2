@@ -1,7 +1,9 @@
 package quantitativo.beans.fisicofinanceiro.anual;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Programa;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -88,7 +91,9 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 
 		try {
 			
-			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,exercicioId);
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentariaId,listUnidadeOrcamentaria);
+			
+			listAcoes = acaoService.buscar(codigo, denominacao, listUO, programaId,exercicioId);
 
 			if(listUnidadeOrcamentaria.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);
@@ -100,8 +105,10 @@ public class FisicoFinanceiroAnualListMBean implements Serializable {
 			Messages.addMessageError(FAIL_SEARCH);
 
 		}
+		
 	}
-
+ 
+	
     public void onChangePpa() {
     	
     	if(ppaId!=null) {

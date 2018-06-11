@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import administrativo.model.Exercicio;
 import administrativo.model.Ppa;
+import administrativo.model.Usuario;
 import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -67,8 +68,10 @@ public class ProgramaListMBean implements Serializable {
 		this.ppaService 	 = ppaService;
 		this.programaService = programaService;
 
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
 		listTipoPrograma = tipoProgramaService.findAll();
-		listOrgoes =  orgaoService.findAllOrderByDescricao();
+		listOrgoes =  orgaoService.findAllOrderByDescricao(user.getId());
 		
 		listPpa = ppaService.findAll();
 		

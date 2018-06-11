@@ -16,6 +16,7 @@ import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -65,7 +66,7 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		userId= user.getId();
-		listOrgao = orgaoService.findAllOrderByDescricao();
+		listOrgao = orgaoService.findAllOrderByDescricao(userId);
 		
 		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
 		this.programaService = programaService;
@@ -88,8 +89,10 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 	public String gerarRelatorio() {
 		
 		try {
-
-			List<Acao> listAcao = acaoService.relatorioPlanoTrabalho(orgao, unidadeOrcamentaria, programa, orgao,ordemCampos);
+			
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+			
+			List<Acao> listAcao = acaoService.relatorioPlanoTrabalho(orgao, listUO, programa, orgao,ordemCampos);
 
 			if (listAcao == null || listAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

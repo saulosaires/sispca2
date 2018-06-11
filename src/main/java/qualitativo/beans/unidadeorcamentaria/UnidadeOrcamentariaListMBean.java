@@ -49,7 +49,10 @@ public class UnidadeOrcamentariaListMBean implements Serializable {
 	public UnidadeOrcamentariaListMBean(UnidadeOrcamentariaService  service, OrgaoService orgaoService) {
 		
 		this.service   = service;
-		this.listOrgao = orgaoService.findAllOrderByDescricao();
+		
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		this.listOrgao = orgaoService.findAllOrderByDescricao(user.getId());
  		
 		atualizar = SessionUtils.containsKey("planejamentoQualitativoUnidadeOrcamentariaAtualizar"); 
 		deletar   = SessionUtils.containsKey("planejamentoQualitativoUnidadeOrcamentariaDeletar");

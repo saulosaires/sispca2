@@ -1,7 +1,9 @@
 package qualitativo.beans.acao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Programa;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -86,7 +89,10 @@ public class AcaoListMBean implements Serializable {
 	public void buscar() {
 
 		try {
-			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,exercicioId);
+			
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentariaId,listUnidadeOrcamentaria);
+			
+			listAcoes = acaoService.buscar(codigo, denominacao, listUO, programaId,exercicioId);
 
 			if(listAcoes.isEmpty()) {
 				Messages.addMessageWarn(ACAO_NO_RECORDS);
@@ -100,6 +106,7 @@ public class AcaoListMBean implements Serializable {
 		}
 	}
 
+	 
 	public String deletar(Acao acao) {
 
 		try {
@@ -150,7 +157,6 @@ public class AcaoListMBean implements Serializable {
 		
 	}
 
-	
     public void onChangePpa() {
     	
     	if(ppaId!=null) {
@@ -160,7 +166,6 @@ public class AcaoListMBean implements Serializable {
     		listExercicio=null;	
     		}
     }
-
 
 	public String getCodigo() {
 		return codigo;

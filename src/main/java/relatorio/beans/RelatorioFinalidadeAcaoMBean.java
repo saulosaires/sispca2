@@ -16,6 +16,7 @@ import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -70,11 +71,13 @@ public class RelatorioFinalidadeAcaoMBean extends RelatorioMBean {
 		this.programaService = programaService;
 		this.acaoService = acaoService;
 		
-		listOrgao = orgaoService.findAllOrderByDescricao();
-		
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		userId = user.getId();
+		
+		listOrgao = orgaoService.findAllOrderByDescricao(user.getId());
+		
+
 		
 	}
 
@@ -94,8 +97,8 @@ public class RelatorioFinalidadeAcaoMBean extends RelatorioMBean {
 	public String gerarRelatorio() {
 		
 		try {
-			
-			List<Acao> listAcao = acaoService.relatorioFinalidade(orgaoId, unidadeOrcamentariaId, programaId, exercicioId);
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentariaId,listUnidadeOrcamentaria);
+			List<Acao> listAcao = acaoService.relatorioFinalidade(orgaoId, listUO, programaId, exercicioId);
 			
 			if(listAcao==null || listAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

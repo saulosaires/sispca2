@@ -34,8 +34,7 @@
 											<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenuUO" value="#{fisicoFinanceiroAnualListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15"
-																			  required="true" requiredMessage="UNIDADE ORÇAMENTÁRIA é obrigatório">
+											<h:selectOneMenu id="inputMenuUO" value="#{fisicoFinanceiroAnualListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15" >
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
 												<f:selectItems value="#{fisicoFinanceiroAnualListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
 												 

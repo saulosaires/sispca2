@@ -11,6 +11,7 @@ import administrativo.model.Usuario;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.UoUtils;
 import qualitativo.model.Acao;
 import qualitativo.model.Programa;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -71,7 +72,9 @@ public class FisicoFinanceiroMensalListMBean implements Serializable {
 
 		try {
 			
-			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,null);
+			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentariaId,listUnidadeOrcamentaria);
+			
+			listAcoes = acaoService.buscar(codigo, denominacao, listUO, programaId,null);
 
 			if(listUnidadeOrcamentaria.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);
@@ -85,6 +88,8 @@ public class FisicoFinanceiroMensalListMBean implements Serializable {
 		}
 	}
 
+	 
+	
 	public String relatorio(FisicoFinanceiro fisicoFinanceiro) {
  
 		return "";

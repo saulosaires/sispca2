@@ -94,12 +94,14 @@ public class RelatorioExecucaoMBean  extends RelatorioMBean {
 				this.acaoService = acaoService;
 				this.regiaoService = regiaoService;
 				
-				listTipoRegiao = tipoRegiaoService.findAllOrderByDescricao();
-				listOrgao = orgaoService.findAllOrderByDescricao();
-				
 				Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 				
 				userId = user.getId();
+				
+				listTipoRegiao = tipoRegiaoService.findAllOrderByDescricao();
+				listOrgao = orgaoService.findAllOrderByDescricao(user.getId());
+				
+
 
 	}
 

@@ -43,7 +43,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 	}
 
 	
-	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId,String orderBy){
+	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
@@ -91,11 +91,14 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		if(!Utils.invalidId(orgaoId)) {
 			predicate.add(cb.equal(joinOrgao.get(ID),orgaoId));
 		}
-		
-		if(!Utils.invalidId(unidadeOrcamentariaId)) {
-			predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID),unidadeOrcamentariaId));
+ 
+		if(unidadeOrcamentaria!=null && !unidadeOrcamentaria.isEmpty()) {
+
+			predicate.add(cb.isTrue(joinUnidadeOrcamentaria.get(ID).in(unidadeOrcamentaria)) );
+			 
 		}
 
+		
 		if(!Utils.invalidId(programaId)) {
 			predicate.add(cb.equal(joinPrograma.get(ID),programaId));
 		}
@@ -135,7 +138,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 	}	
 	
-	public List<Acao> relatorioFinalidade(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+	public List<Acao> relatorioFinalidade(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
@@ -172,8 +175,14 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			predicate.add(cb.equal(joinOrgao.get(ID),orgaoId));
 		}
 		
-		if(!Utils.invalidId(unidadeOrcamentariaId)) {
-			predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID),unidadeOrcamentariaId));
+//		if(!Utils.invalidId(unidadeOrcamentariaId)) {
+//			predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID),unidadeOrcamentariaId));
+//		}
+
+		if(unidadeOrcamentaria!=null && !unidadeOrcamentaria.isEmpty()) {
+
+			predicate.add(cb.isTrue(joinUnidadeOrcamentaria.get(ID).in(unidadeOrcamentaria)) );
+			 
 		}
 
 		if(!Utils.invalidId(programaId)) {
@@ -211,6 +220,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 	}	
 		
+	
+	//ESSE METODO E USADO APENAS NO SIAFEM, PARA BUSCAR PELO CODIGO
 	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -235,7 +246,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.LEFT);
 	 
 			Expression<String> upperCodigo = cb.upper(joinUO.get(CODIGO));
-			
+			 
 			predicate.add(cb.like(upperCodigo,codigoUnidadeOrcamentaria.toUpperCase()));
 			
 		}
@@ -265,7 +276,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		return entityManager.createQuery(query).getResultList();
 	}
 		
-	public List<Acao> buscar(String codigo, String denominacao,Long unidadeOrcamentariaId,Long programaId,Long exercicioId){
+	public List<Acao> buscar(String codigo, String denominacao,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
@@ -289,11 +300,11 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			predicate.add(cb.like(upperDenominacao,"%"+denominacao.toUpperCase()+"%" ));		
 		}
 		
-		if(!Utils.invalidId(unidadeOrcamentariaId)) {
+		if(unidadeOrcamentaria!=null && !unidadeOrcamentaria.isEmpty()) {
  			
 			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
  
-			joinUO.on(cb.equal(joinUO.get(ID),unidadeOrcamentariaId) );
+			joinUO.on(cb.isTrue(joinUO.get(ID).in(unidadeOrcamentaria)) );
 			 
 		}
 		
