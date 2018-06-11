@@ -91,15 +91,31 @@
 								<h:inputText value="#{usuarioEditMBean.usuario.cpf}" styleClass="form-control input-sm" required="true" validator="cpfValidator" maxlength="11" requiredMessage="CPF: campo é obrigatório" />
 							</div>
 						</div>
+												
+						<div class="row" style="margin-top: 1%">
+							<div class="col-lg-4">						
+									<h:outputText value="NÍVEL DO USUÁRIO: " styleClass="labelOutText"/>
+							        <p:selectOneRadio id="customRadio" value="#{usuarioEditMBean.usuario.tipoUsuario}"   >
+							            
+           							    <f:selectItems value="#{usuarioEditMBean.tipoUsuarios}" var="nivel" itemLabel="#{nivel.type}"/>
+           							    
+           							    
+							        </p:selectOneRadio>
+		    				</div>
+		    			</div>	
+						
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-4">
 								<h:outputText value="PERFIL:" styleClass="labelOutText" />
-								<h:selectOneMenu value="#{usuarioEditMBean.perfilSelecionado}"  required="true" requiredMessage="Perfil: campo é obrigatório" 
-												 styleClass="form-control input-sm"  >
-									<f:selectItems value="#{usuarioEditMBean.listPerfil}" var="perfil" itemLabel="#{fn:toUpperCase(perfil.name)}" itemValue="#{perfil.id}" />
-								</h:selectOneMenu>
+								
+								<p:selectManyCheckbox id="grid" value="#{usuarioEditMBean.perfilsSelecionados}" layout="grid" columns="3">
+							        <f:selectItems value="#{usuarioEditMBean.listPerfil}" var="perfil" itemLabel="#{fn:toUpperCase(perfil.name)}" itemValue="#{perfil.id}" />
+							    </p:selectManyCheckbox>
+		 
 							</div>
-						</div>
+						</div>						
+											
+						
 						<div class="row" style="margin-top: 1%">
 							<div class="col-lg-4">
 								<h:outputText value="UNIDADE ORÇAMENTÁRIA:" styleClass="labelOutText" />

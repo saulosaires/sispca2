@@ -1,6 +1,7 @@
 package administrativo.beans.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import administrativo.model.Perfil;
 import administrativo.model.Usuario;
 import administrativo.service.PerfilService;
 import administrativo.service.UserService;
+import arquitetura.enums.TipoUsuario;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -35,10 +37,13 @@ public class UsuarioEditMBean implements Serializable {
 	private Long id;
 
 	private Usuario usuario = new Usuario();
-	private Long perfilSelecionado;
 	private Long uoSelecionada;
 	private List<Perfil>listPerfil;
 	private List<UnidadeOrcamentaria>listUnidadeOrcamentaria;
+	
+	private TipoUsuario[] tipoUsuarios;
+	
+	private Long[] perfilsSelecionados;
 	
 	private UserService userService;
 	private PerfilService perfilService;
@@ -53,6 +58,8 @@ public class UsuarioEditMBean implements Serializable {
 		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
 		this.userValidate			    = userValidate;
 		
+		tipoUsuarios = TipoUsuario.values();
+		
 		listPerfil 				= perfilService.findAll();
 		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
 	}
@@ -62,31 +69,55 @@ public class UsuarioEditMBean implements Serializable {
 		if (!Utils.invalidId(id)) {
 			
 			usuario = userService.findById(id);
-			uoSelecionada = usuario.getUnidadeOrcamentaria().getId();
 			
-			if(!usuario.getPerfis().isEmpty())
-				perfilSelecionado=usuario.getPerfis().get(0).getId();
+			if(usuario!=null) {
+			 uoSelecionada = usuario.getUnidadeOrcamentaria().getId();
 			
-			String[] names=usuario.getName().split(" ");
+			 initPerfil(usuario);
 			
-			StringBuilder login2 = new StringBuilder("");
-			
-			login2.append(names[names.length-1]).append(".").append(names[0]);
-			
-			Optional<Usuario> user2 = userService.queryByUserName(usuario.getLogin());
-			
-			if(user2.isPresent()) {
-				login2.append(Utils.randomNumber());
-			}
+			 initLogin(usuario);	
 			 
-			usuario.setLoginSegundaSugestao(login2.toString());
-			
-		}
+			 
+			}
+	     }
 
 	}
 
- 
+    private void initPerfil(Usuario usuario) {
+    	
+    	if(usuario.getPerfis()!=null && !usuario.getPerfis().isEmpty()) {
+    		
+    		perfilsSelecionados = new Long[usuario.getPerfis().size()];
+    		
+    		for(int i=0;i<usuario.getPerfis().size();i++) {
+    			perfilsSelecionados[i] = usuario.getPerfis().get(i).getId();
+    		}
+    		
+    	}
+    	
+    } 
 
+    
+    private void initLogin(Usuario usuario) {
+  
+		String[] names=usuario.getName().split(" ");
+		
+		StringBuilder login2 = new StringBuilder("");
+		
+		login2.append(names[names.length-1]).append(".").append(names[0]);
+		
+		Optional<Usuario> user2 = userService.queryByUserName(usuario.getLogin());
+		
+		if(user2.isPresent()) {
+			login2.append(Utils.randomNumber());
+		}
+		 
+		usuario.setLoginSegundaSugestao(login2.toString());
+    	
+    	
+    }
+    
+    
 	public String atualizar() {
 
 		try {
@@ -95,7 +126,7 @@ public class UsuarioEditMBean implements Serializable {
 				return "";
 			}
 
-			setDependency();
+			setDependency(usuario);
 			usuario = userService.update(usuario);
 
 			Messages.addMessageInfo(SUCCESS_UPDATE);
@@ -113,18 +144,26 @@ public class UsuarioEditMBean implements Serializable {
 
 	 
 
-	private void setDependency() {
+	private void setDependency(Usuario usuario) {
 		
-		setPerfil();
+		usuario.setPerfis(setPerfilSelecionado());
 		setUO();
 		
 	}
 	
-	private void setPerfil() {
+	private List<Perfil> setPerfilSelecionado() {
 		
-		usuario.getPerfis().clear();
+		if(perfilsSelecionados==null )return null;
 		
-		usuario.getPerfis().add(perfilService.findById(perfilSelecionado));
+		List<Perfil> perfis = new ArrayList<>();
+		
+		for(Long id: perfilsSelecionados) {
+			
+			perfis.add(perfilService.findById(id));
+		}
+		
+
+		return perfis;
 	}
 	
 	private void setUO() {
@@ -185,15 +224,7 @@ public class UsuarioEditMBean implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public Long getPerfilSelecionado() {
-		return perfilSelecionado;
-	}
-
-	public void setPerfilSelecionado(Long perfilSelecionado) {
-		this.perfilSelecionado = perfilSelecionado;
-	}
-
+ 
 	public Long getUoSelecionada() {
 		return uoSelecionada;
 	}
@@ -216,6 +247,22 @@ public class UsuarioEditMBean implements Serializable {
 
 	public void setListUnidadeOrcamentaria(List<UnidadeOrcamentaria> listUnidadeOrcamentaria) {
 		this.listUnidadeOrcamentaria = listUnidadeOrcamentaria;
+	}
+
+	public Long[] getPerfilsSelecionados() {
+		return perfilsSelecionados;
+	}
+
+	public void setPerfilsSelecionados(Long[] perfilsSelecionados) {
+		this.perfilsSelecionados = perfilsSelecionados;
+	}
+
+	public TipoUsuario[] getTipoUsuarios() {
+		return tipoUsuarios;
+	}
+
+	public void setTipoUsuarios(TipoUsuario[] tipoUsuarios) {
+		this.tipoUsuarios = tipoUsuarios;
 	}
 	
 	
