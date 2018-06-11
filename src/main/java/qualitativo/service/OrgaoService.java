@@ -27,6 +27,8 @@ public class OrgaoService extends AbstractService<Orgao>  {
 	@Inject
 	public OrgaoService(OrgaoController controller,UserService userService) {
 		super(controller);
+		
+		this.userService = userService;
 	}
  
 	
@@ -35,7 +37,23 @@ public class OrgaoService extends AbstractService<Orgao>  {
 		if(Utils.emptyParam(codigo) && Utils.emptyParam(sigla) && Utils.emptyParam(descricao)) {
 			return findAllOrderByDescricao(usuarioId);
 		}else {
-			return ((OrgaoController)getController()).buscar(codigo,sigla,descricao);
+			
+		     List<Orgao> listOrgaoId=new ArrayList<>();
+			  
+			 Usuario user = userService.findById(usuarioId);
+				
+			 if(user.getTipoUsuario().equals(TipoUsuario.P) || user.getTipoUsuario().equals(TipoUsuario.G)) {
+				 
+				listOrgaoId.add(findById(user.getUnidadeOrcamentaria().getOrgao().getId()));
+				
+				return listOrgaoId;
+				
+			 }else {
+				return ((OrgaoController)getController()).buscar(codigo,sigla,descricao);
+			 }
+			
+				 
+				 
 		}
 		
 		 
@@ -66,6 +84,7 @@ public class OrgaoService extends AbstractService<Orgao>  {
 	
  
 	}	
+ 
 	
 	private List<Orgao> orderByDescricao(List<Orgao> list){
 		

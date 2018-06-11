@@ -51,7 +51,7 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 
 	}
 
-	public List<Programa> buscar(String codigo, String denominacao, Long orgao, Long tipoPrograma,Long exercicioId,Long eixoId) {
+	public List<Programa> buscar(String codigo, String denominacao,List<Long> listOrgao, Long tipoPrograma,Long exercicioId,Long eixoId) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
@@ -75,13 +75,13 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 			predicate.add(cb.like(upperDenominacao, "%" + denominacao.toUpperCase() + "%"));
 		}
 		
-		if (!Utils.invalidId((orgao))) {
-
+		if(listOrgao!=null && !listOrgao.isEmpty()) {
+			
 			Join<Object, Object> joinOrgao = m.join(ORGAO,JoinType.INNER);
-			joinOrgao.on(cb.equal(joinOrgao.get(ID),orgao) );
-		
+			joinOrgao.on(cb.isTrue(joinOrgao.get(ID).in(listOrgao)) );
+			 
 		}
-
+		
 		if (!Utils.invalidId((tipoPrograma))) {
 
 			Join<Object, Object> joinTipoPrograma = m.join(TIPO_PROGRAMA,JoinType.INNER);

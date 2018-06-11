@@ -12,6 +12,7 @@ import administrativo.model.Ppa;
 import administrativo.model.Usuario;
 import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
+import arquitetura.utils.OrgaoUtils;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import qualitativo.model.Orgao;
@@ -90,7 +91,9 @@ public class ProgramaListMBean implements Serializable {
 
 		try {
 			
-			listPrograma = programaService.buscar(codigo,denominacao,orgao,tipoPrograma,exercicioId,null);
+			List<Long> listOrgao = OrgaoUtils.parseOrgao(orgao, listOrgoes);
+			
+			listPrograma = programaService.buscar(codigo,denominacao,listOrgao,tipoPrograma,exercicioId,null);
 
 			if(listPrograma.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);

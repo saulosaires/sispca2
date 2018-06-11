@@ -26,13 +26,13 @@ public class ProgramaService extends AbstractService<Programa>  {
 		return((ProgramaController)getController()).findAllOrderByDenominacao();
 	}
 
-	public List<Programa> buscar(String codigo, String denominacao, Long orgao, Long tipoPrograma,Long exercicioId,Long eixoId) {
+	public List<Programa> buscar(String codigo, String denominacao,List<Long> listOrgao, Long tipoPrograma,Long exercicioId,Long eixoId) {
 		
-		if(Utils.emptyParam(codigo) && Utils.emptyParam(denominacao) && 
-		   Utils.invalidId(orgao) && Utils.invalidId(tipoPrograma) && Utils.invalidId(exercicioId)) {
+		if(Utils.emptyParam(codigo) && Utils.emptyParam(denominacao) &&  listOrgao==null && 
+				Utils.invalidId(tipoPrograma) && Utils.invalidId(exercicioId)) {
 			return findAll();
 		}else {
-			 return((ProgramaController)getController()).buscar(codigo,denominacao,orgao,tipoPrograma,exercicioId,eixoId);	
+			 return((ProgramaController)getController()).buscar(codigo,denominacao,listOrgao,tipoPrograma,exercicioId,eixoId);	
 		}
 		
 		

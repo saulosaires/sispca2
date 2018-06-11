@@ -23,16 +23,16 @@ public class UnidadeOrcamentariaController  extends AbstractController<UnidadeOr
 		super(dao);
 	}
  
- 
-	public List<UnidadeOrcamentaria> findAllOrderByDescricao() {
+	public List<UnidadeOrcamentaria> buscarByOrgao(Long orgaoId) {
 		
-		return ((UnidadeOrcamentariaDAO)getDao()).findAllOrderByDescricao();
+		return ((UnidadeOrcamentariaDAO)getDao()).buscarByOrgao(orgaoId);
 	}
 
 
-	public List<UnidadeOrcamentaria> buscar(String codigo, String descricao, Long orgaoId) {
+
+	public List<UnidadeOrcamentaria> buscar(List<Long>unidadeOrcamentariaId,String codigo, String descricao, Long orgaoId) {
 		
-		return ((UnidadeOrcamentariaDAO)getDao()).buscar(codigo, descricao, orgaoId);
+		return ((UnidadeOrcamentariaDAO)getDao()).buscar(unidadeOrcamentariaId, codigo, descricao, orgaoId);
 	}
 
 }

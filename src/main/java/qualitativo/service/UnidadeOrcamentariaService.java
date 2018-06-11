@@ -10,6 +10,7 @@ import administrativo.model.Usuario;
 import administrativo.service.UserService;
 import arquitetura.enums.TipoUsuario;
 import arquitetura.service.AbstractService;
+import arquitetura.utils.UoUtils;
 import arquitetura.utils.Utils;
 import qualitativo.controller.UnidadeOrcamentariaController;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -49,7 +50,8 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 			case G:{
 				 UnidadeOrcamentaria uo = findById(user.getUnidadeOrcamentaria().getId());
 
- 				 list.addAll( buscar(null,null,null,uo.getOrgao().getId()));
+				 
+ 				 list.addAll(((UnidadeOrcamentariaController) getController()).buscarByOrgao(uo.getOrgao().getId()));
 				
 			}break;
 		
@@ -71,7 +73,24 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 		if(Utils.emptyParam(codigo) && Utils.emptyParam(descricao) && Utils.invalidId(orgaoId)) {
 			return findAllOrderByDescricao(usuarioId);
 		}else {
-			return ((UnidadeOrcamentariaController) getController()).buscar(codigo, descricao, orgaoId);
+			
+			 Usuario user = userService.findById(usuarioId);
+				
+			 List<Long> listUO=null;
+			 if(user.getTipoUsuario().equals(TipoUsuario.P) || user.getTipoUsuario().equals(TipoUsuario.G)) {
+				 
+				 List<UnidadeOrcamentaria> list = findAllOrderByDescricao(usuarioId);
+				 
+				 listUO =UoUtils.parseUO(null,list);
+				 
+			 }
+				 
+				 return ((UnidadeOrcamentariaController) getController()).buscar(listUO,codigo, descricao, orgaoId);
+			 
+			
+			
+			
+			
 		}
 	}
 	
