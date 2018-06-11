@@ -7,6 +7,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Exercicio;
+import administrativo.model.Ppa;
+import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -41,6 +44,13 @@ public class ProgramaListMBean implements Serializable {
 	
 	private List<Programa> listPrograma;
  
+	private Long ppaId;
+	private List<Ppa> listPpa;
+	
+	private Long exercicioId;
+	private List<Exercicio> listExercicio;
+		
+	private PpaService ppaService;
 	private ProgramaService programaService;
  	
 	private boolean atualizar;
@@ -49,14 +59,23 @@ public class ProgramaListMBean implements Serializable {
 	private boolean view;
 	
 	@Inject
-	public ProgramaListMBean(ProgramaService programaService, TipoProgramaService tipoProgramaService, OrgaoService orgaoService) {
+	public ProgramaListMBean(ProgramaService programaService, 
+							 PpaService ppaService,
+							 TipoProgramaService tipoProgramaService, 
+							 OrgaoService orgaoService) {
 		
-		this.programaService	 = programaService;
+		this.ppaService 	 = ppaService;
+		this.programaService = programaService;
 
 		listTipoPrograma = tipoProgramaService.findAll();
 		listOrgoes =  orgaoService.findAllOrderByDescricao();
 		
- 		
+		listPpa = ppaService.findAll();
+		
+		initPpa();
+		initExercicio();
+
+		
 		atualizar = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoAtualizar"); 
 		deletar   = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoDeletar");
 		salvar    = SessionUtils.containsKey("planejamentoQualitativoPlanoInternoSalvar");
@@ -68,7 +87,7 @@ public class ProgramaListMBean implements Serializable {
 
 		try {
 			
-			listPrograma = programaService.buscar(codigo,denominacao,orgao,tipoPrograma,null,null);
+			listPrograma = programaService.buscar(codigo,denominacao,orgao,tipoPrograma,exercicioId,null);
 
 			if(listPrograma.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);
@@ -103,6 +122,48 @@ public class ProgramaListMBean implements Serializable {
 
 	}
 
+    public void onChangePpa() {
+    	
+    	if(ppaId!=null) {
+    		listExercicio = ppaService.findById(ppaId).getExercicios();
+    	}else {
+    		exercicioId=null;
+    		listExercicio=null;	
+    		}
+    }
+	
+	
+	public void initPpa() {
+		
+		for(Ppa ppa: listPpa) {
+			if(ppa.getVigente()) {
+				ppaId = ppa.getId();
+				break;
+			}
+		}
+		
+	}
+	
+	public void initExercicio() {
+	
+		if(ppaId!=null) {
+			listExercicio = ppaService.findById(ppaId).getExercicios();
+			
+			for(Exercicio e: listExercicio) {
+				
+				if(e.getVigente()) {
+					exercicioId = e.getId();
+					break;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	
+	
 	public String getCodigo() {
 		return codigo;
 	}
@@ -189,6 +250,38 @@ public class ProgramaListMBean implements Serializable {
 
 	public void setView(boolean view) {
 		this.view = view;
+	}
+
+	public Long getPpaId() {
+		return ppaId;
+	}
+
+	public void setPpaId(Long ppaId) {
+		this.ppaId = ppaId;
+	}
+
+	public List<Ppa> getListPpa() {
+		return listPpa;
+	}
+
+	public void setListPpa(List<Ppa> listPpa) {
+		this.listPpa = listPpa;
+	}
+
+	public Long getExercicioId() {
+		return exercicioId;
+	}
+
+	public void setExercicioId(Long exercicioId) {
+		this.exercicioId = exercicioId;
+	}
+
+	public List<Exercicio> getListExercicio() {
+		return listExercicio;
+	}
+
+	public void setListExercicio(List<Exercicio> listExercicio) {
+		this.listExercicio = listExercicio;
 	}
 
 	 

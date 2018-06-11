@@ -62,13 +62,38 @@
 											</h:selectOneMenu>		
 										</div>
 									</div>
+									
+									<div class="span12">					
+										<div class="span3">
+											<h:outputText value="SELECIONE UM PPA:  " styleClass="labelOutText"/>					
+											<h:selectOneMenu value="#{programaListMBean.ppaId}" styleClass="input-sm form-control" id="select_ppa">
+												<f:selectItems var="ppa" value="#{programaListMBean.listPpa}" itemValue="#{ppa.id}" itemLabel="#{ppa.descricao}"/>
+												<p:ajax execute="@this" event="change" listener="#{programaListMBean.onChangePpa}" update="select_exercicio"/>	
+											</h:selectOneMenu>
+										</div>				
+									</div>
+													
+									<div class="span12">					
+										<div class="span3" >
+											<h:outputText value="SELECIONE UM EXERCICIO  " styleClass="labelOutText"/>					
+											<h:selectOneMenu value="#{programaListMBean.exercicioId}" styleClass="input-sm form-control" id="select_exercicio" 
+																								  required="true" requiredMessage="Exercicio é obrigatório"> 
+										 
+												<f:selectItems var="exerc" value="#{programaListMBean.listExercicio}" itemValue="#{exerc.id}" itemLabel="#{exerc.ano}"/>
+												 
+											</h:selectOneMenu>
+										</div>				
+									</div>
+									
+
+								
 								</div>
 								<br />
 								<div class="form-group">
 									<div class="col-sm-offset-7 col-sm-10">
 										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 											<f:ajax
-												execute="@this inputBuscCod inputBuscDen inputMenuUnid inputBuscTipProg"
+												execute="@this inputBuscCod inputBuscDen inputMenuUnid inputBuscTipProg select_ppa select_exercicio"
 												event="click" listener="#{programaListMBean.buscar()}"
 												render="tableProgr" />
 										</h:commandButton>
