@@ -34,7 +34,8 @@
 											<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 										</div>
 										<div class="span3">
-											<h:selectOneMenu id="inputMenuUO" value="#{fisicoFinanceiroAnualListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15">
+											<h:selectOneMenu id="inputMenuUO" value="#{fisicoFinanceiroAnualListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15"
+																			  required="true" requiredMessage="UNIDADE ORÇAMENTÁRIA é obrigatório">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
 												<f:selectItems value="#{fisicoFinanceiroAnualListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
 												 
@@ -62,13 +63,40 @@
 										</div>
 									</div>
 									
+									<div class="span12">					
+										<div class="span3">
+											<h:outputText value="SELECIONE UM PPA:  " styleClass="labelOutText"/>					
+											<h:selectOneMenu value="#{fisicoFinanceiroAnualListMBean.ppaId}" styleClass="input-sm form-control" id="select_ppa">
+												<f:selectItems var="ppa" value="#{fisicoFinanceiroAnualListMBean.listPpa}" itemValue="#{ppa.id}" itemLabel="#{ppa.descricao}"/>
+												<p:ajax execute="@this" event="change" listener="#{fisicoFinanceiroAnualListMBean.onChangePpa}" update="select_exercicio"/>	
+											</h:selectOneMenu>
+										</div>				
+									</div>
+													
+									<div class="span12">					
+										<div class="span3" >
+											<h:outputText value="SELECIONE UM EXERCICIO  " styleClass="labelOutText"/>					
+											<h:selectOneMenu value="#{fisicoFinanceiroAnualListMBean.exercicioId}" styleClass="input-sm form-control" id="select_exercicio" 
+																								  required="true" requiredMessage="Exercicio é obrigatório"> 
+										 
+												<f:selectItems var="exerc" value="#{fisicoFinanceiroAnualListMBean.listExercicio}" itemValue="#{exerc.id}" itemLabel="#{exerc.ano}"/>
+												 
+											</h:selectOneMenu>
+										</div>				
+									</div>
+									
+									
+									
+									
+									
+									
 								</div>
 								<br />
 								<div class="form-group">
 									<div class="col-sm-offset-7 col-sm-10">
 										<h:commandButton value="Pesquisar" styleClass="btn btn-primary btnAction">
 											<f:ajax
-												execute="@this inputCodigo inputMenuUO inputDenominacao inputPrograma"
+												execute="@this inputCodigo inputMenuUO inputDenominacao inputPrograma select_ppa select_exercicio"
 												event="click" listener="#{fisicoFinanceiroAnualListMBean.buscar()}"
 												render="tableUnid" />
 										</h:commandButton>

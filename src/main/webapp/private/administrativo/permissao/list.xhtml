@@ -93,19 +93,19 @@
 						<p:column headerText="Descrição" styleClass="outTextTable">
 							<h:outputText value="#{permissao.descricao}"/>
 						</p:column>
-					
-					
+									
 						<p:column headerText="OPERAÇÃO" style="width: 12%;" styleClass="outTextTable">
 							<center>
-							 
-														
+							 							
 								<p:commandButton title="Remover Associação" action="#{permissaoMBean.deletarAssociacao(permissao)}" 
 								                 icon="ui-icon-trash" process="@this"   update="selectObj table">
 								
 									<p:confirm header="Confirmação" message="Você tem certeza que deseja deletar?" icon="ui-icon-alert" />
-								</p:commandButton>                 								
+								</p:commandButton>     
+           								
 							</center>
 						</p:column>
+						
 					</p:dataTable>
 				</center>	
 				
