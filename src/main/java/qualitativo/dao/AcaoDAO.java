@@ -291,27 +291,27 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		if(!Utils.invalidId(unidadeOrcamentariaId)) {
  			
-			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.LEFT);
-			
-			Expression<String> uoId = joinUO.get(ID);
-			
-			predicate.add(cb.equal(uoId,unidadeOrcamentariaId));
+			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
+ 
+			joinUO.on(cb.equal(joinUO.get(ID),unidadeOrcamentariaId) );
+			 
 		}
 		
 		if(!Utils.invalidId(programaId)) {
  			
-			Join<Object, Object> joinUO = m.join(PROGRAMA,JoinType.LEFT);
+			Join<Object, Object> joinPrograma = m.join(PROGRAMA,JoinType.INNER);
 			
-			Expression<String> uoId = joinUO.get(ID);
-			
-			predicate.add(cb.equal(uoId,programaId));
+	 		
+			joinPrograma.on(cb.equal(joinPrograma.get(ID),programaId) );
+		 
 		}
 		
 		if(!Utils.invalidId(exercicioId)) {
  			
-			Join<Object, Object> joinExercicio = m.join(EXERCICIO,JoinType.LEFT);
-						
-			predicate.add(cb.equal(joinExercicio.get(ID) ,exercicioId));
+			Join<Object, Object> joinExercicio = m.join(EXERCICIO,JoinType.INNER);
+			
+			joinExercicio.on(cb.equal(joinExercicio.get(ID),exercicioId) );
+			 
 		}
 
 		

@@ -39,11 +39,41 @@ public class MenuRelatorioMBean implements Serializable{
 		
 		listPpa = ppaService.findAll();
 		
-		
+		initPpa();
+		initExercicio();
 		initRelatorio();
 		
 	}
 
+	public void initPpa() {
+		
+		for(Ppa ppa: listPpa) {
+			if(ppa.getVigente()) {
+				ppaId = ppa.getId();
+				break;
+			}
+		}
+		
+	}
+	
+	public void initExercicio() {
+	
+		if(ppaId!=null) {
+			listExercicio = ppaService.findById(ppaId).getExercicios();
+			
+			for(Exercicio e: listExercicio) {
+				
+				if(e.getVigente()) {
+					exercicioId = e.getId();
+					break;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
     private void initRelatorio() {
     	
     	relatorios.add(initRelatorioPlanejamento());

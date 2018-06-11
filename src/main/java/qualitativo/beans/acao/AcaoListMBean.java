@@ -7,7 +7,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Exercicio;
+import administrativo.model.Ppa;
 import administrativo.model.Usuario;
+import administrativo.service.PpaService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -40,6 +43,14 @@ public class AcaoListMBean implements Serializable {
 	private List<Acao> listAcoes;
 	private List<UnidadeOrcamentaria> listUnidadeOrcamentaria;
 	private List<Programa> listPrograma;
+	
+	private Long ppaId;
+	private List<Ppa> listPpa;
+	
+	private Long exercicioId;
+	private List<Exercicio> listExercicio;
+	
+	private PpaService ppaService;
 	private AcaoService acaoService;
 	
 	private boolean atualizar;
@@ -48,10 +59,20 @@ public class AcaoListMBean implements Serializable {
 	private boolean view;
 	
 	@Inject
-	public AcaoListMBean(AcaoService acaoService,UnidadeOrcamentariaService unidadeOrcamentariaService,ProgramaService programaService) {
+	public AcaoListMBean(AcaoService acaoService,
+						 UnidadeOrcamentariaService unidadeOrcamentariaService,
+						 ProgramaService programaService,
+						 PpaService ppaService) {
+		
 		this.acaoService = acaoService;
+		this.ppaService = ppaService;
 		
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		listPpa = ppaService.findAll();
+		
+		initPpa();
+		initExercicio();
 		
 		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		listPrograma	        = programaService.findAllOrderByDenominacao();
@@ -65,7 +86,7 @@ public class AcaoListMBean implements Serializable {
 	public void buscar() {
 
 		try {
-			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,null);
+			listAcoes = acaoService.buscar(codigo, denominacao, unidadeOrcamentariaId, programaId,exercicioId);
 
 			if(listAcoes.isEmpty()) {
 				Messages.addMessageWarn(ACAO_NO_RECORDS);
@@ -99,6 +120,47 @@ public class AcaoListMBean implements Serializable {
 		return "";
 
 	}
+	
+	public void initPpa() {
+		
+		for(Ppa ppa: listPpa) {
+			if(ppa.getVigente()) {
+				ppaId = ppa.getId();
+				break;
+			}
+		}
+		
+	}
+	
+	public void initExercicio() {
+	
+		if(ppaId!=null) {
+			listExercicio = ppaService.findById(ppaId).getExercicios();
+			
+			for(Exercicio e: listExercicio) {
+				
+				if(e.getVigente()) {
+					exercicioId = e.getId();
+					break;
+				}
+				
+			}
+			
+		}
+		
+	}
+
+	
+    public void onChangePpa() {
+    	
+    	if(ppaId!=null) {
+    		listExercicio = ppaService.findById(ppaId).getExercicios();
+    	}else {
+    		exercicioId=null;
+    		listExercicio=null;	
+    		}
+    }
+
 
 	public String getCodigo() {
 		return codigo;
@@ -186,6 +248,38 @@ public class AcaoListMBean implements Serializable {
 
 	public void setView(boolean view) {
 		this.view = view;
+	}
+
+	public Long getPpaId() {
+		return ppaId;
+	}
+
+	public void setPpaId(Long ppaId) {
+		this.ppaId = ppaId;
+	}
+
+	public List<Ppa> getListPpa() {
+		return listPpa;
+	}
+
+	public void setListPpa(List<Ppa> listPpa) {
+		this.listPpa = listPpa;
+	}
+
+	public Long getExercicioId() {
+		return exercicioId;
+	}
+
+	public void setExercicioId(Long exercicioId) {
+		this.exercicioId = exercicioId;
+	}
+
+	public List<Exercicio> getListExercicio() {
+		return listExercicio;
+	}
+
+	public void setListExercicio(List<Exercicio> listExercicio) {
+		this.listExercicio = listExercicio;
 	}
 	
 	
