@@ -90,7 +90,7 @@
 						<div class="row" style="margin-top: 1%;">
 							<div class="col-lg-2">
 								<h:outputText value="UNIDADE DE MEDIDA: " styleClass="labelOutText"/>
-								<h:selectOneMenu value="#{acaoEditMBean.acao.unidadeMedida.id}"  styleClass="form-control input-sm">
+								<h:selectOneMenu value="#{acaoEditMBean.acao.unidadeMedida.id}"  styleClass="form-control input-sm" required="true" requiredMessage="Unidade de Medida: campo é obrigatório">>
 								 
 									<f:selectItem itemValue="#{null}" itemLabel="SELECIONE"/>
 									<f:selectItems value="#{acaoEditMBean.listUnidadeMedida}" var="um" itemValue="#{um.id}" itemLabel="#{fn:toUpperCase(um.descricao)}"/>
@@ -137,7 +137,7 @@
 							</div>
 							<div class="col-lg-2">
 								<h:outputText value="TIPO DE CÁLCULO DA META: " styleClass="labelOutText"/>
-								<h:selectOneMenu value="#{acaoEditMBean.acao.tipoCalculoMeta.id}" styleClass="form-control input-sm" >
+								<h:selectOneMenu value="#{acaoEditMBean.acao.tipoCalculoMeta.id}" styleClass="form-control input-sm"   required="true" requiredMessage="Tipo calculo de meta: campo é obrigatório">
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
 									<f:selectItems value="#{acaoEditMBean.listTipoCalculoMeta}" var="tipoCalcMeta" itemLabel="#{fn:toUpperCase(tipoCalcMeta.descricao)}" itemValue="#{tipoCalcMeta.id}"/>
 								</h:selectOneMenu>

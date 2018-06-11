@@ -44,7 +44,7 @@ public class SispcaPhaseListener implements PhaseListener {
 			if(ViewMap.isPublic(uri))return;
 			
 
-			boolean userLoggedIn = SessionUtils.get("user") != null ? true : false;
+			boolean userLoggedIn = SessionUtils.get(SessionUtils.USER) != null ? true : false;
 
 			if (!userLoggedIn) {
 

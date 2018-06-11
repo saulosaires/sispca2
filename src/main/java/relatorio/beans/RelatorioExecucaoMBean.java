@@ -8,12 +8,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
-import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import monitoramento.beans.fisicofinanceiro.mensal.RelatorioExecucao;
 import monitoramento.service.ExecucaoService;
@@ -31,7 +32,6 @@ import qualitativo.service.UnidadeOrcamentariaService;
 import quantitativo.model.Regiao;
 import quantitativo.model.RegiaoMunicipio;
 import quantitativo.model.TipoRegiao;
-import quantitativo.service.FisicoFinanceiroMensalService;
 import quantitativo.service.RegiaoMunicipioService;
 import quantitativo.service.RegiaoService;
 import quantitativo.service.TipoRegiaoService;
@@ -72,7 +72,7 @@ public class RelatorioExecucaoMBean  extends RelatorioMBean {
 	private RegiaoService regiaoService;
 	private AcaoService acaoService;
 
-	
+	private Long userId;
 	
 	@Inject
 	public RelatorioExecucaoMBean(ExercicioService exercicioService,
@@ -96,12 +96,16 @@ public class RelatorioExecucaoMBean  extends RelatorioMBean {
 				
 				listTipoRegiao = tipoRegiaoService.findAllOrderByDescricao();
 				listOrgao = orgaoService.findAllOrderByDescricao();
+				
+				Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+				
+				userId = user.getId();
 
 	}
 
 	public void changeOrgao() {
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(null, null, orgao);
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(userId,null, null, orgao);
 		unidadeOrcamentaria=null;
 		programa=null;
 		acao=null;

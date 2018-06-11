@@ -37,7 +37,7 @@ public class MetasListMBean implements Serializable{
 	public MetasListMBean(AtividadeService atividadeService) {
 		this.atividadeService=atividadeService;
 	
-		Usuario user = (Usuario) SessionUtils.get("user");
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		if(user!=null && user.getUnidadeOrcamentaria()!=null && !Utils.invalidId(user.getUnidadeOrcamentaria().getId())) {
 			unidadeOrcamentaria = user.getUnidadeOrcamentaria().getId();

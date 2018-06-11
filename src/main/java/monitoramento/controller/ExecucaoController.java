@@ -34,12 +34,12 @@ public class ExecucaoController extends AbstractController<Execucao> {
 		return ((ExecucaoDAO) getDao()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
 	}
 	
-	public  Double  findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+	public  BigDecimal  findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 
 		return ((ExecucaoDAO) getDao()).findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
 	}
 
-	public Double calculaExecutadoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
+	public BigDecimal calculaExecutadoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
 
 		return ((ExecucaoDAO) getDao()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes, exercicio, acao);
 		

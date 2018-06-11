@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named; 
+import javax.inject.Named;
+
+import administrativo.model.Usuario;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -49,7 +51,9 @@ public class AcaoListMBean implements Serializable {
 	public AcaoListMBean(AcaoService acaoService,UnidadeOrcamentariaService unidadeOrcamentariaService,ProgramaService programaService) {
 		this.acaoService = acaoService;
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		listPrograma	        = programaService.findAllOrderByDenominacao();
 		
 		atualizar = SessionUtils.containsKey("planejamentoQualitativoAcaoAtualizar"); 

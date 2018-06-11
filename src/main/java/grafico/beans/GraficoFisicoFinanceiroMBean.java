@@ -28,11 +28,13 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 import administrativo.model.Exercicio;
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.MathUtils;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -84,9 +86,11 @@ public class GraficoFisicoFinanceiroMBean implements Serializable{
 		this.programaService=programaService;
 		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
 		
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
 		meses = mesService.findAll();
 		listExercicio = exercicioService.findAll();
-		listUnidade   = unidadeOrcamentariaService.findAllOrderByDescricao();
+		listUnidade   = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		
 	}
 

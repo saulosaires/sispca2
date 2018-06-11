@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -55,14 +56,17 @@ public class UnidadeOrcamentariaListMBean implements Serializable {
 		salvar    = SessionUtils.containsKey("planejamentoQualitativoUnidadeOrcamentariaSalvar");
 		view      = SessionUtils.containsKey("planejamentoQualitativoUnidadeOrcamentariaVisualizar");
 		
+		
+		
 	}
 
 	
 	public void buscar() {
 
 		try {
+			Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 			
-			listUnidadeOrcamentaria = service.buscar(codigo, descricao, orgaoId);
+			listUnidadeOrcamentaria = service.buscar(user.getId(),codigo, descricao, orgaoId);
 
 			if(listUnidadeOrcamentaria.isEmpty()) {
 				Messages.addMessageWarn(NO_RECORDS);

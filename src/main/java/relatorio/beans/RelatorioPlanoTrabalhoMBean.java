@@ -8,11 +8,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -50,6 +52,8 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 	private AcaoService acaoService;
 	private ProgramaService programaService;
 	
+	private Long userId;
+	
 	@Inject
 	public RelatorioPlanoTrabalhoMBean(ExercicioService exercicioService,
 									   OrgaoService orgaoService,
@@ -57,7 +61,10 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 									   UnidadeOrcamentariaService unidadeOrcamentariaService,
 									   ProgramaService programaService) {
 		super(exercicioService);
-		 
+		
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		userId= user.getId();
 		listOrgao = orgaoService.findAllOrderByDescricao();
 		
 		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
@@ -68,7 +75,7 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 	
 	public void buscaUnidadeByOrgao(){
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(null, null, orgao);
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(userId,null, null, orgao);
 		
 	}
 	

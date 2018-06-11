@@ -32,6 +32,8 @@ public class AcaoValidate implements Validate<Acao>,Serializable{
 	public static final String SUBFUNCAO_REQUIRED 	        = "SubFunção é um campo obrigatório";
 	public static final String UNIDADE_ORCAMENTARIA_REQUIRED= "Unidade Orçamentária é um campo obrigatório";
 	public static final String DESCRICAO_REQUIRED 	   		= "Descrição é um campo obrigatório";
+	public static final String UNIDADE_MEDIDA_REQUIRED      = "Unidade Medida é um campo obrigatório";
+	public static final String TIPO_CALCULO_REQUIRED        = "Tipo Calculo Meta é um campo obrigatório";
 	
 	
  
@@ -77,6 +79,17 @@ public class AcaoValidate implements Validate<Acao>,Serializable{
 			valido= false;
 		}
 
+		if (acao.getUnidadeMedida() ==null || Utils.invalidId(acao.getUnidadeMedida().getId())) {
+			Messages.addMessageError(UNIDADE_MEDIDA_REQUIRED);
+			valido= false;
+		}
+
+		if (acao.getTipoCalculoMeta() ==null || Utils.invalidId(acao.getTipoCalculoMeta().getId())) {
+			Messages.addMessageError(TIPO_CALCULO_REQUIRED);
+			valido= false;
+		}
+		
+		
 		if (Utils.emptyParam(acao.getDescricao())) {
 			Messages.addMessageError(DESCRICAO_REQUIRED);
 			valido= false;

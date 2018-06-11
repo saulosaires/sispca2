@@ -8,11 +8,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -52,6 +54,7 @@ public class RelatorioFinalidadeAcaoMBean extends RelatorioMBean {
 	private List<UnidadeOrcamentaria> listUnidadeOrcamentaria;
 	private List<Programa> listPrograma;
 	
+	private Long userId;
 	
 	@Inject
 	public RelatorioFinalidadeAcaoMBean(ExercicioService exercicioService,
@@ -69,13 +72,17 @@ public class RelatorioFinalidadeAcaoMBean extends RelatorioMBean {
 		
 		listOrgao = orgaoService.findAllOrderByDescricao();
 		
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		userId = user.getId();
+		
 	}
 
  
 
 	public void buscaUnidadeByOrgao() {
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(null, null, orgaoId);
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(userId,null, null, orgaoId);
 	}
 	
 	public void buscaProgramaByUnidade() {

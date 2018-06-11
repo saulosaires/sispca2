@@ -7,7 +7,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.Orgao;
@@ -61,9 +63,11 @@ public class ProgramaEditMBean implements Serializable {
 		
 		this.validate =validate;
   
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
 		listTipoPrograma	      = tipoProgramaService.findAll();
 		listOrgoes				  = orgaoService.findAllOrderByDescricao(); 
-		listUnidadeOrcamentaria   = unidadeOrcamentariaService.findAllOrderByDescricao();
+		listUnidadeOrcamentaria   = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		listTipoHorizonteTemporal = tipoHorizonteTemporalService.findAll();
 		
 		

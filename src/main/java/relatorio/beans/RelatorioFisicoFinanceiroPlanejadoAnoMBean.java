@@ -9,11 +9,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -62,7 +64,9 @@ public class RelatorioFisicoFinanceiroPlanejadoAnoMBean extends RelatorioMBean {
 		this.regiaoMunicipioService = regiaoMunicipioService;
 		this.fisicoFinanceiroService = fisicoFinanceiroService;
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		
 		listRegiao = regiaoService.findAllOrderByDescricao();
 		

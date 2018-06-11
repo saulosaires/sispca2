@@ -43,7 +43,7 @@ public class UnidadeOrcamentaria extends Model implements Auditable {
 	@Column(name="descricao")
 	private String descricao;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_orgao")
 	@NotNull(message="Órgão: campo é obrigatório")
 	private Orgao orgao = new Orgao();

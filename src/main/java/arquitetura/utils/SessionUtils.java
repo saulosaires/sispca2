@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
 
+	public static final String USER = "user";
+	
 	private SessionUtils() {
 	    throw new IllegalStateException("Utility class");
 	}

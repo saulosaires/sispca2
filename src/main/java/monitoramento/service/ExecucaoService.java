@@ -1,5 +1,6 @@
 package monitoramento.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +81,7 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		return ((ExecucaoController) getController()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
 	}
 
-	public  Double  findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+	public  BigDecimal  findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 
 		return ((ExecucaoController) getController()).findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
 	}
@@ -90,7 +91,7 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		RelatorioDetalhamentoAcaoExecucaoMensal detalhamentoAcaoExecucaoMensal = new RelatorioDetalhamentoAcaoExecucaoMensal();
 		for(Mes mes: meses) {
 			
-			Double valor = ((ExecucaoController) getController()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
+			BigDecimal valor = ((ExecucaoController) getController()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
 			
 			detalhamentoAcaoExecucaoMensal.setValor(mes.getNumeroMes(), valor);
 		}

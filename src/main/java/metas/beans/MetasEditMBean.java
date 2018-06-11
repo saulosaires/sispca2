@@ -90,7 +90,7 @@ public class MetasEditMBean implements Serializable{
 	public String editar() {
 		
 		try {
-		Usuario user = (Usuario) SessionUtils.get("user");
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
 	
 		atividade.setUltimaAlteracao(new Date());
 		atividade.setUsuarioAlterador(user);

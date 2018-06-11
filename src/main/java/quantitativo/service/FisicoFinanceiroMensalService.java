@@ -98,7 +98,7 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		return ((FisicoFinanceiroMensalController)getController()).findByAcao(acaoId);
 	}
 	
-	public Double findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+	public BigDecimal findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 		
 		return ((FisicoFinanceiroMensalController)getController()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
 	}	
@@ -108,7 +108,7 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		RelatorioDetalhamentoAcaoFinanceiroMensal detalhamentoAcaoFinanceiroMensal = new RelatorioDetalhamentoAcaoFinanceiroMensal();
 		for(Mes mes: meses) {
 			
-			Double valor = ((FisicoFinanceiroMensalController)getController()).calculaPlanejamentoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
+			BigDecimal valor = ((FisicoFinanceiroMensalController)getController()).calculaPlanejamentoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
 			
 			detalhamentoAcaoFinanceiroMensal.setValor(mes.getNumeroMes(), valor);
 		}

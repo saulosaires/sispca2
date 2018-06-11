@@ -9,11 +9,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -56,7 +58,7 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 	private UnidadeOrcamentariaService unidadeOrcamentariaService;
 	private ProgramaService programaService;
 	
-	
+	private Long userId;
 	@Inject
 	public RelatorioQualitativoMBean(ExercicioService exercicioService,
 									 OrgaoService orgaoService,
@@ -65,6 +67,9 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 									 ProgramaService programaService) {
 		super(exercicioService);
 
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		userId = user.getId();
 		listOrgao = orgaoService.findAllOrderByDescricao();
 		
 		this.acaoService = acaoService;
@@ -75,7 +80,7 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 
 	public void changeOrgao() {
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(null, null, orgao);
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.buscar(userId,null, null, orgao);
 		
 	}
 

@@ -59,7 +59,10 @@ public class UsuarioFormMBean implements Serializable {
 		this.userValidate			    =userValidate;
 		
 		listPerfil 				= perfilService.findAll();
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		
+		Usuario user= (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		
 		tipoUsuarios = TipoUsuario.values();
 	}

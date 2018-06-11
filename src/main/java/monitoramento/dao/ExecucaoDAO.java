@@ -16,6 +16,7 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.SetJoin;
 
 import arquitetura.dao.AbstractDAO;
+import arquitetura.utils.MathUtils;
 import arquitetura.utils.Utils;
 import monitoramento.model.Execucao;
 
@@ -213,14 +214,14 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 
 	}
 
-	public Double findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
+	public BigDecimal findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 		
-		if(Utils.invalidId(mesId) || exercicioVigenteId==null)return 0d;
+		if(Utils.invalidId(mesId) || exercicioVigenteId==null)return MathUtils.getZeroBigDecimal();
 		
 		
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		
-		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
 		
 		Root<Execucao> root = criteria.from(Execucao.class);
 		
@@ -251,8 +252,8 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		}
 		
  
-		Path<Double> valor = root.get(VALOR);
-		Expression<Double> soma = builder.sum(valor);
+		Path<BigDecimal> valor = root.get(VALOR);
+		Expression<BigDecimal> soma = builder.sum(valor);
 		criteria.select(soma);
 		 
 	 
@@ -261,20 +262,20 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 						joinMes.get(NUMERO_MES)
 					    );
 		
-		 Double value = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
+		BigDecimal value = entityManager.createQuery(criteria).getResultList().stream().findFirst().orElse(null);
 			
 			
-		 return value!=null?value:0d;		
+		 return value!=null?value:MathUtils.getZeroBigDecimal();		
 		
 		 
 	}
 	
-	public Double calculaExecutadoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
+	public BigDecimal calculaExecutadoMensalByMesAndExercicioAndAcao(Long mes, Long exercicio,Long acao){
 
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		
-		CriteriaQuery<Double> criteria = builder.createQuery(Double.class);
+		CriteriaQuery<BigDecimal> criteria = builder.createQuery(BigDecimal.class);
 		
 		Root<Execucao> root = criteria.from(Execucao.class);
 		
@@ -282,7 +283,7 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		Join<Object, Object> joinExercicio= root.join(EXERCICIO,JoinType.INNER);
 		Join<Object, Object> joinAcao = root.join(ACAO,JoinType.INNER);
 		
-		Path<Double> quantidade = root.get(QUANTIDADE);
+		Path<BigDecimal> quantidade = root.get(QUANTIDADE);
 		 
 		criteria.select(builder.sum(quantidade));
 		

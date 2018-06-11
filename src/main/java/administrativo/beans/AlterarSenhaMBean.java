@@ -32,7 +32,7 @@ public class AlterarSenhaMBean implements Serializable{
 		
 		this.userService=userService;
 		
-		usuario = (Usuario) SessionUtils.get("user");
+		usuario = (Usuario) SessionUtils.get(SessionUtils.USER);
  
 	}
 

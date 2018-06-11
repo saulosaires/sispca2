@@ -15,6 +15,7 @@ import administrativo.service.PerfilService;
 import administrativo.service.UserService;
 import arquitetura.enums.TipoUsuario;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.UnidadeOrcamentaria;
@@ -60,8 +61,11 @@ public class UsuarioEditMBean implements Serializable {
 		
 		tipoUsuarios = TipoUsuario.values();
 		
+		Usuario user= (Usuario) SessionUtils.get(SessionUtils.USER);
+
+		
 		listPerfil 				= perfilService.findAll();
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 	}
 
 	public void init() {

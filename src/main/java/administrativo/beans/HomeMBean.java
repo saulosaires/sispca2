@@ -116,11 +116,13 @@ public class HomeMBean implements Serializable{
 
 		}
 		
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
 		listUnidadeGestora = unidadeGestoraService.findAll();
 		
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		
-		Usuario user = (Usuario) SessionUtils.get("user");
+		
 		
 		if(user!=null && user.getUnidadeOrcamentaria()!=null && !Utils.invalidId(user.getUnidadeOrcamentaria().getId())) {
 			unidadeOrcamentariaId = user.getUnidadeOrcamentaria().getId();
@@ -189,11 +191,11 @@ public class HomeMBean implements Serializable{
 		
 		for(Mes mes : listMes) {
 			
-			Double valorExecutado = execucaoService.findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mes.getId());
+			BigDecimal valorExecutado = execucaoService.findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mes.getId());
 			
 			series1.set(mes.getDescricao(),valorExecutado);
 			
-			Double valorPlanejado = fisicoFinanceiroMensalService.findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mes.getId());
+			BigDecimal valorPlanejado = fisicoFinanceiroMensalService.findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mes.getId());
 			
 			series2.set(mes.getDescricao(),valorPlanejado);
 			

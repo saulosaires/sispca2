@@ -7,7 +7,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import arquitetura.utils.Messages;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
@@ -82,7 +84,10 @@ public class AcaoEditMBean implements Serializable {
 	
 		this.acaoValidate =acaoValidate;
 		
-		listUnidadeOrcamentaria    = unidadeOrcamentariaService.findAllOrderByDescricao();
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+
+		
+		listUnidadeOrcamentaria    = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		listPrograma	           = programaService.findAllOrderByDenominacao();
 		listFuncao 			       = funcaoService.findAllOrderByCodigo();
 		listSubfuncao 		       = subFuncaoService.findAllOrderByCodigo();

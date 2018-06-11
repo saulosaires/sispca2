@@ -1,27 +1,30 @@
 package monitoramento.model;
 
+import java.math.BigDecimal;
+
 import arquitetura.enums.Meses;
+import arquitetura.utils.MathUtils;
 
 public class RelatorioDetalhamentoAcaoExecucaoMensal {
 
  	
-	private Double valorJaneiro;
-	private Double valorFevereiro;
-	private Double valorMarco;
-	private Double valorAbril;
-	private Double valorMaio;
-	private Double valorJunho;
-	private Double valorJulho;
-	private Double valorAgosto;
-	private Double valorSetembro;
-	private Double valorOutubro;
-	private Double valorNovembro;
-	private Double valorDezembro;
+	private BigDecimal valorJaneiro;
+	private BigDecimal valorFevereiro;
+	private BigDecimal valorMarco;
+	private BigDecimal valorAbril;
+	private BigDecimal valorMaio;
+	private BigDecimal valorJunho;
+	private BigDecimal valorJulho;
+	private BigDecimal valorAgosto;
+	private BigDecimal valorSetembro;
+	private BigDecimal valorOutubro;
+	private BigDecimal valorNovembro;
+	private BigDecimal valorDezembro;
 	 
 	
-	public void setValor(int numeroMes,Double valor){
+	public void setValor(int numeroMes,BigDecimal valor){
 	
-		if(valor==null) valor = 0d;
+		if(valor==null) valor = MathUtils.getZeroBigDecimal();
 		 
 		switch(numeroMes) {
 		
@@ -69,76 +72,76 @@ public class RelatorioDetalhamentoAcaoExecucaoMensal {
 	}
 	
  
-	public Double getValorJaneiro() {
+	public BigDecimal getValorJaneiro() {
 		return valorJaneiro;
 	}
-	public void setValorJaneiro(Double valorJaneiro) {
+	public void setValorJaneiro(BigDecimal valorJaneiro) {
 		this.valorJaneiro = valorJaneiro;
 	}
-	public Double getValorFevereiro() {
+	public BigDecimal getValorFevereiro() {
 		return valorFevereiro;
 	}
-	public void setValorFevereiro(Double valorFevereiro) {
+	public void setValorFevereiro(BigDecimal valorFevereiro) {
 		this.valorFevereiro = valorFevereiro;
 	}
-	public Double getValorMarco() {
+	public BigDecimal getValorMarco() {
 		return valorMarco;
 	}
-	public void setValorMarco(Double valorMarco) {
+	public void setValorMarco(BigDecimal valorMarco) {
 		this.valorMarco = valorMarco;
 	}
-	public Double getValorAbril() {
+	public BigDecimal getValorAbril() {
 		return valorAbril;
 	}
-	public void setValorAbril(Double valorAbril) {
+	public void setValorAbril(BigDecimal valorAbril) {
 		this.valorAbril = valorAbril;
 	}
-	public Double getValorMaio() {
+	public BigDecimal getValorMaio() {
 		return valorMaio;
 	}
-	public void setValorMaio(Double valorMaio) {
+	public void setValorMaio(BigDecimal valorMaio) {
 		this.valorMaio = valorMaio;
 	}
-	public Double getValorJunho() {
+	public BigDecimal getValorJunho() {
 		return valorJunho;
 	}
-	public void setValorJunho(Double valorJunho) {
+	public void setValorJunho(BigDecimal valorJunho) {
 		this.valorJunho = valorJunho;
 	}
-	public Double getValorJulho() {
+	public BigDecimal getValorJulho() {
 		return valorJulho;
 	}
-	public void setValorJulho(Double valorJulho) {
+	public void setValorJulho(BigDecimal valorJulho) {
 		this.valorJulho = valorJulho;
 	}
-	public Double getValorAgosto() {
+	public BigDecimal getValorAgosto() {
 		return valorAgosto;
 	}
-	public void setValorAgosto(Double valorAgosto) {
+	public void setValorAgosto(BigDecimal valorAgosto) {
 		this.valorAgosto = valorAgosto;
 	}
-	public Double getValorSetembro() {
+	public BigDecimal getValorSetembro() {
 		return valorSetembro;
 	}
-	public void setValorSetembro(Double valorSetembro) {
+	public void setValorSetembro(BigDecimal valorSetembro) {
 		this.valorSetembro = valorSetembro;
 	}
-	public Double getValorOutubro() {
+	public BigDecimal getValorOutubro() {
 		return valorOutubro;
 	}
-	public void setValorOutubro(Double valorOutubro) {
+	public void setValorOutubro(BigDecimal valorOutubro) {
 		this.valorOutubro = valorOutubro;
 	}
-	public Double getValorNovembro() {
+	public BigDecimal getValorNovembro() {
 		return valorNovembro;
 	}
-	public void setValorNovembro(Double valorNovembro) {
+	public void setValorNovembro(BigDecimal valorNovembro) {
 		this.valorNovembro = valorNovembro;
 	}
-	public Double getValorDezembro() {
+	public BigDecimal getValorDezembro() {
 		return valorDezembro;
 	}
-	public void setValorDezembro(Double valorDezembro) {
+	public void setValorDezembro(BigDecimal valorDezembro) {
 		this.valorDezembro = valorDezembro;
 	}
 	

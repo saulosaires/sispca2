@@ -32,7 +32,7 @@ public class UserMBean implements Serializable {
 	
 	public void init() {
 		
-		usuario = (Usuario) SessionUtils.get("user");
+		usuario = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		initFotoPerfil();
 	}

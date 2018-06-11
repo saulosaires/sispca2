@@ -8,11 +8,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
 import arquitetura.utils.RelatorioUtil;
+import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 import monitoramento.model.RelatorioDetalhamentoAcaoExecucaoMensal;
 import monitoramento.service.ExecucaoService;
@@ -63,7 +65,9 @@ public class RelatorioFinanceiroDetalhamentoAcaoMBean  extends RelatorioMBean {
 												    AcaoService acaoService) {
 		super(exercicioService);
 
-		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao();
+		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
+		
+		listUnidadeOrcamentaria = unidadeOrcamentariaService.findAllOrderByDescricao(user.getId());
 		
 		meses =mesService.findAll();
 		
