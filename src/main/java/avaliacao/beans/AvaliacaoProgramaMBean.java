@@ -31,7 +31,9 @@ import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import administrativo.model.Exercicio;
+import administrativo.model.Ppa;
 import administrativo.service.ExercicioService;
+import administrativo.service.PpaService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.MathUtils;
@@ -88,8 +90,14 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	private boolean editarAvaliacao = false;
 	
 	private String codigoPrograma;
-	private Exercicio exercicio ;
+ 	
+	private Long ppaId;
+	private List<Ppa> listPpa;
 	
+	private Long exercicioId;
+	private List<Exercicio> listExercicio;
+	
+	private PpaService ppaService;
 	private ProgramaService programaService; 
 	private AvaliacaoFisicoFinanceiraService avaliacaoFisicoFinanceiraService; 
 	private IndicadorDesempenhoIntermediarioService indicadorDesempenhoIntermediarioService;
@@ -120,8 +128,10 @@ public class AvaliacaoProgramaMBean implements Serializable {
 								   FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
 								   RecomendacaoService recomendacaoService,
 								   ResultadoService resultadoService,
+								   PpaService ppaService,
 								   EixoService eixoService) {
 
+		this.ppaService 						    = ppaService;
 		this.programaService					    = programaService; 
 		this.avaliacaoFisicoFinanceiraService		= avaliacaoFisicoFinanceiraService;
 		this.diretrizAssociadaService				= diretrizAssociadaService;
@@ -134,13 +144,12 @@ public class AvaliacaoProgramaMBean implements Serializable {
 		
 		listEixos = eixoService.findAllOrderByDecricao();
 		
-		Optional<Exercicio> exercicioAnterior = exercicioService.exercicioVigente();
+		listPpa = ppaService.findAll();
 		
-		if(exercicioAnterior.isPresent()) {
-			
-			   exercicio = exercicioAnterior.get();
-		}
+		initPpa();
+		initExercicio();
 		
+ 		
 		buscarProgramas();
 		
 		
@@ -158,10 +167,53 @@ public class AvaliacaoProgramaMBean implements Serializable {
 
 	public void buscarProgramas() {
 		
-		this.listPrograma = programaService.buscar(codigoPrograma, null, null, null, exercicio.getId(),eixoId);
+		this.listPrograma = programaService.buscar(codigoPrograma, null, null, null, exercicioId,eixoId);
  	
 	}
  	
+    public void onChangePpa() {
+    	
+    	if(ppaId!=null) {
+    		listExercicio = ppaService.findById(ppaId).getExercicios();
+    	}else {
+    		exercicioId=null;
+    		listExercicio=null;	
+    	}
+    	
+    }
+	
+	
+	public void initPpa() {
+		
+		for(Ppa ppa: listPpa) {
+			if(ppa.getVigente()) {
+				ppaId = ppa.getId();
+				break;
+			}
+		}
+		
+	}
+	
+	public void initExercicio() {
+	
+		if(ppaId!=null) {
+			listExercicio = ppaService.findById(ppaId).getExercicios();
+			
+			for(Exercicio e: listExercicio) {
+				
+				if(e.getVigente()) {
+					exercicioId = e.getId();
+					break;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	
+	
 	public void imprimirTodos() {
 		
 		try {
@@ -411,15 +463,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 	public void setEixoId(Long eixoId) {
 		this.eixoId = eixoId;
 	}
-
-	public Exercicio getExercicio() {
-		return exercicio;
-	}
-
-	public void setExercicio(Exercicio exercicio) {
-		this.exercicio = exercicio;
-	}
-
+ 
 	public List<Eixo> getListEixos() {
 		return listEixos;
 	}
@@ -498,6 +542,38 @@ public class AvaliacaoProgramaMBean implements Serializable {
 
 	public void setAvaliacaoSetorialRelatorio(boolean avaliacaoSetorialRelatorio) {
 		this.avaliacaoSetorialRelatorio = avaliacaoSetorialRelatorio;
+	}
+
+	public Long getPpaId() {
+		return ppaId;
+	}
+
+	public void setPpaId(Long ppaId) {
+		this.ppaId = ppaId;
+	}
+
+	public List<Ppa> getListPpa() {
+		return listPpa;
+	}
+
+	public void setListPpa(List<Ppa> listPpa) {
+		this.listPpa = listPpa;
+	}
+
+	public Long getExercicioId() {
+		return exercicioId;
+	}
+
+	public void setExercicioId(Long exercicioId) {
+		this.exercicioId = exercicioId;
+	}
+
+	public List<Exercicio> getListExercicio() {
+		return listExercicio;
+	}
+
+	public void setListExercicio(List<Exercicio> listExercicio) {
+		this.listExercicio = listExercicio;
 	}
 	
 	
