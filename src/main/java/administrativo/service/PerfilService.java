@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import administrativo.controller.PerfilController;
+import administrativo.dao.PerfilDAO;
 import administrativo.model.Perfil;
 import arquitetura.service.AbstractService;
 
@@ -17,13 +17,13 @@ public class PerfilService extends AbstractService<Perfil> {
  
 
 	@Inject
-	public PerfilService(PerfilController perfilController) {
-		super(perfilController);
+	public PerfilService(PerfilDAO dao) {
+		super(dao);
 	}
  
 
 	public Optional<Perfil> findByDescription(String desc){
-		return ((PerfilController) getController()).findByDescription(desc);
+		return ((PerfilDAO) getDAO()).findByDescription(desc);
 	}
 	
 	 

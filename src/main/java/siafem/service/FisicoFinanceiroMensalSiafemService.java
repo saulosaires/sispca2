@@ -15,7 +15,6 @@ import arquitetura.utils.MathUtils;
 import grafico.model.RelatorioLiquidadoAcumuladoFisicoFinanceiro;
 import qualitativo.model.Mes;
 import qualitativo.model.Programa;
-import siafem.controller.FisicoFinanceiroMensalSiafemController;
 import siafem.dao.FisicoFinanceiroMensalSiafemDAO;
 import siafem.enums.NaturezaDespeza;
 import siafem.model.FisicoFinanceiroMensalSiafem;
@@ -30,55 +29,55 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public FisicoFinanceiroMensalSiafemService(FisicoFinanceiroMensalSiafemController controller) {
-		super(controller);
+	public FisicoFinanceiroMensalSiafemService(FisicoFinanceiroMensalSiafemDAO dao) {
+		super(dao);
 	}
 
 	public void create(List<FisicoFinanceiroMensalSiafem> listSiafem) throws JpaException {
 		
-		((FisicoFinanceiroMensalSiafemController)getController()).create(listSiafem);
+		((FisicoFinanceiroMensalSiafemDAO)getDAO()).create(listSiafem);
 	}
 	
 	
 	public int deleteByYear(Integer exercicio) throws JpaException{
-		return ((FisicoFinanceiroMensalSiafemController)getController()).deleteByYear(exercicio);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).deleteByYear(exercicio);
 	}
 
 	public BigDecimal calculaDotacaoInicialByProgAndAno(String programaCodigo, Integer anoVigente){
 		
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaDotacaoInicialByProgAndAno(programaCodigo, anoVigente);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaDotacaoInicialByProgAndAno(programaCodigo, anoVigente);
 	}
 	
 	public BigDecimal calculaDotacaoAtualByProgAndAno(String programaCodigo , Integer anoVigente){
 		
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaDotacaoAtualByProgAndAno(programaCodigo, anoVigente);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaDotacaoAtualByProgAndAno(programaCodigo, anoVigente);
 	}	
 	
 	public BigDecimal calculaEmpenhadoByProgAndAno(String programaCodigo , Integer anoVigente){
 		
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaEmpenhadoByProgAndAno(programaCodigo, anoVigente);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaEmpenhadoByProgAndAno(programaCodigo, anoVigente);
 	}	
 	
 	public BigDecimal calculaLiquidadoByProgAndAno(String programaCodigo , Integer anoVigente){
 		
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaLiquidadoByProgAndAno(programaCodigo, anoVigente);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaLiquidadoByProgAndAno(programaCodigo, anoVigente);
 	}	
 	
 	public BigDecimal calculaPagoByProgAndAno(String programaCodigo , Integer anoVigente){
 		
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaPagoByProgAndAno(programaCodigo, anoVigente);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaPagoByProgAndAno(programaCodigo, anoVigente);
 	}	
 	
 	public List<FisicoFinanceiroMensalSiafem> valorFisicoFinanceiro(String unidadeGestora, String unidadeOrcamentaria, Long acao, Integer exercicio){
 		
-		return ((FisicoFinanceiroMensalSiafemController)getController()).valorFisicoFinanceiro(unidadeGestora,unidadeOrcamentaria,acao,exercicio);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).valorFisicoFinanceiro(unidadeGestora,unidadeOrcamentaria,acao,exercicio);
 		
 	}
 		
 	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(Programa programa, Exercicio exercicio){
 		
-		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem = ((FisicoFinanceiroMensalSiafemController)getController()).analiseFisicoFinanceiro(programa, exercicio);
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiroMensalSiafem = ((FisicoFinanceiroMensalSiafemDAO)getDAO()).analiseFisicoFinanceiro(programa, exercicio);
 		
 		for(FisicoFinanceiroMensalSiafem financeiroMensalSiafem: listFisicoFinanceiroMensalSiafem) {
 
@@ -119,21 +118,20 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 	}
 	
-
 	public BigDecimal calculaQuantidadeCumulativoPlanejada(Long acaoId, Long exercicioId){	
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaQuantidadeCumulativoPlanejada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaQuantidadeAcumulativoPlanejada(acaoId,exercicioId);
 	}
 	
 	public BigDecimal calculaQuantidadeNaoCumulativoPlanejada(Long acaoId, Long exercicioId){
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaQuantidadeNaoCumulativoPlanejada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaQuantidadeNaoAcumulativoPlanejada(acaoId,exercicioId);
 	}
 	
 	public BigDecimal calculaQuantidadeCumulativoExecutada(Long acaoId, Long exercicioId){
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaQuantidadeCumulativoExecutada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaQuantidadeAcumulativoExecutada(acaoId,exercicioId);
 	}
 	
 	public BigDecimal calculaQuantidadeNaoCumulativoExecutada(Long acaoId, Long exercicioId){
-		return ((FisicoFinanceiroMensalSiafemController)getController()).calculaQuantidadeNaoCumulativoExecutada(acaoId,exercicioId);
+		return ((FisicoFinanceiroMensalSiafemDAO)getDAO()).calculaQuantidadeNaoAcumulativoExecutada(acaoId,exercicioId);
 	}
 		
 	private void calculaEficiencia(FisicoFinanceiroMensalSiafem financeiroMensalSiafem) {
@@ -286,11 +284,11 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	}
 		
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiro(String unidadeOrcamentaria,String programa, Integer exercicio){
-		return ((FisicoFinanceiroMensalSiafemController)getController()).analiseFisicoFinanceiro(unidadeOrcamentaria, programa, exercicio);
+		return dao().analiseFisicoFinanceiro(unidadeOrcamentaria, programa, exercicio);
 	}
 	
 	public List<FisicoFinanceiroMensalSiafem> analiseFisicoFinanceiroPorMes(String unidadeOrcamentaria,String programa, Integer exercicio){
-		return ((FisicoFinanceiroMensalSiafemController)getController()).analiseFisicoFinanceiroPorMes(unidadeOrcamentaria, programa, exercicio);
+		return dao().analiseFisicoFinanceiroPorMes(unidadeOrcamentaria, programa, exercicio);
 	}
 	
 	public RelatorioLiquidadoAcumuladoFisicoFinanceiro calculaLiquidadoAcumuladoByUnidadeAndProgAndMesAndAno(String unidadeOrcamentaria,String programa, List<Mes> meses, Integer ano) {
@@ -299,7 +297,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 		
 		for(Mes mes : meses) {
 			
-			BigDecimal liquidado = controller().calculaLiquidadoByUnidadeAndProgAndMesAndAno(unidadeOrcamentaria,programa, mes.getNumeroMes(), ano);
+			BigDecimal liquidado = dao().calculaLiquidadoByUnidadeAndProgAndMesAndAno(unidadeOrcamentaria,programa, mes.getNumeroMes(), ano);
 			
 			relatorioLiquidadoAcumuladoFisicoFinanceiro.setLiquidado(liquidado, mes.getNumeroMes());
 		}
@@ -313,7 +311,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 	public RelatorioDetalhamentoAcaoSiafem  relatorioDetalhamentoAcao(List<Mes> meses, String unidadeOrcamentaria, Long acao, Integer ano){
 		
-		List<FisicoFinanceiroMensalSiafem> listDetalhamentoAcao = controller().relatorioDetalhamentoAcao(unidadeOrcamentaria, acao, ano);
+		List<FisicoFinanceiroMensalSiafem> listDetalhamentoAcao = dao().relatorioDetalhamentoAcao(unidadeOrcamentaria, acao, ano);
 		
 		
 		RelatorioDetalhamentoAcaoValue dotacalInicial = new RelatorioDetalhamentoAcaoValue();
@@ -350,12 +348,12 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	}
 	
 	public FisicoFinanceiroMensalSiafem  calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(Long mes, Integer ano,String programaCodigo,String unidadeOrcamentariaCodigo,String acaocodigo){
-		return controller().calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(mes, ano,programaCodigo,unidadeOrcamentariaCodigo,acaocodigo);
+		return dao().calculaDetalhamentoMensalByMesAndAnoAndProgramaAndUnidadeAndAcao(mes, ano,programaCodigo,unidadeOrcamentariaCodigo,acaocodigo);
 	}
 	
 	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
 		
-		 List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioFinanceiroNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
+		 List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().relatorioFinanceiroNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
 		 
 		 
 		 for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem: listFisicoFinanceiro) {
@@ -372,7 +370,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 	public List<FisicoFinanceiroMensalSiafem> totalPorNaturezaDespesa(Long unidadeGestora, Long unidadeOrcamentaria, Long acao, NaturezaDespeza natureza, Integer ano){
 		
-		 List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().totalPorNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
+		 List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().totalPorNaturezaDespesa(unidadeGestora, unidadeOrcamentaria, acao, natureza,ano);
 		 
 		 
 		 for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem: listFisicoFinanceiro) {
@@ -389,7 +387,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPlanoInterno(Long unidadeGestora, Long unidadeOrcamentaria, Long acao,  Integer ano){
 		
-		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioFinanceiroPlanoInterno(unidadeGestora, unidadeOrcamentaria, acao, ano);
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().relatorioFinanceiroPlanoInterno(unidadeGestora, unidadeOrcamentaria, acao, ano);
 		
 		 for(FisicoFinanceiroMensalSiafem fisicoFinanceiroMensalSiafem: listFisicoFinanceiro) {
 			 
@@ -408,7 +406,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroMetaFisico(Long unidadeGestora, Long unidadeOrcamentaria, Long acao,  Exercicio exercicio){
 		
-		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioFinanceiroMetaFisico(unidadeGestora, unidadeOrcamentaria, acao, exercicio.getAno());
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().relatorioFinanceiroMetaFisico(unidadeGestora, unidadeOrcamentaria, acao, exercicio.getAno());
 		
 
 		for(FisicoFinanceiroMensalSiafem financeiroMensalSiafem: listFisicoFinanceiro) {
@@ -431,7 +429,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 	public List<FisicoFinanceiroMensalSiafem> relatorioDespesasExecutadasAcao(Long unidadeGestora, Long unidadeOrcamentaria, Long acao,Exercicio exercicio){
 		
-		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioDespesasExecutadasAcao(unidadeGestora, unidadeOrcamentaria, acao, exercicio.getAno());
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().relatorioDespesasExecutadasAcao(unidadeGestora, unidadeOrcamentaria, acao, exercicio.getAno());
 		
 		for(FisicoFinanceiroMensalSiafem financeiroMensalSiafem: listFisicoFinanceiro) {
 
@@ -451,7 +449,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	}
 
 	public List<FisicoFinanceiroMensalSiafem> relatorioExecucaoProgramaAcao(Long programa, Long unidadeOrcamentaria, Long acao,Exercicio exercicio){
-		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioExecucaoProgramaAcao(programa, unidadeOrcamentaria, acao, exercicio.getAno());
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().relatorioExecucaoProgramaAcao(programa, unidadeOrcamentaria, acao, exercicio.getAno());
 		
 		
 		for(FisicoFinanceiroMensalSiafem financeiroMensalSiafem: listFisicoFinanceiro) {
@@ -472,7 +470,7 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 
 	public List<FisicoFinanceiroMensalSiafem> relatorioExecucaoUnidade(Long unidadeGestora, Long unidadeOrcamentaria, Long programa,Exercicio exercicio){
 		
-		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = controller().relatorioExecucaoUnidade(unidadeGestora, unidadeOrcamentaria, programa, exercicio.getAno());
+		List<FisicoFinanceiroMensalSiafem> listFisicoFinanceiro = dao().relatorioExecucaoUnidade(unidadeGestora, unidadeOrcamentaria, programa, exercicio.getAno());
 		
 		
 		for(FisicoFinanceiroMensalSiafem financeiroMensalSiafem: listFisicoFinanceiro) {
@@ -493,12 +491,12 @@ public class FisicoFinanceiroMensalSiafemService extends AbstractService<FisicoF
 	
 	
 	public List<FisicoFinanceiroMensalSiafem> relatorioFinanceiroPorPrograma(Integer ano){
-		return controller().relatorioFinanceiroPorPrograma(ano);
+		return dao().relatorioFinanceiroPorPrograma(ano);
 	}
 	
-	private FisicoFinanceiroMensalSiafemController controller() {
+	private FisicoFinanceiroMensalSiafemDAO dao() {
 		
-		return (FisicoFinanceiroMensalSiafemController)getController();
+		return (FisicoFinanceiroMensalSiafemDAO)getDAO();
 	}
 	
 }

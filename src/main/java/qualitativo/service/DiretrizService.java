@@ -3,7 +3,7 @@ package qualitativo.service;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.DiretrizController;
+import qualitativo.dao.DiretrizDAO;
 import qualitativo.model.Diretriz;
 
 public class DiretrizService  extends AbstractService<Diretriz> {
@@ -15,8 +15,8 @@ public class DiretrizService  extends AbstractService<Diretriz> {
  
 
 	@Inject
-	public DiretrizService(DiretrizController controller) {
-		super(controller);
+	public DiretrizService(DiretrizDAO dao) {
+		super(dao);
 	}
 
 	 

@@ -11,7 +11,7 @@ import administrativo.service.UserService;
 import arquitetura.enums.TipoUsuario;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import qualitativo.controller.OrgaoController;
+import qualitativo.dao.OrgaoDAO;
 import qualitativo.model.Orgao;
 
 public class OrgaoService extends AbstractService<Orgao>  {
@@ -25,8 +25,8 @@ public class OrgaoService extends AbstractService<Orgao>  {
 	private UserService userService;
 	
 	@Inject
-	public OrgaoService(OrgaoController controller,UserService userService) {
-		super(controller);
+	public OrgaoService(OrgaoDAO dao,UserService userService) {
+		super(dao);
 		
 		this.userService = userService;
 	}
@@ -49,7 +49,7 @@ public class OrgaoService extends AbstractService<Orgao>  {
 				return listOrgaoId;
 				
 			 }else {
-				return ((OrgaoController)getController()).buscar(codigo,sigla,descricao);
+				return ((OrgaoDAO)getDAO()).buscar(codigo,sigla,descricao);
 			 }
 			
 				 

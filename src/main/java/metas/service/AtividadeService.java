@@ -8,7 +8,7 @@ import org.apache.commons.mail.EmailException;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.EmailUtil;
-import metas.controller.AtividadeController;
+import metas.dao.AtividadeDAO;
 import metas.model.Atividade;
 
 public class AtividadeService extends AbstractService<Atividade> {
@@ -20,13 +20,13 @@ public class AtividadeService extends AbstractService<Atividade> {
  
 
 	@Inject
-	public AtividadeService(AtividadeController controller) {
-		super(controller);
+	public AtividadeService(AtividadeDAO dao) {
+		super(dao);
 	}
  
 	public List<Atividade> findByNomeAndUnidadeOrcamentaria(String nome, Long unidadeOrcamentaria){
 		
-		return ((AtividadeController)getController()).findByNomeAndUnidadeOrcamentaria(nome, unidadeOrcamentaria);
+		return ((AtividadeDAO)getDAO()).findByNomeAndUnidadeOrcamentaria(nome, unidadeOrcamentaria);
 	}
 
 	

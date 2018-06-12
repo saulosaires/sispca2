@@ -6,20 +6,20 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import administrativo.controller.TipoLinkController;
 import administrativo.model.TipoLink;
+import administrativo.service.TipoLinkService;
 
 @FacesConverter(value = "tipoLinkConverter", forClass = TipoLink.class)
 public class TipoLinkConverter implements Converter {
 
 	
-	 TipoLinkController tipoLinkController= CDI.current().select(TipoLinkController.class).get();
+	TipoLinkService tipoLinkService= CDI.current().select(TipoLinkService.class).get();
   
 	
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         if (string != null && !string.isEmpty()) {
-            return tipoLinkController.findById(Long.parseLong(string));
+            return tipoLinkService.findById(Long.parseLong(string));
         }
         return null;
     }

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import quantitativo.controller.RegiaoMunicipioController;
+import quantitativo.dao.RegiaoMunicipioDAO;
 import quantitativo.model.RegiaoMunicipio;
 
 public class RegiaoMunicipioService extends AbstractService<RegiaoMunicipio> {
@@ -18,18 +18,23 @@ public class RegiaoMunicipioService extends AbstractService<RegiaoMunicipio> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public RegiaoMunicipioService(RegiaoMunicipioController controller) {
-		super(controller);
+	public RegiaoMunicipioService(RegiaoMunicipioDAO dao) {
+		super(dao);
 	}
 
-	 
+	private RegiaoMunicipioDAO dao() {
+		
+		return (RegiaoMunicipioDAO)getDAO();
+	}
+
+	
 	public List<RegiaoMunicipio> findByRegiao(Long regiaoId) {
 
 		if(Utils.invalidId(regiaoId)) {
 			return new ArrayList<>();
 		}
 		
-		return ((RegiaoMunicipioController) getController()).findByRegiao(regiaoId);
+		return dao().findByRegiao(regiaoId);
 	}
 	 
 	
@@ -40,9 +45,9 @@ public class RegiaoMunicipioService extends AbstractService<RegiaoMunicipio> {
 			return new ArrayList<>();
 		}
 		
-		List<RegiaoMunicipio> listTipoRegiao = ((RegiaoMunicipioController) getController()).findByTipoRegiao(tipoRegiaoId);
+		List<RegiaoMunicipio> listTipoRegiao = dao().findByTipoRegiao(tipoRegiaoId);
 		
-		List<RegiaoMunicipio> listTodaRegiao = ((RegiaoMunicipioController) getController()).findTodosTipoRegiao();
+		List<RegiaoMunicipio> listTodaRegiao = dao().findTodosTipoRegiao();
 		
 		listTodaRegiao.addAll(listTipoRegiao);
 		

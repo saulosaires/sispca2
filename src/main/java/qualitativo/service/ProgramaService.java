@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import qualitativo.controller.ProgramaController;
+import qualitativo.dao.ProgramaDAO;
 import qualitativo.model.Programa;
 
 public class ProgramaService extends AbstractService<Programa>  {
@@ -17,13 +17,18 @@ public class ProgramaService extends AbstractService<Programa>  {
 	private static final long serialVersionUID = 2854975367734660857L;
  
 	@Inject
-	public ProgramaService(ProgramaController controller) {
-		super(controller);
+	public ProgramaService(ProgramaDAO dao) {
+		super(dao);
 	}
 
+	private ProgramaDAO dao() {
+		return (ProgramaDAO) getDAO();
+	}
+
+	
 	public List<Programa> findAllOrderByDenominacao() {
 		
-		return((ProgramaController)getController()).findAllOrderByDenominacao();
+		return dao().findAllOrderByDenominacao();
 	}
 
 	public List<Programa> buscar(String codigo, String denominacao,List<Long> listOrgao, Long tipoPrograma,Long exercicioId,Long eixoId) {
@@ -32,7 +37,7 @@ public class ProgramaService extends AbstractService<Programa>  {
 				Utils.invalidId(tipoPrograma) && Utils.invalidId(exercicioId)) {
 			return findAll();
 		}else {
-			 return((ProgramaController)getController()).buscar(codigo,denominacao,listOrgao,tipoPrograma,exercicioId,eixoId);	
+			 return dao().buscar(codigo,denominacao,listOrgao,tipoPrograma,exercicioId,eixoId);	
 		}
 		
 		
@@ -40,13 +45,13 @@ public class ProgramaService extends AbstractService<Programa>  {
 
 	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentariaCodigo) {
 
-		return ((ProgramaController) getController()).buscarPorUnidadeOrcamentaria(unidadeOrcamentariaCodigo);
+		return dao().buscarPorUnidadeOrcamentaria(unidadeOrcamentariaCodigo);
 
 	}
  
 	public List<Programa> buscarPorUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
 
-		return ((ProgramaController) getController()).buscarPorUnidadeOrcamentaria(unidadeOrcamentariaId);
+		return dao().buscarPorUnidadeOrcamentaria(unidadeOrcamentariaId);
 
 	}
 

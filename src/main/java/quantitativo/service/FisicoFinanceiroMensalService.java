@@ -14,7 +14,7 @@ import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import qualitativo.model.Mes;
-import quantitativo.controller.FisicoFinanceiroMensalController;
+import quantitativo.dao.FisicoFinanceiroMensalDAO;
 import quantitativo.model.FisicoFinanceiroMensal;
 import quantitativo.model.RelatorioDetalhamentoAcaoFinanceiroMensal;
 import quantitativo.model.RelatorioFisicoFinanceiro;
@@ -28,13 +28,19 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public FisicoFinanceiroMensalService(FisicoFinanceiroMensalController controller) {
-		super(controller);
+	public FisicoFinanceiroMensalService(FisicoFinanceiroMensalDAO dao) {
+		super(dao);
 	}
 
+	private FisicoFinanceiroMensalDAO dao() {
+		
+		return (FisicoFinanceiroMensalDAO)getDAO();
+	}
+	
+	
 	public List<RelatorioFisicoFinanceiro> relatorioPlanejamentoMensal(List<Long> listOrgaoId,Long unidadeOrcamentariaId,Long programaId,Long acaoId, Long tipoRegiaoId, Long regiaoId,Long regiaoMunicipioId,Long exercicioId){
 		
-		List<FisicoFinanceiroMensal> listFisicoFinanceiro = ((FisicoFinanceiroMensalController)getController()).relatorioPlanejamentoMensal(listOrgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
+		List<FisicoFinanceiroMensal> listFisicoFinanceiro = dao().relatorioPlanejamentoMensal(listOrgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
 
  		Map<String,RelatorioFisicoFinanceiro> map = new HashMap<>();
 	
@@ -77,7 +83,7 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 	
 	public Optional<FisicoFinanceiroMensal> findByRegiaoMunicipioAndExercicioAndAcaoAndMes(Long regiaoMunicipioId,Long exercicioId,Long acaoId,Long mesId){
 		
-		return ((FisicoFinanceiroMensalController)getController()).findByRegiaoMunicipioAndExercicioAndAcaoAndMes(regiaoMunicipioId,exercicioId,acaoId,mesId);
+		return dao().findByRegiaoMunicipioAndExercicioAndAcaoAndMes(regiaoMunicipioId,exercicioId,acaoId,mesId);
 	}
 	 
 	
@@ -95,12 +101,12 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 
 	public List<FisicoFinanceiroMensal> findByAcao(Long acaoId) {
 		
-		return ((FisicoFinanceiroMensalController)getController()).findByAcao(acaoId);
+		return dao().findByAcao(acaoId);
 	}
 	
 	public BigDecimal findTotalValorFinanceiroPlanejadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 		
-		return ((FisicoFinanceiroMensalController)getController()).findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
+		return dao().findTotalValorFinanceiroPlanejadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioVigenteId, mesId);
 	}	
 	
 	public RelatorioDetalhamentoAcaoFinanceiroMensal calculaPlanejamentoMensalByMesAndExercicioAndAcao(List<Mes> meses, Long exercicio,Long acao){
@@ -108,7 +114,7 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		RelatorioDetalhamentoAcaoFinanceiroMensal detalhamentoAcaoFinanceiroMensal = new RelatorioDetalhamentoAcaoFinanceiroMensal();
 		for(Mes mes: meses) {
 			
-			BigDecimal valor = ((FisicoFinanceiroMensalController)getController()).calculaPlanejamentoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
+			BigDecimal valor = dao().calculaPlanejamentoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
 			
 			detalhamentoAcaoFinanceiroMensal.setValor(mes.getNumeroMes(), valor);
 		}

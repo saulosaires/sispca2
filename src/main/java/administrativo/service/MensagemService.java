@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import administrativo.controller.MensagemController;
+import administrativo.dao.MensagemDAO;
 import administrativo.model.Mensagem;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
@@ -19,8 +19,8 @@ public class MensagemService extends AbstractService<Mensagem> {
 	
  
 	@Inject
-	public MensagemService( MensagemController controller) {
-		super(controller);
+	public MensagemService( MensagemDAO dao) {
+		super(dao);
 	}
  
 
@@ -31,7 +31,7 @@ public class MensagemService extends AbstractService<Mensagem> {
 		if (Utils.emptyParam(titulo) && Utils.emptyParam(texto)) {
 			return findAll();
 		} else {
-			return ((MensagemController) getController()).queryByTituloAndTexto(titulo, texto);
+			return ((MensagemDAO) getDAO()).queryByTituloAndTexto(titulo, texto);
 		}
 		
 	}

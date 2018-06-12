@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import avaliacao.controller.IndicadorDesempenhoIntermediarioController;
+import avaliacao.dao.IndicadorDesempenhoIntermediarioDAO;
 import avaliacao.model.IndicadorDesempenhoIntermediario;
 
 public class IndicadorDesempenhoIntermediarioService extends AbstractService<IndicadorDesempenhoIntermediario> {
@@ -18,13 +18,13 @@ public class IndicadorDesempenhoIntermediarioService extends AbstractService<Ind
 	
  
 	@Inject
-	public IndicadorDesempenhoIntermediarioService(IndicadorDesempenhoIntermediarioController controller) {
-		super(controller);
+	public IndicadorDesempenhoIntermediarioService(IndicadorDesempenhoIntermediarioDAO dao) {
+		super(dao);
 	}
  
 
 	public List<IndicadorDesempenhoIntermediario> findByProgramaAndExercicio(Long programaId, Long exercicioId){
-		return ((IndicadorDesempenhoIntermediarioController) getController()).findByProgramaAndExercicio(programaId, exercicioId);
+		return ((IndicadorDesempenhoIntermediarioDAO) getDAO()).findByProgramaAndExercicio(programaId, exercicioId);
 	}
 	
 	

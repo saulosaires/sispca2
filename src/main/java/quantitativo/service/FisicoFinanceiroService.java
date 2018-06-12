@@ -10,7 +10,7 @@ import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import qualitativo.model.Acao;
-import quantitativo.controller.FisicoFinanceiroController;
+import quantitativo.dao.FisicoFinanceiroDAO;
 import quantitativo.model.FisicoFinanceiro;
 import relatorio.model.RelatorioQuantitativoAnual;
 
@@ -22,38 +22,44 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public FisicoFinanceiroService(FisicoFinanceiroController controller) {
-		super(controller);
+	public FisicoFinanceiroService(FisicoFinanceiroDAO dao) {
+		super(dao);
+	}
+	
+	private FisicoFinanceiroDAO dao() {
+		
+		return (FisicoFinanceiroDAO)getDAO();
 	}
 
+
 	public List<FisicoFinanceiro> totalPorUnidadeOrcamentaria(Long unidadeOrcamentariaId, Long ppaId){
-		return  ((FisicoFinanceiroController)getController()).totalPorUnidadeOrcamentaria(unidadeOrcamentariaId, ppaId);
+		return  dao().totalPorUnidadeOrcamentaria(unidadeOrcamentariaId, ppaId);
 	}
 
 	
 	public List<FisicoFinanceiro> findByAcaoAndPpa(String acaoCodigo, Long ppaId){
-		return ((FisicoFinanceiroController)getController()).findByAcaoAndPpa(acaoCodigo,ppaId);
+		return dao().findByAcaoAndPpa(acaoCodigo,ppaId);
 	}
 	
 	public List<FisicoFinanceiro> findByAcao(Long acaoId){
 		
-		return ((FisicoFinanceiroController)getController()).findByAcao(acaoId);
+		return dao().findByAcao(acaoId);
 	}
 		
 	public Optional<FisicoFinanceiro> findByRegiaoMunicipioAndExercicioAndAcao(Long regiaoMunicipioId,Long exercicioId,Long acaoId){
 		
-		return ((FisicoFinanceiroController)getController()).findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
+		return dao().findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipioId,exercicioId,acaoId);
 	}
 	
 	public List<FisicoFinanceiro>  relatorioPlanejadoPorAno(Long regiaoId,Long municipioId,Long unidadeOrcamentariaId,Long exercicioId){
 		
-		return ((FisicoFinanceiroController)getController()).relatorioPlanejadoPorAno(regiaoId,municipioId,unidadeOrcamentariaId,exercicioId);
+		return dao().relatorioPlanejadoPorAno(regiaoId,municipioId,unidadeOrcamentariaId,exercicioId);
 	
 	}
 	
 	public List<FisicoFinanceiro>  relatorioPlanejadoPorRegiao(Long regiaoId,Long unidadeOrcamentariaId,Long exercicioId){
 		
-		return ((FisicoFinanceiroController)getController()).relatorioPlanejadoPorRegiao(regiaoId,unidadeOrcamentariaId,exercicioId);
+		return dao().relatorioPlanejadoPorRegiao(regiaoId,unidadeOrcamentariaId,exercicioId);
 	
 	}
 
@@ -74,7 +80,7 @@ public class FisicoFinanceiroService extends AbstractService<FisicoFinanceiro> {
 	}
 	
 	public List<FisicoFinanceiro> relatorioFisicoFinanceiro(Long unidadeOrcamentariaId, Long ppaId){
-		return ((FisicoFinanceiroController)getController()).relatorioFisicoFinanceiro(unidadeOrcamentariaId,ppaId);
+		return dao().relatorioFisicoFinanceiro(unidadeOrcamentariaId,ppaId);
 	}
 
 	

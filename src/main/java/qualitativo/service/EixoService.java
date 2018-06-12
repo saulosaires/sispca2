@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.EixoController;
+import qualitativo.dao.EixoDAO;
 import qualitativo.model.Eixo;
 
 public class EixoService extends AbstractService<Eixo> {
@@ -16,13 +16,13 @@ public class EixoService extends AbstractService<Eixo> {
 	private static final long serialVersionUID = 2854975367734660857L;
 
 	@Inject
-	public EixoService(EixoController controller) {
-		super(controller);
+	public EixoService(EixoDAO dao) {
+		super(dao);
 	}
 
 	public List<Eixo> findAllOrderByDecricao() {
 
-		return ((EixoController) getController()).findAllOrderByDescricao();
+		return ((EixoDAO) getDAO()).findAllOrderByDescricao();
 	}
 
 }

@@ -3,7 +3,7 @@ package qualitativo.service;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.TipoOrcamentoController;
+import qualitativo.dao.TipoOrcamentoDAO;
 import qualitativo.model.TipoOrcamento;
 
 public class TipoOrcamentoService  extends AbstractService<TipoOrcamento> {
@@ -15,8 +15,8 @@ public class TipoOrcamentoService  extends AbstractService<TipoOrcamento> {
  
 
 	@Inject
-	public TipoOrcamentoService(TipoOrcamentoController controller) {
-		super(controller);
+	public TipoOrcamentoService(TipoOrcamentoDAO dao) {
+		super(dao);
 	}
  
 

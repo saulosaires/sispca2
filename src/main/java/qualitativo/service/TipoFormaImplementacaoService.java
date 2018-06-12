@@ -3,7 +3,7 @@ package qualitativo.service;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.TipoFormaImplementacaoController;
+import qualitativo.dao.TipoFormaImplementacaoDAO;
 import qualitativo.model.TipoFormaImplementacao;
 
 public class TipoFormaImplementacaoService  extends AbstractService<TipoFormaImplementacao> {
@@ -15,8 +15,8 @@ public class TipoFormaImplementacaoService  extends AbstractService<TipoFormaImp
  
 
 	@Inject
-	public TipoFormaImplementacaoService(TipoFormaImplementacaoController controller) {
-		super(controller);
+	public TipoFormaImplementacaoService(TipoFormaImplementacaoDAO dao) {
+		super(dao);
 	}
  
 

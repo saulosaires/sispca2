@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import administrativo.controller.PermissaoController;
+import administrativo.dao.PermissaoDAO;
 import administrativo.model.Permissao;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
@@ -17,8 +17,8 @@ public class PermissaoService extends AbstractService<Permissao> {
 	private static final long serialVersionUID = -3288174422611664897L;
 
 	@Inject
-	public PermissaoService(PermissaoController permissaoController) {
-		super(permissaoController);
+	public PermissaoService(PermissaoDAO dao) {
+		super(dao);
 	}
 
 	public List<Permissao> buscaPermissao(String busca) {
@@ -26,19 +26,19 @@ public class PermissaoService extends AbstractService<Permissao> {
 		if (Utils.emptyParam(busca)) {
 			return findAll();
 		} else {
-			return ((PermissaoController) getController()).buscaPermissao(busca);
+			return ((PermissaoDAO) getDAO()).buscaPermissao(busca);
 		}
 
 	}
 
 	public List<Permissao> buscaPermissaoEqAcao(String busca) {
 
-		return ((PermissaoController) getController()).buscaPermissaoEqAcao(busca);
+		return ((PermissaoDAO) getDAO()).buscaPermissaoEqAcao(busca);
 
 	}
 
 	public List<Permissao> findPermissaoAssociada(Long perfilId) {
-		return ((PermissaoController) getController()).findPermissaoAssociada(perfilId);
+		return ((PermissaoDAO) getDAO()).findPermissaoAssociada(perfilId);
 	}
 
 }

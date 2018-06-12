@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import metas.controller.CompromissoController;
+import metas.dao.CompromissoDAO;
 import metas.model.Compromisso;
 
 public class CompromissoService extends AbstractService<Compromisso> {
@@ -17,13 +17,13 @@ public class CompromissoService extends AbstractService<Compromisso> {
  
 
 	@Inject
-	public CompromissoService(CompromissoController controller) {
-		super(controller);
+	public CompromissoService(CompromissoDAO dao) {
+		super(dao);
 	}
  
 public List<Compromisso> findByAtividade(Long atividadeId){
 		
-		return ((CompromissoController)getController()).findByAtividade(atividadeId);
+		return ((CompromissoDAO)getDAO()).findByAtividade(atividadeId);
 	}
  
 

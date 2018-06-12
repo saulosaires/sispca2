@@ -3,7 +3,7 @@ package arquitetura.service;
 import java.io.Serializable;
 import java.util.List;
 
-import arquitetura.controller.AbstractController;
+import arquitetura.dao.AbstractDAO;
 import arquitetura.exception.JpaException;
 
 public abstract class AbstractService<T extends Serializable> implements Serializable {
@@ -12,40 +12,40 @@ public abstract class AbstractService<T extends Serializable> implements Seriali
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private AbstractController<T> controller;
+	private AbstractDAO<T> dao;
 
-	public AbstractService(AbstractController<T> controller) {
+	public AbstractService(AbstractDAO<T> dao) {
 
-		this.controller = controller;
+		this.dao = dao;
 	}
 
 	public T findById(Long id) {
 
-		return controller.findById(id);
+		return dao.findOne(id);
 	}
 
 	public List<T> findAll() {
 
-		return controller.findAll();
+		return dao.findAll();
 	}
 
 	public T create(T t) throws JpaException {
 
-		return controller.create(t);
+		return dao.create(t);
 	}
 
 	public T update(T t) throws JpaException {
 
-		return controller.update(t);
+		return dao.update(t);
 	}
 
 	public T delete(T t) throws JpaException {
 
-		return controller.delete(t);
+		return dao.delete(t);
 	}
 
-	protected AbstractController<T> getController() {
-		return controller;
+	protected AbstractDAO<T> getDAO() {
+		return dao;
 	}
 
 	 

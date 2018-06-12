@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import avaliacao.controller.ResultadoController;
+import avaliacao.dao.ResultadoDAO;
 import avaliacao.model.Resultado;
 
 public class ResultadoService extends AbstractService<Resultado> {
@@ -20,13 +20,13 @@ public class ResultadoService extends AbstractService<Resultado> {
 	
  
 	@Inject
-	public ResultadoService(ResultadoController controller) {
-		super(controller);
+	public ResultadoService(ResultadoDAO dao) {
+		super(dao);
 	}
  
 
 	public List<Resultado> findByProgramaAndExercicio(Long programaId, Long exercicioId){
-		return ((ResultadoController) getController()).findByProgramaAndExercicio(programaId, exercicioId);
+		return ((ResultadoDAO) getDAO()).findByProgramaAndExercicio(programaId, exercicioId);
 	}
 
 

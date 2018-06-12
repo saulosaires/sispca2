@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.FuncaoController;
+import qualitativo.dao.FuncaoDAO;
 import qualitativo.model.Funcao;
 
 public class FuncaoService extends AbstractService<Funcao>{
@@ -16,13 +16,13 @@ public class FuncaoService extends AbstractService<Funcao>{
 	private static final long serialVersionUID = 2854975367734660857L;
 
 	@Inject
-	public FuncaoService(FuncaoController controller) {
-		super(controller);
+	public FuncaoService(FuncaoDAO dao) {
+		super(dao);
 	}
 
 	public List<Funcao> findAllOrderByCodigo() {
 
-		return ((FuncaoController) getController()).findAllOrderByCodigo();
+		return ((FuncaoDAO) getDAO()).findAllOrderByCodigo();
 	}
 
 }

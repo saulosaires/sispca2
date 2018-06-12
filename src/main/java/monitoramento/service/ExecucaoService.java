@@ -13,7 +13,7 @@ import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import monitoramento.beans.fisicofinanceiro.mensal.RelatorioExecucao;
-import monitoramento.controller.ExecucaoController;
+import monitoramento.dao.ExecucaoDAO;
 import monitoramento.model.Execucao;
 import monitoramento.model.RelatorioDetalhamentoAcaoExecucaoMensal;
 import qualitativo.model.Mes;
@@ -26,8 +26,8 @@ public class ExecucaoService extends AbstractService<Execucao> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public ExecucaoService(ExecucaoController controller) {
-		super(controller);
+	public ExecucaoService(ExecucaoDAO dao) {
+		super(dao);
 	}
 
 	private List<RelatorioExecucao> execucaoToRelatorioExecucao(List<Execucao> execucoes){
@@ -58,32 +58,32 @@ public class ExecucaoService extends AbstractService<Execucao> {
 	
 	public  List<RelatorioExecucao>   findByAcaoAndExercicio(Long acaoId,Long exercicioId) {
  		 
-		 return execucaoToRelatorioExecucao(((ExecucaoController) getController()).findByAcaoAndExercicio(acaoId,exercicioId));
+		 return execucaoToRelatorioExecucao(((ExecucaoDAO) getDAO()).findByAcaoAndExercicio(acaoId,exercicioId));
 	}
 
 	public List<RelatorioExecucao> relatorioMonitoramento(Long exercicio,List<Long> orgaoId, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
 		
 		return execucaoToRelatorioExecucao(
-										   ((ExecucaoController) getController()).relatorioMonitoramento(exercicio, 
-																										 orgaoId, 
-																										 unidadeOrcamentaria, 
-																										 programa, 
-																										 acao, 
-																										 tipoRegiao, 
-																										 regiao, 
-																										 regiaoMunicipio)
+										   ((ExecucaoDAO) getDAO()).relatorioMonitoramento(exercicio, 
+																							 orgaoId, 
+																							 unidadeOrcamentaria, 
+																							 programa, 
+																							 acao, 
+																							 tipoRegiao, 
+																							 regiao, 
+																							 regiaoMunicipio)
 										   );
 	}
 	
 	
 	public  Optional<Execucao>  findByAcaoAndRegiaoAndExercicioAndMes(Long acaoId,Long regiaoMunicipioId,Long exercicioId,Long mesId) {
 
-		return ((ExecucaoController) getController()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
+		return ((ExecucaoDAO) getDAO()).findByAcaoAndRegiaoAndExercicioAndMes(acaoId,regiaoMunicipioId,exercicioId,mesId);
 	}
 
 	public  BigDecimal  findTotalValorExecutadoByAcao(Long unidadeGestoraId, Long unidadeOrcamentariaId, Long acaoId,Long exercicioVigenteId, Long mesId) {
 
-		return ((ExecucaoController) getController()).findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
+		return ((ExecucaoDAO) getDAO()).findTotalValorExecutadoByAcao(unidadeGestoraId, unidadeOrcamentariaId, acaoId,exercicioVigenteId, mesId);
 	}
 	
 	public RelatorioDetalhamentoAcaoExecucaoMensal calculaPlanejamentoMensalByMesAndExercicioAndAcao(List<Mes> meses, Long exercicio,Long acao){
@@ -91,7 +91,7 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		RelatorioDetalhamentoAcaoExecucaoMensal detalhamentoAcaoExecucaoMensal = new RelatorioDetalhamentoAcaoExecucaoMensal();
 		for(Mes mes: meses) {
 			
-			BigDecimal valor = ((ExecucaoController) getController()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
+			BigDecimal valor = ((ExecucaoDAO) getDAO()).calculaExecutadoMensalByMesAndExercicioAndAcao(mes.getId(), exercicio,acao);
 			
 			detalhamentoAcaoExecucaoMensal.setValor(mes.getNumeroMes(), valor);
 		}

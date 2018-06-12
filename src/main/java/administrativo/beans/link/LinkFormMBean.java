@@ -6,17 +6,14 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.Part;
 
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
-import administrativo.controller.TipoLinkController;
 import administrativo.model.Link;
 import administrativo.model.TipoLink;
 import administrativo.service.LinkService;
-import arquitetura.utils.FileUtil;
+import administrativo.service.TipoLinkService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 
@@ -42,11 +39,11 @@ public class LinkFormMBean implements Serializable {
  
 	
 	@Inject
-	public LinkFormMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkValidate linkEditValidate) {
+	public LinkFormMBean(LinkService linkService, TipoLinkService tipoLinkService,LinkValidate linkEditValidate) {
 		this.linkService = linkService;
 		this.linkEditValidate=linkEditValidate;
 		
-		listTipoLink = tipoLinkController.findAll();
+		listTipoLink = tipoLinkService.findAll();
 		link.setTipoLink(listTipoLink.get(0));
 
 	}

@@ -9,12 +9,11 @@ import javax.inject.Named;
 
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
-import administrativo.controller.TipoLinkController;
 import administrativo.model.Link;
 import administrativo.model.TipoLink;
 import administrativo.service.LinkService;
+import administrativo.service.TipoLinkService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
@@ -47,11 +46,11 @@ public class LinkEditMBean implements Serializable {
 
 
 	@Inject
-	public LinkEditMBean(LinkService linkService, TipoLinkController tipoLinkController,LinkValidate linkEditValidate) {
+	public LinkEditMBean(LinkService linkService, TipoLinkService tipoLinkService,LinkValidate linkEditValidate) {
 		this.linkService = linkService;
 		this.linkEditValidate=linkEditValidate;
 		
-		listTipoLink = tipoLinkController.findAll();
+		listTipoLink = tipoLinkService.findAll();
 		link.setTipoLink(listTipoLink.get(0));
 
 	}

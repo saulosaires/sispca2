@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import administrativo.controller.ExercicioController;
+import administrativo.dao.ExercicioDAO;
 import administrativo.model.Exercicio;
 import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
@@ -19,31 +19,34 @@ public class ExercicioService extends AbstractService<Exercicio>  {
 	private static final long serialVersionUID = -2698541591873129072L;
  
 	@Inject
-	public ExercicioService(ExercicioController exercicioController) {
-		super(exercicioController);
+	public ExercicioService(ExercicioDAO dao) {
+		super(dao);
 	}
 
-
+    private ExercicioDAO dao() {
+    	return ((ExercicioDAO)getDAO());
+    }
+	
 	public Integer quantidadeVigente() {
 
-		return ((ExercicioController)getController()).quantidadeVigente();
+		return dao().quantidadeVigente();
 
 	}
 
-	public void trocarVigencia(Exercicio exercicio) throws JpaException {
+	public Exercicio trocarVigencia(Exercicio exercicio) throws JpaException {
 
 		exercicio.setVigente(!exercicio.getVigente());
 
-		((ExercicioController)getController()).update(exercicio);
+		return dao().update(exercicio);
 
 	}
 	
 	public Optional<Exercicio> exercicioVigente(){
-		return ((ExercicioController)getController()).exercicioVigente();
+		return dao().exercicioVigente();
 	}
  
 	public Optional<Exercicio> exercicioPorAno(Integer ano){
-		return ((ExercicioController)getController()).exercicioPorAno(ano);
+		return ((ExercicioDAO)getDAO()).exercicioPorAno(ano);
 	}
 	
 	
@@ -68,7 +71,7 @@ public class ExercicioService extends AbstractService<Exercicio>  {
 
 	public List<Exercicio> buscarPorPpa(Long ppaId) {
 
-		return ((ExercicioController)getController()).buscarPorPpa(ppaId);
+		return dao().buscarPorPpa(ppaId);
 
 	}
 	
@@ -78,7 +81,7 @@ public class ExercicioService extends AbstractService<Exercicio>  {
 		if(Utils.invalidId(ppaId))
 			return findAll();
 		
-		return ((ExercicioController)getController()).buscarPorPpa(ppaId);
+		return dao().buscarPorPpa(ppaId);
 
 	}
 	

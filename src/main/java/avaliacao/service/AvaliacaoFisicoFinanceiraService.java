@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import avaliacao.controller.AvaliacaoFisicoFinanceiraController;
+import avaliacao.dao.AvaliacaoFisicoFinanceiraDAO;
 import avaliacao.model.AvaliacaoFisicoFinanceira;
 
 public class AvaliacaoFisicoFinanceiraService extends AbstractService<AvaliacaoFisicoFinanceira> {
@@ -20,13 +20,13 @@ public class AvaliacaoFisicoFinanceiraService extends AbstractService<AvaliacaoF
 	
  
 	@Inject
-	public AvaliacaoFisicoFinanceiraService(AvaliacaoFisicoFinanceiraController controller) {
-		super(controller);
+	public AvaliacaoFisicoFinanceiraService(AvaliacaoFisicoFinanceiraDAO dao) {
+		super(dao);
 	}
  
 
 	public List<AvaliacaoFisicoFinanceira> findByProgramaAndExercicio(Long programaId, Long exercicioId){
-		return ((AvaliacaoFisicoFinanceiraController) getController()).findByProgramaAndExercicio(programaId, exercicioId);
+		return ((AvaliacaoFisicoFinanceiraDAO) getDAO()).findByProgramaAndExercicio(programaId, exercicioId);
 	}
  
 	

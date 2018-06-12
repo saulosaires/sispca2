@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import qualitativo.controller.AcaoController;
+import qualitativo.dao.AcaoDAO;
 import qualitativo.model.Acao;
 
 public class AcaoService  extends AbstractService<Acao> {
@@ -19,10 +19,14 @@ public class AcaoService  extends AbstractService<Acao> {
  
 
 	@Inject
-	public AcaoService(AcaoController acaoController) {
-		super(acaoController);
+	public AcaoService(AcaoDAO dao) {
+		super(dao);
 	}
 
+	private AcaoDAO dao() {
+		return (AcaoDAO) getDAO();
+	}
+	
 	public List<Acao> relatorioQualitativoProgramasAcoes(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long acaoId,Long exercicioId){
 		
 		
@@ -44,12 +48,12 @@ public class AcaoService  extends AbstractService<Acao> {
 
 	public List<Acao> relatorioPlanoTrabalho(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
 		
-		return ((AcaoController) getController()).relatorioPlanoTrabalho(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId,orderBy);
+		return dao().relatorioPlanoTrabalho(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId,orderBy);
 	} 
 
 	public List<Acao> relatorioFinalidade(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		
-		return ((AcaoController) getController()).relatorioFinalidade(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId);
+		return dao().relatorioFinalidade(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId);
 	} 
 
 	
@@ -59,7 +63,7 @@ public class AcaoService  extends AbstractService<Acao> {
 			Utils.emptyParam(codigoPrograma)  && Utils.invalidId(exercicioId)) {
 			return findAll();
 		} else {
-			return ((AcaoController) getController()).buscar(codigo, codigoUnidadeOrcamentaria, codigoPrograma, exercicioId);
+			return dao().buscar(codigo, codigoUnidadeOrcamentaria, codigoPrograma, exercicioId);
 		}
 
 	}
@@ -71,14 +75,14 @@ public class AcaoService  extends AbstractService<Acao> {
 			Utils.invalidId(programaId) && Utils.invalidId(exercicioId)) {
 			return findAll();
 		} else {
-			return ((AcaoController) getController()).buscar(codigo, denominacao, unidadeOrcamentaria, programaId,exercicioId);
+			return dao().buscar(codigo, denominacao, unidadeOrcamentaria, programaId,exercicioId);
 		}
 
 	}
 	
 	public List<Acao> buscar(String codigo, String denominacao,List<Long> orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		
-		return ((AcaoController) getController()).buscar(codigo, denominacao, orgaoId, unidadeOrcamentaria, programaId, exercicioId);
+		return dao().buscar(codigo, denominacao, orgaoId, unidadeOrcamentaria, programaId, exercicioId);
 	}
 
 
@@ -87,7 +91,7 @@ public class AcaoService  extends AbstractService<Acao> {
 		if (Utils.invalidId(exercicioId)) {
 			return new ArrayList<>();
 		} else {
-			return ((AcaoController) getController()).buscarByExercicio( exercicioId);
+			return dao().buscarByExercicio( exercicioId);
 		}
 
 	}
@@ -97,7 +101,7 @@ public class AcaoService  extends AbstractService<Acao> {
 		if (Utils.invalidId(unidadeOrcamentariaId)) {
 			return new ArrayList<>();
 		} else {
-			return ((AcaoController) getController()).buscarByUnidadeOrcamentaria( unidadeOrcamentariaId);
+			return dao().buscarByUnidadeOrcamentaria( unidadeOrcamentariaId);
 		}
 
 	}	

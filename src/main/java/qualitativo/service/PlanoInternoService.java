@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import qualitativo.controller.PlanoInternoController;
+import qualitativo.dao.PlanoInternoDAO;
 import qualitativo.model.PlanoInterno;
 
 public class PlanoInternoService extends AbstractService<PlanoInterno>  {
@@ -18,13 +18,13 @@ public class PlanoInternoService extends AbstractService<PlanoInterno>  {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public PlanoInternoService(PlanoInternoController controller) {
-		super(controller);
+	public PlanoInternoService(PlanoInternoDAO dao) {
+		super(dao);
 	}
 
 	public List<PlanoInterno> relatorio(Long unidadeGestoraId,Long unidadeOrcamentariaId,Long acaoId,Long exercicioId) {
 		 
-		return ((PlanoInternoController)getController()).relatorio(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioId);
+		return ((PlanoInternoDAO)getDAO()).relatorio(unidadeGestoraId, unidadeOrcamentariaId, acaoId, exercicioId);
 	}
 
 	
@@ -33,7 +33,7 @@ public class PlanoInternoService extends AbstractService<PlanoInterno>  {
 		if(Utils.emptyParam(codigo)) {
 			return findAll();
 		}else {
-			return ((PlanoInternoController)getController()).buscar(codigo);
+			return ((PlanoInternoDAO)getDAO()).buscar(codigo);
 		}
 		
 		 

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.MesController;
+import qualitativo.dao.MesDAO;
 import qualitativo.model.Mes;
 
 public class MesService extends AbstractService<Mes> {
@@ -16,13 +16,13 @@ public class MesService extends AbstractService<Mes> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public MesService(MesController controller) {
-		super(controller);
+	public MesService(MesDAO dao) {
+		super(dao);
 	}
 
 	public List<Mes> findallOrderById() {
 
-		return ((MesController) getController()).findallOrderById();
+		return ((MesDAO) getDAO()).findallOrderById();
 	}
 
 }

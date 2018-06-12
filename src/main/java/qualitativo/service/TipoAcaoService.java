@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.TipoAcaoController;
+import qualitativo.dao.TipoAcaoDAO;
 import qualitativo.model.TipoAcao;
 
 public class TipoAcaoService extends AbstractService<TipoAcao> {
@@ -16,13 +16,13 @@ public class TipoAcaoService extends AbstractService<TipoAcao> {
 	private static final long serialVersionUID = 2854975367734660857L;
 
 	@Inject
-	public TipoAcaoService(TipoAcaoController controller) {
-		super(controller);
+	public TipoAcaoService(TipoAcaoDAO dao) {
+		super(dao);
 	}
 
 	public List<TipoAcao> findAllOrderByDecricao() {
 
-		return ((TipoAcaoController) getController()).findAllOrderByDescricao();
+		return ((TipoAcaoDAO) getDAO()).findAllOrderByDescricao();
 	}
 
 }

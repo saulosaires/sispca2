@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import administrativo.controller.LinkController;
+import administrativo.dao.LinkDAO;
 import administrativo.model.Link;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
@@ -18,8 +18,8 @@ public class LinkService extends AbstractService<Link> {
  
 
 	@Inject
-	public LinkService(LinkController linkController) {
-		super(linkController);
+	public LinkService(LinkDAO dao) {
+		super(dao);
 	}
 
 	public List<Link> queryLinkByDescricaoAndURL(String titulo, String url) {
@@ -27,7 +27,7 @@ public class LinkService extends AbstractService<Link> {
 		if (Utils.emptyParam(titulo) && Utils.emptyParam(url)) {
 			return findAll();
 		} else {
-			return ((LinkController) getController()).queryLinkByDescricaoAndURL(titulo, url);
+			return ((LinkDAO) getDAO()).queryLinkByDescricaoAndURL(titulo, url);
 		}
 
 	}

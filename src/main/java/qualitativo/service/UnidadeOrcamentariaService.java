@@ -12,7 +12,7 @@ import arquitetura.enums.TipoUsuario;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.UoUtils;
 import arquitetura.utils.Utils;
-import qualitativo.controller.UnidadeOrcamentariaController;
+import qualitativo.dao.UnidadeOrcamentariaDAO;
 import qualitativo.model.UnidadeOrcamentaria;
 
 public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamentaria>{
@@ -25,8 +25,8 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 	private UserService userService;
 	
 	@Inject
-	public UnidadeOrcamentariaService(UnidadeOrcamentariaController controller,UserService userService) {
-		super(controller);
+	public UnidadeOrcamentariaService(UnidadeOrcamentariaDAO dao,UserService userService) {
+		super(dao);
 		
 		this.userService  = userService;
 	}
@@ -51,7 +51,7 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 				 UnidadeOrcamentaria uo = findById(user.getUnidadeOrcamentaria().getId());
 
 				 
- 				 list.addAll(((UnidadeOrcamentariaController) getController()).buscarByOrgao(uo.getOrgao().getId()));
+ 				 list.addAll(((UnidadeOrcamentariaDAO) getDAO()).buscarByOrgao(uo.getOrgao().getId()));
 				
 			}break;
 		
@@ -85,7 +85,7 @@ public class UnidadeOrcamentariaService extends AbstractService<UnidadeOrcamenta
 				 
 			 }
 				 
-				 return ((UnidadeOrcamentariaController) getController()).buscar(listUO,codigo, descricao, orgaoId);
+				 return ((UnidadeOrcamentariaDAO) getDAO()).buscar(listUO,codigo, descricao, orgaoId);
 			 
 			
 			

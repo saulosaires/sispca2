@@ -3,7 +3,7 @@ package qualitativo.service;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import qualitativo.controller.TipoHorizonteTemporalController;
+import qualitativo.dao.TipoHorizonteTemporalDAO;
 import qualitativo.model.TipoHorizonteTemporal;
 
 public class TipoHorizonteTemporalService  extends AbstractService<TipoHorizonteTemporal> {
@@ -15,8 +15,8 @@ public class TipoHorizonteTemporalService  extends AbstractService<TipoHorizonte
  
 
 	@Inject
-	public TipoHorizonteTemporalService(TipoHorizonteTemporalController controller) {
-		super(controller);
+	public TipoHorizonteTemporalService(TipoHorizonteTemporalDAO dao) {
+		super(dao);
 	}
  
 

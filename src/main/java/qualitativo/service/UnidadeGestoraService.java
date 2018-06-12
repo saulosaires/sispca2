@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import qualitativo.controller.UnidadeGestoraController;
+import qualitativo.dao.UnidadeGestoraDAO;
 import qualitativo.model.UnidadeGestora;
 
 public class UnidadeGestoraService extends AbstractService<UnidadeGestora>  {
@@ -18,13 +18,13 @@ public class UnidadeGestoraService extends AbstractService<UnidadeGestora>  {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public UnidadeGestoraService(UnidadeGestoraController controller) {
-		super(controller);
+	public UnidadeGestoraService(UnidadeGestoraDAO dao) {
+		super(dao);
 	}
 
 	public List<UnidadeGestora> findAllOrderDescricao() {
 		 
-		return ((UnidadeGestoraController)getController()).findAllOrderDescricao();
+		return ((UnidadeGestoraDAO)getDAO()).findAllOrderDescricao();
 	}	
 
 	
@@ -37,7 +37,7 @@ public class UnidadeGestoraService extends AbstractService<UnidadeGestora>  {
 			
 		}else {
 			
-			return ((UnidadeGestoraController)getController()).buscar(codigo, descricao, sigla, unidadeOrcamentariaId);
+			return ((UnidadeGestoraDAO)getDAO()).buscar(codigo, descricao, sigla, unidadeOrcamentariaId);
 			
 		}
 		

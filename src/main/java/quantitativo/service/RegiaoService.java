@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
-import quantitativo.controller.RegiaoController;
+import quantitativo.dao.RegiaoDAO;
 import quantitativo.model.Regiao;
 
 public class RegiaoService extends AbstractService<Regiao> {
@@ -17,13 +17,19 @@ public class RegiaoService extends AbstractService<Regiao> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	public RegiaoService(RegiaoController controller) {
-		super(controller);
+	public RegiaoService(RegiaoDAO dao) {
+		super(dao);
 	}
 
+	private RegiaoDAO dao() {
+		
+		return (RegiaoDAO)getDAO();
+	}
+
+	
 	public List<Regiao> findAllOrderByDescricao() {
 
-		return ((RegiaoController) getController()).findAllOrderByDescricao();
+		return dao().findAllOrderByDescricao();
 	}
 	 
 	
@@ -34,7 +40,7 @@ public class RegiaoService extends AbstractService<Regiao> {
 			return findAllOrderByDescricao();
 		}
 		
-		return ((RegiaoController) getController()).findAllByTipoRegiao(tipoRegiaoId);
+		return dao().findAllByTipoRegiao(tipoRegiaoId);
 	}
 
 }

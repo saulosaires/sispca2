@@ -3,7 +3,7 @@ package metas.service;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import metas.controller.StatusController;
+import metas.dao.StatusDAO;
 import metas.model.Status;
 
 public class StatusService extends AbstractService<Status> {
@@ -15,8 +15,8 @@ public class StatusService extends AbstractService<Status> {
  
 
 	@Inject
-	public StatusService(StatusController controller) {
-		super(controller);
+	public StatusService(StatusDAO dao) {
+		super(dao);
 	}
  
  

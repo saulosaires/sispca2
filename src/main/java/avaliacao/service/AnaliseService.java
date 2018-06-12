@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import arquitetura.service.AbstractService;
-import avaliacao.controller.AnaliseController;
+import avaliacao.dao.AnaliseDAO;
 import avaliacao.model.Analise;
 
 public class AnaliseService extends AbstractService<Analise> {
@@ -18,13 +18,13 @@ public class AnaliseService extends AbstractService<Analise> {
 	
  
 	@Inject
-	public AnaliseService(AnaliseController controller) {
-		super(controller);
+	public AnaliseService(AnaliseDAO dao) {
+		super(dao);
 	}
  
 
 	public List<Analise> findByProgramaAndExercicio(Long programaId, Long exercicioId){
-		return ((AnaliseController) getController()).findByProgramaAndExercicio(programaId, exercicioId);
+		return ((AnaliseDAO) getDAO()).findByProgramaAndExercicio(programaId, exercicioId);
 	}
 	
 	
