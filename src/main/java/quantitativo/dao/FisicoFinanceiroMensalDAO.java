@@ -50,7 +50,7 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 
 	}
   
-	public List<FisicoFinanceiroMensal> relatorioPlanejamentoMensal(Long orgaoId, 
+	public List<FisicoFinanceiroMensal> relatorioPlanejamentoMensal(List<Long> listOrgaoId, 
 																	Long unidadeOrcamentariaId,
 																	Long programaId, 
 																	Long acaoId, 
@@ -80,8 +80,8 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 			joinExercicio.on(cb.equal(joinExercicio.get(ID), exercicioId));
 		}	
 		
-		if(!Utils.invalidId(orgaoId)) {
-			joinOrgao.on(cb.equal(joinOrgao.get(ID), orgaoId));		
+		if(!Utils.emptyList(listOrgaoId)) {
+			joinOrgao.on(cb.isTrue(joinOrgao.get(ID).in(listOrgaoId)));		
 		}
 		
 		if(!Utils.invalidId(unidadeOrcamentariaId)) {

@@ -26,27 +26,11 @@
 					</div>	
 					<div class="row" style="margin-left: 0; margin-top: 1%;">
 						<div class="col-lg-4">
-							<p:outputPanel id="customPanel" style="margin-bottom:10px">
-								<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
-						        <p:selectOneRadio id="customRadio" value="#{relatorioPlanoTrabalhoMBean.tipoArquivo}" layout="custom">
+							<h:outputText value="FORMATO DO ARQUIVO: " styleClass="labelOutText"/>
+						        <p:selectOneRadio id="customRadio" value="#{relatorioPlanoTrabalhoMBean.tipoArquivo}"   >
 						            <f:selectItem itemLabel="PDF" itemValue="PDF" />
-           							<f:selectItem itemLabel="XLS" itemValue="XLS" />
+	         						<f:selectItem itemLabel="XLS" itemValue="XLS" />
 						        </p:selectOneRadio>
-	 
-						        <h:panelGrid columns="4" cellpadding="5">
-						            <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
-						            <h:graphicImage value="/resources/images/icone-pdf.gif" style="widht: 25px; height: 25px;"/>
-						            &nbsp;
-						            <h:outputLabel for="opt1" value="PDF" styleClass="labelOutText"/>
-						           
-						            <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
-						            <h:graphicImage value="/resources/images/icone-xls.png" style="widht: 25px; height: 25px;"/>
-						            &nbsp;
-						            <h:outputLabel for="opt2" value="XLS" styleClass="labelOutText"/>
-						           
-						 		</h:panelGrid>
-						        
-	    					</p:outputPanel>
 						</div>
 					</div>	
 					

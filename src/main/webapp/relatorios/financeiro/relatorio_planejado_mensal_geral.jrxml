@@ -26,413 +26,413 @@
 	<field name="acaoProduto" class="java.lang.String"/>
 	<field name="unidadeMedidaDescricao" class="java.lang.String"/>
 	<field name="regiaoMunicipio" class="java.lang.String"/>
-	<field name="qtdjan" class="java.lang.Double"/>
-	<field name="valorjan" class="java.lang.Double"/>
-	<field name="qtdfev" class="java.lang.Double"/>
-	<field name="valorfev" class="java.lang.Double"/>
-	<field name="qtdmar" class="java.lang.Double"/>
-	<field name="valormar" class="java.lang.Double"/>
-	<field name="qtdabr" class="java.lang.Double"/>
-	<field name="valorabr" class="java.lang.Double"/>
-	<field name="qtdmai" class="java.lang.Double"/>
-	<field name="valormai" class="java.lang.Double"/>
-	<field name="qtdjun" class="java.lang.Double"/>
-	<field name="valorjun" class="java.lang.Double"/>
-	<field name="qtdjul" class="java.lang.Double"/>
-	<field name="valorjul" class="java.lang.Double"/>
-	<field name="qtdago" class="java.lang.Double"/>
-	<field name="valorago" class="java.lang.Double"/>
-	<field name="qtdset" class="java.lang.Double"/>
-	<field name="valorset" class="java.lang.Double"/>
-	<field name="qtdout" class="java.lang.Double"/>
-	<field name="valorout" class="java.lang.Double"/>
-	<field name="qtdnov" class="java.lang.Double"/>
-	<field name="valornov" class="java.lang.Double"/>
-	<field name="qtddez" class="java.lang.Double"/>
-	<field name="valordez" class="java.lang.Double"/>
-	<variable name="sum_qtdjan" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<field name="qtdjan" class="java.math.BigDecimal"/>
+	<field name="valorjan" class="java.math.BigDecimal"/>
+	<field name="qtdfev" class="java.math.BigDecimal"/>
+	<field name="qtdmar" class="java.math.BigDecimal"/>
+	<field name="valormar" class="java.math.BigDecimal"/>
+	<field name="qtdabr" class="java.math.BigDecimal"/>
+	<field name="valorabr" class="java.math.BigDecimal"/>
+	<field name="qtdmai" class="java.math.BigDecimal"/>
+	<field name="valormai" class="java.math.BigDecimal"/>
+	<field name="qtdjun" class="java.math.BigDecimal"/>
+	<field name="valorjun" class="java.math.BigDecimal"/>
+	<field name="qtdjul" class="java.math.BigDecimal"/>
+	<field name="valorjul" class="java.math.BigDecimal"/>
+	<field name="qtdago" class="java.math.BigDecimal"/>
+	<field name="valorago" class="java.math.BigDecimal"/>
+	<field name="qtdset" class="java.math.BigDecimal"/>
+	<field name="valorset" class="java.math.BigDecimal"/>
+	<field name="qtdout" class="java.math.BigDecimal"/>
+	<field name="valorout" class="java.math.BigDecimal"/>
+	<field name="qtdnov" class="java.math.BigDecimal"/>
+	<field name="valornov" class="java.math.BigDecimal"/>
+	<field name="qtddez" class="java.math.BigDecimal"/>
+	<field name="valordez" class="java.math.BigDecimal"/>
+	<field name="valorfev" class="java.math.BigDecimal"/>
+	<variable name="sum_qtdjan" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjan" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorjan" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdfev" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdfev" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorfev" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorfev" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmar" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdmar" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormar" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valormar" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdabr" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdabr" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorabr" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorabr" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmai" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdmai" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormai" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valormai" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjun" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdjun" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjun" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorjun" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjul" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdjul" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjul" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorjul" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdago" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdago" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorago" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorago" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdset" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdset" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorset" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valorset" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdout" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdout" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorout" class="java.lang.Double" resetType="Group" resetGroup="acao">
+	<variable name="sum_valorout" class="java.math.BigDecimal" resetType="Group" resetGroup="acao">
 		<variableExpression><![CDATA[$F{valorout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdnov" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtdnov" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdnov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valornov" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valornov" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valornov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtddez" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_qtddez" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtddez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valordez" class="java.lang.Double" resetType="Group" resetGroup="acao" calculation="Sum">
+	<variable name="sum_valordez" class="java.math.BigDecimal" resetType="Group" resetGroup="acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valordez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjan_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdjan_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjan_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorjan_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdfev_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdfev_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorfev_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorfev_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmar_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdmar_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormar_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valormar_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdabr_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdabr_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorabr_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorabr_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmai_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdmai_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormai_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valormai_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjun_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdjun_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjun_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorjun_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjul_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdjul_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjul_prog" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorjul_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdago_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdago_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorago_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorago_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdset_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdset_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorset_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorset_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdout_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdout_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorout_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valorout_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdnov_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtdnov_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdnov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valornov_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valornov_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valornov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtddez_prog" class="java.lang.Long" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_qtddez_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtddez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valordez_prog" class="java.lang.Double" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
+	<variable name="sum_valordez_prog" class="java.math.BigDecimal" resetType="Group" resetGroup="programa_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valordez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjan_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdjan_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjan_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorjan_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdfev_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdfev_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorfev_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorfev_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmar_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdmar_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormar_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valormar_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdabr_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdabr_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorabr_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorabr_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmai_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdmai_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormai_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valormai_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjun_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdjun_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjun_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorjun_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjul_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdjul_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjul_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorjul_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdago_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdago_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorago_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorago_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdset_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdset_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorset_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorset_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdout_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdout_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorout_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valorout_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdnov_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtdnov_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdnov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valornov_unid" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valornov_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valornov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtddez_unid" class="java.lang.Long" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_qtddez_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtddez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valordez_unid" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valordez_unid" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valordez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjan_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdjan_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjan_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorjan_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjan}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdfev_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdfev_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorfev_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorfev_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorfev}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmar_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdmar_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormar_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valormar_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormar}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdabr_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdabr_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorabr_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorabr_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorabr}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdmai_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdmai_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdmai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valormai_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valormai_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valormai}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjun_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdjun_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjun_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorjun_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjun}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdjul_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdjul_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorjul_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorjul_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorjul}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdago_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdago_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorago_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorago_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorago}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdset_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdset_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorset_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorset_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorset}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdout_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdout_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valorout_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valorout_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorout}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtdnov_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtdnov_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtdnov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valornov_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valornov_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valornov}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtddez_org" class="java.lang.Long" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_qtddez_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{qtddez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Integer (0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valordez_org" class="java.lang.Double" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
+	<variable name="sum_valordez_org" class="java.math.BigDecimal" resetType="Group" resetGroup="orgao_grupo" calculation="Sum">
 		<variableExpression><![CDATA[$F{valordez}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal (0)]]></initialValueExpression>
 	</variable>
 	<group name="orgao_grupo">
 		<groupExpression><![CDATA[$F{orgaoCodigo}+""+$F{orgaoDescricao}]]></groupExpression>
@@ -649,7 +649,7 @@
 						<font size="4"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_valorjan_org}+$V{sum_valorfev_org}+$V{sum_valormar_org}+$V{sum_valorabr_org}+$V{sum_valormai_org}+$V{sum_valorjun_org}+$V{sum_valorjul_org}+$V{sum_valorago_org}+$V{sum_valorset_org}+$V{sum_valorout_org}+$V{sum_valornov_org}+$V{sum_valordez_org}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_valorjan_org}.add($V{sum_valorfev_org}).add($V{sum_valormar_org}).add($V{sum_valorabr_org}).add($V{sum_valormai_org}).add($V{sum_valorjun_org}).add($V{sum_valorjul_org}).add($V{sum_valorago_org}).add($V{sum_valorset_org}).add($V{sum_valorout_org}).add($V{sum_valornov_org}).add($V{sum_valordez_org})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="740" y="0" width="23" height="12" backcolor="#848484" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -897,7 +897,7 @@
 						<font size="4"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_valorjan_unid}+$V{sum_valorfev_unid}+$V{sum_valormar_unid}+$V{sum_valorabr_unid}+$V{sum_valormai_unid}+$V{sum_valorjun_unid}+$V{sum_valorjul_unid}+$V{sum_valorago_unid}+$V{sum_valorset_unid}+$V{sum_valorout_unid}+$V{sum_valornov_unid}+$V{sum_valordez_unid}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_valorjan_unid}.add($V{sum_valorfev_unid}).add($V{sum_valormar_unid}).add($V{sum_valorabr_unid}).add($V{sum_valormai_unid}).add($V{sum_valorjun_unid}).add($V{sum_valorjul_unid}).add($V{sum_valorago_unid}).add($V{sum_valorset_unid}).add($V{sum_valorout_unid}).add($V{sum_valornov_unid}).add($V{sum_valordez_unid})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="335" y="0" width="20" height="12" backcolor="#A2A2A2" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -1355,7 +1355,7 @@
 						<font size="4"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_valorjan_prog}+$V{sum_valorfev_prog}+$V{sum_valormar_prog}+$V{sum_valorabr_prog}+$V{sum_valormai_prog}+$V{sum_valorjun_prog}+$V{sum_valorjul_prog}+$V{sum_valorago_prog}+$V{sum_valorset_prog}+$V{sum_valorout_prog}+$V{sum_valornov_prog}+$V{sum_valordez_prog}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_valorjan_prog}.add($V{sum_valorfev_prog}).add($V{sum_valormar_prog}).add($V{sum_valorabr_prog}).add($V{sum_valormai_prog}).add($V{sum_valorjun_prog}).add($V{sum_valorjul_prog}).add($V{sum_valorago_prog}).add($V{sum_valorset_prog}).add($V{sum_valorout_prog}).add($V{sum_valornov_prog}).add($V{sum_valordez_prog})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="392" y="0" width="20" height="12" backcolor="#BDBDBD" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -2024,7 +2024,7 @@
 						<font size="4"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtdjan}+$V{sum_qtdfev}+$V{sum_qtdmar}+$V{sum_qtdabr}+$V{sum_qtdmai}+$V{sum_qtdjun}+$V{sum_qtdjul}+$V{sum_qtdago}+$V{sum_qtdset}+$V{sum_qtdout}+$V{sum_qtdnov}+$V{sum_qtddez}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtdjan}.add($V{sum_qtdfev}).add($V{sum_qtdmar}).add($V{sum_qtdabr}).add($V{sum_qtdmai}).add($V{sum_qtdjun}).add($V{sum_qtdjul}).add($V{sum_qtdago}).add($V{sum_qtdset}).add($V{sum_qtdout}).add($V{sum_qtdnov}).add($V{sum_qtddez})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="763" y="0" width="47" height="12" backcolor="#D3D3D3" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
@@ -2038,7 +2038,18 @@
 						<font size="4"/>
 						<paragraph leftIndent="2"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_valorjan}+$V{sum_valorfev}+$V{sum_valormar}+$V{sum_valorabr}+$V{sum_valormai}+$V{sum_valorjun}+$V{sum_valorjul}+$V{sum_valorago}+$V{sum_valorset}+$V{sum_valorout}+$V{sum_valornov}+$V{sum_valordez}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_valorjan}
+.add($V{sum_valorfev})
+.add($V{sum_valormar})
+.add($V{sum_valorabr})
+.add($V{sum_valormai})
+.add($V{sum_valorjun})
+.add($V{sum_valorjul})
+.add($V{sum_valorago})
+.add($V{sum_valorset})
+.add($V{sum_valorout})
+.add($V{sum_valornov})
+.add($V{sum_valordez})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -2823,7 +2834,7 @@
 					<font size="4"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdabr}.intValue() == $F{qtdabr} ?  (new DecimalFormat("#,##0")).format($F{qtdabr}) : (new DecimalFormat("#,##0.00")).format($F{qtdabr})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdabr}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="241" y="0" width="37" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -3005,7 +3016,7 @@
 					<font size="4"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdset}.intValue() == $F{qtdset} ?  (new DecimalFormat("#,##0")).format($F{qtdset}) : (new DecimalFormat("#,##0.00")).format($F{qtdset})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdset}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="563" y="0" width="20" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -3075,7 +3086,18 @@
 					<font size="4"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{qtdjan}+$F{qtdfev}+$F{qtdmar}+$F{qtdabr}+$F{qtdmai}+$F{qtdjun}+$F{qtdjul}+$F{qtdago}+$F{qtdset}+$F{qtdout}+$F{qtdnov}+$F{qtddez}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdjan}
+.add($F{qtdfev})
+.add($F{qtdmar})
+.add($F{qtdabr})
+.add($F{qtdmai})
+.add($F{qtdjun})
+.add($F{qtdjul})
+.add($F{qtdago})
+.add($F{qtdset})
+.add($F{qtdout})
+.add($F{qtdnov})
+.add($F{qtddez})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="763" y="0" width="47" height="12" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
@@ -3089,7 +3111,7 @@
 					<font size="4"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valorjan}+$F{valorfev}+$F{valormar}+$F{valorabr}+$F{valormai}+$F{valorjun}+$F{valorjul}+$F{valorago}+$F{valorset}+$F{valorout}+$F{valornov}+$F{valordez}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorjan}.add($F{valorfev}).add($F{valormar}).add($F{valorabr}).add($F{valormai}).add($F{valorjun}).add($F{valorjul}).add($F{valorago}).add($F{valorset}).add($F{valorout}).add($F{valornov}).add($F{valordez})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

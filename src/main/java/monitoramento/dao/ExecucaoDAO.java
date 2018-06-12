@@ -54,7 +54,7 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 
 	}
 
-	public List<Execucao> relatorioMonitoramento(Long exercicio,Long orgao, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
+	public List<Execucao> relatorioMonitoramento(Long exercicio,List<Long> orgaoId, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
 		
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Execucao> query = cb.createQuery(Execucao.class);
@@ -105,9 +105,11 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		if (!Utils.invalidId((exercicio))) {
 			predicate.add(cb.equal(joinExercicio.get(ID),exercicio));
 		}
+ 
+		if(orgaoId!=null && !orgaoId.isEmpty()) {
 
-		if (!Utils.invalidId((orgao))) {
-			predicate.add(cb.equal(joinOrgao.get(ID),orgao));
+			predicate.add(cb.isTrue(joinOrgao.get(ID).in(orgaoId)) );
+			 
 		}
 
 		

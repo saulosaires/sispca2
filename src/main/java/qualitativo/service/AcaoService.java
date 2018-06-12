@@ -23,7 +23,7 @@ public class AcaoService  extends AbstractService<Acao> {
 		super(acaoController);
 	}
 
-	public List<Acao> relatorioQualitativoProgramasAcoes(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long acaoId,Long exercicioId){
+	public List<Acao> relatorioQualitativoProgramasAcoes(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long acaoId,Long exercicioId){
 		
 		
 		if(!Utils.invalidId(acaoId)) {
@@ -33,7 +33,7 @@ public class AcaoService  extends AbstractService<Acao> {
 			return list;
 			
 		}else {
-			return ((AcaoController) getController()).buscar(null, null, unidadeOrcamentaria, programaId, exercicioId);
+			return buscar(null, null, listOrgaoId,unidadeOrcamentaria, programaId, exercicioId);
 		}
 		
 		
@@ -42,14 +42,14 @@ public class AcaoService  extends AbstractService<Acao> {
 		 
 	} 
 
-	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
+	public List<Acao> relatorioPlanoTrabalho(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
 		
-		return ((AcaoController) getController()).relatorioPlanoTrabalho(orgaoId, unidadeOrcamentaria, programaId, exercicioId,orderBy);
+		return ((AcaoController) getController()).relatorioPlanoTrabalho(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId,orderBy);
 	} 
 
-	public List<Acao> relatorioFinalidade(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
+	public List<Acao> relatorioFinalidade(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		
-		return ((AcaoController) getController()).relatorioFinalidade(orgaoId, unidadeOrcamentaria, programaId, exercicioId);
+		return ((AcaoController) getController()).relatorioFinalidade(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId);
 	} 
 
 	
@@ -75,6 +75,12 @@ public class AcaoService  extends AbstractService<Acao> {
 		}
 
 	}
+	
+	public List<Acao> buscar(String codigo, String denominacao,List<Long> orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
+		
+		return ((AcaoController) getController()).buscar(codigo, denominacao, orgaoId, unidadeOrcamentaria, programaId, exercicioId);
+	}
+
 
 	public List<Acao> buscarByExercicio(Long exercicioId) {
 

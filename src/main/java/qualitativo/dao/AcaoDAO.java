@@ -43,7 +43,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 	}
 
 	
-	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
+	public List<Acao> relatorioPlanoTrabalho(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
@@ -88,8 +88,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ATIVO),true));
 		predicate.add(cb.equal(joinOrgao.get(ATIVO),			  true));
 		
-		if(!Utils.invalidId(orgaoId)) {
-			predicate.add(cb.equal(joinOrgao.get(ID),orgaoId));
+		if(!Utils.emptyList(listOrgaoId)) {
+			predicate.add(cb.isTrue(joinOrgao.get(ID).in(listOrgaoId)));
 		}
  
 		if(unidadeOrcamentaria!=null && !unidadeOrcamentaria.isEmpty()) {
@@ -138,7 +138,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 	}	
 	
-	public List<Acao> relatorioFinalidade(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
+	public List<Acao> relatorioFinalidade(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
@@ -171,13 +171,10 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ATIVO),true));
 		predicate.add(cb.equal(joinOrgao.get(ATIVO),			  true));
 		
-		if(!Utils.invalidId(orgaoId)) {
-			predicate.add(cb.equal(joinOrgao.get(ID),orgaoId));
+		if(listOrgaoId!=null && !listOrgaoId.isEmpty()) {
+		 
+			predicate.add(cb.isTrue(joinOrgao.get(ID).in(listOrgaoId)) );
 		}
-		
-//		if(!Utils.invalidId(unidadeOrcamentariaId)) {
-//			predicate.add(cb.equal(joinUnidadeOrcamentaria.get(ID),unidadeOrcamentariaId));
-//		}
 
 		if(unidadeOrcamentaria!=null && !unidadeOrcamentaria.isEmpty()) {
 
@@ -300,7 +297,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			predicate.add(cb.like(upperDenominacao,"%"+denominacao.toUpperCase()+"%" ));		
 		}
 		
-		if(unidadeOrcamentaria!=null && !unidadeOrcamentaria.isEmpty()) {
+		if(!Utils.emptyList(unidadeOrcamentaria)) {
  			
 			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
  
@@ -333,6 +330,76 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		return entityManager.createQuery(query).getResultList();
 	}
 
+	public List<Acao> buscar(String codigo, String denominacao,List<Long> orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> m = query.from(Acao.class);
+		
+		Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
+		
+		query.select(m);
+		
+		List<Predicate> predicate = new ArrayList<>();
+		
+		if(!Utils.emptyParam(codigo)) {
+			
+			Expression<String> upperCodigo = cb.upper(m.get(CODIGO));
+			
+			predicate.add(cb.like(upperCodigo,"%"+codigo.toUpperCase()+"%"));
+		}
+		
+		if(!Utils.emptyParam(denominacao)) {
+			
+			Expression<String> upperDenominacao = cb.upper(m.get(DENOMINACAO));
+			
+			predicate.add(cb.like(upperDenominacao,"%"+denominacao.toUpperCase()+"%" ));		
+		}
+		
+		if(!Utils.emptyList(unidadeOrcamentaria)) {
+ 			
+			 
+ 
+			joinUO.on(cb.isTrue(joinUO.get(ID).in(unidadeOrcamentaria)) );
+			 
+		}
+		
+		if(!Utils.emptyList(orgaoId)) {
+
+			Join<Object, Object> joinOrgao = joinUO.join(ORGAO, JoinType.LEFT);
+ 
+			joinOrgao.on(cb.isTrue(joinOrgao.get(ID).in(orgaoId)) );
+ 
+			
+		}		
+		
+		
+		if(!Utils.invalidId(programaId)) {
+ 			
+			Join<Object, Object> joinPrograma = m.join(PROGRAMA,JoinType.INNER);
+			
+	 		
+			joinPrograma.on(cb.equal(joinPrograma.get(ID),programaId) );
+		 
+		}
+		
+		if(!Utils.invalidId(exercicioId)) {
+ 			
+			Join<Object, Object> joinExercicio = m.join(EXERCICIO,JoinType.INNER);
+			
+			joinExercicio.on(cb.equal(joinExercicio.get(ID),exercicioId) );
+			 
+		}
+
+		
+		query.where(  predicate.toArray(new Predicate[predicate.size()]));
+  
+		query.orderBy(cb.asc(m.get(DENOMINACAO)));
+		
+		return entityManager.createQuery(query).getResultList();
+	}	
+	
+	
 	public List<Acao> buscarByExercicio(Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

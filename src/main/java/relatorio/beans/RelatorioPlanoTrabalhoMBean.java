@@ -13,6 +13,7 @@ import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
+import arquitetura.utils.OrgaoUtils;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -91,8 +92,9 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 		try {
 			
 			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+			List<Long> listOrgaoId = OrgaoUtils.parseOrgao(orgao, listOrgao);
 			
-			List<Acao> listAcao = acaoService.relatorioPlanoTrabalho(orgao, listUO, programa, orgao,ordemCampos);
+			List<Acao> listAcao = acaoService.relatorioPlanoTrabalho(listOrgaoId, listUO, programa, orgao,ordemCampos);
 
 			if (listAcao == null || listAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

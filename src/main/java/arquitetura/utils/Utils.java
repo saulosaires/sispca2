@@ -1,7 +1,9 @@
 package arquitetura.utils;
 
+import java.util.List;
 import java.util.Random;
 
+ 
 public class Utils {
 
 	private Utils() {
@@ -28,6 +30,12 @@ public class Utils {
 		return (year == null || year < 0);
 	}
 
+	public static boolean emptyList(List l) {
+
+		return (l == null || l.isEmpty());
+	}
+	
+	
 	public static boolean invalidYear(String year) {
 
 		try {

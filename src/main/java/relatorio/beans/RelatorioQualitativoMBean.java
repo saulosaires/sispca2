@@ -15,6 +15,7 @@ import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
+import arquitetura.utils.OrgaoUtils;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -73,10 +74,17 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 		
 		userId = user.getId();
 		listOrgao = orgaoService.findAllOrderByDescricao(userId);
-		
+				
 		this.acaoService = acaoService;
 		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
 		this.programaService = programaService;
+		
+		if(!Utils.emptyList(listOrgao)) {
+			orgao = listOrgao.get(0).getId();
+			changeOrgao(); 
+		}
+
+		
 		
 	}
 
@@ -116,8 +124,9 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 		
 		try {
 			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+			List<Long> listOrgaoId = OrgaoUtils.parseOrgao(orgao, listOrgao);
 			
-			List<Acao> listaAcao = acaoService.relatorioQualitativoProgramasAcoes(orgao, listUO, programa, acao, exercicioId);
+			List<Acao> listaAcao = acaoService.relatorioQualitativoProgramasAcoes(listOrgaoId, listUO, programa, acao, exercicioId);
 			
 			if (listaAcao == null || listaAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

@@ -45,8 +45,8 @@ public class ExecucaoController extends AbstractController<Execucao> {
 		
 	}
 	
-	public List<Execucao> relatorioMonitoramento(Long exercicio,Long orgao, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
-		return ((ExecucaoDAO) getDao()).relatorioMonitoramento(exercicio, orgao, unidadeOrcamentaria, programa, acao, tipoRegiao, regiao, regiaoMunicipio);
+	public List<Execucao> relatorioMonitoramento(Long exercicio,List<Long> orgaoId, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
+		return ((ExecucaoDAO) getDao()).relatorioMonitoramento(exercicio, orgaoId, unidadeOrcamentaria, programa, acao, tipoRegiao, regiao, regiaoMunicipio);
 	}
 	
 }

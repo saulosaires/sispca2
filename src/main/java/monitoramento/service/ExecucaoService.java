@@ -61,11 +61,11 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		 return execucaoToRelatorioExecucao(((ExecucaoController) getController()).findByAcaoAndExercicio(acaoId,exercicioId));
 	}
 
-	public List<RelatorioExecucao> relatorioMonitoramento(Long exercicio,Long orgao, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
+	public List<RelatorioExecucao> relatorioMonitoramento(Long exercicio,List<Long> orgaoId, Long unidadeOrcamentaria,Long programa,Long acao,Long tipoRegiao,Long regiao,Long regiaoMunicipio) {
 		
 		return execucaoToRelatorioExecucao(
 										   ((ExecucaoController) getController()).relatorioMonitoramento(exercicio, 
-																										 orgao, 
+																										 orgaoId, 
 																										 unidadeOrcamentaria, 
 																										 programa, 
 																										 acao, 

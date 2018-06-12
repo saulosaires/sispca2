@@ -21,15 +21,15 @@ public class AcaoController  extends AbstractController<Acao>{
 		super(acaoDAO);
 	}
 
-	public List<Acao> relatorioPlanoTrabalho(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
+	public List<Acao> relatorioPlanoTrabalho(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
 		
-		return ((AcaoDAO) getDao()).relatorioPlanoTrabalho(orgaoId, unidadeOrcamentaria, programaId, exercicioId,orderBy);
+		return ((AcaoDAO) getDao()).relatorioPlanoTrabalho(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId,orderBy);
 	} 
 	
 	
-	public List<Acao> relatorioFinalidade(Long orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
+	public List<Acao> relatorioFinalidade(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		
-		return ((AcaoDAO) getDao()).relatorioFinalidade(orgaoId, unidadeOrcamentaria, programaId, exercicioId);
+		return ((AcaoDAO) getDao()).relatorioFinalidade(listOrgaoId, unidadeOrcamentaria, programaId, exercicioId);
 	} 
 
 	
@@ -41,6 +41,11 @@ public class AcaoController  extends AbstractController<Acao>{
 	public List<Acao> buscar(String codigo, String denominacao,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
 		
 		return ((AcaoDAO) getDao()).buscar(codigo, denominacao,unidadeOrcamentaria, programaId,exercicioId);
+	}
+	
+	public List<Acao> buscar(String codigo, String denominacao,List<Long> orgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId){
+		
+		return ((AcaoDAO) getDao()).buscar(codigo, denominacao, orgaoId, unidadeOrcamentaria, programaId, exercicioId);
 	}
 	
 	public List<Acao> buscarByExercicio(Long exercicioId){

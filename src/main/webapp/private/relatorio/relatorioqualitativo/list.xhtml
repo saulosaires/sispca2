@@ -32,7 +32,7 @@
 							<div class="col-lg-4">
 								<h:outputText value="ORGÃO:  " styleClass="labelOutText" />
 								
-								<h:selectOneMenu value="#{relatorioQualitativoMBean.orgao}"
+								<h:selectOneMenu value="#{relatorioQualitativoMBean.orgao}" required="true" requiredMessage="Orgão é obrigatório"
 									styleClass="input-sm form-control" >
 									<f:selectItem itemValue="#{null}" itemLabel="--TODOS--" />
 									<f:selectItems value="#{relatorioQualitativoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org.descricao)}" />

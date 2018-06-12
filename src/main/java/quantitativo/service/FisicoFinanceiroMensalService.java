@@ -32,9 +32,9 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		super(controller);
 	}
 
-	public List<RelatorioFisicoFinanceiro> relatorioPlanejamentoMensal(Long orgaoId,Long unidadeOrcamentariaId,Long programaId,Long acaoId, Long tipoRegiaoId, Long regiaoId,Long regiaoMunicipioId,Long exercicioId){
+	public List<RelatorioFisicoFinanceiro> relatorioPlanejamentoMensal(List<Long> listOrgaoId,Long unidadeOrcamentariaId,Long programaId,Long acaoId, Long tipoRegiaoId, Long regiaoId,Long regiaoMunicipioId,Long exercicioId){
 		
-		List<FisicoFinanceiroMensal> listFisicoFinanceiro = ((FisicoFinanceiroMensalController)getController()).relatorioPlanejamentoMensal(orgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
+		List<FisicoFinanceiroMensal> listFisicoFinanceiro = ((FisicoFinanceiroMensalController)getController()).relatorioPlanejamentoMensal(listOrgaoId, unidadeOrcamentariaId, programaId, acaoId, tipoRegiaoId, regiaoId, regiaoMunicipioId, exercicioId);
 
  		Map<String,RelatorioFisicoFinanceiro> map = new HashMap<>();
 	

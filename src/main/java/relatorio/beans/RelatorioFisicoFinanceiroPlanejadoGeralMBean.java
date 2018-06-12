@@ -13,6 +13,7 @@ import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.FileUtil;
 import arquitetura.utils.Messages;
+import arquitetura.utils.OrgaoUtils;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -139,7 +140,10 @@ public class RelatorioFisicoFinanceiroPlanejadoGeralMBean  extends RelatorioMBea
 	public String gerarRelatorio() {
 		
 		try {
-			List<RelatorioFisicoFinanceiro> relatorio = fisicoFinanceiroMensalService.relatorioPlanejamentoMensal(orgao, unidadeOrcamentaria, programa, acao, tipoRegiao, regiao, regiaoMunicipio, exercicioId);
+			
+			List<Long> listOrgaoId = OrgaoUtils.parseOrgao(orgao, listOrgao);
+			
+			List<RelatorioFisicoFinanceiro> relatorio = fisicoFinanceiroMensalService.relatorioPlanejamentoMensal(listOrgaoId, unidadeOrcamentaria, programa, acao, tipoRegiao, regiao, regiaoMunicipio, exercicioId);
 			
 			if (relatorio == null || relatorio.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);
