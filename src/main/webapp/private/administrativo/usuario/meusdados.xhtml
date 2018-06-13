@@ -22,39 +22,25 @@
 						</div>
 						<div class="row-fluid">
 							<h:outputText value="NOME:  " styleClass="labelOutText" />
-							<h:inputText value="#{usuarioMBean.usuarioLogado.name}"
+							
+							<h:inputText value="#{userMBean.usuario.name}"
 								styleClass="form-control labelInputText" required="true"
 								requiredMessage="Nome: campo obrigatório" />
 						</div>
 						
 						<div class="row-fluid">
 							<h:outputText value="EMAIL:  " styleClass="labelOutText" />
-							<h:inputText value="#{usuarioMBean.usuarioLogado.email}" styleClass="form-control labelInputText" required="true" requiredMessage="Email: campo é obrigatório" />
+							<h:inputText value="#{userMBean.usuario.email}" styleClass="form-control labelInputText" required="true" requiredMessage="Email: campo é obrigatório" />
 						</div>
-						<div class="row-fluid">
-							<h:outputText value="NOVA SENHA:  " styleClass="labelOutText" />
-							<p:password value="#{usuarioMBean.password}"
-								styleClass="form-control labelInputText" />
-						</div>
-						<div class="row-fluid">
-							<h:outputText value="CONFIRMAR NOVA SENHA:  "
-								styleClass="labelOutText" />
-							<p:password value="#{usuarioMBean.passwordConfirmacao}"
-								styleClass="form-control labelInputText" />
-						</div>
-						<div class="row-fluid">
-							<h:outputText value="FOTO:  " styleClass="labelOutText" />
-							<p:fileUpload value="#{usuarioMBean.foto}" mode="simple"
-								validator="FotoValidator" skinSimple="true" />
-						</div>
-
+					 
+ 
 					</div>
 				</div>
 				<div class="spaceBtnAcao">
 					<div class="container-fluid">
 						<div class="row-fluid">
-							<h:commandButton styleClass=" btnAction btn btn-primary"
-								value="Alterar" action="#{usuarioMBean.meusDados()}" />
+							<h:commandButton styleClass=" btnAction btn btn-primary" 
+								value="Alterar" action="#{userMBean.altetarMeusDados()}" />
 							&nbsp;
 						</div>
 					</div>

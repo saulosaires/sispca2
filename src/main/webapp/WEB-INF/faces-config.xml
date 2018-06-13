@@ -719,6 +719,11 @@
 			<from-outcome>relatorioGerencialTCEDespesaUnidade</from-outcome>
 			<to-view-id>/private/relatorio/relatoriofinanceirougprogacao/list.xhtml</to-view-id>
 		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>relatorioBIExecucaOrcamentaria</from-outcome>
+			<to-view-id>/private/relatorio/relatoriobi/view.xhtml</to-view-id>
+		</navigation-case>
 	
 				
 	</navigation-rule> 	

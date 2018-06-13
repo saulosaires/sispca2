@@ -1,15 +1,15 @@
 package administrativo.beans;
 
-import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-
 import administrativo.model.Usuario;
+import administrativo.service.UserService;
+import arquitetura.exception.JpaException;
+import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
 
@@ -24,9 +24,15 @@ public class UserMBean implements Serializable {
 
 	private Usuario usuario;
 	
-	transient StreamedContent fotoPerfil;
+	private String password;
+	private String passwordConfirmacao;
 	
-	public UserMBean() {
+	private UserService userService;
+	
+	@Inject
+	public UserMBean(UserService userService) {
+		
+		this.userService = userService;
 		init();
 	}
 	
@@ -34,7 +40,7 @@ public class UserMBean implements Serializable {
 		
 		usuario = (Usuario) SessionUtils.get(SessionUtils.USER);
 		
-		initFotoPerfil();
+		 
 	}
 
 	public String logout() {
@@ -44,19 +50,18 @@ public class UserMBean implements Serializable {
 		return "login";
 	}
 	
-	public StreamedContent initFotoPerfil() {
-
-		DefaultStreamedContent content = null;
-		try {
-			if (usuario.getFoto() != null) {
-				content = new DefaultStreamedContent(new ByteArrayInputStream(usuario.getFoto()), "image/jpeg");
-			}
+ 	public String altetarMeusDados() {
+ 		
+ 		try {
+			userService.update(usuario);
 		} catch (Exception e) {
 			SispcaLogger.logError(e);
+
+			Messages.addMessageError("Falha ao atualizar dados");
 		}
-		return content;
-	}
-	
+ 		
+ 		return "home";
+ 	}
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -67,14 +72,22 @@ public class UserMBean implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public StreamedContent getFotoPerfil() {
-		return fotoPerfil;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setFotoPerfil(StreamedContent fotoPerfil) {
-		this.fotoPerfil = fotoPerfil;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
+
+	public String getPasswordConfirmacao() {
+		return passwordConfirmacao;
+	}
+
+	public void setPasswordConfirmacao(String passwordConfirmacao) {
+		this.passwordConfirmacao = passwordConfirmacao;
+	}
+ 
 	
 	
 	

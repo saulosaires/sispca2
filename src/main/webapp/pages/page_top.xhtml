@@ -25,23 +25,16 @@
 	<div class="collapse navbar-collapse" id="atas">
 		<div class="navbar-right">
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><strong><h:outputLabel
-								value="#{userMBean.usuario.email}" /></strong> <p:graphicImage
-							id="imgUsuario" value="#{userMBean.fotoPerfil}"
-							cache="disable" styleClass="img-rounded img-responsive img-user" />
-				</a>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<strong><h:outputLabel value="#{userMBean.usuario.email}" /></strong> 
+								 
+					</a>
 					<ul class="dropdown-menu dropdown-login">
 						<li>
 							<div class="navbar-login">
 								<div class="row">
-									<div class="col-lg-3">
-										<p class="text-center">
-											<p:graphicImage id="imgUsuario2"
-												value="#{userMBean.fotoPerfil}" cache="disable"
-												styleClass="img-rounded img-responsive img-user" />
-										</p>
-									</div>
+									
 									<div class="col-lg-9">
 										<p class="text-left">
 											<strong><h:outputLabel
@@ -52,13 +45,11 @@
 										</p>
 										<div class="row">
 											<div class="col-md-6">
-												<small><a
-													href="#{facesContext.externalContext.request.contextPath}/private/administrativo/usuario/meusdados.xhtml">Alterar
-														dados</a></small>
+												<small>
+													<a href="#{facesContext.externalContext.request.contextPath}/private/administrativo/usuario/meusdados.xhtml">Alterar dados</a>
+												</small>
 											</div>
-											<div class="col-md-6">
-												<small><a href="#">Configurações</a></small>
-											</div>
+										 
 										</div>
 									</div>
 								</div>

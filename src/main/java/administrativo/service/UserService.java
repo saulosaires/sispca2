@@ -128,7 +128,7 @@ public class UserService  extends AbstractService<Usuario> {
 		
 	}
 	
-    public boolean recuperarSenha(Usuario usuario, String scheme,String serveName,int port,String path) throws JpaException {
+    private boolean recuperarSenha(Usuario usuario, String scheme,String serveName,int port,String path) throws JpaException {
     	
     	usuario= criarNovaSenha( usuario);
     	usuario=definiValidadeDoHash(usuario);

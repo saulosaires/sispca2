@@ -81,6 +81,8 @@
       <class>metas.model.EixoTematico</class>
       <class>metas.model.Status</class>
       
+      <class>relatorio.model.RelatorioBi</class>
+        
       <class>arquitetura.model.SispcaJob</class>
       
       <properties>

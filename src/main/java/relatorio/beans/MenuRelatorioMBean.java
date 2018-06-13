@@ -180,7 +180,7 @@ public class MenuRelatorioMBean implements Serializable{
     	
     	Relatorio relatorioPlanejamento = new Relatorio("GERENCIAL","#","relatorioGerencial");
     	
-    	;
+    	 
     	relatorioPlanejamento.getSubRelatorio().add(initCategoriaTCE());
     	
     	return relatorioPlanejamento;
@@ -200,11 +200,26 @@ public class MenuRelatorioMBean implements Serializable{
     
     private Relatorio initRelatorioOutros() {
     	
-    	Relatorio relatorioPlanejamento = new Relatorio("OUTROS","#","relatorioOutros");
+    	Relatorio relatorio = new Relatorio("OUTROS","#","relatorioOutros");
     	
-    	return relatorioPlanejamento;
+    	relatorio.getSubRelatorio().add(initCategoriaBI());
+    	
+    	return relatorio;
+ 
     }
    
+   private Relatorio initCategoriaBI(){
+    	
+    	Relatorio relatorio = new Relatorio("RELATÓRIOS - BI","#","relatorioBI");
+    	
+    	relatorio.getSubRelatorio().add(new Relatorio("Relatório de Execução Orçamentaria", "relatorioBIExecucaOrcamentaria","relatorioBIExecucaOrcamentaria"));
+  
+
+    	return relatorio;
+    }
+    
+    
+    
     public void onChangePpa() {
     	
     	listExercicio = ppaService.findById(ppaId).getExercicios();

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="conteudo">	
+			<f:metadata>
+			</f:metadata>
+			
+			<h:form>
+				<div class="container-fluid row-fluid">
+					
+
+					<legend class="outBusc">RELATÓRIOS BI</legend>
+				</div>
+				
+				<div class="spaceContainerForm">			
+					<div class="container-fluid" style="margin-top: 3%;">
+						<div class="row">
+							<div class="col-lg-3">
+								<h:outputText value="RELATÓRIO:  " styleClass="labelOutText" />
+								<h:outputText value="${relatorioBiMBean.bi.descricao}" styleClass="labelInputText" />
+							</div>
+							<!-- <div class="col-lg-3">
+								<h:outputText value="DATA:  " styleClass="labelOutText"/>
+								<h:outputText value="20/02/2018" styleClass="labelInputText" />
+							</div> -->
+						</div>
+						<div class="row" style="margin-top: 30px;">
+							<div class="col-lg-12">
+								<pe:documentViewer height="600" width="1000" value="#{relatorioBiMBean.file}" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="spaceBtnAcao">		
+								<h:form>		
+									<h:commandButton styleClass="btnAction btn btn-primary" value="Download">
+	     								<p:fileDownload value="#{relatorioBiMBean.file}" />
+	 								</h:commandButton>
+									&nbsp;
+									<h:commandButton styleClass="btnAction btn btn-primary"
+										value="Voltar" action="relatorioList">
+									</h:commandButton>
+								</h:form>	
+							</div>
+						</div>
+					</div>	
+				</div>			
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
