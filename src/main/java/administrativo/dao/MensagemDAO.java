@@ -1,7 +1,9 @@
 package administrativo.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,6 +27,29 @@ public class MensagemDAO extends AbstractDAO<Mensagem> {
 
 	}
 
+	public Optional<Mensagem> queryByDate(Date dataExpiracao) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Mensagem> query = cb.createQuery(Mensagem.class);
+		Root<Mensagem> m = query.from(Mensagem.class);
+		
+		query.select(m);
+		
+		List<Predicate> predicate = new ArrayList<>();
+		
+		if(dataExpiracao!=null) {
+
+			predicate.add(cb.greaterThanOrEqualTo(m.get("dataExpiracao"),dataExpiracao));
+		}
+		
+
+		query.where(  predicate.toArray(new Predicate[predicate.size()]));
+ 
+		return entityManager.createQuery(query).setMaxResults(1).getResultList().stream().findFirst();
+		
+	}	
+	
+	
 	public List<Mensagem> queryByTituloAndTexto(String titulo, String texto) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

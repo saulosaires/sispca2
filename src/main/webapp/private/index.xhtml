@@ -15,6 +15,8 @@
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="conteudo">
 		
+ 		
+		
  		  <h:form acceptcharset="UTF-8">
 		
 			<div class="row-fluid">
@@ -271,6 +273,18 @@
 			
 			 </div>
 		  </h:form>
+			
+			<p:dialog widgetVar="dlgMsg"  header="#{homeMBean.mensagem.titulo}"  modal="true" visible="#{not empty homeMBean.mensagem}">
+				  
+				 <h:outputText value="#{homeMBean.mensagem.texto}" escape="false" />
+							 
+				<div class="modal-footer">
+					<h:commandButton onclick="PF('dlgMsg').hide();" class="btn btn-success" value="OK" />
+				</div>
+					 
+			</p:dialog>			
+			
+			
 			
 		</ui:define>
 	</ui:composition>

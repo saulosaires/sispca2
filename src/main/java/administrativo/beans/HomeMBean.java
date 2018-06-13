@@ -2,10 +2,11 @@ package administrativo.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,10 +18,13 @@ import org.primefaces.model.chart.LineChartModel;
 
 import administrativo.model.Exercicio;
 import administrativo.model.Link;
+import administrativo.model.Mensagem;
 import administrativo.model.Usuario;
 import administrativo.service.ExercicioService;
 import administrativo.service.LinkService;
+import administrativo.service.MensagemService;
 import arquitetura.utils.MathUtils;
+import arquitetura.utils.PrimeFacesUtils;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.Utils;
 import monitoramento.service.ExecucaoService;
@@ -38,7 +42,7 @@ import siafem.model.FisicoFinanceiroMensalSiafem;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class HomeMBean implements Serializable{
 
 	
@@ -75,12 +79,14 @@ public class HomeMBean implements Serializable{
 	private BigDecimal percentualLiquidado = MathUtils.getZeroBigDecimal();
 	private BigDecimal valorLiquidado 	   = MathUtils.getZeroBigDecimal();
 	
+	private Mensagem mensagem;
 	
 	private AcaoService acaoService;
 	private UnidadeGestoraService unidadeGestoraService;
 	private UnidadeOrcamentariaService unidadeOrcamentariaService;
 	private ExecucaoService execucaoService;
 	private MesService mesService;
+	private MensagemService mensagemService;
 	private FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
 	private FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
 	
@@ -92,12 +98,14 @@ public class HomeMBean implements Serializable{
 					 FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
 					 FisicoFinanceiroMensalService fisicoFinanceiroMensalService,
 					 ExecucaoService execucaoService,
+					 MensagemService mensagemService,
 					 MesService mesService,
 					 LinkService linkService,
 					 ExercicioService exercicioService) {
 		 
  
 		this.acaoService=acaoService;
+		this.mensagemService =mensagemService;
 		this.mesService=mesService;
 		this.execucaoService=execucaoService;
 		this.unidadeGestoraService=unidadeGestoraService;
@@ -131,7 +139,23 @@ public class HomeMBean implements Serializable{
 		
 		listLinks = linkService.findAll();
 		
+		exibirMensagem(new Date());
+		
 	}
+	
+ 
+	
+	public void exibirMensagem(Date dataExpiracao) {
+		
+		 Optional<Mensagem> msg = mensagemService.queryByDate(dataExpiracao);
+		
+		if(msg.isPresent()) {
+
+			 mensagem = msg.get();
+		}
+ 
+	}
+	
 
 	public void changeUnidadeGestora() {
 		
@@ -412,6 +436,14 @@ public class HomeMBean implements Serializable{
 
 	public void setListLinks(List<Link> listLinks) {
 		this.listLinks = listLinks;
+	}
+
+	public Mensagem getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(Mensagem mensagem) {
+		this.mensagem = mensagem;
 	}
 	
 	

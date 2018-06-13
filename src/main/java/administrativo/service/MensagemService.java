@@ -1,6 +1,8 @@
 package administrativo.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -23,7 +25,11 @@ public class MensagemService extends AbstractService<Mensagem> {
 		super(dao);
 	}
  
-
+	public Optional<Mensagem> queryByDate(Date dataExpiracao) {
+	 
+	   return ((MensagemDAO) getDAO()).queryByDate(dataExpiracao);
+		 	
+	}
 
 
 	public List<Mensagem> queryByTituloAndTexto(String titulo, String texto) {
