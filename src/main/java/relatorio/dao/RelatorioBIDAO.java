@@ -20,7 +20,7 @@ public class RelatorioBIDAO extends AbstractDAO<RelatorioBi> {
 	private static final long serialVersionUID = 3384453382168304771L;
 
 	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria"; 
-	private static final  String DENOMINACAO="denominacao";
+	private static final  String ANO="ano";
 	private static final  String ID="id";
 	
 	public RelatorioBIDAO() {
@@ -28,7 +28,7 @@ public class RelatorioBIDAO extends AbstractDAO<RelatorioBi> {
 
 	}
 
-	public List<RelatorioBi> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId){
+	public List<RelatorioBi> buscarByUnidadeOrcamentaria(Integer ano,Long unidadeOrcamentariaId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<RelatorioBi> query = cb.createQuery(RelatorioBi.class);
@@ -36,13 +36,22 @@ public class RelatorioBIDAO extends AbstractDAO<RelatorioBi> {
 		
 		query.select(m);
  
- 			
+		if (!Utils.invalidYear((ano))) {
+
+			query.where(cb.equal(m.get(ANO),ano) );	
+		
+		}
+	
+		
 		if (!Utils.invalidId((unidadeOrcamentariaId))) {
 
 			Join<Object, Object> joinUO = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
 			joinUO.on(cb.equal(joinUO.get(ID),unidadeOrcamentariaId) );	
 		
 		}
+		
+		
+		
  		
 		return entityManager.createQuery(query).getResultList();
 	}

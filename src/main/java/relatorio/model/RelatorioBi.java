@@ -32,7 +32,9 @@ public class RelatorioBi extends Model   {
 	
 	@Column(name="caminho",length=200)
 	private String caminho;
- 
+
+	@Column(name="ano")
+	private Integer ano;
 
 	public Long getId() {
 		return id;
@@ -65,6 +67,16 @@ public class RelatorioBi extends Model   {
 	public void setCaminho(String caminho) {
 		this.caminho = caminho;
 	}
+
+	public Integer getAno() {
+		return ano;
+	}
+
+	public void setAno(Integer ano) {
+		this.ano = ano;
+	}
   
  
+	
+	
 }

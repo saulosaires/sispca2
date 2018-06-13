@@ -27,9 +27,9 @@ public class RelatorioBiService  extends AbstractService<RelatorioBi> {
 	}
 	
 	
-	public List<RelatorioBi> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId){
+	public List<RelatorioBi> buscarByUnidadeOrcamentaria(Integer ano,Long unidadeOrcamentariaId){
 		
-		return dao().buscarByUnidadeOrcamentaria(unidadeOrcamentariaId);
+		return dao().buscarByUnidadeOrcamentaria(ano,unidadeOrcamentariaId);
 		
 	}
 	

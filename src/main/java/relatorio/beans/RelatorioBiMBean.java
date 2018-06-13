@@ -2,7 +2,6 @@ package relatorio.beans;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -13,6 +12,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import administrativo.model.Usuario;
+import administrativo.service.ExercicioService;
 import arquitetura.enums.TipoArquivo;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
@@ -23,7 +23,7 @@ import relatorio.service.RelatorioBiService;
 
 @Named
 @ViewScoped
-public class RelatorioBiMBean implements Serializable{
+public class RelatorioBiMBean extends RelatorioMBean {
 
 	/**
 	 * 
@@ -37,13 +37,15 @@ public class RelatorioBiMBean implements Serializable{
 	private RelatorioBi bi;
 	
 	@Inject
-	public RelatorioBiMBean(RelatorioBiService relatorioBiService){
+	public RelatorioBiMBean(ExercicioService exercicioService, RelatorioBiService relatorioBiService){
+		
+		super(exercicioService);
 		
 		Usuario user= (Usuario) SessionUtils.get(SessionUtils.USER);
 		
 		if(user.getUnidadeOrcamentaria()!=null && !Utils.invalidId(user.getUnidadeOrcamentaria().getId())) {
 			
-			List<RelatorioBi> listBi = relatorioBiService.buscarByUnidadeOrcamentaria(user.getUnidadeOrcamentaria().getId());
+			List<RelatorioBi> listBi = relatorioBiService.buscarByUnidadeOrcamentaria(exercicio.getAno(),user.getUnidadeOrcamentaria().getId());
 			
 			if(!Utils.emptyList(listBi)) {
 				this.bi = listBi.get(0);
