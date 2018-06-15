@@ -1,5 +1,6 @@
 package avaliacao.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +11,11 @@ import javax.inject.Named;
 import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.Utils;
 import avaliacao.model.Analise;
+import avaliacao.model.ExercicioTopicoAnalise;
 import avaliacao.service.AnaliseService;
+import avaliacao.service.ExercicioTopicoAnaliseService;
 import qualitativo.service.ProgramaService;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
 
@@ -29,11 +33,13 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 
 	private List<Analise> listAnalise;
 	
+	private ExercicioTopicoAnaliseService exercicioTopicoAnaliseService;
 	private AnaliseService analiseService;
 	
 	@Inject
 	public AvaliacaoProgramaAnaliseMBean(ProgramaService programaService,
 									     ExercicioService exercicioService,
+									     ExercicioTopicoAnaliseService exercicioTopicoAnaliseService,
 									     FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService,
 									     AnaliseService analiseService
 									    ) {
@@ -41,6 +47,7 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
 	 
 		this.analiseService = analiseService;
+		this.exercicioTopicoAnaliseService =exercicioTopicoAnaliseService;
 	}
 
 	@Override
@@ -53,7 +60,30 @@ public class AvaliacaoProgramaAnaliseMBean extends AvaliacaoPrograma{
 	
 	private void buscarAnalise() {
 	 	
-		listAnalise = analiseService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listAnalise = analiseService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
+		
+		if(Utils.emptyList(listAnalise)) {
+			
+			List<ExercicioTopicoAnalise> listExercicioTopicoAnalise = exercicioTopicoAnaliseService.buscarPorExercicicio(getPrograma().getExercicio().getId());
+			
+			listAnalise = new ArrayList<>();
+			
+			for(ExercicioTopicoAnalise exercicioTopicoAnalise :listExercicioTopicoAnalise) {
+				
+				Analise analise = new Analise();
+				
+				analise.setAtivo(true);
+				analise.setExercicio(getPrograma().getExercicio());
+				analise.setExercicioTopicoAnalise(exercicioTopicoAnalise);
+				analise.setPrograma(getPrograma());
+				
+				listAnalise.add(analise);
+				
+			}
+			
+		}
+		
+		
 	}
 	
 	public void adicionarAnalise() {

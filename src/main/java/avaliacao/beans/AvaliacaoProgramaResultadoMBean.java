@@ -1,5 +1,7 @@
 package avaliacao.beans;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -10,7 +12,11 @@ import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SispcaLogger;
 import arquitetura.utils.Utils;
+import avaliacao.model.Analise;
+import avaliacao.model.ExercicioTopicoAnalise;
+import avaliacao.model.ExercicioTopicoResultado;
 import avaliacao.model.Resultado;
+import avaliacao.service.ExercicioTopicoResultadoService;
 import avaliacao.service.ResultadoService;
 import qualitativo.service.ProgramaService;
 import siafem.service.FisicoFinanceiroMensalSiafemService;
@@ -27,6 +33,7 @@ public class AvaliacaoProgramaResultadoMBean extends AvaliacaoPrograma{
 	private static final  String SUCCESS_SAVE="Resultado Salvo com sucesso";
 	private static final  String FAIL_SAVE="Falha ao Salvar Resultado";
 
+	private ExercicioTopicoResultadoService exercicioTopicoResultadoService;
  	private ResultadoService resultadoService;
 	
 	private List<Resultado> listResultado;
@@ -34,11 +41,13 @@ public class AvaliacaoProgramaResultadoMBean extends AvaliacaoPrograma{
 	@Inject
 	public AvaliacaoProgramaResultadoMBean(ProgramaService programaService,
 										   ExercicioService exercicioService,
+										   ExercicioTopicoResultadoService exercicioTopicoResultadoService,
 										   FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService, 			
 										   ResultadoService resultadoService) {
 
 		super(programaService,exercicioService,fisicoFinanceiroMensalSiafemService);
 		
+		this.exercicioTopicoResultadoService = exercicioTopicoResultadoService;
 		this.resultadoService=resultadoService;
 		 
 		
@@ -56,7 +65,32 @@ public class AvaliacaoProgramaResultadoMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarResultado() {
-		listResultado = resultadoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listResultado = resultadoService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
+		
+		
+		if(Utils.emptyList(listResultado)) {
+			
+			
+			List<ExercicioTopicoResultado> listExercicioTopicoResultado = exercicioTopicoResultadoService.buscarPorExercicicio(getPrograma().getExercicio().getId());
+			
+			listResultado = new ArrayList<>();
+			
+			for(ExercicioTopicoResultado exercicioTopicoResultado:listExercicioTopicoResultado) {
+				
+				Resultado resultado = new Resultado();
+				
+				resultado.setAtivo(true);
+				resultado.setExercicio(getPrograma().getExercicio());
+				resultado.setExercicioTopicoResultado(exercicioTopicoResultado);
+				resultado.setPrograma(getPrograma());
+				
+				listResultado.add(resultado);
+				
+			}
+			
+			
+			
+		}
 	}
 	
 	public void adicionaResultado() {
@@ -66,7 +100,7 @@ public class AvaliacaoProgramaResultadoMBean extends AvaliacaoPrograma{
 			if(!validar()) {return ;}
 			
 			for(Resultado resultado: listResultado) {
-				
+				resultado.setData(new Date());
 				resultadoService.merge(resultado);
 				
 			}

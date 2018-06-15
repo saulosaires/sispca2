@@ -67,7 +67,7 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarPainelAssociado() {
-		listPainelAssociado = painelAssociadoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listPainelAssociado = painelAssociadoService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
 	}
 	
 	public void adicionaPainelAssociado() {
@@ -76,7 +76,7 @@ public class AvaliacaoProgramaPainelAssociadaMBean extends AvaliacaoPrograma{
 			
 			PainelAssociado painelAssoc = new PainelAssociado();
 			painelAssoc.setData(new Date());
-			painelAssoc.setExercicio(getExercicio());
+			painelAssoc.setExercicio(getPrograma().getExercicio());
 			painelAssoc.setIndicador(indicadorService.findById(indicadorId));
 			painelAssoc.setPrograma(getPrograma());
 			 

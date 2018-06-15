@@ -54,7 +54,7 @@ public class AvaliacaoProgramaRecomendacaoMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarRecomendacao() {
-		recomendacao = recomendacaoService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		recomendacao = recomendacaoService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
 	}
 	
 	public void adicionaRecomendacao() {
@@ -63,7 +63,7 @@ public class AvaliacaoProgramaRecomendacaoMBean extends AvaliacaoPrograma{
 			
 			if(!validar()) {return ;}
 					
-			recomendacao.setExercicio(getExercicio());
+			recomendacao.setExercicio(getPrograma().getExercicio());
 			recomendacao.setPrograma(getPrograma());
 			
 			recomendacaoService.merge(recomendacao);

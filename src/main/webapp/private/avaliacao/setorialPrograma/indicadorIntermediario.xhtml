@@ -30,7 +30,7 @@
 						
 						<sispca:dadosIdentificacaoPrograma programa="#{avaliacaoProgramaIndicadorIntermediarioMBean.programa}"
 														   dotacaoInicial="#{avaliacaoProgramaIndicadorIntermediarioMBean.dotacaoInicial}"
-														   dotAtual="#{avaliacaoProgramaIndicadorIntermediarioMBean.dotacaoAtual}"
+														   dotacaoAtual="#{avaliacaoProgramaIndicadorIntermediarioMBean.dotacaoAtual}"
 														   variacao="#{avaliacaoProgramaIndicadorIntermediarioMBean.variacao}"	 />
 		
 		    			
@@ -66,13 +66,13 @@
 								</h:selectOneMenu>
 							</div>
 							<div class="col-lg-4">
-								<h:outputText value="RESULT. #{avaliacaoProgramaIndicadorIntermediarioMBean.exercicio.ano} ESPERADO: " styleClass="labelOutText"/>
+								<h:outputText value="RESULT. #{avaliacaoProgramaIndicadorIntermediarioMBean.programa.exercicio.ano} ESPERADO: " styleClass="labelOutText"/>
 								<h:inputText value="#{avaliacaoProgramaIndicadorIntermediarioMBean.intermediarioAssociado.resultadoAnoEsperado}" onkeypress='return somenteNumeroDecimal(this,event)'>
 									<f:convertNumber pattern="#,##0.00" />
 								</h:inputText>	
 							</div>	
 							<div class="col-lg-4">
-								<h:outputText value="RESULT. #{avaliacaoProgramaIndicadorIntermediarioMBean.exercicio.ano} APURADO: " styleClass="labelOutText"/>
+								<h:outputText value="RESULT. #{avaliacaoProgramaIndicadorIntermediarioMBean.programa.exercicio.ano} APURADO: " styleClass="labelOutText"/>
 								<h:inputText value="#{avaliacaoProgramaIndicadorIntermediarioMBean.intermediarioAssociado.resultadoAnoApurado}" onkeypress='return somenteNumeroDecimal(this,event)'>
 									<f:convertNumber pattern="#,##0.00" />
 								</h:inputText>

@@ -67,7 +67,7 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarDiretrizAssociada() {
-		listDiretrizAssociada = diretrizAssociadaService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listDiretrizAssociada = diretrizAssociadaService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
 	}
 	
 	public void adicionaDiretrizAssociada() {
@@ -77,7 +77,7 @@ public class AvaliacaoProgramaDiretrizAssociadaMBean extends AvaliacaoPrograma{
 			DiretrizAssociada dir = new DiretrizAssociada();
 			dir.setDiretriz(diretrizService.findById(diretrizId));
 			dir.setData(new Date());
-			dir.setExercicio(getExercicio());
+			dir.setExercicio(getPrograma().getExercicio());
 			dir.setPrograma(getPrograma());
 			 
 			

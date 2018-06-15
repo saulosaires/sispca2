@@ -70,7 +70,7 @@ public class AvaliacaoProgramaIndicadorIntermediarioMBean extends AvaliacaoProgr
 	}
 	
 	private void buscarPainelAssociado() {
-		listIntermediarioAssociado = indicadorDesempenhoIntermediarioService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listIntermediarioAssociado = indicadorDesempenhoIntermediarioService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
 	}
 	
 	public void adicionaIntermediarioAssociado() {
@@ -81,7 +81,7 @@ public class AvaliacaoProgramaIndicadorIntermediarioMBean extends AvaliacaoProgr
 				return;
 			} 
 			
-			intermediarioAssociado.setExercicio(getExercicio());
+			intermediarioAssociado.setExercicio(getPrograma().getExercicio());
 			intermediarioAssociado.setPrograma(getPrograma()); 
 			
 			if(!Utils.invalidId(intermediarioAssociado.getUnidadeMedida().getId())) {

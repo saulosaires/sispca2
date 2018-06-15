@@ -2,9 +2,9 @@ package arquitetura.enums;
 
 public enum TipoUsuario {
 
-	P("PLENO"),
-	G("GESTOR"),
-	A("ADMIN");
+	P("Pleno"),
+	G("Gestor"),
+	A("Admin");
 
 	 
 

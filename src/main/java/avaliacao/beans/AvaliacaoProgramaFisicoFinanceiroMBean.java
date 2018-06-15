@@ -76,11 +76,11 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 	private void buscarAvaliacaoFisicoFinanceira() {
 		
 		
-		listAvaliacaoFisicoFinanceira = avaliacaoFisicoFinanceiraService.findByProgramaAndExercicio(getPrograma().getId(), getExercicio().getId());
+		listAvaliacaoFisicoFinanceira = avaliacaoFisicoFinanceiraService.findByProgramaAndExercicio(getPrograma().getId(), getPrograma().getExercicio().getId());
 
 		if (this.listAvaliacaoFisicoFinanceira .isEmpty()){
 			
-			List<ExercicioTopicoAvaliacao> listExercicioTopicoAvaliacao = exercicioTopicoAvaliacaoService.findByExercicio(getExercicio().getId());
+			List<ExercicioTopicoAvaliacao> listExercicioTopicoAvaliacao = exercicioTopicoAvaliacaoService.findByExercicio(getPrograma().getExercicio().getId());
 
 			listAvaliacaoFisicoFinanceira = new ArrayList<>();
 			
@@ -88,7 +88,7 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 				
 				AvaliacaoFisicoFinanceira avalFinanceira = new AvaliacaoFisicoFinanceira();
 										  avalFinanceira.setData(new Date());
-										  avalFinanceira.setExercicio(getExercicio());
+										  avalFinanceira.setExercicio(getPrograma().getExercicio());
 										  avalFinanceira.setExercicioTopicoAvaliacao(exercTopAval);
 										  avalFinanceira.setPrograma(getPrograma());
 										  avalFinanceira.setResposta("");
@@ -101,7 +101,7 @@ public class AvaliacaoProgramaFisicoFinanceiroMBean extends AvaliacaoPrograma{
 	}
 	
 	private void buscarFisicoFinanceiro() {
-		listFisicoFinanceiroMensalSiafem = fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getExercicio());
+		listFisicoFinanceiroMensalSiafem = fisicoFinanceiroMensalSiafemService.analiseFisicoFinanceiro(getPrograma(), getPrograma().getExercicio());
  	
 		calculaMediaAvaliacaoFisicoFinanceira(listFisicoFinanceiroMensalSiafem);
 	}

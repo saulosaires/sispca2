@@ -28,7 +28,6 @@ public abstract class AvaliacaoPrograma implements Serializable {
 	protected BigDecimal dotacaoAtual;
 	protected BigDecimal variacao;
 	
-	private Exercicio exercicio;
 	
 	protected ProgramaService programaService;
 	protected FisicoFinanceiroMensalSiafemService fisicoFinanceiroMensalSiafemService;
@@ -41,12 +40,6 @@ public abstract class AvaliacaoPrograma implements Serializable {
 		this.programaService = programaService;
 		this.fisicoFinanceiroMensalSiafemService=fisicoFinanceiroMensalSiafemService;
  		
-		Optional<Exercicio> exercicioOptional = exercicioService.exercicioAnterior();
-		if(exercicioOptional.isPresent()) {
-			exercicio = exercicioOptional.get();
-		}else {
-			exercicio = new Exercicio();
-		}
 		
 	
 		
@@ -71,14 +64,14 @@ public abstract class AvaliacaoPrograma implements Serializable {
 	
 	private void calculaDotacaoInicial() {
 		
-		dotacaoInicial = fisicoFinanceiroMensalSiafemService.calculaDotacaoInicialByProgAndAno(programa.getCodigo(), exercicio.getAno());
+		dotacaoInicial = fisicoFinanceiroMensalSiafemService.calculaDotacaoInicialByProgAndAno(programa.getCodigo(), programa.getExercicio().getAno());
 		
 		if(dotacaoInicial==null)dotacaoInicial=new BigDecimal(0);
 		
 	}
 	
 	private void calculaDotacaoAtual() {
-		dotacaoAtual= fisicoFinanceiroMensalSiafemService.calculaDotacaoAtualByProgAndAno(programa.getCodigo(), exercicio.getAno());
+		dotacaoAtual= fisicoFinanceiroMensalSiafemService.calculaDotacaoAtualByProgAndAno(programa.getCodigo(), programa.getExercicio().getAno());
 		
 		if(dotacaoAtual==null)dotacaoAtual=new BigDecimal(0);
 	}
@@ -118,14 +111,7 @@ public abstract class AvaliacaoPrograma implements Serializable {
 	public void setDotacaoInicial(BigDecimal dotacaoInicial) {
 		this.dotacaoInicial = dotacaoInicial;
 	}
-
-	public Exercicio getExercicio() {
-		return exercicio;
-	}
-
-	public void setExercicio(Exercicio exercicio) {
-		this.exercicio = exercicio;
-	}
+ 
 
 	public BigDecimal getDotacaoAtual() {
 		return dotacaoAtual;
