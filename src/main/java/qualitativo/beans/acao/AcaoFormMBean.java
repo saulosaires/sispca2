@@ -2,12 +2,15 @@ package qualitativo.beans.acao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Exercicio;
 import administrativo.model.Usuario;
+import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -61,7 +64,7 @@ public class AcaoFormMBean implements Serializable {
 	private List<TipoCalculoMeta>listTipoCalculoMeta;
 	
 	private AcaoService acaoService;
-	
+	private ExercicioService exercicioService;
 	private AcaoValidate acaoValidate;
 	
 	@Inject
@@ -75,11 +78,12 @@ public class AcaoFormMBean implements Serializable {
 						 TipoHorizonteTemporalService  tipoHorizonteTemporalService,
 						 TipoFormaImplementacaoService tipoFormaImplementacaoService,
 						 TipoOrcamentoService          tipoOrcamentoService,
+						 ExercicioService 			   exercicioService,
 						 TipoCalculoMetaService        tipoCalculoMetaService,
 						 AcaoValidate 				   acaoValidate) {
 		
 		this.acaoService = acaoService;
-	
+		this.exercicioService =exercicioService;
 		this.acaoValidate =acaoValidate;
 		
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
@@ -108,6 +112,11 @@ public class AcaoFormMBean implements Serializable {
 			}
 			
 			acaoValidate.beforePersist(acao);
+			
+			Optional<Exercicio> ex = exercicioService.exercicioVigente();
+			if(ex.isPresent())
+				acao.setExercicio(ex.get());
+			
 			
 			acaoService.create(acao);
 

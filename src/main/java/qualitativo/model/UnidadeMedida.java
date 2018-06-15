@@ -20,7 +20,7 @@ public class UnidadeMedida extends Model implements  Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_unidade")
 	private Long id;
  

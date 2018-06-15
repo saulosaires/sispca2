@@ -36,7 +36,7 @@ public class PlanoInterno extends Model implements Auditable {
 	@Column(name = "objetivo")
 	private String objetivo;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_acao")
 	private Acao acao=new Acao();
 

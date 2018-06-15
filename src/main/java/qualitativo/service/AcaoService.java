@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import arquitetura.exception.JpaException;
 import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import qualitativo.dao.AcaoDAO;
@@ -26,6 +27,20 @@ public class AcaoService  extends AbstractService<Acao> {
 	private AcaoDAO dao() {
 		return (AcaoDAO) getDAO();
 	}
+	
+	
+	@Override
+	public Acao delete(Acao a) throws JpaException {
+
+		Acao acao = findById(a.getId());
+	
+		acao.setAtivo(false);
+		
+		update(acao);
+			
+		return acao;
+	}
+	
 	
 	public List<Acao> relatorioQualitativoProgramasAcoes(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long acaoId,Long exercicioId){
 		

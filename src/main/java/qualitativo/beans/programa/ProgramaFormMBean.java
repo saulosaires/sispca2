@@ -2,12 +2,15 @@ package qualitativo.beans.programa;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import administrativo.model.Exercicio;
 import administrativo.model.Usuario;
+import administrativo.service.ExercicioService;
 import arquitetura.utils.Messages;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
@@ -38,7 +41,13 @@ public class ProgramaFormMBean implements Serializable {
 	
 	private Programa programa = new Programa();
 	
+	private ExercicioService exercicioService;
 	private ProgramaService service;
+	
+	private OrgaoService orgaoService;
+	private UnidadeOrcamentariaService unidadeOrcamentariaService;
+	private TipoProgramaService tipoProgramaService;
+	private TipoHorizonteTemporalService tipoHorizonteTemporalService;
 	
 	private ProgramaValidate validate;
 	
@@ -49,12 +58,21 @@ public class ProgramaFormMBean implements Serializable {
 	
 	
 	@Inject
-	public ProgramaFormMBean(ProgramaService service,ProgramaValidate validate, 	OrgaoService orgaoService,
-						     UnidadeOrcamentariaService unidadeOrcamentariaService, TipoProgramaService tipoProgramaService,
+	public ProgramaFormMBean(ProgramaService service,ProgramaValidate validate, 	
+							 OrgaoService orgaoService,
+							 ExercicioService exercicioService,
+						     UnidadeOrcamentariaService unidadeOrcamentariaService, 
+						     TipoProgramaService tipoProgramaService,
 						     TipoHorizonteTemporalService tipoHorizonteTemporalService) {
 		
+		
 		this.service = service;
-	
+		this.exercicioService = exercicioService;
+		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
+		this.orgaoService = orgaoService;
+		this.tipoProgramaService= tipoProgramaService;
+		this.tipoHorizonteTemporalService = tipoHorizonteTemporalService;
+		
 		this.validate =validate;
   
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
@@ -75,6 +93,15 @@ public class ProgramaFormMBean implements Serializable {
 				return "";
 			}
 			 
+			Optional<Exercicio> ex = exercicioService.exercicioVigente();
+			if(ex.isPresent())
+				programa.setExercicio(ex.get());
+
+			
+			programa.setOrgao(orgaoService.findById(programa.getOrgao().getId()));
+			programa.setUnidadeOrcamentaria(unidadeOrcamentariaService.findById(programa.getUnidadeOrcamentaria().getId()));
+			programa.setTipoPrograma(tipoProgramaService.findById(programa.getTipoPrograma().getId()));
+			programa.setTipoHorizonteTemporal(tipoHorizonteTemporalService.findById(programa.getTipoHorizonteTemporal().getId()));
 			
 			service.create(programa);
 

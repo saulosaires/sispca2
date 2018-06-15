@@ -122,17 +122,17 @@
 						<c:if test="${monitoramentoFisicoFinanceiroMensalFormMBean.listRegiaoMunicipio != null}">
 							<table class="table table-bordered" style="font-size: 12px;">
 								<tr>
-									<td rowspan="2"><b><h:outputText style="text-align:center" value="REGIAO/MUNICIPIO" /></b></td>
-									<td colspan="2"><b><h:outputText value="EXERCICIO #{monitoramentoFisicoFinanceiroMensalFormMBean.exercicio.ano}" /></b></td>
-									<td colspan="2"><b><h:outputText value="#{monitoramentoFisicoFinanceiroMensalFormMBean.mes.descricao}" /></b></td>
-									<td colspan="2"><b><h:outputText value="TOTAL MESES ANTERIORES" /></b></td>
-									<td colspan="2"><b><h:outputText value="TOTAL" /></b></td>
-									<td rowspan="2"><b><h:outputText value="COMENTÁRIO" /></b></td>									
+									<td rowspan="2" style="text-align: center;vertical-align: middle;"><b><h:outputText style="text-align:center" value="REGIÃO/MUNICÍPIO" /></b></td>
+									<td colspan="2" style="text-align: center;vertical-align: middle;"><b><h:outputText value="EXERCICIO #{monitoramentoFisicoFinanceiroMensalFormMBean.exercicio.ano}" /></b></td>
+									<td colspan="2" style="text-align: center;vertical-align: middle;"><b><h:outputText value="#{monitoramentoFisicoFinanceiroMensalFormMBean.mes.descricao}" /></b></td>
+									<td colspan="2" style="text-align: center;vertical-align: middle;"><b><h:outputText value="TOTAL MESES ANTERIORES" /></b></td>
+									<td colspan="2" style="text-align: center;vertical-align: middle;"><b><h:outputText value="TOTAL" /></b></td>
+									<td rowspan="2" style="text-align: center;vertical-align: middle;"><b><h:outputText value="COMENTÁRIO" /></b></td>									
 								</tr>
 								<tr>
 									<c:forEach var="j" begin="1" end="4">
-										<td><b><h:outputText value="Quantidade" /></b></td>
-										<td><b><h:outputText value="Valor (R$)" /></b></td>
+										<td style="text-align: center;vertical-align: middle;"><b><h:outputText value="Quantidade" /></b></td>
+										<td style="text-align: center;vertical-align: middle;"><b><h:outputText value="Valor (R$)" /></b></td>
 									</c:forEach>
 								</tr>
 								 
@@ -142,19 +142,17 @@
 											<h:outputText value="${rm.label}" />
 										</td>
 										
-										<td style="padding: 4px;">
-											<h:inputText class="form-control input-sm m-bot15"  style="padding: 2px 2px; font-size: 10px; text-align:right;"
-														 disabled="true" value="#{rm.quantidadeVigente}">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
+											<h:outputText value="#{rm.quantidadeVigente}">
 												<f:convertNumber pattern="#,##0.00" />
-											</h:inputText>													
+											</h:outputText>													
 										</td>
 										
-										<td style="padding: 4px;">
-											<h:inputText class="form-control input-sm m-bot15" style="padding: 2px 2px; font-size: 10px; text-align:right;"
-														 disabled="true" value="#{rm.valorVigente}">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
+											<h:outputText value="#{rm.valorVigente}">
 												<f:convertNumber pattern="#,##0.00" />
 												
-											</h:inputText>
+											</h:outputText>
 										</td>
 									 
 									
@@ -167,7 +165,7 @@
 													<h:inputText class="linha valor form-control input-sm m-bot15"
 																 value="#{ex.quantidade}"
 																 onkeypress='return somenteNumeroDecimal(this,event)'
-																 style="padding: 2px 2px; font-size: 10px; text-align:right;">
+																 style="text-align:right;">
 																 
 														<f:convertNumber pattern="#,##0.00" />	
 																											
@@ -185,7 +183,7 @@
 													<h:inputText class="linha valor form-control input-sm m-bot15"
 																 value="#{ex.valor}"
 																 onkeypress='return somenteNumeroDecimal(this,event)'
-																 style="padding: 2px 2px; font-size: 10px; text-align:right;"
+																 style="text-align:right;"
 																 onkeyup='return ValidaNumero(event)'>
 														
 														<f:convertNumber pattern="#,##0.00" />
@@ -202,49 +200,43 @@
 											
 										</c:forEach>
 									 										
-										<td style="padding: 4px;">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
 											<h:panelGroup id="AntQtd_${status.index}">
-												<h:inputText class="linha valor form-control input-sm m-bot15"
-															 style="padding: 2px 2px; font-size: 10px; text-align:right;"
-														     disabled="true" value="#{rm.quantidadeAnterior}">
+												<h:outputText value="#{rm.quantidadeAnterior}">
 														
 														<f:convertNumber pattern="#,##0.00" />	
 																											
-												</h:inputText>
+												</h:outputText>
 											</h:panelGroup>
 										</td>
 										
-										<td style="padding: 4px;">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
 											<h:panelGroup id="AntValor_${status.index}">
-												<h:inputText class="linha valor form-control input-sm m-bot15" 
-															 style="padding: 2px 2px; font-size: 10px; text-align:right;"
-															 disabled="true" value="#{rm.valorAnterior}">
+												<h:outputText value="#{rm.valorAnterior}">
 													<f:convertNumber pattern="#,##0.00" />
-												</h:inputText>
+												</h:outputText>
 											</h:panelGroup>
 										</td>
 										
-										<td style="padding: 4px;">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
 											<h:panelGroup id="outQtd_${status.index}">
-												<b><h:inputText class="linha valor form-control input-sm m-bot15"
-																style="padding: 2px 2px;font-size: 10px; text-align:right;"
-																disabled="true" value="#{rm.quantidadeTotal}">
+												<b><h:outputText  value="#{rm.quantidadeTotal}">
 														<f:convertNumber pattern="#,##0.00" />														
-													</h:inputText></b>
+													</h:outputText>
+												</b>
 											</h:panelGroup>
 										</td>
 										
-										<td style="padding: 4px;">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
 											<h:panelGroup id="outValor_${status.index}">
-												<b><h:inputText class="linha valor form-control input-sm m-bot15"
-																style="padding: 2px 2px;font-size: 10px; text-align:right;"
-																disabled="true" value="#{rm.valorTotal}">
+												<b><h:outputText value="#{rm.valorTotal}">
 														<f:convertNumber pattern="#,##0.00" />
-													</h:inputText></b>
+													</h:outputText>
+												</b>
 											</h:panelGroup>
 										</td>
 									 
-										<td style="padding: 4px">
+										<td style="padding: 4px;text-align: center;vertical-align: middle;">
 										
 											<center>										
  													

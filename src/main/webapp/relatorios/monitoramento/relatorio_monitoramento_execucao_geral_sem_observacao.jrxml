@@ -11,26 +11,7 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<style name="Crosstab Data Text" hTextAlign="Center" hImageAlign="Center"/>
 	<parameter name="param_imagem" class="java.lang.String"/>
-	<parameter name="param_id_acao" class="java.lang.Long">
-		<defaultValueExpression><![CDATA[new Long (127l)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_cod_acao" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_acao" class="java.lang.String"/>
-	<parameter name="param_cod_orgao" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_orgao" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_cod_unid_orc" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_unid_orc" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_cod_programa" class="java.lang.String"/>
-	<parameter name="param_programa" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_unid_medida" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="param_prod_acao" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/jrwalteram/WorkspaceSEATI/sisppa/SIspca/WebContent/relatorios/monitoramento/"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_id_exercicio" class="java.lang.Long" isForPrompting="false">
-		<defaultValueExpression><![CDATA[new Long (1l)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false">
+	<parameter name="param_exercicio" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[new String ("2016")]]></defaultValueExpression>
 	</parameter>
 	<queryString>

@@ -36,14 +36,15 @@ public class UnidadeOrcamentariaEditMBean implements Serializable {
 	private List<Orgao> listOrgao;
 	
 	private UnidadeOrcamentariaService service;
-     
+    private OrgaoService orgaoService;
+    
 	private UnidadeOrcamentariaValidate validate;
 
 	@Inject
 	public UnidadeOrcamentariaEditMBean(UnidadeOrcamentariaService service, UnidadeOrcamentariaValidate validate,OrgaoService orgaoService) {
 
 		this.service = service;
-		
+		this.orgaoService = orgaoService;
 		this.validate = validate; 
 		
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
@@ -71,6 +72,8 @@ public class UnidadeOrcamentariaEditMBean implements Serializable {
 				return "";
 			}
  			
+			unidadeOrcamentaria.setOrgao(orgaoService.findById(unidadeOrcamentaria.getOrgao().getId()));
+			
 			unidadeOrcamentaria= service.update(unidadeOrcamentaria);
 
 			Messages.addMessageInfo(SUCCESS);

@@ -265,6 +265,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			predicate.add(cb.equal(joinExercicio.get(ID) ,exercicioId));
 		}
 
+		predicate.add(cb.equal(m.get(ATIVO),true));
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
   
@@ -322,6 +323,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			 
 		}
 
+		predicate.add(cb.equal(m.get(ATIVO),true));
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
   
@@ -390,7 +392,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 			joinExercicio.on(cb.equal(joinExercicio.get(ID),exercicioId) );
 			 
 		}
-
+		
+		predicate.add(cb.equal(m.get(ATIVO),true));
 		
 		query.where(  predicate.toArray(new Predicate[predicate.size()]));
   

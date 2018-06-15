@@ -164,10 +164,10 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 			 
 			regiaoMunicipio.setExecucoes(new ArrayList<>());
 			
-			for(Mes m: listaMes) {
+		//	for(Mes m: listaMes) {
 
-				regiaoMunicipio.getExecucoes().add(buscaExecucao(acao,regiaoMunicipio,exercicio,m));
-			}
+				regiaoMunicipio.getExecucoes().add(buscaExecucao(acao,regiaoMunicipio,exercicio,mes));
+		//	}
 			 
 			
 			Optional<FisicoFinanceiro> ff = fisicoFinanceiroService.findByRegiaoMunicipioAndExercicioAndAcao(regiaoMunicipio.getId(), exercicio.getId(), acao.getId());
@@ -255,15 +255,16 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
 			try {
 				
 				for(RegiaoMunicipio regiaoMunicipio:listRegiaoMunicipio) {
+				
+				// TODO isso é pra ser assim ?	
+				//	for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
 						
-					for(FisicoFinanceiroMensal fisicoFinanceiroMensal : regiaoMunicipio.getFisicoFinanceiroMensal()) {
-						
-						if(fisicoFinanceiroMensal.getValor().doubleValue()>0 || fisicoFinanceiroMensal.getQuantidade().doubleValue()>0) {
+				//		if(fisicoFinanceiroMensal.getValor().doubleValue()>0 || fisicoFinanceiroMensal.getQuantidade().doubleValue()>0 ) {
 							salvarExecucoes(regiaoMunicipio.getExecucoes());	
-						}
+				//		}
 						
 						
-					}
+				//	}
  
 				}
 		
@@ -284,7 +285,7 @@ public class MonitoramentoFisicoFinanceiroMensalFormMBean implements Serializabl
  			
 		for(Execucao ex :execucoes) {	
 			
-			if(!Utils.invalidId(ex.getId()) || ex.getValor().intValue()>0 || ex.getQuantidade().intValue()>0) {
+			if( ex.getValor().intValue()>0 || ex.getQuantidade().intValue()>0  || !Utils.emptyParam(ex.getObservacao())) {
 				execucaoService.merge(ex);
 			}
 			

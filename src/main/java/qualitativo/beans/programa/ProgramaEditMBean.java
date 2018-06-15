@@ -42,7 +42,11 @@ public class ProgramaEditMBean implements Serializable {
 	private Programa programa = new Programa();
 	
 	private ProgramaService service;
- 	
+	private OrgaoService orgaoService;
+	private UnidadeOrcamentariaService unidadeOrcamentariaService;
+	private TipoProgramaService tipoProgramaService;
+	private TipoHorizonteTemporalService tipoHorizonteTemporalService;
+
 	private ProgramaValidate validate;
 	
 	private List<Orgao> listOrgoes;
@@ -59,7 +63,13 @@ public class ProgramaEditMBean implements Serializable {
 						     TipoProgramaService tipoProgramaService,
 						     TipoHorizonteTemporalService tipoHorizonteTemporalService) {
 		
-		this.service = service; 
+		this.service = service;
+
+		this.unidadeOrcamentariaService = unidadeOrcamentariaService;
+		this.orgaoService = orgaoService;
+		this.tipoProgramaService= tipoProgramaService;
+		this.tipoHorizonteTemporalService = tipoHorizonteTemporalService;
+
 		
 		this.validate =validate;
   
@@ -107,6 +117,11 @@ public class ProgramaEditMBean implements Serializable {
 				return "";
 			}
 			 
+			programa.setOrgao(orgaoService.findById(programa.getOrgao().getId()));
+			programa.setUnidadeOrcamentaria(unidadeOrcamentariaService.findById(programa.getUnidadeOrcamentaria().getId()));
+			programa.setTipoPrograma(tipoProgramaService.findById(programa.getTipoPrograma().getId()));
+			programa.setTipoHorizonteTemporal(tipoHorizonteTemporalService.findById(programa.getTipoHorizonteTemporal().getId()));
+
 			
 			service.update(programa);
 			Messages.addMessageInfo(SUCCESS);

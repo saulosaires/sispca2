@@ -32,7 +32,7 @@ public class PlanoInternoFormMBean implements Serializable {
 	private PlanoInterno planoInterno = new PlanoInterno();
 	
 	private PlanoInternoService service;
-	
+	private AcaoService acaoService;
 	private PlanoInternoValidate validate;
 	
 	private List<Acao> listAcao;
@@ -41,7 +41,8 @@ public class PlanoInternoFormMBean implements Serializable {
 	public PlanoInternoFormMBean(PlanoInternoService service, AcaoService acaoService, PlanoInternoValidate validate) {
 		
 		this.service = service;
-	
+		this.acaoService = acaoService;
+		
 		this.validate =validate;
   
 		listAcao = acaoService.findAll(); 
@@ -55,6 +56,8 @@ public class PlanoInternoFormMBean implements Serializable {
 				return "";
 			}
 			 
+			Acao acao = acaoService.findById(planoInterno.getAcao().getId());
+			planoInterno.setAcao(acao);
 			
 			service.create(planoInterno);
 

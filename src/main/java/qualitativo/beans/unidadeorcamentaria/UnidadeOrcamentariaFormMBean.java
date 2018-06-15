@@ -32,6 +32,7 @@ public class UnidadeOrcamentariaFormMBean implements Serializable {
 
 	private List<Orgao> listOrgao;
 	
+	private OrgaoService orgaoService;
 	private UnidadeOrcamentariaService service;
 
 	private UnidadeOrcamentariaValidate validate;
@@ -40,6 +41,7 @@ public class UnidadeOrcamentariaFormMBean implements Serializable {
 	public UnidadeOrcamentariaFormMBean(UnidadeOrcamentariaService service, UnidadeOrcamentariaValidate validate,OrgaoService orgaoService) {
 
 		this.service = service;
+		this.orgaoService=orgaoService;
 		this.validate = validate;
 		
 		Usuario user = (Usuario) SessionUtils.get(SessionUtils.USER);
@@ -55,7 +57,9 @@ public class UnidadeOrcamentariaFormMBean implements Serializable {
 			if (!validate.validar(unidadeOrcamentaria)) {
 				return "";
 			}
-
+			
+			
+			unidadeOrcamentaria.setOrgao(orgaoService.findById(unidadeOrcamentaria.getOrgao().getId()));
 			service.create(unidadeOrcamentaria);
 
 			Messages.addMessageInfo(SUCCESS);
