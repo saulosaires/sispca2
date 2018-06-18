@@ -11,7 +11,7 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<style name="Crosstab Data Text" hTextAlign="Center" hImageAlign="Center"/>
 	<parameter name="param_imagem" class="java.lang.String"/>
-	<parameter name="param_exercicio" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -240,7 +240,7 @@
 		</groupHeader>
 		<groupFooter>
 			<band height="52">
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -254,7 +254,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdjan}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="23" y="40" width="35" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -268,7 +268,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorjan}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="58" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -282,7 +282,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdfev}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="81" y="40" width="41" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -296,7 +296,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorfev}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="122" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -310,7 +310,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdmar}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="145" y="40" width="41" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -324,7 +324,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valormar}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="186" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -338,7 +338,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdabr}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="209" y="40" width="41" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -352,7 +352,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorabr}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="250" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -366,7 +366,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdmai}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="273" y="40" width="41" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -380,7 +380,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valormai}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="314" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -394,7 +394,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdjun}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="337" y="40" width="41" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -408,7 +408,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorjun}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="378" y="40" width="24" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -422,7 +422,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdjul}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="40" width="40" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -436,7 +436,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorjul}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="442" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -450,7 +450,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdago}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="465" y="40" width="40" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -464,7 +464,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorago}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="505" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -478,7 +478,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdset}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="528" y="40" width="40" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -492,7 +492,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorset}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="568" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -506,7 +506,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdout}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="591" y="40" width="41" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -520,7 +520,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valorout}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="632" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -534,7 +534,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtdnov}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="655" y="40" width="39" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -548,7 +548,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_valornov}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="694" y="40" width="23" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -562,7 +562,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_qtddez}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="717" y="40" width="43" height="12" uuid="f264cba8-3faf-4e2c-a7e9-b3740bd21e11"/>
 					<box rightPadding="0">
 						<topPen lineWidth="0.5"/>
@@ -2007,7 +2007,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{obsjan}!=null && !$F{obsjan}.isEmpty() ? "<b>JAN:</b> "+$F{obsjan} : ""]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2021,7 +2021,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdjan}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="23" y="0" width="35" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2035,7 +2035,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorjan}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="58" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2049,7 +2049,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdfev}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="81" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2063,7 +2063,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorfev}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="122" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2077,7 +2077,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdmar}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="145" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2091,7 +2091,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valormar}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="186" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2105,7 +2105,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdabr}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="209" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2119,7 +2119,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorabr}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="250" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2133,7 +2133,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdmai}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="273" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2147,7 +2147,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valormai}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="314" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2161,7 +2161,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdjun}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="337" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2175,7 +2175,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorjun}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="378" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2189,7 +2189,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdjul}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="442" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2203,7 +2203,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdago}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="401" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2217,7 +2217,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorjul}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="465" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2231,7 +2231,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorago}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="529" y="0" width="41" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2245,7 +2245,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorset}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="593" y="0" width="39" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2259,7 +2259,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorout}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="655" y="0" width="39" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2273,7 +2273,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valornov}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="506" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2287,7 +2287,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdset}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="570" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2301,7 +2301,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdout}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="632" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2315,7 +2315,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtdnov}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="694" y="0" width="23" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -2329,7 +2329,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qtddez}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="717" y="0" width="40" height="15" uuid="7bfdde06-95ae-4174-8f16-d303c1827bfd"/>
 				<box>
 					<topPen lineWidth="0.5"/>

@@ -28,8 +28,8 @@
 	</queryString>
 	<field name="regiaoMunicipioDescricao" class="java.lang.String"/>
 	<field name="ano" class="java.lang.Integer"/>
-	<field name="quantidade" class="java.lang.Double"/>
-	<field name="valor" class="java.lang.Double"/>
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="valor" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -333,10 +333,10 @@
 						</cellContents>
 					</crosstabTotalColumnHeader>
 				</columnGroup>
-				<measure name="quantidadeMeasure" class="java.lang.Double" calculation="Sum">
+				<measure name="quantidadeMeasure" class="java.math.BigDecimal" calculation="Sum">
 					<measureExpression><![CDATA[$F{quantidade}]]></measureExpression>
 				</measure>
-				<measure name="valorMeasure" class="java.lang.Double" calculation="Sum">
+				<measure name="valorMeasure" class="java.math.BigDecimal" calculation="Sum">
 					<measureExpression><![CDATA[$F{valor}]]></measureExpression>
 				</measure>
 				<crosstabCell width="81" height="25">
@@ -344,8 +344,8 @@
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField>
-							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="29" height="25" backcolor="#EEEEEE" uuid="8e3a7c07-f171-4ae8-a1a1-312e20c822c8"/>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="81" height="13" backcolor="#EEEEEE" uuid="8e3a7c07-f171-4ae8-a1a1-312e20c822c8"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
 								<leftPen lineWidth="0.75"/>
@@ -355,12 +355,10 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$V{quantidadeMeasure}==null ? "0" : $V{quantidadeMeasure}.intValue()==$V{quantidadeMeasure} ? (new DecimalFormat("#,##0")).format($V{quantidadeMeasure}) :
-
-(new DecimalFormat("#,##0.00")).format($V{quantidadeMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{quantidadeMeasure}]]></textFieldExpression>
 						</textField>
-						<textField>
-							<reportElement style="Crosstab Data Text" mode="Opaque" x="29" y="0" width="52" height="25" backcolor="#EEEEEE" uuid="9e429174-8aa3-4e7b-abb5-3bff79df9eb7"/>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
+							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="13" width="81" height="12" backcolor="#EEEEEE" uuid="9e429174-8aa3-4e7b-abb5-3bff79df9eb7"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
 								<leftPen lineWidth="0.75"/>
@@ -370,7 +368,7 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$V{valorMeasure}==null ? "0" : (new DecimalFormat("#,###,##0.00")).format($V{valorMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{valorMeasure}]]></textFieldExpression>
 						</textField>
 					</cellContents>
 				</crosstabCell>
@@ -379,7 +377,7 @@
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
 							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="29" height="25" backcolor="#C7C7C7" uuid="8004b78b-46ae-4f28-b7bd-90da8e2a1491"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
@@ -390,11 +388,9 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$V{quantidadeMeasure}.intValue()==$V{quantidadeMeasure} ? (new DecimalFormat("#,##0")).format($V{quantidadeMeasure}) :
-
-(new DecimalFormat("#,##0.00")).format($V{quantidadeMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{quantidadeMeasure}]]></textFieldExpression>
 						</textField>
-						<textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
 							<reportElement style="Crosstab Data Text" mode="Opaque" x="29" y="0" width="52" height="25" backcolor="#C7C7C7" uuid="9e429174-8aa3-4e7b-abb5-3bff79df9eb7"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
@@ -405,7 +401,7 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($V{valorMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{valorMeasure}]]></textFieldExpression>
 						</textField>
 					</cellContents>
 				</crosstabCell>
@@ -414,7 +410,7 @@
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
 							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="31" height="25" backcolor="#EEEEEE" uuid="cc5db893-2305-4b2a-876a-7fb2d1f311ca"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
@@ -425,11 +421,9 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$V{quantidadeMeasure}.intValue()==$V{quantidadeMeasure} ? (new DecimalFormat("#,##0")).format($V{quantidadeMeasure}) :
-
-(new DecimalFormat("#,##0.00")).format($V{quantidadeMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{quantidadeMeasure}]]></textFieldExpression>
 						</textField>
-						<textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
 							<reportElement style="Crosstab Data Text" mode="Opaque" x="31" y="0" width="57" height="25" backcolor="#EEEEEE" uuid="cc5db893-2305-4b2a-876a-7fb2d1f311ca"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
@@ -440,7 +434,7 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($V{valorMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{valorMeasure}]]></textFieldExpression>
 						</textField>
 					</cellContents>
 				</crosstabCell>
@@ -449,7 +443,7 @@
 						<box>
 							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
 						</box>
-						<textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
 							<reportElement style="Crosstab Data Text" mode="Opaque" x="0" y="0" width="31" height="25" backcolor="#C7C7C7" uuid="238e0e15-3d88-40e8-bbb3-7363c456a6d5"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
@@ -460,11 +454,9 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$V{quantidadeMeasure}.intValue()==$V{quantidadeMeasure} ?  (new DecimalFormat("#,##0")).format($V{quantidadeMeasure}) :
-
-(new DecimalFormat("#,##0.00")).format($V{quantidadeMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{quantidadeMeasure}]]></textFieldExpression>
 						</textField>
-						<textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="true">
 							<reportElement style="Crosstab Data Text" mode="Opaque" x="31" y="0" width="57" height="25" backcolor="#C7C7C7" uuid="cc5db893-2305-4b2a-876a-7fb2d1f311ca"/>
 							<box rightPadding="3">
 								<topPen lineWidth="0.75"/>
@@ -475,7 +467,7 @@
 							<textElement textAlignment="Right" verticalAlignment="Middle">
 								<font size="7"/>
 							</textElement>
-							<textFieldExpression><![CDATA[(new DecimalFormat("#,###,##0.00")).format($V{valorMeasure})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{valorMeasure}]]></textFieldExpression>
 						</textField>
 					</cellContents>
 				</crosstabCell>

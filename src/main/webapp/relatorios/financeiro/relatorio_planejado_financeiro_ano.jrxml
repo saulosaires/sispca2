@@ -15,58 +15,59 @@
 	<field name="exercicio" class="administrativo.model.Exercicio"/>
 	<field name="regiaoMunicipio" class="quantitativo.model.RegiaoMunicipio"/>
 	<field name="acao" class="qualitativo.model.Acao"/>
-	<field name="quantidade" class="java.lang.Double"/>
-	<field name="valor" class="java.lang.Double"/>
-	<variable name="sum_qtd_unidade" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<variable name="sum_qtd_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valor_unidade" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valor_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="subtotal" class="java.lang.Double">
-		<variableExpression><![CDATA[$F{quantidade}*$F{valor}]]></variableExpression>
+	<variable name="subtotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{quantidade}.multiply($F{valor}, new MathContext(4))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_subtotal_unidade" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_subtotal_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtd_ano" class="java.lang.Double" resetType="Group" resetGroup="ano" calculation="Sum">
+	<variable name="sum_qtd_ano" class="java.math.BigDecimal" resetType="Group" resetGroup="ano" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valor_ano" class="java.lang.Double" resetType="Group" resetGroup="ano" calculation="Sum">
+	<variable name="sum_valor_ano" class="java.math.BigDecimal" resetType="Group" resetGroup="ano" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_subtotal_ano" class="java.lang.Double" resetType="Group" resetGroup="ano" calculation="Sum">
+	<variable name="sum_subtotal_ano" class="java.math.BigDecimal" resetType="Group" resetGroup="ano" calculation="Sum">
 		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtd_municipio" class="java.lang.Double" resetType="Group" resetGroup="municipio" calculation="Sum">
+	<variable name="sum_qtd_municipio" class="java.math.BigDecimal" resetType="Group" resetGroup="municipio" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valor_municipio" class="java.lang.Double" resetType="Group" resetGroup="municipio" calculation="Sum">
+	<variable name="sum_valor_municipio" class="java.math.BigDecimal" resetType="Group" resetGroup="municipio" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_subtotal_municipio" class="java.lang.Double" resetType="Group" resetGroup="municipio" calculation="Sum">
+	<variable name="sum_subtotal_municipio" class="java.math.BigDecimal" resetType="Group" resetGroup="municipio" calculation="Sum">
 		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtd_regiao" class="java.lang.Double" resetType="Group" resetGroup="regiao" calculation="Sum">
+	<variable name="sum_qtd_regiao" class="java.math.BigDecimal" resetType="Group" resetGroup="regiao" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valor_regiao" class="java.lang.Double" resetType="Group" resetGroup="regiao" calculation="Sum">
+	<variable name="sum_valor_regiao" class="java.math.BigDecimal" resetType="Group" resetGroup="regiao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_subtotal_regiao" class="java.lang.Double" resetType="Group" resetGroup="regiao" calculation="Sum">
+	<variable name="sum_subtotal_regiao" class="java.math.BigDecimal" resetType="Group" resetGroup="regiao" calculation="Sum">
 		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
 	<group name="ano" keepTogether="true">
 		<groupExpression><![CDATA[$F{exercicio}]]></groupExpression>

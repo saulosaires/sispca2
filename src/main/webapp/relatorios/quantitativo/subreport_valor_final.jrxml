@@ -9,8 +9,8 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="quantidade" class="java.lang.Double"/>
-	<field name="valor" class="java.lang.Double"/>
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="valor" class="java.math.BigDecimal"/>
 	<field name="acao" class="qualitativo.model.Acao"/>
 	<group name="ano">
 		<groupExpression><![CDATA[$F{acao}]]></groupExpression>
@@ -151,10 +151,10 @@
 						</cellContents>
 					</crosstabTotalColumnHeader>
 				</columnGroup>
-				<measure name="valor" class="java.lang.Double" calculation="Sum">
+				<measure name="valor" class="java.math.BigDecimal" calculation="Sum">
 					<measureExpression><![CDATA[$F{valor}]]></measureExpression>
 				</measure>
-				<measure name="qtd" class="java.lang.Double" calculation="Sum">
+				<measure name="qtd" class="java.math.BigDecimal" calculation="Sum">
 					<measureExpression><![CDATA[$F{quantidade}]]></measureExpression>
 				</measure>
 				<crosstabCell width="126" height="28">

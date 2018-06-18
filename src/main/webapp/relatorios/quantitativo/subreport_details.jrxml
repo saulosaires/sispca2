@@ -8,8 +8,8 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="valor" class="java.lang.Double"/>
-	<field name="quantidade" class="java.lang.Double"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="quantidade" class="java.math.BigDecimal"/>
 	<field name="regiaoMunicipio" class="quantitativo.model.RegiaoMunicipio"/>
 	<field name="acao" class="qualitativo.model.Acao"/>
 	<background>
@@ -138,10 +138,10 @@
 						</cellContents>
 					</crosstabTotalColumnHeader>
 				</columnGroup>
-				<measure name="valor" class="java.lang.Double" calculation="Sum">
+				<measure name="valor" class="java.math.BigDecimal" calculation="Sum">
 					<measureExpression><![CDATA[$F{valor}]]></measureExpression>
 				</measure>
-				<measure name="qtd" class="java.lang.Double" calculation="Sum">
+				<measure name="qtd" class="java.math.BigDecimal" calculation="Sum">
 					<measureExpression><![CDATA[$F{quantidade}]]></measureExpression>
 				</measure>
 				<crosstabCell width="126" height="27">
@@ -217,7 +217,7 @@
 							<textElement verticalAlignment="Middle">
 								<font size="9"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$V{qtd}.intValue() == $V{qtd} ? (new DecimalFormat("#,##0")).format($V{qtd}) : (new DecimalFormat("#,##0.00")).format($V{qtd})]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$V{qtd}]]></textFieldExpression>
 						</textField>
 						<textField pattern="#,##0.00">
 							<reportElement style="Crosstab Data Text" x="57" y="0" width="87" height="25" uuid="58f025e3-6671-4887-b0be-a1927e117248"/>

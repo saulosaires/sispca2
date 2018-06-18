@@ -17,11 +17,11 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="acao" class="qualitativo.model.Acao"/>
-	<field name="valor" class="java.lang.Double"/>
-	<variable name="total_acao" class="java.lang.Double" resetType="Group" resetGroup="grupo_acao" calculation="Sum">
+	<field name="valor" class="java.math.BigDecimal"/>
+	<variable name="total_acao" class="java.math.BigDecimal" resetType="Group" resetGroup="grupo_acao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
 	</variable>
-	<variable name="total_unidade" class="java.lang.Double" resetType="Group" resetGroup="grupo_unidade_orcamentaria" calculation="Sum">
+	<variable name="total_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="grupo_unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
 	</variable>
 	<group name="grupo_unidade_orcamentaria" keepTogether="true">

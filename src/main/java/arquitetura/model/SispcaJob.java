@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Job", schema = "agendador_tarefa")
+@Table(name = "job", schema = "agendador_tarefa")
 public class SispcaJob extends Model   {
 
 	private static final long serialVersionUID = 1L;

@@ -94,7 +94,7 @@ public class RelatorioPlanoTrabalhoMBean extends RelatorioMBean {
 			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
 			List<Long> listOrgaoId = OrgaoUtils.parseOrgao(orgao, listOrgao);
 			
-			List<Acao> listAcao = acaoService.relatorioPlanoTrabalho(listOrgaoId, listUO, programa, orgao,ordemCampos);
+			List<Acao> listAcao = acaoService.relatorioPlanoTrabalho(listOrgaoId, listUO, programa, exercicioId,ordemCampos);
 
 			if (listAcao == null || listAcao.isEmpty()) {
 				Messages.addMessageWarn(NO_DATA);

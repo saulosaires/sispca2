@@ -33,7 +33,6 @@
 					<div class="col-lg-3" >
 						<h:outputText value="SELECIONE UM EXERCICIO  " styleClass="labelOutText"/>					
 						<h:selectOneMenu value="#{menuRelatorioMBean.exercicioId}" styleClass="input-sm form-control" id="select_exercicio">
-						<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 							<f:selectItems var="exerc" value="#{menuRelatorioMBean.listExercicio}" itemValue="#{exerc.id}" itemLabel="#{exerc.ano}"/>
 							 <p:ajax  event="change" update="rels"/>	
 						</h:selectOneMenu>

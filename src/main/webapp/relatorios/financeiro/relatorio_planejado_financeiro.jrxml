@@ -15,30 +15,35 @@
 	<field name="regiaoMunicipio" class="quantitativo.model.RegiaoMunicipio"/>
 	<field name="acao" class="qualitativo.model.Acao"/>
 	<field name="exercicio" class="administrativo.model.Exercicio"/>
-	<field name="quantidade" class="java.lang.Double"/>
-	<field name="valor" class="java.lang.Double"/>
-	<variable name="sum_qtd_unidade" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<variable name="sum_qtd_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valor_unidade" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_valor_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="subtotal" class="java.lang.Double">
-		<variableExpression><![CDATA[$F{quantidade}*$F{valor}]]></variableExpression>
+	<variable name="subtotal" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{quantidade}.multiply($F{valor}, new MathContext(4))]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_subtotal_unidade" class="java.lang.Double" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
+	<variable name="sum_subtotal_unidade" class="java.math.BigDecimal" resetType="Group" resetGroup="unidade_orcamentaria" calculation="Sum">
 		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_qtd_regiao" class="java.lang.Double" resetType="Group" resetGroup="regiao" calculation="Sum">
+	<variable name="sum_qtd_regiao" class="java.math.BigDecimal" resetType="Group" resetGroup="regiao" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
-		<initialValueExpression><![CDATA[new Double (0.0)]]></initialValueExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_valor_regiao" class="java.lang.Double" resetType="Group" resetGroup="regiao" calculation="Sum">
+	<variable name="sum_valor_regiao" class="java.math.BigDecimal" resetType="Group" resetGroup="regiao" calculation="Sum">
 		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
-	<variable name="sum_subtotal_regiao" class="java.lang.Double" resetType="Group" resetGroup="regiao" calculation="Sum">
+	<variable name="sum_subtotal_regiao" class="java.math.BigDecimal" resetType="Group" resetGroup="regiao" calculation="Sum">
 		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0.0)]]></initialValueExpression>
 	</variable>
 	<group name="regiao" keepTogether="true">
 		<groupExpression><![CDATA[$F{regiaoMunicipio}.getRegiao().getDescricao()]]></groupExpression>
@@ -74,7 +79,7 @@
 					</textElement>
 					<text><![CDATA[TOTAL (REGIÃO):]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="#,###,##0.00" isBlankWhenNull="true">
 					<reportElement mode="Opaque" x="325" y="0" width="57" height="15" backcolor="#A2A2A2" uuid="f5e73651-0e22-40dd-a85d-59848c9adb73"/>
 					<box rightPadding="2">
 						<topPen lineWidth="0.75"/>
@@ -85,9 +90,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtd_regiao}.intValue() == $V{sum_qtd_regiao} ? (new DecimalFormat("#,##0")).format($V{sum_qtd_regiao}) :
-
-(new DecimalFormat("#,##0.00")).format($V{sum_qtd_regiao})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtd_regiao}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,###,##0.00" isBlankWhenNull="true">
 					<reportElement mode="Opaque" x="382" y="0" width="87" height="15" backcolor="#A2A2A2" uuid="f5e73651-0e22-40dd-a85d-59848c9adb73"/>
@@ -152,7 +155,7 @@
 					</textElement>
 					<text><![CDATA[TOTAL (UNIDADE ORÇAMENTÁRIA):]]></text>
 				</staticText>
-				<textField pattern="">
+				<textField pattern="#,###,##0.00" isBlankWhenNull="true">
 					<reportElement mode="Opaque" x="325" y="0" width="57" height="15" backcolor="#C3C3C3" uuid="f5e73651-0e22-40dd-a85d-59848c9adb73"/>
 					<box rightPadding="2">
 						<topPen lineWidth="0.75"/>
@@ -163,9 +166,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="7" pdfFontName="Helvetica-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_qtd_unidade}.intValue() == $V{sum_qtd_unidade} ? (new DecimalFormat("#,##0")).format($V{sum_qtd_unidade}) :
-
-(new DecimalFormat("#,##0.00")).format($V{sum_qtd_unidade})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_qtd_unidade}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,###,##0.00" isBlankWhenNull="true">
 					<reportElement mode="Opaque" x="382" y="0" width="87" height="15" backcolor="#C3C3C3" uuid="f5e73651-0e22-40dd-a85d-59848c9adb73"/>
@@ -370,7 +371,7 @@
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
-			<textField pattern="">
+			<textField pattern="#,###,##0.00" isBlankWhenNull="true">
 				<reportElement x="325" y="0" width="57" height="15" uuid="e881a896-27c0-43f3-81d5-cbad2dd56c71"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
