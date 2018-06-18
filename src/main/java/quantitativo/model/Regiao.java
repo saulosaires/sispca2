@@ -34,7 +34,7 @@ public class Regiao extends Model  {
 	private String descricao;
  
 	
-	//bi-directional many-to-one association to Localizador
+	//bi-directional many-to-one association to 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_tipo_regiao")
 	private TipoRegiao tipoRegiao;

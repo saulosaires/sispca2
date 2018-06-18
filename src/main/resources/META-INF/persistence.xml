@@ -66,7 +66,6 @@
              
       <class>quantitativo.model.FisicoFinanceiro</class>
       <class>quantitativo.model.FisicoFinanceiroMensal</class>
-      <class>quantitativo.model.Localizador</class>
       <class>quantitativo.model.Municipio</class>
       <class>quantitativo.model.Regiao</class>
       <class>quantitativo.model.RegiaoMunicipio</class>

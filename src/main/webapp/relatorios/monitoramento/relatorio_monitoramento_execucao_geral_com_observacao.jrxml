@@ -11,7 +11,7 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<style name="Crosstab Data Text" hTextAlign="Center" hImageAlign="Center"/>
 	<parameter name="param_imagem" class="java.lang.String"/>
-	<parameter name="param_exercicio" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_exercicio" class="java.lang.Integer" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>

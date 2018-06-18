@@ -20,7 +20,6 @@ import qualitativo.model.Orgao;
 import qualitativo.model.Programa;
 import qualitativo.model.UnidadeMedida;
 import qualitativo.model.UnidadeOrcamentaria;
-import quantitativo.model.Localizador;
 import quantitativo.model.Municipio;
 import quantitativo.model.Regiao;
 import quantitativo.model.RegiaoMunicipio;
@@ -42,10 +41,7 @@ public class Execucao extends Model implements  Auditable {
 	@JoinColumn(name = "id_acao")
 	private Acao acao;
 
-	@ManyToOne
-	@JoinColumn(name = "id_localizador")
-	private Localizador localizador;
-
+ 
 	@ManyToOne
 	@JoinColumn(name="id_mes")
 	private Mes mes;
@@ -158,14 +154,7 @@ public class Execucao extends Model implements  Auditable {
 		this.acao = acao;
 	}
 
-	public Localizador getLocalizador() {
-		return localizador;
-	}
-
-	public void setLocalizador(Localizador localizador) {
-		this.localizador = localizador;
-	}
-
+ 
 	public Mes getMes() {
 		return mes;
 	}

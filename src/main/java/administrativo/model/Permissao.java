@@ -41,8 +41,8 @@ public class Permissao implements Serializable{
 	private List<Perfil> perfil=new ArrayList<>();
 	
 	
-	 
-	@Column(name="acao",length=100,nullable=false)
+	 //TODO undo this, set nullable tp false
+	@Column(name="acao",length=100,nullable=true)
 	private String acao;
 	
 	@Column(name="descricao",length=150,nullable=true)

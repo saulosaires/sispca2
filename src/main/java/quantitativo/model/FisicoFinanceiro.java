@@ -46,10 +46,7 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	@NotNull(message="Campo Obrigatório")
 	private Acao acao;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_localizador")
-	private Localizador localizador;
-
+ 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_regiao_municipio")
 	private RegiaoMunicipio regiaoMunicipio;
@@ -167,15 +164,7 @@ public class FisicoFinanceiro extends Model implements  Auditable {
 	public void setAcao(Acao acao) {
 		this.acao = acao;
 	}
-
-	public Localizador getLocalizador() {
-		return this.localizador;
-	}
-
-	public void setLocalizador(Localizador localizador) {
-		this.localizador = localizador;
-	}
-
+ 
 	public RegiaoMunicipio getRegiaoMunicipio() {
 		return regiaoMunicipio;
 	}
