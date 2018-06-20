@@ -22,14 +22,23 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 	 */
 	private static final long serialVersionUID = 2103883892152462274L;
 
-	private static final  String ID="id";
-	private static final  String CODIGO="codigo";
-	private static final  String DENOMINACAO="denominacao";
-	private static final  String ORGAO="orgao";
-	private static final  String EIXOS="eixos";
-	private static final  String TIPO_PROGRAMA="tipoPrograma";
-	private static final  String EXERCICIO="exercicio";
-	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria";
+	private static final String ID="id";
+	private static final String CODIGO="codigo";
+	private static final String DENOMINACAO="denominacao";
+	private static final String ORGAO="orgao";
+	private static final String OBJETIVO="objetivo";
+	private static final String RESPONSAVEL="responsavel";
+	private static final String EIXOS="eixos";
+	private static final String INDICADOR ="indicador";
+	private static final String PUBLICO_ALVO= "publicoAlvo";
+	private static final String TIPO_PROGRAMA="tipoPrograma";
+	private static final String TIPO_HORIZONTE_TEMPORAL="tipoHorizonteTemporal";
+	private static final String EXERCICIO="exercicio";
+	private static final String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria";
+	private static final String INDICADOR_DESEMPENHO="indicadorDesempenhoIntermediario";
+	private static final String DESCRICAO="descricao";
+	private static final String PROBLEMA="problema";
+	
 	
 	public ProgramaDAO() {
 		setClazz(Programa.class);
@@ -43,6 +52,8 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 		CriteriaQuery<Programa> q = cb.createQuery(Programa.class);
 		
 		Root<Programa> c = q.from(Programa.class);
+		
+		q.where(cb.equal(c.get(ATIVO), true));
 		
 		q.select(c);
 		q.orderBy(cb.asc(c.get(DENOMINACAO)));
@@ -109,8 +120,7 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 		
 		return  entityManager.createQuery(query).getResultList();
 	}
-	
-	 
+		 
 	public List<Programa> buscarPorUnidadeOrcamentaria(String unidadeOrcamentariaCodigo) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -152,9 +162,38 @@ public class ProgramaDAO extends AbstractDAO<Programa> {
 		
 		return  entityManager.createQuery(query).getResultList();
 	}
-	
 	 
-	
+	public List<Programa> exportarBI(Long exercicioId) {
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Programa> query = cb.createQuery(Programa.class);
+		
+		Root<Programa> root = query.from(Programa.class);
+		Join<Object, Object> joinTipoPrograma 		 = root.join(TIPO_PROGRAMA,JoinType.LEFT);
+		Join<Object, Object> joinTipoHorizonte 		 = root.join(TIPO_HORIZONTE_TEMPORAL,JoinType.LEFT);
+		Join<Object, Object> joinIndicadorDesempenho = root.joinSet(INDICADOR_DESEMPENHO,JoinType.LEFT);
+		Join<Object, Object> joinProgExercicio 		 = root.join(EXERCICIO, 	   JoinType.LEFT);
+		
+		query.multiselect(
+						  root.get(CODIGO),
+						  root.get(OBJETIVO),
+						  root.get(RESPONSAVEL),
+						  joinIndicadorDesempenho.get(INDICADOR),
+						  root.get(PUBLICO_ALVO),
+						  joinTipoPrograma.get(CODIGO),
+						  joinTipoPrograma.get(DESCRICAO),
+						  root.get(PROBLEMA),
+						  joinTipoHorizonte.get(DESCRICAO)
+						  );
+		
+		query.where(
+					cb.equal(root.get(ATIVO), true),
+					cb.equal(joinProgExercicio.get(ID),exercicioId)
+					);
+		
+		return  entityManager.createQuery(query).getResultList();
+	}	
 	
 
 }

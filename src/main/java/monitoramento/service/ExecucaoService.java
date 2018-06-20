@@ -100,7 +100,10 @@ public class ExecucaoService extends AbstractService<Execucao> {
 		return detalhamentoAcaoExecucaoMensal;
 	}
 
-	
+	public List<Execucao> exportarBI(Long exercicioId) {
+		
+		return ((ExecucaoDAO) getDAO()).exportarBI(exercicioId);
+	}
 	
 	public Execucao merge(Execucao execucao) throws JpaException {
 		

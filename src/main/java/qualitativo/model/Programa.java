@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import administrativo.model.Exercicio;
 import arquitetura.interfaces.Auditable;
 import arquitetura.model.Model;
+import avaliacao.model.IndicadorDesempenhoIntermediario;
 
 
  
@@ -101,6 +102,9 @@ public class Programa extends Model implements  Auditable {
 	@OneToMany(mappedBy="programa")
 	private List<MacroObjetivo> macroObjetivos;
  
+	@OneToMany(mappedBy="programa")
+	private List<IndicadorDesempenhoIntermediario> indicadorDesempenhoIntermediario;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_tipo_horizonte_temporal")
 	@NotNull(message="Tipo Horizonte Temporal: campo é obrigatório")
@@ -120,10 +124,46 @@ public class Programa extends Model implements  Auditable {
 	@JoinColumn(name="id_exercicio") 
 	private Exercicio exercicio;
 
+	private transient String indicadorDesempenho;
 	
 	public Programa() {}
 
 	public Programa(Long id) {this.id=id;}
+	
+	public Programa(
+			          String codigo,
+			          String objetivo,
+			          String responsavel,
+ 
+			          String indicadorDesempenho,
+					  String publicoAlvo,
+					  
+					  String tipoProgramaCodigo,
+					  String tipoProgramaDescricao,
+					  String problema ,
+					  String tipoHorizonteDescricao
+
+					){
+		
+		this.codigo = codigo;
+		this.objetivo=objetivo;
+		this.responsavel = responsavel;
+		
+		this.indicadorDesempenho = indicadorDesempenho;
+		this.publicoAlvo = publicoAlvo;
+		
+		this.problema = problema;
+		
+		tipoPrograma = new TipoPrograma();
+		
+		tipoPrograma.setCodigo(tipoProgramaCodigo);
+		tipoPrograma.setDescricao(tipoHorizonteDescricao);
+		
+		tipoHorizonteTemporal = new TipoHorizonteTemporal();
+		tipoHorizonteTemporal.setDescricao(tipoHorizonteDescricao);
+	}
+	
+	
 	
 	public Long getId() {
 		return id;
@@ -315,6 +355,28 @@ public class Programa extends Model implements  Auditable {
 
 	public void setEixos(List<Eixo> eixos) {
 		this.eixos = eixos;
+	}
+
+	
+	
+	public List<IndicadorDesempenhoIntermediario> getIndicadorDesempenhoIntermediario() {
+		return indicadorDesempenhoIntermediario;
+	}
+
+	public void setIndicadorDesempenhoIntermediario(
+			List<IndicadorDesempenhoIntermediario> indicadorDesempenhoIntermediario) {
+		this.indicadorDesempenhoIntermediario = indicadorDesempenhoIntermediario;
+	}
+
+	
+	
+	
+	public String getIndicadorDesempenho() {
+		return indicadorDesempenho;
+	}
+
+	public void setIndicadorDesempenho(String indicadorDesempenho) {
+		this.indicadorDesempenho = indicadorDesempenho;
 	}
 
 	@Override

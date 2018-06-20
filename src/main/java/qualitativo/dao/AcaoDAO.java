@@ -31,12 +31,20 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 	private static final  String FUNCAO="funcao";
 	private static final  String SUBFUNCAO="subfuncao";
 	
+	private static final  String ANO= "ano";
 	private static final  String CODIGO="codigo";
 	private static final  String DESCRICAO="descricao";
 	private static final  String DENOMINACAO="denominacao";
 	private static final  String FINALIDADE="finalidade";
-	private static final  String ATIVO="ativo";
 	private static final  String ID="id";
+
+	private static final  String TIPO_HORIZONTE_TEMPORAL ="tipoHorizonteTemporal";
+	private static final  String TIPO_FORMA_IMPLEMENTACAO ="tipoFormaImplementacao";
+	private static final  String TIPO_ACAO= "tipoAcao";
+	private static final  String TIPO_ORCAMENTO= "tipoOrcamento";
+	private static final  String TIPO_CALCULO_META="tipoCalculoMeta";
+	private static final  String UNIDADE_MEDIDA="unidadeMedida";
+	private static final  String PRODUTO="produto";
 	
 	public AcaoDAO() {
 		setClazz(Acao.class);
@@ -217,7 +225,6 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 	}	
 		
-	
 	//ESSE METODO E USADO APENAS NO SIAFEM, PARA BUSCAR PELO CODIGO
 	public List<Acao> buscar(String codigo, String codigoUnidadeOrcamentaria,String codigoPrograma,Long exercicioId){
 		 
@@ -402,7 +409,6 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		return entityManager.createQuery(query).getResultList();
 	}	
 	
-	
 	public List<Acao> buscarByExercicio(Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -444,5 +450,100 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		
 		return entityManager.createQuery(query).getResultList();
 	}
+	
+	public List<Acao> exportarBI(Long exercicioId){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> root = query.from(Acao.class);
+		
+		Join<Object, Object> joinExercicio 				= root.join(EXERCICIO,JoinType.INNER);
+		Join<Object, Object> joinTipoFormaImplementacao = root.join(TIPO_FORMA_IMPLEMENTACAO,JoinType.INNER);
+		Join<Object, Object> joinHorizonteTemporal  	= root.join(TIPO_HORIZONTE_TEMPORAL,JoinType.INNER);
+		Join<Object, Object> joinTipoAcao 				= root.join(TIPO_ACAO,JoinType.INNER);
+		Join<Object, Object> joinTipoOrcamento	    	= root.join(TIPO_ORCAMENTO,JoinType.INNER);
+ 
+		
+		query.multiselect(
+						 joinExercicio.get(ANO),
+						 root.get(CODIGO),
+						 joinTipoOrcamento.get(DESCRICAO),
+						 joinTipoAcao.get(DESCRICAO),
+						 joinHorizonteTemporal.get(DESCRICAO),
+						 joinTipoFormaImplementacao.get(DESCRICAO),
+						 root.get(FINALIDADE)
+				    );
+ 
+ 			
+		query.where(
+					cb.equal(root.get(ATIVO), true),
+					cb.equal(joinExercicio.get(ID),exercicioId)
+				   );
+
+		query.groupBy(
+					  joinExercicio.get(ANO),
+					  root.get(CODIGO),
+					  joinTipoOrcamento.get(DESCRICAO),
+					  joinTipoAcao.get(DESCRICAO),
+					  joinHorizonteTemporal.get(DESCRICAO),
+					  joinTipoFormaImplementacao.get(DESCRICAO),
+					  root.get(FINALIDADE)
+				      );  
+		
+		query.orderBy(cb.asc(root.get(CODIGO)));
+		
+		return entityManager.createQuery(query).getResultList();
+	}
+	
+	
+	public List<Acao> exportarBIMetas(Long exercicioId){
+		 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
+		Root<Acao> root = query.from(Acao.class);
+		
+		Join<Object, Object> joinPrograma				= root.join(PROGRAMA,JoinType.INNER);
+		Join<Object, Object> joinUnidadeOrcamentaria  	= root.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
+		Join<Object, Object> joinTipoCalculoMeta		= root.join(TIPO_CALCULO_META,JoinType.INNER);
+		Join<Object, Object> joinUnidadeMedida	    	= root.join(UNIDADE_MEDIDA,JoinType.INNER);
+		Join<Object, Object> joinExercicio 				= root.join(EXERCICIO,JoinType.INNER);
+
+
+ 		
+		query.multiselect(
+						 joinExercicio.get(ANO),
+						 joinPrograma.get(CODIGO),
+						 root.get(ID),
+						 root.get(CODIGO),
+						 joinUnidadeOrcamentaria.get(CODIGO),
+						 root.get(PRODUTO),
+						 joinTipoCalculoMeta.get(DESCRICAO),
+						 joinUnidadeMedida.get(CODIGO),
+						 joinUnidadeMedida.get(DESCRICAO)
+				    );
+ 
+ 			
+		query.where(
+					cb.equal(root.get(ATIVO), true),
+					cb.equal(joinExercicio.get(ID),exercicioId)
+				   );
+
+		query.groupBy(
+						 joinExercicio.get(ANO),
+						 joinPrograma.get(CODIGO),
+						 root.get(ID),
+						 root.get(CODIGO),
+						 joinUnidadeOrcamentaria.get(CODIGO),
+						 root.get(PRODUTO),
+						 joinTipoCalculoMeta.get(DESCRICAO),
+						 joinUnidadeMedida.get(CODIGO),
+						 joinUnidadeMedida.get(DESCRICAO)
+				      );  
+		
+		query.orderBy(cb.asc(joinPrograma.get(CODIGO)));
+		
+		return entityManager.createQuery(query).getResultList();
+	}	
+	
 	
 }

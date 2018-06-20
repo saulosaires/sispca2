@@ -27,6 +27,9 @@ public class TipoPrograma extends Model {
 	@Column(name="id_tipo_programa")
 	private Long id;
  
+	@Column(name="codigo")
+	private String codigo;
+	
 	@Column(name="descricao")
 	private String descricao;
 	 
@@ -60,6 +63,14 @@ public class TipoPrograma extends Model {
 
 	public void setProgramas(List<Programa> programas) {
 		this.programas = programas;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}	
  
  

@@ -62,6 +62,8 @@ public class Agendador implements Serializable{
 
 			}
 		}
+		
+		
 	}
 
 	public static void finaliza() throws SchedulerException {

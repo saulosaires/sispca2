@@ -55,7 +55,10 @@ public class ProgramaService extends AbstractService<Programa>  {
 
 	}
 
-	 
+	public List<Programa> exportarBI(Long exercicioId) {
+		
+		return dao().exportarBI(exercicioId);
+	}
 
 	
 }

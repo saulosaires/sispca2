@@ -18,6 +18,7 @@ import qualitativo.model.Acao;
 import qualitativo.model.Mes;
 import qualitativo.model.Orgao;
 import qualitativo.model.Programa;
+import qualitativo.model.TipoCalculoMeta;
 import qualitativo.model.UnidadeMedida;
 import qualitativo.model.UnidadeOrcamentaria;
 import quantitativo.model.Municipio;
@@ -127,6 +128,50 @@ public class Execucao extends Model implements  Auditable {
 		this.acao.getUnidadeOrcamentaria().setOrgao(new Orgao());
 		this.acao.getUnidadeOrcamentaria().getOrgao().setCodigo(orgaoCodigo);
 		this.acao.getUnidadeOrcamentaria().getOrgao().setDescricao(orgaoDescricao);
+		
+	}
+ 
+	
+//exportar BI
+	public Execucao(
+			  		Long mesId,
+			  		Integer ano,
+			  		String programaCodigo,
+			  		Long acaoId,
+			  		String acaoCodigo,
+			  		String unidadeOrcamentariaCodigo,
+			  		String acaoProduto,
+			  		String tipoCalculoMetaDescricao,
+			  		Integer unidadeMedidaCodigo,
+			  		String unidadeMedidaDescricao, 
+			  		BigDecimal quantidade
+					) {
+		
+		mes = new Mes(mesId);
+		
+		exercicio = new Exercicio();
+		exercicio.setAno(ano);
+		
+		acao = new Acao();
+		acao.setId(acaoId);
+		acao.setCodigo(acaoCodigo);
+		
+		acao.setPrograma(new Programa());
+		acao.getPrograma().setCodigo(programaCodigo);
+		
+		acao.setUnidadeOrcamentaria(new UnidadeOrcamentaria());
+		acao.getUnidadeOrcamentaria().setCodigo(unidadeOrcamentariaCodigo);
+		
+		acao.setProduto(acaoProduto);
+		
+		acao.setTipoCalculoMeta(new TipoCalculoMeta());
+		acao.getTipoCalculoMeta().setDescricao(tipoCalculoMetaDescricao);
+		
+		acao.setUnidadeMedida(new UnidadeMedida());
+		acao.getUnidadeMedida().setCodigo(unidadeMedidaCodigo);
+		acao.getUnidadeMedida().setDescricao(unidadeMedidaDescricao);
+		
+		this.quantidade = quantidade;
 		
 	}
 	

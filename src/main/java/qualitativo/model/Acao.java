@@ -1,5 +1,6 @@
 package qualitativo.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -96,9 +97,7 @@ public class Acao extends Model implements  Auditable {
 	@Column(name="tipo_acao",length=4)
 	private String tipoAcaoDep;
 
-	@Column(name="tipo_orcamento",length=4)
-	private String tipoOrcamentoDep;
-
+ 
 	@Column(name="valores",length=10000)
 	private String valores;
 
@@ -157,9 +156,12 @@ public class Acao extends Model implements  Auditable {
  
 	@ManyToOne
 	@JoinColumn(name="id_exercicio") 
-//	@NotNull(message="exercicio: campo é obrigatório")
+//	@NotNull(message="exercicio: campo é obrigatório") //TODO deve ser obrigatorio
 	private Exercicio exercicio;
  	
+	private transient BigDecimal quantidadePlanejado;
+	
+	
 	public Acao() {}
 	
 	public Acao(Long id) {
@@ -212,8 +214,7 @@ public class Acao extends Model implements  Auditable {
 	
 
 }
-	
-	
+		
 	public Acao(String orgaoCodigo,
 			    String orgaoDescricao,
 			    String unidadeOrcamentariaCodigo,
@@ -246,6 +247,80 @@ public class Acao extends Model implements  Auditable {
  
 	}
 	
+	//EXPORTAR BI
+	public Acao(
+				Integer exercicioAno,
+			  
+				String codigo,
+				String tipoOrcamentoDescricao,
+				String tipoAcaoDescricao,
+				String horizonteTemporalDescricao,
+				String tipoFormaImplementacaoDescricao,
+				String finalidade
+			
+				) {
+		
+		exercicio = new Exercicio();
+		exercicio.setAno(exercicioAno);
+		
+		
+		this.codigo =codigo;
+		
+		tipoOrcamento = new TipoOrcamento();
+		tipoOrcamento.setDescricao(tipoOrcamentoDescricao);
+		
+		tipoAcao = new TipoAcao();
+		tipoAcao.setDescricao(tipoAcaoDescricao);
+		
+		tipoHorizonteTemporal = new TipoHorizonteTemporal();
+		tipoHorizonteTemporal.setDescricao(horizonteTemporalDescricao);
+		
+		
+		tipoFormaImplementacao = new TipoFormaImplementacao();
+		tipoFormaImplementacao.setDescricao(tipoFormaImplementacaoDescricao);
+		
+		this.finalidade=finalidade;
+	}
+
+	//EXPORTAR BI METAS
+	public Acao(
+				 Integer exercicioAno,
+				 String programaCodigo,
+				 Long acaoId,
+				 String acaoCodigo,
+				 String unidadeOrcamentariaCodigo,
+				 String acaoProduto,
+				 String tipoCalculoMetaDescricao,
+				 Integer unidadeMedidaCodigo,
+				 String unidadeMedidaDescricao
+			   ) {
+		
+		
+		this.id=acaoId;
+		this.codigo = acaoCodigo;
+		this.produto = acaoProduto;
+		
+		exercicio = new Exercicio();
+		exercicio.setAno(exercicioAno);
+		
+		programa = new Programa();
+		programa.setCodigo(programaCodigo);
+		
+		unidadeOrcamentaria = new UnidadeOrcamentaria();
+		unidadeOrcamentaria.setCodigo(unidadeOrcamentariaCodigo);
+		
+		
+		tipoCalculoMeta = new TipoCalculoMeta();
+		tipoCalculoMeta.setDescricao(tipoCalculoMetaDescricao);
+		
+		unidadeMedida = new UnidadeMedida();
+		unidadeMedida.setCodigo(unidadeMedidaCodigo);
+		unidadeMedida.setDescricao(unidadeMedidaDescricao);
+		
+		
+		
+		
+	}
 	
 	public Long getId() {
 		return id;
@@ -467,14 +542,7 @@ public class Acao extends Model implements  Auditable {
 		this.tipoHorizonteTemporal = tipoHorizonteTemporal;
 	}	
 
-	public String getTipoOrcamentoDep() {
-		return tipoOrcamentoDep;
-	}
-
-	public void setTipoOrcamentoDep(String tipoOrcamentoDep) {
-		this.tipoOrcamentoDep = tipoOrcamentoDep;
-	}
-
+ 
 	public TipoOrcamento getTipoOrcamento() {
 		return tipoOrcamento;
 	}
@@ -532,7 +600,16 @@ public class Acao extends Model implements  Auditable {
 		this.exercicio = exercicio;
 	}
 
+	
  
+	public BigDecimal getQuantidadePlanejado() {
+		return quantidadePlanejado;
+	}
+
+	public void setQuantidadePlanejado(BigDecimal quantidadePlanejado) {
+		this.quantidadePlanejado = quantidadePlanejado;
+	}
+
 	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();

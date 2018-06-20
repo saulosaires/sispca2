@@ -11,6 +11,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.SetJoin;
 
@@ -259,13 +260,24 @@ public class FisicoFinanceiroMensalDAO extends AbstractDAO<FisicoFinanceiroMensa
 		 
 		criteria.select(builder.sum(quantidade));
 		
-		criteria.where(
-					   builder.equal(joinMes.get(ID),mes ),
-					   builder.equal(joinExercicio.get(ID),exercicio ),
-					   builder.equal(joinAcao.get(ID),acao )
-					   );
-  
- 
+		List<Predicate> predicate = new ArrayList<>();
+		
+   
+		if(!Utils.invalidId(mes)){
+			predicate.add( builder.equal(joinMes.get(ID),mes ));
+		}
+
+		if(!Utils.invalidId(exercicio)){
+			predicate.add(   builder.equal(joinExercicio.get(ID),exercicio ));
+		}
+
+		if(!Utils.invalidId(acao)){
+			predicate.add( builder.equal(joinAcao.get(ID),acao ));
+		}
+
+		
+		criteria.where(predicate.toArray(new Predicate[predicate.size()]));
+		
 	    return  entityManager.createQuery(criteria).getSingleResult();
 		
 		

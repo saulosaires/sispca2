@@ -15,7 +15,7 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 	* 
 	*/
 	private static final long serialVersionUID = 1L;
-
+	protected static final  String ATIVO="ativo";
 	private Class<T> clazz;
 
 	public static final EntityManager entityManager;

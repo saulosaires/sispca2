@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<jboss-web >  
+   <context-root>/</context-root>  
+<!--      <virtual-host>sispca.seplan.ma.gov.br</virtual-host>       -->
+     <virtual-host>homologa.sispca.seplan.ma.gov.br</virtual-host>      
+</jboss-web>  

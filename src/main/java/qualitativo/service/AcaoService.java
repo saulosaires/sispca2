@@ -10,6 +10,7 @@ import arquitetura.service.AbstractService;
 import arquitetura.utils.Utils;
 import qualitativo.dao.AcaoDAO;
 import qualitativo.model.Acao;
+import quantitativo.service.FisicoFinanceiroMensalService;
 
 public class AcaoService  extends AbstractService<Acao> {
 
@@ -18,10 +19,13 @@ public class AcaoService  extends AbstractService<Acao> {
 	 */
 	private static final long serialVersionUID = 2854975367734660857L;
  
-
+	FisicoFinanceiroMensalService fisicoFinanceiroMensalService;
+	
 	@Inject
-	public AcaoService(AcaoDAO dao) {
+	public AcaoService(AcaoDAO dao, FisicoFinanceiroMensalService fisicoFinanceiroMensalService) {
 		super(dao);
+		
+		this.fisicoFinanceiroMensalService= fisicoFinanceiroMensalService;
 	}
 
 	private AcaoDAO dao() {
@@ -120,5 +124,26 @@ public class AcaoService  extends AbstractService<Acao> {
 		}
 
 	}	
+	
+	
+	public List<Acao> exportarBI(Long exercicioId){
+		return dao().exportarBI(exercicioId);
+	}
+
+	public List<Acao> exportarBIMetas(Long exercicioId){
+		
+		List<Acao> listAcao = dao().exportarBIMetas(exercicioId);
+		
+		for(Acao acao :listAcao) {
+			
+			acao.setQuantidadePlanejado(fisicoFinanceiroMensalService.calculaPlanejamentoByExercicioAndAcao(exercicioId, acao.getId()));
+			
+		}
+		
+		
+		return listAcao;
+	}
+
+	
 	
 }

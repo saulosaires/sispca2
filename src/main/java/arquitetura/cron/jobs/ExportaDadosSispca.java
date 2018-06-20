@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+
+import javax.enterprise.inject.spi.CDI;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -12,10 +15,16 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import administrativo.model.Exercicio;
+import administrativo.service.ExercicioService;
 import arquitetura.utils.CSVUtils;
 import arquitetura.utils.SispcaLogger;
+import monitoramento.model.Execucao;
+import monitoramento.service.ExecucaoService;
 import qualitativo.model.Acao;
 import qualitativo.model.Programa;
+import qualitativo.service.AcaoService;
+import qualitativo.service.ProgramaService;
 
  
 
@@ -30,50 +39,78 @@ public class ExportaDadosSispca    implements Job{
 	//public static String DiretorioServidor = "/var/sispca-documents/tmp/";
 	public static String DiretorioServidor = "";
 	
-	public static final String acao = "acao_sispca_2017.csv";
-	public static final String programa = "programa_sispca_2017.csv";
-	public static final String meta = "elaboracao_meta_fisica_sispca_2017.csv";
-	public static final String execucao = "execucao_meta_fisica_sispca_2017.csv";
+	public static String acao = "acao_sispca_ANO.csv";
+	public static String programa = "programa_sispca_ANO.csv";
+	public static String meta = "elaboracao_meta_fisica_sispca_ANO.csv";
+	public static String execucao = "execucao_meta_fisica_sispca_ANO.csv";
 
+	private AcaoService acaoService;
+	private ProgramaService programaService;
+	private ExecucaoService execucaoService;
+	private ExercicioService exercicioService;
+	
+	 private  Exercicio exercicio ;
+	
+	public ExportaDadosSispca(){
+		
+		acaoService 	 = CDI.current().select(AcaoService.class).get();
+		programaService  = CDI.current().select(ProgramaService.class).get();
+		execucaoService  = CDI.current().select(ExecucaoService.class).get();
+		exercicioService = CDI.current().select(ExercicioService.class).get();
+		
+		Optional<Exercicio> exerc = exercicioService.exercicioVigente();
+		
+		if(exerc.isPresent()) {
+			exercicio = exerc.get();
+		} 
+
+		
+		acao 	 = acao.replace(	"ANO", exercicio.getAno().toString());
+		programa = programa.replace("ANO", exercicio.getAno().toString());
+		meta 	 = meta.replace(	"ANO", exercicio.getAno().toString());
+		execucao = execucao.replace("ANO", exercicio.getAno().toString());
+		
+	}
+	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 
-//		List<Acao> listAcao = new AcaoDao().retornaAcaoPorAno(2017);
-//		List<Programa> listPrograma = new ProgramaDao().retornaProgramas();
-//		List<ElaboracaoMetaFisica> listMeta = new AcaoDao().retornaMetaByAcao(2017);
-//		List<ExecucaoMetaFisica> listExecucao = new AcaoDao().retornaExecucaoByAno(2017);
-//		
-//		FTPClient ftpClient = conexaoFTP(ftpServer, user, pass);
-//		try {
-//			
-//			File arquivoAcao = new File(DiretorioServidor +acao);
-//			File arquivoPrograma = new File(DiretorioServidor + programa);
-//			File arquivoMeta = new File(DiretorioServidor + meta);
-//			File arquivoExecucao = new File(DiretorioServidor +execucao);
-//			
-//			CSVUtils.generateCsvFile(arquivoAcao, listAcao, Acao.class);
-//			CSVUtils.generateCsvFile(arquivoPrograma, listPrograma, Programa.class);
-//			CSVUtils.generateCsvFile(arquivoMeta, listMeta, ElaboracaoMetaFisica.class);
-//			CSVUtils.generateCsvFile(arquivoExecucao, listExecucao, ExecucaoMetaFisica.class);
-//			
-//			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoAcao);
-//			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoPrograma);
-//			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoMeta);
-//			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoExecucao);
-//			
-//			SispcaLogger.logWarn("Exportação arquivos sispca 2017 com sucesso!");
-//			
-//			removeArq(arquivoAcao);
-//			removeArq(arquivoPrograma);
-//			removeArq(arquivoMeta);
-//			removeArq(arquivoExecucao);
-// 			
-//			ftpClient.logout();
-//			ftpClient.disconnect();
-//		} catch (IOException e) {
-//			SispcaLogger.logError("Erro ao exportar arquivos sispca para ftp");
-//			SispcaLogger.logError(e);
-//		}
+		List<Acao> listAcao = acaoService.exportarBI(exercicio.getId());
+		List<Programa> listPrograma = programaService.exportarBI(exercicio.getId());
+		List<Acao> listMeta = acaoService.exportarBIMetas(exercicio.getId());
+		List<Execucao> listExecucao =execucaoService.exportarBI(exercicio.getId());
+		
+		FTPClient ftpClient = conexaoFTP(ftpServer, user, pass);
+		try {
+			
+			File arquivoAcao = new File(DiretorioServidor +acao);
+			File arquivoPrograma = new File(DiretorioServidor + programa);
+			File arquivoMeta = new File(DiretorioServidor + meta);
+			File arquivoExecucao = new File(DiretorioServidor +execucao);
+			
+			CSVUtils.generateCsvFile(arquivoAcao, listAcao, Acao.class);
+			CSVUtils.generateCsvFile(arquivoPrograma, listPrograma, Programa.class);
+			CSVUtils.generateCsvFile(arquivoMeta, listMeta, Acao.class);
+			CSVUtils.generateCsvFile(arquivoExecucao, listExecucao, Execucao.class);
+			
+			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoAcao);
+			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoPrograma);
+			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoMeta);
+			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoExecucao);
+			
+			SispcaLogger.logWarn("Exportação arquivos sispca com sucesso!");
+			
+			removeArq(arquivoAcao);
+			removeArq(arquivoPrograma);
+			removeArq(arquivoMeta);
+			removeArq(arquivoExecucao);
+ 			
+			ftpClient.logout();
+			ftpClient.disconnect();
+		} catch (IOException e) {
+			SispcaLogger.logError("Erro ao exportar arquivos sispca para ftp");
+			SispcaLogger.logError(e);
+		}
 		
 		
 	}

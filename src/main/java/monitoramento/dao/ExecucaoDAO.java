@@ -28,6 +28,7 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 	private static final long serialVersionUID = 1L;
 
 	private static final  String ACAO="acao"; 
+	private static final  String ANO="ano"; 
 	private static final  String UNIDADE_ORCAMENTARIA="unidadeOrcamentaria"; 
 	private static final  String UNIDADE_GESTORA="unidadeGestoras";
 	private static final  String VALOR="valor";
@@ -39,6 +40,7 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 	private static final  String REGIAO_MUNICIPIO= "regiaoMunicipio";
 	private static final  String QUANTIDADE="quantidade";
 	private static final  String UNIDADE_MEDIDA="unidadeMedida"; 
+	private static final  String TIPO_CALCULO_META="tipoCalculoMeta";
 	private static final  String ORGAO= "orgao";
 	private static final  String PROGRAMA="programa"; 
 	private static final  String MUNICIPIO= "municipio";
@@ -300,6 +302,65 @@ public class ExecucaoDAO extends AbstractDAO<Execucao> {
 		
 		
 	}
+	
+	
+	public List<Execucao> exportarBI(Long exercicioId) {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Execucao> query = cb.createQuery(Execucao.class);
+		Root<Execucao> m = query.from(Execucao.class);
+
+		Join<Object, Object> joinAcao 			 = m.join(ACAO, JoinType.INNER);
+		Join<Object, Object> joinExercicio 		 = m.join(EXERCICIO, JoinType.INNER);
+		Join<Object, Object> joinPrograma 		 = joinAcao.join(PROGRAMA, JoinType.INNER);
+		Join<Object, Object> joinUO 			 = joinAcao.join(UNIDADE_ORCAMENTARIA, JoinType.INNER);
+		Join<Object, Object> joinTipoCalculoMeta = joinAcao.join(TIPO_CALCULO_META,JoinType.INNER);
+		Join<Object, Object> joinUnidadeMedida   = joinAcao.join(UNIDADE_MEDIDA,JoinType.INNER);
+		Join<Object, Object> joinMes			 = m.join(MES,JoinType.INNER);
+ 
+		
+		query.multiselect(
+							joinMes.get(ID),
+							joinExercicio.get(ANO),
+							joinPrograma.get(CODIGO),
+							joinAcao.get(ID),
+							joinAcao.get(CODIGO),
+							joinUO.get(CODIGO),
+							joinAcao.get(PRODUTO),
+							joinTipoCalculoMeta.get(DESCRICAO),
+							joinUnidadeMedida.get(CODIGO),
+							joinUnidadeMedida.get(DESCRICAO),
+							cb.sum(m.get(QUANTIDADE))
+				          );	
+		
+ 		
+	 
+		query.where(
+					cb.equal(joinExercicio.get(ID), exercicioId),
+					cb.greaterThan(m.get(QUANTIDADE),0)
+					);
+ 
+		query.groupBy(
+						joinMes.get(ID),
+						joinExercicio.get(ANO),
+						joinPrograma.get(CODIGO),
+						joinAcao.get(ID),
+						joinAcao.get(CODIGO),
+						joinUO.get(CODIGO),
+						joinAcao.get(PRODUTO),
+						joinTipoCalculoMeta.get(DESCRICAO),
+						joinUnidadeMedida.get(CODIGO),
+						joinUnidadeMedida.get(DESCRICAO),
+						cb.sum(m.get(QUANTIDADE))
+				);
+
+		query.orderBy( cb.asc(joinAcao.get(CODIGO)) );
+
+
+		return entityManager.createQuery(query).setMaxResults(1).getResultList();
+
+	}
+
 	
 	
 }

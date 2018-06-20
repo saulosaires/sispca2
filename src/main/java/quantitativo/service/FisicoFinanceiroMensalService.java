@@ -123,5 +123,11 @@ public class FisicoFinanceiroMensalService extends AbstractService<FisicoFinance
 		return detalhamentoAcaoFinanceiroMensal;
 	}
 	
+	public BigDecimal calculaPlanejamentoByExercicioAndAcao( Long exercicio,Long acao){
+		
+		return dao().calculaPlanejamentoMensalByMesAndExercicioAndAcao(null, exercicio,acao);
+		
+	}
+	
 	
 }
