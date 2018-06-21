@@ -2,11 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>sispca2</groupId>
-	<artifactId>sispca2</artifactId>
+	<groupId>sispca</groupId>
+	<artifactId>sispca</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sispca2 Maven Webapp</name>
+	<name>sispca Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 
@@ -156,7 +156,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>sispca2</finalName>
+		<finalName>sispca</finalName>
 
 		<pluginManagement>
 			<plugins>

@@ -1,83 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:web="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
-	<display-name>Archetype Created Web Application</display-name>
-
-	<welcome-file-list>
-		<welcome-file>public/login.xhtml</welcome-file>
-	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>errorServlet</servlet-name>
-		<servlet-class>arquitetura.servlet.ErrorHttpServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>Faces Servlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>bootstrap</param-value>
-	</context-param>
-
-	<context-param>
-		<description>State saving method: 'client' or 'server' (=default). See
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+    <welcome-file>public/login.xhtml</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>errorServlet</servlet-name>
+    <servlet-class>arquitetura.servlet.ErrorHttpServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>bootstrap</param-value>
+  </context-param>
+  <context-param>
+    <description>State saving method: 'client' or 'server' (=default). See
 			JSF Specification 2.5.2</description>
-		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-		<param-value>server</param-value>
-	</context-param>
-	
- <listener>
-  <listener-class>arquitetura.cron.IniciaAgenda</listener-class>
- </listener>
- 
-	<filter>
-		<filter-name>PrimeFaces FileUpload Filter</filter-name>
-		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>PrimeFaces FileUpload Filter</filter-name>
-		<servlet-name>Faces Servlet</servlet-name>
-	</filter-mapping>
-
-	<servlet-mapping>
-		<servlet-name>errorServlet</servlet-name>
-		<url-pattern>/errorServlet</url-pattern>
-	</servlet-mapping>
-	<session-config>
-		<session-timeout>180</session-timeout>
-	</session-config>
-
-	<error-page>
-		<error-code>404</error-code>
-		<location>/errorServlet</location>
-	</error-page>
-	<error-page>
-		<error-code>403</error-code>
-		<location>/errorServlet</location>
-	</error-page>
-	<error-page>
-		<exception-type>javax.servlet.ServletException</exception-type>
-		<location>/errorServlet</location>
-	</error-page>
-
-	<error-page>
-		<exception-type>java.io.IOException</exception-type>
-		<location>/errorServlet</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/errorServlet</location>
-	</error-page>
-
-
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>server</param-value>
+  </context-param>
+  <listener>
+    <listener-class>arquitetura.cron.IniciaAgenda</listener-class>
+  </listener>
+  <filter>
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+    <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+  </filter-mapping>
+  <servlet-mapping>
+    <servlet-name>errorServlet</servlet-name>
+    <url-pattern>/errorServlet</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>180</session-timeout>
+  </session-config>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorServlet</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/errorServlet</location>
+  </error-page>
+  <error-page>
+    <exception-type>javax.servlet.ServletException</exception-type>
+    <location>/errorServlet</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.io.IOException</exception-type>
+    <location>/errorServlet</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/errorServlet</location>
+  </error-page>
 </web-app>

@@ -21,7 +21,7 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 	public static final EntityManager entityManager;
 
 	static {
-		entityManager = Persistence.createEntityManagerFactory("sispca2").createEntityManager();
+		entityManager = Persistence.createEntityManagerFactory("sispca").createEntityManager();
 	}
 
 	public final void setClazz(Class<T> clazzToSet) {

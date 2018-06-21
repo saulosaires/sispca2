@@ -33,7 +33,7 @@ public class MenuMBean implements Serializable{
 	
  
 	String[][] arr= {
-					 {"/sispca2/",""},
+					 {"/sispca/",""},
 					 {"public/",""},
 					 { "private/",""},
 					 {".xhtml",""},
