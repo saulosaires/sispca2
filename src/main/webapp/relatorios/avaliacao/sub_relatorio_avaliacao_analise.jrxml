@@ -98,7 +98,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" mode="Opaque" x="0" y="2" width="802" height="12" backcolor="#F0F0F0" uuid="69e1018b-cf87-4397-8d0f-55a3ee32ba3b"/>
 				<textElement markup="html">
-					<font fontName="Arial" size="8" pdfFontName="Helvetica-Bold"/>
+					<font fontName="SansSerif" size="8" pdfFontName="Helvetica-Bold"/>
 					<paragraph leftIndent="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{exercicioTopicoAnalise}.getTopicoAnalise().getDescricao()]]></textFieldExpression>
@@ -106,7 +106,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="0" y="14" width="799" height="15" uuid="f98185e4-8b5b-45ac-8f69-c448a53c84ee"/>
 				<textElement textAlignment="Justified">
-					<font size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{resposta}]]></textFieldExpression>
 			</textField>

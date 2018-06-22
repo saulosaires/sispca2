@@ -70,21 +70,21 @@
 			<staticText>
 				<reportElement x="80" y="2" width="722" height="14" uuid="a59fcf0a-0450-4a96-975c-f3e428fbf54f"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					<font fontName="SansSerif" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[Governo do Estado do Maranhão]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="80" y="16" width="723" height="14" uuid="b0f9b314-13d9-41a3-911c-bccb2b470f86"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					<font fontName="SansSerif" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[Secretaria de Estado do Planejamento e Orçamento]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="80" y="31" width="723" height="16" uuid="c8f0fcce-9ccf-40e2-b1c3-b330a37b1ab1"/>
 				<textElement verticalAlignment="Middle" markup="html">
-					<font fontName="Arial" isBold="true" pdfFontName="Helvetica-Bold"/>
+					<font fontName="SansSerif" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Relatório de Avaliação do "+$P{param_ppa}+" - Exercício "+$P{param_ano}]]></textFieldExpression>
 			</textField>

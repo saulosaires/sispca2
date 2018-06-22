@@ -275,7 +275,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 
 			 
 				
-				FileUtil.sendFileOnResponse(bytes,"Relatorio_Financeiro_Detalhamento.pdf", TipoArquivo.PDF.getId(),"");
+				FileUtil.sendFileOnResponseAttached(bytes,"Relatorio_Financeiro_Detalhamento.pdf", TipoArquivo.PDF.getId());
 				
 			 
 		} catch (Exception e) {

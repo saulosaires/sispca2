@@ -72,7 +72,7 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" mode="Opaque" x="0" y="4" width="802" height="12" backcolor="#F0F0F0" uuid="69e1018b-cf87-4397-8d0f-55a3ee32ba3b"/>
 				<textElement markup="html">
-					<font fontName="Arial" size="8" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 					<paragraph leftIndent="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{exercicioTopicoAvaliacao}.getTopicoAvaliacao().getDescricao()]]></textFieldExpression>

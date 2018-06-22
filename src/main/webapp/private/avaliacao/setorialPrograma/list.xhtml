@@ -173,7 +173,7 @@
  
 														 
 								<p:column headerText="Acomp" width="4%"  rendered="#{avaliacaoProgramaMBean.avaliacaoSetorialRelatorio}">
-									<h:commandButton image="/resources/images/icone-pdf.gif"  actionListener="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" title="Acompanhamento da avaliação para o programa"  onclick="this.form.target='_blank'"  style="margin-left: 2%; width: 20px; height: 20px;">
+									<h:commandButton image="/resources/images/icone-pdf.gif"  actionListener="#{avaliacaoProgramaMBean.gerarRelatorio(prog)}" title="Acompanhamento da avaliação para o programa"   style="margin-left: 2%; width: 20px; height: 20px;">
 									     <f:param name="id" value="#{prog.id}" /> 
 									</h:commandButton>
 								</p:column>								
