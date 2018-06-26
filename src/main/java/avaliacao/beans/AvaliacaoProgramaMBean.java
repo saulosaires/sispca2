@@ -229,10 +229,11 @@ public class AvaliacaoProgramaMBean implements Serializable {
 				
 				JasperPrint jasperRelatorio = buildReport( programa,page) ;
 				
-				if(jasperRelatorio!=null)
+				if(jasperRelatorio!=null) {
 					page+=jasperRelatorio.getPages().size();
 				
-				jasperPrints.add(jasperRelatorio);
+					jasperPrints.add(jasperRelatorio);
+				}
 			}
 		
 		 
@@ -248,7 +249,7 @@ public class AvaliacaoProgramaMBean implements Serializable {
 			byte[] bytes = out.toByteArray();
 			
 
-			FileUtil.sendFileOnResponse(bytes,"Relatorio_Financeiro_Detalhamento.pdf", TipoArquivo.PDF.getId(),"");
+			FileUtil.sendFileOnResponseAttached(bytes,"Relatorio_Financeiro_Detalhamento.pdf", TipoArquivo.PDF.getId());
 		} catch (Exception e) {
 			
 			SispcaLogger.logError(e);

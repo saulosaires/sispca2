@@ -4,8 +4,8 @@
              version="2.0">
    <persistence-unit name="sispca" transaction-type="RESOURCE_LOCAL">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      <jta-data-source>java:/sispcaDS_homol2</jta-data-source>
-<!--             <jta-data-source>java:/PostgresDS_HOMOL</jta-data-source> -->
+<!--       <jta-data-source>java:/sispcaDS_homol2</jta-data-source> -->
+            <jta-data-source>java:/PostgresDS_HOMOL</jta-data-source>
    
       <class>arquitetura.model.Model</class>
     

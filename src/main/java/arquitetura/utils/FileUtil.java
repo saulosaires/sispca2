@@ -41,6 +41,8 @@ public class FileUtil {
 		File file = new File(sb.toString());
 		boolean created= file.createNewFile();
  		
+		if(!created)return "";
+		
 		Path path = Paths.get(file.getAbsolutePath());
 
 		
@@ -98,8 +100,6 @@ public class FileUtil {
 		return file;
 
 	}
-
-	
 	
 	public static void sendFileOnResponseAttached(byte[] bytes, String name, String contentType) throws IOException {
 		
@@ -123,25 +123,5 @@ public class FileUtil {
 	}
 
 	
-	public static void sendFileOnResponse(byte[] bytes, String name, String contentType,String param) throws IOException {
-		
-		if (bytes != null && bytes.length>0){
-		
-			FacesContext context = FacesContext.getCurrentInstance();
-			
-			HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();	    
-			
-			response.setContentType(contentType);				
-			response.setHeader("Content-disposition", param+"; filename="+name);
-			response.setContentLength(bytes.length);
-			ServletOutputStream outputStream = response.getOutputStream();				
-			outputStream.write(bytes, 0, bytes.length);
-			outputStream.flush();
-			outputStream.close();
-			
-			context.responseComplete(); 	
-	   }
-		
-	}	
-	
+
 }
