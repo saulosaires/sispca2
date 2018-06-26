@@ -5,7 +5,7 @@
    <persistence-unit name="sispca" transaction-type="RESOURCE_LOCAL">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
 <!--       <jta-data-source>java:/sispcaDS_homol2</jta-data-source> -->
-            <jta-data-source>java:/PostgresDS_HOMOL</jta-data-source>
+ 		   <jta-data-source>java:/PostgresDS_HOMOL</jta-data-source>
    
       <class>arquitetura.model.Model</class>
     
@@ -83,8 +83,8 @@
       <properties>
  
  		 <property  name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
-		 <property name="hibernate.show_sql"   value="true"/>
-		 <property name="hibernate.format_sql" value="true"/>
+<!-- 		 <property name="hibernate.show_sql"   value="true"/> -->
+<!-- 		 <property name="hibernate.format_sql" value="true"/> -->
 		
 <!-- 		 <property name="hibernate.hbm2ddl.auto" value="update"/> -->
 		

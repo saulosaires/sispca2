@@ -83,9 +83,9 @@
 					<font fontName="SansSerif" size="8"/>
 					<paragraph leftIndent="5" spacingBefore="2" spacingAfter="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<b>Dotação Orçamentária (R$ 1,00)  Inicial:</b> "+ $P{param_dot_inicial}+
-"      <b>Atual: </b>"+$P{param_dot_atual}+
-"      <b> Variação(%):</b> "+$P{param_variacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<b>Dotação Orçamentária (R$ 1,00)  Inicial:</b> "+ new DecimalFormat("#,##0.00").format($P{param_dot_inicial})+
+"      <b>Atual: </b>"+ new DecimalFormat("#,##0.00").format($P{param_dot_atual})+
+"      <b> Variação(%):</b> "+ new DecimalFormat("#,##0.00").format($P{param_variacao})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="-20" y="-3" width="802" height="20" forecolor="#FEFEFE" backcolor="#465A7F" uuid="56fd9096-2a96-4cc1-8e91-814adcf6d7a8"/>

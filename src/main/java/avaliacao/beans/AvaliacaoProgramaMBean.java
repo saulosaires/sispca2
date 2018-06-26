@@ -218,6 +218,8 @@ public class AvaliacaoProgramaMBean implements Serializable {
 		
 		try {
 			
+			
+			
 			if(pages==null) {
 				pages=1;
 			}
@@ -250,11 +252,11 @@ public class AvaliacaoProgramaMBean implements Serializable {
 			
 
 			FileUtil.sendFileOnResponseAttached(bytes,"Relatorio_Financeiro_Detalhamento.pdf", TipoArquivo.PDF.getId());
+			
 		} catch (Exception e) {
 			
 			SispcaLogger.logError(e);
-			 
-			
+			 		
 			Messages.addMessageError(FAIL_REPORT);
 		}
 			
