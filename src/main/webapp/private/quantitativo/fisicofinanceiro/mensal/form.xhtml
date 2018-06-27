@@ -76,7 +76,7 @@
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 									<f:selectItems value="#{fisicoFinanceiroMensalFormMBean.listTipoRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
 									
-									<p:ajax  listener="#{fisicoFinanceiroMensalFormMBean.onChangeTipoRegiao()}" partialSubmit="true" update="inputRegiao regiaoTable" onstart="carregando();" oncomplete="completo();"/>
+									<p:ajax  listener="#{fisicoFinanceiroMensalFormMBean.onChangeTipoRegiao()}" partialSubmit="true" update="inputRegiao regiaoTable" onstart="carregando();" oncomplete="completo();initTable();"/>
 									
 								</h:selectOneMenu>
 							</div>
@@ -90,7 +90,7 @@
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
 									<f:selectItems value="#{fisicoFinanceiroMensalFormMBean.listRegioes}" var="loc" itemValue="#{loc.id}" itemLabel="#{fn:toUpperCase(loc.descricao)}" />
 									
-									<p:ajax listener="#{fisicoFinanceiroMensalFormMBean.onChangeRegiao()}"   partialSubmit="true" update="regiaoTable"  onstart="carregando();" oncomplete="completo();" />
+									<p:ajax listener="#{fisicoFinanceiroMensalFormMBean.onChangeRegiao()}"   partialSubmit="true" update="regiaoTable"  onstart="carregando();" oncomplete="completo();initTable();" />
 									
 								</h:selectOneMenu>
 							</div>
@@ -145,13 +145,10 @@
 												
 											</c:forEach>
 											
-											<td style="padding: 4px;">
+											<td  style="padding: 4px;text-align: center;vertical-align: middle;">
 											
-													<b><h:inputText 
-															class="linha quantidade form-control input-sm m-bot15"
-															style="padding: 2px 2px;font-size: 10px; text-align:right;"
-															disabled="true" value="#{rm.quantidadeTotal}">
-														</h:inputText>
+													<b><h:outputText  class="linha quantidadeTotal" value="#{rm.quantidadeTotal}" />
+														 
 													</b>
 												
 											</td>
@@ -173,13 +170,9 @@
 													</td>
 													
 												</c:forEach>
-												<td style="padding: 4px;">
+												<td  style="padding: 4px;text-align: center;vertical-align: middle;">
 													
-														<b><h:inputText 
-																class="linha valor form-control input-sm m-bot15"
-																style="padding: 2px 2px;font-size: 10px; text-align:right;"
-																disabled="true" value="#{rm.valorTotal}">
-															</h:inputText></b>
+														<b><h:outputText  class="linha valorTotal" value="#{rm.valorTotal}"/></b>
 													
 												</td>
 											</tr>
@@ -202,6 +195,9 @@
 
 
 				<script>
+				
+				  function initTable(){
+					  
 					String.prototype.replaceAll = function(target, replacement) {
 					  	return this.split(target).join(replacement);
 					};
@@ -218,13 +214,14 @@
 					};
 						
 					$('.linha').blur(function(){
- 
+  
 						var elementosQuantidade = $(this).parents('tr').children().find('input.quantidade:enabled');
 						var elementosValor = $(this).parents('tr').children().find('input.valor:enabled');
 
-						var valorFinal = $(this).parents('tr').children().find('input.valor:disabled');
-						var quantidadeFinal = $(this).parents('tr').children().find('input.quantidade:disabled');
+						var valorFinal = $(this).parents('tr').children().find('span.linha.valorTotal');
+						var quantidadeFinal = $(this).parents('tr').children().find('span.linha.quantidadeTotal');
 
+						
 						var somaQuantidade = 0;
 						for(var i = 0; i &lt; elementosQuantidade.length; i++) {
 
@@ -232,7 +229,7 @@
 							valor = valor.replaceAll('.','');
 							valor = valor.replace(',','.');
 							somaQuantidade += parseFloat(valor);
-							quantidadeFinal.val(somaQuantidade.formatMoney(2,'.',','));
+							
 						}
  
 						var somaValor = 0;
@@ -241,11 +238,14 @@
 							valor = valor.replaceAll('.','');
 							valor = valor.replace(',','.');
 							somaValor +=  parseFloat(valor);
-							valorFinal.val(somaValor.formatMoney(2,'.',','));
+							
 						}
+						
+						quantidadeFinal.text(somaQuantidade.formatMoney(2,'.',','));
+						valorFinal.text(somaValor.formatMoney(2,'.',','));
 					});
-
-					$('.linha').trigger('blur');
+				  }
+					 
 				</script>
 
 

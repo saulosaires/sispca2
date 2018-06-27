@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import arquitetura.model.Model;
+import arquitetura.utils.MathUtils;
 import monitoramento.model.Execucao;
 
 @Entity
@@ -65,12 +66,11 @@ public class RegiaoMunicipio extends Model{
 	
 	private transient BigDecimal quantidadeVigente;
 	
-	private transient BigDecimal valorTotal;
+	private transient BigDecimal valorTotal = MathUtils.getZeroBigDecimal();
 	
-	private transient BigDecimal quantidadeTotal;
+	private transient BigDecimal quantidadeTotal = MathUtils.getZeroBigDecimal();
 	
-	private transient boolean comitado;
-	
+ 	
 	private transient String label;
  
 	public RegiaoMunicipio(){
@@ -236,14 +236,7 @@ public class RegiaoMunicipio extends Model{
 	public void setQuantidadeAnterior(BigDecimal quantidadeAnterior) {
 		this.quantidadeAnterior = quantidadeAnterior;
 	}
-	@Transient
-	public boolean isComitado() {
-		return comitado;
-	}
-	@Transient
-	public void setComitado(boolean comitado) {
-		this.comitado = comitado;
-	}
+ 
 	
 	@Override
 	public String toString() {
