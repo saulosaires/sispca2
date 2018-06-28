@@ -53,7 +53,7 @@
 									styleClass="input-sm form-control">
 									<f:selectItem itemLabel="-SELECIONE-" itemValue="#{null}"/>		
 																
-									<f:selectItems var="unid" value="#{graficoFisicoFinanceiroMBean.listUnidade}" itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.codigo}" />
+									<f:selectItems var="unid" value="#{graficoFisicoFinanceiroMBean.listUnidade}" itemLabel="#{fn:toUpperCase(unid)}" itemValue="#{unid.codigo}" />
 										
 									<f:ajax event="change" execute="@this"
 										listener="#{graficoFisicoFinanceiroMBean.buscaProgramaPorUnidadeOrcamentaria()}"

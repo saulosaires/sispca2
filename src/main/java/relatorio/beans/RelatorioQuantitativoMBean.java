@@ -67,7 +67,7 @@ public class RelatorioQuantitativoMBean extends RelatorioMBean {
 	
 	public void changeUnidade() {
 		
-		listAcoes = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria);
+		listAcoes = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria,exercicioId);
 		acao=null;
 	}
 

@@ -137,7 +137,12 @@
 						
 							<h:commandButton value="Gerar Relatório" 
 								action="#{relatorioExecucaoMBean.gerarRelatorio()}"
-								style="margin-left: 2%;" styleClass="btn btn-primary"/>
+								style="margin-left: 2%;" styleClass="btnAction btn btn-primary"/>
+								
+							&nbsp;	
+						    <h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+								
+								
 					</div>
 				</div>	
 			</h:form>

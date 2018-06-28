@@ -23,9 +23,6 @@
 			<h:form>
 
 				<div class="container-fluid row-fluid">
-					<div class="span12">
-						<p:messages closable="true" />
-					</div>
 					<legend class="outBusc">Execução Financeira por Programas e Ações</legend>
 				</div>
 
@@ -58,7 +55,7 @@
 									requiredMessage="Selecione o programa"  >
 									<f:selectItem itemValue="#{null}" itemLabel="--TODOS--" />
 									<f:selectItems value="#{relatorioFisicoFinanceiroProgramaAcaoMBean.listPrograma}"
-										var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}" />
+										var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog)}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -69,8 +66,10 @@
 								<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 								<h:selectOneMenu id="idComboUoPi" value="#{relatorioFisicoFinanceiroProgramaAcaoMBean.unidadeOrcamentaria}" styleClass="input-sm form-control">
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>	
+									
 									<f:selectItems var="unid" value="#{relatorioFisicoFinanceiroProgramaAcaoMBean.listUnidadeOrcamentaria}"
-										itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.id}" />
+										itemLabel="#{fn:toUpperCase(unid)}" itemValue="#{unid.id}" />
+										
 									<f:ajax event="change" execute="@this"
 										listener="#{relatorioFisicoFinanceiroProgramaAcaoMBean.onchangeUnidadeOrcamentaria()}"
 										render="idComboPlanoFinanceiro" />
@@ -86,9 +85,12 @@
 									value="#{relatorioFisicoFinanceiroProgramaAcaoMBean.acao}"
 									styleClass="input-sm form-control"
 									requiredMessage="Selecione a ação" >
+									
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
+									
 									<f:selectItems value="#{relatorioFisicoFinanceiroProgramaAcaoMBean.listAcao}"
-										var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao.denominacao)}" />
+										var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao)}" />
+										
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -98,6 +100,11 @@
 								<h:commandLink styleClass="btnAction btn btn-primary"  
 							 		value="Gerar Relatório" 
 							 		action="#{relatorioFisicoFinanceiroProgramaAcaoMBean.gerarRelatorio()}" />
+							 
+							 &nbsp;	
+						    <h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+							 		
+							 		
 							</div>
 						</div>	
 					</div>

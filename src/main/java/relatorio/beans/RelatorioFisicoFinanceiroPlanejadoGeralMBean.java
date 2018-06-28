@@ -1,5 +1,6 @@
 package relatorio.beans;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import arquitetura.utils.OrgaoUtils;
 import arquitetura.utils.RelatorioUtil;
 import arquitetura.utils.SessionUtils;
 import arquitetura.utils.SispcaLogger;
+import arquitetura.utils.Utils;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -118,6 +120,7 @@ public class RelatorioFisicoFinanceiroPlanejadoGeralMBean  extends RelatorioMBea
 	
 	public void changeUnidade() {
 		
+		
 		listPrograma = programaService.buscarPorUnidadeOrcamentaria(unidadeOrcamentaria);
 		programa=null;
 		acao=null;
@@ -125,7 +128,14 @@ public class RelatorioFisicoFinanceiroPlanejadoGeralMBean  extends RelatorioMBea
 
 	public void changePrograma() {
 		
-		listAcao = acaoService.buscar(null, null, null, programa, exercicioId);
+		List<Long> uo=null;
+		
+		if(!Utils.invalidId(unidadeOrcamentaria)) {
+			uo = new ArrayList<>(1);
+			uo.add(unidadeOrcamentaria);
+		}
+		
+		listAcao = acaoService.buscar(null, null, uo, programa, exercicioId);
 		acao=null;
 	}
 	

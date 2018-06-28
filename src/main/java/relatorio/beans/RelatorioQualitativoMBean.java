@@ -98,19 +98,23 @@ public class RelatorioQualitativoMBean extends RelatorioMBean {
 	}
 	
 	public void changePrograma() {
-		listAcoes = acaoService.buscar(null, null, null, programa, null);
+		
+		List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+		
+		listAcoes = acaoService.buscar(null, null, listUO, programa, exercicioId);
 	}
 	
 	public void todasAcoes() {
 		
 		listAcoes = new ArrayList<>();
+		List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
 		
 		if(!Utils.invalidId(programa))
-			listAcoes.addAll(acaoService.buscar(null, null, null, programa, null));
+			listAcoes.addAll(acaoService.buscar(null, null, listUO, programa, exercicioId));
 		
 		if(!Utils.invalidId(unidadeOrcamentaria)) {
 			
-			List<Long> listUO =UoUtils.parseUO(unidadeOrcamentaria,listUnidadeOrcamentaria);
+			 
 			
 			listAcoes.addAll(acaoService.buscar(null, null, listUO, null, null));
 		}

@@ -66,7 +66,7 @@ public class RelatorioFisicoFinanceiroProgramaAcaoMBean  extends RelatorioMBean 
 
 	public void onchangeUnidadeOrcamentaria() {
 		
-		listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria);
+		listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria,exercicioId);
 	}
 
 	public void gerarRelatorio(){

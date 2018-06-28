@@ -36,7 +36,7 @@
 										<div class="span3">
 											<h:selectOneMenu id="inputMenuUO" value="#{monitoramentoFisicoFinanceiroMensalListMBean.unidadeOrcamentariaId}"  styleClass="form-control input-sm m-bot15">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>
+												<f:selectItems value="#{monitoramentoFisicoFinanceiroMensalListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo)}"/>
 												 
 											</h:selectOneMenu>											
 										</div>

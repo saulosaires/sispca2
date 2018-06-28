@@ -83,6 +83,12 @@ public class UnidadeGestora extends Model implements Auditable {
 	}
 
 	@Override
+	public String toString() {
+		 
+		return getCodigo()+" - "+ getDescricao();
+	}
+	
+	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" Unidade Gestoria Id: ").append(this.id).append(" Unidade Gestora Código: ").append(this.codigo)

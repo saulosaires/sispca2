@@ -61,12 +61,15 @@
 							<div class="col-lg-3">
 								<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 								<h:selectOneMenu value="#{relatorioMetaFisicoFinanceiroMBean.unidadeOrcamentaria}" styleClass="input-sm form-control">
+								
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>	
 									<f:selectItems var="unid" value="#{relatorioMetaFisicoFinanceiroMBean.listUnidadeOrcamentaria}"
-										itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.id}" />
+										itemLabel="#{fn:toUpperCase(unid)}" itemValue="#{unid.id}" />
+										
 									<f:ajax event="change" execute="@this"
 										listener="#{relatorioMetaFisicoFinanceiroMBean.buscaAcoesByUnidade()}"
 										render="idComboMetaFisicoAcao" />
+										
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -79,7 +82,7 @@
 									styleClass="input-sm form-control" requiredMessage="Selecione a ação" >
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
 									<f:selectItems value="#{relatorioMetaFisicoFinanceiroMBean.listAcao}"
-										var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao.denominacao)}" />
+										var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao)}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -97,6 +100,12 @@
 								<h:commandLink styleClass="btnAction btn btn-primary"  
 							 		value="Gerar Relatório" 
 							 		action="#{relatorioMetaFisicoFinanceiroMBean.gerarRelatorio()}" />
+							 		
+							 	&nbsp;	
+								<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+							 		
+							 		
+							 		
 							</div>
 						</div>	
 					</div>

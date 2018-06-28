@@ -432,27 +432,7 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 		return entityManager.createQuery(query).getResultList();
 	}
 	
-	public List<Acao> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId){
-		 
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Acao> query = cb.createQuery(Acao.class);
-		Root<Acao> m = query.from(Acao.class);
-		
-		query.select(m);
- 
- 			
-		if (!Utils.invalidId((unidadeOrcamentariaId))) {
-
-			Join<Object, Object> joinExercicio = m.join(UNIDADE_ORCAMENTARIA,JoinType.INNER);
-			joinExercicio.on(cb.equal(joinExercicio.get(ID),unidadeOrcamentariaId) );	
-		
-		}
-		  
-		query.orderBy(cb.asc(m.get(DENOMINACAO)));
-		
-		return entityManager.createQuery(query).getResultList();
-	}
-	
+ 	
 	public List<Acao> exportarBI(Long exercicioId){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

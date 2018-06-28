@@ -60,13 +60,19 @@
 							<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 							<h:selectOneMenu value="#{relatorioFisicoFinanceiroPlanejadoMBean.unidadeOrcamentaria}" styleClass="form-control input-sm">
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioFisicoFinanceiroPlanejadoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid.descricao)}"/>
+								<f:selectItems value="#{relatorioFisicoFinanceiroPlanejadoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid)}"/>
 							</h:selectOneMenu>
 						</div>
 					</div>	
 					
 					<div class="row" style="margin-top: 2%;">						
-						<h:commandButton value="Gerar Relatório" action="#{relatorioFisicoFinanceiroPlanejadoMBean.gerarRelatorio()}" style="margin-left: 2%;" styleClass="btn btn-primary"/>
+						<h:commandButton value="Gerar Relatório" action="#{relatorioFisicoFinanceiroPlanejadoMBean.gerarRelatorio()}" style="margin-left: 2%;" styleClass="btnAction btn btn-primary"/>
+						
+						 &nbsp;	
+						<h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+						
+						
+						
 					</div>
 				</div>	
 			</h:form>

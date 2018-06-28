@@ -30,7 +30,7 @@
 										<div class="span3">
 											<h:selectOneMenu id="inputMenuUnidOrc" value="#{unidadeGestoraListMBean.unidadeOrcamentaria}" styleClass="form-control input-sm">
 												<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--"/>
-												<f:selectItems value="#{unidadeGestoraListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo.descricao)}"/>		
+												<f:selectItems value="#{unidadeGestoraListMBean.listUnidadeOrcamentaria}" var="uo" itemValue="#{uo.id}" itemLabel="#{fn:toUpperCase(uo)}"/>		
 											</h:selectOneMenu>											
 										</div>
 									</div>

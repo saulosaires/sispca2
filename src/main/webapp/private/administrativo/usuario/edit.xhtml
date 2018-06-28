@@ -121,7 +121,7 @@
 								<h:outputText value="UNIDADE ORÇAMENTÁRIA:" styleClass="labelOutText" />
 								<h:selectOneMenu value="#{usuarioEditMBean.uoSelecionada}"  required="true" requiredMessage="Unidade Orçamentário: campo é obrigatório" 
 											     styleClass="form-control input-sm" >
-									<f:selectItems value="#{usuarioEditMBean.listUnidadeOrcamentaria}" var="uo" itemLabel="#{fn:toUpperCase(uo.sigla)}" itemValue="#{uo.id}" />
+									<f:selectItems value="#{usuarioEditMBean.listUnidadeOrcamentaria}" var="uo" itemLabel="#{fn:toUpperCase(uo)}" itemValue="#{uo.id}" />
 								</h:selectOneMenu>
 							</div>
 						</div>

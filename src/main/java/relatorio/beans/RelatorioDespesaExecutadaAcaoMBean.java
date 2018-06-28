@@ -75,7 +75,7 @@ public class RelatorioDespesaExecutadaAcaoMBean   extends RelatorioMBean {
 	
 	public void onChangeUnidade(){
 	
-		listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria);
+		listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria,exercicioId);
 		
 	}
 	

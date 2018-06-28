@@ -35,7 +35,7 @@
 									styleClass="labelOutText" />
 								<h:selectOneMenu value="#{relatorioQuantitativoMBean.unidadeOrcamentaria}" required="true" requiredMessage="Selecione a unidade orçamentária" styleClass="input-sm form-control">
 									<f:selectItem itemValue="#{null}" itemLabel="--SELECIONE--" />
-									<f:selectItems value="#{relatorioQuantitativoMBean.listUnidadeOrcamentaria}" var="unid" itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.id}" />
+									<f:selectItems value="#{relatorioQuantitativoMBean.listUnidadeOrcamentaria}" var="unid" itemLabel="#{fn:toUpperCase(unid)}" itemValue="#{unid.id}" />
 									
 									<f:ajax event="change" render="acoes" listener="#{relatorioQuantitativoMBean.changeUnidade()}"></f:ajax>
 								</h:selectOneMenu>
@@ -48,7 +48,7 @@
 								
 								<h:selectOneMenu id="acoes" value="#{relatorioQuantitativoMBean.acao}" styleClass="input-sm form-control" requiredMessage="Selecione a ação" >
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--" />
-									<f:selectItems value="#{relatorioQuantitativoMBean.listAcoes}" var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao.denominacao)}" />
+									<f:selectItems value="#{relatorioQuantitativoMBean.listAcoes}" var="acao" itemValue="#{acao.id}" itemLabel="#{fn:toUpperCase(acao)}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -59,6 +59,12 @@
 								<h:commandLink styleClass="btnAction btn btn-primary"  
 							 		value="Gerar Relatório" 
 							 		action="#{relatorioQuantitativoMBean.gerarRelatorio()}" />
+							 		
+							    &nbsp;	
+						       <h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+							 		
+							 		
+							 		
 							</div>
 						</div>	
 					</div>

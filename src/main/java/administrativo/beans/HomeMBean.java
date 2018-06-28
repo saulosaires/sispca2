@@ -166,7 +166,7 @@ public class HomeMBean implements Serializable{
 	public void changeUnidadeOrcamentaria() {
 		
 		if(!Utils.invalidId(unidadeOrcamentariaId))
-			listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentariaId);
+			listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentariaId,exercicioVigenteId);
 		
 		montarGrafico();
 	}

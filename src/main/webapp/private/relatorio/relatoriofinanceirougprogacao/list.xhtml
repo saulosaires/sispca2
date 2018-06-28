@@ -54,7 +54,7 @@
 								<h:selectOneMenu value="#{relatorioFinanceiroUgProgAcaoMBean.unidadeGestora}" styleClass="input-sm form-control">
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>	
 									<f:selectItems var="ug" value="#{relatorioFinanceiroUgProgAcaoMBean.listUnidadeGestora}"
-												   itemLabel="#{fn:toUpperCase(ug.descricao)}" itemValue="#{ug.id}" />
+												   itemLabel="#{fn:toUpperCase(ug)}" itemValue="#{ug.id}" />
 								</h:selectOneMenu>
 							</div>
 						</div>	
@@ -65,7 +65,7 @@
 								<h:selectOneMenu value="#{relatorioFinanceiroUgProgAcaoMBean.unidadeOrcamentaria}" styleClass="input-sm form-control">
 									<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>	
 									<f:selectItems var="unid" value="#{relatorioFinanceiroUgProgAcaoMBean.listUnidadeOrcamentaria}"
-												   itemLabel="#{fn:toUpperCase(unid.descricao)}" itemValue="#{unid.id}" />
+												   itemLabel="#{fn:toUpperCase(unid)}" itemValue="#{unid.id}" />
 												   
 									<f:ajax event="change" execute="@this"
 										listener="#{relatorioFinanceiroUgProgAcaoMBean.onChangeUnidade()}"
@@ -84,7 +84,7 @@
 									<f:selectItem itemValue="#{null}" itemLabel="--TODOS--" />
 									
 									<f:selectItems value="#{relatorioFinanceiroUgProgAcaoMBean.listPrograma}"
-												   var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}" />
+												   var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog)}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -95,6 +95,12 @@
 								<h:commandLink styleClass="btnAction btn btn-primary"  
 							 		value="Gerar Relatório" 
 							 		action="#{relatorioFinanceiroUgProgAcaoMBean.gerarRelatorio()}" />
+							 		
+							&nbsp;	
+						    <h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+							 		
+							 		
+							 		
 							</div>
 						</div>	
 					</div>

@@ -50,7 +50,7 @@
 							<h:selectOneMenu value="#{relatorioPlanoTrabalhoMBean.orgao}" styleClass="form-control input-sm">
 								
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioPlanoTrabalhoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org.descricao)}"/>
+								<f:selectItems value="#{relatorioPlanoTrabalhoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org)}"/>
 								<f:ajax execute="@this" event="change" listener="#{relatorioPlanoTrabalhoMBean.buscaUnidadeByOrgao()}" render="combo_unid_orc"/>	
 							</h:selectOneMenu>
 						</div>
@@ -62,7 +62,7 @@
 							<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 							<h:selectOneMenu id="combo_unid_orc" value="#{relatorioPlanoTrabalhoMBean.unidadeOrcamentaria}" styleClass="form-control input-sm">
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioPlanoTrabalhoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid.descricao)}"/>
+								<f:selectItems value="#{relatorioPlanoTrabalhoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid)}"/>
 								<f:ajax execute="@this" event="change" listener="#{relatorioPlanoTrabalhoMBean.buscaProgramaByUnidade()}" render="combo_prog"/>										
 							</h:selectOneMenu>
 						</div>
@@ -73,7 +73,7 @@
 							<h:outputText value="PROGRAMA: " styleClass="labelOutText"/>
 							<h:selectOneMenu id="combo_prog" value="#{relatorioPlanoTrabalhoMBean.programa}" styleClass="form-control input-sm">
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioPlanoTrabalhoMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
+								<f:selectItems value="#{relatorioPlanoTrabalhoMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog)}"/>
 							</h:selectOneMenu>
 						</div>
 					</div>	
@@ -82,7 +82,12 @@
 						
 							<h:commandButton value="Gerar Relatório"  
 								action="#{relatorioPlanoTrabalhoMBean.gerarRelatorio()}"
-								style="margin-left: 2%;" styleClass="btn btn-primary"/>
+								style="margin-left: 2%;" styleClass="btnAction btn btn-primary"/>
+								
+							&nbsp;	
+						    <h:button styleClass="btnAction btn btn-primary" style="margin-left: 0px" value="Voltar" outcome="relatorioList" immediate="true" />		
+								
+								
 					</div>
 				</div>	
 			</h:form>

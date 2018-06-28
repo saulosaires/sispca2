@@ -115,12 +115,17 @@ public class AcaoService  extends AbstractService<Acao> {
 
 	}
 
-	public List<Acao> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId) {
+	public List<Acao> buscarByUnidadeOrcamentaria(Long unidadeOrcamentariaId,Long exercicioId) {
 
 		if (Utils.invalidId(unidadeOrcamentariaId)) {
 			return new ArrayList<>();
 		} else {
-			return dao().buscarByUnidadeOrcamentaria( unidadeOrcamentariaId);
+			
+			List<Long> uo =new ArrayList<Long>();
+			uo.add(unidadeOrcamentariaId);
+			 
+			return buscar(null,null,null,uo,null, exercicioId);
+		 
 		}
 
 	}	

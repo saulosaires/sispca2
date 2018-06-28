@@ -78,7 +78,7 @@ public class RelatorioFinanceiroNaturezaDespesaMBean extends RelatorioMBean {
 	
 	public void buscaAcoesByUnidade() {
 		
-		listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria);
+		listAcao = acaoService.buscarByUnidadeOrcamentaria(unidadeOrcamentaria,exercicioId);
 		
 	}
 
