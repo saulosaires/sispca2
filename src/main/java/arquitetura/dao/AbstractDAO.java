@@ -6,8 +6,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import arquitetura.exception.JpaException;
+
 
 public abstract class AbstractDAO<T extends Serializable> implements Serializable {
 
@@ -34,7 +38,19 @@ public abstract class AbstractDAO<T extends Serializable> implements Serializabl
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
-		return entityManager.createQuery("from " + clazz.getName()).getResultList();
+		//return entityManager.createQuery("from " + clazz.getName()).getResultList();
+	 
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<T> query = cb.createQuery(clazz);
+		Root<T> m = query.from(clazz);
+
+		query.select(m);
+
+		query.where(cb.equal(m.get(ATIVO),true));
+		
+ 
+		return entityManager.createQuery(query).getResultList();
+		
 	}
 
 	public T create(T entity) throws JpaException {

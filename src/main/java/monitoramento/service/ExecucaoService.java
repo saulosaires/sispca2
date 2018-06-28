@@ -32,15 +32,15 @@ public class ExecucaoService extends AbstractService<Execucao> {
 
 	private List<RelatorioExecucao> execucaoToRelatorioExecucao(List<Execucao> execucoes){
 	
-		 Map<Long,RelatorioExecucao> map = new HashMap<>();
+		 Map<String,RelatorioExecucao> map = new HashMap<>();
 		 
 		 for(Execucao e : execucoes) {	
 			 
-			 if(map.containsKey(e.getRegiaoMunicipio().getId())) {
-				 map.get(e.getRegiaoMunicipio().getId()).setData(e);
+			 if(map.containsKey(e.getRegiaoMunicipio().getId().toString()+e.getAcao().getCodigo())) {
+				 map.get(e.getRegiaoMunicipio().getId().toString()+e.getAcao().getCodigo()).setData(e);
 				 
 			 }else {                                                                                    
-				 map.put(e.getRegiaoMunicipio().getId(), new RelatorioExecucao(e));
+				 map.put(e.getRegiaoMunicipio().getId().toString()+e.getAcao().getCodigo(), new RelatorioExecucao(e));
 			 }
 
 		 }

@@ -611,6 +611,12 @@ public class Acao extends Model implements  Auditable {
 	}
 
 	@Override
+	public String toString() {
+	 
+		return codigo+" - "+denominacao;
+	}
+	
+	@Override
 	public String getLogDetail() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" Ação Id : ").append(id);

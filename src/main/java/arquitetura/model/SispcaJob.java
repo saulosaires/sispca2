@@ -1,7 +1,5 @@
 package arquitetura.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +25,7 @@ public class SispcaJob extends Model   {
 	@Column(name = "periodo")
 	private String periodo;
  
-	
+	public SispcaJob() {}
  
 	public Long getId() {
 		return id;

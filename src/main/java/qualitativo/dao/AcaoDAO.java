@@ -51,6 +51,8 @@ public class AcaoDAO extends AbstractDAO<Acao> {
 	}
 
 	
+	
+	
 	public List<Acao> relatorioPlanoTrabalho(List<Long> listOrgaoId,List<Long> unidadeOrcamentaria,Long programaId,Long exercicioId,String orderBy){
 		 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();

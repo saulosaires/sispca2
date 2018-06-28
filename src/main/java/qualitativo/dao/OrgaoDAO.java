@@ -20,12 +20,17 @@ public class OrgaoDAO extends AbstractDAO<Orgao> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final  String DESCRICAO="descricao";
+	private static final  String CODIGO="codigo";
+	private static final  String SIGLA="sigla";
+
+	
 	public OrgaoDAO() {
 		setClazz(Orgao.class);
 
 	}
  
-	
+	 
 	
 	public List<Orgao> buscar(String codigo,String sigla,String descricao) {
 
@@ -39,28 +44,28 @@ public class OrgaoDAO extends AbstractDAO<Orgao> {
 
 		if (!Utils.emptyParam(codigo)) {
 
-			Expression<String> upperCodigo = cb.upper(m.get("codigo"));
+			Expression<String> upperCodigo = cb.upper(m.get(CODIGO));
 
 			predicate.add(cb.like(upperCodigo, "%" + codigo.toUpperCase() + "%"));
 		}
 
 		if (!Utils.emptyParam(sigla)) {
 
-			Expression<String> upperSigla = cb.upper(m.get("sigla"));
+			Expression<String> upperSigla = cb.upper(m.get(SIGLA));
 
 			predicate.add(cb.like(upperSigla, "%" + sigla.toUpperCase() + "%"));
 		}
 		
 		if (!Utils.emptyParam(descricao)) {
 
-			Expression<String> upperDescricao = cb.upper(m.get("descricao"));
+			Expression<String> upperDescricao = cb.upper(m.get(DESCRICAO));
 
 			predicate.add(cb.like(upperDescricao, "%" + descricao.toUpperCase() + "%"));
 		}	
 		
 		query.where(predicate.toArray(new Predicate[predicate.size()]));
 
-		query.orderBy(cb.asc(m.get("descricao")));
+		query.orderBy(cb.asc(m.get(DESCRICAO)));
 
 		return entityManager.createQuery(query).getResultList();
 	}

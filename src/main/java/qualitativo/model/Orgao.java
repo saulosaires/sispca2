@@ -98,7 +98,7 @@ public class Orgao extends Model implements   Auditable  {
 
 	@Override
 	public String toString() {
-		return getSigla() +" - "+getDescricao();
+		return getCodigo() +" - "+getDescricao();
 	}
 	
 	@Override

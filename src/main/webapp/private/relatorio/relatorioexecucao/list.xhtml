@@ -50,7 +50,7 @@
 							<h:selectOneMenu value="#{relatorioExecucaoMBean.orgao}" styleClass="form-control input-sm">
 							
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioExecucaoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org.descricao)}"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listOrgao}" var="org" itemValue="#{org.id}" itemLabel="#{fn:toUpperCase(org)}"/>
 								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changeOrgao()}" render="combo_unid_orc"/>	
 							</h:selectOneMenu>
 						</div>
@@ -62,7 +62,7 @@
 							<h:outputText value="UNIDADE ORÇAMENTÁRIA: " styleClass="labelOutText"/>
 							<h:selectOneMenu id="combo_unid_orc" value="#{relatorioExecucaoMBean.unidadeOrcamentaria}" styleClass="form-control input-sm">
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioExecucaoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid.descricao)}"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listUnidadeOrcamentaria}" var="unid" itemValue="#{unid.id}" itemLabel="#{fn:toUpperCase(unid)}"/>
 								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changeUnidade()}" render="combo_prog"/>										
 							</h:selectOneMenu>
 						</div>
@@ -74,7 +74,7 @@
 							<h:outputText value="PROGRAMA: " styleClass="labelOutText"/>
 							<h:selectOneMenu id="combo_prog" value="#{relatorioExecucaoMBean.programa}" styleClass="form-control input-sm">
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioExecucaoMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog.denominacao)}"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listPrograma}" var="prog" itemValue="#{prog.id}" itemLabel="#{fn:toUpperCase(prog)}"/>
 									
 								<f:ajax execute="@this" event="change" listener="#{relatorioExecucaoMBean.changePrograma()}" render="combo_acao"/>											
 							</h:selectOneMenu>
@@ -87,7 +87,7 @@
 							<h:outputText value="AÇÃO: " styleClass="labelOutText"/>
 							<h:selectOneMenu id="combo_acao" value="#{relatorioExecucaoMBean.acao}" styleClass="form-control input-sm">
 								<f:selectItem itemValue="#{null}" itemLabel="--TODAS--"/>
-								<f:selectItems value="#{relatorioExecucaoMBean.listAcao}" var="ac" itemValue="#{ac.id}" itemLabel="#{fn:toUpperCase(ac.denominacao)}"/>
+								<f:selectItems value="#{relatorioExecucaoMBean.listAcao}" var="ac" itemValue="#{ac.id}" itemLabel="#{fn:toUpperCase(ac)}"/>
 							</h:selectOneMenu>
 						</div>
 					</div>	
