@@ -88,10 +88,10 @@ public class ExportaDadosSispca    implements Job{
 			File arquivoMeta = new File(DiretorioServidor + meta);
 			File arquivoExecucao = new File(DiretorioServidor +execucao);
 			
-			CSVUtils.generateCsvFile(arquivoAcao, listAcao, Acao.class);
-			CSVUtils.generateCsvFile(arquivoPrograma, listPrograma, Programa.class);
-			CSVUtils.generateCsvFile(arquivoMeta, listMeta, Acao.class);
-			CSVUtils.generateCsvFile(arquivoExecucao, listExecucao, Execucao.class);
+			CSVUtils.generateCsvFile(arquivoAcao, listAcao, "Acao");
+			CSVUtils.generateCsvFile(arquivoPrograma, listPrograma, "Programa");
+			CSVUtils.generateCsvFile(arquivoMeta, listMeta, "ElaboracaoMetaFisica");
+			CSVUtils.generateCsvFile(arquivoExecucao, listExecucao, "ExecucaoMetaFisica");
 			
 			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoAcao);
 			tranferirArquivoParaFTP(ftpClient, Diretorio, arquivoPrograma);

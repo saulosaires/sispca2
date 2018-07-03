@@ -18,10 +18,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import arquitetura.model.Model;
+
  
 @Entity
 @Table(name = "permissao", schema = "controle_acesso")
-public class Permissao implements Serializable{
+public class Permissao extends Model implements Serializable{
 
 	/**
 	 * 
